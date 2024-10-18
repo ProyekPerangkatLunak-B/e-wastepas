@@ -7,7 +7,7 @@
     </a>
 </p>
 
-# 🗑️ Proyek E-Waste Management Dashboard
+# 🗑️ Proyek E-Wastepas
 
 Proyek ini bertujuan untuk membangun aplikasi web pengelolaan limbah elektronik (**e-waste**) menggunakan **Laravel** untuk backend dan **TailwindCSS** untuk frontend. Aplikasi ini memungkinkan pengguna untuk mengajukan permintaan daur ulang dan melacak status pembuangan limbah elektronik mereka.
 
