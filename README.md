@@ -1,10 +1,9 @@
-
 <p align="center">
     <a href="https://laravel.com" target="_blank">
-        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300" alt="Laravel Logo">
+        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="500" alt="Laravel Logo">
     </a>
     <a href="https://tailwindcss.com" target="_blank">
-        <img src="https://github.com/user-attachments/assets/aada3ec5-90eb-4825-88e1-0dd49d7ecacd" width="300" alt="Tailwind CSS Logo">
+        <img src="https://github.com/user-attachments/assets/14234e2d-f5ae-4061-b27b-da955bbfa57c" width="500" alt="Tailwind CSS Logo">
     </a>
 </p>
 
@@ -21,6 +20,12 @@ Proyek ini bertujuan untuk membangun aplikasi web pengelolaan limbah elektronik 
 - **PHP Version**: 8.3.12
 - **Node.js Version**: 20.18.0
 - **MySQL Version**: 8.3.0
+
+---
+
+## 📂 Alat & Sumber Daya
+
+Unduh alat yang diperlukan melalui [link Google Drive ini](https://drive.google.com/drive/u/2/folders/1vTMnaYzjjx-OneLvWd6MSWwhzj2SkoRr).
 
 ---
 
@@ -95,7 +100,7 @@ npm run dev
 
 ### Penamaan Branch
 
-Buat branch baru sesuai dengan tugas yang dikerjakan menggunakan konvensi berikut:
+Buat branch baru sesuai dengan tugas yang dikerjakan menggunakan konvensi berikut contohnya:
 
 - **Frontend Task**: `recycleme-frontend`
 - **Backend Task**: `recycleme-backend`
@@ -138,12 +143,6 @@ git add .
 git commit -m "Pesan commit yang deskriptif"
 git push origin nama-branch
 ```
-
----
-
-## 📂 Alat & Sumber Daya
-
-Unduh alat yang diperlukan melalui [link Google Drive ini](https://drive.google.com/drive/u/2/folders/1vTMnaYzjjx-OneLvWd6MSWwhzj2SkoRr).
 
 ---
 
