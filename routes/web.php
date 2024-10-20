@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Masyarakat\PenjemputanSampahController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,14 +12,11 @@ Route::get('/', function () {
 // Route Modul Manajemen, registrasi dan dashboard
 
 // Route Modul Masyarakat, registrasi dan penjemputan-sampah
-Route::get('/penjemputan-sampah', function () {
-    return view('masyarakat.penjemputan-sampah.index'); // pastikan nama file tanpa .blade.php
-});
-
-Route::get('/penjemputan-sampah/create', function () {
-    return view('masyarakat.penjemputan-sampah.create'); // pastikan nama file tanpa .blade.php
+Route::group([
+    'prefix' => '/masyarakat',
+    'as' => 'masyarakat.',
+], function () {
+    Route::resource('/penjemputan-sampah', PenjemputanSampahController::class);
 });
 
 // Route Modul Mitra-kurir, registrasi dan penjemputan-sampah
-
-
