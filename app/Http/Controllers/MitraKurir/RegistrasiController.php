@@ -23,7 +23,7 @@ class RegistrasiController extends Controller
             'NomorHP' => ['required', 'min:12', 'max:14'],
             'Email' => ['required', 'email'],
             'password' => ['required', 'min:8'],
-            'ulangiPassword' => ['required', 'min:8', 'same:password'] // Ensure ulangiPassword matches password
+            'ulangiPassword' => ['required', 'min:8', 'same:password'] 
         ]);
 
         User::create([
