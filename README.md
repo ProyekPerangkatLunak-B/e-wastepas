@@ -127,10 +127,10 @@ git commit -m "Recycleme-frontend: Menambahkan fitur baru"
 
 ### Tarik Perubahan Terbaru
 
-Sebelum memulai pekerjaan, pastikan untuk menarik (pull) perubahan terbaru dari `main`:
+Sebelum memulai pekerjaan, pastikan untuk menarik (pull) perubahan terbaru dari `dev`:
 
 ```bash
-git checkout main
+git checkout dev
 git pull
 ```
 
