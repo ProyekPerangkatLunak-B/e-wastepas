@@ -134,13 +134,19 @@ git checkout dev
 git pull
 ```
 
+### Pindah ke Branch Masing - Masing
+Setelah melakukan pull pada branch dev, pidahlah kebranch masing - masing sesuai dengan jobdesk:
+```bash
+git checkout nama-branch
+```
+
 ### Push Perubahan ke Branch
 
 Setelah menyelesaikan pekerjaan, push perubahan ke branch masing-masing:
 
 ```bash
 git add .
-git commit -m "Pesan commit yang deskriptif"
+git commit -m "Pesan commit yang deskriptif sesuuai dengan contoh yang sudah diberikan"
 git push origin nama-branch
 ```
 
