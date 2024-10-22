@@ -21,15 +21,19 @@
 <body>
 
     {{-- Header --}}
-    @include('assets.partials.header')
+    @include('partials.header', [
+        'userName' => 'Ammar Bahtiar', 
+        'userRole' => 'Masyarakat', 
+        'profileImage' => 'https://via.placeholder.com/40'
+    ])
 
     {{-- Sidebar --}}
-    @include('assets.partials.sidebar')
-    
+    @include('partials.sidebar')
+
     {{-- Main Content --}}
     <div class="pt-6 pl-[20rem]">
         @yield('content')
     </div>    
-    
+
 </body>
 </html>

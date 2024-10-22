@@ -12,12 +12,18 @@ Route::get('/', function () {
 
 // Route Modul Masyarakat, registrasi dan penjemputan-sampah
 Route::get('/penjemputan-sampah', function () {
-    return view('masyarakat.penjemputan-sampah.index'); // pastikan nama file tanpa .blade.php
-});
+    return view('masyarakat.penjemputan-sampah.index');
+})->name('penjemputan.index');
 
-Route::get('/penjemputan-sampah/create', function () {
-    return view('masyarakat.penjemputan-sampah.create'); // pastikan nama file tanpa .blade.php
-});
+Route::get('/penjemputan-sampah/kategori', function () {
+    return view('masyarakat.penjemputan-sampah.kategori');
+})->name('penjemputan.kategori');
+
+
+Route::get('/penjemputan-sampah/permintaan-penjemputan', function () {
+    return view('masyarakat.penjemputan-sampah.permintaan-penjemputan');
+})->name('penjemputan.permintaan');
+
 
 // Route Modul Mitra-kurir, registrasi dan penjemputan-sampah
 
