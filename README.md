@@ -119,7 +119,7 @@ Pastikan untuk commit pekerjaan dengan pesan yang jelas dan deskriptif:
 git commit -m "Recycleme-frontend: Menambahkan fitur baru"
 ```
 
-**Catatan**: Selalu push ke branch masing-masing, **bukan langsung ke `main`**.
+**Catatan**: Selalu push ke branch masing-masing, **bukan langsung ke `dev`**.
 
 ---
 
@@ -127,10 +127,10 @@ git commit -m "Recycleme-frontend: Menambahkan fitur baru"
 
 ### Tarik Perubahan Terbaru
 
-Sebelum memulai pekerjaan, pastikan untuk menarik (pull) perubahan terbaru dari `main`:
+Sebelum memulai pekerjaan, pastikan untuk menarik (pull) perubahan terbaru dari `dev`:
 
 ```bash
-git checkout main
+git checkout dev
 git pull
 ```
 
