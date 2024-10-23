@@ -1,4 +1,4 @@
-@extends('main-mitrakurir')
+@extends('layouts.main-mitrakurir')
 
 @section('content')
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
