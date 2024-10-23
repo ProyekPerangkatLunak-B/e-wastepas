@@ -27,4 +27,6 @@ Route::get('/penjemputan-sampah/permintaan-penjemputan', function () {
 
 // Route Modul Mitra-kurir, registrasi dan penjemputan-sampah
 
-
+Route::get('mitrakurir/penjemputan-sampah/kategori', function () {
+    return view('mitra-kurir.penjemputan-sampah.kategori');
+})->name('mitra-kurir.penjemputan.kategori');
