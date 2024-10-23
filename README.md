@@ -166,6 +166,11 @@ git checkout dev
 git pull
 ```
 
+Jika tidak bisa menggunakan `git pull` Coba Gunakan ini:
+```bash
+git pull origin dev
+```
+
 ### Push Perubahan ke Branch
 
 Setelah menyelesaikan pekerjaan, push perubahan ke branch masing-masing:
