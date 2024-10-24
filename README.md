@@ -48,7 +48,7 @@ Untuk menjaga keteraturan dalam penamaan, berikut adalah aturan naming conventio
 - **Properti Model**: Menggunakan _Snake Case_ (karena berhubungan dengan database, contoh: `user_name`, `created_at`).
 - **Metode Model**: Menggunakan _Camel Case_ (contoh: `getUserData()`, `saveProduct()`).
 
-- **Blade View**: Menggunakan _Snake Case_ (contoh: `user_profile.blade.php`, `product_list.blade.php`).
+- **Blade View**: Menggunakan _Kebab Case_ (contoh: `user-profile.blade.php`, `product-list.blade.php`).
 
 Referensi tambahan mengenai convention di Laravel:  
 [Link Sumber](https://webdevetc.com/blog/laravel-naming-conventions/)
