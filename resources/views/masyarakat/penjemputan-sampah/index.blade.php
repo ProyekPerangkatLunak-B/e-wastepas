@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main')
 
 @section('content')
 
@@ -13,12 +13,17 @@
                     title="Kategori Sampah Elektronik" 
                     description="Jumlah Kategori sampah elektronik yang terdaftar di aplikasi" 
                     image="https://picsum.photos/1280/720"
-                    link="{{ route('penjemputan.kategori') }}" />
+                    link="{{ route('masyarakat.penjemputan.kategori') }}" />
                 <x-card
                     title="Jumlah Penjemputan" 
                     description="Jumlah penjemputan sampah elektronik yang telah dilakukan" 
                     image="https://picsum.photos/1280/720"
-                    link="{{ route('penjemputan.permintaan') }}" />
+                    link="{{ route('masyarakat.penjemputan.permintaan') }}" />
+                <x-card
+                    title="Melacak Penjemputan" 
+                    description="Lihat disini untuk melacak sampah elektronik yang telah ditindak" 
+                    image="https://picsum.photos/1280/720"
+                    link="{{ route('masyarakat.penjemputan.melacak') }}" />
             </div>
         </div>
     </div>
