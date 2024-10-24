@@ -15,19 +15,8 @@
                     title="Lampu" 
                     description="Semua jenis lampu dari berbagai alat elektronik" 
                     image="https://picsum.photos/1280/720" 
-                    link="#" />
+                    link="{{ route('mitra-kurir.penjemputan.detail-kategori') }}" />
 
-                <x-card 
-                    title="Baterai" 
-                    description="Baterai dari berbagai perangkat elektronik." 
-                    image="https://picsum.photos/1280/720" 
-                    link="#" />
-
-                <x-card 
-                    title="Kabel" 
-                    description="Berbagai macam kabel dari perangkat elektronik rusak" 
-                    image="https://picsum.photos/1280/720" 
-                    link="#" />
             </div>
         </div>
     </div>
