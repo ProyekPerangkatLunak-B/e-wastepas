@@ -23,6 +23,38 @@ Proyek ini bertujuan untuk membangun aplikasi web pengelolaan limbah elektronik 
 
 ---
 
+## 🔗 Coding Standard & Naming Convention
+
+### Coding Standard
+
+Untuk menjaga konsistensi dan keterbacaan kode, kami menggunakan **PSR-1** dan **PSR-4** sebagai standar utama:
+
+- **PSR-1**: Merupakan standar dasar kode PHP yang merekomendasikan penggunaan coding style yang umum untuk meningkatkan keterbacaan dan kompatibilitas kode PHP di berbagai proyek. PSR-1 mencakup aturan seperti penggunaan `<?php` dan standar nama kelas.
+  - [Link Mengenai PSR-1](https://www.php-fig.org/psr/psr-1/)
+
+- **PSR-4**: Standar ini mendefinisikan aturan autoloading untuk project PHP menggunakan namespaces. Dengan PSR-4, kelas PHP dapat dipetakan ke file sistem berdasarkan namespace-nya, memudahkan pengelolaan file dan struktur folder.
+  - [Link Mengenai PSR-4](https://www.php-fig.org/psr/psr-4/)
+  - [Contoh PSR-4 Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader-examples.md)
+
+### Naming Convention
+
+Untuk menjaga keteraturan dalam penamaan, berikut adalah aturan naming convention yang digunakan di proyek ini:
+
+- **Controller**: Menggunakan _Pascal Case_ (contoh: `UserController`, `ProductController`).
+- **Database**: Menggunakan _Snake Case_ (semua yang berhubungan dengan database, contoh: `user_data`, `product_list`).
+- **Variable**: Menggunakan _Camel Case_ (contoh: `$userData`, `$productList`).
+
+- **Model**: Menggunakan _Pascal Case_ (contoh: `User`, `Product`).
+- **Properti Model**: Menggunakan _Snake Case_ (karena berhubungan dengan database, contoh: `user_name`, `created_at`).
+- **Metode Model**: Menggunakan _Camel Case_ (contoh: `getUserData()`, `saveProduct()`).
+
+- **Blade View**: Menggunakan _Snake Case_ (contoh: `user_profile.blade.php`, `product_list.blade.php`).
+
+Referensi tambahan mengenai convention di Laravel:  
+[Link Sumber](https://webdevetc.com/blog/laravel-naming-conventions/)
+
+---
+
 ## 📂 Alat & Sumber Daya
 
 Unduh alat yang diperlukan melalui [link Google Drive ini](https://drive.google.com/drive/u/2/folders/1vTMnaYzjjx-OneLvWd6MSWwhzj2SkoRr).
@@ -119,7 +151,7 @@ Pastikan untuk commit pekerjaan dengan pesan yang jelas dan deskriptif:
 git commit -m "Recycleme-frontend: Menambahkan fitur baru"
 ```
 
-**Catatan**: Selalu push ke branch masing-masing, **bukan langsung ke `main`**.
+**Catatan**: Selalu push ke branch masing-masing, **bukan langsung ke `dev`**.
 
 ---
 
@@ -127,11 +159,16 @@ git commit -m "Recycleme-frontend: Menambahkan fitur baru"
 
 ### Tarik Perubahan Terbaru
 
-Sebelum memulai pekerjaan, pastikan untuk menarik (pull) perubahan terbaru dari `main`:
+Sebelum memulai pekerjaan, pastikan untuk menarik (pull) perubahan terbaru dari `dev`:
 
 ```bash
-git checkout main
+git checkout dev
 git pull
+```
+
+Jika tidak bisa menggunakan `git pull` Coba Gunakan ini:
+```bash
+git pull origin dev
 ```
 
 ### Push Perubahan ke Branch
