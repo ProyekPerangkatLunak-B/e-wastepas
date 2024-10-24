@@ -24,6 +24,14 @@ Route::get('/penjemputan-sampah/permintaan-penjemputan', function () {
     return view('masyarakat.penjemputan-sampah.permintaan-penjemputan');
 })->name('penjemputan.permintaan');
 
+Route::get('/registrasi/login', function() {
+    return view('masyarakat.registrasi.login');
+})->name('registrasi.login');
+
+Route::get('/registrasi/register', function() {
+    return view('masyarakat.registrasi.register');
+})->name('registrasi.register');
+
 
 // Route Modul Mitra-kurir, registrasi dan penjemputan-sampah
 
