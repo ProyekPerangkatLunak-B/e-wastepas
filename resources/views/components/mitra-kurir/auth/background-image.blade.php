@@ -1,0 +1,2 @@
+<div class="hidden md:block w-1/2 bg-cover bg-center" style="background-image: url('{{ $imageUrl }}');"></div>
+<div class="block md:hidden w-full h-1/2 bg-cover bg-center" style="background-image: url('{{ $imageUrl }}');"></div>
