@@ -22,7 +22,9 @@ Route::get('admin/datamaster/dashboard', function () {
 Route::get('admin/login', function () {
     return view('admin.datamaster.login.index');
 })->name('admin.login.index');
+
 // Route Modul Manajemen, registrasi dan dashboard
+
 
 // Route Modul Masyarakat, registrasi dan penjemputan-sampah
 Route::get('masyarakat/penjemputan-sampah', function () {

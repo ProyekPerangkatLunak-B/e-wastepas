@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-admin')
 
 @section('content')
     {{-- Card jumlah masyarakat, dll --}}
@@ -15,21 +15,22 @@
                             <th class="px-4 py-2 border-b text-left text-gray-600">Nama</th>
                             <th class="px-4 py-2 border-b text-left text-gray-600">Email</th>
                             <th class="px-4 py-2 border-b text-left text-gray-600">Status Registrasi</th>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Aksi</th>
+                            <th class="px-5 py-2 border-b text-left text-gray-600">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td class="px-4 py-2 border-b">John Doe</td>
                             <td class="px-4 py-2 border-b">johndoe@example.com</td>
-                            <td class="px-4 py-2 border-b">Terverifikasi</td>
+                            <td class="px-4 py-2 border-b">
+                                <span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                                    Terverifikasi
+                                </span>
+                            </td>
                             <td class="px-4 py-2 border-b">
                                 <div class="flex items-center space-x-4">
                                     <button class="text-green-500 hover:text-green-700" onclick="confirmRegistration()">
                                         <i class="fas fa-check"></i>
-                                    </button>
-                                    <button class="text-blue-500 hover:text-blue-700">
-                                        <i class="fas fa-file"></i>
                                     </button>
                                     <button class="text-red-500 hover:text-red-700" onclick="confirmDelete()">
                                         <i class="fas fa-trash"></i>

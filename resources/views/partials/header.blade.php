@@ -2,14 +2,15 @@
     <div class="container flex items-center justify-end">
         <div class="relative flex items-center space-x-2">
             <!-- Toggler untuk Dropdown (Nama, Role, dan Gambar) -->
-            <button @click="dropdownOpen = !dropdownOpen" class="flex items-center space-x-2 focus:outline-none">
+            <button @click=dropdownOpen = "!dropdownOpen" class="flex items-center space-x-2 focus:outline-none">
                 <!-- Text Section -->
                 <div class="flex flex-col items-end">
                     <p class="font-bold text-gray-700">{{ $userName }}</p>
                     <span class="text-sm text-gray-500">{{ $userRole }}</span>
                 </div>
                 <!-- Dummy Profile Picture -->
-                <img src="{{ $profileImage }}" alt="Profile Image" class="border border-green-300 rounded-full shadow-sm w-14 h-14">
+                <img src="{{ $profileImage }}" alt="Profile Image"
+                    class="border border-green-300 rounded-full shadow-sm w-14 h-14">
             </button>
 
             {{-- Dropdown menu --}}
@@ -22,11 +23,15 @@
                 x-transition:leave-start="transform opacity-200 scale-200"
                 x-transition:leave-end="transform opacity-0 scale-95">
                 <div class="py-1">
-                    <a href="#" class="block px-4 py-4 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">Dashboard</a>
-                    <a href="#" class="block px-4 py-4 mt-2 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">Pengaturan Akun</a>
+                    <a href="#"
+                        class="block px-4 py-4 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">Dashboard</a>
+                    <a href="#"
+                        class="block px-4 py-4 mt-2 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">Pengaturan
+                        Akun</a>
                     <form action="#" method="POST">
                         @csrf
-                        <button type="submit" class="block w-full px-8 py-2 mt-2 text-sm text-center text-white bg-red-500 py-2s rounded-xl hover:bg-red-700">Logout</button>
+                        <button type="submit"
+                            class="block w-full px-8 py-2 mt-2 text-sm text-center text-white bg-red-500 py-2s rounded-xl hover:bg-red-700">Logout</button>
                     </form>
                 </div>
             </div>
