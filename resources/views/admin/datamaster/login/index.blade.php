@@ -12,7 +12,7 @@
                 <div class="mt-4 flex flex-col items-center">
                     <div class="logo">
                         <img src="{{ asset('img/logoEwaste.png') }}" alt="Logo Ewaste"
-                            class="w-24 h-24 ms-10 align-self-center">
+                            class="w-24 h-24 ms-16 align-self-center">
                         <h2 class="text-center text-2xl mt-8 font-bold leading-9 tracking-tight text-green-700">Selamat
                             Datang,</h2>
                         <h2 class="text-center text-2xl mt-2 font-bold leading-9 tracking-tight text-green-700">Login
@@ -34,7 +34,7 @@
                                 <label for="password"
                                     class="block mt-4 text-md font-medium leading-9 text-gray-900">Password</label>
                                 <input
-                                    class="w-full px-8 py-4 mt-2 rounded-lg font-medium bg-gray-100 border border-green-200 text-sm focus:outline-none focus:border-green-400 focus:bg-white mt-5"
+                                    class="w-full px-8 py-4 mt-auto rounded-lg font-medium bg-gray-100 border border-green-200 text-sm focus:outline-none focus:border-green-400 focus:bg-white"
                                     type="password" />
 
                                 <!-- Button Submit -->

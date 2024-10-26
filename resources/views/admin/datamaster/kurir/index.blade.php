@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-admin')
 
 @section('content')
     {{-- Card jumlah kurir, dll --}}
@@ -16,7 +16,7 @@
                             <th class="px-4 py-2 border-b text-left text-gray-600">Email</th>
                             <th class="px-4 py-2 border-b text-left text-gray-600">Jenis Kendaraan</th>
                             <th class="px-4 py-2 border-b text-left text-gray-600">Status Registrasi</th>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Aksi</th>
+                            <th class="px-9 py-2 border-b text-left text-gray-600">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,7 +24,11 @@
                             <td class="px-4 py-2 border-b">John Doe</td>
                             <td class="px-4 py-2 border-b">johndoe@example.com</td>
                             <td class="px-4 py-2 border-b">Mobil</td>
-                            <td class="px-4 py-2 border-b">Terverifikasi</td>
+                            <td class="px-4 py-2 border-b">
+                                <span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                                    Terverifikasi
+                                </span>
+                            </td>
                             <td class="px-4 py-2 border-b">
                                 <div class="flex items-center space-x-4">
                                     <button class="text-green-500 hover:text-green-700" onclick="confirmRegistration()">
