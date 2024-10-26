@@ -19,7 +19,6 @@ Route::get('masyarakat/penjemputan-sampah/kategori', function () {
     return view('masyarakat.penjemputan-sampah.kategori');
 })->name('masyarakat.penjemputan.kategori');
 
-
 Route::get('masyarakat/penjemputan-sampah/permintaan-penjemputan', function () {
     return view('masyarakat.penjemputan-sampah.permintaan-penjemputan');
 })->name('masyarakat.penjemputan.permintaan');

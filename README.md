@@ -15,11 +15,11 @@ Proyek ini bertujuan untuk membangun aplikasi web pengelolaan limbah elektronik 
 
 ## 🛠️ Teknologi yang Digunakan
 
-- **Laravel**: Kerangka kerja aplikasi web dengan sintaks yang ekspresif dan elegan.
-- **Tailwind CSS**: Kerangka kerja CSS berbasis utilitas untuk membangun antarmuka pengguna dengan cepat.
-- **PHP Version**: 8.3.12
-- **Node.js Version**: 20.18.0
-- **MySQL Version**: 8.3.0
+-   **Laravel**: 11.28
+-   **Tailwind CSS**: 3
+-   **PHP**: 8.3.12
+-   **Node.js**: 20.18.0
+-   **MySQL**: 8.3.0
 
 ---
 
@@ -29,26 +29,27 @@ Proyek ini bertujuan untuk membangun aplikasi web pengelolaan limbah elektronik 
 
 Untuk menjaga konsistensi dan keterbacaan kode, kami menggunakan **PSR-1** dan **PSR-4** sebagai standar utama:
 
-- **PSR-1**: Merupakan standar dasar kode PHP yang merekomendasikan penggunaan coding style yang umum untuk meningkatkan keterbacaan dan kompatibilitas kode PHP di berbagai proyek. PSR-1 mencakup aturan seperti penggunaan `<?php` dan standar nama kelas.
-  - [Link Mengenai PSR-1](https://www.php-fig.org/psr/psr-1/)
+-   **PSR-1**: Merupakan standar dasar kode PHP yang merekomendasikan penggunaan coding style yang umum untuk meningkatkan keterbacaan dan kompatibilitas kode PHP di berbagai proyek. PSR-1 mencakup aturan seperti penggunaan `<?php` dan standar nama kelas.
 
-- **PSR-4**: Standar ini mendefinisikan aturan autoloading untuk project PHP menggunakan namespaces. Dengan PSR-4, kelas PHP dapat dipetakan ke file sistem berdasarkan namespace-nya, memudahkan pengelolaan file dan struktur folder.
-  - [Link Mengenai PSR-4](https://www.php-fig.org/psr/psr-4/)
-  - [Contoh PSR-4 Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader-examples.md)
+    -   [Link Mengenai PSR-1](https://www.php-fig.org/psr/psr-1/)
+
+-   **PSR-4**: Standar ini mendefinisikan aturan autoloading untuk project PHP menggunakan namespaces. Dengan PSR-4, kelas PHP dapat dipetakan ke file sistem berdasarkan namespace-nya, memudahkan pengelolaan file dan struktur folder.
+    -   [Link Mengenai PSR-4](https://www.php-fig.org/psr/psr-4/)
+    -   [Contoh PSR-4 Autoloader](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader-examples.md)
 
 ### Naming Convention
 
 Untuk menjaga keteraturan dalam penamaan, berikut adalah aturan naming convention yang digunakan di proyek ini:
 
-- **Controller**: Menggunakan _Pascal Case_ (contoh: `UserController`, `ProductController`).
-- **Database**: Menggunakan _Snake Case_ (semua yang berhubungan dengan database, contoh: `user_data`, `product_list`).
-- **Variable**: Menggunakan _Camel Case_ (contoh: `$userData`, `$productList`).
+-   **Controller**: Menggunakan _Pascal Case_ (contoh: `UserController`, `ProductController`).
+-   **Database**: Menggunakan _Snake Case_ (semua yang berhubungan dengan database, contoh: `user_data`, `product_list`).
+-   **Variable**: Menggunakan _Camel Case_ (contoh: `$userData`, `$productList`).
 
-- **Model**: Menggunakan _Pascal Case_ (contoh: `User`, `Product`).
-- **Properti Model**: Menggunakan _Snake Case_ (karena berhubungan dengan database, contoh: `user_name`, `created_at`).
-- **Metode Model**: Menggunakan _Camel Case_ (contoh: `getUserData()`, `saveProduct()`).
+-   **Model**: Menggunakan _Pascal Case_ (contoh: `User`, `Product`).
+-   **Properti Model**: Menggunakan _Snake Case_ (karena berhubungan dengan database, contoh: `user_name`, `created_at`).
+-   **Metode Model**: Menggunakan _Camel Case_ (contoh: `getUserData()`, `saveProduct()`).
 
-- **Blade View**: Menggunakan _Kebab Case_ (contoh: `user-profile.blade.php`, `product-list.blade.php`).
+-   **Blade View**: Menggunakan _Kebab Case_ (contoh: `user-profile.blade.php`, `product-list.blade.php`).
 
 Referensi tambahan mengenai convention di Laravel:  
 [Link Sumber](https://webdevetc.com/blog/laravel-naming-conventions/)
@@ -74,13 +75,13 @@ cd nama-proyek
 
 ### 2️⃣ Instal Dependensi
 
-- **PHP dependencies** dengan Composer:
+-   **PHP dependencies** dengan Composer:
 
 ```bash
 composer install
 ```
 
-- **Node packages** dengan npm:
+-   **Node packages** dengan npm:
 
 ```bash
 npm install
@@ -95,7 +96,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-- **Konfigurasi Database**: Sesuaikan detail database di file `.env`:
+-   **Konfigurasi Database**: Sesuaikan detail database di file `.env`:
 
 ```bash
 DB_CONNECTION=mysql
@@ -114,13 +115,13 @@ php artisan migrate
 
 ### 4️⃣ Menjalankan Aplikasi
 
-- Jalankan server development Laravel:
+-   Jalankan server development Laravel:
 
 ```bash
 php artisan serve
 ```
 
-- Jalankan build frontend development:
+-   Jalankan build frontend development:
 
 ```bash
 npm run dev
@@ -134,8 +135,8 @@ npm run dev
 
 Buat branch baru sesuai dengan tugas yang dikerjakan menggunakan konvensi berikut contohnya:
 
-- **Frontend Task**: `recycleme-frontend`
-- **Backend Task**: `recycleme-backend`
+-   **Frontend Task**: `recycleme-frontend`
+-   **Backend Task**: `recycleme-backend`
 
 Contoh:
 
@@ -167,6 +168,7 @@ git pull
 ```
 
 Jika tidak bisa menggunakan `git pull` Coba Gunakan ini:
+
 ```bash
 git pull origin dev
 ```
