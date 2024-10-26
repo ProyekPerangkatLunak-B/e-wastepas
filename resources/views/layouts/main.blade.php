@@ -22,8 +22,8 @@
 
     {{-- Header --}}
     @include('partials.header', [
-        'userName' => 'Ammar Bahtiar', 
-        'userRole' => 'Masyarakat', 
+        'userName' => 'Ammar Bahtiar',
+        'userRole' => 'Masyarakat',
         'profileImage' => 'https://via.placeholder.com/40'
     ])
 
@@ -33,7 +33,7 @@
     {{-- Main Content --}}
     <div class="pt-6 pl-[20rem]">
         @yield('content')
-    </div>    
+    </div>
 
 </body>
 </html>
