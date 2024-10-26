@@ -1,7 +1,7 @@
 <div class="fixed inset-y-0 left-0 bg-white border border-solid w-[22rem]">
     <div class="p-6">
         <div class="flex items-center mb-6">
-            <img src="#" alt="Logo" class="w-12 h-12">
+            <img src="{{ asset('img/logoEwaste.png') }}" alt="Logo" class="w-12 h-12">
             <h1 class="ml-4 text-2xl font-bold text-green-500">E-WastePas</h1>
         </div>
         <hr class="mb-6 border-t-2 border-gray-100">
