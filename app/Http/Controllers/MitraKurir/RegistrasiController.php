@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class RegistrasiController extends Controller
 {
     public function index(){
-        return view('mitra-kurir/registrasi/registrasi');
+        return view('mitra-kurir.registrasi.register');
     }
 
     public function simpanData(Request $request){
@@ -19,6 +19,7 @@ class RegistrasiController extends Controller
 
         $validateData = $request->validate([
             'nama' => 'required',
+            'username' => 'required',
             'KTP' => ['required', 'min:16'],
             'NomorHP' => ['required', 'min:12', 'max:14'],
             'Email' => ['required', 'email'],
@@ -26,12 +27,41 @@ class RegistrasiController extends Controller
             'ulangiPassword' => ['required', 'min:8', 'same:password'] 
         ]);
 
-        User::create([
-            'name' => $validateData['nama'], 
-            'no_ktp' => $validateData['KTP'],
-            'no_hp' => $validateData['NomorHP'],
-            'email' => $validateData['Email'],
-            'password' => Hash::make($validateData['password'])
-        ]);
+        try {
+            User::create([
+                'name' => $validateData['nama'],
+                'username' => $validateData['username'], // Include username
+                'no_ktp' => $validateData['KTP'], // Include no_ktp
+                'no_hp' => $validateData['NomorHP'],
+                'email' => $validateData['Email'],
+                'password' => Hash::make($validateData['password'])
+            ]);
+    
+            return back()->with('success', 'Registrasi berhasil!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Handle specific error codes
+            if ($e->getCode() === '23000') { 
+                $errorMessages = [];
+    
+                // Check if the error is for username
+                if (str_contains($e->getMessage(), 'username_unique')) {
+                    $errorMessages['username'] = 'Username already taken.';
+                }
+    
+                // Check if the error is for email
+                if (str_contains($e->getMessage(), 'email_unique')) {
+                    $errorMessages['email'] = 'Email already taken.';
+                }
+    
+                // Check if the error is for no_ktp
+                if (str_contains($e->getMessage(), 'no_ktp_unique')) {
+                    $errorMessages['KTP'] = 'No KTP already taken.';
+                }
+    
+                return back()->withErrors($errorMessages);
+            }
+    
+            return back()->withErrors(['error' => 'An error occurred during registration.']);
+        }
 }
 }

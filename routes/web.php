@@ -62,17 +62,16 @@ Route::get('mitrakurir/penjemputan-sampah/kategori/detail', function () {
     ]);
 })->name('mitra-kurir.penjemputan.detail-kategori');
 
-Route::get('/mitra-kurir/registrasi/register', function () {
-    return view('mitra-kurir.registrasi.register');
-})->name('mitra-kurir.registrasi.register');
+
+// route mitra kurir registrasi
+Route::get('/mitra-kurir/registrasi/register', [RegistrasiController::class, 'index']);
 
 Route::get('/mitra-kurir/registrasi/login', function () {
     return view('mitra-kurir.registrasi.login');
 })->name('mitra-kurir.registrasi.login');
 
-Route::get('/registrasi', [RegistrasiController::class, 'index']);
 
-Route::post('/registrasi', [RegistrasiController::class, 'simpanData']);
+Route::post('/mitra-kurir/registrasi/register', [RegistrasiController::class, 'simpanData']);
 
 Route::get('/otp', function () {
     return view('mitra-kurir/registrasi/otp');

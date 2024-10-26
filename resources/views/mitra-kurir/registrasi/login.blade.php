@@ -8,7 +8,7 @@
   
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form class="space-y-0.5" action="{{ url('/mitra-kurir/registrasi/login') }}" method="POST">
-                {{ csrf_field() }}
+                @csrf
                 @include('components.mitra-kurir.auth.input', ['id' => 'email', 'name' => 'email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'Enter your email'])
                 @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'password', 'label' => 'Password', 'type' => 'password', 'placeholder' => 'Enter your password'])
                 @include('components.mitra-kurir.auth.button', ['type' => 'submit', 'text' => 'Sign in'])

@@ -11,6 +11,19 @@
         Registrasi
     </h1>
     <div>  
+
+        {{-- untuk troubleshooting --}}
+        @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+        {{-- untuk troubleshooting --}}
+        
        <form action="/registrasi" method="POST">
         @csrf
         <label for="nama">Nama Lengkap</label><br>
@@ -34,14 +47,6 @@
         <button type="submit">Registrasi</button>
        </form>
     </div>
-    @if ($errors->any())
-    <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+   
 </body>
 </html>
