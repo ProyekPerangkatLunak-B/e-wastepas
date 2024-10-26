@@ -47,3 +47,11 @@ Route::get('mitrakurir/penjemputan-sampah/kategori/detail', function () {
         "namaKategori" => "Layar dan Monitor"
     ]);
 })->name('mitra-kurir.penjemputan.detail-kategori');
+
+Route::get('/mitra-kurir/registrasi/register', function () {
+    return view('mitra-kurir.registrasi.register');
+})->name('mitra-kurir.registrasi.register');
+
+Route::get('/mitra-kurir/registrasi/login', function () {
+    return view('mitra-kurir.registrasi.login');
+})->name('mitra-kurir.registrasi.login');
