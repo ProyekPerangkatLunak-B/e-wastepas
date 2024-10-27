@@ -7,6 +7,21 @@
             <div class="flex items-center justify-between">
                 <h4 class="text-base font-normal ml-14">Kategori dan jenis sampah elektronik yang dapat dijemput.</h4>
 
+                {{-- Search and Filter options --}}
+                <div class="flex items-center space-x-4 mr-14">
+                    {{-- Search Box --}}
+                    <div class="relative">
+                        <input type="text" class="w-64 px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-full focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900" placeholder="Cari....">
+                    </div>
+                    {{-- Filter Dropdown --}}
+                    <div>
+                        <select class="items-center  px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-full focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200">
+                            <option value="all">Filter</option>
+                            <option value="active">Aktif</option>
+                            <option value="inactive">Tidak Aktif</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             {{-- Card Section --}}
