@@ -12,34 +12,23 @@ class PenjemputanSampahController extends Controller
     {
         return view('masyarakat.penjemputan-sampah.index');
     }
-
-    public function create()
+    public function kategori()
     {
-        return view('masyarakat.penjemputan-sampah.create');
+        $kategori = [];
+        return view('masyarakat.penjemputan-sampah.kategori', compact('kategori'));
     }
 
-    public function store(Request $request)
+    public function permintaan()
     {
-        //
+        $kategori = [];
+        $jenis = [];
+        $alamatDropbox = [];
+        return view('masyarakat.penjemputan-sampah.permintaan-penjemputan', compact('kategori', 'jenis', 'alamatDropbox'));
     }
 
-    public function show($id)
+    public function melacak()
     {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        $penjemputan = [];
+        return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
     }
 }

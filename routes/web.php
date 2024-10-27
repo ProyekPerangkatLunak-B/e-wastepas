@@ -12,22 +12,19 @@ Route::get('/', function () {
 // Route Modul Manajemen, registrasi dan dashboard
 
 // Route Modul Masyarakat, registrasi dan penjemputan-sampah
-Route::get('masyarakat/penjemputan-sampah', function () {
-    return view('masyarakat.penjemputan-sampah.index');
-})->name('masyarakat.penjemputan.index');
+Route::group([
+    'prefix' => 'masyarakat/',
+    'as' => 'masyarakat.',
+], function () {
+    // Modul Registrasi
 
-Route::get('masyarakat/penjemputan-sampah/kategori', function () {
-    return view('masyarakat.penjemputan-sampah.kategori');
-})->name('masyarakat.penjemputan.kategori');
+    // Modul Penjemputan Sampah
+    Route::get('penjemputan-sampah', [PenjemputanSampahController::class, 'index'])->name('penjemputan.index');
+    Route::get('penjemputan-sampah/kategori', [PenjemputanSampahController::class, 'kategori'])->name('penjemputan.kategori');
+    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahController::class, 'permintaan'])->name('penjemputan.permintaan');
+    Route::get('penjemputan-sampah/melacak-penjemputan', [PenjemputanSampahController::class, 'melacak'])->name('penjemputan.melacak');
+});
 
-
-Route::get('masyarakat/penjemputan-sampah/permintaan-penjemputan', function () {
-    return view('masyarakat.penjemputan-sampah.permintaan-penjemputan');
-})->name('masyarakat.penjemputan.permintaan');
-
-Route::get('masyarakat/penjemputan-sampah/melacak-penjemputan', function () {
-    return view('masyarakat.penjemputan-sampah.melacak-penjemputan');
-})->name('masyarakat.penjemputan.melacak');
 
 Route::get('/registrasi/login', function () {
     return view('masyarakat.registrasi.login');
