@@ -6,5 +6,5 @@
         name="{{ $name }}" 
         value="{{ $value ?? '' }}"  {{-- Default value kosong --}}
         placeholder="{{ $placeholder }}" 
-        class="w-full px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200">
+        class="w-3/4 px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200">
 </div>

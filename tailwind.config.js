@@ -14,6 +14,11 @@ export default {
             fontFamily: {
                 sans: ["Mulish", ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                "main-color": "#437252", 
+                "second-gray": "#60B15B",
+                "tertiary-color": "#E2EDE0",
+            },
         },
     },
     plugins: [],
