@@ -6,12 +6,10 @@
                 <h1 class="ml-4 text-2xl font-bold text-green-500">E-WastePas</h1>
             </a>
         </div>
-        <hr class="mb-6 border-t-2 border-gray-100">
-
+        <hr class="mb-6 border-t-2 border-gray-200">
 
         {{-- Masyarakat Section --}}
-        <hr class="mb-6 border-t-2 border-gray-200">
-        <nav class="">
+        <nav>
             <h2 class="mb-4 text-sm font-bold text-gray-800">Masyarakat</h2>
             <ul class="space-y-2">
                 <li>
