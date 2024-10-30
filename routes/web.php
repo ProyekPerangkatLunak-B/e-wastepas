@@ -39,6 +39,8 @@ Route::group([
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahController::class, 'kategori'])->name('penjemputan.kategori');
     Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahController::class, 'permintaan'])->name('penjemputan.permintaan');
     Route::get('penjemputan-sampah/melacak-penjemputan', [PenjemputanSampahController::class, 'melacak'])->name('penjemputan.melacak');
+    Route::get('penjemputan-sampah/detail-kategori', [PenjemputanSampahController::class, 'detailKategori'])->name('penjemputan.detail');
+    Route::get('penjemputan-sampah/detail-melacak', [PenjemputanSampahController::class, 'detailMelacak'])->name('penjemputan.detail-melacak');
 });
 
 

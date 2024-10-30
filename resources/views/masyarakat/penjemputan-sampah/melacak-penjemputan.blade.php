@@ -1,106 +1,36 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container max-w-full px-16 py-8 mx-auto bg-gray-100">
-    <!-- Header Section -->
-    <div class="mb-8 ms-8">
-        <h2 class="text-xl font-semibold leading-relaxed">Melacak Penjemputan</h2>
-        <p class="text-base font-normal text-gray-600">Daftar semua kategori sampah elektronik di akun anda.</p>
-    </div>
+<div class="w-[81%] min-h-screen px-12 py-4 mx-[22rem] bg-gray-100">
+    <h2 class="text-xl font-semibold leading-relaxed">Melacak Penjemputan</h2>
+    <p class="text-base font-normal text-gray-600">Daftar semua penjemputan sampah elektronik di akun anda.</p>
 
-    {{-- Section 1: Tracking ID, Progress, and Estimated Arrival --}}
-    <div class="w-[90%] mx-auto bg-white rounded-xl shadow-md px-8 py-6">
-        <div class="flex items-center justify-between">
-            <!-- Left: ID Penjemputan -->
-            <div>
-                <p class="text-gray-600">ID Penjemputan:</p>
-                <p class="text-xl font-semibold text-black">232378923</p>
-            </div>
-
-            <!-- Progress Bar with Icons and Line -->
-            <div class="relative flex items-center justify-between mx-auto space-x-6">
-                <!-- Icon Dijemput Kurir -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/box-seam1.png') }}" alt="Dijemput Kurir" class="w-12 h-12">
-                    <span class="mt-2 text-sm text-green-500">Dijemput Kurir</span>
+    <!-- Container Grid Card -->
+    <div class="grid grid-cols-2 gap-6 mt-6">
+        <!-- Card 1 -->
+        <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
+            <div class="relative p-6 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <div class="flex justify-end">
+                    <span class="text-sm font-bold text-gray-600">C032378923</span>
                 </div>
-                <div class="w-16 h-1 bg-green-300 rounded"></div>
-
-                <!-- Icon Menuju Dropbox -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/truck1.png') }}" alt="Menuju Dropbox" class="w-12 h-12">
-                    <span class="mt-2 text-sm text-gray-500">Menuju Dropbox</span>
-                </div>
-                <div class="w-16 h-1 bg-gray-300 rounded"></div>
-
-                <!-- Icon E-waste Tiba -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/patch-check1.png') }}" alt="E-waste Tiba" class="w-12 h-12">
-                    <span class="mt-2 text-sm text-gray-500">E-waste Tiba</span>
-                </div>
-            </div>
-
-            <!-- Right: Estimasi Tiba -->
-            <div class="text-right">
-                <p class="text-gray-600">Estimasi Tiba:</p>
-                <p class="text-xl font-semibold text-black">17.23</p>
-            </div>
-        </div>
-    </div>
-
-    {{-- Section 2: Alamat Pengantaran dan Tracking --}}
-    <div class="w-[90%] mx-auto mt-6 bg-white rounded-xl shadow-md px-8 pb-28">
-        <!-- Tabs atau Indicators di atas -->
-        <div class="flex justify-center mb-12 space-x-28">
-            <span class="w-24 h-2 bg-red-500 rounded"></span>
-            <span class="w-24 h-2 bg-blue-500 rounded"></span>
-            <span class="w-24 h-2 bg-red-500 rounded"></span>
-            <span class="w-24 h-2 bg-blue-500 rounded"></span>
-            <span class="w-24 h-2 bg-red-500 rounded"></span>
-            <span class="w-24 h-2 bg-blue-500 rounded"></span>
-            <span class="w-24 h-2 bg-red-500 rounded"></span>
-        </div>
-
-        <div class="grid grid-cols-2 gap-8 pt-4">
-            <!-- Left: Alamat Pengantaran -->
-            <div>
-                <h3 class="text-lg font-semibold text-gray-700">Alamat Pengantaran</h3>
-                <p class="mt-1 text-gray-700">Nama Kurir - 085112345678</p>
-                <p class="text-sm text-gray-500">DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142</p>
-                <p class="mt-4 font-semibold text-gray-700">Jumlah Barang: 2 (dua)</p>
-                <p class="text-sm text-gray-500">Ada 2 Barang, 1 Pcs Laptop dan 1 Pcs Lemari Es. Hati hati Bang Kurir</p>
-                <p class="mt-4 text-xs text-gray-400">*Lorem ipsum dolor sit amet</p>
-            </div>
-
-            <!-- Right: Tracking Details -->
-            <div>
-                <h3 class="text-lg font-semibold text-gray-700">Tracking</h3>
-                <div class="flex flex-col mt-4 space-y-6">
-                    <!-- Tracking Steps with Dot and Line -->
-                    <div class="flex items-center space-x-4">
-                        <div class="relative">
-                            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
-                            <div class="absolute w-1 h-8 transform -translate-x-1/2 bg-gray-300 -bottom-8 left-1/2"></div>
-                        </div>
-                        <p class="text-sm text-gray-700">Sampai di Dropbox Cidadap (10.34 WIB)</p>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="relative">
-                            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
-                            <div class="absolute w-1 h-8 transform -translate-x-1/2 bg-gray-300 -bottom-8 left-1/2"></div>
-                        </div>
-                        <p class="text-sm text-gray-700">Kurir sedang mengantarkan ke Dropbox Cidadap (09.30 WIB)</p>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="relative">
-                            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
-                        </div>
-                        <p class="text-sm text-gray-700">Kurir Mengambil Sampah dari Ammar Bahtiar (09.00 WIB)</p>
+                
+                <!-- Isi Konten -->
+                <div class="flex items-center px-6 mt-4 space-x-4">
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/patch-check1.png') }}" alt="Icon" class="w-[15%] h-[15%]">
+                    <div class="pl-[4rem]">
+                        <p class="text-2xl font-semibold">Rice Cooker</p>
+                        <p class="text-2xl font-semibold">Laptop</p>
+                        <p class="text-2xl font-semibold">TV</p>
+                        <p class="mt-1 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
                     </div>
                 </div>
-                <p class="mt-6 text-xs text-gray-400">*Lorem ipsum dolor sit amet</p>
+                
+                <!-- Status Button di kanan bawah konten -->
+                <div class="absolute right-0 bottom-1">
+                    <span class="px-6 py-2 text-sm font-semibold text-white bg-orange-500 rounded-lg">Dijemput Kurir</span>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 @endsection

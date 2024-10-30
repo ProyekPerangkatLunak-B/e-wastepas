@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
-
-    {{-- Card jumlah masyarakat, dll --}}
-    <div class="container max-w-full px-4 mx-auto bg-gray-100">
+    <div class="min-h-screen mx-[22rem] mt-2 bg-gray-100 w-[82%]">
         <div class="py-8">
-            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Masyarakat</h2>
-            <h4 class="text-base font-normal ml-14">Selamat datang di dashboard masyarakat.</h4>
+            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Masyarakat - Penjemputan Sampah</h2>
+            <div class="flex items-center justify-between">
+                <h4 class="text-base font-normal ml-14">Daftar semua tentang penjemputan sampah</h4>
+            </div>
             {{-- Card Section --}}
             <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                 <x-card 
