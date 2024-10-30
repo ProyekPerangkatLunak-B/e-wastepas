@@ -42,13 +42,13 @@ Route::group([
 });
 
 
-Route::get('/registrasi/login', function () {
+Route::get('/masyarakat/login', function () {
     return view('masyarakat.registrasi.login');
-})->name('registrasi.login');
+})->name('masyarakat.login');
 
-Route::get('/registrasi/register', function () {
+Route::get('/masyarakat/register', function () {
     return view('masyarakat.registrasi.register');
-})->name('registrasi.register');
+})->name('masyarakat.register');
 
 // Route Modul Mitra-kurir, registrasi dan penjemputan-sampah
 
