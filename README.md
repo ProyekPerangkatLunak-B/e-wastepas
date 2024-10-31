@@ -167,7 +167,7 @@ git checkout dev
 git pull
 ```
 
-Sebelum memulai pekerjaan, pastikan untuk mengecek digrup apakakh ada update dependencies `npm atau composer`:
+Sebelum memulai pekerjaan, pastikan untuk mengecek digrup apakah ada update dependencies `npm atau composer`:
 
 ```bash
 npm install
@@ -203,4 +203,4 @@ git push origin nama-branch
 
 ---
 
-`Last Edited 18/10/24 @e-waste-ppl-b`
+`Last Edited 31/10/24 @e-waste-ppl-b`
