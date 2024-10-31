@@ -45,9 +45,9 @@ Route::group([
 ], function () {
 
     // Submodul Dashboard
-    Route::get('manajemen/datamaster/dashboard', function () {
+    Route::get('datamaster/dashboard', function () {
         return view('manajemen.datamaster.dashboard.index');
-    })->name('manajemen.datamaster.dashboard.index');
+    })->name('datamaster.dashboard.index');
 
 
     // Submodul Registrasi

@@ -25,7 +25,7 @@ class RegistrasiManajemenController extends Controller
         );
 
         if ($status === Password::RESET_LINK_SENT) {
-            return redirect()->route('password.check-email');
+            return redirect()->route('manajemen.password.check-email');
         }
 
         return back()->withErrors(['email' => __($status)]);
