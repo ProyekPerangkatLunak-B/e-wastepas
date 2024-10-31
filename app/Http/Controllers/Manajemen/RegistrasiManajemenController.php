@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
-class RegistrasiController extends Controller
+class RegistrasiManajemenController extends Controller
 {
     // Fungsi untuk menampilkan halaman forgot password
     public function showLinkRequestForm()
@@ -25,7 +25,7 @@ class RegistrasiController extends Controller
         );
 
         if ($status === Password::RESET_LINK_SENT) {
-            return redirect()->route('password.check-email');
+            return redirect()->route('manajemen.password.check-email');
         }
 
         return back()->withErrors(['email' => __($status)]);

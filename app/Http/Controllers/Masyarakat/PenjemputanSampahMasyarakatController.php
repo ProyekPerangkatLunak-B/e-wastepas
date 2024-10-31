@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Masyarakat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PenjemputanSampahController extends Controller
+class PenjemputanSampahMasyarakatController extends Controller
 {
     public function __construct() {}
     public function index()
