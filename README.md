@@ -167,12 +167,23 @@ git checkout dev
 git pull
 ```
 
+Sebelum memulai pekerjaan, pastikan untuk mengecek digrup apakakh ada update dependencies `npm atau composer`:
+
+```bash
+npm install
+```
+
+```bash
+composer install
+```
+
 
 ### Pindah ke Branch Masing - Masing
 Setelah melakukan pull pada branch dev, pidahlah kebranch masing - masing sesuai dengan jobdesk:
 ```bash
 git checkout nama-branch
 
+```
 Jika tidak bisa menggunakan `git pull` Coba Gunakan ini:
 
 ```bash
