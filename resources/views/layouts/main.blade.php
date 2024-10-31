@@ -18,7 +18,11 @@
     <title>E-WastePas</title>
 </head>
 
-<body>
+<body class="overflow-x-hidden">
+
+
+    {{-- Sidebar --}}
+    @include('partials.sidebar')
 
     {{-- Header --}}
     @include('partials.header', [
@@ -27,13 +31,15 @@
         'profileImage' => 'https://via.placeholder.com/40'
     ])
 
-    {{-- Sidebar --}}
-    @include('partials.sidebar')
-
     {{-- Main Content --}}
-    <div class="pt-6 pl-[20rem]">
-        @yield('content')
-    </div>
+    @yield('content')
+
+    {{-- Modal Form Data --}}
+<script>
+    function toggleModal(open) {
+        document.getElementById('modal-overlay').style.display = open ? 'flex' : 'none';
+    }
+</script>
 
 </body>
 </html>

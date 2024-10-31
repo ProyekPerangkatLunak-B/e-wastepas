@@ -1,4 +1,4 @@
-<header x-data="{ dropdownOpen: false }" class="top-0 right-0 ps-12 pt-4 left-64 ms-[16rem]">
+<header x-data="{ dropdownOpen: false }" class="top-0 right-0 z-0 ps-12 py-2 left-64 ms-[16rem]">
     <div class="container flex items-center justify-end">
         <div class="relative flex items-center space-x-2">
             <!-- Toggler untuk Dropdown (Nama, Role, dan Gambar) -->

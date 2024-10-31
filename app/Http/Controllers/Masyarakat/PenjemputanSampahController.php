@@ -31,4 +31,14 @@ class PenjemputanSampahController extends Controller
         $penjemputan = [];
         return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
     }
+
+    public function detailKategori()
+    {
+        return view('masyarakat.penjemputan-sampah.detail-kategori');
+    }
+
+    public function detailMelacak()
+    {
+        return view('masyarakat.penjemputan-sampah.detail-melacak');
+    }
 }
