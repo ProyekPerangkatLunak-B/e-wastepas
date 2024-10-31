@@ -21,14 +21,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href=""
-                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/dashboard') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
-                        Sampah
-                        <span
-                            class="text-lg {{ Request::is('admin/dashboard') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{ route('admin.datamaster.masyarakat.index') }}"
                         class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/masyarakat') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
                         Masyarakat
@@ -45,11 +37,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href=""
-                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/laporan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                    <a href="{{ route('admin.datamaster.sampah.index') }}"
+                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/sampah') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                        Sampah
+                        <span
+                            class="text-lg {{ Request::is('admin/datamaster/sampah') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.datamaster.dropbox.index') }}"
+                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/dropbox') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
                         Dropbox
                         <span
-                            class="text-lg {{ Request::is('admin/laporan') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+                            class="text-lg {{ Request::is('admin/datamaster/dropbox') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
                     </a>
                 </li>
             </ul>
