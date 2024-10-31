@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- Link Fav Icon --}}
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
+    {{-- Icon fontawesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     {{-- Link Font Google --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,28 +20,23 @@
     <title>E-WastePas</title>
 </head>
 
-<body class="overflow-x-hidden">
-
-
-    {{-- Sidebar --}}
-    @include('partials.sidebar')
+<body>
 
     {{-- Header --}}
     @include('partials.header', [
-        'userName' => 'Ammar Bahtiar',
-        'userRole' => 'Masyarakat',
-        'profileImage' => 'https://via.placeholder.com/40'
+        'userName' => 'Ahmad Zidane',
+        'userRole' => 'admin',
+        'profileImage' => 'https://via.placeholder.com/40',
     ])
 
-    {{-- Main Content --}}
-    @yield('content')
+    {{-- Sidebar --}}
+    @include('partials.sidebar-admin')
 
-    {{-- Modal Form Data --}}
-<script>
-    function toggleModal(open) {
-        document.getElementById('modal-overlay').style.display = open ? 'flex' : 'none';
-    }
-</script>
+    {{-- Main Content --}}
+    <div class="pt-6 pl-[20rem]">
+        @yield('content')
+    </div>
 
 </body>
+
 </html>

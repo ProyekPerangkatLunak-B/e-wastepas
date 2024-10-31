@@ -1,4 +1,4 @@
-<header x-data="{ dropdownOpen: false }" class="top-0 right-0 ps-12 pt-4 left-64 ms-[16rem]">
+<header x-data="{ dropdownOpen: false }" class="top-0 right-0 z-0 ps-12 py-2 left-64 ms-[16rem]">
     <div class="container flex items-center justify-end">
         <div class="relative flex items-center space-x-2">
             <!-- Toggler untuk Dropdown (Nama, Role, dan Gambar) -->
@@ -23,10 +23,10 @@
                 x-transition:leave-end="transform opacity-0 scale-95">
                 <div class="py-1">
                     <a href="#" class="block px-4 py-4 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">Dashboard</a>
-                    <a href="#" class="block px-4 py-4 mt-2 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">Pengaturan Akun</a>
-                    <form action="#" method="POST">
+                    <a href="#" class="block px-4 py-4 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">Pengaturan Akun</a>
+                    <form action="#" method="">
                         @csrf
-                        <button type="submit" class="block w-full px-8 py-2 mt-2 text-sm text-center text-white bg-red-500 py-2s rounded-xl hover:bg-red-700">Logout</button>
+                        <button type="submit" class="block w-full px-8 py-2 mt-2 text-sm text-center text-white bg-red-500 rounded-xl hover:bg-red-700">Logout</button>
                     </form>
                 </div>
             </div>

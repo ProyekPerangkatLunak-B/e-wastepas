@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\MitraKurir\RegistrasiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,32 +22,36 @@ Route::get('admin/datamaster/dashboard', function () {
 Route::get('admin/login', function () {
     return view('admin.datamaster.login.index');
 })->name('admin.login.index');
+
 // Route Modul Manajemen, registrasi dan dashboard
+Route::get('manajemen/datamaster/dashboard', function () {
+    return view('manajemen.datamaster.dashboard.index');
+})->name('manajemen.datamaster.dashboard.index');
 
 // Route Modul Masyarakat, registrasi dan penjemputan-sampah
-Route::get('masyarakat/penjemputan-sampah', function () {
-    return view('masyarakat.penjemputan-sampah.index');
-})->name('masyarakat.penjemputan.index');
+Route::group([
+    'prefix' => 'masyarakat/',
+    'as' => 'masyarakat.',
+], function () {
+    // Modul Registrasi
 
-Route::get('masyarakat/penjemputan-sampah/kategori', function () {
-    return view('masyarakat.penjemputan-sampah.kategori');
-})->name('masyarakat.penjemputan.kategori');
+    // Modul Penjemputan Sampah
+    Route::get('penjemputan-sampah', [PenjemputanSampahController::class, 'index'])->name('penjemputan.index');
+    Route::get('penjemputan-sampah/kategori', [PenjemputanSampahController::class, 'kategori'])->name('penjemputan.kategori');
+    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahController::class, 'permintaan'])->name('penjemputan.permintaan');
+    Route::get('penjemputan-sampah/melacak-penjemputan', [PenjemputanSampahController::class, 'melacak'])->name('penjemputan.melacak');
+    Route::get('penjemputan-sampah/detail-kategori', [PenjemputanSampahController::class, 'detailKategori'])->name('penjemputan.detail');
+    Route::get('penjemputan-sampah/detail-melacak', [PenjemputanSampahController::class, 'detailMelacak'])->name('penjemputan.detail-melacak');
+});
 
-Route::get('masyarakat/penjemputan-sampah/permintaan-penjemputan', function () {
-    return view('masyarakat.penjemputan-sampah.permintaan-penjemputan');
-})->name('masyarakat.penjemputan.permintaan');
 
-Route::get('masyarakat/penjemputan-sampah/melacak-penjemputan', function () {
-    return view('masyarakat.penjemputan-sampah.melacak-penjemputan');
-})->name('masyarakat.penjemputan.melacak');
-
-Route::get('/registrasi/login', function () {
+Route::get('/masyarakat/login', function () {
     return view('masyarakat.registrasi.login');
-})->name('registrasi.login');
+})->name('masyarakat.login');
 
-Route::get('/registrasi/register', function () {
+Route::get('/masyarakat/register', function () {
     return view('masyarakat.registrasi.register');
-})->name('registrasi.register');
+})->name('masyarakat.register');
 
 // Route Modul Mitra-kurir, registrasi dan penjemputan-sampah
 

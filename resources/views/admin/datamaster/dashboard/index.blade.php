@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-admin')
 
 @section('content')
     {{-- Container Utama --}}

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="container max-w-full px-4 mx-auto bg-gray-100">
+    <div class="min-h-screen mx-[22rem] mt-2 bg-gray-100 w-[82%]">
         <div class="py-8">
             <h2 class="text-xl font-semibold leading-relaxed ml-14">Kategori Sampah Elektronik</h2>
             <div class="flex items-center justify-between">
@@ -30,7 +30,7 @@
                     title="Lampu" 
                     description="Semua jenis lampu dari berbagai alat elektronik" 
                     image="https://picsum.photos/1280/720" 
-                    link="#" />
+                    link="{{ route('masyarakat.penjemputan.detail') }}" />
 
                 <x-card 
                     title="Baterai" 

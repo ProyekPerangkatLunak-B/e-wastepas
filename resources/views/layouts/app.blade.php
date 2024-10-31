@@ -21,7 +21,7 @@
 <body>
 
  {{-- Main Content --}}
- 
+
         @yield('content')
     </div> 
 
