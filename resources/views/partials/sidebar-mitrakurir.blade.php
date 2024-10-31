@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('mitra-kurir.penjemputan.kategori') }}" class="flex items-center justify-between p-3 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
+                    <a href="{{ route('mitra-kurir.penjemputan.permintaan') }}" class="flex items-center justify-between p-3 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
                         Permintaan Penjemputan
                         <span class="text-lg {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'text-green-600' : 'text-gray-400' }}">
                             <svg class="w-[20px] h-[20px] text-gray-800 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
@@ -29,9 +29,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('mitra-kurir.penjemputan.kategori') }}" class="flex items-center justify-between p-3 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
+                    <a href="{{ route('mitra-kurir.penjemputan.dropbox') }}" class="flex items-center justify-between p-3 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
                         Dropbox
-                        <span class="text-lg {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'text-green-600' : 'text-gray-400' }}">
+                        <span class="text-lg {{ Request::is('penjemputan-sampah/dropbox') ? 'text-green-600' : 'text-gray-400' }}">
                             <svg class="w-[20px] h-[20px] text-gray-800 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5 7 7-7 7"/>
                             </svg>
@@ -39,9 +39,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('mitra-kurir.penjemputan.kategori') }}" class="flex items-center justify-between p-3 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
+                    <a href="{{ route('mitra-kurir.penjemputan.riwayat') }}" class="flex items-center justify-between p-3 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
                         Riwayat Penjemputan
-                        <span class="text-lg {{ Request::is('penjemputan-sampah/permintaan-penjemputan') ? 'text-green-600' : 'text-gray-400' }}">
+                        <span class="text-lg {{ Request::is('penjemputan-sampah/riwayat') ? 'text-green-600' : 'text-gray-400' }}">
                             <svg class="w-[20px] h-[20px] text-gray-800 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5 7 7-7 7"/>
                             </svg>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MitraKurirController;
 
 Route::get('/', function () {
     return view('app');
@@ -36,3 +37,23 @@ Route::get('mitrakurir/penjemputan-sampah/kategori/detail', function () {
         "namaKategori" => "Layar dan Monitor"
     ]);
 })->name('mitra-kurir.penjemputan.detail-kategori');
+
+Route::get('mitrakurir/penjemputan-sampah/permintaan', function () {
+    return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan');
+})->name('mitra-kurir.penjemputan.permintaan');
+
+Route::get('mitrakurir/penjemputan-sampah/dropbox', function () {
+    return view('mitra-kurir.penjemputan-sampah.dropbox');
+})->name('mitra-kurir.penjemputan.dropbox');
+
+Route::get('mitrakurir/penjemputan-sampah/riwayat', function () {
+    return view('mitra-kurir.penjemputan-sampah.riwayat');
+})->name('mitra-kurir.penjemputan.riwayat');
+
+Route::prefix('mitrakurir/penjemputan-sampah')->group(function () {
+    Route::get('kategori', [MitraKurirController::class, 'kategori'])->name('mitra-kurir.penjemputan.kategori');
+    Route::get('kategori/detail', [MitraKurirController::class, 'detailKategori'])->name('mitra-kurir.penjemputan.detail-kategori');
+    Route::get('permintaan', [MitraKurirController::class, 'permintaan'])->name('mitra-kurir.penjemputan.permintaan');
+    Route::get('dropbox', [MitraKurirController::class, 'dropbox'])->name('mitra-kurir.penjemputan.dropbox');
+    Route::get('riwayat', [MitraKurirController::class, 'riwayat'])->name('mitra-kurir.penjemputan.riwayat');
+});
