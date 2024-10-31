@@ -13,6 +13,10 @@ class RegistrasiController extends Controller
         return view('mitra-kurir.registrasi.register');
     }
 
+    public function loginIndex(){
+        return view('mitra-kurir.registrasi.login');
+    }
+
     public function simpanData(Request $request){
 
         // dd($request->all()); 
@@ -39,21 +43,17 @@ class RegistrasiController extends Controller
     
             return back()->with('success', 'Registrasi berhasil!');
         } catch (\Illuminate\Database\QueryException $e) {
-            // Handle specific error codes
             if ($e->getCode() === '23000') { 
                 $errorMessages = [];
     
-                // Check if the error is for username
                 if (str_contains($e->getMessage(), 'username_unique')) {
                     $errorMessages['username'] = 'Username already taken.';
                 }
     
-                // Check if the error is for email
                 if (str_contains($e->getMessage(), 'email_unique')) {
                     $errorMessages['email'] = 'Email already taken.';
                 }
     
-                // Check if the error is for no_ktp
                 if (str_contains($e->getMessage(), 'no_ktp_unique')) {
                     $errorMessages['KTP'] = 'No KTP already taken.';
                 }
@@ -63,5 +63,6 @@ class RegistrasiController extends Controller
     
             return back()->withErrors(['error' => 'An error occurred during registration.']);
         }
+       
 }
 }

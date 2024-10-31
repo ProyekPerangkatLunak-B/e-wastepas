@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MitraKurir\RegistrasiController;
+use App\Http\Controllers\MitraKurir\PenjemputanSampahController;
 
 Route::get('/', function () {
     return view('app');
@@ -67,11 +69,9 @@ Route::get('mitrakurir/penjemputan-sampah/kategori/detail', function () {
 
 
 // route mitra kurir registrasi
-Route::get('/mitra-kurir/registrasi/register', [RegistrasiController::class, 'index']);
 
-Route::get('/mitra-kurir/registrasi/login', function () {
-    return view('mitra-kurir.registrasi.login');
-})->name('mitra-kurir.registrasi.login');
+Route::get('/mitra-kurir/registrasi/register', [RegistrasiController::class, 'index'] )->name('mitra-kurir.registrasi.register');
+Route::get('/mitra-kurir/registrasi/login', [RegistrasiController::class, 'loginIndex'] )->name('mitra-kurir.registrasi.login');
 
 
 Route::post('/mitra-kurir/registrasi/register', [RegistrasiController::class, 'simpanData']);
