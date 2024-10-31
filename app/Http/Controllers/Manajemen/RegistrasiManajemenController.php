@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
-class RegistrasiController extends Controller
+class RegistrasiManajemenController extends Controller
 {
     // Fungsi untuk menampilkan halaman forgot password
     public function showLinkRequestForm()
