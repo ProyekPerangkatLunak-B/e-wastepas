@@ -3,9 +3,12 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "serve": "php artisan serve",
+        "dev-serve": "concurrently \"npm run dev\" \"php artisan serve\""
     },
     "devDependencies": {
+        "@tailwindcss/forms": "^0.5.9",
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
@@ -13,5 +16,9 @@
         "postcss": "^8.4.47",
         "tailwindcss": "^3.4.14",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "alpinejs": "^3.14.3",
+        "preline": "^2.5.1"
     }
 }
