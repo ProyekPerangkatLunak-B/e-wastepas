@@ -28,14 +28,12 @@
                                 </span>
                             </td>
                             <td class="px-4 py-2 border-b">
-                                <div class="flex items-center space-x-4">
-                                    <button class="text-green-500 hover:text-green-700" onclick="confirmRegistration()">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                    <button class="text-red-500 hover:text-red-700" onclick="confirmDelete()">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
+                                <button class="px-2 py-1 text-white bg-blue-500 rounded hover:bg-blue-700 shadow">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-700 shadow">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
                         <!-- Tambahkan baris tambahan untuk setiap pengguna -->

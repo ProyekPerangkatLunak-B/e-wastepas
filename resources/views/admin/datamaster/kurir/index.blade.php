@@ -31,14 +31,14 @@
                             </td>
                             <td class="px-4 py-2 border-b">
                                 <div class="flex items-center space-x-4">
-                                    <button class="text-green-500 hover:text-green-700" onclick="confirmRegistration()">
-                                        <i class="fas fa-check"></i>
+                                    <button class="px-2 py-1 text-white bg-blue-500 rounded hover:bg-blue-700 shadow">
+                                        <i class="fas fa-edit"></i>
                                     </button>
-                                    <button class="text-blue-500 hover:text-blue-700">
-                                        <i class="fas fa-file"></i>
-                                    </button>
-                                    <button class="text-red-500 hover:text-red-700" onclick="confirmDelete()">
+                                    <button class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-700 shadow">
                                         <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="px-2 py-1 text-white bg-blue-500 rounded hover:text-blue-700 shadow">
+                                        <i class="fas fa-file"></i>
                                     </button>
                                 </div>
                             </td>

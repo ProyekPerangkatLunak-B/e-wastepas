@@ -13,6 +13,7 @@ Route::get('/', function () {
 // Route Modul Admin
 Route::group([
     'prefix' => 'admin/',
+    'as' => 'admin.',
 ], function () {
 
     // Submodul Datamaster
@@ -28,13 +29,21 @@ Route::group([
         return view('admin.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
 
-    Route::get('datamaster/dropbox', function () {
-        return view('admin.datamaster.dropbox.index');
+    Route::get('datamaster/master-data/dropbox', function () {
+        return view('admin.datamaster.master-data.dropbox.index');
     })->name('datamaster.dropbox.index');
 
-    Route::get('datamaster/sampah', function () {
-        return view('admin.datamaster.sampah.index');
-    })->name('datamaster.sampah.index');
+    Route::get('datamaster/master-data/kategori', function () {
+        return view('admin.datamaster.master-data.kategori.index');
+    })->name('datamaster.kategori.index');
+
+    Route::get('datamaster/master-data/jenis', function () {
+        return view('admin.datamaster.master-data.jenis.index');
+    })->name('datamaster.jenis.index');
+
+    Route::get('datamaster/master-data/wilayah', function () {
+        return view('admin.datamaster.master-data.wilayah.index');
+    })->name('datamaster.wilayah.index');
 
     // Submodul Registrasi
     Route::get('login', function () {

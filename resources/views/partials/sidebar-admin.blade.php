@@ -37,22 +37,61 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.datamaster.sampah.index') }}"
-                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/sampah') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
-                        Sampah
-                        <span
-                            class="text-lg {{ Request::is('admin/datamaster/sampah') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
-                    </a>
+                    <button onclick="toggleDropdown()"
+                        class="flex items-center justify-between w-full p-3 text-sm font-medium text-gray-700 border border-gray-300 hover:bg-gray-200 rounded-lg">
+                        Data Master
+                        <span id="dropdown-icon" class="text-lg text-gray-400">&gt;</span>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <ul id="dropdown-menu"
+                        class="mt-2 space-y-2 pl-4 {{ Request::is('admin/datamaster/master-data/dropbox', 'admin/datamaster/master-data/wilayah', 'admin/datamaster/master-data/kategori', 'admin/datamaster/master-data/jenis') ? '' : 'hidden' }}">
+                        <li>
+                            <a href="{{ route('admin.datamaster.dropbox.index') }}"
+                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/dropbox') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                                Dropbox
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.datamaster.wilayah.index') }}"
+                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/wilayah') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                                Wilayah
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.datamaster.jenis.index') }}"
+                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/jenis') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                                Jenis
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.datamaster.kategori.index') }}"
+                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/kategori') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                                Kategori
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="{{ route('admin.datamaster.dropbox.index') }}"
-                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/dropbox') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
-                        Dropbox
-                        <span
-                            class="text-lg {{ Request::is('admin/datamaster/dropbox') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
-                    </a>
-                </li>
+
             </ul>
         </nav>
     </div>
 </div>
+
+<script>
+    let dropdownOpen =
+        {{ Request::is('datamaster/master-data/dropbox', 'datamaster/master-data/wilayah', 'datamaster/master-data/kategori', 'datamaster/master-data/jenis') ? 'true' : 'false' }};
+
+    function toggleDropdown() {
+        const menu = document.getElementById('dropdown-menu');
+        const icon = document.getElementById('dropdown-icon');
+
+        dropdownOpen = !dropdownOpen;
+        if (dropdownOpen) {
+            menu.classList.remove('hidden');
+            icon.textContent = '⌄'; // Change icon to down arrow
+        } else {
+            menu.classList.add('hidden');
+            icon.textContent = '>'; // Change icon to right arrow
+        }
+    }
+</script>
