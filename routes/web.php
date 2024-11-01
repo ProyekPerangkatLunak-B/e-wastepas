@@ -1,42 +1,46 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
-use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
+use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
     return view('app');
 });
 
-
-
 // Route Modul Admin
 Route::group([
     'prefix' => 'admin/',
-    'as' => 'admin.',
 ], function () {
 
     // Submodul Datamaster
     Route::get('datamaster/masyarakat', function () {
         return view('admin.datamaster.masyarakat.index');
     })->name('datamaster.masyarakat.index');
+
     Route::get('datamaster/kurir', function () {
         return view('admin.datamaster.kurir.index');
     })->name('datamaster.kurir.index');
+
     Route::get('datamaster/dashboard', function () {
         return view('admin.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
 
+    Route::get('datamaster/dropbox', function () {
+        return view('admin.datamaster.dropbox.index');
+    })->name('datamaster.dropbox.index');
+
+    Route::get('datamaster/sampah', function () {
+        return view('admin.datamaster.sampah.index');
+    })->name('datamaster.sampah.index');
 
     // Submodul Registrasi
     Route::get('admin/login', function () {
         return view('admin.datamaster.login.index');
     })->name('admin.login.index');
 });
-
-
 
 // Route Modul Manajemen
 Route::group([
@@ -49,7 +53,6 @@ Route::group([
         return view('manajemen.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
 
-
     // Submodul Registrasi
     Route::get('forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('forgot-password', [RegistrasiManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
@@ -61,8 +64,6 @@ Route::group([
     })->name('password.reset');
     Route::post('reset-password', [RegistrasiManajemenController::class, 'reset'])->name('password.update');
 });
-
-
 
 // Route Modul Masyarakat
 Route::group([
@@ -78,7 +79,6 @@ Route::group([
         return view('masyarakat.registrasi.register');
     })->name('register');
 
-
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('penjemputan.kategori');
@@ -87,8 +87,6 @@ Route::group([
     Route::get('penjemputan-sampah/detail-kategori', [PenjemputanSampahMasyarakatController::class, 'detailKategori'])->name('penjemputan.detail');
     Route::get('penjemputan-sampah/detail-melacak', [PenjemputanSampahMasyarakatController::class, 'detailMelacak'])->name('penjemputan.detail-melacak');
 });
-
-
 
 // Route Modul Mitra-kurir
 Route::group([
@@ -105,7 +103,6 @@ Route::group([
             "namaKategori" => "Layar dan Monitor",
         ]);
     })->name('penjemputan.detail-kategori');
-
 
     // Submodul Registrasi
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
