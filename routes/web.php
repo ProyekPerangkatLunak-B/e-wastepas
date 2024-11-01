@@ -37,9 +37,9 @@ Route::group([
     })->name('datamaster.sampah.index');
 
     // Submodul Registrasi
-    Route::get('admin/login', function () {
+    Route::get('login', function () {
         return view('admin.datamaster.login.index');
-    })->name('admin.login.index');
+    })->name('login.index');
 });
 
 // Route Modul Manajemen
