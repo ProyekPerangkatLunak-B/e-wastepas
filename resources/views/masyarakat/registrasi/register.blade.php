@@ -1,13 +1,12 @@
 @extends('layouts/app')
 @section('content')
 
-
 <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center item-center w-full">
     <div class="max-w-screen-2xl bg-white shadow sm:rounded-lg flex justify-center">
         <div class="md:w-2/3 xl:w-7/12 p-6 sm:p-12">
            <div class="mt-5 flex flex-col items-center">
               <div class="logo">
-              <img src="../img/logoEwaste.png" alt="" class="w-24 h-24 mx-auto flex justify-center"">
+              <img src="../img/logoEwaste.png" alt="" class="w-24 h-24 mx-auto flex justify-center">
               <h2 class="text-center text-2xl mt-8 font-bold leading-9 tracking-tight text-green-700">Selamat Datang di E-WastePas</h2>
               <p class="mt-2 text-center text-sm text-gray-500">Masukkan detail anda di bawah ini!</p>
             </div>
@@ -52,12 +51,10 @@
                 </div>
 
               <!-- Button Submit -->
-              <a href="url(masyarakat.registrasi.login)" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                  <button
-                      class="mt-10 tracking-wide font-semibold bg-green-700 text-white w-full py-3 rounded-lg hover:bg-green-400 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Masuk
-                  </button>
-                </a>
-                  </form>
+              <button
+                  class="mt-10 tracking-wide font-semibold bg-green-700 text-white w-full py-3 rounded-lg hover:bg-green-400 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Daftar
+              </button>
+              </form>
             </div>
           </div>
         </div>
