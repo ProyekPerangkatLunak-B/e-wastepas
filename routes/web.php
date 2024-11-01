@@ -13,6 +13,7 @@ Route::get('/', function () {
 // Route Modul Admin
 Route::group([
     'prefix' => 'admin/',
+    'as' => 'admin.',
 ], function () {
 
     // Submodul Datamaster
