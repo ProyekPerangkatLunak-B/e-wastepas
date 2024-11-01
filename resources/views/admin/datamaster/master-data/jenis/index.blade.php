@@ -4,8 +4,8 @@
     {{-- Card jumlah kurir, dll --}}
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
         <div class="py-8">
-            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Sampah</h2>
-            <h4 class="text-base font-normal ml-14">Selamat datang di dashboard sampah.</h4>
+            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Jenis</h2>
+            <h4 class="text-base font-normal ml-14">Selamat datang di dashboard jenis.</h4>
 
             {{-- Tombol Tambah Data --}}
             <div class="flex justify-end px-12 mt-4">

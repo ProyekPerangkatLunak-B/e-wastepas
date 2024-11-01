@@ -4,13 +4,13 @@
     {{-- Card jumlah kurir, dll --}}
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
         <div class="py-8">
-            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Sampah</h2>
-            <h4 class="text-base font-normal ml-14">Selamat datang di dashboard sampah.</h4>
+            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Wilayah</h2>
+            <h4 class="text-base font-normal ml-14">Selamat datang di dashboard wilayah.</h4>
 
             {{-- Tombol Tambah Data --}}
             <div class="flex justify-end px-12 mt-4">
                 <button onclick="openAddDataModal()"
-                    class="flex items-center px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 shadow-lg transition duration-200">
+                    class="flex items-center px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 shadow-lg transition duration-200">
                     <i class="fas fa-plus mr-2"></i> Tambah Data
                 </button>
             </div>

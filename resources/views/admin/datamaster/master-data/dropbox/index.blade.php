@@ -3,7 +3,7 @@
 @section('content')
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Dropbox</h2>
+            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Dashboard Dropbox</h2>
             <h4 class="text-base font-normal ml-14">Daftar data Dropbox.</h4>
 
             {{-- Tombol Tambah Data --}}
