@@ -3,6 +3,7 @@
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman utama (welcome)
@@ -13,6 +14,7 @@ Route::get('/', function () {
 // Route Modul Admin
 Route::group([
     'prefix' => 'admin/',
+    'as' => 'admin.',
 ], function () {
 
     // Submodul Datamaster
@@ -28,13 +30,21 @@ Route::group([
         return view('admin.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
 
-    Route::get('datamaster/dropbox', function () {
-        return view('admin.datamaster.dropbox.index');
+    Route::get('datamaster/master-data/dropbox', function () {
+        return view('admin.datamaster.master-data.dropbox.index');
     })->name('datamaster.dropbox.index');
 
-    Route::get('datamaster/sampah', function () {
-        return view('admin.datamaster.sampah.index');
-    })->name('datamaster.sampah.index');
+    Route::get('datamaster/master-data/kategori', function () {
+        return view('admin.datamaster.master-data.kategori.index');
+    })->name('datamaster.kategori.index');
+
+    Route::get('datamaster/master-data/jenis', function () {
+        return view('admin.datamaster.master-data.jenis.index');
+    })->name('datamaster.jenis.index');
+
+    Route::get('datamaster/master-data/wilayah', function () {
+        return view('admin.datamaster.master-data.wilayah.index');
+    })->name('datamaster.wilayah.index');
 
     // Submodul Registrasi
     Route::get('login', function () {
@@ -72,12 +82,30 @@ Route::group([
 ], function () {
 
     // Submodul Registrasi
-    Route::get('login', function () {
-        return view('masyarakat.registrasi.login');
-    })->name('login');
-    Route::get('register', function () {
-        return view('masyarakat.registrasi.register');
+    // Route::get('login', function () {
+    //     return view('masyarakat.registrasi.login');
+    // })->name('login');
+
+    // Route::get('register', function () {
+    //     return view('masyarakat.registrasi.register');
+    // })->name('register');
+
+
+    Route::get('datamaster/dashboard', function () {
+        return view('masyarakat.registrasi.dashboard');
     })->name('register');
+
+    // Route::get('otp', function () {
+    //     return view('masyarakat.registrasi.otp');
+    // })->name('otp'); // tunggu buat halaman otp
+
+
+    // Rute untuk mengirim data registrasi
+    Route::get('register', [LoginMasyarakat::class, 'showRegistrationForm'])->name('register');
+    Route::post('register', [LoginMasyarakat::class, 'login'])->name('register.submit');
+
+    // Rute untuk login
+    Route::get('login', [LoginMasyarakat::class, 'login'])->name('masyarakat.login');
 
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
