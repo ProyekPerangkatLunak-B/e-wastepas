@@ -45,7 +45,7 @@
                     </button>
                     <!-- Dropdown Menu -->
                     <ul id="dropdown-menu"
-                        class="mt-2 space-y-2 pl-4 {{ Request::is('admin/datamaster/master-data/dropbox', 'admin/datamaster/master-data/wilayah', 'admin/datamaster/master-data/kategori', 'admin/datamaster/master-data/jenis') ? '' : 'hidden' }}">
+                        class="mt-2 space-y-2 pl-4 {{ Request::is('admin/datamaster/master-data/dropbox', 'admin/datamaster/master-data/daerah', 'admin/datamaster/master-data/kategori', 'admin/datamaster/master-data/jenis') ? '' : 'hidden' }}">
                         <li>
                             <a href="{{ route('admin.datamaster.dropbox.index') }}"
                                 class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/dropbox') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
@@ -54,7 +54,7 @@
                         </li>
                         <li>
                             <a href="{{ route('admin.datamaster.daerah.index') }}"
-                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/daerah') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                                class="flex items-center p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/daerah') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
                                 Daerah
                             </a>
                         </li>
@@ -71,15 +71,14 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-            </ul>
+
         </nav>
     </div>
 </div>
 
 <script>
     let dropdownOpen =
-        {{ Request::is('datamaster/master-data/dropbox', 'datamaster/master-data/wilayah', 'datamaster/master-data/kategori', 'datamaster/master-data/jenis') ? 'true' : 'false' }};
+        {{ Request::is('datamaster/master-data/dropbox', 'datamaster/master-data/daerah', 'datamaster/master-data/kategori', 'datamaster/master-data/jenis') ? 'true' : 'false' }};
 
     function toggleDropdown() {
         const menu = document.getElementById('dropdown-menu');

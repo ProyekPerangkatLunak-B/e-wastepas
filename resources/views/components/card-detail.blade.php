@@ -3,9 +3,9 @@
         <div class="h-36 rounded-full overflow-hidden bg-white mt-5">
             <img class="object-cover w-full h-full" src="{{ $image }}" alt="{{ $tittle }}"/>
         </div>
-        <div class="flex flex-col items-center justify-center h-40 p-4 text-center">
-            <h3 class="text-2xl font-semibold text-gray-900">{{ $tittle }}</h3>
-            <p class="mt-2 text-base text-gray-500">{{ $description }}</p>
+        <div class="flex flex-col items-center justify-center p-4 text-center">
+            <h3 class="text-lg font-semibold text-gray-900">{{ $title }}</h3>
+            <p class="mt-1 text-sm text-gray-500">{{ $description }}</p>
         </div>
     </div>
 </div>
