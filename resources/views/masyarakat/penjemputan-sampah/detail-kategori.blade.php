@@ -39,6 +39,26 @@
                     title="Rice Cooker"
                     description="Semua jenis rice cooker dari berbagai alat elektronik"
                     image="https://picsum.photos/700/700" />
+                <x-detail-card
+                    title="Rice Cooker"
+                    description="Semua jenis rice cooker dari berbagai alat elektronik"
+                    image="https://picsum.photos/700/700" />
+                <x-detail-card
+                    title="Rice Cooker"
+                    description="Semua jenis rice cooker dari berbagai alat elektronik"
+                    image="https://picsum.photos/700/700" />
+                <x-detail-card
+                    title="Rice Cooker"
+                    description="Semua jenis rice cooker dari berbagai alat elektronik"
+                    image="https://picsum.photos/700/700" />
+                <x-detail-card
+                    title="Rice Cooker"
+                    description="Semua jenis rice cooker dari berbagai alat elektronik"
+                    image="https://picsum.photos/700/700" />
+                <x-detail-card
+                    title="Rice Cooker"
+                    description="Semua jenis rice cooker dari berbagai alat elektronik"
+                    image="https://picsum.photos/700/700" />
             </div>
         </div>
     </div>
