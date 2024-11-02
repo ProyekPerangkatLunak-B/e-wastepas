@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman utama (welcome)
@@ -42,9 +42,9 @@ Route::group([
         return view('admin.datamaster.master-data.jenis.index');
     })->name('datamaster.jenis.index');
 
-    Route::get('datamaster/master-data/wilayah', function () {
-        return view('admin.datamaster.master-data.wilayah.index');
-    })->name('datamaster.wilayah.index');
+    Route::get('datamaster/master-data/daerah', function () {
+        return view('admin.datamaster.master-data.daerah.index');
+    })->name('datamaster.daerah.index');
 
     // Submodul Registrasi
     Route::get('login', function () {
@@ -90,7 +90,6 @@ Route::group([
     //     return view('masyarakat.registrasi.register');
     // })->name('register');
 
-
     Route::get('datamaster/dashboard', function () {
         return view('masyarakat.registrasi.dashboard');
     })->name('register');
@@ -98,7 +97,6 @@ Route::group([
     // Route::get('otp', function () {
     //     return view('masyarakat.registrasi.otp');
     // })->name('otp'); // tunggu buat halaman otp
-
 
     // Rute untuk mengirim data registrasi
     Route::get('register', [LoginMasyarakat::class, 'showRegistrationForm'])->name('register');
