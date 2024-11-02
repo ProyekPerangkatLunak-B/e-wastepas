@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Masyarakat;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class PenjemputanSampahMasyarakatController extends Controller
 {
@@ -14,16 +15,16 @@ class PenjemputanSampahMasyarakatController extends Controller
     }
     public function kategori()
     {
-        $kategori = [];
+        $kategori = DB::table('kategori_sampah')->get();
         return view('masyarakat.penjemputan-sampah.kategori', compact('kategori'));
     }
 
     public function permintaan()
     {
-        $kategori = [];
-        $jenis = [];
-        $alamatDropbox = [];
-        return view('masyarakat.penjemputan-sampah.permintaan-penjemputan', compact('kategori', 'jenis', 'alamatDropbox'));
+        $kategori = DB::table('kategori_sampah')->get();
+        $jenis = DB::table('jenis_sampah')->get();
+        $dropbox = DB::table('dropbox')->get();
+        return view('masyarakat.penjemputan-sampah.permintaan-penjemputan', compact('kategori', 'jenis', 'dropbox'));
     }
 
     public function melacak()
@@ -34,11 +35,22 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function detailKategori()
     {
-        return view('masyarakat.penjemputan-sampah.detail-kategori');
+        $jenis = DB::table('jenis_sampah')->get();
+        return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis'));
     }
 
     public function detailMelacak()
     {
         return view('masyarakat.penjemputan-sampah.detail-melacak');
+    }
+
+    public function tambah(Request $request)
+    {
+        $request->validate([
+            'kategori' => 'required',
+            'jenis' => 'required',
+            'dropbox' => 'required',
+        ]);
+        return redirect()->route('masyarakat.penjemputan-sampah.permintaan')->with('success', 'Permintaan penjemputan sampah berhasil ditambahkan.');
     }
 }
