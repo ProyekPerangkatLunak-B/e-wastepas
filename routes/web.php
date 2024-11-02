@@ -48,8 +48,13 @@ Route::group([
 
     // Submodul Registrasi
     Route::get('login', function () {
-        return view('admin.datamaster.login.index');
+        return view('admin.datamaster.auth.login.index');
     })->name('login.index');
+
+    Route::get('otp', function () {
+        return view('admin.datamaster.auth.otp.index');
+    })->name('otp.index');
+
 });
 
 // Route Modul Manajemen
