@@ -9,7 +9,8 @@
             {{-- Tombol Tambah Data --}}
             <div class="flex justify-end px-12 mt-4">
                 <button onclick="openAddDataModal()"
-                    class="flex items-center px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 shadow-lg transition duration-200">
+                    class="flex items-center px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 shadow-lg transition duration-200"
+                    style="color: white">
                     <i class="fas fa-plus mr-2"></i> Tambah Data
                 </button>
             </div>
@@ -31,11 +32,13 @@
                             <td class="px-4 py-2 border-b">Braga</td>
                             <td class="px-4 py-2 border-b">70</td>
                             <td class="px-4 py-2 border-b">
-                                <button class="px-2 py-1 text-white bg-blue-500 rounded hover:bg-blue-700 shadow">
-                                    <i class="fas fa-edit"></i>
+                                <button onclick="openEditDataModal('Bandung Tengah', 'Braga', 70)"
+                                    class="px-2 py-1 bg-blue-500 rounded hover:bg-blue-700 shadow">
+                                    <i class="fas fa-edit" style="color: white"></i>
                                 </button>
-                                <button class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-700 shadow">
-                                    <i class="fas fa-trash"></i>
+                                <button onclick="confirmDelete()"
+                                    class="px-2 py-1 bg-red-500 rounded hover:bg-red-700 shadow">
+                                    <i class="fas fa-trash" style="color: white"></i>
                                 </button>
                             </td>
                         </tr>
@@ -45,9 +48,9 @@
         </div>
     </div>
 
-    {{-- Modal for Adding Data --}}
-    <div id="addDataModal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
-        <div class="bg-white rounded-lg p-6 w-1/3 shadow-lg">
+    {{-- Modal for Editing Data --}}
+    <div id="addDataModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-70">
+        <div class="bg-white rounded-lg p-6 w-1/3 shadow-lg" style="background-color: white">
             <h3 class="text-lg font-semibold">Tambah Data Dropbox</h3>
             <div class="flex flex-col space-y-4 mt-4">
                 <div class="flex flex-col">
@@ -76,13 +79,15 @@
             </div>
             <div class="flex justify-end mt-4">
                 <button onclick="saveData()"
-                    class="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition duration-200">Simpan</button>
+                    class="px-4 py-2 bg-green-600 rounded hover:bg-green-700 transition duration-200">Simpan</button>
                 <button onclick="closeAddDataModal()"
-                    class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition duration-200 ml-2">Batal</button>
+                    class="px-4 py-2 bg-red-600 rounded hover:bg-red-700 transition duration-200 ml-2">Batal</button>
             </div>
         </div>
     </div>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function openAddDataModal() {
             document.getElementById('addDataModal').classList.remove('hidden');
@@ -90,6 +95,17 @@
 
         function closeAddDataModal() {
             document.getElementById('addDataModal').classList.add('hidden');
+        }
+
+        function openEditDataModal(nama, wilayah, total) {
+            document.getElementById('editNamaDropbox').value = nama;
+            document.getElementById('editWilayah').value = wilayah;
+            document.getElementById('editTotalTransaksi').value = total;
+            document.getElementById('editDataModal').classList.remove('hidden');
+        }
+
+        function closeEditDataModal() {
+            document.getElementById('editDataModal').classList.add('hidden');
         }
 
         function saveData() {
@@ -100,10 +116,10 @@
             if (!namaDropbox || !wilayah || !totalTransaksi) {
                 alert('Mohon isi semua field');
             } else {
-                // Here you can add the logic to save the data to your database
+                // Logic to save the data can be added here (e.g., send to backend)
                 alert('Data Dropbox berhasil ditambahkan!');
 
-                // Optionally close the modal after saving
+                // Close the modal after saving
                 closeAddDataModal();
 
                 // Clear inputs
@@ -111,6 +127,69 @@
                 document.getElementById('wilayah').value = '';
                 document.getElementById('totalTransaksi').value = '';
             }
+        }
+
+        function updateData() {
+            const namaDropbox = document.getElementById('editNamaDropbox').value;
+            const wilayah = document.getElementById('editWilayah').value;
+            const totalTransaksi = document.getElementById('editTotalTransaksi').value;
+
+            if (!namaDropbox || !wilayah || !totalTransaksi) {
+                alert('Mohon isi semua field');
+            } else {
+                // Logic to update the data can be added here (e.g., send to backend)
+                alert('Data Dropbox berhasil diperbarui!');
+
+                // Close the modal after saving
+                closeEditDataModal();
+            }
+        }
+
+        function confirmRegistration() {
+            Swal.fire({
+                title: 'Apakah anda menyetujui registrasi ini kurir?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Setujui',
+                cancelButtonText: 'Tolak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Registrasi Disetujui',
+                        'Registrasi Kurir disetujui.',
+                        'success'
+                    );
+                } else {
+                    Swal.fire(
+                        'Registrasi Ditolak',
+                        'Registrasi Kurir tidak disetujui.',
+                        'error'
+                    );
+                }
+            });
+        }
+
+        function confirmDelete() {
+            Swal.fire({
+                title: 'Apakah anda yakin ingin menghapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Data Dihapus',
+                        'Data kurir berhasil dihapus.',
+                        'success'
+                    );
+                    // Logic to delete data from the backend can be added here
+                }
+            });
         }
     </script>
 @endsection
