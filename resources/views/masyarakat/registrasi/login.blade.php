@@ -3,7 +3,6 @@
 
 
 <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center item-center w-full">
-    <div class="max-w-screen-2xl bg-white shadow sm:rounded-lg flex justify-center">
         <div class="md:w-2/3 xl:w-7/12 p-6 sm:p-12">
            <div class="mt-10 flex flex-col items-center">
               <div class="logo">
@@ -19,22 +18,22 @@
 
             <!-- Form Login -->
                 <div class="mx-auto max-w-md">
-                  <form action="#" method="POST">
+                  <form action="" method="POST">
                   <div>
                     <label for="email" class="block mt-4 text-md font-medium leading-9 text-gray-500">Email</label>
                         <input
-                            class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-green-200 text-md focus:outline-none focus:border-green-400 focus:bg-white"
-                            type="email" required/>
-                    </div>       
-                    <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label> 
+                            class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-green-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
+                            type="email" name="email" required/>
+                    </div>
+                    <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label>
                         <input
-                            class="w-full px-5 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-green-200 text-sm focus:outline-none focus:border-green-400 focus:bg-white"
-                            type="password" required/>
+                            class="w-full px-5 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-green-400 text-sm focus:outline-none focus:border-gray-900 focus:bg-white"
+                            type="password" name="password" required/>
                     <div class="flex justify-between">
                       <div class="">
                     </div>
                     <div class="text-sm">
-                        <a href="#" class="text-gray-900 mt-2 flex hover:text-gray-500">Lupa Password?</a>
+                        <a href="./forgot-password" class="text-gray-900 mt-2 flex hover:text-gray-500">Lupa Password?</a>
                   </div>
                 </div>
 
@@ -50,7 +49,7 @@
         </div>
       </div>
       <div class="flex-1 text-center hidden md:flex">
-        <img src="../img/bgRegist.jpg">
+        <img src="../img/mitra-kurir/bgAuth.jpg">
           <div class="m-12 xl:m-24 w-full bg-contain bg-center bg-no-repeat">
       </div>
     </div>

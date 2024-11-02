@@ -98,12 +98,19 @@ Route::group([
     //     return view('masyarakat.registrasi.otp');
     // })->name('otp'); // tunggu buat halaman otp
 
-    // Rute untuk mengirim data registrasi
+
+    //Submodul Registrasi
+    //Rute untuk mengirim data registrasi
     Route::get('register', [LoginMasyarakat::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [LoginMasyarakat::class, 'login'])->name('register.submit');
 
     // Rute untuk login
     Route::get('login', [LoginMasyarakat::class, 'login'])->name('masyarakat.login');
+
+    Route::get('/forgot-password', function () {
+        return view('masyarakat/registrasi/forgot-password');
+    });
+
 
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
