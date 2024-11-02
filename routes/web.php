@@ -139,3 +139,7 @@ Route::group([
 Route::get('/otp', function () {
     return view('mitra-kurir/registrasi/otp');
 });
+
+Route::get('/otp', function () {
+    return view('mitra-kurir/registrasi/get-otp');
+});
