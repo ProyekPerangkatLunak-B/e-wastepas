@@ -28,6 +28,7 @@
     @include('partials.header', [
         'userName' => 'Ammar Bahtiar',
         'userRole' => 'Masyarakat',
+        'profileImage' => 'https://via.placeholder.com/40',
     ])
 
     {{-- Main Content --}}
