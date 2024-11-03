@@ -17,7 +17,7 @@
                     @include('components.mitra-kurir.otp.input')
                     @include('components.mitra-kurir.otp.change-email')
                 </form>
-                @include('components.mitra-kurir.get-otp.button', ['type' => 'submit', 'text' => 'GET OTP'])
+                @include('components.mitra-kurir.get-otp.button', ['type' => 'submit', 'text' => 'VERIFY AND PROCEED'])
             </div>
         </div>
     </div>
