@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center item-center w-full">
+<div class="min-h-screen bg-white text-gray-900 flex justify-center item-center w-full">
         <div class="md:w-2/3 xl:w-7/12 p-6 sm:p-12">
            <div class="mt-5 flex flex-col items-center">
               <div class="logo">
@@ -34,31 +34,33 @@
                   <div>
                     <label for="name" class="block mt-4 text-md font-medium leading-9 text-gray-500">Nama</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-green-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
                             type="name" required name="name"/>
                     </div>
                   <div>
                     <label for="name" class="block mt-4 text-md font-medium leading-9 text-gray-500">No. Telepon</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-green-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
                             type="tel" required name="phone_number"/>
                     </div>
                   <div>
                     <label for="email" class="block mt-4 text-md font-medium leading-9 text-gray-500">Email</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-green-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
                             type="email" required name="email"/>
                     </div>
+                    <div>
                     <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-green-400 text-sm focus:outline-none focus:border-gray-900 focus:bg-white"
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-sm focus:outline-none focus:border-gray-900 focus:bg-white"
                             type="password" required name="password"/>
+                    </div>
                       <div class="">
                 </div>
 
               <!-- Button Submit -->
                   <button
-                      class="mt-10 tracking-wide font-semibold bg-green-700 text-white w-full py-3 rounded-lg hover:bg-green-400 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Masuk
+                      class="mt-10 tracking-wide font-semibold bg-green-900 text-gray-100 w-full py-3 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Masuk
                   </button>
                   </form>
                   <p class="mt-2 text-center text-sm text-gray-500">Sudah punya akun?
