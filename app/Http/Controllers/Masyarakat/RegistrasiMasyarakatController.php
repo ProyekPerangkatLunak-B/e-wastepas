@@ -45,5 +45,6 @@ class RegistrasiMasyarakatController extends Controller
 
         // return response()->json(['message' => 'Invalid credentials or OTP.'], 401);
     }
+
 }
 

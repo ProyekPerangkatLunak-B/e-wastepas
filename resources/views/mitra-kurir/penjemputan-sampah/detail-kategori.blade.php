@@ -5,7 +5,7 @@
         <div class="py-8">
             <h2 class="text-xl font-bold leading-relaxed ml-14">Sampah Elektronik {{ $namaKategori }}</h2>
             <div class="flex items-center justify-between">
-                <h4 class="text-base font-normal ml-14">Daftar jenis sampah elektronik dari kategori {{ $namaKategori }} yang dapat dijemput</h4>
+                <h4 class="text-base font-normal ml-14 w-1/2">Daftar jenis sampah elektronik dari kategori {{ $namaKategori }} yang dapat dijemput</h4>
 
                 {{-- Search and Filter options --}}
                 <div class="flex items-center space-x-4 mr-14">

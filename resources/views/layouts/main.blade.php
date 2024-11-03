@@ -29,6 +29,7 @@
         'userName' => 'Ammar Bahtiar',
         'userRole' => 'Masyarakat',
         'profileImage' => 'https://ui-avatars.com/api/?name=Ammar+Bahtiar&background=random&color=fff'
+
     ])
 
     {{-- Main Content --}}

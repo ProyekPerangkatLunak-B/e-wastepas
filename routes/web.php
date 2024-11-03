@@ -99,16 +99,32 @@ Route::group([
         return view('masyarakat.registrasi.dashboard');
     })->name('register');
 
-    // Route::get('otp', function () {
-    //     return view('masyarakat.registrasi.otp');
-    // })->name('otp'); // tunggu buat halaman otp
+    Route::get('otp', function () {
+         return view('masyarakat.registrasi.otp');
+    })->name('otp'); // tunggu buat halaman otp
 
-    // Rute untuk mengirim data registrasi
+
+    //Submodul Registrasi
+    //Rute untuk mengirim data registrasi
     Route::get('register', [LoginMasyarakat::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [LoginMasyarakat::class, 'login'])->name('register.submit');
 
     // Rute untuk login
     Route::get('login', [LoginMasyarakat::class, 'login'])->name('masyarakat.login');
+
+    Route::get('/forgot-password', function () {
+        return view('masyarakat/registrasi/forgot-password');
+    });
+
+    Route::get('/check-mail', function () {
+        return view('masyarakat/registrasi/check-mail');
+    });
+
+    Route::get('/reset-password', function () {
+        return view('masyarakat/registrasi/reset-password');
+    });
+
+
 
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
@@ -135,6 +151,12 @@ Route::group([
             "namaKategori" => "Layar dan Monitor",
         ]);
     })->name('penjemputan.detail-kategori');
+    Route::get('penjemputan-sampah/permintaan-penjemputan', function () {
+        return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan');
+    })->name('penjemputan.permintaan');
+    Route::get('penjemputan-sampah/permintaan-penjemputan/detail', function () {
+        return view('mitra-kurir.penjemputan-sampah.detail-permintaan');
+    })->name('penjemputan.detail-permintaan');
 
     // Submodul Registrasi
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
@@ -145,3 +167,16 @@ Route::group([
 Route::get('/otp', function () {
     return view('mitra-kurir/registrasi/otp');
 });
+
+// rute untuk isi email untuk mendapatkan otp
+Route::get('/mitra-kurir/registrasi/get-otp', function () {
+    return view('mitra-kurir.registrasi.get-otp');
+})->name('mitra-kurir.registrasi.get-otp');
+
+
+// rute untuk isi email untuk mendapatkan otp
+Route::get('/mitra-kurir/registrasi/otp2', function () {
+    return view('mitra-kurir.registrasi.otp2');
+})->name('mitra-kurir.registrasi.otp2');
+
+Route::post('/mitra-kurir/registrasi/login', [RegistrasiMitraKurirController::class, 'login'])->name('mitra-kurir.login');
