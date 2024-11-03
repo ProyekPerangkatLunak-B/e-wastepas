@@ -1,7 +1,7 @@
 @extends('layouts.main-mitrakurir')
 
 @section('content')
-    <div class="container max-w-full px-4 mx-auto bg-gray-100">
+    <div class="container max-w-full px-4 mx-auto  bg-gray-100">
         <div class="py-8">
             <h2 class="text-xl font-semibold leading-relaxed ml-14">Kategori Sampah Elektronik</h2>
             <div class="flex items-center justify-between">

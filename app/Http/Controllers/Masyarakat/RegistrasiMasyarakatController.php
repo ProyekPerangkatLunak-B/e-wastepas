@@ -90,4 +90,5 @@ class RegistrasiMasyarakatController extends Controller
 
         return back()->withErrors(['otp' => 'Invalid OTP code.']); // Sesuaikan dengan nama input yang benar
     }
+
 }

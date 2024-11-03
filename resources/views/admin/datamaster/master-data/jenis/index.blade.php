@@ -4,13 +4,14 @@
     {{-- Card jumlah kurir, dll --}}
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
         <div class="py-8">
-            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Jenis</h2>
+            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Dashboard Jenis</h2>
             <h4 class="text-base font-normal ml-14">Selamat datang di dashboard jenis.</h4>
 
             {{-- Tombol Tambah Data --}}
             <div class="flex justify-end px-12 mt-4">
                 <button onclick="openAddDataModal()"
-                    class="flex items-center px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 shadow-lg transition duration-200">
+                    class="flex items-center px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 shadow-lg transition duration-200"
+                    style="color: white">
                     <i class="fas fa-plus mr-2"></i> Tambah Data
                 </button>
             </div>
@@ -18,7 +19,7 @@
             {{-- Table Section --}}
             <div class="px-12 mt-4">
                 <table class="min-w-full bg-white border rounded-lg">
-                    <thead>
+                    <thead class="bg-gray-200">
                         <tr>
                             <th class="px-4 py-2 border-b text-left text-gray-600">Nama Dropbox</th>
                             <th class="px-4 py-2 border-b text-left text-gray-600">Wilayah</th>
@@ -32,13 +33,13 @@
                             <td class="px-4 py-2 border-b">TPA - Setiabudhi</td>
                             <td class="px-4 py-2 border-b">50</td>
                             <td class="px-4 py-2 border-b">
-                                <button class="px-2 py-1 text-white bg-blue-500 rounded hover:bg-blue-700 shadow"
+                                <button class="px-2 py-1 bg-blue-500 rounded hover:bg-blue-700 shadow"
                                     onclick="confirmEdit()">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit" style="color: white"></i>
                                 </button>
-                                <button class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-700 shadow"
+                                <button class="px-2 py-1 bg-red-500 rounded hover:bg-red-700 shadow"
                                     onclick="confirmDelete()">
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash" style="color: white"></i>
                                 </button>
                             </td>
                         </tr>
@@ -51,7 +52,7 @@
 
     {{-- Modal for Adding Data --}}
     <div id="addDataModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-70">
-        <div class="bg-white rounded-lg p-6 w-1/3 shadow-lg">
+        <div class="bg-white rounded-lg p-6 w-1/3 shadow-lg" style="background-color: white">
             <h3 class="text-lg font-semibold">Tambah Data Dropbox</h3>
             <div class="flex flex-col space-y-4 mt-4">
                 <div class="flex flex-col">

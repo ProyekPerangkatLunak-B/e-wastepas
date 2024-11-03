@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
@@ -43,14 +44,19 @@ Route::group([
         return view('admin.datamaster.master-data.jenis.index');
     })->name('datamaster.jenis.index');
 
-    Route::get('datamaster/master-data/wilayah', function () {
-        return view('admin.datamaster.master-data.wilayah.index');
-    })->name('datamaster.wilayah.index');
+    Route::get('datamaster/master-data/daerah', function () {
+        return view('admin.datamaster.master-data.daerah.index');
+    })->name('datamaster.daerah.index');
 
     // Submodul Registrasi
     Route::get('login', function () {
-        return view('admin.datamaster.login.index');
+        return view('admin.datamaster.auth.login.index');
     })->name('login.index');
+
+    Route::get('otp', function () {
+        return view('admin.datamaster.auth.otp.index');
+    })->name('otp.index');
+
 });
 
 // Route Modul Manajemen
@@ -104,6 +110,20 @@ Route::group([
     Route::post('otp', [RegistrasiMasyarakatController::class, 'verifyOtp'])->name('otp.verify');
 
 
+    Route::get('/forgot-password', function () {
+        return view('masyarakat/registrasi/forgot-password');
+    });
+
+    Route::get('/check-mail', function () {
+        return view('masyarakat/registrasi/check-mail');
+    });
+
+    Route::get('/reset-password', function () {
+        return view('masyarakat/registrasi/reset-password');
+    });
+
+
+
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('penjemputan.kategori');
@@ -128,6 +148,12 @@ Route::group([
             "namaKategori" => "Layar dan Monitor",
         ]);
     })->name('penjemputan.detail-kategori');
+    Route::get('penjemputan-sampah/permintaan-penjemputan', function () {
+        return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan');
+    })->name('penjemputan.permintaan');
+    Route::get('penjemputan-sampah/permintaan-penjemputan/detail', function () {
+        return view('mitra-kurir.penjemputan-sampah.detail-permintaan');
+    })->name('penjemputan.detail-permintaan');
 
     // Submodul Registrasi
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
@@ -138,3 +164,16 @@ Route::group([
 Route::get('/otp', function () {
     return view('mitra-kurir/registrasi/otp');
 });
+
+// rute untuk isi email untuk mendapatkan otp
+Route::get('/mitra-kurir/registrasi/get-otp', function () {
+    return view('mitra-kurir.registrasi.get-otp');
+})->name('mitra-kurir.registrasi.get-otp');
+
+
+// rute untuk isi email untuk mendapatkan otp
+Route::get('/mitra-kurir/registrasi/otp2', function () {
+    return view('mitra-kurir.registrasi.otp2');
+})->name('mitra-kurir.registrasi.otp2');
+
+Route::post('/mitra-kurir/registrasi/login', [RegistrasiMitraKurirController::class, 'login'])->name('mitra-kurir.login');

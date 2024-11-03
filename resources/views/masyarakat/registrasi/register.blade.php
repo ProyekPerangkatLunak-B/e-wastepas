@@ -12,7 +12,7 @@
             </div>
 
             <!-- Registrasi -->
-             
+
             <div class="w-full flex-20 mt-2">
                 <div class="flex flex-col flex justify-around items-center">
             </div>
@@ -34,19 +34,27 @@
                   <div>
                     <label for="name" class="block mt-4 text-md font-medium leading-9 text-gray-500">Nama</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-green-200 text-md focus:outline-none focus:border-green-400 focus:bg-white"
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
                             type="name" required name="name"/>
+                    </div>
+                  <div>
+                    <label for="name" class="block mt-4 text-md font-medium leading-9 text-gray-500">No. Telepon</label>
+                        <input
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
+                            type="tel" required name="phone_number"/>
                     </div>
                   <div>
                     <label for="email" class="block mt-4 text-md font-medium leading-9 text-gray-500">Email</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-green-200 text-md focus:outline-none focus:border-green-400 focus:bg-white"
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
                             type="email" required name="email"/>
                     </div>
-                    <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label> 
+                    <div>
+                    <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-green-200 text-sm focus:outline-none focus:border-green-400 focus:bg-white"
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-sm focus:outline-none focus:border-gray-900 focus:bg-white"
                             type="password" required name="password"/>
+                    </div>
                       <div class="">
                 </div>
 
@@ -60,7 +68,7 @@
         </div>
       </div>
       <div class="flex-1 text-center hidden md:flex">
-        <img src="../img/bgRegist.jpg">
+        <img src="../img/mitra-kurir/bgAuth.jpg">
           <div class="m-12 xl:m-24 w-full bg-contain bg-center bg-no-repeat">
       </div>
     </div>
