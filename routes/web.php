@@ -150,3 +150,5 @@ Route::get('/mitra-kurir/registrasi/get-otp', function () {
 Route::get('/mitra-kurir/registrasi/otp2', function () {
     return view('mitra-kurir.registrasi.otp2');
 })->name('mitra-kurir.registrasi.otp2');
+
+Route::post('/mitra-kurir/registrasi/login', [RegistrasiMitraKurirController::class, 'login'])->name('mitra-kurir.login');
