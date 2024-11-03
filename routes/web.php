@@ -147,6 +147,9 @@ Route::group([
     Route::get('penjemputan-sampah/permintaan-penjemputan/detail', function () {
         return view('mitra-kurir.penjemputan-sampah.detail-permintaan');
     })->name('penjemputan.detail-permintaan');
+    Route::get('penjemputan-sampah/dropbox', function () {
+        return view('mitra-kurir.penjemputan-sampah.dropbox');
+    })->name('penjemputan.dropbox');
 
     // Submodul Registrasi
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
