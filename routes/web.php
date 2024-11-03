@@ -4,6 +4,8 @@ use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman utama (welcome)
@@ -86,31 +88,27 @@ Route::group([
     'as' => 'masyarakat.',
 ], function () {
 
+    // Submodul Login
+    Route::get('login', function () {
+        return view('masyarakat.registrasi.login');
+    })->name('login');
+    
+    Route::post('login', [LoginMasyarakat::class, 'login'])->name('login.submit');
+
     // Submodul Registrasi
-    // Route::get('login', function () {
-    //     return view('masyarakat.registrasi.login');
-    // })->name('login');
-
-    // Route::get('register', function () {
-    //     return view('masyarakat.registrasi.register');
-    // })->name('register');
-
-    Route::get('datamaster/dashboard', function () {
-        return view('masyarakat.registrasi.dashboard');
+    Route::get('register', function () {
+        return view('masyarakat.registrasi.register');
     })->name('register');
+    
+    Route::post('register', [RegistrasiMasyarakatController::class, 'register'])->name('register.submit');
 
+    // Rute untuk tampilan OTP
     Route::get('otp', function () {
-         return view('masyarakat.registrasi.otp');
-    })->name('otp'); // tunggu buat halaman otp
+        return view('masyarakat.registrasi.verify_otp');
+    })->name('otp');
+    
+    Route::post('otp', [RegistrasiMasyarakatController::class, 'verifyOtp'])->name('otp.verify');
 
-
-    //Submodul Registrasi
-    //Rute untuk mengirim data registrasi
-    Route::get('register', [LoginMasyarakat::class, 'showRegistrationForm'])->name('register');
-    Route::post('register', [LoginMasyarakat::class, 'login'])->name('register.submit');
-
-    // Rute untuk login
-    Route::get('login', [LoginMasyarakat::class, 'login'])->name('masyarakat.login');
 
     Route::get('/forgot-password', function () {
         return view('masyarakat/registrasi/forgot-password');

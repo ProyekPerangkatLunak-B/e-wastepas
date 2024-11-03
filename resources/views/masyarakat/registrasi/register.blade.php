@@ -1,8 +1,8 @@
 @extends('layouts/app')
 @section('content')
 
-
-<div class="min-h-screen bg-white text-gray-900 flex justify-center item-center w-full">
+<div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center item-center w-full">
+    <div class="max-w-screen-2xl bg-white shadow sm:rounded-lg flex justify-center">
         <div class="md:w-2/3 xl:w-7/12 p-6 sm:p-12">
            <div class="mt-5 flex flex-col items-center">
               <div class="logo">
@@ -59,12 +59,10 @@
                 </div>
 
               <!-- Button Submit -->
-                  <button
-                      class="mt-10 tracking-wide font-semibold bg-green-900 text-gray-100 w-full py-3 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Masuk
-                  </button>
-                  </form>
-                  <p class="mt-2 text-center text-sm text-gray-500">Sudah punya akun?
-                  <a href="./login" class="font-semibold leading-6 text-gray-700 hover:text-gray-500">Masuk disini.</a></p>
+              <button
+                  class="mt-10 tracking-wide font-semibold bg-green-700 text-white w-full py-3 rounded-lg hover:bg-green-400 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Daftar
+              </button>
+              </form>
             </div>
           </div>
         </div>
