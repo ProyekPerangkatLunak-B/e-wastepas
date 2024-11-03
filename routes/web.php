@@ -99,9 +99,9 @@ Route::group([
         return view('masyarakat.registrasi.dashboard');
     })->name('register');
 
-    // Route::get('otp', function () {
-    //     return view('masyarakat.registrasi.otp');
-    // })->name('otp'); // tunggu buat halaman otp
+    Route::get('otp', function () {
+         return view('masyarakat.registrasi.otp');
+    })->name('otp'); // tunggu buat halaman otp
 
 
     //Submodul Registrasi
@@ -115,6 +115,15 @@ Route::group([
     Route::get('/forgot-password', function () {
         return view('masyarakat/registrasi/forgot-password');
     });
+
+    Route::get('/check-mail', function () {
+        return view('masyarakat/registrasi/check-mail');
+    });
+
+    Route::get('/reset-password', function () {
+        return view('masyarakat/registrasi/reset-password');
+    });
+
 
 
     // Submodul Penjemputan Sampah
