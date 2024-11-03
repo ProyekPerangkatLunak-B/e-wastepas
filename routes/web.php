@@ -141,6 +141,12 @@ Route::group([
             "namaKategori" => "Layar dan Monitor",
         ]);
     })->name('penjemputan.detail-kategori');
+    Route::get('penjemputan-sampah/permintaan-penjemputan', function () {
+        return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan');
+    })->name('penjemputan.permintaan');
+    Route::get('penjemputan-sampah/permintaan-penjemputan/detail', function () {
+        return view('mitra-kurir.penjemputan-sampah.detail-permintaan');
+    })->name('penjemputan.detail-permintaan');
 
     // Submodul Registrasi
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');

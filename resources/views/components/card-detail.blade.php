@@ -1,7 +1,7 @@
-<div class="w-full max-w-xs transition-shadow duration-300 bg-white border border-gray-200 shadow-md rounded-xl hover:shadow-lg">
-    <div class="flex flex-col items-center pb-5">
-        <div class="w-full h-40 overflow-hidden bg-white rounded-t-xl">
-            <img class="object-cover w-full h-full" src="{{ $image }}" alt="{{ $title }}" />
+<div class=" w-full h-auto max-w-sm bg-neutral-50 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg">
+    <div class="flex flex-col items-center pb-10">
+        <div class="h-36 rounded-full overflow-hidden bg-white mt-5">
+            <img class="object-cover w-full h-full" src="{{ $image }}" alt="{{ $tittle }}"/>
         </div>
         <div class="flex flex-col items-center justify-center p-4 text-center">
             <h3 class="text-lg font-semibold text-gray-900">{{ $title }}</h3>

@@ -20,7 +20,7 @@
     <title>E-WastePas</title>
 </head>
 
-<body>
+<body class="overflow-x-hidden">
 
     {{-- Header --}}
     @include('partials.header', [
@@ -33,7 +33,7 @@
     @include('partials.sidebar-mitrakurir')
 
     {{-- Main Content --}}
-    <div class="pt-6 pl-[20rem]">
+    <div class="pt-6 pl-[22rem]">
         @yield('content')
     </div>
 
