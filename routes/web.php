@@ -157,3 +157,16 @@ Route::group([
 Route::get('/otp', function () {
     return view('mitra-kurir/registrasi/otp');
 });
+
+// rute untuk isi email untuk mendapatkan otp
+Route::get('/mitra-kurir/registrasi/get-otp', function () {
+    return view('mitra-kurir.registrasi.get-otp');
+})->name('mitra-kurir.registrasi.get-otp');
+
+
+// rute untuk isi email untuk mendapatkan otp
+Route::get('/mitra-kurir/registrasi/otp2', function () {
+    return view('mitra-kurir.registrasi.otp2');
+})->name('mitra-kurir.registrasi.otp2');
+
+Route::post('/mitra-kurir/registrasi/login', [RegistrasiMitraKurirController::class, 'login'])->name('mitra-kurir.login');

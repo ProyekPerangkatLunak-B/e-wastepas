@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth; // alert login
 
 class RegistrasiMitraKurirController extends Controller
 {
@@ -66,5 +67,30 @@ class RegistrasiMitraKurirController extends Controller
 
             return back()->withErrors(['error' => 'An error occurred during registration.']);
         }
+    }
+
+    // alert login
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'password.required' => 'Password is required.',    
+            'password.min' => 'Password must be at least 8 characters long.', 
+        ]
+        );
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput($request->except('password'));
     }
 }
