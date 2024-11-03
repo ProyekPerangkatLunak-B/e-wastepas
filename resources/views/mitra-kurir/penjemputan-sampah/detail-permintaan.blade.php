@@ -10,7 +10,7 @@
             <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                 
                 <!-- Left Card: informasi user -->
-                <div class="bg-white-100 rounded-3xl shadow-md p-6 flex flex-col items-center text-center">
+                <div class="bg-white-100 rounded-2xl shadow-md p-6 flex flex-col items-center text-center">
                     <img src="https://picsum.photos/700/700" alt="User Avatar" class="w-24 h-24 rounded-full mb-4">
                     <h3 class="text-lg font-semibold">Sarah Martins</h3>
                     <div class="text-sm mt-2">
@@ -39,7 +39,7 @@
                 </div>
 
                 <!-- Right Card: detail sampah -->
-                <div class="lg:col-span-2 bg-white-100 rounded-3xl shadow-md p-6">
+                <div class="lg:col-span-2 bg-white-100 rounded-2xl shadow-md p-6">
                     <h3 class="text-lg font-semibold mb-4">Sampah</h3>
                     
                     {{-- detail item --}}
@@ -64,17 +64,43 @@
                                 <span>: 1 Pcs</span>
                             </div>
                         </div>
+                        <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">
+                            <div class="grid grid-cols-2 gap-x-2">
+                                <span class="font-semibold">Kategori</span>
+                                <span>: Layar dan Monitor</span>
+                                <span class="font-semibold">Jenis</span>
+                                <span>: Handphone</span>
+                                <span class="font-semibold">Jumlah</span>
+                                <span>: 1 Pcs</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">
+                            <div class="grid grid-cols-2 gap-x-2">
+                                <span class="font-semibold">Kategori</span>
+                                <span>: Layar dan Monitor</span>
+                                <span class="font-semibold">Jenis</span>
+                                <span>: Handphone</span>
+                                <span class="font-semibold">Jumlah</span>
+                                <span>: 1 Pcs</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- catatan -->
+                    <!-- catatan & status -->
                     <h3 class="text-lg font-semibold mb-2">Catatan</h3>
-                    <div class="bg-gray-100 p-4 rounded-xl text-sm mb-6 border border-gray-300">
+                    <div class="bg-gray-100 p-4 rounded-xl text-sm mb-2 border border-gray-300">
                         <p> Layar handphone pecah </p>
                     </div>
+                    <h4 class="text-base font-semibold mb-7">Status Permintaan Penjemputan: Belum Diproses</h4>
 
-                    <!-- button terima -->
-                    <div class="flex justify-center">
-                        <a href="#" type="button" id="openModalBtn" class="focus:outline-none  text-slate-50 bg-gradient-to-b from-lime-500 to-green-600 hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300 font-bold rounded-2xl text-base px-5 py-2.5 me-2 mb-2 ">Terima Penjemputan</a>
+                    <!-- button terima & tolak -->
+                    <div class="grid grid-cols-2 gap-1 mb-1">
+                        <div class="flex justify-end">
+                            <a href="#" type="button" id="openModalBtn" class="focus:outline-none  text-slate-50 bg-secondary-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300 font-bold rounded-xl text-base px-16 py-2 me-2 mr-4 ">Terima </a>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="#" type="button" id="tolakModalBtn" class="focus:outline-none  text-slate-50 bg-red-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300 font-bold rounded-xl text-base px-16 py-2 me-2 ml-4">Tolak</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,14 +108,26 @@
     </div>
 
     <!-- Modal -->
-    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
         <div class="bg-white-100 rounded-2xl shadow-lg p-6 max-w-sm w-full text-center">
             <h2 class="text-base font-normal  justify-self-start text-gray-500">Notifikasi</h2>
-            <div class="w-10 h-0.5 bg-green-600 rounded-xl ml-3"></div>
+            <div class="w-10 h-0.5 bg-secondary-normal rounded-xl ml-3"></div>
             <p class="mb-6 mt-6 text-lg">Permintaan Penjemputan Diterima!</p>
-            <button id="closeModalBtn" class="px-10 py-2 bg-gradient-to-r from-green-600 to-green-800 text-white-100 rounded-2xl font-semibold hover:bg-gradient-to-l">
+            <button id="closeModalBtn" class="px-10 py-2 bg-gradient-to-r from-secondary-normal to-primary-normal text-white-100 rounded-2xl font-normal hover:bg-gradient-to-l">
                 OK
             </button>
+        </div>
+    </div>
+
+    <div id="modalTolak" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
+        <div class="bg-white-100 rounded-2xl shadow-lg p-6 max-w-sm w-full text-center">
+            <h2 class="text-base font-normal  justify-self-start text-gray-500">Notifikasi</h2>
+            <div class="w-10 h-0.5 bg-red-normal rounded-xl ml-3"></div>
+            <p class="mb-6 mt-6 text-lg">Apakah anda yakin ingin menolak permintaan penjemputan sampah ini ?</p>
+            <div class="flex items-center mt-6 space-x-4 rtl:space-x-reverse justify-end">
+                <button id="close" type="button" class="text-white  font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Tutup</button>
+                <button id="tolakButton"  class="py-2.5 px-5 text-sm font-medium text-white-100 focus:outline-none bg-red-normal rounded-lg border ">Tolak</button>
+            </div>
         </div>
     </div>
 
@@ -102,6 +140,21 @@
 
         document.getElementById('closeModalBtn').addEventListener('click', function () {
             document.getElementById('modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden'); 
+        });
+
+        document.getElementById('tolakModalBtn').addEventListener('click', function () {
+            document.getElementById('modalTolak').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden'); 
+        });
+
+        document.getElementById('close').addEventListener('click', function () {
+            document.getElementById('modalTolak').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden'); 
+        });
+
+        document.getElementById('tolakButton').addEventListener('click', function () {
+            document.getElementById('modalTolak').classList.add('hidden');
             document.body.classList.remove('overflow-hidden'); 
         });
     </script>

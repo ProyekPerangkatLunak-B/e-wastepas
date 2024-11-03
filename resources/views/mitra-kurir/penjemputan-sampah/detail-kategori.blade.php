@@ -27,8 +27,20 @@
             {{-- Card Section --}}
             <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                 <x-card-detail
-                    tittle="Lampu" 
-                    description="Semua tipe handphone termasuk komponen layar dan monitor, seperti touchscreen, backlight, panel LCD, LED, OLED, dan sebagainya.  " 
+                    title="Lampu"
+                    description="Semua tipe laptop dari berbagai alat elektronik"
+                    image="https://picsum.photos/700/700" />
+                    <x-card-detail
+                    title="Lampu"
+                    description="Semua tipe laptop dari berbagai alat elektronik"
+                    image="https://picsum.photos/700/700" />
+                    <x-card-detail
+                    title="Lampu"
+                    description="Semua tipe laptop dari berbagai alat elektronik"
+                    image="https://picsum.photos/700/700" />
+                    <x-card-detail
+                    title="Lampu"
+                    description="Semua tipe laptop dari berbagai alat elektronik"
                     image="https://picsum.photos/700/700" />
             </div>
 
