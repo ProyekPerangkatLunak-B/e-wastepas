@@ -145,6 +145,7 @@ Route::get('/mitra-kurir/registrasi/get-otp', function () {
     return view('mitra-kurir.registrasi.get-otp');
 })->name('mitra-kurir.registrasi.get-otp');
 
+
 // rute untuk isi email untuk mendapatkan otp
 Route::get('/mitra-kurir/registrasi/otp2', function () {
     return view('mitra-kurir.registrasi.otp2');
