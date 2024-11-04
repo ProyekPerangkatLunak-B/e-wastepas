@@ -5,7 +5,7 @@ use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
+// use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman utama (welcome)
@@ -143,20 +143,28 @@ Route::group([
     Route::get('penjemputan-sampah/kategori', function () {
         return view('mitra-kurir.penjemputan-sampah.kategori');
     })->name('penjemputan.kategori');
+    
     Route::get('penjemputan-sampah/kategori/detail', function () {
         return view('mitra-kurir.penjemputan-sampah.detail-kategori', [
             "namaKategori" => "Layar dan Monitor",
         ]);
     })->name('penjemputan.detail-kategori');
+
     Route::get('penjemputan-sampah/permintaan-penjemputan', function () {
         return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan');
     })->name('penjemputan.permintaan');
+
     Route::get('penjemputan-sampah/permintaan-penjemputan/detail', function () {
         return view('mitra-kurir.penjemputan-sampah.detail-permintaan');
     })->name('penjemputan.detail-permintaan');
+
     Route::get('penjemputan-sampah/dropbox', function () {
         return view('mitra-kurir.penjemputan-sampah.dropbox');
     })->name('penjemputan.dropbox');
+
+    Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
+        return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan');
+    })->name('penjemputan.riwayat-penjemputan');
 
     // Submodul Registrasi
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
