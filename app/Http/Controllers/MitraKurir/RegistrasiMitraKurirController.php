@@ -23,13 +23,28 @@ class RegistrasiMitraKurirController extends Controller
         return view('mitra-kurir.registrasi.login');
     }
 
+    public function OtpRedirect($user_id){
+        $user = User::find($user_id);
+        return view('mitra-kurir.registrasi.otp-verification', compact('user'));
+    }
+
+    public function OtpValidation($user_id, Request $request){
+        $otp = UserOTP::where('otp_code', $request->otp_code)->where('expired_at','>',now())->first();
+    if (!$otp) {
+        return redirect()->back()->withErrors([
+            'otp_code' => 'OTP CODE tidak ditemukan.'
+        ]);
+    }
+
+    $otp->user->email_verified_at = Date::now();
+    $otp->user->save();
+    
+    return redirect('mitra-kurir/registrasi/login');
+    }
+
     public function simpanData(Request $request)
     {
-
-        // dd($request->all());
-
-        
-
+        // dd($request->all())
         $validateData = $request->validate([
             'nama' => 'required',
             'username' => 'required',
@@ -39,12 +54,11 @@ class RegistrasiMitraKurirController extends Controller
             'password' => ['required', 'min:8'],
             'ulangiPassword' => ['required', 'min:8', 'same:password']
         ]);
-
         try {
          $user = User::create([
                 'name' => $validateData['nama'],
-                'username' => $validateData['username'], // Include username
-                'no_ktp' => $validateData['KTP'], // Include no_ktp
+                'username' => $validateData['username'], 
+                'no_ktp' => $validateData['KTP'], 
                 'no_hp' => $validateData['NomorHP'],
                 'email' => $validateData['Email'],
                 'password' => Hash::make($validateData['password'])

@@ -142,27 +142,10 @@ Route::group([
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
+    Route::get('/{user_id}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
+    Route::post('/{user_id}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
 });
 
 
-
-Route::get('/{user_id}/otp-verification', function ($user_id) {
-    $user = User::find($user_id);
-    return view('mitra-kurir.registrasi.otp-verification', compact('user'));
-})->name('otp-verification');
-
-Route::post('/{user_id}/otp-validation', function ($user_id, Request $request) {
-    $otp = UserOTP::where('otp_code', $request->otp_code)->where('expired_at','>',now())->first();
-    if (!$otp) {
-        return redirect()->back()->withErrors([
-            'otp_code' => 'OTP CODE tidak ditemukan.'
-        ]);
-    }
-
-    $otp->user->email_verified_at = Date::now();
-    $otp->user->save();
-    return redirect('mitra-kurir/registrasi/login');
-    
-})->middleware([])->name('otp.validation');
 
 
