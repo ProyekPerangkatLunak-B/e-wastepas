@@ -44,13 +44,20 @@ class PenjemputanSampahMasyarakatController extends Controller
         return view('masyarakat.penjemputan-sampah.detail-melacak');
     }
 
-    public function tambah(Request $request)
+    public function totalRiwayatPenjemputan()
     {
-        $request->validate([
-            'kategori' => 'required',
-            'jenis' => 'required',
-            'dropbox' => 'required',
-        ]);
-        return redirect()->route('masyarakat.penjemputan-sampah.permintaan')->with('success', 'Permintaan penjemputan sampah berhasil ditambahkan.');
+        $penjemputan = [];
+        return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('penjemputan'));
+    }
+
+    public function riwayatPenjemputan()
+    {
+        $penjemputan = [];
+        return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
+    }
+
+    public function detailRiwayat()
+    {
+        return view('masyarakat.penjemputan-sampah.detail-riwayat');
     }
 }

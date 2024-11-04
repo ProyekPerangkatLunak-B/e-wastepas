@@ -1,167 +1,268 @@
 @extends('layouts.main-admin')
 
 @section('content')
-    {{-- Card jumlah kurir, dll --}}
-    <div class="container max-w-full px-4 mx-auto bg-gray-100">
+    <style>
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+        }
+
+        h2 {
+            color: #2ecc71;
+            /* Hijau tua */
+            margin-bottom: 15px;
+            border-bottom: 3px solid #27ae60;
+            /* Hijau lebih gelap */
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        h4 {
+            color: #2ecc71;
+            /* Hijau tua */
+        }
+
+        a.inline-block {
+            transition: all 0.3s ease;
+        }
+
+        a.inline-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 255, 0, 0.3);
+            /* Hijau */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        th {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            /* Gradasi hijau */
+            color: #ffffff;
+            padding: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        td,
+        th {
+            text-align: left;
+        }
+
+        button {
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
+            /* Hijau */
+        }
+
+        button:hover {
+            background-color: #2ecc71;
+            /* Hijau */
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+            /* Hijau lebih gelap */
+        }
+
+        .flex.space-x-2 button {
+            margin: 0 3px;
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .flex.space-x-2 button:hover {
+            background-color: #27ae60;
+            /* Hijau lebih gelap */
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+            /* Hijau lebih gelap */
+        }
+
+        .flex.space-x-2 .active {
+            background-color: #2ecc71;
+            /* Hijau */
+            color: #fff;
+        }
+    </style>
+
+    <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Dashboard Kategori</h2>
-            <h4 class="text-base font-normal ml-14">Selamat datang di dashboard kategori.</h4>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14">Dashboard Kategori</h2>
+            <h4 class="text-base font-light ml-14 text-gray-600">Selamat datang di dashboard kategori.</h4>
 
-            {{-- Tombol Tambah Data --}}
-            <div class="flex justify-end px-12 mt-4">
-                <button onclick="openAddDataModal()"
-                    class="flex items-center px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 shadow-lg transition duration-200"
-                    style="color: white">
+            <div class="flex justify-end px-12 mt-6" style="color: white">
+                <a href="{{ route('admin.datamaster.kategori.create') }}"
+                    class="inline-block px-5 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg shadow hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transition transform hover:-translate-y-1">
                     <i class="fas fa-plus mr-2"></i> Tambah Data
-                </button>
+                </a>
             </div>
 
-            {{-- Table Section --}}
-            <div class="px-12 mt-4">
-                <table class="min-w-full bg-white border rounded-lg">
-                    <thead class="bg-gray-200">
-                        <tr>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Nama Dropbox</th>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Wilayah</th>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Total Transaksi</th>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="px-4 py-2 border-b">TPS - SMA 16 Bandung</td>
-                            <td class="px-4 py-2 border-b">TPA - Setiabudhi</td>
-                            <td class="px-4 py-2 border-b">50</td>
-                            <td class="px-4 py-2 border-b">
-                                <button class="px-2 py-1 bg-blue-500 rounded hover:bg-blue-700 shadow"
-                                    onclick="confirmEdit()">
-                                    <i class="fas fa-edit" style="color: white"></i>
-                                </button>
-                                <button class="px-2 py-1 bg-red-500 rounded hover:bg-red-700 shadow"
-                                    onclick="confirmDelete()">
-                                    <i class="fas fa-trash" style="color: white"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <!-- Tambahkan baris tambahan untuk setiap pengguna -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+            <div class="px-12 mt-6">
+                <!-- Custom search and length menu -->
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center">
+                        <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
+                        <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="text" id="customSearch" placeholder="Cari..." class="border rounded px-4 py-1" />
+                    </div>
+                </div>
 
-    {{-- Modal for Adding Data --}}
-    <div id="addDataModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-70">
-        <div class="bg-white rounded-lg p-6 w-1/3 shadow-lg" style="background-color: white">
-            <h3 class="text-lg font-semibold">Tambah Data Dropbox</h3>
-            <div class="flex flex-col space-y-4 mt-4">
-                <div class="flex flex-col">
-                    <label for="namaDropbox" class="mb-1 font-medium text-gray-700">Nama Dropbox</label>
-                    <input type="text" id="namaDropbox"
-                        class="w-full p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500"
-                        placeholder="Masukkan nama dropbox">
+                <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+                    <table id="kategoriTable" class="w-full border border-gray-300 bg-white rounded-lg">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Nama Kategori Sampah</th>
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Deskripsi Kategori Sampah</th>
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data akan dimuat melalui AJAX -->
+                        </tbody>
+                    </table>
                 </div>
-                <div class="flex flex-col">
-                    <label for="wilayah" class="mb-1 font-medium text-gray-700">Wilayah</label>
-                    <select id="wilayah"
-                        class="w-full p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>Pilih Wilayah</option>
-                        <option value="Braga">Braga</option>
-                        <option value="Bandung Timur">Bandung Timur</option>
-                        <option value="Setiabudhi">Setiabudhi</option>
-                        <option value="Dago">Dago</option>
-                    </select>
+
+                <!-- Custom pagination -->
+                <div id="customPagination" class="flex justify-between mt-4" style="color: white">
+                    <div id="customInfo" class="text-sm text-gray-700">
+                        <!-- Informasi jumlah data akan diisi di sini -->
+                    </div>
+                    <div class="space-x-2">
+                        <!-- Tombol pagination akan dihasilkan di sini -->
+                    </div>
                 </div>
-                <div class="flex flex-col">
-                    <label for="totalTransaksi" class="mb-1 font-medium text-gray-700">Total Transaksi</label>
-                    <input type="number" id="totalTransaksi"
-                        class="w-full p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500"
-                        placeholder="Masukkan total transaksi">
-                </div>
-            </div>
-            <div class="flex justify-end mt-4">
-                <button onclick="saveData()"
-                    class="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition duration-200">Simpan</button>
-                <button onclick="closeAddDataModal()"
-                    class="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition duration-200 ml-2">Batal</button>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
-        function openAddDataModal() {
-            document.getElementById('addDataModal').classList.remove('hidden');
-        }
+        $(document).ready(function() {
+            // Initialize DataTable
+            var table = $('#kategoriTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('admin.datamaster.kategori.data') }}',
+                columns: [{
+                        data: 'nama_kategori_sampah',
+                        name: 'nama_kategori_sampah',
+                        orderable: true
+                    },
+                    {
+                        data: 'deskripsi_kategori_sampah',
+                        name: 'deskripsi_kategori_sampah',
+                        orderable: true
+                    },
+                    {
+                        data: 'id_kategori_sampah',
+                        name: 'id_kategori_sampah',
+                        orderable: false,
+                        render: function(data, type, row) {
+                            return `
+                            <div class="flex space-x-2">
+                                <a href="/admin/datamaster/master-data/kategori/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" style="color: white">
+                                    Edit
+                                </a>
+                                <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">
+                                    Hapus
+                                </button>
+                            </div>`;
+                        }
+                    }
+                ],
+                order: [
+                    [0, 'asc']
+                ],
+                dom: 't',
+            });
 
-        function closeAddDataModal() {
-            document.getElementById('addDataModal').classList.add('hidden');
-        }
+            // Custom search input
+            $('#customSearch').on('keyup', function() {
+                table.search(this.value).draw();
+            });
 
-        function saveData() {
-            const namaDropbox = document.getElementById('namaDropbox').value;
-            const wilayah = document.getElementById('wilayah').value;
-            const totalTransaksi = document.getElementById('totalTransaksi').value;
+            // Custom length menu
+            $('#customLengthMenu').on('change', function() {
+                table.page.len(this.value).draw();
+            });
 
-            if (!namaDropbox || !wilayah || !totalTransaksi) {
-                alert('Mohon isi semua field');
-            } else {
-                // Logic to save the data can be added here (e.g., send to backend)
-                alert('Data Dropbox berhasil ditambahkan!');
+            // Custom pagination and info display
+            table.on('draw', function() {
+                var pageInfo = table.page.info();
+                $('#customInfo').text(
+                    `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`);
 
-                // Close the modal after saving
-                closeAddDataModal();
+                $('#customPagination').empty();
+                for (var i = 0; i < pageInfo.pages; i++) {
+                    var button =
+                        `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-blue-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
+                    $('#customPagination').append(button);
+                }
+            });
 
-                // Clear inputs
-                document.getElementById('namaDropbox').value = '';
-                document.getElementById('wilayah').value = '';
-                document.getElementById('totalTransaksi').value = '';
-            }
-        }
+            window.changePage = function(page) {
+                table.page(page).draw('page');
+            };
+        });
 
-        function confirmRegistration() {
+        function confirmDelete(id) {
             Swal.fire({
-                title: 'Apakah anda menyetujui registrasi ini kurir?',
+                title: 'Apakah Anda yakin?',
+                text: "Data ini akan dihapus secara permanen!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Setujui',
-                cancelButtonText: 'Tolak'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Registrasi Disetujui',
-                        'Registrasi Kurir disetujui.',
-                        'success'
-                    );
-                } else {
-                    Swal.fire(
-                        'Registrasi Ditolak',
-                        'Registrasi Kurir tidak disetujui.',
-                        'error'
-                    );
-                }
-            });
-        }
-
-        function confirmDelete() {
-            Swal.fire({
-                title: 'Apakah anda yakin ingin menghapus data ini?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Ya, Hapus',
+                confirmButtonText: 'Ya, hapus!',
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire(
-                        'Data Dihapus',
-                        'Data kurir berhasil dihapus.',
-                        'success'
-                    );
-                    // Logic to delete data from the backend can be added here
+                    $.ajax({
+                        url: `{{ route('admin.datamaster.kategori.destroy', '') }}/${id}`,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            Swal.fire(
+                                'Dihapus!',
+                                'Data berhasil dihapus.',
+                                'success'
+                            );
+                            $('#kategoriTable').DataTable().ajax.reload();
+                        },
+                        error: function(xhr) {
+                            Swal.fire(
+                                'Gagal!',
+                                xhr.responseJSON && xhr.responseJSON.error ?
+                                `Gagal menghapus data: ${xhr.responseJSON.error}` :
+                                'Terjadi kesalahan saat menghapus data.',
+                                'error'
+                            );
+                        }
+                    });
                 }
             });
         }

@@ -40,6 +40,16 @@
         function toggleModal(open) {
             document.getElementById('modal-overlay').style.display = open ? 'flex' : 'none';
         }
+
+        // Function to open the modal
+        function openModal() {
+            document.getElementById('alertModal').classList.remove('hidden');
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('alertModal').classList.add('hidden');
+        }
     </script>
 
 </body>
