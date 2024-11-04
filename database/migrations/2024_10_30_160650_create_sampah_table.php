@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sampah', function (Blueprint $table) {
             $table->integer('id_sampah')->primary();
-            $table->integer('id_jenis_sampah');
-            $table->integer('id_kategori_sampah')->nullable();
+            $table->unsignedBigInteger('id_jenis_sampah');
+            $table->unsignedBigInteger('id_kategori_sampah')->nullable();
             $table->string('nama_sampah', 255)->nullable();
             $table->string('deskripsi_sampah', 255)->nullable();
             $table->integer('id_penjemputan')->nullable();

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 
+
 class RegistrasiMitraKurirController extends Controller
 {
     public function index()
@@ -95,5 +96,30 @@ class RegistrasiMitraKurirController extends Controller
 
             return back()->withErrors(['error' => 'An error occurred during registration.']);
         }
+    }
+
+    // alert login
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'password.required' => 'Password is required.',    
+            'password.min' => 'Password must be at least 8 characters long.', 
+        ]
+        );
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput($request->except('password'));
     }
 }

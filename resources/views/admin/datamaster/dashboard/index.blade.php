@@ -5,7 +5,7 @@
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
         <div class="py-8">
             {{-- Section Judul --}}
-            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Kurir</h2>
+            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Dashboard Kurir</h2>
             <h4 class="text-base font-normal ml-14">Selamat datang di dashboard kurir.</h4>
 
             {{-- Card Section --}}
@@ -47,7 +47,7 @@
             {{-- Table Section --}}
             <div class="px-12 mt-8">
                 <table class="min-w-full bg-white border rounded-lg">
-                    <thead>
+                    <thead class="bg-gray-300">
                         <tr>
                             <th class="px-4 py-2 border-b text-left text-gray-600">Pelanggan</th>
                             <th class="px-4 py-2 border-b text-left text-gray-600">Kurir</th>

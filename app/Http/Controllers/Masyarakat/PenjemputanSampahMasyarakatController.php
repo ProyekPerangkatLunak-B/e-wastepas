@@ -41,4 +41,19 @@ class PenjemputanSampahMasyarakatController extends Controller
     {
         return view('masyarakat.penjemputan-sampah.detail-melacak');
     }
+
+    public function totalRiwayatPenjemputan() {
+        $penjemputan = [];
+        return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('penjemputan'));
+    }
+
+    public function riwayatPenjemputan() {
+        $penjemputan = [];
+        return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
+    }
+
+    public function detailRiwayat() {
+        return view('masyarakat.penjemputan-sampah.detail-riwayat');
+    }
+
 }
