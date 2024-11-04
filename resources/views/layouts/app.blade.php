@@ -20,10 +20,8 @@
 
 <body>
 
- {{-- Main Content --}}
-
+    {{-- Main Content --}}
         @yield('content')
-    </div> 
 
 </body>
 </html>
