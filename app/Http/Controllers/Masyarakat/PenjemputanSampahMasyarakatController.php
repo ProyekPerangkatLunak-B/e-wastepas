@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Masyarakat;
 
-use App\Http\Controllers\Controller;
+use App\Models\JenisSampah;
 use Illuminate\Http\Request;
+use App\Models\KategoriSampah;
+use App\Http\Controllers\Controller;
 
 class PenjemputanSampahMasyarakatController extends Controller
 {
@@ -14,7 +16,7 @@ class PenjemputanSampahMasyarakatController extends Controller
     }
     public function kategori()
     {
-        $kategori = [];
+        $kategori = KategoriSampah::all();
         return view('masyarakat.penjemputan-sampah.kategori', compact('kategori'));
     }
 
@@ -32,9 +34,10 @@ class PenjemputanSampahMasyarakatController extends Controller
         return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
     }
 
-    public function detailKategori()
+    public function detailKategori($id)
     {
-        return view('masyarakat.penjemputan-sampah.detail-kategori');
+        $jenis = JenisSampah::where('id_kategori_sampah', $id)->paginate(6);
+        return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis'));
     }
 
     public function detailMelacak()
@@ -42,18 +45,20 @@ class PenjemputanSampahMasyarakatController extends Controller
         return view('masyarakat.penjemputan-sampah.detail-melacak');
     }
 
-    public function totalRiwayatPenjemputan() {
+    public function totalRiwayatPenjemputan()
+    {
         $penjemputan = [];
         return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('penjemputan'));
     }
 
-    public function riwayatPenjemputan() {
+    public function riwayatPenjemputan()
+    {
         $penjemputan = [];
         return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
     }
 
-    public function detailRiwayat() {
+    public function detailRiwayat()
+    {
         return view('masyarakat.penjemputan-sampah.detail-riwayat');
     }
-
 }

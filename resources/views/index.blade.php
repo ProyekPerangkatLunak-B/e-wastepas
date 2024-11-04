@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="bg-white-normal">
     <div class="relative px-6 isolate pt-14 lg:px-8">
       <div class="absolute inset-x-0 overflow-hidden -top-40 -z-10 transform-gpu blur-3xl sm:-top-80" aria-hidden="true">
@@ -28,5 +27,4 @@
       </div>
     </div>
   </div>
-
 @endsection
