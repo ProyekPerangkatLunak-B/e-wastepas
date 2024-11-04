@@ -1,13 +1,18 @@
 <?php
 
+use App\Models\User;
+use App\Models\UserOTP;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
-use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
-use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
-// use App\Http\Controllers\Masyarakat\LoginMasyarakat;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -181,22 +186,14 @@ Route::group([
     // Submodul Registrasi
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
+    Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
 });
-
-Route::get('/otp', function () {
-    return view('mitra-kurir/registrasi/otp');
-});
-
-// rute untuk isi email untuk mendapatkan otp
-Route::get('/mitra-kurir/registrasi/get-otp', function () {
-    return view('mitra-kurir.registrasi.get-otp');
-})->name('mitra-kurir.registrasi.get-otp');
+    Route::post('/{user_id}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
+    Route::get('/{user_id}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
 
-// rute untuk isi email untuk mendapatkan otp
-Route::get('/mitra-kurir/registrasi/otp2', function () {
-    return view('mitra-kurir.registrasi.otp2');
-})->name('mitra-kurir.registrasi.otp2');
 
-Route::post('/mitra-kurir/registrasi/login', [RegistrasiMitraKurirController::class, 'login'])->name('mitra-kurir.login');
+
+
+
