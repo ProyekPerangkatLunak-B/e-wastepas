@@ -1,9 +1,9 @@
-<div class="relative w-full bg-white rounded-lg shadow-md group hover:shadow-lg">
-    <div class="w-full h-56 overflow-hidden bg-white rounded-t-xl">
+<div class="relative w-[450px] h-[350px] shadow-md bg-white-100 pb-8 rounded-2xl group hover:shadow-lg">
+    <div class="w-[450px] h-[228px] overflow-hidden bg-white rounded-t-xl">
         <img src="{{ $image }}" alt="{{ $title }}" class="object-cover w-full h-full">
     </div>
-    <div class="flex flex-col items-center justify-center h-40 pb-10 text-center">
-        <h3 class="text-2xl font-semibold text-gray-900">{{ $title }}</h3>
-        <p class="mt-2 text-base text-gray-500">{{ $description }}</p>
+    <div class="flex flex-col items-start justify-center pt-4 text-center">
+        <h3 class="mt-2 mb-2 ml-8 text-2xl font-semibold text-gray-900">{{ $title }}</h3>
+        <p class="ml-8 text-gray-500 text-md">{{ $description }}</p>
     </div>
 </div>
