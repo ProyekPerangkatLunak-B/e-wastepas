@@ -188,9 +188,11 @@ Route::group([
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
     Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
-    Route::get('/{user_id}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
-    Route::post('/{user_id}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
 });
+    Route::post('/{user_id}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
+    Route::get('/{user_id}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
+
+
 
 
 

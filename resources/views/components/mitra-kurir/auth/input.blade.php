@@ -7,6 +7,7 @@
             type="{{ $type }}" 
             placeholder="{{ $placeholder }}" 
             required 
+            autofocus
             class="block w-full rounded-xl border border-secondary-normal py-2 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 pl-4 {{ $type === 'password' ? 'pr-10' : '' }}"
         >
         @if($type === 'password')
