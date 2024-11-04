@@ -10,15 +10,18 @@
         }
 
         h2 {
-            color: #333;
+            color: #2ecc71;
+            /* Hijau tua */
             margin-bottom: 15px;
-            border-bottom: 3px solid #4a90e2;
+            border-bottom: 3px solid #27ae60;
+            /* Hijau lebih gelap */
             display: inline-block;
             padding-bottom: 5px;
         }
 
         h4 {
-            color: #666;
+            color: #2ecc71;
+            /* Hijau tua */
         }
 
         a.inline-block {
@@ -27,7 +30,8 @@
 
         a.inline-block:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 255, 0, 0.3);
+            /* Hijau */
         }
 
         table {
@@ -38,7 +42,8 @@
         }
 
         th {
-            background: linear-gradient(90deg, #007bff, #00c6ff);
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            /* Gradasi hijau */
             color: #ffffff;
             padding: 12px;
             text-transform: uppercase;
@@ -58,26 +63,15 @@
 
         button {
             transition: background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
+            /* Hijau */
         }
 
         button:hover {
-            background-color: #e74c3c;
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
-        }
-
-        #customLengthMenu,
-        #customSearch {
-            border: 1px solid #ddd;
-            padding: 8px;
-            border-radius: 8px;
-            outline: none;
-            transition: box-shadow 0.2s;
-        }
-
-        #customLengthMenu:focus,
-        #customSearch:focus {
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+            background-color: #2ecc71;
+            /* Hijau */
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+            /* Hijau lebih gelap */
         }
 
         .flex.space-x-2 button {
@@ -87,13 +81,16 @@
         }
 
         .flex.space-x-2 button:hover {
-            background-color: #4a90e2;
+            background-color: #27ae60;
+            /* Hijau lebih gelap */
             color: #fff;
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+            /* Hijau lebih gelap */
         }
 
         .flex.space-x-2 .active {
-            background-color: #007bff;
+            background-color: #2ecc71;
+            /* Hijau */
             color: #fff;
         }
     </style>
@@ -105,7 +102,7 @@
 
             <div class="flex justify-end px-12 mt-6" style="color: white">
                 <a href="{{ route('admin.datamaster.kategori.create') }}"
-                    class="inline-block px-5 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg shadow hover:bg-gradient-to-r hover:from-teal-400 hover:to-blue-500 transition transform hover:-translate-y-1">
+                    class="inline-block px-5 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg shadow hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transition transform hover:-translate-y-1">
                     <i class="fas fa-plus mr-2"></i> Tambah Data
                 </a>
             </div>
@@ -131,9 +128,9 @@
                     <table id="kategoriTable" class="w-full border border-gray-300 bg-white rounded-lg">
                         <thead class="bg-gray-100">
                             <tr>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Nama Kategori Sampah</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Deskripsi Kategori Sampah</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Aksi</th>
@@ -185,7 +182,7 @@
                         render: function(data, type, row) {
                             return `
                             <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/kategori/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-blue-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-500 transform hover:-translate-y-1 transition" style="color: white">
+                                <a href="/admin/datamaster/master-data/kategori/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" style="color: white">
                                     Edit
                                 </a>
                                 <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">
