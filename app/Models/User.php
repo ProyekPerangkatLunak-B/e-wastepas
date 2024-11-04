@@ -10,16 +10,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Model
 {
-
-
-
-
     // /** @use HasFactory<\Database\Factories\UserFactory> */
     // use HasFactory, Notifiable;
 
-    
 
-    // /**
+// /**azQA  z   ZQ
     //  * The attributes that are mass assignable.
     //  *
     //  * @var array<int, string>
@@ -42,6 +37,11 @@ class User extends Model
         'password',
         'remember_token',
     ];
+
+    public function activeOTP()
+    {
+        return $this->hasOne(UserOTP::class,'user_id')->where('expired_at','>', 'now()');
+    }
 
     // /**
     //  * Get the attributes that should be cast.
