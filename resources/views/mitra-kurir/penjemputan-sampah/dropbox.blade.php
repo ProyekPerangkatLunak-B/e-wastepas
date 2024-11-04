@@ -10,7 +10,7 @@
                     <p class="text-base font-normal text-gray-600">Rute penjemputan untuk penyimpanan sampah pada dropbox</p>
                 </div>
                 <!-- button jemput sekarang -->
-                <a href="#" class="flex items-center justify-center px-10 py-2 bg-secondary-normal text-white-100 rounded-2xl shadow-md">
+                <a href="#" id="openModalBtn" class="flex items-center justify-center px-10 py-2 bg-secondary-normal text-white-100 rounded-2xl shadow-md">
                     Jemput Sekarang
                 </a>
             </div>
@@ -63,7 +63,9 @@
 
             <!-- Container alamat & sampah -->
             <div class=" mt-6 bg-white-100 shadow-md rounded-2xl space-x-4 mx-14">
-                <div class="flex justify-between space-x-5 px-6">
+                <div class="flex justify-between space-x-5 px-8">
+                    <span class="w-20 h-1 bg-red-500 rounded"></span>
+                    <span class="w-20 h-1 bg-blue-500 rounded"></span>
                     <span class="w-20 h-1 bg-red-500 rounded"></span>
                     <span class="w-20 h-1 bg-blue-500 rounded"></span>
                     <span class="w-20 h-1 bg-red-500 rounded"></span>
@@ -111,4 +113,28 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
+        <div class="bg-white-100 rounded-2xl shadow-lg p-6 max-w-sm w-full text-center">
+            <h2 class="text-base font-normal  justify-self-start text-gray-500">Notifikasi</h2>
+            <div class="w-10 h-0.5 bg-secondary-normal rounded-xl ml-3"></div>
+            <p class="mb-6 mt-6 text-lg">Penjemputan berhasil dimulai!</p>
+            <button id="closeModalBtn" class="px-10 py-2 bg-gradient-to-r from-secondary-normal to-primary-normal text-white-100 rounded-2xl font-normal hover:bg-gradient-to-l">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('openModalBtn').addEventListener('click', function () {
+            document.getElementById('modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden'); 
+        });
+
+        document.getElementById('closeModalBtn').addEventListener('click', function () {
+            document.getElementById('modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden'); 
+        });
+    </script>
 @endsection

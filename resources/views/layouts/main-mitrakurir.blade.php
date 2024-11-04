@@ -33,7 +33,7 @@
     @include('partials.sidebar-mitrakurir')
 
     {{-- Main Content --}}
-    <div class="pt-6 pl-[22rem]">
+    <div class=" pl-[22rem]">
         @yield('content')
     </div>
 
