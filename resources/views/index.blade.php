@@ -12,10 +12,10 @@
             <img src="{{ asset('img/logoEwaste.png') }}" alt="Logo E-waste" class="w-auto h-16">
             <h1 class="text-5xl font-semibold tracking-tight text-gray-900 text-balance sm:text-7xl">E-Wastepas</h1>
           </div>
-          <p class="mt-8 text-lg font-medium text-gray-500 text-pretty sm:text-xl/8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, quas?</p>
+          <p class="mt-8 text-lg font-medium text-gray-500 text-pretty sm:text-xl/8">Aplikasi Sampah Elektronik Universitas Pasundan 2024</p>
           <div class="flex items-center justify-center mt-10 gap-x-6">
             @foreach (['masyarakat.login' => 'Masyarakat',
-            'mitra-kurir.login' => 'Mitra Kurir',
+            'mitra-kurir.registrasi.login' => 'Mitra Kurir',
             'admin.login.index' => 'Admin',
             'manajemen.datamaster.dashboard.index' => 'Manajemen']
             as $route => $label)
