@@ -36,14 +36,14 @@
                   <button
                       class="mt-10 tracking-wide font-semibold bg-green-900  text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Simpan
                   </button> -->
-                  <button class=" mt-4 tracking-wide bg-green-900 font-semibold text-md text-gray-100 w-full rounded-md py-3 hover:bg-green-700 transition" onclick="openModal('modelConfirm')">
+                  <button class=" focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-3 focus:ring-4 focus:ring-green-300 font-bold rounded-lg mt-8 text-base" onclick="openModal('modelConfirm')">
                     Simpan
                  </button>
                  <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
                      <div class="relative top-40 mx-auto shadow-xl rounded-lg bg-gray-100 max-w-md">
                          <div class="flex justify-end p-2">
                              <button onclick="closeModal('modelConfirm')" type="button"
-                                 class="text-gray-400 bg-white hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                                 class="text-gray-400 bg-white hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto items-center">
                                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                      <path fill-rule="evenodd"
                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -57,7 +57,7 @@
                                 <img src="../img/masyarakat/registrasi/popup-reset.png" alt="" class="w-25 h-20 mx-auto flex justify-center">
                              <h3 class="text-md font-medium text-gray-500 mt-5 mb-6"> Sekarang Anda dapat masuk dengan kata sandi baru Anda. </h3>
                              <a href="#"  onclick="closeModal('modelConfirm')"
-                                 class="bg-green-900 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-gray-100 inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                 class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-3 focus:ring-4 focus:ring-green-300 font-bold rounded-lg items-center px-5 py-2.5 text-center mr-2">
                                  Kembali
                              </a>
                          </div>

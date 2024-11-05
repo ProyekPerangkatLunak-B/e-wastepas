@@ -5,7 +5,6 @@ use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman utama (welcome)
@@ -92,21 +91,21 @@ Route::group([
     Route::get('login', function () {
         return view('masyarakat.registrasi.login');
     })->name('login');
-    
+
     Route::post('login', [LoginMasyarakat::class, 'login'])->name('login.submit');
 
     // Submodul Registrasi
     Route::get('register', function () {
         return view('masyarakat.registrasi.register');
     })->name('register');
-    
+
     Route::post('register', [RegistrasiMasyarakatController::class, 'register'])->name('register.submit');
 
     // Rute untuk tampilan OTP
     Route::get('otp', function () {
         return view('masyarakat.registrasi.verify_otp');
     })->name('otp');
-    
+
     Route::post('otp', [RegistrasiMasyarakatController::class, 'verifyOtp'])->name('otp.verify');
 
 
