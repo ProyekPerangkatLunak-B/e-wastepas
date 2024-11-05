@@ -96,19 +96,19 @@ class RegistrasiMasyarakatController extends Controller
 
         return back()->withErrors(['otp' => 'Invalid OTP code.']); // Sesuaikan dengan nama input yang benar
         
-        //otp ke email
-        $otpCode = Str::random(4); // Buat kode OTP
+             //otp ke email
+             $otpCode = Str::random(4); // Buat kode OTP
 
 
-// Buat entri OTP baru
-OtpMail::create([
-    'email' => $request->email,
-    'otp' => $otpCode,
-    'expires_at' => now()->addMinutes(10), // Set waktu kedaluwarsa
-]);
+             // Buat entri OTP baru
+            OtpMail::create([
+            'email' => $request->email,
+            'otp' => $otpCode,
+            'expires_at' => now()->addMinutes(10), // Set waktu kedaluwarsa
+            ]);
 
-// Kirim email dengan OTP ke pengguna
-Mail::to($request->email)->send(new OtpMail($OtpMail));
+            // Kirim email dengan OTP ke pengguna
+            Mail::to($request->email)->send(new OtpMail($OtpMail));
 
         
       
