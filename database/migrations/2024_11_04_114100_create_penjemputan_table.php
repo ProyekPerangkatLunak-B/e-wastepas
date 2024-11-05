@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('penjemputan', function (Blueprint $table) {
             $table->integer('id_penjemputan')->primary();
-            $table->integer('id_dropbox');
+            $table->unsignedBigInteger('id_dropbox');
             $table->integer('id_kurir');
             $table->integer('id_masyarakat');
-            $table->integer('id_wilayah');
+            $table->unsignedBigInteger('id_daerah');
             $table->datetime('waktu_pembaruan')->nullable();
             $table->string('catatan', 255)->nullable();
             $table->integer('total_berat')->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->foreign('id_dropbox')->references('id_dropbox')->on('dropbox')->onDelete('cascade');
             $table->foreign('id_kurir')->references('id_registrasi_akun')->on('registrasi_akun')->onDelete('cascade');
             $table->foreign('id_masyarakat')->references('id_registrasi_akun')->on('registrasi_akun')->onDelete('cascade');
-            $table->foreign('id_wilayah')->references('id_wilayah')->on('wilayah')->onDelete('cascade');
+            $table->foreign('id_daerah')->references('id_daerah')->on('daerah')->onDelete('cascade');
         });
     }
 
