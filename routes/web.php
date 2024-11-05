@@ -199,3 +199,7 @@ Route::group([
         return view('mitra-kurir/registrasi/document-upload');
     });
 
+    Route::get('/mitra-kurir/registrasi/otp2', function () {
+        return view('mitra-kurir/registrasi/otp2');
+    });
+
