@@ -1,42 +1,26 @@
 <?php
 
+use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Models\User;
 use App\Models\UserOTP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
-use App\Http\Controllers\Manajemen\RegistrasiController;
-use App\Http\Controllers\Manajemen\LoginController;
-=======
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
+use App\Http\Controllers\Admin\DropboxAdminController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
->>>>>>> 662c86937aa11578a35da5a02136a385149e8031
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
     return view('index');
 });
 
-<<<<<<< HEAD
-// Route untuk menampilkan halaman login
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-
-// Route untuk proses login
-Route::post('login', [LoginController::class, 'login']);
-
-// Route untuk logout
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
-// Route untuk menampilkan halaman lupa password
-Route::get('forgot-password', [RegistrasiController::class, 'showLinkRequestForm'])->name('password.request');
-=======
 // Route Modul Admin
 Route::group([
     'prefix' => 'admin/',
@@ -77,6 +61,7 @@ Route::group([
         return view('admin.datamaster.auth.otp.index');
     })->name('otp.index');
 
+    // kategori sampah
     Route::resource('datamaster/master-data/kategori', KategoriSampahAdminController::class)->names([
         'index' => 'datamaster.kategori.index',
         'create' => 'datamaster.kategori.create',
@@ -88,6 +73,34 @@ Route::group([
     ]);
 
     Route::get('datamaster/kategori/data', [KategoriSampahAdminController::class, 'getKategoriData'])->name('datamaster.kategori.data');
+    Route::get('datamaster/kategori/search', [KategoriSampahAdminController::class, 'search'])->name('datamaster.kategori.search');
+    Route::post('datamaster/kategori/storeKategori', [KategoriSampahAdminController::class, 'storeKategori'])->name('datamaster.kategori.storeKategori');
+    
+    // jenis sampah
+    Route::resource('datamaster/master-data/jenis', JenisSampahAdminController::class)->names([
+        'index' => 'datamaster.jenis.index',
+        'create' => 'datamaster.jenis.create',
+        'store' => 'datamaster.jenis.store',
+        'show' => 'datamaster.jenis.show',
+        'edit' => 'datamaster.jenis.edit',
+        'update' => 'datamaster.jenis.update',
+        'destroy' => 'datamaster.jenis.destroy',
+    ]);
+
+    Route::get('datamaster/jenis/data', [JenisSampahAdminController::class, 'getJenisSampahData'])->name('datamaster.jenis.data');
+
+    // dropbox
+    Route::resource('datamaster/master-data/dropbox', DropboxAdminController::class)->names([
+        'index' => 'datamaster.dropbox.index',
+        'create' => 'datamaster.dropbox.create',
+        'store' => 'datamaster.dropbox.store',
+        'show' => 'datamaster.dropbox.show',
+        'edit' => 'datamaster.dropbox.edit',
+        'update' => 'datamaster.dropbox.update',
+        'destroy' => 'datamaster.dropbox.destroy',
+    ]);
+
+    Route::get('datamaster/dropbox/data', [DropboxAdminController::class, 'getDropboxData'])->name('datamaster.dropbox.data');
 });
 
 
@@ -211,51 +224,7 @@ Route::group([
     Route::get('/{user_id}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
 
->>>>>>> 662c86937aa11578a35da5a02136a385149e8031
 
 
-<<<<<<< HEAD
-// Route untuk halaman konfirmasi setelah pengiriman link reset password
-Route::get('check-email', function () {
-    return view('manajemen.registrasi.check-email'); // View untuk konfirmasi check email
-})->name('password.check-email');
-
-// Route untuk menampilkan halaman OTP
-Route::get('/confirm-account', function () {
-    return view('manajemen.registrasi.confirm-account');
-})->name('confirm-account');
-
-// Route untuk menampilkan halaman reset password (dengan token)
-Route::get('reset-password/{token}', function ($token) {
-    return view('manajemen.registrasi.reset-password', ['token' => $token]); // View untuk reset password
-})->name('password.reset');
-
-// Route untuk menangani permintaan reset password setelah form dikirim
-Route::post('reset-password', [RegistrasiController::class, 'reset'])->name('password.update');
-
-// Route untuk halaman dashboard setelah login (dengan middleware auth)
-Route::get('/dashboard', function () {
-    return view('manajemen.dashboard'); // Pastikan view dashboard tersedia di folder yang sesuai
-})->middleware('auth');
-
-// Route untuk menampilkan halaman registrasi
-Route::get('register', function () {
-    return view('manajemen.registrasi.register'); // View untuk registrasi pengguna baru
-})->name('register');
-
-// Route untuk menangani proses registrasi (jika memerlukan controller)
-Route::post('register', [RegistrasiController::class, 'register']);
-
-// Route untuk menampilkan halaman konfirmasi akun (untuk verifikasi kode OTP atau email)
-Route::get('confirm-account', function () {
-    return view('manajemen.registrasi.confirm-account'); // View untuk memasukkan kode verifikasi
-})->name('confirm-account');
-
-// Route untuk menampilkan halaman konfirmasi berhasil
-Route::get('confirmation-success', function () {
-    return view('manajemen.registrasi.confirmation-success'); // View untuk konfirmasi berhasil
-})->name('confirmation-success');
-=======
 
 
->>>>>>> 662c86937aa11578a35da5a02136a385149e8031
