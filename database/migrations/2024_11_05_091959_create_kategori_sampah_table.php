@@ -9,11 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('wilayah', function (Blueprint $table) {
-            $table->integer('id_wilayah')->primary();
-            $table->string('nama_wilayah', 255)->nullable();
+        Schema::create('kategori_sampah', function (Blueprint $table) {
+            $table->id('id_kategori_sampah');
+            $table->string('nama_kategori_sampah')->nullable();
+            $table->text('deskripsi_kategori_sampah')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wilayah');
+        Schema::dropIfExists('kategori_sampah');
     }
 };

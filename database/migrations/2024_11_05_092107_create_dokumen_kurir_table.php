@@ -9,17 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('dokumen_kurir', function (Blueprint $table) {
-            $table->integer('id_dokumen')->primary();
-            $table->integer('id_registrasi_akun');
-            $table->enum('tipe_dokumen', ['ktp', 'kk'])->nullable();
-            $table->string('file_dokumen', 255)->nullable();
+            $table->id('id_dokumen');
+            $table->foreignId('id_pengguna')->nullable()
+                ->constrained('pengguna', 'id_pengguna') // Specify the referenced column
+                ->onDelete('cascade');
+            $table->enum('tipe_dokumen', ['KTP', 'KK'])->nullable();
+            $table->string('file_dokumen')->nullable();
             $table->text('catatan_admin')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_registrasi_akun')->references('id_registrasi_akun')->on('registrasi_akun')->onDelete('cascade');
         });
     }
 
