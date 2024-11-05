@@ -12,7 +12,7 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #4a90e2;
+            border-bottom: 3px solid #2ecc71;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -43,7 +43,7 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #2ecc71;
             box-shadow: 0 6px 20px rgba(0, 86, 179, 0.4);
         }
     </style>
@@ -72,7 +72,7 @@
 
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-blue-500 shadow-md transition transform hover:-translate-y-1">
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
                             <i class="fas fa-save mr-2"></i>Simpan
                         </button>
                     </div>
