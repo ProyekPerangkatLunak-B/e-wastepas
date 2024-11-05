@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Models\User;
 use App\Models\UserOTP;
 use Illuminate\Http\Request;
@@ -72,6 +73,21 @@ Route::group([
     ]);
 
     Route::get('datamaster/kategori/data', [KategoriSampahAdminController::class, 'getKategoriData'])->name('datamaster.kategori.data');
+    Route::get('datamaster/kategori/search', [KategoriSampahAdminController::class, 'search'])->name('datamaster.kategori.search');
+    Route::post('datamaster/kategori/storeKategori', [KategoriSampahAdminController::class, 'storeKategori'])->name('datamaster.kategori.storeKategori');
+    
+    // jenis sampah
+    Route::resource('datamaster/master-data/jenis', JenisSampahAdminController::class)->names([
+        'index' => 'datamaster.jenis.index',
+        'create' => 'datamaster.jenis.create',
+        'store' => 'datamaster.jenis.store',
+        'show' => 'datamaster.jenis.show',
+        'edit' => 'datamaster.jenis.edit',
+        'update' => 'datamaster.jenis.update',
+        'destroy' => 'datamaster.jenis.destroy',
+    ]);
+
+    Route::get('datamaster/jenis/data', [JenisSampahAdminController::class, 'getJenisSampahData'])->name('datamaster.jenis.data');
 
     // dropbox
     Route::resource('datamaster/master-data/dropbox', DropboxAdminController::class)->names([

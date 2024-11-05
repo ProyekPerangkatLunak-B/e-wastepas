@@ -38,7 +38,19 @@ class KategoriSampahAdminController extends Controller
         }
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('term');
 
+        if (empty($search)) {
+            $categories = KategoriSampah::all(['id_kategori_sampah as id', 'nama_kategori_sampah as text']);
+        } else {
+            $categories = KategoriSampah::where('nama_kategori_sampah', 'LIKE', '%' . $search . '%')
+                ->get(['id_kategori_sampah as id', 'nama_kategori_sampah as text']);
+        }
+
+        return response()->json($categories);
+    }
 
 
     public function create()
@@ -56,6 +68,19 @@ class KategoriSampahAdminController extends Controller
         KategoriSampah::create($request->all());
 
         return redirect()->route('admin.datamaster.kategori.index')->with('success', 'Data berhasil ditambahkan.');
+    }
+
+    public function storeKategori(Request $request)
+    {
+        $request->validate([
+            'nama_kategori_sampah' => 'required|string|max:255|unique:kategori_sampah,nama_kategori_sampah'
+        ]);
+
+        $kategori = KategoriSampah::create([
+            'nama_kategori_sampah' => $request->nama_kategori_sampah,
+        ]);
+
+        return response()->json(['id' => $kategori->id, 'text' => $kategori->nama_kategori_sampah]);
     }
 
     public function edit($id)
