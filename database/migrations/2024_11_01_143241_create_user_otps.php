@@ -7,19 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Sementara dulu pake ini untuk coba coba bikin OTP
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('UserMasyarakat', function (Blueprint $table) {
+        Schema::create('user_otps', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('otp')->nullable();
+            $table->integer('user_id');
+            $table->integer('otp_code');
+            $table->dateTime('expired_at');
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_masyarakats');
+        Schema::dropIfExists('user_otps');
     }
 };

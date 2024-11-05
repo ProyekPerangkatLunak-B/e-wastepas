@@ -12,8 +12,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kategori_sampah', function (Blueprint $table) {
-            $table->integer('id_kategori_sampah')->primary();
+            $table->bigIncrements('id_kategori_sampah');
             $table->string('nama_kategori_sampah', 255)->nullable();
+            $table->string('deskripsi_kategori_sampah', 255)->nullable();
             $table->timestamps();
         });
     }

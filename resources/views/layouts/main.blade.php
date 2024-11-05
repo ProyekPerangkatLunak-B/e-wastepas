@@ -28,17 +28,29 @@
     @include('partials.header', [
         'userName' => 'Ammar Bahtiar',
         'userRole' => 'Masyarakat',
+        'profileImage' => 'https://ui-avatars.com/api/?name=Ammar+Bahtiar&background=random&color=fff'
+
     ])
 
     {{-- Main Content --}}
     @yield('content')
 
     {{-- Modal Form Data --}}
-<script>
-    function toggleModal(open) {
-        document.getElementById('modal-overlay').style.display = open ? 'flex' : 'none';
-    }
-</script>
+    <script>
+        function toggleModal(open) {
+            document.getElementById('modal-overlay').style.display = open ? 'flex' : 'none';
+        }
+
+        // Function to open the modal
+        function openModal() {
+            document.getElementById('alertModal').classList.remove('hidden');
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('alertModal').classList.add('hidden');
+        }
+    </script>
 
 </body>
 </html>
