@@ -17,14 +17,13 @@
             </div>
 
             @if ($errors->any())
-                    <div class="bg-red-500 text-white p-3 rounded-lg">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li class="text-red-500 p-3 rounded-lg">{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+
 
             <!-- Form Registrasi -->
                 <div class="mx-auto max-w-md">
