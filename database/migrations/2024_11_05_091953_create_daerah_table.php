@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Sementara dulu pake ini untuk coba coba bikin OTP
+     * Run the migrations.
      */
     public function up()
     {
-        Schema::create('user_otps', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->integer('otp_code');
-            $table->dateTime('expired_at');
+        Schema::create('daerah', function (Blueprint $table) {
+            $table->id('id_daerah');
+            $table->string('nama_daerah')->nullable();
+            $table->tinyInteger('status_daerah')->nullable();
+            $table->integer('total_dropbox')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_otps');
+        Schema::dropIfExists('daerah');
     }
 };

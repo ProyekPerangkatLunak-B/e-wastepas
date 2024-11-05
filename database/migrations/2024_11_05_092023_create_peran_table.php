@@ -9,21 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->integer('id_role')->primary();
-            $table->string('nama_role', 255)->nullable();
+        Schema::create('peran', function (Blueprint $table) {
+            $table->id('id_peran');
+            $table->string('nama_peran')->nullable();
+            $table->text('deskripsi_peran')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('peran');
     }
 };
