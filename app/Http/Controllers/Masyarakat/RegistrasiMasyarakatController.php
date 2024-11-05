@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Masyarakat;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\OtpMail;
 use Illuminate\Http\Request;
 use App\Models\Otp;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+
 
 class RegistrasiMasyarakatController extends Controller
 {
@@ -29,7 +31,7 @@ class RegistrasiMasyarakatController extends Controller
         $otpCode = Str::random(6);
         
         // Buat entri OTP baru
-        Otp::create([
+      otp::create([
             'email' => $request->email,
             'otp' => $otpCode,
             'expires_at' => now()->addMinutes(10), // Set waktu kedaluwarsa
@@ -85,10 +87,32 @@ class RegistrasiMasyarakatController extends Controller
             // Hapus OTP setelah berhasil diverifikasi
             $otp->delete();
 
-            return redirect()->route('masyarakat.login')->with('success', 'Registration successful! You can now login.');
+            //email
+            // Asumsikan Anda sudah membuat OTP dan menyimpannya di database
+            $otp = mt_rand(1000, 9999); // Contoh membuat OTP
+        
+            // Kirim OTP ke email user
         }
 
         return back()->withErrors(['otp' => 'Invalid OTP code.']); // Sesuaikan dengan nama input yang benar
+        
+        //otp ke email
+        $otpCode = Str::random(4); // Buat kode OTP
+
+
+// Buat entri OTP baru
+OtpMail::create([
+    'email' => $request->email,
+    'otp' => $otpCode,
+    'expires_at' => now()->addMinutes(10), // Set waktu kedaluwarsa
+]);
+
+// Kirim email dengan OTP ke pengguna
+Mail::to($request->email)->send(new OtpMail($OtpMail));
+
+        
+      
+
     }
 
 }

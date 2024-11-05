@@ -122,6 +122,8 @@ Route::group([
     })->name('otp');
 
     Route::post('otp', [RegistrasiMasyarakatController::class, 'verifyOtp'])->name('otp.verify');
+    //rute otp ke email
+    Route::post('otp/confirm', [RegistrasiMasyarakatController::class, 'confirmOtp'])->name('otp.confirm');
 
 
     Route::get('/forgot-password', function () {
