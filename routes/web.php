@@ -223,10 +223,8 @@ Route::group([
     Route::post('/{user_id}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
     Route::get('/{user_id}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
-    Route::post('/mitra-kurir/registrasi/login', [RegistrasiMitraKurirController::class, 'login'])->name('mitra-kurir.login');
 
-    // rute document-upload mitra kurir
-    Route::get('/mitra-kurir/registrasi/document-upload', function () {
-        return view('mitra-kurir/registrasi/document-upload');
-    });
+
+
+
 
