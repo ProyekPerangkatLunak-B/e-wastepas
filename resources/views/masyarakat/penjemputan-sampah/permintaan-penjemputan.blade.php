@@ -7,7 +7,7 @@
         <p class="text-base font-normal text-gray-600">Form permintaan untuk permintaan penjemputan sampah elektronik.</p>
     </div>
 
-    <div class="w-[1380px] h-[750px] pb-2 shadow-lg bg-white-normal rounded-2xl">
+    <div class="w-[1380px] h-[800px] pb-2 shadow-lg bg-white-normal rounded-2xl">
         <form action="#" method="POST">
             @csrf
             <div class="grid grid-cols-1 gap-8 pt-5 mx-12 lg:grid-cols-2">
@@ -28,6 +28,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Pilih Daera -->
+                    <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
+                        <option value="">Pilih Daerah</option>
+                        <option value="dropbox1">Daerah 1</option>
+                        <option value="dropbox2">Daerah 2</option>
+                    </x-select>
 
                     <!-- Pilih Dropbox -->
                     <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
@@ -130,7 +137,7 @@
                 <div class="space-y-4">
                     <div>
                         <label for="kategori" class="block text-sm font-medium text-gray-700">Pilih Kategori</label>
-                        <select id="kategori" name="kategori" class="block w-full px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                        <select id="kategori" name="kategori" class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option>Pilih Kategori</option>
                             <option>Kategori 1</option>
                             <option>Kategori 2</option>
@@ -138,15 +145,19 @@
                     </div>
                     <div>
                         <label for="jenis" class="block text-sm font-medium text-gray-700">Pilih Jenis</label>
-                        <select id="jenis" name="jenis" class="block w-full px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                        <select id="jenis" name="jenis" class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option>Pilih Jenis</option>
                             <option>Jenis 1</option>
                             <option>Jenis 2</option>
                         </select>
                     </div>
                     <div>
+                        <label for="berat" class="block text-sm font-medium text-gray-700">Berat Sampah</label>
+                        <input id="berat" name="berat" type="number" step="0.01" class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="0 Kg">
+                    </div>
+                    <div>
                         <label for="catatan" class="block text-sm font-medium text-gray-700">Catatan</label>
-                        <textarea id="catatan" name="catatan" rows="8" class="block w-full px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Catatan untuk barang"></textarea>
+                        <textarea id="catatan" name="catatan" rows="8" class="block w-[460px] h-[170px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Catatan untuk barang"></textarea>
                         <p class="text-sm text-gray-500">*Catatan untuk barang yang akan dijemput</p>
                     </div>
                 </div>

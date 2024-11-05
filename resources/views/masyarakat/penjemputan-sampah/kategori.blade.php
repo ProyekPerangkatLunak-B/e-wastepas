@@ -42,23 +42,29 @@
             </div>
 
             {{-- Card Section --}}
-            <div class="grid grid-cols-1 gap-4 px-12 mx-6 mt-4 lg:grid-cols-3 lg:gap-4">
-                @if (count($kategori) == 0)
-                    <div class="col-span-3">
-                        <div class="flex items center justify-center">
-                            <p class="text-lg font-semibold text-gray-500">Tidak ada kategori sampah elektronik</p>
+            <div class="flex justify-center mt-4">
+                <div class="grid grid-cols-1 gap-6 mr-36 lg:grid-cols-3 lg:gap-6 lg:w-[80%]">
+                    @if (count($kategori) == 0)
+                        <div class="flex justify-center ml-[500px] mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
+                            <div class="text-center">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}" alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
+                                <p class="text-lg font-semibold text-gray-500">Kategori {{ $search ?? 'Sampah Elektronik' }} tidak ditemukan.</p>
+                            </div>
                         </div>
-                    </div>
-                @else
-                    @foreach ($kategori as $k)
-                        <x-card title="{{ $k->nama_kategori_sampah }}" description="{{ $k->deskripsi_kategori_sampah }}"
-                            image="https://picsum.photos/1280/720"
-                            link="{{ route('masyarakat.penjemputan.detail', $k->id_kategori_sampah) }}" />
-                    @endforeach
-                    {{-- <x-card title="Lampu" description="Semua  kategori  dari berbagai alat elektronik"
-                    image="https://picsum.photos/1280/720" link="{{ route('masyarakat.penjemputan.detail') }}" /> --}}
-                @endif
+                    @else
+                        @foreach ($kategori as $k)
+                            <x-card
+                                title="{{ $k->nama_kategori_sampah }}"
+                                description="{{ $k->deskripsi_kategori_sampah }}"
+                                image="https://picsum.photos/1280/720"
+                                link="{{ route('masyarakat.penjemputan.detail', $k->id_kategori_sampah) }}"
+                            />
+                        @endforeach
+                    @endif
+                </div>
             </div>
+            {{-- Pagination --}}
+
         </div>
     </div>
 @endsection
