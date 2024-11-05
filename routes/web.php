@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
+use App\Http\Controllers\Admin\DropboxAdminController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
@@ -54,6 +55,7 @@ Route::group([
         return view('admin.datamaster.auth.otp.index');
     })->name('otp.index');
 
+    // kategori sampah
     Route::resource('datamaster/master-data/kategori', KategoriSampahAdminController::class)->names([
         'index' => 'datamaster.kategori.index',
         'create' => 'datamaster.kategori.create',
@@ -65,6 +67,19 @@ Route::group([
     ]);
 
     Route::get('datamaster/kategori/data', [KategoriSampahAdminController::class, 'getKategoriData'])->name('datamaster.kategori.data');
+
+    // dropbox
+    Route::resource('datamaster/master-data/dropbox', DropboxAdminController::class)->names([
+        'index' => 'datamaster.dropbox.index',
+        'create' => 'datamaster.dropbox.create',
+        'store' => 'datamaster.dropbox.store',
+        'show' => 'datamaster.dropbox.show',
+        'edit' => 'datamaster.dropbox.edit',
+        'update' => 'datamaster.dropbox.update',
+        'destroy' => 'datamaster.dropbox.destroy',
+    ]);
+
+    Route::get('datamaster/dropbox/data', [DropboxAdminController::class, 'getDropboxData'])->name('datamaster.dropbox.data');
 });
 
 
