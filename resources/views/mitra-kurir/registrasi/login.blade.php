@@ -9,14 +9,16 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <!-- Tampilkan Alert Jika Ada Kesalahan -->
             @if ($errors->any())
-                <div class="bg-red-100 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">Oops!</strong>
+                <span class="block sm:inline">There were some problems with your input:</span>
+                <ul class="mt-2 list-disc pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             
             <form class="space-y-0.5" action="{{ url('/mitra-kurir/registrasi/login') }}" method="POST">
                 @csrf

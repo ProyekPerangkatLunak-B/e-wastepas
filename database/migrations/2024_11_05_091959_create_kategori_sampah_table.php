@@ -9,11 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('kategori_sampah', function (Blueprint $table) {
-            $table->integer('id_kategori_sampah')->primary();
-            $table->string('nama_kategori_sampah', 255)->nullable();
+            $table->id('id_kategori_sampah');
+            $table->string('nama_kategori_sampah')->nullable();
+            $table->text('deskripsi_kategori_sampah')->nullable();
             $table->timestamps();
         });
     }

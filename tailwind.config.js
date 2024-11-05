@@ -26,6 +26,7 @@ export default {
                     600: "#284431",
                     700: "#1e3325",
                     dark: "#17281d",
+                    lighten: "#EFF7EF",
                 },
                 secondary: {
                     light: "#eff7ef",
@@ -79,7 +80,7 @@ export default {
                     light: "#fdecec",
                     100: "#fce3e2",
                     200: "#fac5c3",
-                    normal: "#ee443f",
+                    normal: "#FE6969",
                     300: "#d63d39",
                     400: "#be3632",
                     500: "#b3332f",

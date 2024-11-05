@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="w-[81%] min-h-screen px-[5rem] py-4 mx-[22rem] bg-gray-100">
+<div class="w-[81%] min-h-screen px-[5rem] py-12 mx-[22rem] bg-gray-100">
     <h2 class="text-xl font-semibold leading-relaxed">Melacak Penjemputan</h2>
     <div class="flex items-center justify-between">
         <h4 class="text-base font-normal">Daftar semua penjemputan sampah elektronik di akun anda.</h4>
@@ -34,103 +34,171 @@
 
 
     <!-- Container Grid Card -->
-    <div class="grid grid-cols-2 gap-4 mt-6">
+    <div class="grid grid-cols-3 gap-4 mt-6">
         <!-- Card 1 -->
         <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
-            <div class="relative w-[670px] h-[230px] pb-16 mr-12 bg-white shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-end">
-                    <span class="mt-2 mr-2 text-lg font-bold text-gray-800">C032378923</span>
+            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                <div class="flex justify-between">
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
                 </div>
 
                 <!-- Isi Konten -->
                 <div class="flex items-center px-6 mt-4 space-x-4">
-                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}" alt="Icon" class="w-24 h-24 ml-8">
-                    <div class="pl-[4rem] mt-2">
+                    <div class="pl-[10px]">
                         <p class="text-2xl font-semibold">Rice Cooker</p>
                         <p class="text-2xl font-semibold">Laptop</p>
                         <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-1 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
+                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
                     </div>
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}" alt="Icon" class="w-[100px] h-[100px] relative left-24 bottom-5">
                 </div>
 
                 <!-- Status Button -->
                 <div class="absolute right-0 bottom-1.5">
-                    <span class="px-6 py-2 font-semibold text-gray-100 bg-tertiary-600 text-md rounded-tl-3xl rounded-br-xl">Menunggu Konfirmasi</span>
+                    <span class="px-8 py-2 font-semibold text-gray-100 bg-tertiary-600 text-md rounded-tl-3xl rounded-br-xl">Menunggu Konfirmasi</span>
                 </div>
             </div>
         </a>
         <!-- Card 2 -->
         <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
-            <div class="relative w-[670px] h-[230px] pb-16 mr-12 bg-white shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-end">
-                    <span class="mt-2 mr-2 text-lg font-bold text-gray-800">C032378923</span>
+            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                <div class="flex justify-between">
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
                 </div>
 
                 <!-- Isi Konten -->
                 <div class="flex items-center px-6 mt-4 space-x-4">
-                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/box-seam1.png') }}" alt="Icon" class="w-24 h-24 ml-8">
-                    <div class="pl-[4rem] mt-2">
+                    <div class="pl-[10px]">
                         <p class="text-2xl font-semibold">Rice Cooker</p>
                         <p class="text-2xl font-semibold">Laptop</p>
                         <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-1 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
+                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
                     </div>
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/box-seam 2.png') }}" alt="Icon" class="w-[100px] h-[100px] relative left-24 bottom-5">
                 </div>
 
                 <!-- Status Button -->
                 <div class="absolute right-0 bottom-1.5">
-                    <span class="px-8 py-2 font-semibold text-gray-100 bg-white-dark text-md rounded-tl-3xl rounded-br-xl">Dijemput Kurir</span>
+                    <span class="px-10 py-2 font-semibold text-gray-100 bg-tertiary-dark text-md rounded-tl-3xl rounded-br-xl">Dijemput Kurir</span>
                 </div>
             </div>
         </a>
         <!-- Card 3 -->
         <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
-            <div class="relative w-[670px] h-[230px] pb-16 mr-12 bg-white shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-end">
-                    <span class="mt-2 mr-2 text-lg font-bold text-gray-800">C032378923</span>
+            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                <div class="flex justify-between">
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
                 </div>
 
                 <!-- Isi Konten -->
                 <div class="flex items-center px-6 mt-4 space-x-4">
-                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/box-seam1.png') }}" alt="Icon" class="w-24 h-24 ml-8">
-                    <div class="pl-[4rem] mt-2">
+                    <div class="pl-[10px]">
                         <p class="text-2xl font-semibold">Rice Cooker</p>
                         <p class="text-2xl font-semibold">Laptop</p>
                         <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-1 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
+                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
                     </div>
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/truck1.png') }}" alt="Icon" class="w-[100px] h-[100px] relative left-24 bottom-5">
                 </div>
 
                 <!-- Status Button -->
                 <div class="absolute right-0 bottom-1.5">
-                    <span class="px-8 py-2 font-semibold text-gray-100 bg-primary-normal text-md rounded-tl-3xl rounded-br-xl">Menuju Dropbox</span>
+                    <span class="px-10 py-2 font-semibold text-gray-100 bg-secondary-600 text-md rounded-tl-3xl rounded-br-xl">Menuju Dropbox</span>
                 </div>
             </div>
         </a>
         <!-- Card 4 -->
         <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
-            <div class="relative w-[670px] h-[230px] pb-16 mr-12 bg-white shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-end">
-                    <span class="mt-2 mr-2 text-lg font-bold text-gray-800">C032378923</span>
+            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                <div class="flex justify-between">
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
                 </div>
 
                 <!-- Isi Konten -->
                 <div class="flex items-center px-6 mt-4 space-x-4">
-                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/box-seam1.png') }}" alt="Icon" class="w-24 h-24 ml-8">
-                    <div class="pl-[4rem] mt-2">
+                    <div class="pl-[10px]">
                         <p class="text-2xl font-semibold">Rice Cooker</p>
                         <p class="text-2xl font-semibold">Laptop</p>
                         <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-1 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
+                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
                     </div>
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/patch-check1.png') }}" alt="Icon" class="w-[100px] h-[100px] relative left-24 bottom-5">
                 </div>
 
                 <!-- Status Button -->
                 <div class="absolute right-0 bottom-1.5">
-                    <span class="px-8 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">Sudah Sampai</span>
+                    <span class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">Sudah Sampai</span>
                 </div>
             </div>
         </a>
+
+        <!-- Card 5 -->
+        <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
+            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                <div class="flex justify-between">
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
+                </div>
+
+                <!-- Isi Konten -->
+                <div class="flex items-center px-6 mt-4 space-x-4">
+                    <div class="pl-[10px]">
+                        <p class="text-2xl font-semibold">Rice Cooker</p>
+                        <p class="text-2xl font-semibold">Laptop</p>
+                        <p class="text-2xl font-semibold">TV</p>
+                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
+                    </div>
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}" alt="Icon" class="w-[100px] h-[100px] relative left-24 bottom-5">
+                </div>
+
+                <!-- Status Button -->
+                <div class="absolute right-0 bottom-1.5">
+                    <span class="px-12 py-2 font-semibold text-gray-100 bg-red-300 text-md rounded-tl-3xl rounded-br-xl">Dibatalkan</span>
+                </div>
+            </div>
+        </a>
+        <!-- Card 6 -->
+        <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
+            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                <div class="flex justify-between">
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
+                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
+                </div>
+
+                <!-- Isi Konten -->
+                <div class="flex items-center px-6 mt-4 space-x-4">
+                    <div class="pl-[10px]">
+                        <p class="text-2xl font-semibold">Rice Cooker</p>
+                        <p class="text-2xl font-semibold">Laptop</p>
+                        <p class="text-2xl font-semibold">TV</p>
+                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
+                    </div>
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/patch-check1.png') }}" alt="Icon" class="w-[100px] h-[100px] relative left-24 bottom-5">
+                </div>
+
+                <!-- Status Button -->
+                <div class="absolute right-0 bottom-1.5">
+                    <span class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">Sudah Sampai</span>
+                </div>
+            </div>
+        </a>
+
+        {{-- Pagination --}}
+        <div class="flex items-center justify-end mt-4">
+            <div class="relative space-x-2 left-[58rem]">
+                <button class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;&lt;</button>
+                <button class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;</button>
+
+                <button class="w-[50px] h-[50px] px-3 py-1 font-bold text-green-700 shadow-sm bg-green-200 rounded">1</button>
+
+                <button class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;</button>
+                <button class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;&gt;</button>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

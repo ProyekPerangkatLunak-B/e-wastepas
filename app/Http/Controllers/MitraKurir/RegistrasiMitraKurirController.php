@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\MitraKurir;
 
 use App\Models\User;
+use App\Models\UserOTP;
+use App\Models\otp_cache;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth; // alert login
+use Illuminate\Auth\Events\Registered;
 
 class RegistrasiMitraKurirController extends Controller
 {
@@ -15,16 +19,49 @@ class RegistrasiMitraKurirController extends Controller
         return view('mitra-kurir.registrasi.register');
     }
 
+    public function LoginAuth(Request $request){
+       $credentials =  $request -> validate([
+            'email' => ['required', 'email:dns'],
+            'password' => ['required']
+        ]);
+
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('/dashboard');
+        }
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
     public function loginIndex()
     {
         return view('mitra-kurir.registrasi.login');
     }
 
+    public function OtpRedirect($user_id){
+        $user = User::find($user_id);
+        return view('mitra-kurir.registrasi.otp-verification', compact('user'));
+    }
+
+    public function OtpValidation($user_id, Request $request){
+        $otp = UserOTP::where('otp_code', $request->otp_code)->where('expired_at','>',now())->first();
+    if (!$otp) {
+        return redirect()->back()->withErrors([
+            'otp_code' => 'OTP CODE tidak ditemukan.'
+        ]);
+    }
+
+    $otp->user->email_verified_at = Date::now();
+    $otp->user->save();
+    
+    return redirect('mitra-kurir/registrasi/login');
+    }
+
     public function simpanData(Request $request)
     {
-
-        // dd($request->all());
-
+        // dd($request->all())
         $validateData = $request->validate([
             'nama' => 'required',
             'username' => 'required',
@@ -34,18 +71,26 @@ class RegistrasiMitraKurirController extends Controller
             'password' => ['required', 'min:8'],
             'ulangiPassword' => ['required', 'min:8', 'same:password']
         ]);
-
         try {
-            User::create([
+         $user = User::create([
                 'name' => $validateData['nama'],
-                'username' => $validateData['username'], // Include username
-                'no_ktp' => $validateData['KTP'], // Include no_ktp
+                'username' => $validateData['username'], 
+                'no_ktp' => $validateData['KTP'], 
                 'no_hp' => $validateData['NomorHP'],
                 'email' => $validateData['Email'],
                 'password' => Hash::make($validateData['password'])
             ]);
+            
+            $otp = UserOTP::create([
+                'user_id' => $user->id,
+                'otp_code' => rand(1000,9999),
+                'expired_at' => Date::now()->addMinutes(5)
+            ]);
+            
+            event(new Registered($user));
+            
+            return redirect()->route('otp-verification', $user->id);
 
-            return back()->with('success', 'Registrasi berhasil!');
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() === '23000') {
                 $errorMessages = [];
@@ -69,28 +114,5 @@ class RegistrasiMitraKurirController extends Controller
         }
     }
 
-    // alert login
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:8'
-        ], [
-            'email.required' => 'Email is required.',
-            'email.email' => 'Please enter a valid email address.',
-            'password.required' => 'Password is required.',    
-            'password.min' => 'Password must be at least 8 characters long.', 
-        ]
-        );
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('/dashboard');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->withInput($request->except('password'));
-    }
+  
 }

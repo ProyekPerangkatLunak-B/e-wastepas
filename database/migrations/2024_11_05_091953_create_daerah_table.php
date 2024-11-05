@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dropbox', function (Blueprint $table) {
-            $table->integer('id_dropbox')->primary();
-            $table->string('nama', 255)->nullable();
-            $table->integer('id_wilayah')->nullable();
+        Schema::create('daerah', function (Blueprint $table) {
+            $table->id('id_daerah');
+            $table->string('nama_daerah')->nullable();
+            $table->tinyInteger('status_daerah')->nullable();
+            $table->integer('total_dropbox')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_wilayah')->references('id_wilayah')->on('wilayah')->onDelete('cascade');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dropbox');
+        Schema::dropIfExists('daerah');
     }
 };

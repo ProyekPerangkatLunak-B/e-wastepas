@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="w-[81%] min-h-screen px-12 py-4 mx-[22rem] bg-gray-100">
+<div class="w-[81%] min-h-screen px-20 py-12 mx-[22rem] bg-gray-100">
     <div class="mb-8">
         <h2 class="text-xl font-semibold leading-relaxed">Mengajukan Permintaan Penjemputan</h2>
         <p class="text-base font-normal text-gray-600">Form permintaan untuk permintaan penjemputan sampah elektronik.</p>
     </div>
 
-    <div class="w-[1380px] h-[720px] pb-2 shadow-lg bg-white-normal rounded-2xl">
+    <div class="w-[1380px] h-[800px] pb-2 shadow-lg bg-white-normal rounded-2xl">
         <form action="#" method="POST">
             @csrf
             <div class="grid grid-cols-1 gap-8 pt-5 mx-12 lg:grid-cols-2">
@@ -19,7 +19,7 @@
                             <label for="sampah" class="block mb-4 font-semibold">Pilih Sampah</label>
                             <div class="relative">
                                 <input type="text" id="sampah" name="sampah" placeholder="..."
-                                       class="w-full px-4 py-2 pr-20 border rounded-lg bg-white-300 focus:outline-none focus:ring-2 focus:ring-green-400" readonly/>
+                                       class="w-full px-4 py-2 pr-20 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" readonly/>
                                 <button type="button"
                                         class="absolute top-0 bottom-0 right-0 px-4 py-2 text-white rounded-r-lg bg-secondary-200 hover:bg-secondary-normal"
                                         onclick="toggleModal(true)">
@@ -28,6 +28,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Pilih Daera -->
+                    <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
+                        <option value="">Pilih Daerah</option>
+                        <option value="dropbox1">Daerah 1</option>
+                        <option value="dropbox2">Daerah 2</option>
+                    </x-select>
 
                     <!-- Pilih Dropbox -->
                     <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
@@ -110,7 +117,7 @@
             <!-- Tombol Kembali dan Kirim Permintaan -->
             <div class="flex justify-end mt-8 mr-10 space-x-4">
                 <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Kembali</a>
-                <button type="submit" class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal">
+                <button type="submit" class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="mr-1 bi bi-send" viewBox="0 0 16 16">
                         <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
                       </svg>
@@ -130,7 +137,7 @@
                 <div class="space-y-4">
                     <div>
                         <label for="kategori" class="block text-sm font-medium text-gray-700">Pilih Kategori</label>
-                        <select id="kategori" name="kategori" class="block w-full px-3 py-2 mt-1 border rounded-lg bg-white-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+                        <select id="kategori" name="kategori" class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option>Pilih Kategori</option>
                             <option>Kategori 1</option>
                             <option>Kategori 2</option>
@@ -138,15 +145,20 @@
                     </div>
                     <div>
                         <label for="jenis" class="block text-sm font-medium text-gray-700">Pilih Jenis</label>
-                        <select id="jenis" name="jenis" class="block w-full px-3 py-2 mt-1 border rounded-lg bg-white-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+                        <select id="jenis" name="jenis" class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option>Pilih Jenis</option>
                             <option>Jenis 1</option>
                             <option>Jenis 2</option>
                         </select>
                     </div>
                     <div>
+                        <label for="berat" class="block text-sm font-medium text-gray-700">Berat Sampah</label>
+                        <input id="berat" name="berat" type="number" step="0.01" class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="0 Kg">
+                    </div>
+                    <div>
                         <label for="catatan" class="block text-sm font-medium text-gray-700">Catatan</label>
-                        <textarea id="catatan" name="catatan" rows="8" class="block w-full px-3 py-2 mt-1 border rounded-lg bg-white-300 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Catatan untuk barang"></textarea>
+                        <textarea id="catatan" name="catatan" rows="8" class="block w-[460px] h-[170px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Catatan untuk barang"></textarea>
+                        <p class="text-sm text-gray-500">*Catatan untuk barang yang akan dijemput</p>
                     </div>
                 </div>
 

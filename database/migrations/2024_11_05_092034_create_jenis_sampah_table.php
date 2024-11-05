@@ -9,19 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('jenis_sampah', function (Blueprint $table) {
-            $table->integer('id_jenis_sampah')->primary();
-            $table->integer('id_kategori_sampah');
-            $table->string('nama_jenis_sampah', 250)->nullable();
+            $table->id('id_jenis_sampah');
+            $table->foreignId('id_kategori_sampah')->nullable()
+                ->constrained('kategori_sampah', 'id_kategori_sampah')  // Specify the referenced column
+                ->onDelete('cascade');
+            $table->string('nama_jenis_sampah')->nullable();
+            $table->text('deskripsi_jenis_sampah')->nullable();
             $table->integer('poin')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_kategori_sampah')->references('id_kategori_sampah')->on('kategori_sampah')->onDelete('cascade');
         });
     }
-
 
     /**
      * Reverse the migrations.
