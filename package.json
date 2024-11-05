@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.14.3",
+        "jquery": "^3.7.1",
         "preline": "^2.5.1"
     }
 }
