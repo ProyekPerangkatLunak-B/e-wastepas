@@ -38,8 +38,11 @@
                 </div>
 
               <!-- Button Submit -->
+                  <!--<button
+                      class="mt-10 tracking-wide font-semibold bg-green-900  text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none bg-gradient"> Masuk
+                  </button>-->
                   <button
-                      class="mt-10 tracking-wide font-semibold bg-green-900  text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Masuk
+                      class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-4 focus:ring-4 focus:ring-green-300 font-bold rounded-lg mt-8 text-base"> Masuk
                   </button>
                 </form>
                 </a>
