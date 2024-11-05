@@ -74,34 +74,26 @@
                     <x-detail-card title="{{ $j->nama_jenis_sampah }}" description="{{ $j->deskripsi_jenis_sampah }}"
                         image="https://picsum.photos/700/700" />
                 @endforeach
-                {{-- <x-detail-card
-                    title="Rice Cooker"
-                    description="Semua Jenis  dari berbagai alat elektronik"
-                    image="https://picsum.photos/700/700" /> --}}
             </div>
 
             {{-- Pagination --}}
-            <div class="flex items-center justify-end mt-4">
-                <div class="relative space-x-2 -left-20 ">
-                    {{ $jenis->links('pagination::tailwind') }}
-                </div>
+            <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
+                {{-- Button < & << --}}
+                @if ($jenis->currentPage() > 1)
+                    <button onclick="window.location.href='{{ $jenis->url(1) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                    <button onclick="window.location.href='{{ $jenis->previousPageUrl() }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                @endif
+
+                {{-- Nomor halaman  --}}
+                <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $jenis->currentPage() }}</button>
+
+                {{-- Button > & >>--}}
+                @if ($jenis->hasMorePages())
+                    <button onclick="window.location.href='{{ $jenis->nextPageUrl() }}'" class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                    <button onclick="window.location.href='{{ $jenis->url($jenis->lastPage()) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                @endif
             </div>
-            {{-- <div class="flex items-center justify-end mt-4">
-                <div class="relative space-x-2 -left-20 ">
-                    <button
-                        class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;&lt;</button>
-                    <button
-                        class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;</button>
 
-                    <button
-                        class="w-[50px] h-[50px] px-3 py-1 font-bold text-green-700 shadow-sm bg-green-200 rounded">1</button>
-
-                    <button
-                        class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;</button>
-                    <button
-                        class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;&gt;</button>
-                </div>
-            </div> --}}
         </div>
     </div>
 @endsection
