@@ -11,7 +11,6 @@
                 {{ csrf_field() }}
                 @include('components.mitra-kurir.auth.input', ['id' => 'name', 'name' => 'nama', 'label' => 'Name', 'type' => 'text', 'placeholder' => 'Enter your name'])
                 @include('components.mitra-kurir.auth.input', ['id' => 'ktp', 'name' => 'KTP', 'label' => 'No KTP', 'type' => 'text', 'placeholder' => 'Enter your KTP'])
-                @include('components.mitra-kurir.auth.input', ['id' => 'username', 'name' => 'username', 'label' => 'Username', 'type' => 'text', 'placeholder' => 'Enter your username'])
                 @include('components.mitra-kurir.auth.input', ['id' => 'email', 'name' => 'Email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'Enter your email'])
                 @include('components.mitra-kurir.auth.input', ['id' => 'phone', 'name' => 'NomorHP', 'label' => 'No Telp', 'type' => 'tel', 'placeholder' => 'Enter your phone number'])
                 @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'password', 'label' => 'Password', 'type' => 'password', 'placeholder' => 'Enter your password'])
