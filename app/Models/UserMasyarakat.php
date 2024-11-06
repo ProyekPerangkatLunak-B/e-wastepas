@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserMasyarakat extends Model
 {
-    public function up()
-    {
-        
-    }
+    protected $table = 'pengguna';
+    protected $primaryKey = 'id_pengguna';
+
+
+
+    
 }
 
