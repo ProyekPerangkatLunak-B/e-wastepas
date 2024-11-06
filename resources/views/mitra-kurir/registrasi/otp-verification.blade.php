@@ -3,12 +3,12 @@
 @section('content')
   <div class="flex flex-col md:flex-row min-h-screen">
 
-    <form method="POST" action="{{ route('otp.validation', $user->id) }}">
+    <form method="POST" action="{{ route('otp.validation', $user->id_pengguna) }}">
         @csrf
         
         <div>
             <label for="otp">{{ __('OTP CODE') }}</label>
-            <input id="otp"  name="otp_code" >
+            <input id="otp"  name="otp_token" >
             
             <!-- Display error message for otp_code -->
             @error('otp_code')

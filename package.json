@@ -19,7 +19,11 @@
     },
     "dependencies": {
         "alpinejs": "^3.14.3",
+        "datatables.net": "^2.1.8",
+        "datatables.net-dt": "^2.1.8",
         "jquery": "^3.7.1",
-        "preline": "^2.5.1"
+        "preline": "^2.5.1",
+        "select2": "^4.1.0-rc.0",
+        "sweetalert2": "^11.14.5"
     }
 }

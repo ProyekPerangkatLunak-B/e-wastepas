@@ -164,80 +164,82 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            // Initialize DataTable
-            var table = $('#jenisTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('admin.datamaster.jenis.data') }}', // Corrected route
-                columns: [{
-                        data: 'nama_jenis_sampah',
-                        name: 'nama_jenis_sampah'
-                    },
-                    {
-                        data: 'kategori_sampah.nama_kategori_sampah',
-                        name: 'kategori_sampah.nama_kategori_sampah'
-                    },
-                    {
-                        data: 'deskripsi_jenis_sampah',
-                        name: 'deskripsi_jenis_sampah'
-                    },
-                    {
-                        data: 'poin',
-                        name: 'poin'
-                    },
-                    {
-                        data: 'id_jenis_sampah',
-                        name: 'id_jenis_sampah',
-                        orderable: false,
-                        render: function(data, type, row) {
-                            return `
+        document.addEventListener('DOMContentLoaded', () => {
+            $(document).ready(function() {
+                var table = $('#jenisTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{{ route('admin.datamaster.jenis.data') }}',
+                    columns: [{
+                            data: 'nama_jenis_sampah',
+                            name: 'nama_jenis_sampah'
+                        },
+                        {
+                            data: 'kategori_sampah.nama_kategori_sampah',
+                            name: 'kategori_sampah.nama_kategori_sampah'
+                        },
+                        {
+                            data: 'deskripsi_jenis_sampah',
+                            name: 'deskripsi_jenis_sampah'
+                        },
+                        {
+                            data: 'poin',
+                            name: 'poin'
+                        },
+                        {
+                            data: 'id_jenis_sampah',
+                            name: 'id_jenis_sampah',
+                            orderable: false,
+                            render: function(data) {
+                                return `
                             <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/jenis/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" style="color: white">
+                                <a href="/admin/datamaster/master-data/jenis/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition">
                                     Edit
                                 </a>
-                                <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">
+                                <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" onclick="confirmDelete(${data})">
                                     Hapus
                                 </button>
                             </div>`;
+                            }
                         }
+                    ],
+                    order: [
+                        [0, 'asc']
+                    ],
+                    dom: 't',
+                });
+
+                // Custom search input
+                $('#customSearch').on('keyup', function() {
+                    table.search(this.value).draw();
+                });
+
+                // Custom length menu
+                $('#customLengthMenu').on('change', function() {
+                    table.page.len(this.value).draw();
+                });
+
+                // Custom pagination and info display
+                table.on('draw', function() {
+                    var pageInfo = table.page.info();
+                    $('#customInfo').text(
+                        `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`
+                        );
+                    $('#customPagination').empty();
+                    for (var i = 0; i < pageInfo.pages; i++) {
+                        var button =
+                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-blue-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
+                        $('#customPagination').append(button);
                     }
-                ],
-                order: [
-                    [0, 'asc']
-                ],
-                dom: 't',
+                });
             });
 
-            // Custom search input
-            $('#customSearch').on('keyup', function() {
-                table.search(this.value).draw();
-            });
-
-            // Custom length menu
-            $('#customLengthMenu').on('change', function() {
-                table.page.len(this.value).draw();
-            });
-
-            // Custom pagination and info display
-            table.on('draw', function() {
-                var pageInfo = table.page.info();
-                $('#customInfo').text(
-                    `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`);
-
-                $('#customPagination').empty();
-                for (var i = 0; i < pageInfo.pages; i++) {
-                    var button =
-                        `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-blue-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
-                    $('#customPagination').append(button);
-                }
-            });
+            function changePage(page) {
+                $('#jenisTable').DataTable().page(page).draw('page');
+            }
         });
 
-        function changePage(page) {
-            $('#jenisTable').DataTable().page(page).draw('page');
-        }
-
+        // Move confirmDelete outside of DOMContentLoaded
         function confirmDelete(id) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',

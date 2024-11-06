@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\UserOTP;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,20 +14,19 @@ class User extends Authenticatable
 {
     // /** @use HasFactory<\Database\Factories\UserFactory> */
     // use HasFactory, Notifiable;
-
-
+    protected $table = 'pengguna';
+    protected $primaryKey = 'id_pengguna';
 // /**azQA  z   ZQ
     //  * The attributes that are mass assignable.
     //  *
     //  * @var array<int, string>
     //  */
     protected $fillable = [
-        'name',
-        'username',
+        'nama',
         'email',
-        'password',
-        'no_hp',
-        'no_ktp'
+        'kata_sandi',
+        'nomor_ktp',
+        'nomor_telepon'
     ];
 
     // /**
@@ -34,25 +35,18 @@ class User extends Authenticatable
     //  * @var array<int, string>
     //  */
     protected $hidden = [
-        'password',
+        'kata_sandi',
         'remember_token',
     ];
 
     public function activeOTP()
     {
-        return $this->hasOne(UserOTP::class,'user_id')->where('expired_at','>', 'now()');
+        return $this->hasOne(UserOTP::class,'id_pengguna')->where('otp_kadaluarsa','>', 'now()');
     }
 
-    // /**
-    //  * Get the attributes that should be cast.
-    //  *
-    //  * @return array<string, string>
-    //  */
-    protected function casts(): array
+    public function getAuthPasswordName()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return 'kata_sandi';
     }
+
 }
