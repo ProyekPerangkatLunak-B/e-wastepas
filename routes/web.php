@@ -16,7 +16,6 @@ use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\SampahController;
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
     return view('index');
