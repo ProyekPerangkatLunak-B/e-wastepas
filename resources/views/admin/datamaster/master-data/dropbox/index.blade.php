@@ -227,7 +227,7 @@
                     $('#customPagination').empty();
                     for (var i = 0; i < pageInfo.pages; i++) {
                         var button =
-                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-blue-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
+                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
                         $('#customPagination').append(button);
                     }
                 });
