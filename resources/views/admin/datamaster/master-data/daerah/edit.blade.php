@@ -12,7 +12,7 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #2ecc71;
+            border-bottom: 3px solid #4a90e2;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -43,7 +43,7 @@
         }
 
         button:hover {
-            background-color: #2ecc71;
+            background-color: #0056b3;
             box-shadow: 0 6px 20px rgba(0, 86, 179, 0.4);
         }
     </style>
@@ -51,112 +51,45 @@
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
             <h2 class="text-2xl font-semibold leading-relaxed ml-14">Edit Daerah</h2>
-            <h4 class="text-base font-normal ml-14">Silakan ubah data berikut untuk memperbarui daerah.</h4>
+            <h4 class="text-base font-normal ml-14">Silakan isi form berikut untuk memperbarui data daerah.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_kategori_sampah) }}" method="POST">
+                <form action="{{ route('admin.datamaster.daerah.update', $daerah->id_daerah) }}" method="POST">
                     @csrf
-                    @method('PUT')
+                    @method('PATCH')
                     <div class="mb-6">
-                        <label for="nama_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama
-                            Dropbox</label>
-                        <input type="text" name="nama_jenis_sampah" id="nama_jenis_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700"
-                            value="{{ $jenisSampah->nama_jenis_sampah }}" />
+                        <label for="nama_daerah" class="block text-sm font-medium text-gray-800 mb-1">Nama Daerah</label>
+                        <input type="text" name="nama_daerah" id="nama_daerah" value="{{ $daerah->nama_daerah }}"
+                            required
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Daerah</label>
-                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori_sampah">
-                            <option value="{{ $jenisSampah->id_kategori_sampah }}" selected>
-                                {{ $jenisSampah->kategoriSampah->nama_kategori_sampah }}</option>
+                        <label for="status_daerah" class="block text-sm font-medium text-gray-800 mb-1">Status
+                            Daerah</label>
+                        <select name="status_daerah" id="status_daerah" required
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700">
+                            <option value="1" {{ $daerah->status_daerah ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ !$daerah->status_daerah ? 'selected' : '' }}>Tidak Aktif</option>
                         </select>
                     </div>
 
                     <div class="mb-6">
-                        <label for="poin" class="block text-sm font-medium text-gray-800 mb-1">Total Transaksi</label>
-                        <input type="number" name="poin" id="poin" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700"
-                            value="{{ $jenisSampah->poin }}" />
+                        <label for="total_dropbox" class="block text-sm font-medium text-gray-800 mb-1">Total
+                            Dropbox</label>
+                        <input type="number" name="total_dropbox" id="total_dropbox" value="{{ $daerah->total_dropbox }}"
+                            required
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Update
+                            class="px-6 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-blue-500 shadow-md transition transform hover:-translate-y-1">
+                            <i class="fas fa-save mr-2"></i>Perbarui
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-    <!-- jQuery (must be included before Select2) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Select2 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
-    <!-- Select2 JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#mySelect2').select2({
-                placeholder: 'Pilih Kategori Sampah',
-                allowClear: true,
-                tags: true,
-                createTag: function(params) {
-                    return {
-                        id: params.term,
-                        text: params.term,
-                        isNew: true
-                    };
-                },
-                ajax: {
-                    url: '{{ route('admin.datamaster.kategori.search') }}',
-                    dataType: 'json',
-                    delay: 250,
-                    data: function(params) {
-                        return {
-                            term: params.term
-                        };
-                    },
-                    processResults: function(data) {
-                        return {
-                            results: data
-                        };
-                    },
-                    cache: true
-                },
-                templateResult: function(data) {
-                    if (data.isNew) {
-                        return $('<span>Add New: ' + data.text + '</span>');
-                    }
-                    return data.text;
-                }
-            });
-
-            $('#mySelect2').on('select2:select', function(e) {
-                var data = e.params.data;
-                if (data.isNew) {
-                    $.ajax({
-                        url: '{{ route('admin.datamaster.kategori.storeKategori') }}',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            nama_kategori_sampah: data.text
-                        },
-                        success: function(response) {
-                            $('#mySelect2').append(new Option(response.text, response.id, false,
-                                true)).trigger('change');
-                        },
-                        error: function() {
-                            alert('Failed to add new category');
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 @endsection

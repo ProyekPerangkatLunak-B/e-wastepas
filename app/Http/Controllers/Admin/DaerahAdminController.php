@@ -21,7 +21,6 @@ class DaerahAdminController extends Controller
     {
         try {
             $daerah = Daerah::select(['id_daerah','nama_daerah', 'status_daerah', 'total_dropbox']);
-            dd($daerah->get());
             return DataTablesDataTables::of($daerah)
                 ->addColumn('action', function ($row) {
                     return '
