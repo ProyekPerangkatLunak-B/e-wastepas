@@ -3,8 +3,12 @@
 @section('content')
   <div class="flex flex-col md:flex-row min-h-screen">
     <div class="w-full md:w-1/2 flex flex-col justify-center px-6 py-12 lg:px-8">
-        @include('components.mitra-kurir.auth.logo')        
-        @include('components.mitra-kurir.auth.title-description', ['title' => 'Login', 'description' => 'Welcome to E-Waste - Let’s log in to your account']) 
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img class="mx-auto h-24 w-auto" src="/img/logoEwaste.png" alt="Logo e-waste">
+        </div>         
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <h2 class="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#498D43]">Welcome!</h2>
+        </div> 
   
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <!-- Tampilkan Alert Jika Ada Kesalahan -->
@@ -22,22 +26,21 @@
             
             <form class="space-y-0.5" action="{{ url('/mitra-kurir/registrasi/login') }}" method="POST">
                 @csrf
-                @include('components.mitra-kurir.auth.input', ['id' => 'email', 'name' => 'email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'Enter your email'])
-                @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'kata_sandi', 'label' => 'Password', 'type' => 'password', 'placeholder' => 'Enter your password'])
-                @include('components.mitra-kurir.auth.button', ['type' => 'submit', 'text' => 'Sign in'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'email', 'name' => 'email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'Masukkan Email'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'kata_sandi', 'label' => 'Kata Sandi', 'type' => 'password', 'placeholder' => 'Masukkan Kata Sandi'])
+                @include('components.mitra-kurir.auth.button', ['type' => 'submit', 'text' => 'Masuk'])
                 
-                @include('components.mitra-kurir.auth.auth-link', [
-                    'message' => "Forgot your password?",
-                    'linkUrl' => url('/mitra-kurir/password/reset'),
-                    'linkText' => 'Reset',
-                    'position' => 'right' 
-                ])
+                <p class="mt-10 text-right text-sm text-gray-500">
+                    <a href="url('/mitra-kurir/password/reset')" class="font-semibold leading-6 text-gray-500 hover:text-gray-600">
+                        Lupa kata sandi?
+                    </a>
+                </p>
             </form>
   
             @include('components.mitra-kurir.auth.auth-link', [
-                'message' => "Don't have an account?",
+                'message' => "Belum Punya Akun?",
                 'linkUrl' => route('mitra-kurir.registrasi.register'),
-                'linkText' => 'Register'
+                'linkText' => 'Daftar'
             ])
         </div>
     </div>

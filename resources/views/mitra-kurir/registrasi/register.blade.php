@@ -9,14 +9,14 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form class="space-y-0.5" action="{{ url('/mitra-kurir/registrasi/register') }}" method="POST">
                 {{ csrf_field() }}
-                @include('components.mitra-kurir.auth.input', ['id' => 'name', 'name' => 'nama', 'label' => 'Name', 'type' => 'text', 'placeholder' => 'Enter your name'])
-                @include('components.mitra-kurir.auth.input', ['id' => 'ktp', 'name' => 'KTP', 'label' => 'No KTP', 'type' => 'text', 'placeholder' => 'Enter your KTP'])
-                @include('components.mitra-kurir.auth.input', ['id' => 'email', 'name' => 'Email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'Enter your email'])
-                @include('components.mitra-kurir.auth.input', ['id' => 'phone', 'name' => 'NomorHP', 'label' => 'No Telp', 'type' => 'tel', 'placeholder' => 'Enter your phone number'])
-                @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'password', 'label' => 'Password', 'type' => 'password', 'placeholder' => 'Enter your password'])
-                @include('components.mitra-kurir.auth.input', ['id' => 'confirm-password', 'name' => 'ulangiPassword', 'label' => 'Confirm Password', 'type' => 'password', 'placeholder' => 'Confirm your password'])
-                @include('components.mitra-kurir.auth.checkbox', ['id' => 'terms', 'name' => 'terms', 'label' => 'I agree to the terms and conditions'])
-                @include('components.mitra-kurir.auth.button', ['type' => 'submit', 'text' => 'Sign up'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'name', 'name' => 'nama', 'label' => 'Nama', 'type' => 'text', 'placeholder' => 'Masukkan Nama'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'ktp', 'name' => 'KTP', 'label' => 'No. KTP', 'type' => 'text', 'placeholder' => 'Masukkan No. KTP'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'email', 'name' => 'Email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'Masukkan Email'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'phone', 'name' => 'NomorHP', 'label' => 'No. Telepon', 'type' => 'tel', 'placeholder' => 'Masukkan No.Telepon'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'password', 'label' => 'Kata Sandi', 'type' => 'password', 'placeholder' => 'Masukkan Kata Sandi'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'confirm-password', 'name' => 'ulangiPassword', 'label' => 'Konfirmasi Kata Sandi', 'type' => 'password', 'placeholder' => 'Masukkan Konfirmasi Kata Sandi'])
+                @include('components.mitra-kurir.auth.checkbox', ['id' => 'terms', 'name' => 'terms', 'label' => 'Saya menyetujui'])
+                @include('components.mitra-kurir.auth.button', ['type' => 'submit', 'text' => 'Daftar'])
             </form>
 
     @if ($errors->any())
@@ -30,9 +30,9 @@
 @endif
 
             @include('components.mitra-kurir.auth.auth-link', [
-                'message' => "Have an account?",
+                'message' => "Sudah punya akun?",
                 'linkUrl' => route('mitra-kurir.registrasi.login'),
-                'linkText' => 'Login'
+                'linkText' => 'Masuk'
             ])
         </div>
     </div>

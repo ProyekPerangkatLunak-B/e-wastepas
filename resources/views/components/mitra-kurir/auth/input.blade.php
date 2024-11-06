@@ -1,5 +1,5 @@
 <div>
-    <label for="{{ $id }}" class="block text-sm font-medium leading-6 text-gray-900">{{ $label }}</label>
+    <label for="{{ $id }}" class="block text-sm font-medium leading-7 text-gray-500 mt-2">{{ $label }}</label>
     <div class="mt-2 relative">
         <input 
             id="{{ $id }}" 
@@ -8,7 +8,7 @@
             placeholder="{{ $placeholder }}" 
             required 
             autofocus
-            class="block w-full rounded-xl border border-secondary-normal py-2 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 pl-4 {{ $type === 'password' ? 'pr-10' : '' }}"
+            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none  focus:bg-white {{ $type === 'password' ? 'pr-10' : '' }}"
         >
         @if($type === 'password')
             <button 

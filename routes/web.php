@@ -235,4 +235,9 @@ Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
         return view('mitra-kurir/registrasi/reset-password');
     });
 
+    // syarat & ketentuan
+    Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
+        return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+    })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+
 
