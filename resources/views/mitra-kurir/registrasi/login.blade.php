@@ -31,7 +31,7 @@
                 @include('components.mitra-kurir.auth.button', ['type' => 'submit', 'text' => 'Masuk'])
                 
                 <p class="mt-10 text-right text-sm text-gray-500">
-                    <a href="url('/mitra-kurir/password/reset')" class="font-semibold leading-6 text-gray-500 hover:text-gray-600">
+                    <a href="{{ url('/mitra-kurir/registrasi/forgot-password') }}" class="font-semibold leading-6 text-gray-500 hover:text-gray-600">
                         Lupa kata sandi?
                     </a>
                 </p>
