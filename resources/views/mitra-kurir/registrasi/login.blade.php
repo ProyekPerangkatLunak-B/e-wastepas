@@ -23,7 +23,7 @@
             <form class="space-y-0.5" action="{{ url('/mitra-kurir/registrasi/login') }}" method="POST">
                 @csrf
                 @include('components.mitra-kurir.auth.input', ['id' => 'email', 'name' => 'email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'Enter your email'])
-                @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'password', 'label' => 'Password', 'type' => 'password', 'placeholder' => 'Enter your password'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'kata_sandi', 'label' => 'Password', 'type' => 'password', 'placeholder' => 'Enter your password'])
                 @include('components.mitra-kurir.auth.button', ['type' => 'submit', 'text' => 'Sign in'])
                 
                 @include('components.mitra-kurir.auth.auth-link', [

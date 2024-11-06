@@ -44,8 +44,21 @@
                         <span id="dropdown-icon" class="text-lg text-gray-400">&gt;</span>
                     </button>
                     <!-- Dropdown Menu -->
+                    <!-- Dropdown Menu -->
                     <ul id="dropdown-menu"
-                        class="mt-2 space-y-2 pl-4 {{ Request::is('admin/datamaster/master-data/dropbox', 'admin/datamaster/master-data/daerah', 'admin/datamaster/master-data/kategori', 'admin/datamaster/master-data/jenis') ? '' : 'hidden' }}">
+                        class="mt-2 space-y-2 pl-4 
+{{ Request::is(
+    'admin/datamaster/master-data/dropbox',
+    'admin/datamaster/master-data/daerah',
+    'admin/datamaster/master-data/kategori',
+    'admin/datamaster/master-data/jenis',
+    'admin/datamaster/master-data/jenis/create',
+    'admin/datamaster/master-data/jenis/*/edit',
+    'admin/datamaster/master-data/kategori/create',
+    'admin/datamaster/master-data/kategori/*/edit',
+)
+    ? ''
+    : 'hidden' }}">
                         <li>
                             <a href="{{ route('admin.datamaster.dropbox.index') }}"
                                 class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/dropbox') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
@@ -60,37 +73,47 @@
                         </li>
                         <li>
                             <a href="{{ route('admin.datamaster.jenis.index') }}"
-                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/jenis') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/jenis', 'admin/datamaster/master-data/jenis/create', 'admin/datamaster/master-data/jenis/*/edit') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
                                 Jenis
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('admin.datamaster.kategori.index') }}"
-                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/kategori') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                                class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/master-data/kategori', 'admin/datamaster/master-data/kategori/create', 'admin/datamaster/master-data/kategori/*/edit') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
                                 Kategori
                             </a>
                         </li>
                     </ul>
-
+                </li>
         </nav>
     </div>
 </div>
 
 <script>
-    let dropdownOpen =
-        {{ Request::is('datamaster/master-data/dropbox', 'datamaster/master-data/daerah', 'datamaster/master-data/kategori', 'datamaster/master-data/jenis') ? 'true' : 'false' }};
-
-    function toggleDropdown() {
+    document.addEventListener('DOMContentLoaded', function() {
         const menu = document.getElementById('dropdown-menu');
         const icon = document.getElementById('dropdown-icon');
 
-        dropdownOpen = !dropdownOpen;
+        // Set initial dropdown state based on current route
+        let dropdownOpen = {{ Request::is('admin/datamaster/master-data/*') ? 'true' : 'false' }};
         if (dropdownOpen) {
             menu.classList.remove('hidden');
-            icon.textContent = '⌄'; // Change icon to down arrow
+            icon.textContent = '⌄'; // Down arrow
         } else {
             menu.classList.add('hidden');
-            icon.textContent = '>'; // Change icon to right arrow
+            icon.textContent = '>'; // Right arrow
         }
-    }
+
+        // Toggle function
+        window.toggleDropdown = function() {
+            dropdownOpen = !dropdownOpen;
+            if (dropdownOpen) {
+                menu.classList.remove('hidden');
+                icon.textContent = '⌄';
+            } else {
+                menu.classList.add('hidden');
+                icon.textContent = '>';
+            }
+        };
+    });
 </script>
