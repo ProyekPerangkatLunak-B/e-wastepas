@@ -16,6 +16,7 @@ use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\SampahController;
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
     return view('index');
@@ -114,6 +115,23 @@ Route::group([
     Route::get('datamaster/dashboard', function () {
         return view('manajemen.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
+
+    Route::get('datamaster/melacak-penjemputan', function () {
+        return view('manajemen.datamaster.melacak-penjemputan.index');
+    })->name('datamaster.melacak-penjemputan.index');
+
+    Route::get('datamaster/total-sampah', function () {
+        return view('manajemen.datamaster.total-sampah.index');
+    })->name('datamaster.total-sampah.index');
+
+    Route::get('datamaster/dashboard', function () {
+        return view('manajemen.datamaster.dashboard.index');
+    })->name('datamaster.dashboard.index');
+
+    Route::get('datamaster/dashboard', function () {
+        return view('manajemen.datamaster.dashboard.index');
+    })->name('datamaster.dashboard.index');
+    
 
     // Submodul Registrasi
     Route::get('forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');

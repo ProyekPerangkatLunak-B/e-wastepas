@@ -57,24 +57,31 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Chart: Top Masyarakat -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left  hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
+                            <a href="total-sampah">
                             <h2 class="text-lg font-bold mb-2">Top Masyarakat</h2>
                             <div id="chart-top-masyarakat" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
+                        </a>
                         </button>
-                      
+
                         <!-- Chart: Top Kurir -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
+                            <a href="total-sampah">
                             <h2 class="text-lg font-bold mb-2">Top Kurir</h2>
                             <div id="chart-top-kurir" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
+                        </a>
                         </button>
                     </div>
                   
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Chart: Total Sampah Terkumpul -->
+                        <!-- Chart: Top Jenis Sampah -->
+
                         <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                            <h2 class="text-lg font-bold mb-2">Total Sampah Terkumpul</h2>
+                            <a href="total-sampah">
+                            <h2 class="text-lg font-bold mb-2">Top Jenis Sampah</h2>
                             <div id="chart-total-sampah" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
+                            </a>
                         </button>
-                      
+
                     <!-- Chart: Total Sampah Tiap Daerah -->
                     <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
                         <h2 class="text-lg font-bold mb-2">Total Sampah Terkumpul Tiap Daerah</h2>
@@ -84,7 +91,7 @@
                       
                         <!-- Chart: Top Jenis Sampah -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left w-full hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                            <h2 class="text-lg font-bold mb-2">Top Jenis Sampah</h2>
+                            <h2 class="text-lg font-bold mb-2">Top Sampah per Kategori</h2>
                             <p class="text-sm text-gray-500 mb-4">Berdasarkan Kategori</p>
                             
                             <div class="space-y-6">
@@ -133,9 +140,6 @@
                         </button>
                     </div>
                 </div>
-                <div id="multi-layer-ring-chart" class="p-10" style="width: 400px; height: 400px;"></div>                    
-                </div>
-
             </div>
 
             
@@ -215,51 +219,6 @@
             }
         }
     });
-
-    var chartDom = document.getElementById('multi-layer-ring-chart');
-var myChart = echarts.init(chartDom);
-
-var option = {
-    title: {
-        text: 'Top E-commerce',
-        left: 'center',
-        top: '5%',
-        textStyle: {
-            fontSize: 16,
-            fontWeight: 'bold'
-        }
-    },
-    tooltip: {
-        trigger: 'item',
-        formatter: '{b}: {c} ({d}%)'
-    },
-    series: [
-        {
-            name: 'E-commerce Share',
-            type: 'pie',
-            radius: ['50%', '70%'],
-            label: {
-                show: false,
-                position: 'center'
-            },
-            labelLine: {
-                show: true,
-                length: 20, // panjang garis penghubung
-                length2: 15, // panjang garis horizontal
-            },
-            data: [
-                { value: 45, name: 'Amazon', itemStyle: { color: '#f0a500' }, label: { show: true, formatter: '{b}\n{d}%', position: 'outside' } },
-                { value: 25, name: 'Tokopedia', itemStyle: { color: '#007f5f' }, label: { show: true, formatter: '{b}\n{d}%', position: 'outside' } },
-                { value: 35, name: 'Alibaba', itemStyle: { color: '#ff6b6b' }, label: { show: true, formatter: '{b}\n{d}%', position: 'outside' } },
-            ]
-        }
-    ]
-};
-
-myChart.setOption(option);
-
-
-
 
       </script>
 @endsection
