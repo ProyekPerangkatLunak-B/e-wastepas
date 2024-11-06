@@ -13,8 +13,8 @@
         <div class="mt-32 items-center">
             <div class="otp-img">
             <img src="../img/masyarakat/registrasi/otp.png" alt="" class="w-30 mx-auto flex justify-center">
-                <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Konfirmasi Kode</h2>
-                <p class="mt-2 text-center text-sm text-gray-500">Silahkan masukan kode verifikasi yang kami kirim kan ke email anda</p>
+                <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Konfirmasi OTP</h2>
+                <p class="mt-2 text-center text-md text-gray-500">Silahkan masukan kode verifikasi yang kami kirim kan ke email anda</p>
             </div>
 
               @if ($errors->any())
@@ -37,8 +37,14 @@
                               type="text" required name="otp" id="otp"/>
                       </div>-->
 
-                      <div class="grid grid-cols-4  mt-10 ms-6 gap-x-6 my-2">
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200  dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                      <div class="grid grid-cols-6  mt-10 ms-6 gap-x-10 my-2">
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                          <span class="text-gray-900 dark:text-gray-400"></span>
+                        </div>
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                          <span class="text-gray-900 dark:text-gray-400"></span>
+                        </div>
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900 dark:text-gray-400"></span>
                         </div>
                         <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
@@ -52,12 +58,8 @@
                         </div>
 
                       <!-- Button Submit -->
-                     <button
-                      class="mt-14 w-40 h-10 focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg">
-                      Kirim Ulang
-                  </button>
                       <button
-                          class="mt-14 w-40 h-10 ms-32 focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg" onclick="openModal('modelConfirm')">
+                          class="mt-14 ms-12 w-80 h-12 focus:outline-none text-slate-50 font-bold bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg" onclick="openModal('modelConfirm')">
                           Kirim
                       </button>
                       <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
@@ -78,7 +80,7 @@
                                    <img src="../img/masyarakat/registrasi/popup-reset.png" alt="" class="w-25 h-20 mx-auto flex justify-center">
                                 <h3 class="text-md font-medium text-gray-500 mt-5 mb-6"> Selamat Anda Berhasil Melakukan Konfirmasi Kode !! </h3>
                                 <a href="#"  onclick="closeModal('modelConfirm')"
-                                    class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg px-5 py-2.5 text-center mr-2">
+                                    class="focus:outline-none text-slate-50 font-bold bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg px-5 py-2.5 text-center mr-2">
                                     Kembali
                                 </a>
                             </div>
@@ -111,6 +113,7 @@
                     </script>
                   </form>
               </div>
+              <a href="" class="font-semibold ms-48 leading-6 text-gray-700 text-md hover:text-gray-500">Kirim Ulang</a>
           </div>
         </div>
       </div>
