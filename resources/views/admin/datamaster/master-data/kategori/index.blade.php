@@ -155,32 +155,30 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function() {
-            // Initialize DataTable
-            var table = $('#kategoriTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('admin.datamaster.kategori.data') }}',
-                columns: [{
-                        data: 'nama_kategori_sampah',
-                        name: 'nama_kategori_sampah',
-                        orderable: true
-                    },
-                    {
-                        data: 'deskripsi_kategori_sampah',
-                        name: 'deskripsi_kategori_sampah',
-                        orderable: true
-                    },
-                    {
-                        data: 'id_kategori_sampah',
-                        name: 'id_kategori_sampah',
-                        orderable: false,
-                        render: function(data, type, row) {
-                            return `
+        document.addEventListener('DOMContentLoaded', () => {
+            $(document).ready(function() {
+                // Initialize DataTable
+                var table = $('#kategoriTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{{ route('admin.datamaster.kategori.data') }}',
+                    columns: [{
+                            data: 'nama_kategori_sampah',
+                            name: 'nama_kategori_sampah',
+                            orderable: true
+                        },
+                        {
+                            data: 'deskripsi_kategori_sampah',
+                            name: 'deskripsi_kategori_sampah',
+                            orderable: true
+                        },
+                        {
+                            data: 'id_kategori_sampah',
+                            name: 'id_kategori_sampah',
+                            orderable: false,
+                            render: function(data, type, row) {
+                                return `
                             <div class="flex space-x-2">
                                 <a href="/admin/datamaster/master-data/kategori/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" style="color: white">
                                     Edit
@@ -189,82 +187,84 @@
                                     Hapus
                                 </button>
                             </div>`;
+                            }
                         }
+                    ],
+                    order: [
+                        [0, 'asc']
+                    ],
+                    dom: 't',
+                });
+
+                // Custom search input
+                $('#customSearch').on('keyup', function() {
+                    table.search(this.value).draw();
+                });
+
+                // Custom length menu
+                $('#customLengthMenu').on('change', function() {
+                    table.page.len(this.value).draw();
+                });
+
+                // Custom pagination and info display
+                table.on('draw', function() {
+                    var pageInfo = table.page.info();
+                    $('#customInfo').text(
+                        `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`
+                        );
+
+                    $('#customPagination').empty();
+                    for (var i = 0; i < pageInfo.pages; i++) {
+                        var button =
+                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-blue-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
+                        $('#customPagination').append(button);
                     }
-                ],
-                order: [
-                    [0, 'asc']
-                ],
-                dom: 't',
+                });
+
+                window.changePage = function(page) {
+                    table.page(page).draw('page');
+                };
             });
 
-            // Custom search input
-            $('#customSearch').on('keyup', function() {
-                table.search(this.value).draw();
-            });
-
-            // Custom length menu
-            $('#customLengthMenu').on('change', function() {
-                table.page.len(this.value).draw();
-            });
-
-            // Custom pagination and info display
-            table.on('draw', function() {
-                var pageInfo = table.page.info();
-                $('#customInfo').text(
-                    `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`);
-
-                $('#customPagination').empty();
-                for (var i = 0; i < pageInfo.pages; i++) {
-                    var button =
-                        `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-blue-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
-                    $('#customPagination').append(button);
-                }
-            });
-
-            window.changePage = function(page) {
-                table.page(page).draw('page');
-            };
+            function confirmDelete(id) {
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data ini akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `{{ route('admin.datamaster.kategori.destroy', '') }}/${id}`,
+                            type: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Dihapus!',
+                                    'Data berhasil dihapus.',
+                                    'success'
+                                );
+                                $('#kategoriTable').DataTable().ajax.reload();
+                            },
+                            error: function(xhr) {
+                                Swal.fire(
+                                    'Gagal!',
+                                    xhr.responseJSON && xhr.responseJSON.error ?
+                                    `Gagal menghapus data: ${xhr.responseJSON.error}` :
+                                    'Terjadi kesalahan saat menghapus data.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            }
         });
-
-        function confirmDelete(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Data ini akan dihapus secara permanen!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: `{{ route('admin.datamaster.kategori.destroy', '') }}/${id}`,
-                        type: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            Swal.fire(
-                                'Dihapus!',
-                                'Data berhasil dihapus.',
-                                'success'
-                            );
-                            $('#kategoriTable').DataTable().ajax.reload();
-                        },
-                        error: function(xhr) {
-                            Swal.fire(
-                                'Gagal!',
-                                xhr.responseJSON && xhr.responseJSON.error ?
-                                `Gagal menghapus data: ${xhr.responseJSON.error}` :
-                                'Terjadi kesalahan saat menghapus data.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
-        }
     </script>
 @endsection
