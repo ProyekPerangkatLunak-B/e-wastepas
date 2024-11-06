@@ -8,7 +8,6 @@
               <div class="logo">
               <img src="../img/logoEwaste.png" alt="" class="w-24 h-24 mx-auto flex justify-center">
               <h2 class="text-center text-2xl mt-8 font-bold leading-9 tracking-tight text-green-700">Selamat Datang di E-WastePas</h2>
-              <p class="mt-2 text-center text-sm text-gray-500">Masukkan akun anda di bawah ini!</p>
             </div>
 
             <!-- Login -->
@@ -22,12 +21,12 @@
                   <div>
                     <label for="email" class="block mt-4 text-md font-medium leading-9 text-gray-500">Email</label>
                         <input
-                            class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-gray-400 text-md focus:outline-none focus:border-gray-900 focus:bg-white"
+                            class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
                             type="email" name="email" required/>
                     </div>
                     <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label>
                         <input
-                            class="w-full px-5 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-400 text-sm focus:outline-none focus:border-gray-900 focus:bg-white"
+                            class="w-full px-5 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
                             type="password" name="password" required/>
                     <div class="flex justify-between">
                       <div class="">
@@ -42,7 +41,7 @@
                       class="mt-10 tracking-wide font-semibold bg-green-900  text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none bg-gradient"> Masuk
                   </button>-->
                   <button
-                      class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-4 focus:ring-4 focus:ring-green-300 font-bold rounded-lg mt-8 text-base"> Masuk
+                      class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-4 font-bold rounded-lg mt-8 text-base"> Masuk
                   </button>
                 </form>
                 </a>
