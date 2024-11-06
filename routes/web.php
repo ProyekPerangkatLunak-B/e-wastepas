@@ -217,9 +217,6 @@ Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
     Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
     Route::get('/{id_pengguna}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
-    // rute login mitra kurir
-    Route::post('/mitra-kurir/registrasi/login', [RegistrasiMitraKurirController::class, 'login'])->name('mitra-kurir.login');
-
     // rute otp
     Route::get('/mitra-kurir/registrasi/otp2', function () {
         return view('mitra-kurir/registrasi/otp2');

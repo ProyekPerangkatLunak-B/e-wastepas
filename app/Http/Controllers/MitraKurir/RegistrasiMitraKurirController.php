@@ -6,11 +6,11 @@ use App\Models\UserOTP;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\OtpMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Log;
+
 
 class RegistrasiMitraKurirController extends Controller
 {
@@ -57,7 +57,12 @@ class RegistrasiMitraKurirController extends Controller
         return redirect()->back()->withErrors([
             'otp_code' => 'OTP CODE tidak ditemukan.'
         ]);
+    }elseif($otp->otp_kadaluarsa <= now()){
+        return redirect()->back()->withErrors([
+            'otp_code' => 'OTP CODE telah kadaluarsa.'
+        ]);
     }
+
 
     $otp->user->tanggal_email_diverifikasi = Date::now();
     $otp->user->save();
@@ -92,8 +97,11 @@ class RegistrasiMitraKurirController extends Controller
                 'otp_token' => rand(1000,9999),
                 'otp_kadaluarsa' => Date::now()->addMinutes(5)
             ]);
+
             
-            event(new Registered($user));
+
+            $user->notify(new OtpMail($otp->otp_token));
+   
             
             return redirect()->route('otp-verification', $user->id_pengguna);
 
