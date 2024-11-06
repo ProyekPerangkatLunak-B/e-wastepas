@@ -100,12 +100,12 @@
                 $('#mySelect2').select2({
                     placeholder: 'Pilih Kategori Sampah',
                     allowClear: true,
-                    tags: true, // Enable adding new options
+                    tags: true,
                     createTag: function(params) {
                         return {
                             id: params.term,
                             text: params.term,
-                            isNew: true // Mark this option as new
+                            isNew: true
                         };
                     },
                     ajax: {
@@ -114,7 +114,7 @@
                         delay: 250,
                         data: function(params) {
                             return {
-                                term: params.term // search term
+                                term: params.term
                             };
                         },
                         processResults: function(data) {
@@ -132,22 +132,22 @@
                     }
                 });
 
-                // Handle adding new data when submitted
                 $('#mySelect2').on('select2:select', function(e) {
                     var data = e.params.data;
                     if (data.isNew) {
                         $.ajax({
-                            url: '{{ route('admin.datamaster.kategori.storeKategori') }}', // Define route for storing new data
+                            url: '{{ route('admin.datamaster.kategori.storeKategori') }}',
                             method: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
-                                nama_kategori_sampah: data
-                                    .text // Send the new name as parameter
+                                nama_kategori_sampah: data.text
                             },
                             success: function(response) {
-                                $('#mySelect2').append(new Option(response.text,
-                                    response.id, false,
-                                    true)).trigger('change');
+                                console.log(response);
+                                // Use the returned response id and text
+                                let newOption = new Option(response.text, response.id,
+                                    true, true);
+                                $('#mySelect2').append(newOption).trigger('change');
                             },
                             error: function() {
                                 alert('Failed to add new category');

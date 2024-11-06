@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
-return new class extends Migration
+return new class extends Migration 
 {
     /**
      * Run the migrations.
@@ -16,10 +17,10 @@ return new class extends Migration
             $table->foreignId('id_peran')->nullable()
                 ->constrained('peran', 'id_peran')
                 ->onDelete('cascade');
-            $table->integer('nomor_ktp')->nullable()->unique();
+            $table->string('nomor_ktp')->nullable()->unique();
             $table->string('nama', 50)->nullable();
             $table->string('alamat', 255)->nullable();
-            $table->string('email', 255)->nullable();
+            $table->string('email', 255)->nullable()->Unique();
             $table->string('kata_sandi', 255)->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('foto_profil', 255)->nullable();
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->integer('subtotal_poin')->nullable();
             $table->enum('status', ['Diterima', 'Diproses', 'Ditolak'])->nullable();
             $table->tinyInteger('nomor_terverifikasi')->nullable();
-            $table->timestamp('tanggal_email_dioverifikasi')->nullable();
+            $table->timestamp('tanggal_email_diverifikasi')->nullable();
             $table->timestamp('tanggal_update')->nullable();
             $table->timestamp('tanggal_dihapus')->nullable();
             $table->timestamp('tanggal_diverifikasi')->nullable();
