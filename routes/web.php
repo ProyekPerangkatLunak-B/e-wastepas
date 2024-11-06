@@ -15,7 +15,7 @@ use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
     return view('index');
@@ -153,9 +153,9 @@ Route::group([
     })->name('otp');
 
     Route::post('otp', [RegistrasiMasyarakatController::class, 'verifyOtp'])->name('otp.verify');
+   
     //rute otp ke email
     Route::post('otp/confirm', [RegistrasiMasyarakatController::class, 'confirmOtp'])->name('otp.confirm');
-
 
     Route::get('/forgot-password', function () {
         return view('masyarakat/registrasi/forgot-password');
@@ -169,6 +169,8 @@ Route::group([
         return view('masyarakat/registrasi/reset-password');
     });
 
+    //forgot pass masyarakat
+    Route::post('/masyarakat/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 
     // Submodul Penjemputan Sampah

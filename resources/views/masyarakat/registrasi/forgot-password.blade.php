@@ -23,7 +23,7 @@
                 <div class="flex flex-col flex justify-around items-center">
             </div>
                 <div class="mx-auto max-w-md">
-                  <form action="#" method="POST">
+                <form action="{{ route('masyarakat.password.email') }}" method="POST">
                   <div>
                     <label for="email" class="block mt-4 text-md font-medium leading-9 text-gray-500">Email</label>
                         <input
