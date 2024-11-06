@@ -238,3 +238,7 @@ Route::group([
         return view('mitra-kurir/registrasi/forgot-password');
     });
 
+    // reset password
+    Route::get('/mitra-kurir/registrasi/reset-password', function () {
+        return view('mitra-kurir/registrasi/reset-password');
+    });
