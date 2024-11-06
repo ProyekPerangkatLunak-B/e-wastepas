@@ -34,28 +34,38 @@
             </div>
 
             {{-- Card Section --}}
-            <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
-                <x-card-detail
-                    title="Lampu"
-                    description="Semua tipe laptop dari berbagai alat elektronik"
-                    image="https://picsum.photos/700/700" />
-                    <x-card-detail
-                    title="Lampu"
-                    description="Semua tipe laptop dari berbagai alat elektronik"
-                    image="https://picsum.photos/700/700" />
-                    <x-card-detail
-                    title="Lampu"
-                    description="Semua tipe laptop dari berbagai alat elektronik"
-                    image="https://picsum.photos/700/700" />
-                    <x-card-detail
-                    title="Lampu"
-                    description="Semua tipe laptop dari berbagai alat elektronik"
-                    image="https://picsum.photos/700/700" />
+            @if (count($jenis == 0))
+                <div>
+                    Jenis {{ $search ?? 'Sampah Elektronik' }} tidak ditemukan.
+                </div>
+            @else
+                @foreach ($jenis as $jenisSampah)    
+                    <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
+                        <x-card-detail
+                            title="{{ $jenisSampah->nama_jenis_sampah }}"
+                            description="{{ $jenisSampah->deskripsi_jenis_sampah }}"
+                            image="https://picsum.photos/700/700" />
+                    </div>
+                @endforeach
+            @endif
+            
+            {{-- Pagination --}}
+            <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
+                {{-- Button < & << --}}
+                @if ($jenis->currentPage() > 1)
+                    <button onclick="window.location.href='{{ $jenis->url(1) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                    <button onclick="window.location.href='{{ $jenis->previousPageUrl() }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                @endif
+
+                {{-- Nomor halaman  --}}
+                <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $jenis->currentPage() }}</button>
+
+                {{-- Button > & >>--}}
+                @if ($jenis->hasMorePages())
+                    <button onclick="window.location.href='{{ $jenis->nextPageUrl() }}'" class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                    <button onclick="window.location.href='{{ $jenis->url($jenis->lastPage()) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                @endif
             </div>
-
-
-            
-            
         </div>
     </div>
 @endsection

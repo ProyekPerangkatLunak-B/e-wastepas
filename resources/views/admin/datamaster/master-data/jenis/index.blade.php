@@ -148,10 +148,10 @@
 
                 <!-- Custom pagination -->
                 <div id="customPagination" class="flex justify-between mt-4" style="color: white">
-                    <div id="customInfo" class="text-sm text-gray-700">
+                    <div id="customInfo" class="text-sm  text-gray-700">
                         <!-- Informasi jumlah data akan diisi di sini -->
                     </div>
-                    <div class="space-x-2">
+                    <div class="space-x-2 ">
                         <!-- Tombol pagination akan dihasilkan di sini -->
                     </div>
                 </div>
@@ -189,10 +189,10 @@
                             render: function(data) {
                                 return `
                             <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/jenis/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition">
+                                <a href="/admin/datamaster/master-data/jenis/${data}/edit" style="color: white" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" >
                                     Edit
                                 </a>
-                                <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" onclick="confirmDelete(${data})">
+                                <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" onclick="confirmDelete(${data})" style="color: white">
                                     Hapus
                                 </button>
                             </div>`;
@@ -220,11 +220,11 @@
                     var pageInfo = table.page.info();
                     $('#customInfo').text(
                         `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`
-                        );
+                    );
                     $('#customPagination').empty();
                     for (var i = 0; i < pageInfo.pages; i++) {
                         var button =
-                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-blue-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
+                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
                         $('#customPagination').append(button);
                     }
                 });

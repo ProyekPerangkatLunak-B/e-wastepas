@@ -64,9 +64,12 @@
                     </div>
 
                     <div class="mb-6">
-                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Kategori
+                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Jenis
                             Sampah</label>
-                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori_sampah">
+                        <select name="status_dropbox" id="status_dropbox" required
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700">
+                            <option value="1">Sampah Elektronik Besar</option>
+                            <option value="0">Sampah Elektronik Kecil</option>
                         </select>
                     </div>
 
@@ -85,7 +88,7 @@
 
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
                             <i class="fas fa-save mr-2"></i>Simpan
                         </button>
                     </div>
