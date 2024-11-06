@@ -15,7 +15,7 @@
           <p class="mt-8 text-lg font-medium text-gray-500 text-pretty sm:text-xl/8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, quas?</p>
           <div class="flex items-center justify-center mt-10 gap-x-6">
             @foreach (['masyarakat.login' => 'Masyarakat',
-            'mitra-kurir.login' => 'Mitra Kurir',
+            'mitra-kurir.registrasi.login' => 'Mitra Kurir',
             'admin.login.index' => 'Admin',
             'manajemen.datamaster.dashboard.index' => 'Manajemen']
             as $route => $label)
