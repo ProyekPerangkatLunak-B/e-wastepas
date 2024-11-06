@@ -13,15 +13,6 @@ window.Swal = Swal;
 import 'select2';
 import 'select2/dist/css/select2.css';
 
-// Initialize Select2 on jQuery
-jQuery(function() {
-    if ($.fn.select2 === undefined) {
-        console.error("Select2 is not loaded properly.");
-    } else {
-        console.log("Select2 loaded successfully.");
-    }
-});
-
 // Import and start Alpine.js
 import Alpine from "alpinejs";
 window.Alpine = Alpine;
