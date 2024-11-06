@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Models\User;
 use App\Models\UserOTP;
@@ -183,7 +182,6 @@ Route::group([
     Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat');
     Route::get('penjemputan-sampah/detail-riwayat', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 });
-
 // Route Modul Mitra-kurir
 Route::group([
     'prefix' => 'mitra-kurir',
@@ -206,7 +204,7 @@ Route::group([
         return view('mitra-kurir.penjemputan-sampah.dropbox');
     })->name('penjemputan.dropbox');
 
-    Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
+Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
         return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan');
     })->name('penjemputan.riwayat-penjemputan');
 
@@ -227,4 +225,3 @@ Route::group([
     Route::get('/mitra-kurir/registrasi/otp2', function () {
         return view('mitra-kurir/registrasi/otp2');
     });
-
