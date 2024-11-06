@@ -69,6 +69,21 @@
                 </button>
             </div>
         </form>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="fixed inset-0 flex items-center justify-center z-50" style="display: none;">
+            <!-- Background overlay with opacity -->
+            <div class="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
+            
+            <div class="relative rounded-lg p-8 max-w-sm text-center z-10 shadow-lg" style="background-color: white; border: 1px solid black;" >
+                <p class="text-xl font-semibold">Selamat anda sudah berhasil mengunggah dokumen anda</p>
+                <div class="mt-4">
+                    <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="mx-auto h-16 w-16">
+                </div>
+                <p class="mt-4">Butuh Waktu 7x24 Jam Untuk Admin Memvalidasi</p>
+                <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-green-700 text-[#FFFFFF] rounded-md">Kembali ke Menu Utama</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -97,5 +112,26 @@
             }
         });
     });
+
+    // Modal functionality
+    function openModal() {
+    const modal = document.getElementById('successModal');
+    modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('successModal');
+        modal.style.display = 'none';
+    }
+
+    // Handle form submission
+    function handleFormSubmission(event) {
+        event.preventDefault();
+        openModal();
+    }
+
+    // Attach form submission handler
+    const form = document.querySelector('form');
+    form.addEventListener('submit', handleFormSubmission);
 </script>
 @endsection
