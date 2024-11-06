@@ -240,4 +240,9 @@ Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
         return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
     })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
 
+    // upload dokumen
+    Route::get('/mitra-kurir/registrasi/document-upload', function () {
+        return view('/mitra-kurir/registrasi/document-upload');
+    })->name('/mitra-kurir/registrasi/document-upload');
+
 
