@@ -2,50 +2,53 @@
 
 @section('content')
     {{-- Container Utama --}}
-    <div class="container max-w-full px-4 mx-auto bg-gray-100">
-        <div class="py-8">
-            {{-- Section Judul --}}
-            <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Manajemen</h2>
-            <h4 class="text-base font-normal ml-14">Selamat datang di dashboard Manajemen.</h4>
+<div class="container max-w-full px-4 mx-auto bg-gray-100">
+    <div class="py-8">
+        {{-- Section Judul --}}
+        <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Manajemen</h2>
+        <h4 class="text-base font-normal ml-14">Selamat datang di dashboard Manajemen.</h4>
 
-            {{-- Card Section --}}
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 px-12">
-                {{-- Card Total Sampah Terkumpul --}}
-                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2"> <!-- Ubah flex-direction ke column -->
-                    <i class="fa-solid fa-recycle text-3xl"></i>
-                    <div class="text-start"> <!-- Tambahkan wrapper untuk teks -->
-                        <h5 class="text-gray-600 font-semibold">Total Sampah Terkumpul</h5>
-                        <p class="text-2xl font-bold">150</p>
-                    </div>
+        {{-- Card Section --}}
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 px-12">
+            {{-- Card Total Sampah Terkumpul --}}
+            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2">
+                <i class="fa-solid fa-recycle text-3xl text-[#437252]"></i>
+                <div class="text-start">
+                    <h5 class="text-gray-600 font-semibold">Total Sampah Terkumpul</h5>
+                    <p class="text-2xl font-bold">174.265 Kg</p>
                 </div>
-                
+            </div>
+
             {{-- Card Total Poin Terkumpul --}}
             <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2">
                 <i class="fa-solid fa-coins text-green text-3xl"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Total Poin Terkumpul</h5>
-                    <p class="text-2xl font-bold">30</p>
+                    <p class="text-2xl font-bold">3045 Poin</p>
                 </div>
             </div>
 
             {{-- Card Masyarakat Yang Terdaftar --}}
             <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2">
-                <i class="fa-solid fa-users text-3xl"></i>
+                <i class="fa-solid fa-users text-[#437252] text-3xl"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Masyarakat Yang Terdaftar</h5>
-                    <p class="text-2xl font-bold">75</p>
+                    <p class="text-2xl font-bold">1019</p>
                 </div>
             </div>
 
             {{-- Card Transaksi Terselesaikan --}}
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2">
-                <i class="fa-solid fa-clipboard-list text-3xl"></i>
+            <button class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2 cursor-pointer hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
+                <i class="fa-solid fa-clipboard-list text-3xl text-[#437252]"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Transaksi Terselesaikan</h5>
-                    <p class="text-2xl font-bold">1200</p>
+                    <p class="text-2xl font-bold">5362</p>
                 </div>
-            </div>
+            </button>
         </div>
+    </div>
+</div>
+
 
             {{-- Chart --}}
             <div class="px-12 mt-8">
@@ -53,36 +56,34 @@
                     <!-- Baris 1: 2 Kolom -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Chart: Top Masyarakat -->
-                        <div class="bg-white p-4 rounded-lg shadow-md">
+                        <button class="bg-white p-4 rounded-lg shadow-md text-left  hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
                             <h2 class="text-lg font-bold mb-2">Top Masyarakat</h2>
                             <div id="chart-top-masyarakat" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
-                        </div>
+                        </button>
                       
                         <!-- Chart: Top Kurir -->
-                        <div class="bg-white p-4 rounded-lg shadow-md">
+                        <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
                             <h2 class="text-lg font-bold mb-2">Top Kurir</h2>
                             <div id="chart-top-kurir" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
-                        </div>
+                        </button>
                     </div>
                   
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- Chart: Total Sampah Terkumpul -->
-                        <div class="bg-white p-4 rounded-lg shadow-md">
+                        <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
                             <h2 class="text-lg font-bold mb-2">Total Sampah Terkumpul</h2>
                             <div id="chart-total-sampah" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
-                        </div>
+                        </button>
                       
                     <!-- Chart: Total Sampah Tiap Daerah -->
-                    <div class="bg-white p-4 rounded-lg shadow-md">
+                    <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
                         <h2 class="text-lg font-bold mb-2">Total Sampah Terkumpul Tiap Daerah</h2>
                         <div id="chart-daerah" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
-                        <!-- Elemen untuk menampilkan persentase di bawah chart -->
-                        <div id="percentage-labels" class="mt-2 flex justify-between"></div>
-                    </div>
+                    </button>
 
                       
                         <!-- Chart: Top Jenis Sampah -->
-                        <div class="bg-white p-6 rounded-lg shadow-md w-full" >
+                        <button class="bg-white p-4 rounded-lg shadow-md text-left w-full hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
                             <h2 class="text-lg font-bold mb-2">Top Jenis Sampah</h2>
                             <p class="text-sm text-gray-500 mb-4">Berdasarkan Kategori</p>
                             
@@ -96,7 +97,7 @@
                                             <span class="text-sm font-medium">80%</span>
                                         </div>
                                         <div class="w-full bg-gray-300 h-2 rounded-full mt-1 ml-2">
-                                            <div class="bg-gray-700 h-2 rounded-full" style="width: 80%;"></div>
+                                            <div class="bg-[#437252] h-2 rounded-full" style="width: 80%;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +111,7 @@
                                             <span class="text-sm font-medium">60%</span>
                                         </div>
                                         <div class="w-full bg-gray-300 h-2 rounded-full mt-1">
-                                            <div class="bg-gray-700 h-2 rounded-full" style="width: 60%;"></div>
+                                            <div class="bg-[#437252] h-2 rounded-full" style="width: 60%;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -124,19 +125,25 @@
                                             <span class="text-sm font-medium">30%</span>
                                         </div>
                                         <div class="w-full bg-gray-300 h-2 rounded-full mt-1">
-                                            <div class="bg-gray-700 h-2 rounded-full" style="width: 30%;"></div>
+                                            <div class="bg-[#437252] h-2 rounded-full" style="width: 30%;"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
+                <div id="multi-layer-ring-chart" class="p-10" style="width: 400px; height: 400px;"></div>                    
+                </div>
+
             </div>
+
             
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js"></script>
+
 
     <script>
         // Konfigurasi untuk masing-masing chart (contoh sederhana)
@@ -147,9 +154,9 @@
       
         // Chart: Top Masyarakat
         renderChart("#chart-top-masyarakat", {
-          series: [{ data: [10, 15, 20, 25] }],
+          series: [{ data: [10, 15, 20, 25, 13, 17, 23] }],
           chart: { type: 'bar' },
-          xaxis: { categories: ['Aaliyah', 'Kim', 'Isa', 'Beyonce'] },
+          xaxis: { categories: ['Aaliyah', 'Kim', 'Isa', 'Beyonce', 'Asep', 'Jajang', 'Maemunah'] },
           colors: ['#437252'],
           plotOptions: {
             bar: {
@@ -191,7 +198,7 @@
         labels: ['Cibiru', 'Cileunyi', 'Sarijadi', 'Sukagalih', 'Setiabudi', 'Arab'],
         stroke: {
             width: 2,
-            colors: ['#1c64f2']
+            colors: ['#437252']
         },
         fill: {
             opacity: 0.4
@@ -208,6 +215,49 @@
             }
         }
     });
+
+    var chartDom = document.getElementById('multi-layer-ring-chart');
+var myChart = echarts.init(chartDom);
+
+var option = {
+    title: {
+        text: 'Top E-commerce',
+        left: 'center',
+        top: '5%',
+        textStyle: {
+            fontSize: 16,
+            fontWeight: 'bold'
+        }
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {c} ({d}%)'
+    },
+    series: [
+        {
+            name: 'E-commerce Share',
+            type: 'pie',
+            radius: ['50%', '70%'],
+            label: {
+                show: false,
+                position: 'center'
+            },
+            labelLine: {
+                show: true,
+                length: 20, // panjang garis penghubung
+                length2: 15, // panjang garis horizontal
+            },
+            data: [
+                { value: 45, name: 'Amazon', itemStyle: { color: '#f0a500' }, label: { show: true, formatter: '{b}\n{d}%', position: 'outside' } },
+                { value: 25, name: 'Tokopedia', itemStyle: { color: '#007f5f' }, label: { show: true, formatter: '{b}\n{d}%', position: 'outside' } },
+                { value: 35, name: 'Alibaba', itemStyle: { color: '#ff6b6b' }, label: { show: true, formatter: '{b}\n{d}%', position: 'outside' } },
+            ]
+        }
+    ]
+};
+
+myChart.setOption(option);
+
 
 
 
