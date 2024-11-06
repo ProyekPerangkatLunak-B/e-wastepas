@@ -54,8 +54,7 @@
             <h4 class="text-base font-normal ml-14">Silakan ubah data berikut untuk memperbarui jenis sampah.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_kategori_sampah) }}"
-                    method="POST">
+                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_kategori_sampah) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="mb-6">
@@ -100,71 +99,65 @@
         </div>
     </div>
 
-    <!-- jQuery (must be included before Select2) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Select2 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
-    <!-- Select2 JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
     <script>
-        $(document).ready(function() {
-            $('#mySelect2').select2({
-                placeholder: 'Pilih Kategori Sampah',
-                allowClear: true,
-                tags: true,
-                createTag: function(params) {
-                    return {
-                        id: params.term,
-                        text: params.term,
-                        isNew: true
-                    };
-                },
-                ajax: {
-                    url: '{{ route('admin.datamaster.kategori.search') }}',
-                    dataType: 'json',
-                    delay: 250,
-                    data: function(params) {
+        document.addEventListener('DOMContentLoaded', () => {
+            $(document).ready(function() {
+                $('#mySelect2').select2({
+                    placeholder: 'Pilih Kategori Sampah',
+                    allowClear: true,
+                    tags: true,
+                    createTag: function(params) {
                         return {
-                            term: params.term
+                            id: params.term,
+                            text: params.term,
+                            isNew: true
                         };
                     },
-                    processResults: function(data) {
-                        return {
-                            results: data
-                        };
+                    ajax: {
+                        url: '{{ route('admin.datamaster.kategori.search') }}',
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                term: params.term
+                            };
+                        },
+                        processResults: function(data) {
+                            return {
+                                results: data
+                            };
+                        },
+                        cache: true
                     },
-                    cache: true
-                },
-                templateResult: function(data) {
-                    if (data.isNew) {
-                        return $('<span>Add New: ' + data.text + '</span>');
-                    }
-                    return data.text;
-                }
-            });
-
-            $('#mySelect2').on('select2:select', function(e) {
-                var data = e.params.data;
-                if (data.isNew) {
-                    $.ajax({
-                        url: '{{ route('admin.datamaster.kategori.storeKategori') }}',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            nama_kategori_sampah: data.text
-                        },
-                        success: function(response) {
-                            $('#mySelect2').append(new Option(response.text, response.id, false,
-                                true)).trigger('change');
-                        },
-                        error: function() {
-                            alert('Failed to add new category');
+                    templateResult: function(data) {
+                        if (data.isNew) {
+                            return $('<span>Add New: ' + data.text + '</span>');
                         }
-                    });
-                }
+                        return data.text;
+                    }
+                });
+
+                $('#mySelect2').on('select2:select', function(e) {
+                    var data = e.params.data;
+                    if (data.isNew) {
+                        $.ajax({
+                            url: '{{ route('admin.datamaster.kategori.storeKategori') }}',
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                nama_kategori_sampah: data.text
+                            },
+                            success: function(response) {
+                                $('#mySelect2').append(new Option(response.text,
+                                    response.id, false,
+                                    true)).trigger('change');
+                            },
+                            error: function() {
+                                alert('Failed to add new category');
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>
