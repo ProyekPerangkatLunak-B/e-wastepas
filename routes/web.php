@@ -233,3 +233,8 @@ Route::group([
         return view('mitra-kurir/registrasi/otp2');
     });
 
+    // forgot password
+    Route::get('/mitra-kurir/registrasi/forgot-password', function () {
+        return view('mitra-kurir/registrasi/forgot-password');
+    });
+
