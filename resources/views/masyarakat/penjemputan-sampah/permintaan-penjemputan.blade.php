@@ -31,7 +31,7 @@
                             </div>
                         </div>
 
-                        <!-- Pilih Daera -->
+                        <!-- Pilih Daerah -->
                         <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
                             <option value="">Pilih Daerah</option>
                             @foreach ($daerah as $d)
