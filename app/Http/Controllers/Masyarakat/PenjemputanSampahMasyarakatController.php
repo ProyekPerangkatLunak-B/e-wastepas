@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Masyarakat;
 
+use App\Models\Daerah;
+use App\Models\Dropbox;
 use App\Models\JenisSampah;
 use Illuminate\Http\Request;
 use App\Models\KategoriSampah;
@@ -22,10 +24,11 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function permintaan()
     {
-        $kategori = [];
-        $jenis = [];
-        $alamatDropbox = [];
-        return view('masyarakat.penjemputan-sampah.permintaan-penjemputan', compact('kategori', 'jenis', 'alamatDropbox'));
+        $kategori = KategoriSampah::all();
+        $jenis = JenisSampah::all();
+        $daerah = Daerah::all();
+        $dropbox = Dropbox::all();
+        return view('masyarakat.penjemputan-sampah.permintaan-penjemputan', compact('kategori', 'jenis', 'daerah', 'dropbox'));
     }
 
     public function melacak()
