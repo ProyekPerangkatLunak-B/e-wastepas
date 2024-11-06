@@ -50,38 +50,31 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Tambah Jenis Sampah</h2>
-            <h4 class="text-base font-normal ml-14">Silakan isi form berikut untuk menambah jenis sampah baru.</h4>
+            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Tambah Daerah</h2>
+            <h4 class="text-base font-normal ml-14">Silakan isi form berikut untuk menambah daerah baru.</h4>
 
             <div class="px-12 mt-4">
                 <form action="{{ route('admin.datamaster.jenis.store') }}" method="POST">
                     @csrf
                     <div class="mb-6">
-                        <label for="nama_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
-                            Sampah</label>
+                        <label for="nama_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama
+                            Dropbox</label>
                         <input type="text" name="nama_jenis_sampah" id="nama_jenis_sampah" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Jenis
-                            Sampah</label>
+                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Daerah</label>
                         <select name="status_dropbox" id="status_dropbox" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700">
-                            <option value="1">Sampah Elektronik Besar</option>
-                            <option value="0">Sampah Elektronik Kecil</option>
+                            <option value="">Dago</option>
+                            <option value="">Bandung Barat</option>
+                            <option value="">Lembang</option>
+                            <option value="">Kopo</option>
                         </select>
                     </div>
-
                     <div class="mb-6">
-                        <label for="deskripsi_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Deskripsi
-                            Jenis Sampah</label>
-                        <textarea name="deskripsi_jenis_sampah" id="deskripsi_jenis_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700 h-28"></textarea>
-                    </div>
-
-                    <div class="mb-6">
-                        <label for="poin" class="block text-sm font-medium text-gray-800 mb-1">Poin</label>
+                        <label for="poin" class="block text-sm font-medium text-gray-800 mb-1">Total Transaksi</label>
                         <input type="number" name="poin" id="poin" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>

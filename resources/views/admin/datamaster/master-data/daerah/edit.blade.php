@@ -50,46 +50,40 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Tambah Jenis Sampah</h2>
-            <h4 class="text-base font-normal ml-14">Silakan isi form berikut untuk menambah jenis sampah baru.</h4>
+            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Edit Daerah</h2>
+            <h4 class="text-base font-normal ml-14">Silakan ubah data berikut untuk memperbarui daerah.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.jenis.store') }}" method="POST">
+                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_kategori_sampah) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="mb-6">
-                        <label for="nama_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
-                            Sampah</label>
+                        <label for="nama_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama
+                            Dropbox</label>
                         <input type="text" name="nama_jenis_sampah" id="nama_jenis_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700"
+                            value="{{ $jenisSampah->nama_jenis_sampah }}" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Jenis
-                            Sampah</label>
-                        <select name="status_dropbox" id="status_dropbox" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700">
-                            <option value="1">Sampah Elektronik Besar</option>
-                            <option value="0">Sampah Elektronik Kecil</option>
+                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Daerah</label>
+                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori_sampah">
+                            <option value="{{ $jenisSampah->id_kategori_sampah }}" selected>
+                                {{ $jenisSampah->kategoriSampah->nama_kategori_sampah }}</option>
                         </select>
                     </div>
 
                     <div class="mb-6">
-                        <label for="deskripsi_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Deskripsi
-                            Jenis Sampah</label>
-                        <textarea name="deskripsi_jenis_sampah" id="deskripsi_jenis_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700 h-28"></textarea>
-                    </div>
-
-                    <div class="mb-6">
-                        <label for="poin" class="block text-sm font-medium text-gray-800 mb-1">Poin</label>
+                        <label for="poin" class="block text-sm font-medium text-gray-800 mb-1">Total Transaksi</label>
                         <input type="number" name="poin" id="poin" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700"
+                            value="{{ $jenisSampah->poin }}" />
                     </div>
 
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
                             class="px-6 py-2 bg-gradient-to-r from-green-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Simpan
+                            <i class="fas fa-save mr-2"></i>Update
                         </button>
                     </div>
                 </form>
@@ -111,12 +105,12 @@
             $('#mySelect2').select2({
                 placeholder: 'Pilih Kategori Sampah',
                 allowClear: true,
-                tags: true, // Enable adding new options
+                tags: true,
                 createTag: function(params) {
                     return {
                         id: params.term,
                         text: params.term,
-                        isNew: true // Mark this option as new
+                        isNew: true
                     };
                 },
                 ajax: {
@@ -125,7 +119,7 @@
                     delay: 250,
                     data: function(params) {
                         return {
-                            term: params.term // search term
+                            term: params.term
                         };
                     },
                     processResults: function(data) {
@@ -143,16 +137,15 @@
                 }
             });
 
-            // Handle adding new data when submitted
             $('#mySelect2').on('select2:select', function(e) {
                 var data = e.params.data;
                 if (data.isNew) {
                     $.ajax({
-                        url: '{{ route('admin.datamaster.kategori.storeKategori') }}', // Define route for storing new data
+                        url: '{{ route('admin.datamaster.kategori.storeKategori') }}',
                         method: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}',
-                            nama_kategori_sampah: data.text // Send the new name as parameter
+                            nama_kategori_sampah: data.text
                         },
                         success: function(response) {
                             $('#mySelect2').append(new Option(response.text, response.id, false,

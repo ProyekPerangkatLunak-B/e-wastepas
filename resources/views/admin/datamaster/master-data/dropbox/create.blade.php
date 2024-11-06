@@ -12,7 +12,7 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #4a90e2;
+            border-bottom: 3px solid #27ae60    ;
             display: inline-block;
             padding-bottom: 5px;
         }

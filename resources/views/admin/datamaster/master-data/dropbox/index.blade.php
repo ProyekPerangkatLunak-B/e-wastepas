@@ -10,15 +10,15 @@
         }
 
         h2 {
-            color: #333;
+            color: #27ae60;
             margin-bottom: 15px;
-            border-bottom: 3px solid #4a90e2;
+            border-bottom: 3px solid #27ae60;
             display: inline-block;
             padding-bottom: 5px;
         }
 
         h4 {
-            color: #666;
+            color: #27ae60;
         }
 
         a.inline-block {
@@ -38,7 +38,7 @@
         }
 
         th {
-            background: linear-gradient(90deg, #007bff, #00c6ff);
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
             color: #ffffff;
             padding: 12px;
             text-transform: uppercase;
@@ -105,7 +105,7 @@
 
             <div class="flex justify-end px-12 mt-6" style="color: white">
                 <a href="{{ route('admin.datamaster.dropbox.create') }}"
-                    class="inline-block px-5 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg shadow hover:bg-gradient-to-r hover:from-teal-400 hover:to-blue-500 transition transform hover:-translate-y-1">
+                    class="inline-block px-5 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg shadow hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transition transform hover:-translate-y-1">
                     <i class="fas fa-plus mr-2"></i> Tambah Data
                 </a>
             </div>
@@ -131,13 +131,13 @@
                     <table id="dropboxTable" class="w-full border border-gray-300 bg-white rounded-lg">
                         <thead class="bg-gray-100">
                             <tr>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700">Nama Lokasi</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700">Alamat</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700">Status Dropbox
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Nama Lokasi</th>
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Alamat</th>
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Status Dropbox
                                 </th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700">Total Transaksi
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Total Transaksi
                                     Dropbox</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700">Aksi</th>
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
