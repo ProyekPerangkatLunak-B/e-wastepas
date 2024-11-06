@@ -24,7 +24,8 @@
             </div>
                 <div class="mx-auto max-w-md">
                 <form action="{{ route('masyarakat.password.email') }}" method="POST">
-                  <div>
+                @csrf
+                <div>
                     <label for="email" class="block mt-4 text-md font-medium leading-9 text-gray-500">Email</label>
                         <input
                             class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-gray-400 text-md focus:outline-none focus:border-green-900 focus:bg-white"
