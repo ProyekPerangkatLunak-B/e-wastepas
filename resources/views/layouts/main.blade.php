@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;400;600;800&display=swap" rel="stylesheet">
 
-    {{-- Link Load CSS --}}
+    {{-- Link Load CSS & JS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <title>E-WastePas</title>
@@ -35,22 +35,8 @@
     {{-- Main Content --}}
     @yield('content')
 
-    {{-- Modal Form Data --}}
-    <script>
-        function toggleModal(open) {
-            document.getElementById('modal-overlay').style.display = open ? 'flex' : 'none';
-        }
-
-        // Function to open the modal
-        function openModal() {
-            document.getElementById('alertModal').classList.remove('hidden');
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            document.getElementById('alertModal').classList.add('hidden');
-        }
-    </script>
+    {{-- Custom JS --}}
+    <script type="text/javascript" src="{{ asset('js/masyarakat/penjemputan-sampah/custom.js') }}"></script>
 
 </body>
 </html>

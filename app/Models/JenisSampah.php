@@ -18,4 +18,9 @@ class JenisSampah extends Model
         'deskripsi_jenis_sampah',
         'poin',
     ];
+
+    public function kategoriSampah()
+    {
+        return $this->belongsTo(KategoriSampah::class, 'id_kategori_sampah');
+    }
 }

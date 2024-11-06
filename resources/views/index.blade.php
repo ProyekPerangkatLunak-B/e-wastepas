@@ -14,7 +14,11 @@
           </div>
           <p class="mt-8 text-lg font-medium text-gray-500 text-pretty sm:text-xl/8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, quas?</p>
           <div class="flex items-center justify-center mt-10 gap-x-6">
-            @foreach (['masyarakat.login' => 'Masyarakat', 'mitra-kurir.login' => 'Mitra Kurir', 'admin.login.index' => 'Admin', 'manajemen.datamaster.dashboard.index' => 'Manajemen'] as $route => $label)
+            @foreach (['masyarakat.login' => 'Masyarakat',
+            'mitra-kurir.login' => 'Mitra Kurir',
+            'admin.login.index' => 'Admin',
+            'manajemen.datamaster.dashboard.index' => 'Manajemen']
+            as $route => $label)
               <a href="{{ route($route) }}" class="rounded-md bg-secondary-normal px-6 py-2.5 text-lg font-semibold text-white-normal shadow-sm hover:bg-secondary-400 hover:scale-105 transition transform duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-normal">
                 {{ $label }}
               </a>

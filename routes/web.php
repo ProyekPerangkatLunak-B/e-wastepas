@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Models\User;
 use App\Models\UserOTP;
 use Illuminate\Http\Request;
@@ -8,6 +9,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
+use App\Http\Controllers\Admin\DropboxAdminController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
@@ -59,6 +61,7 @@ Route::group([
         return view('admin.datamaster.auth.otp.index');
     })->name('otp.index');
 
+    // kategori sampah
     Route::resource('datamaster/master-data/kategori', KategoriSampahAdminController::class)->names([
         'index' => 'datamaster.kategori.index',
         'create' => 'datamaster.kategori.create',
@@ -70,6 +73,34 @@ Route::group([
     ]);
 
     Route::get('datamaster/kategori/data', [KategoriSampahAdminController::class, 'getKategoriData'])->name('datamaster.kategori.data');
+    Route::get('datamaster/kategori/search', [KategoriSampahAdminController::class, 'search'])->name('datamaster.kategori.search');
+    Route::post('datamaster/kategori/storeKategori', [KategoriSampahAdminController::class, 'storeKategori'])->name('datamaster.kategori.storeKategori');
+    
+    // jenis sampah
+    Route::resource('datamaster/master-data/jenis', JenisSampahAdminController::class)->names([
+        'index' => 'datamaster.jenis.index',
+        'create' => 'datamaster.jenis.create',
+        'store' => 'datamaster.jenis.store',
+        'show' => 'datamaster.jenis.show',
+        'edit' => 'datamaster.jenis.edit',
+        'update' => 'datamaster.jenis.update',
+        'destroy' => 'datamaster.jenis.destroy',
+    ]);
+
+    Route::get('datamaster/jenis/data', [JenisSampahAdminController::class, 'getJenisSampahData'])->name('datamaster.jenis.data');
+
+    // dropbox
+    Route::resource('datamaster/master-data/dropbox', DropboxAdminController::class)->names([
+        'index' => 'datamaster.dropbox.index',
+        'create' => 'datamaster.dropbox.create',
+        'store' => 'datamaster.dropbox.store',
+        'show' => 'datamaster.dropbox.show',
+        'edit' => 'datamaster.dropbox.edit',
+        'update' => 'datamaster.dropbox.update',
+        'destroy' => 'datamaster.dropbox.destroy',
+    ]);
+
+    Route::get('datamaster/dropbox/data', [DropboxAdminController::class, 'getDropboxData'])->name('datamaster.dropbox.data');
 });
 
 
@@ -122,6 +153,8 @@ Route::group([
     })->name('otp');
 
     Route::post('otp', [RegistrasiMasyarakatController::class, 'verifyOtp'])->name('otp.verify');
+    //rute otp ke email
+    Route::post('otp/confirm', [RegistrasiMasyarakatController::class, 'confirmOtp'])->name('otp.confirm');
 
 
     Route::get('/forgot-password', function () {
@@ -194,11 +227,6 @@ Route::group([
 
     // rute login mitra kurir
     Route::post('/mitra-kurir/registrasi/login', [RegistrasiMitraKurirController::class, 'login'])->name('mitra-kurir.login');
-
-    // rute document-upload mitra kurir
-    Route::get('/mitra-kurir/registrasi/document-upload', function () {
-        return view('mitra-kurir/registrasi/document-upload');
-    });
 
     // rute otp
     Route::get('/mitra-kurir/registrasi/otp2', function () {
