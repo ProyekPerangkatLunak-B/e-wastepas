@@ -16,4 +16,9 @@ class Daerah extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function dropbox()
+    {
+        return $this->hasMany(Dropbox::class, 'id_daerah', 'id_daerah');
+    }
 }

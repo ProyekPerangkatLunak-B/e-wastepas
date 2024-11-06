@@ -115,6 +115,10 @@ Route::group([
     ]);
 
     Route::get('datamaster/daerah/data', [DaerahAdminController::class, 'getDaerahData'])->name('datamaster.daerah.data');
+    //search
+    Route::get('datamaster/daerah/search', [DaerahAdminController::class, 'search'])->name('datamaster.daerah.search');
+    //store daerah
+    Route::post('datamaster/daerah/storeDaerah', [DaerahAdminController::class, 'storeDaerah'])->name('datamaster.daerah.storeDaerah');
 });
 
 

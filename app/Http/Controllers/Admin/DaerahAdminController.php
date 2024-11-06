@@ -16,11 +16,10 @@ class DaerahAdminController extends Controller
         return view('admin.datamaster.master-data.daerah.index', compact('daerah'));
     }
 
-
     public function getDaerahData()
     {
         try {
-            $daerah = Daerah::select(['id_daerah','nama_daerah', 'status_daerah', 'total_dropbox']);
+            $daerah = Daerah::select(['id_daerah', 'nama_daerah', 'status_daerah', 'total_dropbox']);
             return DataTablesDataTables::of($daerah)
                 ->addColumn('action', function ($row) {
                     return '
@@ -38,6 +37,47 @@ class DaerahAdminController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    //search
+    public function search(Request $request)
+    {
+        $search = $request->input('term');
+
+        if (empty($search)) {
+            $daerah = Daerah::all(['id_daerah as id', 'nama_daerah as text']);
+        } else {
+            $daerah = Daerah::where('nama_daerah', 'LIKE', '%' . $search . '%')
+                ->get(['id_daerah as id', 'nama_daerah as text']);
+        }
+
+        return response()->json($daerah);
+    }
+
+    //store daerah
+    public function storeDaerah(Request $request)
+    {
+        $request->validate([
+            'nama_daerah' => 'required|string|max:255',
+        ]);
+
+        // Set default values for status_daerah and total_dropbox
+        $data = $request->all();
+        $data['status_daerah'] = 1; // Automatically set status_daerah to 1
+        $data['total_dropbox'] = 1; // Automatically set total_dropbox to 1
+
+        // Create the new Daerah record
+        $daerah = Daerah::create($data);
+
+        // Prepare response data
+        $response = [
+            'id' => $daerah->id_daerah,
+            'text' => $daerah->nama_daerah,
+            'status' => 'success',
+            'message' => 'Data berhasil ditambahkan.',
+        ];
+
+        return response()->json($response);
     }
 
 
