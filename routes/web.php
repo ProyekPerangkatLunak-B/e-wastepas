@@ -224,3 +224,15 @@ Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
     Route::get('/mitra-kurir/registrasi/otp2', function () {
         return view('mitra-kurir/registrasi/otp2');
     });
+
+    // forgot password
+    Route::get('/mitra-kurir/registrasi/forgot-password', function () {
+        return view('mitra-kurir/registrasi/forgot-password');
+    });
+
+    // reset password
+    Route::get('/mitra-kurir/registrasi/reset-password', function () {
+        return view('mitra-kurir/registrasi/reset-password');
+    });
+
+
