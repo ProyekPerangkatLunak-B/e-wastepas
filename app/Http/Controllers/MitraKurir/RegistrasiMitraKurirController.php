@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class RegistrasiMitraKurirController extends Controller
 {
-    public function index()
+    public function index() 
     {
         return view('mitra-kurir.registrasi.register');
     }
@@ -26,8 +26,7 @@ class RegistrasiMitraKurirController extends Controller
             'kata_sandi' => ['required']
         ]);
     
-        Log::info('Attempting login with:', ['email' => $credentials['email'], 'password' => $credentials['kata_sandi']]);
-
+  
 
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['kata_sandi']])) {
             $request->session()->regenerate();
