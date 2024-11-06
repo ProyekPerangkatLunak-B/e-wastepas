@@ -179,14 +179,14 @@
                             orderable: false,
                             render: function(data, type, row) {
                                 return `
-                            <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/kategori/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" style="color: white">
-                                    Edit
-                                </a>
-                                <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">
-                                    Hapus
-                                </button>
-                            </div>`;
+                                    <div class="flex space-x-2">
+                                        <a href="/admin/datamaster/master-data/kategori/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" style="color: white">
+                                            Edit
+                                        </a>
+                                        <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">
+                                            Hapus
+                                        </button>
+                                    </div>`;
                             }
                         }
                     ],
@@ -225,46 +225,46 @@
                     table.page(page).draw('page');
                 };
             });
-
-            function confirmDelete(id) {
-                Swal.fire({
-                    title: 'Apakah Anda yakin?',
-                    text: "Data ini akan dihapus secara permanen!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: `{{ route('admin.datamaster.kategori.destroy', '') }}/${id}`,
-                            type: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response) {
-                                Swal.fire(
-                                    'Dihapus!',
-                                    'Data berhasil dihapus.',
-                                    'success'
-                                );
-                                $('#kategoriTable').DataTable().ajax.reload();
-                            },
-                            error: function(xhr) {
-                                Swal.fire(
-                                    'Gagal!',
-                                    xhr.responseJSON && xhr.responseJSON.error ?
-                                    `Gagal menghapus data: ${xhr.responseJSON.error}` :
-                                    'Terjadi kesalahan saat menghapus data.',
-                                    'error'
-                                );
-                            }
-                        });
-                    }
-                });
-            }
         });
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data ini akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ route('admin.datamaster.kategori.destroy', '') }}/${id}`,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            Swal.fire(
+                                'Dihapus!',
+                                'Data berhasil dihapus.',
+                                'success'
+                            );
+                            $('#kategoriTable').DataTable().ajax.reload();
+                        },
+                        error: function(xhr) {
+                            Swal.fire(
+                                'Gagal!',
+                                xhr.responseJSON && xhr.responseJSON.error ?
+                                `Gagal menghapus data: ${xhr.responseJSON.error}` :
+                                'Terjadi kesalahan saat menghapus data.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endsection

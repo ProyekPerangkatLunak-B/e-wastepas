@@ -76,12 +76,21 @@ class KategoriSampahAdminController extends Controller
             'nama_kategori_sampah' => 'required|string|max:255|unique:kategori_sampah,nama_kategori_sampah'
         ]);
 
+        // Create the category
         $kategori = KategoriSampah::create([
             'nama_kategori_sampah' => $request->nama_kategori_sampah,
         ]);
 
-        return response()->json(['id' => $kategori->id, 'text' => $kategori->nama_kategori_sampah]);
+        // Prepare the response data
+        $response = [
+            'id' => $kategori->id_kategori_sampah,
+            'text' => $kategori->nama_kategori_sampah,
+        ];
+
+        // Return the JSON response
+        return response()->json($response);
     }
+
 
     public function edit($id)
     {
