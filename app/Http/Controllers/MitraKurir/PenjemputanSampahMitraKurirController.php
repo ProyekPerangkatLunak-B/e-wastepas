@@ -21,8 +21,8 @@ class PenjemputanSampahMitraKurirController extends Controller
     public function detailKategori($id)
     {
         $jenis = JenisSampah::where('id_kategori_sampah', $id)->paginate(6);
-        $namaKategori = KategoriSampah::where('nama_kategori_sampah');
-        return view('mitra-kurir.penjemputan-sampah.detail-kategori', compact('jenis'));
+        $kategori = KategoriSampah::find($id);
+        return view('mitra-kurir.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori'));
     }
     
     public function permintaan()
