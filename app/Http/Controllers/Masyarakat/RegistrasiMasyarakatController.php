@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Masyarakat;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pengguna;
 use App\Notifications\OtpMail;
 use Illuminate\Http\Request;
 use App\Models\Otp;
@@ -20,38 +21,40 @@ class RegistrasiMasyarakatController extends Controller
     }
 
     public function register(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8', // Menggunakan 'confirmed' jika ada konfirmasi password
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:pengguna,email',
+        'password' => 'required|string|min:8',
+    ]);
 
-        $otpCode = Str::random(6);
-        
-        // Buat entri OTP baru
-      otp::create([
-            'email' => $request->email,
-            'otp' => $otpCode,
-            'expires_at' => now()->addMinutes(10), // Set waktu kedaluwarsa
-        ]);
+    // Simpan pengguna di database
+    $pengguna = Pengguna::create([
+        'nama' => $request->name,
+        'email' => $request->email,
+        'kata_sandi' => Hash::make($request->password),
+    ]);
 
-        // Kirim email dengan OTP ke pengguna
-        Mail::raw("Your OTP code is: $otpCode", function ($message) use ($request) {
-            $message->to($request->email)->subject('OTP Verification');
-            // Email ini hanya akan dicatat di log
-        });
+    // Buat kode OTP
+    $otpCode = Str::random(6);
 
-        // Simpan data pendaftaran di session
-        $request->session()->put('register_data', [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), // Hash password
-        ]);
+    // Buat entri OTP dengan `id_pengguna`
+    Otp::create([
+        'id_pengguna' => $pengguna->id_pengguna, // Gunakan ID pengguna
+        'otp_token' => $otpCode,
+        'otp_kadaluarsa' => now()->addMinutes(10),
+        'otp_status' => 0, // Status awal OTP, misal 0 untuk belum diverifikasi
+    ]);
 
-        return redirect()->route('masyarakat.otp')->with('email', $request->email);
-    }
+    // Kirim email dengan OTP ke pengguna
+    Mail::raw("Your OTP code is: $otpCode", function ($message) use ($request) {
+        $message->to($request->email)->subject('OTP Verification');
+    });
+
+    return redirect()->route('masyarakat.otp')->with('email', $request->email);
+}
+
 
     public function showOtpForm()
     {
@@ -110,7 +113,7 @@ class RegistrasiMasyarakatController extends Controller
             // Kirim email dengan OTP ke pengguna
             Mail::to($request->email)->send(new OtpMail($OtpMail));
 
-        
+            return view('masyarakat.registrasi.verify_otp');
       
 
     }

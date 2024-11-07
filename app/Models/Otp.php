@@ -9,10 +9,14 @@ class Otp extends Model
 {
     use HasFactory;
 
+    // Pastikan deklarasi $table dan $fillable berada di baris terpisah dan tidak ada tanda koma di akhir deklarasi
+    protected $table = 'otp_cache';
+
     protected $fillable = [
         'email',
-        'otp', // Pastikan kolom ini ada dalam $fillable
+        'otp',
         'expires_at',
     ];
 }
+
 
