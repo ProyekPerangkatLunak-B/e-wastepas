@@ -21,7 +21,16 @@
 
     <title>E-WastePas</title>
 </head>
+<style>
+    .chart-container {
+    position: relative;
+}
+.label-top, .label-right, .label-bottom, .label-left {
+    font-size: 14px;
+    color: #333;
+}
 
+</style>
 <body>
 
     {{-- Header --}}

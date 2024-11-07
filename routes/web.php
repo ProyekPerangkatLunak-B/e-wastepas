@@ -133,6 +133,23 @@ Route::group([
         return view('manajemen.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
 
+    Route::get('datamaster/melacak-penjemputan', function () {
+        return view('manajemen.datamaster.melacak-penjemputan.index');
+    })->name('datamaster.melacak-penjemputan.index');
+
+    Route::get('datamaster/total-sampah', function () {
+        return view('manajemen.datamaster.total-sampah.index');
+    })->name('datamaster.total-sampah.index');
+
+    Route::get('datamaster/dashboard', function () {
+        return view('manajemen.datamaster.dashboard.index');
+    })->name('datamaster.dashboard.index');
+
+    Route::get('datamaster/dashboard', function () {
+        return view('manajemen.datamaster.dashboard.index');
+    })->name('datamaster.dashboard.index');
+    
+
     // Submodul Registrasi
     Route::get('forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('forgot-password', [RegistrasiManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
