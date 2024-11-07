@@ -38,22 +38,22 @@
                       </div>-->
 
                       <div class="grid grid-cols-6  mt-10 ms-6 gap-x-10 my-2">
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900 dark:text-gray-400"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900 dark:text-gray-400"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text  w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900 dark:text-gray-400"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text  w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900 dark:text-gray-400"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text  w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900 dark:text-gray-400"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-200 cursor-text dark:bg-gray-800 w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900 dark:text-gray-400"></span>
                         </div>
 
