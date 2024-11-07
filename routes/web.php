@@ -204,7 +204,7 @@ Route::group([
 });
 // Route Modul Mitra-kurir
 Route::group([
-    'prefix' => 'mitra-kurir',
+    'prefix' => 'mitra-kurir/',
     'as' => 'mitra-kurir.',
 ], function () {
 
@@ -254,5 +254,3 @@ Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
     Route::get('/mitra-kurir/registrasi/reset-password', function () {
         return view('mitra-kurir/registrasi/reset-password');
     });
-
-
