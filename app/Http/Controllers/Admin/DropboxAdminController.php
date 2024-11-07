@@ -57,14 +57,16 @@ class DropboxAdminController extends Controller
             'total_transaksi_dropbox' => 'nullable|integer',
         ]);
 
-        Dropbox::create($request->all());
+        $data = $request->all();
+        $data['dibuat_pada'] = now();
 
+        Dropbox::create($data);
         return redirect()->route('admin.datamaster.dropbox.index')->with('success', 'Data berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
-        $dropbox = Dropbox::findOrFail($id);
+        $dropbox = Dropbox::with('daerah')->findOrFail($id);
         return view('admin.datamaster.master-data.dropbox.edit', compact('dropbox'));
     }
 

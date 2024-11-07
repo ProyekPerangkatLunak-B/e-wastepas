@@ -12,7 +12,7 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #4a90e2;
+            border-bottom: 3px solid #27ae60;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -58,8 +58,7 @@
                     @csrf
                     <div class="mb-6">
                         <label for="id_daerah" class="block text-sm font-medium text-gray-800 mb-1">ID Daerah</label>
-                        <input type="number" name="id_daerah" id="id_daerah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+                        <select id="idDaerahSelect" class="w-full" style="width: 100%" name="id_daerah" required></select>
                     </div>
 
                     <div class="mb-6">
@@ -93,7 +92,7 @@
 
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-blue-500 shadow-md transition transform hover:-translate-y-1">
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
                             <i class="fas fa-save mr-2"></i>Simpan
                         </button>
                     </div>
@@ -101,4 +100,69 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $(document).ready(function() {
+                $('#idDaerahSelect').select2({
+                    placeholder: 'Pilih Daerah',
+                    allowClear: true,
+                    tags: true,
+                    createTag: function(params) {
+                        return {
+                            id: params.term,
+                            text: params.term,
+                            isNew: true
+                        };
+                    },
+                    ajax: {
+                        url: '{{ route('admin.datamaster.daerah.search') }}',
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                term: params.term
+                            };
+                        },
+                        processResults: function(data) {
+                            return {
+                                results: data
+                            };
+                        },
+                        cache: true
+                    },
+                    templateResult: function(data) {
+                        if (data.isNew) {
+                            return $('<span>Add New: ' + data.text + '</span>');
+                        }
+                        return data.text;
+                    }
+                });
+
+                $('#idDaerahSelect').on('select2:select', function(e) {
+                    var data = e.params.data;
+                    if (data.isNew) {
+                        $.ajax({
+                            url: '{{ route('admin.datamaster.daerah.storeDaerah') }}',
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                nama_daerah: data.text
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                let newOption = new Option(response.text, response.id,
+                                    true, true);
+                                $('#idDaerahSelect').append(newOption).trigger(
+                                'change');
+                            },
+                            error: function() {
+                                alert('Failed to add new region');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

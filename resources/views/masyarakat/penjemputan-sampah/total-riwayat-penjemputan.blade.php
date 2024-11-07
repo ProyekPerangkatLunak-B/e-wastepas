@@ -43,8 +43,8 @@
 
         <!-- Button Batalkan Penjemputan -->
         <a href="{{ route('masyarakat.penjemputan.riwayat') }}"
-           class="flex items-center justify-center w-[200px] h-[50px] px-4 py-2 text-white-normal transition duration-300 bg-secondary-normal hover:bg-secondary-400 rounded-2xl shadow-md">
-            Lihat selengkapnya ...
+           class="flex items-center justify-center w-[220px] h-[50px] px-4 py-2 text-black-normal transition duration-300 bg-secondary-200 hover:bg-secondary-300 rounded-2xl shadow-md border border-secondary-normal">
+            Tampilan lebih banyak
         </a>
     </div>
 
