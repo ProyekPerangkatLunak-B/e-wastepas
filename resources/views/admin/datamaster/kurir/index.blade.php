@@ -12,11 +12,11 @@
                 <table class="min-w-full bg-white border rounded-lg">
                     <thead class="bg-gray-300">
                         <tr>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Nama</th>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Email</th>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Jenis Kendaraan</th>
-                            <th class="px-4 py-2 border-b text-left text-gray-600">Status Registrasi</th>
-                            <th class="px-9 py-2 border-b text-left text-gray-600">Aksi</th>
+                            <th class="px-4 py-2 text-left text-gray-600 border-b">Nama</th>
+                            <th class="px-4 py-2 text-left text-gray-600 border-b">Email</th>
+                            <th class="px-4 py-2 text-left text-gray-600 border-b">Jenis Kendaraan</th>
+                            <th class="px-4 py-2 text-left text-gray-600 border-b">Status Registrasi</th>
+                            <th class="py-2 text-left text-gray-600 border-b px-9">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,22 +25,22 @@
                             <td class="px-4 py-2 border-b">johndoe@example.com</td>
                             <td class="px-4 py-2 border-b">Mobil</td>
                             <td class="px-4 py-2 border-b">
-                                <span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                                <span class="px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">
                                     Terverifikasi
                                 </span>
                             </td>
                             <td class="px-4 py-2 border-b">
                                 <div class="flex items-center space-x-4">
                                     <button onclick="viewDetails()"
-                                        class="px-2 py-1 bg-blue-500 rounded hover:bg-blue-700 shadow">
+                                        class="px-2 py-1 bg-blue-500 rounded shadow hover:bg-blue-700">
                                         <i class="fas fa-file" style="color: white"></i>
                                     </button>
                                     <button onclick="confirmRegistration()"
-                                        class="px-2 py-1 bg-green-500 rounded hover:bg-green-700 shadow">
+                                        class="px-2 py-1 bg-green-500 rounded shadow hover:bg-green-700">
                                         <i class="fas fa-check" style="color: white"></i>
                                     </button>
                                     <button onclick="confirmDelete()"
-                                        class="px-2 py-1 bg-red-500 rounded hover:bg-red-700 shadow">
+                                        class="px-2 py-1 bg-red-500 rounded shadow hover:bg-red-700">
                                         <i class="fas fa-trash" style="color: white"></i>
                                     </button>
 
