@@ -271,3 +271,14 @@ Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
     Route::get('/mitra-kurir/registrasi/reset-password', function () {
         return view('mitra-kurir/registrasi/reset-password');
     });
+
+    // syarat & ketentuan
+    Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
+        return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+    })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+
+    // upload dokumen
+    Route::get('/mitra-kurir/registrasi/document-upload', function () {
+        return view('/mitra-kurir/registrasi/document-upload');
+    })->name('/mitra-kurir/registrasi/document-upload');
+
