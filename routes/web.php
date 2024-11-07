@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\JenisSampahAdminController;
+use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Models\User;
 use App\Models\UserOTP;
 use Illuminate\Http\Request;
@@ -102,6 +103,23 @@ Route::group([
     ]);
 
     Route::get('datamaster/dropbox/data', [DropboxAdminController::class, 'getDropboxData'])->name('datamaster.dropbox.data');
+
+    // daerah
+    Route::resource('datamaster/master-data/daerah', DaerahAdminController::class)->names([
+        'index' => 'datamaster.daerah.index',
+        'create' => 'datamaster.daerah.create',
+        'store' => 'datamaster.daerah.store',
+        'show' => 'datamaster.daerah.show',
+        'edit' => 'datamaster.daerah.edit',
+        'update' => 'datamaster.daerah.update',
+        'destroy' => 'datamaster.daerah.destroy',
+    ]);
+
+    Route::get('datamaster/daerah/data', [DaerahAdminController::class, 'getDaerahData'])->name('datamaster.daerah.data');
+    //search
+    Route::get('datamaster/daerah/search', [DaerahAdminController::class, 'search'])->name('datamaster.daerah.search');
+    //store daerah
+    Route::post('datamaster/daerah/storeDaerah', [DaerahAdminController::class, 'storeDaerah'])->name('datamaster.daerah.storeDaerah');
 });
 
 
@@ -115,6 +133,23 @@ Route::group([
     Route::get('datamaster/dashboard', function () {
         return view('manajemen.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
+
+    Route::get('datamaster/melacak-penjemputan', function () {
+        return view('manajemen.datamaster.melacak-penjemputan.index');
+    })->name('datamaster.melacak-penjemputan.index');
+
+    Route::get('datamaster/total-sampah', function () {
+        return view('manajemen.datamaster.total-sampah.index');
+    })->name('datamaster.total-sampah.index');
+
+    Route::get('datamaster/dashboard', function () {
+        return view('manajemen.datamaster.dashboard.index');
+    })->name('datamaster.dashboard.index');
+
+    Route::get('datamaster/dashboard', function () {
+        return view('manajemen.datamaster.dashboard.index');
+    })->name('datamaster.dashboard.index');
+    
 
     // Submodul Registrasi
     Route::get('forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
@@ -189,7 +224,7 @@ Route::group([
 });
 // Route Modul Mitra-kurir
 Route::group([
-    'prefix' => 'mitra-kurir',
+    'prefix' => 'mitra-kurir/',
     'as' => 'mitra-kurir.',
 ], function () {
 
@@ -230,10 +265,21 @@ Route::get('/mitra-kurir/registrasi/otp2', function () {
     return view('mitra-kurir/registrasi/otp2');
 });
 
+
 // forgot password
-Route::get('/mitra-kurir/registrasi/forgot-password', function () {
-    return view('mitra-kurir/registrasi/forgot-password');
-});
+    Route::get('/mitra-kurir/registrasi/forgot-password', function () {
+        return view('mitra-kurir/registrasi/forgot-password');
+    });
+
+    // syarat & ketentuan
+    Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
+        return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+    })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+
+    // upload dokumen
+    Route::get('/mitra-kurir/registrasi/document-upload', function () {
+        return view('/mitra-kurir/registrasi/document-upload');
+    })->name('/mitra-kurir/registrasi/document-upload');
 
 // reset password
 Route::get('/mitra-kurir/registrasi/reset-password', function () {

@@ -18,9 +18,8 @@ class Dropbox extends Model
         'alamat',
         'status_dropbox',
         'total_transaksi_dropbox',
-        'dibuat_pada',
-        'diperbarui_pada',
     ];
+
 
     // Menyesuaikan nama kolom timestamp
     const CREATED_AT = 'dibuat_pada';
@@ -30,4 +29,4 @@ class Dropbox extends Model
     {
         return $this->belongsTo(Daerah::class, 'id_daerah');
     }
-}
+

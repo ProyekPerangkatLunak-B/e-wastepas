@@ -42,9 +42,7 @@
                         name="email"
                         id="email"
                         required
-                        class="w-full px-4 py-2.5 border border-green-500 rounded-2xl 
-                               focus:ring-2 focus:ring-green-500 focus:border-green-500 
-                               outline-none transition-colors"
+                        class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none  focus:bg-white"
                         placeholder="Email"
                     >
                 </div>
@@ -56,8 +54,8 @@
                 type="button"
                 onclick="showVerificationModal()"
                 class="w-full sm:w-32 float-right
-                       bg-primary-normal text-[#FFFFFF] py-2 px-4 rounded-md 
-                       hover:bg-secondary-normal transition-all duration-300 ease-in-out 
+                       bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
+                       hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
                         transform hover:scale-105 !important text-sm sm:text-base"
             >
                 Kirim
@@ -83,7 +81,7 @@
         </div>
         <div class="text-center mt-3 sm:mt-4">
             <p class="text-gray-600 text-sm sm:text-base">Tidak menerima email? 
-            <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Kirim Email</a></p> 
+            <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Kirim Ulang</a></p> 
         </div>
     </div>
 </div>
