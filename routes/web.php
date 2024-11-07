@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Admin\JenisSampahAdminController;
+use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Models\User;
 use App\Models\UserOTP;
 use Illuminate\Http\Request;
@@ -75,7 +76,7 @@ Route::group([
     Route::get('datamaster/kategori/data', [KategoriSampahAdminController::class, 'getKategoriData'])->name('datamaster.kategori.data');
     Route::get('datamaster/kategori/search', [KategoriSampahAdminController::class, 'search'])->name('datamaster.kategori.search');
     Route::post('datamaster/kategori/storeKategori', [KategoriSampahAdminController::class, 'storeKategori'])->name('datamaster.kategori.storeKategori');
-    
+
     // jenis sampah
     Route::resource('datamaster/master-data/jenis', JenisSampahAdminController::class)->names([
         'index' => 'datamaster.jenis.index',
@@ -101,6 +102,23 @@ Route::group([
     ]);
 
     Route::get('datamaster/dropbox/data', [DropboxAdminController::class, 'getDropboxData'])->name('datamaster.dropbox.data');
+
+    // daerah
+    Route::resource('datamaster/master-data/daerah', DaerahAdminController::class)->names([
+        'index' => 'datamaster.daerah.index',
+        'create' => 'datamaster.daerah.create',
+        'store' => 'datamaster.daerah.store',
+        'show' => 'datamaster.daerah.show',
+        'edit' => 'datamaster.daerah.edit',
+        'update' => 'datamaster.daerah.update',
+        'destroy' => 'datamaster.daerah.destroy',
+    ]);
+
+    Route::get('datamaster/daerah/data', [DaerahAdminController::class, 'getDaerahData'])->name('datamaster.daerah.data');
+    //search
+    Route::get('datamaster/daerah/search', [DaerahAdminController::class, 'search'])->name('datamaster.daerah.search');
+    //store daerah
+    Route::post('datamaster/daerah/storeDaerah', [DaerahAdminController::class, 'storeDaerah'])->name('datamaster.daerah.storeDaerah');
 });
 
 

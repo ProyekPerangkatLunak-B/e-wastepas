@@ -64,12 +64,9 @@
                     </div>
 
                     <div class="mb-6">
-                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Jenis
+                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Kategori
                             Sampah</label>
-                        <select name="status_dropbox" id="status_dropbox" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700">
-                            <option value="1">Sampah Elektronik Besar</option>
-                            <option value="0">Sampah Elektronik Kecil</option>
+                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori_sampah">
                         </select>
                     </div>
 
