@@ -30,3 +30,4 @@ class Dropbox extends Model
         return $this->belongsTo(Daerah::class, 'id_daerah');
     }
 
+}
