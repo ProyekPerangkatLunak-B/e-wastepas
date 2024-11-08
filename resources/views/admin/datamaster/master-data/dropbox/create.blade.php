@@ -58,8 +58,7 @@
                     @csrf
                     <div class="mb-6">
                         <label for="id_daerah" class="block text-sm font-medium text-gray-800 mb-1">ID Daerah</label>
-                        <input type="number" name="id_daerah" id="id_daerah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+                        <select id="idDaerahSelect" class="w-full" style="width: 100%" name="id_daerah" required></select>
                     </div>
 
                     <div class="mb-6">
@@ -101,4 +100,69 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $(document).ready(function() {
+                $('#idDaerahSelect').select2({
+                    placeholder: 'Pilih Daerah',
+                    allowClear: true,
+                    tags: true,
+                    createTag: function(params) {
+                        return {
+                            id: params.term,
+                            text: params.term,
+                            isNew: true
+                        };
+                    },
+                    ajax: {
+                        url: '{{ route('admin.datamaster.daerah.search') }}',
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                term: params.term
+                            };
+                        },
+                        processResults: function(data) {
+                            return {
+                                results: data
+                            };
+                        },
+                        cache: true
+                    },
+                    templateResult: function(data) {
+                        if (data.isNew) {
+                            return $('<span>Add New: ' + data.text + '</span>');
+                        }
+                        return data.text;
+                    }
+                });
+
+                $('#idDaerahSelect').on('select2:select', function(e) {
+                    var data = e.params.data;
+                    if (data.isNew) {
+                        $.ajax({
+                            url: '{{ route('admin.datamaster.daerah.storeDaerah') }}',
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                nama_daerah: data.text
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                let newOption = new Option(response.text, response.id,
+                                    true, true);
+                                $('#idDaerahSelect').append(newOption).trigger(
+                                'change');
+                            },
+                            error: function() {
+                                alert('Failed to add new region');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

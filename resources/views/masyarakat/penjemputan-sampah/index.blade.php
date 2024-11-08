@@ -8,7 +8,7 @@
                 <h4 class="text-base font-normal ml-14">Daftar semua modul masyarakat submodul penjemputan sampah.</h4>
             </div>
             {{-- Card Section --}}
-            <div class="grid grid-cols-1 gap-4 px-12 pb-6 mt-4 lg:grid-cols-3 lg:gap-4">
+            <div class="grid grid-cols-3 gap-6 px-12 pb-6 mt-4 lg:grid-cols-3 lg:gap-6">
                 <x-index-card
                     title="Kategori Sampah Elektronik"
                     description="Jumlah Kategori sampah elektronik"

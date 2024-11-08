@@ -64,31 +64,33 @@
             </div>
 
             <div class="flex justify-end">
-                <button type="submit" class="px-6 py-2 bg-green-700 text-[#FFFFFF] rounded-md hover:bg-green-800 transition-colors">
+                <button type="submit" class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-colors">
                     Kirim Dokumen
                 </button>
             </div>
         </form>
 
         <!-- Success Modal -->
-        <div id="successModal" class="fixed inset-0 flex items-center justify-center z-50" style="display: none;">
-            <!-- Background overlay with opacity -->
-            <div class="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
-            
-            <div class="relative rounded-lg p-8 max-w-sm text-center z-10 shadow-lg" style="background-color: white; border: 1px solid black;" >
-                <p class="text-xl font-semibold">Selamat anda sudah berhasil mengunggah dokumen anda</p>
-                <div class="mt-4">
-                    <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="mx-auto h-16 w-16">
+        <div id="successModal" style="display: none; background: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; align-items: center; justify-content: center; z-index: 50;">
+            <div style="background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 400px; text-align: center; position: relative;">
+
+        <!-- Tombol Close -->
+        <button onclick="closeModal()" 
+        class="absolute top-3 right-3 hover:bg-gray-300 p-2 rounded-full transition-colors duration-300 ease-in-out transform hover:scale-105 z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </button>
+                <h2 class="text-lg font-bold mb-4">Selamat anda sudah berhasil mengunggah dokumen anda</h2>
+                <div class="flex justify-center mb-4">
+                    <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="w-32 sm:w-40 !important">
                 </div>
-                <p class="mt-4">Butuh Waktu 7x24 Jam Untuk Admin Memvalidasi</p>
-                <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-green-700 text-[#FFFFFF] rounded-md">Kembali ke Menu Utama</button>
-            </div>
+                <p class="text-gray-700 mt-4">Butuh Waktu 7x24 Jam Untuk Admin Memvalidasi</p>
+                <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">Kembali ke Menu Utama
+                </button> 
         </div>
     </div>
 </div>
 
 <script>
-    // Add drag and drop functionality
     const dropZones = document.querySelectorAll('.border-dashed');
     
     dropZones.forEach(zone => {
@@ -114,24 +116,31 @@
     });
 
     // Modal functionality
-    function openModal() {
+function openModal() {
     const modal = document.getElementById('successModal');
     modal.style.display = 'flex';
-    }
+}
 
-    function closeModal() {
-        const modal = document.getElementById('successModal');
-        modal.style.display = 'none';
-    }
+function closeModal() {
+    const modal = document.getElementById('successModal');
+    modal.style.display = 'none';
+}
 
-    // Handle form submission
-    function handleFormSubmission(event) {
-        event.preventDefault();
-        openModal();
-    }
+// Handle form submission
+function handleFormSubmission(event) {
+    event.preventDefault();
+    openModal();
+}
 
-    // Attach form submission handler
-    const form = document.querySelector('form');
-    form.addEventListener('submit', handleFormSubmission);
+const form = document.querySelector('form');
+form.addEventListener('submit', handleFormSubmission);
+
+// Close modal when clicking outside of it
+document.querySelector('#successModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+
 </script>
 @endsection

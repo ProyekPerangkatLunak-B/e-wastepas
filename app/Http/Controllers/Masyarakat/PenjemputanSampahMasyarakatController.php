@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Masyarakat;
 
 use App\Models\Daerah;
+use App\Models\Sampah;
 use App\Models\Dropbox;
 use App\Models\JenisSampah;
+use App\Models\Penjemputan;
 use Illuminate\Http\Request;
 use App\Models\KategoriSampah;
+use App\Models\DetailPenjemputan;
 use App\Http\Controllers\Controller;
+use PhpParser\Node\Stmt\TryCatch;
 
 class PenjemputanSampahMasyarakatController extends Controller
 {
@@ -31,10 +35,50 @@ class PenjemputanSampahMasyarakatController extends Controller
         return view('masyarakat.penjemputan-sampah.permintaan-penjemputan', compact('kategori', 'jenis', 'daerah', 'dropbox'));
     }
 
+    public function tambah(Request $request)
+    {
+        $request->validate([
+            // Validasi untuk sampah
+            'kategori' => 'required',
+            'jenis' => 'required',
+            'berat' => 'required',
+            // Validasi untuk penjemputan
+            'daerah' => 'required',
+            'dropbox' => 'required',
+            'alamat' => 'required',
+            'tanggal_penjemputan' => 'required',
+        ]);
+
+        try {
+            $penjemputan = new Penjemputan();
+            $penjemputan->id_pengguna = '1';
+            $penjemputan->id_dropbox = $request->dropbox;
+            $penjemputan->lokasi_penjemputan = $request->alamat;
+            $penjemputan->status_permintaan = 'Menunggu Konfirmasi';
+            $penjemputan->waktu_permintaan = $request->tanggal_penjemputan;
+            $penjemputan->save();
+
+            $sampah = new Sampah();
+            $sampah->id_kategori_sampah = $request->kategori;
+            $sampah->id_jenis_sampah = $request->jenis;
+            $sampah->deskripsi_sampah = $request->catatan;
+            $sampah->berat_sampah = $request->berat;
+            $sampah->save();
+
+            $detailPenjemputan = new DetailPenjemputan();
+            $detailPenjemputan->id_penjemputan = $penjemputan->id_penjemputan;
+            $detailPenjemputan->id_sampah = $sampah->id_sampah;
+            $detailPenjemputan->save();
+            return redirect()->route('masyarakat.penjemputan.melacak-penjemputan')->with('success', 'Permintaan penjemputan sampah berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return redirect()->route('masyarakat.penjemputan.index')->with('error', 'Permintaan penjemputan sampah gagal ditambahkan');
+        }
+    }
+
     public function melacak()
     {
-        $penjemputan = [];
-        return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
+        $detailPenjemputan = DetailPenjemputan::paginate(6);
+        return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('detailPenjemputan'));
     }
 
     public function detailKategori($id)

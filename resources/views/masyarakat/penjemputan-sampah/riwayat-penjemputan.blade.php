@@ -55,15 +55,15 @@
                         <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
                     </svg>
                 </div>
-            {{-- Button PDF dan XLSX(Excel) --}}
-            <a href="#"
-            class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-primary-lighten hover:bg-primary-200 rounded-2xl shadow-md">
-                XLSX
-            </a>
-            <a href="#"
-            class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-md">
-                PDF
-            </a>
+                {{-- Button PDF dan XLSX(Excel) --}}
+                <a href="#"
+                class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-primary-lighten hover:bg-primary-200 rounded-2xl shadow-md">
+                    XLSX
+                </a>
+                <a href="#"
+                class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-md">
+                    PDF
+                </a>
         </div>
     </div>
 
@@ -101,165 +101,6 @@
             </div>
         </a>
 
-        <!-- Card 2 -->
-        <a href="#" class="block">
-            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-between">
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
-                </div>
-
-                <!-- Isi Konten -->
-                <div class="flex items-center px-6 mt-4 space-x-4">
-                    <div class="pl-[10px]">
-                        <p class="text-2xl font-semibold">Rice Cooker</p>
-                        <p class="text-2xl font-semibold">Laptop</p>
-                        <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    {{-- Jumlah poin --}}
-                    <div class="absolute right-6 bottom-24">
-                        <div class="inline-block">
-                            <span class="mr-8 text-5xl font-bold leading-none text-black-normal">-</span>
-                            <span class="text-lg font-bold leading-none text-black-normal">Poin</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Status Button -->
-                <div class="absolute right-0 bottom-1.5">
-                    <span class="px-10 py-2 font-semibold text-gray-100 bg-red-normal text-md rounded-tl-3xl rounded-br-xl">Dibatalkan</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Card 3 -->
-        <a href="#" class="block">
-            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-between">
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
-                </div>
-
-                <!-- Isi Konten -->
-                <div class="flex items-center px-6 mt-4 space-x-4">
-                    <div class="pl-[10px]">
-                        <p class="text-2xl font-semibold">Rice Cooker</p>
-                        <p class="text-2xl font-semibold">Laptop</p>
-                        <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    {{-- Jumlah poin --}}
-                    <div class="flex items-center justify-center mb-10">
-                        <div class="inline-block">
-                            <span class="ml-4 text-6xl font-bold leading-none text-secondary-normal">+30</span>
-                            <span class="ml-4 text-lg font-bold leading-none text-black-normal">Poin</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Status Button -->
-                <div class="absolute right-0 bottom-1.5">
-                    <span class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">Sudah Sampai</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Card 4 -->
-        <a href="#" class="block">
-            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-between">
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
-                </div>
-
-                <!-- Isi Konten -->
-                <div class="flex items-center px-6 mt-4 space-x-4">
-                    <div class="pl-[10px]">
-                        <p class="text-2xl font-semibold">Rice Cooker</p>
-                        <p class="text-2xl font-semibold">Laptop</p>
-                        <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    {{-- Jumlah poin --}}
-                    <div class="flex items-center justify-center mb-10">
-                        <div class="inline-block">
-                            <span class="ml-4 text-6xl font-bold leading-none text-secondary-normal">+25</span>
-                            <span class="ml-4 text-lg font-bold leading-none text-black-normal">Poin</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Status Button -->
-                <div class="absolute right-0 bottom-1.5">
-                    <span class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">Sudah Sampai</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Card 5 -->
-        <a href="#" class="block">
-            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-between">
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
-                </div>
-
-                <!-- Isi Konten -->
-                <div class="flex items-center px-6 mt-4 space-x-4">
-                    <div class="pl-[10px]">
-                        <p class="text-2xl font-semibold">Rice Cooker</p>
-                        <p class="text-2xl font-semibold">Laptop</p>
-                        <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    {{-- Jumlah poin --}}
-                    <div class="absolute right-6 bottom-24">
-                        <div class="inline-block">
-                            <span class="mr-8 text-5xl font-bold leading-none text-black-normal">-</span>
-                            <span class="text-lg font-bold leading-none text-black-normal">Poin</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Status Button -->
-                <div class="absolute right-0 bottom-1.5">
-                    <span class="px-10 py-2 font-semibold text-gray-100 bg-red-normal text-md rounded-tl-3xl rounded-br-xl">Dibatalkan</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Card 6 -->
-        <a href="#" class="block">
-            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-between">
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
-                </div>
-
-                <!-- Isi Konten -->
-                <div class="flex items-center px-6 mt-4 space-x-4">
-                    <div class="pl-[10px]">
-                        <p class="text-2xl font-semibold">Rice Cooker</p>
-                        <p class="text-2xl font-semibold">Laptop</p>
-                        <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    {{-- Jumlah poin --}}
-                    <div class="flex items-center justify-center mb-10">
-                        <div class="inline-block">
-                            <span class="ml-4 text-6xl font-bold leading-none text-secondary-normal">+35</span>
-                            <span class="ml-4 text-lg font-bold leading-none text-black-normal">Poin</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Status Button -->
-                <div class="absolute right-0 bottom-1.5">
-                    <span class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">Sudah Sampai</span>
-                </div>
-            </div>
-        </a>
         {{-- Pagination --}}
         <div class="flex items-center justify-end mt-4">
             <div class="relative space-x-2 left-[58rem]">

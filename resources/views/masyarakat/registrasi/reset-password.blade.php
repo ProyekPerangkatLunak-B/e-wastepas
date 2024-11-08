@@ -3,7 +3,7 @@
 
 
 <div class="min-h-screen bg-white text-gray-900 flex justify-center item-center w-full">
-    <a href="./check-mail">
+    <a href="./login">
       <img src="../img/masyarakat/registrasi/back-button.png" class="mt-6 ms-8 w-6 h-6 " alt="Kembali">
     </a>
     <p class= "mt-6 ms-2">
@@ -26,17 +26,17 @@
                   <form action="#" method="POST">
                     <label for="password" class="block mt-4 text-md font-bold leading-9 text-gray-900">Password baru</label>
                     <input
-                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-sm focus:outline-none focus:border-gray-900 focus:bg-white"
+                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
                         type="password" placeholder="Enter your password" required name="password"/>
                     <label for="password" class="block mt-4 text-md font-bold leading-9 text-gray-900">Konfirmasi Password baru</label>
                     <input
-                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-400 text-sm focus:outline-none focus:border-gray-900 focus:bg-white"
-                        type="password"  placeholder="Enter your passwird" name="password"/>
+                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
+                        type="password"  placeholder="Enter your password" name="password"/>
               <!-- Button Submit
                   <button
                       class="mt-10 tracking-wide font-semibold bg-green-900  text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Simpan
                   </button> -->
-                  <button class=" focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-3 focus:ring-4 focus:ring-green-300 font-bold rounded-lg mt-8 text-base" onclick="openModal('modelConfirm')">
+                  <button class=" focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-3 font-bold rounded-lg mt-8 text-base" onclick="openModal('modelConfirm')">
                     Simpan
                  </button>
                  <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
@@ -57,7 +57,7 @@
                                 <img src="../img/masyarakat/registrasi/popup-reset.png" alt="" class="w-25 h-20 mx-auto flex justify-center">
                              <h3 class="text-md font-medium text-gray-500 mt-5 mb-6"> Sekarang Anda dapat masuk dengan kata sandi baru Anda. </h3>
                              <a href="#"  onclick="closeModal('modelConfirm')"
-                                 class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-3 focus:ring-4 focus:ring-green-300 font-bold rounded-lg items-center px-5 py-2.5 text-center mr-2">
+                                 class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l w-full py-3 font-bold rounded-lg items-center px-5 py-2.5 text-center mr-2">
                                  Kembali
                              </a>
                          </div>
