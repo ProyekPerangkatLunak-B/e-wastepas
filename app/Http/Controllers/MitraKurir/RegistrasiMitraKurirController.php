@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 
 class RegistrasiMitraKurirController extends Controller
 {
-    public function index() 
+    public function index()
     {
         return view('mitra-kurir.registrasi.register');
     }
@@ -25,8 +25,8 @@ class RegistrasiMitraKurirController extends Controller
             'email' => ['required', 'email'],
             'kata_sandi' => ['required']
         ]);
-    
-  
+
+
 
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['kata_sandi']])) {
             $request->session()->regenerate();
@@ -37,7 +37,7 @@ class RegistrasiMitraKurirController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-    
+
 
 
 
@@ -67,7 +67,7 @@ class RegistrasiMitraKurirController extends Controller
     $otp->user->tanggal_email_diverifikasi = Date::now();
     $otp->user->save();
     $otp->delete();
-    
+
     return redirect('mitra-kurir/registrasi/login');
     }
 
@@ -85,24 +85,24 @@ class RegistrasiMitraKurirController extends Controller
         try {
          $user = User::create([
                 'nama' => $validateData['nama'],
-                'nomor_ktp' => $validateData['KTP'], 
+                'nomor_ktp' => $validateData['KTP'],
                 'nomor_hp' => $validateData['NomorHP'],
                 'email' => $validateData['Email'],
                 'kata_sandi' => Hash::make($validateData['password']),
                 'tanggal_dibuat' => now()
             ]);
-            
+
             $otp = UserOTP::create([
                 'id_pengguna' => $user->id_pengguna,
                 'otp_token' => rand(1000,9999),
                 'otp_kadaluarsa' => Date::now()->addMinutes(5)
             ]);
 
-            
+
 
             $user->notify(new OtpMail($otp->otp_token));
-   
-            
+
+
             return redirect()->route('otp-verification', $user->id_pengguna);
 
         } catch (\Illuminate\Database\QueryException $e) {
