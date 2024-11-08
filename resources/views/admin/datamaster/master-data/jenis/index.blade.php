@@ -97,7 +97,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14">Dashboard jenis</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-green-500">Dashboard jenis</h2>
             <h4 class="text-base font-light ml-14 text-gray-600">Selamat datang di dashboard jenis.</h4>
 
             <div class="flex justify-end px-12 mt-6" style="color: white">
@@ -132,8 +132,6 @@
                                     style="color: white">Nama Jenis Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Nama Kategori Sampah</th>
-                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">Deskripsi Jenis Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Poin</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
@@ -175,12 +173,11 @@
                             name: 'kategori_sampah.nama_kategori_sampah'
                         },
                         {
-                            data: 'deskripsi_jenis_sampah',
-                            name: 'deskripsi_jenis_sampah'
-                        },
-                        {
                             data: 'poin',
-                            name: 'poin'
+                            name: 'poin',
+                            render: function(data) {
+                                return `<span class="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">${data}</span>`;
+                            }
                         },
                         {
                             data: 'id_jenis_sampah',

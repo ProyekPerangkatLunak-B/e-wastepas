@@ -100,7 +100,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14">Dashboard Dropbox</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-green-500">Dashboard Dropbox</h2>
             <h4 class="text-base font-light ml-14 text-gray-600">Selamat datang di dashboard Dropbox.</h4>
 
             <div class="flex justify-end px-12 mt-6" style="color: white">
@@ -133,10 +133,10 @@
                             <tr>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Nama Lokasi</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Alamat</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Status Dropbox
-                                </th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Total Transaksi
                                     Dropbox</th>
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Status Dropbox
+                                </th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Aksi</th>
                             </tr>
                         </thead>
@@ -177,12 +177,17 @@
                             name: 'alamat'
                         },
                         {
-                            data: 'status_dropbox',
-                            name: 'status_dropbox'
-                        },
-                        {
                             data: 'total_transaksi_dropbox',
                             name: 'total_transaksi_dropbox'
+                        },
+                        {
+                            data: 'status_dropbox',
+                            name: 'status_dropbox',
+                            render: function(data) {
+                                return data == 1 ?
+                                    '<span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">Aktif</span>' :
+                                    '<span class="px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">Tidak Aktif</span>';
+                            }
                         },
                         {
                             data: 'id_dropbox',
@@ -191,7 +196,7 @@
                             render: function(data, type, row) {
                                 return `
                             <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/dropbox/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-blue-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-500 transform hover:-translate-y-1 transition" style="color: white">
+                                <a href="/admin/datamaster/master-data/dropbox/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-500 transform hover:-translate-y-1 transition" style="color: white">
                                     Edit
                                 </a>
                                 <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">

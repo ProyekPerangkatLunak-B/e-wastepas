@@ -9,13 +9,11 @@ use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class DropboxAdminController extends Controller
 {
-
     public function index()
     {
         $dropbox = Dropbox::all();
         return view('admin.datamaster.master-data.dropbox.index', compact('dropbox'));
     }
-
 
     public function getDropboxData()
     {
@@ -39,8 +37,6 @@ class DropboxAdminController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
-
 
     public function create()
     {

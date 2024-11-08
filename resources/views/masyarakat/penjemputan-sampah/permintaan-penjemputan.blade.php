@@ -12,7 +12,7 @@
                 </p>
             </div>
             @if ($errors->any())
-                <div class="bg-red-normal p-4 rounded-lg mb-6 text-white-normal">
+                <div class="p-4 mb-6 rounded-lg bg-red-normal text-white-normal">
                     @foreach ($errors->all() as $error)
                         <p>{{ $error }}</p>
                     @endforeach
@@ -71,56 +71,6 @@
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
                         <div class="space-y-4 overflow-y-auto h-[500px]">
                             <!-- Card Sampah 1 -->
-                            <div
-                                class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-                                <div class="p-2 space-y-1">
-                                    <p class="font-semibold">Layar dan Monitor</p>
-                                    <p class="ml-48 text-sm text-center text-gray-500">Lorem ipsum dolor sit amet.</p>
-                                    <p class="font-semibold">Televisi</p>
-                                </div>
-                                <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
-                            </div>
-                            <!-- Card Sampah 2 -->
-                            <div
-                                class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-                                <div class="p-2 space-y-1">
-                                    <p class="font-semibold">Layar dan Monitor</p>
-                                    <p class="ml-48 text-sm text-center text-gray-500">Lorem ipsum dolor sit amet.</p>
-                                    <p class="font-semibold">Televisi</p>
-                                </div>
-                                <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
-                            </div>
-                            <!-- Card Sampah 3 -->
-                            <div
-                                class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-                                <div class="p-2 space-y-1">
-                                    <p class="font-semibold">Layar dan Monitor</p>
-                                    <p class="ml-48 text-sm text-center text-gray-500">Lorem ipsum dolor sit amet.</p>
-                                    <p class="font-semibold">Televisi</p>
-                                </div>
-                                <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
-                            </div>
-                            <!-- Card Sampah 4 -->
-                            <div
-                                class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-                                <div class="p-2 space-y-1">
-                                    <p class="font-semibold">Layar dan Monitor</p>
-                                    <p class="ml-48 text-sm text-center text-gray-500">Lorem ipsum dolor sit amet.</p>
-                                    <p class="font-semibold">Televisi</p>
-                                </div>
-                                <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
-                            </div>
-                            <!-- Card Sampah 5 -->
-                            <div
-                                class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-                                <div class="p-2 space-y-1">
-                                    <p class="font-semibold">Layar dan Monitor</p>
-                                    <p class="ml-48 text-sm text-center text-gray-500">Lorem ipsum dolor sit amet.</p>
-                                    <p class="font-semibold">Televisi</p>
-                                </div>
-                                <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
-                            </div>
-                            <!-- Card Sampah 6 -->
                             <div
                                 class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
                                 <div class="p-2 space-y-1">
