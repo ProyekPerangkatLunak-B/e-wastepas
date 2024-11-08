@@ -100,7 +100,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14">Dashboard Dropbox</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-green-500">Dashboard Dropbox</h2>
             <h4 class="text-base font-light ml-14 text-gray-600">Selamat datang di dashboard Dropbox.</h4>
 
             <div class="flex justify-end px-12 mt-6" style="color: white">
