@@ -196,7 +196,7 @@
                             render: function(data, type, row) {
                                 return `
                             <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/dropbox/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-blue-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-500 transform hover:-translate-y-1 transition" style="color: white">
+                                <a href="/admin/datamaster/master-data/dropbox/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-500 transform hover:-translate-y-1 transition" style="color: white">
                                     Edit
                                 </a>
                                 <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">
