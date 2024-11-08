@@ -43,7 +43,7 @@
 
             {{-- Card Section --}}
             <div class="flex justify-center mt-4">
-                <div class="grid grid-cols-1 gap-6 mr-36 lg:grid-cols-3 lg:gap-6 lg:w-[80%]">
+                <div class="grid grid-cols-3 gap-6 mx-auto">
                     @if (count($kategori) == 0)
                         <div class="flex justify-center ml-[500px] mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
                             <div class="text-center">

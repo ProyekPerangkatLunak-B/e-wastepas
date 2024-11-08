@@ -129,17 +129,13 @@
     <script>
         document.getElementById('openModalBtn').addEventListener('click', function () {
             document.getElementById('modal').classList.remove('hidden');
-            document.body.classList.add('overflow-hidden'); 
+            document.body.classList.add('overflow-hidden');
         });
 
         document.getElementById('closeModalBtn').addEventListener('click', function () {
             document.getElementById('modal').classList.add('hidden');
-            document.body.classList.remove('overflow-hidden'); 
+            document.body.classList.remove('overflow-hidden');
         });
     </script>
 @endsection
-@extends('main-mitrakurir')
 
-@section('content')
-
-@endsection
