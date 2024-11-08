@@ -133,10 +133,10 @@
                             <tr>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Nama Lokasi</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Alamat</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Status Dropbox
-                                </th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Total Transaksi
                                     Dropbox</th>
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Status Dropbox
+                                </th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Aksi</th>
                             </tr>
                         </thead>
@@ -177,12 +177,17 @@
                             name: 'alamat'
                         },
                         {
-                            data: 'status_dropbox',
-                            name: 'status_dropbox'
-                        },
-                        {
                             data: 'total_transaksi_dropbox',
                             name: 'total_transaksi_dropbox'
+                        },
+                        {
+                            data: 'status_dropbox',
+                            name: 'status_dropbox',
+                            render: function(data) {
+                                return data == 1 ?
+                                    '<span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">Aktif</span>' :
+                                    '<span class="px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">Tidak Aktif</span>';
+                            }
                         },
                         {
                             data: 'id_dropbox',

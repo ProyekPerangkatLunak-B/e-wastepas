@@ -66,13 +66,6 @@
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
-                    <div class="mb-6">
-                        <label for="deskripsi_kategori_sampah"
-                            class="block text-sm font-medium text-gray-800 mb-1">Deskripsi Kategori Sampah</label>
-                        <textarea name="deskripsi_kategori_sampah" id="deskripsi_kategori_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700 h-28">{{ $kategoriSampah->deskripsi_kategori_sampah }}</textarea>
-                    </div>
-
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
                             class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">

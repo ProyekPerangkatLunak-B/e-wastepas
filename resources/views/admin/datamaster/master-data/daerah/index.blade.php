@@ -132,9 +132,9 @@
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Nama Daerah</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Status Daerah
-                                </th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Total Dropbox
+                                </th>
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Status Daerah
                                 </th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Aksi</th>
                             </tr>
@@ -171,12 +171,17 @@
                             name: 'nama_daerah'
                         },
                         {
-                            data: 'status_daerah',
-                            name: 'status_daerah'
-                        },
-                        {
                             data: 'total_dropbox',
                             name: 'total_dropbox'
+                        },
+                        {
+                            data: 'status_daerah',
+                            name: 'status_daerah',
+                            render: function(data) {
+                                return data == 1 ?
+                                    '<span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">Aktif</span>' :
+                                    '<span class="px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">Tidak Aktif</span>';
+                            }
                         },
                         {
                             data: 'id_daerah',
