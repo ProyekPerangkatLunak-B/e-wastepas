@@ -13,8 +13,8 @@ class Daerah extends Model
         'nama_daerah',
         'status_daerah',
         'total_dropbox',
-        'created_at',
-        'updated_at'
+        // 'created_at',
+        // 'updated_at'
     ];
 
     public function dropbox()

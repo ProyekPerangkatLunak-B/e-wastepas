@@ -22,11 +22,11 @@ class Dropbox extends Model
 
 
     // Menyesuaikan nama kolom timestamp
-    const CREATED_AT = 'dibuat_pada';
-    const UPDATED_AT = 'diperbarui_pada';
+    // const CREATED_AT = 'dibuat_pada';
+    // const UPDATED_AT = 'diperbarui_pada';
 
     public function daerah()
     {
         return $this->belongsTo(Daerah::class, 'id_daerah');
     }
-
+}
