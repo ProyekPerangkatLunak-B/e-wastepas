@@ -11,13 +11,33 @@
                     elektronik.
                 </p>
             </div>
+
             @if ($errors->any())
-                <div class="p-4 mb-6 rounded-lg bg-red-normal text-white-normal">
+            <div id="error-message" class="p-4 mb-6 text-red-600 bg-red-100 border-l-4 border-red-600 rounded-lg shadow-lg">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <!-- Icon Error -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 9v2m0 4v.01m5.293-4.293l1.414 1.414a9 9 0 1 1-12.828 0L6.707 10.707a7.5 7.5 0 1 0 10.586 0z"></path>
+                        </svg>
+                        <p class="text-lg font-medium">Oops! Ada kesalahan pada data yang Anda masukkan.</p>
+                    </div>
+                    <!-- Dismiss Button -->
+                    <button id="dismiss-button" class="text-red-600 hover:text-red-800 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-2">
                     @foreach ($errors->all() as $error)
-                        <p>{{ $error }}</p>
+                        <p class="mt-2 text-sm leading-tight">{{ $error }}</p>
                     @endforeach
                 </div>
-            @endif
+            </div>
+        @endif
+
+
 
             <div class="w-[1380px] h-[800px] pb-2 shadow-lg bg-white-normal rounded-2xl">
                 <div class="grid grid-cols-1 gap-8 pt-5 mx-12 lg:grid-cols-2">
@@ -88,8 +108,8 @@
                 <!-- Tombol Kembali dan Kirim Permintaan -->
                 <div class="flex justify-end mt-8 mr-10 space-x-4">
                     <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Kembali</a>
-                    <button type="submit"
-                        class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
+                    <button type="button" id="submit-request"  name="submit" onclick="kirimKonfirmasi()"
+                    class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
                             class="mr-1 bi bi-send" viewBox="0 0 16 16">
                             <path
@@ -106,8 +126,6 @@
             <!-- Modal Content -->
             <div class="w-full max-w-lg p-6 transition-all duration-300 transform shadow-lg bg-white-normal rounded-2xl">
                 <h3 class="mb-4 text-lg font-semibold text-gray-700">Tambah Sampah</h3>
-                <form action="#" method="POST">
-                    @csrf
                     <div class="space-y-4">
                         <div>
                             <label for="kategori" class="block text-sm font-medium text-gray-700">Pilih Kategori</label>
@@ -150,7 +168,32 @@
                         <button type="button" onclick="toggleModal(false)"
                             class="px-4 py-2 text-white rounded-lg bg-secondary-200 hover:bg-secondary-normal">Tambah</button>
                     </div>
-                </form>
+            </div>
+        </div>
+
+        <!-- Modal Konfirmasi Kirim Permintaan -->
+        <div id="confirmModal" class="fixed inset-0 z-40 flex items-center justify-center hidden bg-gray-900 bg-opacity-50">
+            <div class="bg-white-normal w-[450px] p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-lg font-semibold text-gray-500 text-start">Notifikasi</h2>
+                {{-- Underline  --}}
+               <div id="underlineAlert" class="w-3/12 h-1 mt-2 mb-8 bg-gray-500"></div>
+                <h3 class="mb-4 text-lg font-semibold">Konfirmasi Pengiriman</h3>
+                <p class="mb-6">Apakah Anda yakin ingin mengirim permintaan penjemputan sampah?</p>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="cancelAddRequest()" class="px-4 py-2 w-[200px] h-[40px] bg-gray-300 rounded-xl hover:bg-gray-400">Batal</button>
+                    <button type="button" onclick="sendAddRequest()" class="px-4 py-2 w-[200px] h-[40px] bg-green-500 rounded-xl text-white-normal hover:bg-green-600">Kirim</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Notifikasi -->
+        <div id="alertModal" class="fixed inset-0 z-40 items-center justify-center hidden bg-gray-900 bg-opacity-50">
+            <div class="bg-white-normal w-[450px] p-6 mx-auto mt-96 rounded-lg shadow-lg text-center">
+                <h2 id="notifikasiAlert" class="text-lg font-semibold text-red-normal text-start">Notifikasi</h2>
+                {{-- Underline  --}}
+               <div id="underlineAlert" class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
+                <p id="alertMessage" class="mb-8 font-semibold"></p>
+                <button type="button" class="px-4 py-2 bg-secondary-normal rounded-xl w-[200px] h-[40px] text-white-normal hover:bg-secondary-300" id="closeAlertModal">OK</button>
             </div>
         </div>
     </form>
