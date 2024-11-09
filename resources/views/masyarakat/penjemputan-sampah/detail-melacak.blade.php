@@ -34,8 +34,8 @@
         </div>
 
         <!-- Button Batalkan Penjemputan -->
-        <a href="javascript:void(0);" onclick="openModal()" class="flex items-center justify-center w-[200px] h-[50px] px-4 py-2 text-gray-100 transition duration-300 bg-red-normal rounded-2xl shadow-md">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-2 bi bi-x-circle" viewBox="0 0 16 16">
+        <a href="javascript:void(0);" onclick="openModal()" class="flex items-center justify-center w-[200px] h-[50px] -mx-12 px-6 py-2 text-gray-100 transition duration-300 bg-red-normal rounded-2xl shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="mr-2 bi bi-x-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
             </svg>
