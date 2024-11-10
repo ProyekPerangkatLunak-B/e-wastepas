@@ -69,7 +69,7 @@ class PenjemputanSampahMasyarakatController extends Controller
             $detailPenjemputan->id_penjemputan = $penjemputan->id_penjemputan;
             $detailPenjemputan->id_sampah = $sampah->id_sampah;
             $detailPenjemputan->save();
-            return redirect()->route('masyarakat.penjemputan.melacak-penjemputan')->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
+            return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
         } catch (\Exception $e) {
             return redirect()->route('masyarakat.penjemputan.index')->with('error', 'Gagal Mengajukan Permintaan Penjemputan!');
         }
@@ -77,7 +77,7 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function melacak()
     {
-        $detailPenjemputan = DetailPenjemputan::paginate(6);
+        $detailPenjemputan = DetailPenjemputan::orderByDesc('created_at')->paginate(6);
         return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('detailPenjemputan'));
     }
 

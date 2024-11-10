@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fungsi untuk menutup modal alert
     function closeAlertModal() {
         alertModal.classList.add("hidden");
+        underlineAlert.classList.remove("bg-secondary-normal", "bg-red-normal");
     }
 
     // Fungsi untuk memperbarui class pada alert dan underline berdasarkan status
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         removeAlertClass(notifikasiAlert, underlineAlert);
         removeButtonClass(btnOk);
 
-        if (status === "success") {
+        if (status == "success") {
             // Status berhasil
             btnOk.classList.add(
                 "bg-secondary-normal",
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             notifikasiAlert.classList.remove("text-red-normal");
             underlineAlert.classList.add("bg-secondary-normal");
             underlineAlert.classList.remove("bg-red-normal");
-        } else if (status === "cancel") {
+        } else if (status == "cancel") {
             // Status gagal
             btnOk.classList.add("bg-red-normal", "hover:bg-red-400");
             btnOk.classList.remove(
