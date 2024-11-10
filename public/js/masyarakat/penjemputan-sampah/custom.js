@@ -17,6 +17,54 @@ document.addEventListener("DOMContentLoaded", function () {
     const notifikasiAlert = document.getElementById("notifikasiAlert");
     const underlineAlert = document.getElementById("underlineAlert");
 
+    // Tambah sampah ke dalam box
+    const boxSemuaSampah = document.getElementById("boxSemuaSampah");
+    const kategori = document.getElementById("kategori");
+    const jenis = document.getElementById("jenis");
+    const berat = document.getElementById("berat");
+    const catatan = document.getElementById("catatan");
+
+    window.tambahKeBox = function () {
+        if (kategori.value == "" || jenis.value == "" || berat.value == "") {
+            toggleModal(false);
+            return;
+        }
+        const box = `
+        <div class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
+            <input type="text" value="${
+                kategori.value
+            }" name="kategori[]" hidden>
+            <input type="text" value="${jenis.value}" name="jenis[]" hidden>
+            <input type="text" value="${berat.value}" name="berat[]" hidden>
+            <input type="text" value="${catatan.value}" name="catatan[]" hidden>
+            <div class="p-2 space-y-1">
+                <p class="font-semibold">${
+                    kategori.options[kategori.selectedIndex].text
+                }</p>
+                <p class="ml-48 text-sm text-center text-gray-500">${
+                    catatan.value
+                }</p>
+                <p class="font-semibold">${
+                    jenis.options[jenis.selectedIndex].text
+                }</p>
+            </div>
+            <p class="mr-6 text-xl font-bold text-secondary-normal">${
+                berat.value
+            }kg</p>
+        </div>
+                    `;
+        boxSemuaSampah.innerHTML += box;
+        resetInput();
+        toggleModal(false);
+    };
+
+    function resetInput() {
+        kategori.selectedIndex = 0;
+        jenis.selectedIndex = 0;
+        berat.value = "";
+        catatan.value = "";
+    }
+
     // Fungsi untuk membuka modal konfirmasi
     window.kirimKonfirmasi = function () {
         openConfirmationModal();

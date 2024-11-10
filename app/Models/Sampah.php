@@ -15,10 +15,15 @@ class Sampah extends Model
     protected $fillable = [
         'id_kategori_sampah',
         'id_jenis_sampah',
-        'nama_sampah',
+        'id_penjemputan',
         'deskripsi_sampah',
         'berat_sampah',
     ];
+
+    public function detailPenjemputan()
+    {
+        return $this->belongsto(DetailPenjemputan::class, 'id_penjemputan');
+    }
 
     public function kategori()
     {

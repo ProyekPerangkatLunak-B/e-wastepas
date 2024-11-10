@@ -95,7 +95,7 @@
                     <!-- Kolom Kanan: Daftar Sampah yang Dipilih -->
                     <div class="pt-8 space-y-4">
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
-                        <div class="space-y-4 overflow-y-auto h-[500px]">
+                        <div class="space-y-4 overflow-y-auto h-[500px]" id="boxSemuaSampah">
                             <!-- Card Sampah 1 -->
                             <div
                                 class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
@@ -135,9 +135,9 @@
                 <div class="space-y-4">
                     <div>
                         <label for="kategori" class="block text-sm font-medium text-gray-700">Pilih Kategori</label>
-                        <select id="kategori" name="kategori"
+                        <select id="kategori" name=""
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
-                            <option>Pilih Kategori</option>
+                            <option value="">Pilih Kategori</option>
                             @foreach ($kategori as $k)
                                 <option value="{{ $k->id_kategori_sampah }}">{{ $k->nama_kategori_sampah }}</option>
                             @endforeach
@@ -145,9 +145,9 @@
                     </div>
                     <div>
                         <label for="jenis" class="block text-sm font-medium text-gray-700">Pilih Jenis</label>
-                        <select id="jenis" name="jenis"
+                        <select id="jenis" name=""
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
-                            <option>Pilih Jenis</option>
+                            <option value="">Pilih Jenis</option>
                             @foreach ($jenis as $j)
                                 <option value="{{ $j->id_jenis_sampah }}">{{ $j->nama_jenis_sampah }}</option>
                             @endforeach
@@ -155,13 +155,13 @@
                     </div>
                     <div>
                         <label for="berat" class="block text-sm font-medium text-gray-700">Berat Sampah</label>
-                        <input id="berat" name="berat" type="number" step="0.01"
+                        <input id="berat" name="" type="number" step="0.01"
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             placeholder="0 Kg">
                     </div>
                     <div>
                         <label for="catatan" class="block text-sm font-medium text-gray-700">Catatan</label>
-                        <textarea id="catatan" name="catatan" rows="8"
+                        <textarea id="catatan" name="" rows="8"
                             class="block w-[460px] h-[170px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             placeholder="Catatan untuk barang"></textarea>
                         <p class="text-sm text-gray-500">*Catatan untuk barang yang akan dijemput</p>
@@ -171,7 +171,7 @@
                 <div class="flex justify-end mt-6 space-x-4">
                     <button type="button" onclick="toggleModal(false)"
                         class="px-4 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Batal</button>
-                    <button type="button" onclick="toggleModal(false)"
+                    <button type="button" onclick="tambahKeBox()"
                         class="px-4 py-2 text-white rounded-lg bg-secondary-200 hover:bg-secondary-normal">Tambah</button>
                 </div>
             </div>

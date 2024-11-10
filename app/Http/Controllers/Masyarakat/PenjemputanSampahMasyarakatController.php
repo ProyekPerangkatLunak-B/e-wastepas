@@ -58,17 +58,19 @@ class PenjemputanSampahMasyarakatController extends Controller
             $penjemputan->waktu_permintaan = $request->tanggal_penjemputan;
             $penjemputan->save();
 
-            $sampah = new Sampah();
-            $sampah->id_kategori_sampah = $request->kategori;
-            $sampah->id_jenis_sampah = $request->jenis;
-            $sampah->deskripsi_sampah = $request->catatan;
-            $sampah->berat_sampah = $request->berat;
-            $sampah->save();
+            foreach ($request->kategori as $key => $value) {
+                $sampah = new Sampah();
+                $sampah->id_kategori_sampah = $value;
+                $sampah->id_jenis_sampah = $request->jenis[$key];
+                $sampah->deskripsi_sampah = $request->catatan[$key];
+                $sampah->berat_sampah = $request->berat[$key];
+                $sampah->save();
 
-            $detailPenjemputan = new DetailPenjemputan();
-            $detailPenjemputan->id_penjemputan = $penjemputan->id_penjemputan;
-            $detailPenjemputan->id_sampah = $sampah->id_sampah;
-            $detailPenjemputan->save();
+                $detailPenjemputan = new DetailPenjemputan();
+                $detailPenjemputan->id_penjemputan = $penjemputan->id_penjemputan;
+                $detailPenjemputan->id_sampah = $sampah->id_sampah;
+                $detailPenjemputan->save();
+            }
             return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
         } catch (\Exception $e) {
             return redirect()->route('masyarakat.penjemputan.index')->with('error', 'Gagal Mengajukan Permintaan Penjemputan!');
@@ -77,8 +79,8 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function melacak()
     {
-        $detailPenjemputan = DetailPenjemputan::orderByDesc('created_at')->paginate(6);
-        return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('detailPenjemputan'));
+        $penjemputan = Penjemputan::orderByDesc('created_at')->paginate(6);
+        return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
     }
 
     public function detailKategori($id)

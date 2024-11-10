@@ -43,12 +43,12 @@
 
         <!-- Container Grid Card -->
         <div class="grid grid-cols-3 gap-8 mt-6">
-            @foreach ($detailPenjemputan as $p)
+            @foreach ($penjemputan as $p)
                 <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
                     <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
                         <div class="flex justify-between">
                             <span class="mx-6 my-2 text-lg font-bold text-gray-800">
-                                {{ $p->penjemputan->waktu_permintaan }}
+                                {{ $p->waktu_permintaan }}
                             </span>
                         </div>
 
@@ -56,8 +56,9 @@
                         <div class="flex px-6 mt-4 space-x-6">
                             <!-- Bagian Jenis dan Deskripsi Sampah -->
                             <div class="flex-grow my-4">
-                                <p class="text-2xl font-semibold">{{ $p->sampah->jenis->nama_jenis_sampah }}</p>
-                                <p class="mt-20 text-sm text-gray-500">{{ $p->sampah->deskripsi_sampah }}</p>
+                                @foreach ($p->sampah as $s)
+                                    <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis_sampah }}</p>
+                                @endforeach
                             </div>
                             <div class="flex flex-col items-center justify-between">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
@@ -66,7 +67,7 @@
                                 <div class="absolute right-0 bottom-1">
                                     <span
                                         class="px-4 py-2 font-semibold text-white-normal bg-tertiary-600 rounded-tl-3xl rounded-br-xl">
-                                        {{ $p->penjemputan->status_permintaan }}
+                                        {{ $p->status_permintaan }}
                                     </span>
                                 </div>
                             </div>
