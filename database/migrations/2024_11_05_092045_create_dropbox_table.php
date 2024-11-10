@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('alamat')->nullable();
             $table->tinyInteger('status_dropbox')->nullable();
             $table->integer('total_transaksi_dropbox')->nullable();
-            $table->timestamp('diperbarui_pada')->nullable();
             $table->timestamps();
         });
     }

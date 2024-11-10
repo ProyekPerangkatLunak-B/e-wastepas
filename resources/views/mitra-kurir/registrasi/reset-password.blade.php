@@ -44,8 +44,8 @@
                 type="button"
                 onclick="showVerificationModal()"
                 class="w-full sm:w-32 float-right
-                    bg-primary-normal text-[#FFFFFF] py-2 px-4 rounded-md 
-                    hover:bg-secondary-normal transition-all duration-300 ease-in-out 
+                    bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
+                    hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
                     transform hover:scale-105 text-sm sm:text-base"
             >
                 Kirim
@@ -69,7 +69,7 @@
             <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="w-32 sm:w-40 !important">
         </div>
         <p class="text-gray-700 mt-4">Sekarang Anda Bisa Log In Dengan Kata Sandi Baru.</p>
-        <button onclick="closeVerificationModal()" class="mt-6 px-4 py-2 bg-green-700 text-[#FFFFFF] rounded-md hover:bg-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">
+        <button onclick="closeVerificationModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">
             Kembali
         </button>
 

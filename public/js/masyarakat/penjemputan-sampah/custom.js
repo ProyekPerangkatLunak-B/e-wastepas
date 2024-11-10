@@ -15,3 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("alertModal").classList.add("hidden");
     };
 });
+
+// Select 2 untuk permintaan-penjemputan
+$(document).ready(function () {
+    $("select").select2();
+});

@@ -1,3 +1,3 @@
-<div>
-    <button type="{{ $type }}" style="color: white !important;" class="flex w-full justify-center rounded-lg bg-primary-normal mt-6 px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm hover:bg-secondary-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ $text }}</button>
+<div class="flex justify-center">
+    <button type="{{ $type }}" style="color: white !important;" class="flex w-3/4 justify-center rounded-lg bg-gradient-to-r from-green-500 to-green-700 mt-6 px-4 py-2 text-sm font-semibold leading-6 shadow-sm hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ $text }}</button>
 </div>

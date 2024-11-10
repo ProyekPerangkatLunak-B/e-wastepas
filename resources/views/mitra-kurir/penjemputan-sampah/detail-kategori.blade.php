@@ -3,9 +3,10 @@
 @section('content')
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
         <div class="py-8">
-            <h2 class="text-xl font-bold leading-relaxed ml-14">Sampah Elektronik {{ $namaKategori }}</h2>
+            
+            <h2 class="text-xl font-bold leading-relaxed ml-14">Sampah Elektronik {{ htmlspecialchars($kategori->nama_kategori_sampah) }}  </h2>
             <div class="flex items-center justify-between">
-                <h4 class="text-base font-normal ml-14 w-1/2">Daftar jenis sampah elektronik dari kategori {{ $namaKategori }} yang dapat dijemput</h4>
+                <h4 class="text-base font-normal ml-14 w-1/2">Daftar jenis sampah elektronik dari kategori {{ htmlspecialchars($kategori->nama_kategori_sampah) }}  yang dapat dijemput</h4>
 
                 {{-- Search and Filter options --}}
                 <div class="flex items-center space-x-4 mr-14">
@@ -34,11 +35,7 @@
             </div>
 
             {{-- Card Section --}}
-            @if (count($jenis == 0))
-                <div>
-                    Jenis {{ $search ?? 'Sampah Elektronik' }} tidak ditemukan.
-                </div>
-            @else
+
                 @foreach ($jenis as $jenisSampah)    
                     <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                         <x-card-detail
@@ -47,7 +44,6 @@
                             image="https://picsum.photos/700/700" />
                     </div>
                 @endforeach
-            @endif
             
             {{-- Pagination --}}
             <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
