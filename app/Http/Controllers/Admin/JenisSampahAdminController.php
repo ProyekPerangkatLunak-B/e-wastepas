@@ -58,7 +58,6 @@ class JenisSampahAdminController extends Controller
         $request->validate([
             'id_kategori_sampah' => 'required|integer',
             'nama_jenis_sampah' => 'required|string|max:255',
-            'deskripsi_jenis_sampah' => 'nullable|string',
             'poin' => 'required|integer',
         ]);
 
@@ -78,7 +77,6 @@ class JenisSampahAdminController extends Controller
         $request->validate([
             'id_kategori_sampah' => 'required|integer',
             'nama_jenis_sampah' => 'required|string|max:255',
-            'deskripsi_jenis_sampah' => 'nullable|string',
             'poin' => 'required|integer',
         ]);
 

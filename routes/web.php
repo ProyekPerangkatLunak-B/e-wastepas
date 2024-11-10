@@ -18,6 +18,8 @@ use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Manajemen\LoginController;
+
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
     return view('index');
@@ -152,13 +154,22 @@ Route::group([
     
 
     // Submodul Registrasi
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('manajemen.registrasi.login'); // Alias tambahan
+
+    Route::post('/login', [LoginController::class, 'login'])->name('manajemen.registrasi.login');
+
     Route::get('forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
+
     Route::post('forgot-password', [RegistrasiManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
+
     Route::get('check-email', function () {
         return view('manajemen.registrasi.check-email'); // Mengarah ke folder registrasi
     })->name('password.check-email');
+
     Route::get('reset-password/{token}', function ($token) {
-        return view('manajemen.registrasi.reset-password', ['token' => $token]); // Mengarah ke folder registrasi
+        return view('manajemen.registrasi.reset-password', ['token' => $token]); 
+        
+        // Mengarah ke folder registrasi
     })->name('password.reset');
     Route::post('reset-password', [RegistrasiManajemenController::class, 'reset'])->name('password.update');
 });
