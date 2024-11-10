@@ -21,7 +21,7 @@
         <p class="text-sm mb-8 text-center" style="color: #4d8e49;">masuk ke akun Anda !!</p>
 
         <!-- Form Login -->
-        <form action="{{ route('login') }}" method="POST" class="w-full max-w-sm space-y-4">
+        <form action="/login" method="post" class="w-full max-w-sm space-y-4">
             @csrf
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email :</label>
@@ -40,7 +40,7 @@
             
             <!-- Link Lupa Password -->
             <div class="flex justify-end mb-4">
-                <a href="{{ route('password.request') }}" class="text-sm text-gray-500 hover:text-green-500 hover:underline">Lupa Password ?</a>
+                <a href="/manajemen/forgot-password" class="text-sm text-gray-500 hover:text-green-500 hover:underline">Lupa Password ?</a>
             </div>
             
             <!-- Tombol Masuk -->
@@ -48,7 +48,7 @@
         </form>
 
         <!-- Link Daftar -->
-        <p class="mt-6 text-sm text-gray-600">Belum punya akun? <a href="{{ route('register') }}" style="color: #3c674a; font-weight: 600; hover:underline;">Daftar</a></p>
+        <p class="mt-6 text-sm text-gray-600">Belum punya akun? <a href="#" style="color: #3c674a; font-weight: 600; hover:underline;">Daftar</a></p>
     </div>
 </div>
 
