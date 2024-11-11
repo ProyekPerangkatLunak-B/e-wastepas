@@ -23,6 +23,11 @@ class Penjemputan extends Model
         'waktu_permintaan',
     ];
 
+    public function detailPenjemputan()
+    {
+        return $this->hasMany(DetailPenjemputan::class, 'id_penjemputan');
+    }
+
     public function pengguna()
     {
         return $this->belongsTo(UserMasyarakat::class, 'id_pengguna');

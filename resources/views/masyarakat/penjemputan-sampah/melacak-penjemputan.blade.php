@@ -41,56 +41,59 @@
             </div>
         </div>
 
-            <!-- Container Grid Card -->
-            <div class="grid grid-cols-3 gap-8 mt-6">
-                @foreach ($detailPenjemputan as $p)
-                    <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
-                        <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                            <div class="flex justify-between">
-                                <span class="mx-6 my-2 text-lg font-bold text-gray-800">
-                                    {{ $p->penjemputan->waktu_permintaan }}
-                                </span>
-                            </div>
+        <!-- Container Grid Card -->
+        <div class="grid grid-cols-3 gap-8 mt-6">
+            @foreach ($penjemputan as $p)
+                <a href="{{ route('masyarakat.penjemputan.detail-melacak') }}" class="block">
+                    <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                        <div class="flex justify-between">
+                            <span class="mx-6 my-2 text-lg font-bold text-gray-800">
+                                {{ $p->waktu_permintaan }}
+                            </span>
+                        </div>
 
-                            <!-- Isi Konten -->
-                            <div class="flex px-6 mt-4 space-x-6">
-                                <!-- Bagian Jenis dan Deskripsi Sampah -->
-                                <div class="flex-grow my-4">
-                                    <p class="text-2xl font-semibold">{{ $p->sampah->jenis->nama_jenis_sampah }}</p>
-                                    <p class="mt-20 text-sm text-gray-500">{{ $p->sampah->deskripsi_sampah }}</p>
-                                </div>
-                                    <div class="flex flex-col items-center justify-between">
-                                        <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}" alt="Icon" class="w-[100px] h-[100px]">
-                                        <!-- Status -->
-                                        <div class="absolute right-0 bottom-1">
-                                            <span class="px-4 py-2 font-semibold text-white-normal bg-tertiary-600 rounded-tl-3xl rounded-br-xl">
-                                                {{ $p->penjemputan->status_permintaan }}
-                                            </span>
-                                        </div>
+                        <!-- Isi Konten -->
+                        <div class="flex px-6 mt-4 space-x-6">
+                            <!-- Bagian Jenis dan Deskripsi Sampah -->
+                            <div class="flex-grow my-4">
+                                @foreach ($p->sampah as $s)
+                                    <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis_sampah }}</p>
+                                @endforeach
+                            </div>
+                            <div class="flex flex-col items-center justify-between">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
+                                    alt="Icon" class="w-[100px] h-[100px]">
+                                <!-- Status -->
+                                <div class="absolute right-0 bottom-1">
+                                    <span
+                                        class="px-4 py-2 font-semibold text-white-normal bg-tertiary-600 rounded-tl-3xl rounded-br-xl">
+                                        {{ $p->status_permintaan }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                    </a>
-                @endforeach
-            </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
 
-            {{-- Pagination --}}
-            <div class="flex items-center justify-end mt-4">
-                <div class="relative space-x-2 left-[58rem]">
-                    <button
-                        class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;&lt;</button>
-                    <button
-                        class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;</button>
+        {{-- Pagination --}}
+        <div class="flex items-center justify-end mt-4">
+            <div class="relative space-x-2 left-[58rem]">
+                <button
+                    class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;&lt;</button>
+                <button
+                    class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;</button>
 
-                    <button
-                        class="w-[50px] h-[50px] px-3 py-1 font-bold text-green-700 shadow-sm bg-green-200 rounded">1</button>
+                <button
+                    class="w-[50px] h-[50px] px-3 py-1 font-bold text-green-700 shadow-sm bg-green-200 rounded">1</button>
 
-                    <button
-                        class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;</button>
-                    <button
-                        class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;&gt;</button>
-                </div>
+                <button
+                    class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;</button>
+                <button
+                    class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;&gt;</button>
             </div>
         </div>
+    </div>
     </div>
 @endsection
