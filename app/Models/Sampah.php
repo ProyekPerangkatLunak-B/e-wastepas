@@ -15,7 +15,6 @@ class Sampah extends Model
     protected $fillable = [
         'id_kategori_sampah',
         'id_jenis_sampah',
-        'id_penjemputan',
         'deskripsi_sampah',
         'berat_sampah',
     ];
