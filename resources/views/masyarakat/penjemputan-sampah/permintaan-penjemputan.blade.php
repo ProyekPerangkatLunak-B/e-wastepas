@@ -152,6 +152,7 @@
                                 <option value="{{ $j->id_jenis_sampah }}">{{ $j->nama_jenis_sampah }}</option>
                             @endforeach
                         </select>
+
                     </div>
                     <div>
                         <label for="berat" class="block text-sm font-medium text-gray-700">Berat Sampah</label>

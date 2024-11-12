@@ -179,3 +179,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 // END Pesan Error ketika data tidak dimasukkan
+
+// START Semua Select 2
+document.addEventListener("DOMContentLoaded", function () {
+    $("#daerah").select2({
+        placeholder: "Pilih Daerah",
+        allowClear: true,
+    });
+
+    $("#dropbox").select2({
+        placeholder: "Pilih Dropbox",
+        allowClear: true,
+    });
+
+    $("#kategori").select2({
+        placeholder: "Pilih Kategori Sampah",
+        allowClear: true,
+    });
+
+    $("#jenis").select2({
+        placeholder: "Pilih jenis sampah",
+        allowClear: true,
+    });
+});
+
+// END Semua Select 2
