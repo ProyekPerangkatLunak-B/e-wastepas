@@ -3,15 +3,16 @@ import $ from "jquery";
 window.$ = $;
 window.jQuery = $;
 
+// Import Select 2
+import "select2";
+import "select2/dist/css/select2.css";
+
 // Import DataTables
-import 'datatables.net';
+import "datatables.net";
 
 // Import and configure SweetAlert2
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 window.Swal = Swal;
-
-import 'select2';
-import 'select2/dist/css/select2.css';
 
 // Import and start Alpine.js
 import Alpine from "alpinejs";

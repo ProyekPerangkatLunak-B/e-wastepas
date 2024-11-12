@@ -15,6 +15,9 @@
     {{-- Link Load CSS & JS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- Link load CSS Custom --}}
+    <link rel="stylesheet" href="{{ asset('css/masyarakat-penjemputan-sampah.css') }}">
+
     <title>E-WastePas</title>
 </head>
 
