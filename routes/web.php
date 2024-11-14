@@ -30,6 +30,7 @@ Route::get('/', function () {
 Route::group([
     'prefix' => 'admin/',
     'as' => 'admin.',
+    'middleware' => ['auth'],
 ], function () {
 
     // Submodul Datamaster
