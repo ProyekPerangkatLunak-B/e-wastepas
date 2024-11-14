@@ -277,33 +277,33 @@ Route::group([
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
     Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
-    });
+});
 
-    Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
-    Route::get('/{id_pengguna}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
+Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
+Route::get('/{id_pengguna}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
 
-    // rute otp
-    Route::get('/mitra-kurir/registrasi/otp2', function () {
-        return view('mitra-kurir/registrasi/otp2');
-    });
+// rute otp
+Route::get('/mitra-kurir/registrasi/otp2', function () {
+    return view('mitra-kurir/registrasi/otp2');
+});
 
-    // forgot password
-    Route::get('/mitra-kurir/registrasi/forgot-password', function () {
-        return view('mitra-kurir/registrasi/forgot-password');
-    });
+// forgot password
+Route::get('/mitra-kurir/registrasi/forgot-password', function () {
+    return view('mitra-kurir/registrasi/forgot-password');
+});
 
-    // syarat & ketentuan
-    Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
-        return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
-    })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+// syarat & ketentuan
+Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
+    return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+})->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
 
-    // upload dokumen
-    Route::get('/mitra-kurir/registrasi/document-upload', function () {
-        return view('/mitra-kurir/registrasi/document-upload');
-    })->name('/mitra-kurir/registrasi/document-upload');
+// upload dokumen
+Route::get('/mitra-kurir/registrasi/document-upload', function () {
+    return view('/mitra-kurir/registrasi/document-upload');
+})->name('/mitra-kurir/registrasi/document-upload');
 
-    // reset password
-    Route::get('/mitra-kurir/registrasi/reset-password', function () {
-        return view('mitra-kurir/registrasi/reset-password');
+// reset password
+Route::get('/mitra-kurir/registrasi/reset-password', function () {
+    return view('mitra-kurir/registrasi/reset-password');
 });
