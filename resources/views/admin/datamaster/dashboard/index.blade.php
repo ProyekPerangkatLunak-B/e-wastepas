@@ -133,7 +133,7 @@
                         <i class="fas fa-star text-purple-500 text-3xl"></i>
                         <div>
                             <h5 class="text-gray-600 font-semibold">Poin</h5>
-                            <p class="text-2xl font-bold">1200</p>
+                            <p class="text-2xl font-bold">2000</p>
                         </div>
                     </div>
                 </div>
