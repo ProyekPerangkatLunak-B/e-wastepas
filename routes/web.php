@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Models\User;
@@ -29,6 +30,7 @@ Route::get('/', function () {
 Route::group([
     'prefix' => 'admin/',
     'as' => 'admin.',
+    'middleware' => ['auth'],
 ], function () {
 
     // Submodul Datamaster
@@ -55,15 +57,6 @@ Route::group([
     Route::get('datamaster/master-data/daerah', function () {
         return view('admin.datamaster.master-data.daerah.index');
     })->name('datamaster.daerah.index');
-
-    // Submodul Registrasi
-    Route::get('login', function () {
-        return view('admin.datamaster.auth.login.index');
-    })->name('login.index');
-
-    Route::get('otp', function () {
-        return view('admin.datamaster.auth.otp.index');
-    })->name('otp.index');
 
     // kategori sampah
     Route::resource('datamaster/master-data/kategori', KategoriSampahAdminController::class)->names([
@@ -123,6 +116,13 @@ Route::group([
     //store daerah
     Route::post('datamaster/daerah/storeDaerah', [DaerahAdminController::class, 'storeDaerah'])->name('datamaster.daerah.storeDaerah');
 });
+
+Route::post('/admin/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
+Route::get('/admin/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
+// Submodul Registrasi
+Route::get('/admin/login', function () {
+    return view('admin.datamaster.auth.login.index');
+})->name('admin.login.index');
 
 
 // Route Modul Manajemen
