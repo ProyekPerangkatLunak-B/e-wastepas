@@ -124,54 +124,68 @@ Route::get('/admin/login', function () {
     return view('admin.datamaster.auth.login.index');
 })->name('admin.login.index');
 
+
 // Route Modul Manajemen
 Route::group([
-    'prefix' => 'manajemen/',
+    'prefix' => 'manajemen',
     'as' => 'manajemen.',
 ], function () {
 
     // Submodul Dashboard
-    Route::get('datamaster/dashboard', function () {
+    Route::get('/datamaster/dashboard', function () {
         return view('manajemen.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
 
-    Route::get('datamaster/melacak-penjemputan', function () {
+    Route::get('/datamaster/melacak-penjemputan', function () {
         return view('manajemen.datamaster.melacak-penjemputan.index');
     })->name('datamaster.melacak-penjemputan.index');
 
-    Route::get('datamaster/total-sampah', function () {
+    Route::get('/datamaster/total-sampah', function () {
         return view('manajemen.datamaster.total-sampah.index');
     })->name('datamaster.total-sampah.index');
 
-    Route::get('datamaster/dashboard', function () {
-        return view('manajemen.datamaster.dashboard.index');
-    })->name('datamaster.dashboard.index');
-
-    Route::get('datamaster/dashboard', function () {
-        return view('manajemen.datamaster.dashboard.index');
-    })->name('datamaster.dashboard.index');
-
-
     // Submodul Registrasi
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('manajemen.registrasi.login'); // Alias tambahan
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan
+    Route::post('/login', [LoginController::class, 'login'])->name('registrasi.login');
 
-    Route::post('/login', [LoginController::class, 'login'])->name('manajemen.registrasi.login');
+    Route::get('/forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/forgot-password', [RegistrasiManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
 
-    Route::get('forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::get('/register', function () {
+        return view('manajemen.registrasi.register'); // Mengarah ke folder registrasi
+    })->name('registrasi.register');
 
-    Route::post('forgot-password', [RegistrasiManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/verify-otp', function () {
+        return view('manajemen.registrasi.verify-otp');
+    })->name('registrasi.verify-otp');
 
-    Route::get('check-email', function () {
+    Route::get('/data-total-sampah', function () {
+        return view('manajemen.registrasi.data-total-sampah');
+    })->name('registrasi.data-total-sampah');
+
+    Route::get('/data-profil', function () {
+        return view('manajemen.registrasi.data-profil');
+    })->name('registrasi.data-profil');
+
+    Route::get('/otp-confirmation-success', function () {
+        return view('manajemen.registrasi.otp-confirmation-success');
+    })->name('registrasi.otp-confirmation-success');
+
+    Route::get('/otp-change-password-success', function () {
+        return view('manajemen.registrasi.otp-change-password-success');
+    })->name('registrasi.otp-change-password-success');
+
+    Route::get('/check-email', function () {
         return view('manajemen.registrasi.check-email'); // Mengarah ke folder registrasi
     })->name('password.check-email');
 
-    Route::get('reset-password/{token}', function ($token) {
-        return view('manajemen.registrasi.reset-password', ['token' => $token]);
-
-        // Mengarah ke folder registrasi
+    Route::get('/reset-password/{token}', function ($token) {
+        return view('manajemen.registrasi.reset-password', ['token' => $token]); // Mengarah ke folder registrasi
     })->name('password.reset');
-    Route::post('reset-password', [RegistrasiManajemenController::class, 'reset'])->name('password.update');
+
+    Route::post('/reset-password', [RegistrasiManajemenController::class, 'reset'])->name('password.update');
 });
+
 
 // Route Modul Masyarakat
 Route::group([
@@ -263,31 +277,33 @@ Route::group([
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
     Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
-});
-Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
-Route::get('/{id_pengguna}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
+    });
 
-// rute otp
-Route::get('/mitra-kurir/registrasi/otp2', function () {
-    return view('mitra-kurir/registrasi/otp2');
-});
+    Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
+    Route::get('/{id_pengguna}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
-// forgot password
-Route::get('/mitra-kurir/registrasi/forgot-password', function () {
-    return view('mitra-kurir/registrasi/forgot-password');
-});
 
-// syarat & ketentuan
-Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
-    return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
-})->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+    // rute otp
+    Route::get('/mitra-kurir/registrasi/otp2', function () {
+        return view('mitra-kurir/registrasi/otp2');
+    });
 
-// upload dokumen
-Route::get('/mitra-kurir/registrasi/document-upload', function () {
-    return view('/mitra-kurir/registrasi/document-upload');
-})->name('/mitra-kurir/registrasi/document-upload');
+    // forgot password
+    Route::get('/mitra-kurir/registrasi/forgot-password', function () {
+        return view('mitra-kurir/registrasi/forgot-password');
+    });
 
-// reset password
-Route::get('/mitra-kurir/registrasi/reset-password', function () {
-    return view('mitra-kurir/registrasi/reset-password');
+    // syarat & ketentuan
+    Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
+        return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+    })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+
+    // upload dokumen
+    Route::get('/mitra-kurir/registrasi/document-upload', function () {
+        return view('/mitra-kurir/registrasi/document-upload');
+    })->name('/mitra-kurir/registrasi/document-upload');
+
+    // reset password
+    Route::get('/mitra-kurir/registrasi/reset-password', function () {
+        return view('mitra-kurir/registrasi/reset-password');
 });
