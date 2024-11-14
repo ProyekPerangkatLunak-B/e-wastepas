@@ -27,102 +27,89 @@ Route::get('/', function () {
 });
 
 // Route Modul Admin
-Route::group([
-    'prefix' => 'admin/',
-    'as' => 'admin.',
-    'middleware' => ['auth'],
-], function () {
+Route::prefix('admin')
+    ->as('admin.')
+    ->middleware(['auth', 'role:Admin'])
+    ->group(function () {
 
-    // Submodul Datamaster
-    Route::get('datamaster/masyarakat', function () {
-        return view('admin.datamaster.masyarakat.index');
-    })->name('datamaster.masyarakat.index');
+        // Submodul Datamaster
+        Route::prefix('datamaster')->as('datamaster.')->group(function () {
+            Route::view('masyarakat', 'admin.datamaster.masyarakat.index')->name('masyarakat.index');
+            Route::view('kurir', 'admin.datamaster.kurir.index')->name('kurir.index');
+            Route::view('dashboard', 'admin.datamaster.dashboard.index')->name('dashboard.index');
 
-    Route::get('datamaster/kurir', function () {
-        return view('admin.datamaster.kurir.index');
-    })->name('datamaster.kurir.index');
+            Route::prefix('master-data')->group(function () {
+                Route::view('dropbox', 'admin.datamaster.master-data.dropbox.index')->name('dropbox.index');
+                Route::view('jenis', 'admin.datamaster.master-data.jenis.index')->name('jenis.index');
+                Route::view('daerah', 'admin.datamaster.master-data.daerah.index')->name('daerah.index');
+            });
 
-    Route::get('datamaster/dashboard', function () {
-        return view('admin.datamaster.dashboard.index');
-    })->name('datamaster.dashboard.index');
+            // Kategori Sampah
+            Route::resource('master-data/kategori', KategoriSampahAdminController::class)->names([
+                'index' => 'kategori.index',
+                'create' => 'kategori.create',
+                'store' => 'kategori.store',
+                'show' => 'kategori.show',
+                'edit' => 'kategori.edit',
+                'update' => 'kategori.update',
+                'destroy' => 'kategori.destroy',
+            ]);
 
-    Route::get('datamaster/master-data/dropbox', function () {
-        return view('admin.datamaster.master-data.dropbox.index');
-    })->name('datamaster.dropbox.index');
+            Route::controller(KategoriSampahAdminController::class)->group(function () {
+                Route::get('kategori/data', 'getKategoriData')->name('kategori.data');
+                Route::get('kategori/search', 'search')->name('kategori.search');
+                Route::post('kategori/storeKategori', 'storeKategori')->name('kategori.storeKategori');
+            });
 
-    Route::get('datamaster/master-data/jenis', function () {
-        return view('admin.datamaster.master-data.jenis.index');
-    })->name('datamaster.jenis.index');
+            // Jenis Sampah
+            Route::resource('master-data/jenis', JenisSampahAdminController::class)->names([
+                'index' => 'jenis.index',
+                'create' => 'jenis.create',
+                'store' => 'jenis.store',
+                'show' => 'jenis.show',
+                'edit' => 'jenis.edit',
+                'update' => 'jenis.update',
+                'destroy' => 'jenis.destroy',
+            ]);
 
-    Route::get('datamaster/master-data/daerah', function () {
-        return view('admin.datamaster.master-data.daerah.index');
-    })->name('datamaster.daerah.index');
+            Route::get('jenis/data', [JenisSampahAdminController::class, 'getJenisSampahData'])->name('jenis.data');
 
-    // kategori sampah
-    Route::resource('datamaster/master-data/kategori', KategoriSampahAdminController::class)->names([
-        'index' => 'datamaster.kategori.index',
-        'create' => 'datamaster.kategori.create',
-        'store' => 'datamaster.kategori.store',
-        'show' => 'datamaster.kategori.show',
-        'edit' => 'datamaster.kategori.edit',
-        'update' => 'datamaster.kategori.update',
-        'destroy' => 'datamaster.kategori.destroy',
-    ]);
+            // Dropbox
+            Route::resource('master-data/dropbox', DropboxAdminController::class)->names([
+                'index' => 'dropbox.index',
+                'create' => 'dropbox.create',
+                'store' => 'dropbox.store',
+                'show' => 'dropbox.show',
+                'edit' => 'dropbox.edit',
+                'update' => 'dropbox.update',
+                'destroy' => 'dropbox.destroy',
+            ]);
 
-    Route::get('datamaster/kategori/data', [KategoriSampahAdminController::class, 'getKategoriData'])->name('datamaster.kategori.data');
-    Route::get('datamaster/kategori/search', [KategoriSampahAdminController::class, 'search'])->name('datamaster.kategori.search');
-    Route::post('datamaster/kategori/storeKategori', [KategoriSampahAdminController::class, 'storeKategori'])->name('datamaster.kategori.storeKategori');
+            Route::get('dropbox/data', [DropboxAdminController::class, 'getDropboxData'])->name('dropbox.data');
 
-    // jenis sampah
-    Route::resource('datamaster/master-data/jenis', JenisSampahAdminController::class)->names([
-        'index' => 'datamaster.jenis.index',
-        'create' => 'datamaster.jenis.create',
-        'store' => 'datamaster.jenis.store',
-        'show' => 'datamaster.jenis.show',
-        'edit' => 'datamaster.jenis.edit',
-        'update' => 'datamaster.jenis.update',
-        'destroy' => 'datamaster.jenis.destroy',
-    ]);
+            // Daerah
+            Route::resource('master-data/daerah', DaerahAdminController::class)->names([
+                'index' => 'daerah.index',
+                'create' => 'daerah.create',
+                'store' => 'daerah.store',
+                'show' => 'daerah.show',
+                'edit' => 'daerah.edit',
+                'update' => 'daerah.update',
+                'destroy' => 'daerah.destroy',
+            ]);
 
-    Route::get('datamaster/jenis/data', [JenisSampahAdminController::class, 'getJenisSampahData'])->name('datamaster.jenis.data');
+            Route::controller(DaerahAdminController::class)->group(function () {
+                Route::get('daerah/data', 'getDaerahData')->name('daerah.data');
+                Route::get('daerah/search', 'search')->name('daerah.search');
+                Route::post('daerah/storeDaerah', 'storeDaerah')->name('daerah.storeDaerah');
+            });
+        });
+    });
 
-    // dropbox
-    Route::resource('datamaster/master-data/dropbox', DropboxAdminController::class)->names([
-        'index' => 'datamaster.dropbox.index',
-        'create' => 'datamaster.dropbox.create',
-        'store' => 'datamaster.dropbox.store',
-        'show' => 'datamaster.dropbox.show',
-        'edit' => 'datamaster.dropbox.edit',
-        'update' => 'datamaster.dropbox.update',
-        'destroy' => 'datamaster.dropbox.destroy',
-    ]);
-
-    Route::get('datamaster/dropbox/data', [DropboxAdminController::class, 'getDropboxData'])->name('datamaster.dropbox.data');
-
-    // daerah
-    Route::resource('datamaster/master-data/daerah', DaerahAdminController::class)->names([
-        'index' => 'datamaster.daerah.index',
-        'create' => 'datamaster.daerah.create',
-        'store' => 'datamaster.daerah.store',
-        'show' => 'datamaster.daerah.show',
-        'edit' => 'datamaster.daerah.edit',
-        'update' => 'datamaster.daerah.update',
-        'destroy' => 'datamaster.daerah.destroy',
-    ]);
-
-    Route::get('datamaster/daerah/data', [DaerahAdminController::class, 'getDaerahData'])->name('datamaster.daerah.data');
-    //search
-    Route::get('datamaster/daerah/search', [DaerahAdminController::class, 'search'])->name('datamaster.daerah.search');
-    //store daerah
-    Route::post('datamaster/daerah/storeDaerah', [DaerahAdminController::class, 'storeDaerah'])->name('datamaster.daerah.storeDaerah');
-});
-
+// Rute autentikasi
 Route::post('/admin/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
 Route::get('/admin/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
-// Submodul Registrasi
-Route::get('/admin/login', function () {
-    return view('admin.datamaster.auth.login.index');
-})->name('admin.login.index');
+Route::view('/admin/login', 'admin.datamaster.auth.login.index')->name('admin.login.index');
 
 
 // Route Modul Manajemen
@@ -277,34 +264,33 @@ Route::group([
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
     Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
-    });
-
-    Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
-    Route::get('/{id_pengguna}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
-
-
-    // rute otp
-    Route::get('/mitra-kurir/registrasi/otp2', function () {
-        return view('mitra-kurir/registrasi/otp2');
-    });
-
-    // forgot password
-    Route::get('/mitra-kurir/registrasi/forgot-password', function () {
-        return view('mitra-kurir/registrasi/forgot-password');
-    });
-
-    // syarat & ketentuan
-    Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
-        return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
-    })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
-
-    // upload dokumen
-    Route::get('/mitra-kurir/registrasi/document-upload', function () {
-        return view('/mitra-kurir/registrasi/document-upload');
-    })->name('/mitra-kurir/registrasi/document-upload');
-
-    // reset password
-    Route::get('/mitra-kurir/registrasi/reset-password', function () {
-        return view('mitra-kurir/registrasi/reset-password');
 });
 
+Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
+Route::get('/{id_pengguna}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
+
+
+// rute otp
+Route::get('/mitra-kurir/registrasi/otp2', function () {
+    return view('mitra-kurir/registrasi/otp2');
+});
+
+// forgot password
+Route::get('/mitra-kurir/registrasi/forgot-password', function () {
+    return view('mitra-kurir/registrasi/forgot-password');
+});
+
+// syarat & ketentuan
+Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
+    return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+})->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
+
+// upload dokumen
+Route::get('/mitra-kurir/registrasi/document-upload', function () {
+    return view('/mitra-kurir/registrasi/document-upload');
+})->name('/mitra-kurir/registrasi/document-upload');
+
+// reset password
+Route::get('/mitra-kurir/registrasi/reset-password', function () {
+    return view('mitra-kurir/registrasi/reset-password');
+});

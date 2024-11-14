@@ -15,4 +15,9 @@ class Peran extends Model
         'deskripsi_peran',
         'status',
     ];
+
+    public function pengguna()
+    {
+        return $this->hasMany(Pengguna::class, 'id_peran', 'id_peran');
+    }
 }
