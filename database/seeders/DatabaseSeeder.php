@@ -26,5 +26,7 @@ class DatabaseSeeder extends Seeder
         Daerah::factory()->count(10)->create()->each(function ($daerah) {
             Dropbox::factory()->count(15)->create(['id_daerah' => $daerah->id_daerah]);
         });
+
+        $this->call(AdminSeeder::class);
     }
 }

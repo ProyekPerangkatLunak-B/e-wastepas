@@ -23,24 +23,19 @@
                     <div class="w-full flex-20 mt-8">
                         <div class="flex flex-col justify-around items-center"></div>
                         <div class="mx-auto max-w-md">
-                            <form action="#" method="POST">
+                            <form action="{{ route('sendAdminLoginLink') }}" method="POST">
+                                @csrf
                                 <div>
                                     <label for="email"
                                         class="block mt-4 text-md font-medium leading-9 text-gray-900">Email</label>
-                                    <input
+                                    <input name="email"
                                         class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-green-200 text-md focus:outline-none focus:border-green-400 focus:bg-white"
-                                        type="email" />
+                                        type="email" required />
                                 </div>
-                                <label for="password"
-                                    class="block mt-4 text-md font-medium leading-9 text-gray-900">Password</label>
-                                <input
-                                    class="w-full px-8 py-4 mt-auto rounded-lg font-medium bg-gray-100 border border-green-200 text-sm focus:outline-none focus:border-green-400 focus:bg-white"
-                                    type="password" />
-
                                 <!-- Button Submit -->
                                 <button
                                     class="mt-8 tracking-wide font-semibold bg-green-400 text-white w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                                    Masuk
+                                    Kirim Link Login
                                 </button>
                             </form>
                         </div>
