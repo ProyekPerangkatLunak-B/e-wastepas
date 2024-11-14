@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\JenisSampah;
 use App\Models\KategoriSampah;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class JenisSampahAdminController extends Controller
@@ -16,7 +16,6 @@ class JenisSampahAdminController extends Controller
         $jenisSampah = JenisSampah::all();
         return view('admin.datamaster.master-data.jenis.index', compact('jenisSampah'));
     }
-
 
     public function getJenisSampahData()
     {
@@ -46,7 +45,6 @@ class JenisSampahAdminController extends Controller
         }
     }
 
-
     public function create()
     {
         $kategoriSampah = KategoriSampah::all(); // Pastikan model KategoriSampah diimport
@@ -64,6 +62,10 @@ class JenisSampahAdminController extends Controller
         jenisSampah::create($request->all());
 
         return redirect()->route('admin.datamaster.jenis.index')->with('success', 'Data berhasil ditambahkan.');
+
+        // Set session flash
+        return redirect()->route('admin.datamaster.jenis.index')
+            ->with('success', 'Data Jenis berhasil ditambahkan!');
     }
 
     public function edit($id)

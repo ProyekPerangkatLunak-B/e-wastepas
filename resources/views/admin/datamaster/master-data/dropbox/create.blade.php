@@ -154,7 +154,7 @@
                                 let newOption = new Option(response.text, response.id,
                                     true, true);
                                 $('#idDaerahSelect').append(newOption).trigger(
-                                'change');
+                                    'change');
                             },
                             error: function() {
                                 alert('Failed to add new region');
