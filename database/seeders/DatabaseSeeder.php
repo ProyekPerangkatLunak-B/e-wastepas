@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // data kategori sampah
         KategoriSampah::factory()->count(6)->create()->each(function ($kategori) {
             // data jenis sampah untuk setiap kategori 
-            JenisSampah::factory()->count(12)->create(['id_kategori_sampah' => $kategori->id]);
+            JenisSampah::factory()->count(12)->create(['id_kategori_sampah' => $kategori->id_kategori_sampah]);
         });
 
         Daerah::factory()->count(10)->create()->each(function ($daerah) {

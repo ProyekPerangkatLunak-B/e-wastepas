@@ -130,6 +130,8 @@
                             <tr>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Nama Kategori Sampah</th>
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Deskripsi Kategori Sampah</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Aksi</th>
                             </tr>
@@ -164,6 +166,11 @@
                     columns: [{
                             data: 'nama_kategori_sampah',
                             name: 'nama_kategori_sampah',
+                            orderable: true
+                        },
+                        {
+                            data: 'deskripsi_kategori_sampah',
+                            name: 'deskripsi_kategori_sampah',
                             orderable: true
                         },
                         {
