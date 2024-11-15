@@ -236,6 +236,20 @@
                     table.page.len(this.value).draw();
                 });
 
+                // Custom pagination and info display
+                table.on('draw', function() {
+                    var pageInfo = table.page.info();
+                    $('#customInfo').text(
+                        `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`
+                    );
+                    $('#customPagination').empty();
+                    for (var i = 0; i < pageInfo.pages; i++) {
+                        var button =
+                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
+                        $('#customPagination').append(button);
+                    }
+                });
+
                 // Alert untuk tambah data
                 @if (session('success'))
                     Swal.fire({
