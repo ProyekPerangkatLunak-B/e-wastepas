@@ -107,9 +107,15 @@ Route::prefix('admin')
     });
 
 // Rute autentikasi
-Route::post('/admin/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
-Route::get('/admin/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
-Route::view('/admin/login', 'admin.datamaster.auth.login.index')->name('admin.login.index');
+Route::prefix('admin')
+    ->as('admin.')
+    ->group(function () {
+        Route::post('/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
+        Route::get('/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
+        Route::view('/login', 'admin.datamaster.auth.login.index')->name('login.index');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
+    });
+
 
 // Route Modul Manajemen
 Route::group([

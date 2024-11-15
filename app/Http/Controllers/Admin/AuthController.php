@@ -18,7 +18,7 @@ class AuthController extends Controller
 
         // Buat link login aman yang akan kedaluwarsa dalam 30 menit
         $loginUrl = URL::temporarySignedRoute(
-            'login.verify',
+            'admin.login.verify',
             now()->addMinutes(30),
             ['email' => $request->email]
         );
@@ -41,5 +41,17 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect()->intended('admin/datamaster/dashboard');
+    }
+    public function logout(Request $request)
+    {
+        // Logout user
+        Auth::logout();
+
+        // Hapus sesi pengguna
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirect ke halaman login setelah logout
+        return redirect()->route('admin.login.index')->with('status', 'Anda telah keluar.');
     }
 }
