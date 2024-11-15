@@ -23,7 +23,7 @@
                     <div class="w-full flex-20 mt-8">
                         <div class="flex flex-col justify-around items-center"></div>
                         <div class="mx-auto max-w-md">
-                            <form action="{{ route('sendAdminLoginLink') }}" method="POST">
+                            <form action="{{ route('admin.sendAdminLoginLink') }}" method="POST">
                                 @csrf
                                 <div>
                                     <label for="email"

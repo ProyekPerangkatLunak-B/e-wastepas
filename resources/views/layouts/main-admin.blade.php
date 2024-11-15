@@ -24,7 +24,7 @@
 <body>
 
     {{-- Header --}}
-    @include('partials.header', [
+    @include('partials.admin-header', [
         'userName' => 'Ahmad Zidane',
         'userRole' => 'admin',
         'profileImage' => 'https://via.placeholder.com/40',
