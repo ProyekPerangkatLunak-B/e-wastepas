@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Admin\DropboxAdminController;
+use App\Http\Controllers\Admin\MasyarakatAdminController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
@@ -34,7 +35,13 @@ Route::prefix('admin')
 
         // Submodul Datamaster
         Route::prefix('datamaster')->as('datamaster.')->group(function () {
-            Route::view('masyarakat', 'admin.datamaster.masyarakat.index')->name('masyarakat.index');
+            Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
+                Route::get('/', [MasyarakatAdminController::class, 'index'])->name('index');
+                Route::put('/{id}', [MasyarakatAdminController::class, 'update'])->name('update');
+                Route::delete('/{id}', [MasyarakatAdminController::class, 'destroy'])->name('destroy');
+                Route::get('/data', [MasyarakatAdminController::class, 'getMasyarakatData'])->name('getData');
+            });
+
             Route::view('kurir', 'admin.datamaster.kurir.index')->name('kurir.index');
             Route::view('dashboard', 'admin.datamaster.dashboard.index')->name('dashboard.index');
 

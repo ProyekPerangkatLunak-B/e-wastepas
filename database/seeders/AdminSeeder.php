@@ -34,7 +34,6 @@ class AdminSeeder extends Seeder
             'nomor_telepon' => '081234567890',
             'no_rekening' => '1234567890',
             'subtotal_poin' => 0,
-            'status' => 'Diterima',
             'nomor_terverifikasi' => true,
             'tanggal_email_diverifikasi' => now(),
             'tanggal_update' => now(),
