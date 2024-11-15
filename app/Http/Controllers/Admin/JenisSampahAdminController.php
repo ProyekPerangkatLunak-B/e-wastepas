@@ -62,10 +62,6 @@ class JenisSampahAdminController extends Controller
         jenisSampah::create($request->all());
 
         return redirect()->route('admin.datamaster.jenis.index')->with('success', 'Data berhasil ditambahkan.');
-
-        // Set session flash
-        return redirect()->route('admin.datamaster.jenis.index')
-            ->with('success', 'Data Jenis berhasil ditambahkan!');
     }
 
     public function edit($id)

@@ -97,10 +97,6 @@ class DaerahAdminController extends Controller
 
         return redirect()->route('admin.datamaster.daerah.index')->with('success', 'Data berhasil ditambahkan.');
 
-        // Set session flash
-        return redirect()->route('admin.datamaster.daerah.index')
-            ->with('success', 'Data Daerah berhasil ditambahkan!');
-
     }
 
     public function edit($id)

@@ -67,10 +67,6 @@ class KategoriSampahAdminController extends Controller
 
         return redirect()->route('admin.datamaster.kategori.index')->with('success', 'Data berhasil ditambahkan.');
 
-        // Set session flash
-        return redirect()->route('admin.datamaster.kategori.index')
-            ->with('success', 'Data Kategori berhasil ditambahkan!');
-
     }
 
     public function storeKategori(Request $request)

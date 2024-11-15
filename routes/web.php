@@ -1,26 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Http\Controllers\Admin\DaerahAdminController;
-use App\Models\User;
-use App\Models\UserOTP;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
-use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Admin\DropboxAdminController;
+use App\Http\Controllers\Admin\JenisSampahAdminController;
+use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Admin\MasyarakatAdminController;
-use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
-use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
-use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
-use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
-use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Manajemen\LoginController;
+use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
+use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
+use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
+use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
+use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -30,7 +23,7 @@ Route::get('/', function () {
 // Route Modul Admin
 Route::prefix('admin')
     ->as('admin.')
-    ->middleware(['auth', 'role:Admin'])
+// ->middleware(['auth', 'role:Admin'])
     ->group(function () {
 
         // Submodul Datamaster
@@ -118,7 +111,6 @@ Route::post('/admin/send-login-link', [AuthController::class, 'sendLoginLink'])-
 Route::get('/admin/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
 Route::view('/admin/login', 'admin.datamaster.auth.login.index')->name('admin.login.index');
 
-
 // Route Modul Manajemen
 Route::group([
     'prefix' => 'manajemen',
@@ -180,7 +172,6 @@ Route::group([
     Route::post('/reset-password', [RegistrasiManajemenController::class, 'reset'])->name('password.update');
 });
 
-
 // Route Modul Masyarakat
 Route::group([
     'prefix' => 'masyarakat/',
@@ -225,7 +216,6 @@ Route::group([
 
     //forgot pass masyarakat
     Route::post('/masyarakat/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
 
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
@@ -274,8 +264,7 @@ Route::group([
 });
 
 Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
-Route::get('/{id_pengguna}/otp-verification',  [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
-
+Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
 // rute otp
 Route::get('/mitra-kurir/registrasi/otp2', function () {

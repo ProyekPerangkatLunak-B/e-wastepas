@@ -58,10 +58,6 @@ class DropboxAdminController extends Controller
 
         Dropbox::create($data);
         return redirect()->route('admin.datamaster.dropbox.index')->with('success', 'Data berhasil ditambahkan.');
-
-        // Set session flash
-        return redirect()->route('admin.datamaster.dropbox.index')
-            ->with('success', 'Data Dropbox berhasil ditambahkan!');
     }
 
     public function edit($id)

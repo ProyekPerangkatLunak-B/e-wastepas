@@ -255,8 +255,30 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        console.log('Data ID: ', id); // Tes untuk melihat apakah ID terkirim
-                        // Tambahkan fungsi AJAX di sini
+                        $.ajax({
+                            url: `{{ route('admin.datamaster.dropbox.destroy', '') }}/${id}`,
+                            type: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Dihapus!',
+                                    'Data berhasil dihapus.',
+                                    'success'
+                                );
+                                $('#dropboxTable').DataTable().ajax.reload();
+                            },
+                            error: function(xhr) {
+                                Swal.fire(
+                                    'Gagal!',
+                                    xhr.responseJSON && xhr.responseJSON.error ?
+                                    `Gagal menghapus data: ${xhr.responseJSON.error}` :
+                                    'Terjadi kesalahan saat menghapus data.',
+                                    'error'
+                                );
+                            }
+                        });
                     }
                 });
             }
