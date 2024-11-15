@@ -265,7 +265,6 @@ Route::get('/mitra-kurir/registrasi/otp', function () {
     return view('mitra-kurir/registrasi/otp');
 });
 
-
 // forgot password
     Route::get('/mitra-kurir/registrasi/forgot-password', function () {
         return view('mitra-kurir/registrasi/forgot-password');
@@ -285,3 +284,18 @@ Route::get('/mitra-kurir/registrasi/otp', function () {
 Route::get('/mitra-kurir/registrasi/reset-password', function () {
     return view('mitra-kurir/registrasi/reset-password');
 });
+
+// halaman profile
+Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
+    return view('mitra-kurir/registrasi/account-profile/profile');
+})->name('mitra-kurir.registrasi.account-profile.profile');
+
+// halaman account 
+Route::get('/mitra-kurir/registrasi/account-profile/account', function () {
+    return view('mitra-kurir/registrasi/account-profile/account');
+})->name('mitra-kurir.registrasi.account-profile.account');
+
+// change password
+Route::get('/mitra-kurir/registrasi/account-profile/change-password', function () {
+    return view('mitra-kurir/registrasi/account-profile/change-password');
+})->name('mitra-kurir.registrasi.account-profile.change-password');
