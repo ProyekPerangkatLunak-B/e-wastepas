@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Daerah;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class DaerahAdminController extends Controller
@@ -80,8 +80,6 @@ class DaerahAdminController extends Controller
         return response()->json($response);
     }
 
-
-
     public function create()
     {
         return view('admin.datamaster.master-data.daerah.create');
@@ -98,6 +96,7 @@ class DaerahAdminController extends Controller
         Daerah::create($request->all());
 
         return redirect()->route('admin.datamaster.daerah.index')->with('success', 'Data berhasil ditambahkan.');
+
     }
 
     public function edit($id)

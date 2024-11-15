@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Pengguna;
 use App\Models\Peran;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
@@ -26,8 +26,8 @@ class AdminSeeder extends Seeder
             'id_peran' => 1, // Sesuaikan dengan id peran admin
             'nomor_ktp' => '1234567890123456',
             'nama' => 'Admin',
-            'alamat' => 'Jl. Admin Utama No. 1',
-            'email' => 'adiyazam03@gmail.com',
+            'alamat' => 'Jl. Admin Utama No. 114G Sethiabudi',
+            'email' => 'yayansupirna20@gmail.com',
             'kata_sandi' => Hash::make('password'), // Gantilah dengan password yang aman
             'tanggal_lahir' => '1990-01-01',
             'foto_profil' => null,

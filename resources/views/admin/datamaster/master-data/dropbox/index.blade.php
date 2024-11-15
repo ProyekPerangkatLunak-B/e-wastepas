@@ -59,10 +59,11 @@
         button {
             transition: background-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: rgb(31, 31, 31);
         }
 
         button:hover {
-            background-color: #e74c3c;
+            background-color: #27ae60;
             box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
         }
 
@@ -196,7 +197,7 @@
                             render: function(data, type, row) {
                                 return `
                             <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/dropbox/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-500 transform hover:-translate-y-1 transition" style="color: white">
+                                <a href="/admin/datamaster/master-data/dropbox/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" style="color: white">
                                     Edit
                                 </a>
                                 <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">
@@ -245,7 +246,7 @@
             function confirmDelete(id) {
                 Swal.fire({
                     title: 'Apakah Anda yakin?',
-                    text: "Data ini akan dihapus secara permanen!",
+                    text: 'Data ini akan dihapus secara permanen!',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -281,6 +282,16 @@
                     }
                 });
             }
+
+            // Alert untuk tambah data
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         });
     </script>
 @endsection

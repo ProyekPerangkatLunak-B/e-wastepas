@@ -12,7 +12,7 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #4a90e2;
+            border-bottom: 3px solid #27ae60;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -84,8 +84,8 @@
 
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-blue-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Perbarui
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
+                            <i class="fas fa-save mr-2"></i>Simpan Perubahan
                         </button>
                     </div>
                 </form>

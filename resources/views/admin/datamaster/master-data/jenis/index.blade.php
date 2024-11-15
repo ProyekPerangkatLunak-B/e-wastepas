@@ -64,6 +64,7 @@
         button {
             transition: background-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
+            color: rgb(27, 27, 27);
             /* Hijau */
         }
 
@@ -149,7 +150,7 @@
                     <div id="customInfo" class="text-sm  text-gray-700">
                         <!-- Informasi jumlah data akan diisi di sini -->
                     </div>
-                    <div class="space-x-2 ">
+                    <div class="space-x-2 class">
                         <!-- Tombol pagination akan dihasilkan di sini -->
                     </div>
                 </div>
@@ -160,6 +161,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             $(document).ready(function() {
+                // Inisialisasi DataTable
                 var table = $('#jenisTable').DataTable({
                     processing: true,
                     serverSide: true,
@@ -186,7 +188,7 @@
                             render: function(data) {
                                 return `
                             <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/jenis/${data}/edit" style="color: white" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" >
+                                <a href="/admin/datamaster/master-data/jenis/${data}/edit" style="color: white" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition">
                                     Edit
                                 </a>
                                 <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" onclick="confirmDelete(${data})" style="color: white">
@@ -199,8 +201,30 @@
                     order: [
                         [0, 'asc']
                     ],
+                    pageLength: 10, // Jumlah default item per halaman
                     dom: 't',
+                    drawCallback: function(settings) {
+                        updateCustomPagination(
+                            table); // Update pagination setiap kali tabel di-render
+                    }
                 });
+
+                // Fungsi custom untuk memperbarui pagination
+                function updateCustomPagination(table) {
+                    var pageInfo = table.page.info();
+                    $('#customPagination').empty(); // Hapus pagination sebelumnya
+
+                    // Generate tombol pagination
+                    for (var i = 0; i < pageInfo.pages; i++) {
+                        $('#customPagination').append(`
+                        <button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="$('#jenisTable').DataTable().page(${i}).draw('page')">${i + 1}</button>
+                    `);
+                    }
+
+                    // Update informasi jumlah data
+                    $('#customInfo').text(
+                        `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`);
+                }
 
                 // Custom search input
                 $('#customSearch').on('keyup', function() {
@@ -225,6 +249,16 @@
                         $('#customPagination').append(button);
                     }
                 });
+
+                // Alert untuk tambah data
+                @if (session('success'))
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
             });
 
             function changePage(page) {
