@@ -78,7 +78,7 @@
                         <label for="total_dropbox" class="block text-sm font-medium text-gray-800 mb-1">Total
                             Dropbox</label>
                         <input type="number" name="total_dropbox" id="total_dropbox" value="{{ $daerah->total_dropbox }}"
-                            required
+                            required disabled
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 

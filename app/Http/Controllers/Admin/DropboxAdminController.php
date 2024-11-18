@@ -18,8 +18,12 @@ class DropboxAdminController extends Controller
     public function getDropboxData()
     {
         try {
-            $dropbox = Dropbox::select(['nama_lokasi', 'alamat', 'status_dropbox', 'total_transaksi_dropbox', 'id_dropbox']);
+            $dropbox = Dropbox::with('daerah:id_daerah,nama_daerah')
+                ->select(['id_dropbox', 'nama_lokasi', 'alamat', 'status_dropbox', 'total_transaksi_dropbox', 'id_daerah']);
             return DataTablesDataTables::of($dropbox)
+                ->addColumn('nama_daerah', function ($row) {
+                    return $row->daerah ? $row->daerah->nama_daerah : '-';
+                })
                 ->addColumn('action', function ($row) {
                     return '
                     <div class="flex space-x-2">
