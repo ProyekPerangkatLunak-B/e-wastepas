@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Daerah;
+use App\Models\Dropbox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
@@ -129,6 +130,7 @@ class DaerahAdminController extends Controller
     public function destroy($id)
     {
         $daerah = Daerah::findOrFail($id);
+        Dropbox::where('id_daerah', $id)->delete();
         $daerah->delete();
 
         return response()->json(['success' => 'Data berhasil dihapus.']);

@@ -112,6 +112,7 @@ class KategoriSampahAdminController extends Controller
     public function destroy($id)
     {
         $kategori = KategoriSampah::findOrFail($id);
+        KategoriSampah::where('id_kategori_sampah', $id)->delete();
         $kategori->delete();
 
         return response()->json(['success' => 'Data berhasil dihapus.']);

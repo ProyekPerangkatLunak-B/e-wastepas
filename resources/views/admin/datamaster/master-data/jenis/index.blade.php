@@ -171,7 +171,7 @@
                             name: 'nama_jenis_sampah'
                         },
                         {
-                            data: 'kategori_sampah.nama_kategori_sampah',
+                            data: 'nama_kategori_sampah',
                             name: 'kategori_sampah.nama_kategori_sampah'
                         },
                         {

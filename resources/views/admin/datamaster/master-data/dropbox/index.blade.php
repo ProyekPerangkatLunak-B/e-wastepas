@@ -176,7 +176,7 @@
                         },
                         {
                             data: 'nama_daerah',
-                            name: 'nama_daerah'
+                            name: 'daerah.nama_daerah'
                         },
                         {
                             data: 'alamat',
