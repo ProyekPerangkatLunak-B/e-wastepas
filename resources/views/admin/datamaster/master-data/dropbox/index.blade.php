@@ -133,6 +133,7 @@
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Nama Lokasi</th>
+                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Daerah</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Alamat</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Total Transaksi
                                     Dropbox</th>
@@ -172,6 +173,10 @@
                     columns: [{
                             data: 'nama_lokasi',
                             name: 'nama_lokasi'
+                        },
+                        {
+                            data: 'nama_daerah',
+                            name: 'nama_daerah'
                         },
                         {
                             data: 'alamat',
