@@ -279,8 +279,7 @@ Route::get('/mitra-kurir/registrasi/otp', function () {
     Route::get('/mitra-kurir/registrasi/forgot-password', function () {
         return view('mitra-kurir/registrasi/forgot-password');
     });
-
-    // syarat & ketentuan
+   // syarat & ketentuan
     Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
         return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
     })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
@@ -291,6 +290,6 @@ Route::get('/mitra-kurir/registrasi/otp', function () {
     })->name('/mitra-kurir/registrasi/document-upload');
 
 // reset password
-Route::get('/mitra-kurir/registrasi/reset-password', function () {
+    Route::get('/mitra-kurir/registrasi/reset-password', function () {
     return view('mitra-kurir/registrasi/reset-password');
 });
