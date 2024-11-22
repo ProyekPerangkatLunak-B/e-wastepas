@@ -14,6 +14,8 @@ class Pengguna extends Authenticatable
 
     protected $primaryKey = 'id_pengguna';
 
+    public $timestamps = true;
+
     protected $fillable = [
         'id_peran',
         'nomor_ktp',

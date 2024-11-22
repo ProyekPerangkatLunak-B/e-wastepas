@@ -25,7 +25,7 @@
 
     {{-- Header --}}
     @include('partials.admin-header', [
-        'userName' => auth()->user()->nama,
+        'userName' => auth()->user()->nama ?? 'No name',
         'userRole' => auth()->user()->peran->nama_peran ?? 'No role assigned',
     ])
 
