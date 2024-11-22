@@ -26,6 +26,10 @@ Route::prefix('admin')
     ->middleware(['auth', 'role:Admin'])
     ->group(function () {
 
+        Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
+            Route::get('/detail/{id}', [MasyarakatAdminController::class, 'show'])->name('show');
+        });
+
         // Submodul Datamaster
         Route::prefix('datamaster')->as('datamaster.')->group(function () {
             Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
@@ -113,7 +117,9 @@ Route::prefix('admin')
         Route::post('/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
         Route::get('/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
         Route::view('/login', 'admin.datamaster.auth.login.index')->name('login.index');
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::patch('masyarakat/{id}/approve', [MasyarakatAdminController::class, 'approve'])->name('approve');
+        Route::patch('masyarakat/{id}/reject', [MasyarakatAdminController::class, 'reject'])->name('reject');
     });
 
 

@@ -4,16 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\masyarakat;
-use App\Models\KategoriSampah;
 use App\Models\Pengguna;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Mail;
+
 
 class MasyarakatAdminController extends Controller
 {
 
     public function index()
     {
+        $this->deleteRejectedAfter7Days();
         $masyarakat = Pengguna::where('id_peran', 2)->get();
         return view('admin.datamaster.masyarakat.index', compact('masyarakat'));
     }
@@ -59,9 +60,6 @@ class MasyarakatAdminController extends Controller
                 })
                 ->addColumn('status_verifikasi', function ($row) {
                     return $this->generateStatusVerifikasiBadges($row);
-                })
-                ->addColumn('action', function ($row) {
-                    return $this->generateActionButtons($row);
                 })
                 ->rawColumns(['status', 'action', 'status_verifikasi'])
                 ->make(true);
@@ -143,20 +141,72 @@ class MasyarakatAdminController extends Controller
         }
     }
 
-    // Helper function to generate action buttons
-    private function generateActionButtons($row)
+    public function approve(Request $request, $id)
     {
-        return '
-        <div class="flex space-x-2">
-            <a href="/admin/datamaster/master-data/masyarakat/' . $row->id_pengguna . '/edit" class="px-3 py-1 bg-gradient-to-r from-blue-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-blue-500 transform hover:-translate-y-1 transition">
-                Edit
-            </a>
-            <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" onclick="confirmDelete(' . $row->id_pengguna . ')">
-                Hapus
-            </button>
-        </div>';
+        try {
+            // Update status_verifikasi menjadi 'Diterima'
+            $masyarakat = Pengguna::findOrFail($id);
+            $masyarakat->status_verifikasi = 'Diterima';
+            $masyarakat->save();
+
+            // Kirim email notifikasi
+            Mail::send('admin.emails.verification', ['masyarakat' => $masyarakat, 'status' => 'Diterima'], function ($message) use ($masyarakat) {
+                $message->to($masyarakat->email)
+                    ->subject('Verifikasi Akun Anda Diterima');
+            });
+
+            return response()->json(['success' => 'Status berhasil diperbarui dan email telah dikirim.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
+    public function reject(Request $request, $id)
+    {
+        $request->validate([
+            'alasan_penolakan' => 'required|string|max:255',
+        ]);
+
+        try {
+            $masyarakat = Pengguna::findOrFail($id);
+            $masyarakat->status_verifikasi = 'Ditolak';
+            $masyarakat->save();
+
+            Mail::send('admin.emails.verification', [
+                'masyarakat' => $masyarakat,
+                'status' => 'Ditolak',
+                'alasan' => $request->alasan_penolakan,
+            ], function ($message) use ($masyarakat) {
+                $message->to($masyarakat->email)
+                    ->subject('Verifikasi Akun Anda Ditolak');
+            });
+
+            return response()->json(['success' => 'Status berhasil diperbarui dan email telah dikirim.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function deleteRejectedAfter7Days()
+    {
+        try {
+            $sevenDaysAgo = now()->subDays(7);
+
+            $deletedCount = Pengguna::where('status_verifikasi', 'Ditolak')
+                ->where('updated_at', '<', $sevenDaysAgo)
+                ->delete();
+
+            return response()->json(['success' => "{$deletedCount} data dengan status Ditolak telah dihapus."]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function show($id)
+    {
+        $masyarakat = Pengguna::findOrFail($id);
+        return view('admin.datamaster.masyarakat.show', compact('masyarakat'));
+    }
 
     public function update(Request $request, $id)
     {
