@@ -248,46 +248,6 @@
                 };
             });
 
-            function confirmDelete(id) {
-                Swal.fire({
-                    title: 'Apakah Anda yakin?',
-                    text: 'Data ini akan dihapus secara permanen!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: `{{ route('admin.datamaster.dropbox.destroy', '') }}/${id}`,
-                            type: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response) {
-                                Swal.fire(
-                                    'Dihapus!',
-                                    'Data berhasil dihapus.',
-                                    'success'
-                                );
-                                $('#dropboxTable').DataTable().ajax.reload();
-                            },
-                            error: function(xhr) {
-                                Swal.fire(
-                                    'Gagal!',
-                                    xhr.responseJSON && xhr.responseJSON.error ?
-                                    `Gagal menghapus data: ${xhr.responseJSON.error}` :
-                                    'Terjadi kesalahan saat menghapus data.',
-                                    'error'
-                                );
-                            }
-                        });
-                    }
-                });
-            }
-
             // Alert untuk tambah data
             @if (session('success'))
                 Swal.fire({
@@ -298,5 +258,45 @@
                 });
             @endif
         });
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Data ini akan dihapus secara permanen!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ route('admin.datamaster.dropbox.destroy', '') }}/${id}`,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            Swal.fire(
+                                'Dihapus!',
+                                'Data berhasil dihapus.',
+                                'success'
+                            );
+                            $('#dropboxTable').DataTable().ajax.reload();
+                        },
+                        error: function(xhr) {
+                            Swal.fire(
+                                'Gagal!',
+                                xhr.responseJSON && xhr.responseJSON.error ?
+                                `Gagal menghapus data: ${xhr.responseJSON.error}` :
+                                'Terjadi kesalahan saat menghapus data.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endsection

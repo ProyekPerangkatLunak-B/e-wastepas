@@ -93,7 +93,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed">Detail Masyarakat</h2>
+            <h2 class="text-2xl font-semibold leading-relaxed">Detail Pengguna</h2>
 
             <div class="profile-header">
                 <div class="profile-image">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Admin\DropboxAdminController;
 use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
+use App\Http\Controllers\Admin\KurirAdminController;
 use App\Http\Controllers\Admin\MasyarakatAdminController;
 use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
@@ -29,6 +30,9 @@ Route::prefix('admin')
         Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
             Route::get('/detail/{id}', [MasyarakatAdminController::class, 'show'])->name('show');
         });
+        Route::prefix('kurir')->name('kurir.')->group(function () {
+            Route::get('/detail/{id}', [KurirAdminController::class, 'show'])->name('show');
+        });
 
         // Submodul Datamaster
         Route::prefix('datamaster')->as('datamaster.')->group(function () {
@@ -37,6 +41,13 @@ Route::prefix('admin')
                 Route::put('/{id}', [MasyarakatAdminController::class, 'update'])->name('update');
                 Route::delete('/{id}', [MasyarakatAdminController::class, 'destroy'])->name('destroy');
                 Route::get('/data', [MasyarakatAdminController::class, 'getMasyarakatData'])->name('getData');
+            });
+            Route::prefix('kurir')->name('kurir.')->group(function () {
+                Route::get('/', [KurirAdminController::class, 'index'])->name('index');
+                Route::put('/{id}', [KurirAdminController::class, 'update'])->name('update');
+                Route::delete('/{id}', [KurirAdminController::class, 'destroy'])->name('destroy');
+                Route::get('/data', [KurirAdminController::class, 'getKurirData'])->name('getData');
+                Route::get('/{id}/dokumen', [KurirAdminController::class, 'getDokumen'])->name('dokumen');
             });
 
             Route::view('kurir', 'admin.datamaster.kurir.index')->name('kurir.index');
@@ -120,6 +131,8 @@ Route::prefix('admin')
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::patch('masyarakat/{id}/approve', [MasyarakatAdminController::class, 'approve'])->name('approve');
         Route::patch('masyarakat/{id}/reject', [MasyarakatAdminController::class, 'reject'])->name('reject');
+        Route::patch('kurir/{id}/approve', [KurirAdminController::class, 'approve'])->name('approve');
+        Route::patch('kurir/{id}/reject', [KurirAdminController::class, 'reject'])->name('reject');
     });
 
 
