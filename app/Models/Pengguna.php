@@ -66,4 +66,9 @@ class Pengguna extends Authenticatable
     {
         return $this->hasMany(Otp::class, 'id_pengguna', 'id_pengguna');
     }
+
+    public function dokumenKurir()
+    {
+        return $this->hasMany(DokumenKurir::class, 'id_pengguna', 'id_pengguna');
+    }
 }
