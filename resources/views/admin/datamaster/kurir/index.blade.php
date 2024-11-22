@@ -504,16 +504,24 @@
 
         function fetchDokumen(userId) {
             $.ajax({
-                url: `{{ route('admin.datamaster.kurir.dokumen', ':id') }}`.replace(':id',
-                    userId),
+                url: `{{ route('admin.datamaster.kurir.dokumen', ':id') }}`.replace(':id', userId),
                 method: 'GET',
                 success: function(response) {
                     const dokumen = response.data;
                     let modalContent = '';
 
                     dokumen.forEach(item => {
+                        console.log(item);
                         modalContent += `
                     <p><strong>Tipe Dokumen:</strong> ${item.tipe_dokumen}</p>
+                `;
+
+                        // Hanya tampilkan nomor KTP jika tipe dokumen adalah "KTP"
+                        if (item.tipe_dokumen === 'KTP') {
+                            modalContent += `<p><strong>Nomor KTP:</strong> ${item.pengguna.nomor_ktp}</p>`;
+                        }
+
+                        modalContent += `
                     <p><strong>File Dokumen:</strong></p>
                     <img src="${item.file_dokumen}" alt="Dokumen" class="w-full rounded-lg mt-2 mb-4">
                 `;

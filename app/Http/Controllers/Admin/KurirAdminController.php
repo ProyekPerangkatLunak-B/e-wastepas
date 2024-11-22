@@ -23,7 +23,8 @@ class KurirAdminController extends Controller
     public function getDokumen($id)
     {
         try {
-            $dokumen = DokumenKurir::where('id_pengguna', $id)->get();
+            $dokumen = DokumenKurir::with('pengguna')
+                ->where('id_pengguna', $id)->get();
 
             if ($dokumen->isEmpty()) {
                 return response()->json(['message' => 'Dokumen tidak ditemukan.'], 404);
