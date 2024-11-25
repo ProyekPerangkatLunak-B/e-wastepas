@@ -13,10 +13,20 @@
             <div class="w-full mt-4 flex-20">
                 <div class="flex flex-col items-center justify-around">
             </div>
-
+            @if (session('success'))
+                <div class="w-full px-4 py-3 mt-4 text-green-700 bg-green-100 border border-green-400 rounded">
+                    {{ session('success') }}
+                </div>
+            @elseif (session('error'))
+                <div class="w-full px-4 py-3 mt-4 text-red-700 bg-red-100 border border-red-400 rounded">
+                    {{ session('error') }}
+                </div>
+            @endif
             <!-- Form Login -->
                 <div class="max-w-md mx-auto">
-                  <form action="" method="POST">
+                  
+                <form action="{{ route('masyarakat.login.submit') }}" method="POST">
+                @csrf
                   <div>
                     <label for="email" class="block mt-4 font-medium leading-9 text-gray-500 text-md">Email</label>
                         <input
