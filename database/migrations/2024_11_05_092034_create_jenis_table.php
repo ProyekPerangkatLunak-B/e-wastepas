@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jenis_sampah', function (Blueprint $table) {
-            $table->id('id_jenis_sampah');
-            $table->foreignId('id_kategori_sampah')->nullable()
-                ->constrained('kategori_sampah', 'id_kategori_sampah')  // Specify the referenced column
+        Schema::create('jenis', function (Blueprint $table) {
+            $table->id('id_jenis');
+            $table->foreignId('id_kategori')->nullable()
+                ->constrained('kategori_sampah', 'id_kategori')  // Specify the referenced column
                 ->onDelete('cascade');
-            $table->string('nama_jenis_sampah')->nullable();
-            $table->text('deskripsi_jenis_sampah')->nullable();
+            $table->string('nama_jenis')->nullable();
+            $table->text('deskripsi_jenis')->nullable();
             $table->integer('poin')->nullable();
             $table->timestamps();
         });
