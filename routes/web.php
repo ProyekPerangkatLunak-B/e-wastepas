@@ -14,6 +14,7 @@ use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use App\Http\Controllers\Masyarakat\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 // Route untuk halaman utama (welcome)
@@ -208,7 +209,7 @@ Route::group([
         return view('masyarakat.registrasi.login');
     })->name('login');
 
-    Route::post('login', [LoginMasyarakat::class, 'login'])->name('login.submit');
+    Route::post('login', [LoginMasyarakat::class, 'authenticate'])->name('login.submit');
 
     // Submodul Registrasi
     Route::get('register', function () {
@@ -240,8 +241,8 @@ Route::group([
     });
 
     //forgot pass masyarakat
-    Route::post('/masyarakat/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('masyarakat.password.email');
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('penjemputan.kategori');
