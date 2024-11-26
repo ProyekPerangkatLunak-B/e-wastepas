@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Masyarakat;
 
+use App\Models\Jenis;
 use App\Models\Daerah;
 use App\Models\Sampah;
 use App\Models\Dropbox;
-use App\Models\JenisSampah;
+use App\Models\Kategori;
 use App\Models\Penjemputan;
+use App\Models\SampahDetail;
 use Illuminate\Http\Request;
-use App\Models\KategoriSampah;
-use App\Models\DetailPenjemputan;
 use App\Http\Controllers\Controller;
-use PhpParser\Node\Stmt\TryCatch;
 
 class PenjemputanSampahMasyarakatController extends Controller
 {
@@ -22,14 +21,14 @@ class PenjemputanSampahMasyarakatController extends Controller
     }
     public function kategori()
     {
-        $kategori = KategoriSampah::all();
+        $kategori = Kategori::all();
         return view('masyarakat.penjemputan-sampah.kategori', compact('kategori'));
     }
 
     public function permintaan()
     {
-        $kategori = KategoriSampah::all();
-        $jenis = JenisSampah::all();
+        $kategori = Kategori::all();
+        $jenis = Jenis::all();
         $daerah = Daerah::all();
         $dropbox = Dropbox::all();
         return view('masyarakat.penjemputan-sampah.permintaan-penjemputan', compact('kategori', 'jenis', 'daerah', 'dropbox'));
@@ -60,16 +59,16 @@ class PenjemputanSampahMasyarakatController extends Controller
 
             foreach ($request->kategori as $key => $value) {
                 $sampah = new Sampah();
-                $sampah->id_kategori_sampah = $value;
-                $sampah->id_jenis_sampah = $request->jenis[$key];
-                $sampah->deskripsi_sampah = $request->catatan[$key];
-                $sampah->berat_sampah = $request->berat[$key];
+                $sampah->id_kategori = $value;
+                $sampah->id_jenis = $request->jenis[$key];
+                $sampah->deskripsi = $request->catatan[$key];
+                $sampah->berat = $request->berat[$key];
                 $sampah->save();
 
-                $detailPenjemputan = new DetailPenjemputan();
-                $detailPenjemputan->id_penjemputan = $penjemputan->id_penjemputan;
-                $detailPenjemputan->id_sampah = $sampah->id_sampah;
-                $detailPenjemputan->save();
+                $SampahDetail = new SampahDetail();
+                $SampahDetail->id_penjemputan = $penjemputan->id_penjemputan;
+                $SampahDetail->id = $sampah->id;
+                $SampahDetail->save();
             }
             return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
         } catch (\Exception $e) {
@@ -85,7 +84,7 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function detailKategori($id)
     {
-        $jenis = JenisSampah::where('id_kategori_sampah', $id)->paginate(6);
+        $jenis = Jenis::where('id_kategori', $id)->paginate(6);
         return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis'));
     }
 
