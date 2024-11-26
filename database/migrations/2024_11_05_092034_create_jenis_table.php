@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jenis', function (Blueprint $table) {
             $table->id('id_jenis');
             $table->foreignId('id_kategori')->nullable()
-                ->constrained('kategori_sampah', 'id_kategori')  // Specify the referenced column
+                ->constrained('kategori', 'id_kategori')
                 ->onDelete('cascade');
             $table->string('nama_jenis')->nullable();
             $table->text('deskripsi_jenis')->nullable();
