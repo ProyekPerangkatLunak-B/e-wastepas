@@ -59,7 +59,7 @@
                     @method('PUT')
 
                     <div class="mb-6">
-                        <label for="id_daerah" class="block text-sm font-medium text-gray-800 mb-1">ID Daerah</label>
+                        <label for="id_daerah" class="block text-sm font-medium text-gray-800 mb-1">Daerah</label>
                         <select id="idDaerahSelect" class="w-full" style="width: 100%" name="id_daerah" required>
                             <option value="{{ $dropbox->id_daerah }}" selected>
                                 {{ $dropbox->daerah->nama_daerah ?? 'Pilih Daerah' }}</option>
@@ -100,7 +100,7 @@
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
                             class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Update
+                            <i class="fas fa-save mr-2"></i>Simpan Perubahan
                         </button>
                     </div>
                 </form>
@@ -161,7 +161,7 @@
                                 let newOption = new Option(response.text, response.id,
                                     true, true);
                                 $('#idDaerahSelect').append(newOption).trigger(
-                                'change');
+                                    'change');
                             },
                             error: function() {
                                 alert('Failed to add new region');

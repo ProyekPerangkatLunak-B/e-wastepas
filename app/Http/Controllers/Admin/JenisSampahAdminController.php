@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\JenisSampah;
 use App\Models\KategoriSampah;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class JenisSampahAdminController extends Controller
@@ -17,12 +17,11 @@ class JenisSampahAdminController extends Controller
         return view('admin.datamaster.master-data.jenis.index', compact('jenisSampah'));
     }
 
-
     public function getJenisSampahData()
     {
         try {
-            $jenisSampah = JenisSampah::with('kategoriSampah')
-                ->select('jenis_sampah.*');
+            $jenisSampah = JenisSampah::join('kategori_sampah', 'kategori_sampah.id_kategori_sampah', '=', 'jenis_sampah.id_kategori_sampah')
+                ->select('jenis_sampah.*', 'kategori_sampah.nama_kategori_sampah');
 
             return DataTablesDataTables::of($jenisSampah)
                 ->addColumn('nama_kategori_sampah', function ($row) {
@@ -45,7 +44,6 @@ class JenisSampahAdminController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
 
     public function create()
     {

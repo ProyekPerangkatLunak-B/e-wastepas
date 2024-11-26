@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\KategoriSampah;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class KategoriSampahAdminController extends Controller
@@ -16,11 +16,10 @@ class KategoriSampahAdminController extends Controller
         return view('admin.datamaster.master-data.kategori.index', compact('kategoriSampah'));
     }
 
-
     public function getKategoriData()
     {
         try {
-            $kategoriSampah = KategoriSampah::select(['id_kategori_sampah', 'nama_kategori_sampah']);
+            $kategoriSampah = KategoriSampah::select(['id_kategori_sampah', 'nama_kategori_sampah', 'deskripsi_kategori_sampah']);
             return DataTablesDataTables::of($kategoriSampah)
                 ->addColumn('action', function ($row) {
                     return '
@@ -52,7 +51,6 @@ class KategoriSampahAdminController extends Controller
         return response()->json($categories);
     }
 
-
     public function create()
     {
         return view('admin.datamaster.master-data.kategori.create');
@@ -62,17 +60,19 @@ class KategoriSampahAdminController extends Controller
     {
         $request->validate([
             'nama_kategori_sampah' => 'required|string|max:255',
+            'deskripsi_kategori_sampah' => 'nullable|string',
         ]);
 
         KategoriSampah::create($request->all());
 
         return redirect()->route('admin.datamaster.kategori.index')->with('success', 'Data berhasil ditambahkan.');
+
     }
 
     public function storeKategori(Request $request)
     {
         $request->validate([
-            'nama_kategori_sampah' => 'required|string|max:255|unique:kategori_sampah,nama_kategori_sampah'
+            'nama_kategori_sampah' => 'required|string|max:255|unique:kategori_sampah,nama_kategori_sampah',
         ]);
 
         // Create the category
@@ -90,7 +90,6 @@ class KategoriSampahAdminController extends Controller
         return response()->json($response);
     }
 
-
     public function edit($id)
     {
         $kategoriSampah = KategoriSampah::findOrFail($id);
@@ -101,6 +100,7 @@ class KategoriSampahAdminController extends Controller
     {
         $request->validate([
             'nama_kategori_sampah' => 'required|string|max:255',
+            'deskripsi_kategori_sampah' => 'nullable|string',
         ]);
 
         $kategori = KategoriSampah::findOrFail($id);
@@ -112,6 +112,7 @@ class KategoriSampahAdminController extends Controller
     public function destroy($id)
     {
         $kategori = KategoriSampah::findOrFail($id);
+        KategoriSampah::where('id_kategori_sampah', $id)->delete();
         $kategori->delete();
 
         return response()->json(['success' => 'Data berhasil dihapus.']);

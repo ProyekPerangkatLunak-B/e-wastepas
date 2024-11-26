@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Dropbox;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class DropboxAdminController extends Controller
@@ -18,7 +18,15 @@ class DropboxAdminController extends Controller
     public function getDropboxData()
     {
         try {
-            $dropbox = Dropbox::select(['nama_lokasi', 'alamat', 'status_dropbox', 'total_transaksi_dropbox', 'id_dropbox']);
+            $dropbox = Dropbox::join('daerah', 'daerah.id_daerah', '=', 'dropbox.id_daerah')
+                ->select([
+                    'dropbox.id_dropbox',
+                    'dropbox.nama_lokasi',
+                    'dropbox.alamat',
+                    'dropbox.status_dropbox',
+                    'dropbox.total_transaksi_dropbox',
+                    'daerah.nama_daerah',
+                ]);
             return DataTablesDataTables::of($dropbox)
                 ->addColumn('action', function ($row) {
                     return '
