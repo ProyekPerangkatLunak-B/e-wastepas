@@ -109,17 +109,14 @@ class RegistrasiMitraKurirController extends Controller
             if ($e->getCode() === '23000') {
                 $errorMessages = [];
 
-                if (str_contains($e->getMessage(), 'username_unique')) {
-                    $errorMessages['username'] = 'Username already taken.';
-                }
-
                 if (str_contains($e->getMessage(), 'email_unique')) {
                     $errorMessages['email'] = 'Email already taken.';
                 }
-
-                if (str_contains($e->getMessage(), 'no_ktp_unique')) {
-                    $errorMessages['KTP'] = 'No KTP already taken.';
+        
+                if (str_contains($e->getMessage(), 'nomor_ktp_unique')) {
+                    $errorMessages['ktp'] = 'No KTP already taken.';
                 }
+        
 
                 return back()->withErrors($errorMessages);
             }
