@@ -45,7 +45,7 @@
             <div class="flex justify-center mt-4">
                 <div class="grid grid-cols-3 gap-6 mx-auto">
                     @if (count($kategori) == 0)
-                        <div class="flex justify-center ml-[500px] mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
+                        <div class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
                             <div class="text-center">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}" alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
                                 <p class="text-lg font-semibold text-gray-500">Kategori {{ $search ?? 'Sampah Elektronik' }} tidak ditemukan.</p>
