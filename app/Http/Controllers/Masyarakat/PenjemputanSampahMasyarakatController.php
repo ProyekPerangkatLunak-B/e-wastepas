@@ -7,6 +7,8 @@ use App\Models\Daerah;
 use App\Models\Sampah;
 use App\Models\Dropbox;
 use App\Models\Kategori;
+use App\Models\Pengguna;
+use App\Models\Pelacakan;
 use App\Models\Penjemputan;
 use App\Models\SampahDetail;
 use Illuminate\Http\Request;
@@ -48,31 +50,45 @@ class PenjemputanSampahMasyarakatController extends Controller
             'tanggal_penjemputan' => 'required',
         ]);
 
+        $poinKategori = 0;
+        $poinJenis = 0;
+        $totalPoin = 0;
+        foreach ($request->kategori as $key => $value) {
+            $poinKategori = Kategori::where('id_kategori', $value)->first()->poin;
+            $poinJenis = Jenis::where('id_jenis', $request->jenis[$key])->first()->poin;
+            $totalPoin += $poinKategori + $poinJenis;
+        }
+
         try {
             $penjemputan = new Penjemputan();
-            $penjemputan->id_pengguna = '1';
+            $penjemputan->id_pengguna_masyarakat = '1';
+            $penjemputan->id_pengguna_kurir = '2';
+            $penjemputan->id_daerah = $request->daerah;
             $penjemputan->id_dropbox = $request->dropbox;
-            $penjemputan->lokasi_penjemputan = $request->alamat;
-            $penjemputan->status_permintaan = 'Menunggu Konfirmasi';
-            $penjemputan->waktu_permintaan = $request->tanggal_penjemputan;
+            $penjemputan->total_berat = array_sum($request->berat);
+            $penjemputan->total_poin = $totalPoin;
+            $penjemputan->alamat_penjemputan = $request->alamat;
+            $penjemputan->tanggal_penjemputan = $request->tanggal_penjemputan;
+            $penjemputan->catatan = 'TESTING';
             $penjemputan->save();
 
             foreach ($request->kategori as $key => $value) {
-                $sampah = new Sampah();
-                $sampah->id_kategori = $value;
-                $sampah->id_jenis = $request->jenis[$key];
-                $sampah->deskripsi = $request->catatan[$key];
-                $sampah->berat = $request->berat[$key];
-                $sampah->save();
-
                 $SampahDetail = new SampahDetail();
                 $SampahDetail->id_penjemputan = $penjemputan->id_penjemputan;
-                $SampahDetail->id = $sampah->id;
+                $SampahDetail->id_kategori = $value;
+                $SampahDetail->id_jenis = $request->jenis[$key];
+                $SampahDetail->berat = $request->berat[$key];
                 $SampahDetail->save();
             }
+
+            $pelacakan = new Pelacakan();
+            $pelacakan->id_penjemputan = $penjemputan->id_penjemputan;
+            $pelacakan->status = 'Menunggu Konfirmasi';
+            $pelacakan->save();
             return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
         } catch (\Exception $e) {
-            return redirect()->route('masyarakat.penjemputan.index')->with('error', 'Gagal Mengajukan Permintaan Penjemputan!');
+            dd($e);
+            return redirect()->route('masyarakat.penjemputan.permintaan')->with('error', 'Gagal Mengajukan Permintaan Penjemputan!');
         }
     }
 
@@ -95,8 +111,10 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function totalRiwayatPenjemputan()
     {
-        $penjemputan = [];
-        return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('penjemputan'));
+        $totalSampah = Pengguna::where('id_pengguna', '1')->first()->penjemputan->count();
+        $totalPoin = Penjemputan::sum('total_poin');
+        $penjemputan = Penjemputan::all();
+        return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'));
     }
 
     public function riwayatPenjemputan()
