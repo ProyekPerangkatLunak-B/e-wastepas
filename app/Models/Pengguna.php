@@ -14,6 +14,8 @@ class Pengguna extends Authenticatable
 
     protected $primaryKey = 'id_pengguna';
 
+    public $timestamps = true;
+
     protected $fillable = [
         'id_peran',
         'nomor_ktp',
@@ -63,5 +65,15 @@ class Pengguna extends Authenticatable
     public function otps()
     {
         return $this->hasMany(Otp::class, 'id_pengguna', 'id_pengguna');
+    }
+
+    public function dokumenKurir()
+    {
+        return $this->hasMany(DokumenKurir::class, 'id_pengguna', 'id_pengguna');
+    }
+
+    public function penjemputan()
+    {
+        return $this->hasMany(Penjemputan::class, 'id_pengguna_masyarakat', 'id_pengguna');
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_daerah');
             $table->string('nama_daerah')->nullable();
             $table->tinyInteger('status_daerah')->nullable();
-            $table->integer('total_dropbox')->nullable();
+            $table->integer('total_poin')->nullable();
             $table->timestamps();
         });
     }

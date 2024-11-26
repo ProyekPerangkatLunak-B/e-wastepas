@@ -4,22 +4,40 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DokumenKurir;
 use App\Models\Pengguna;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Mail;
 
 
-class MasyarakatAdminController extends Controller
+class KurirAdminController extends Controller
 {
 
     public function index()
     {
         $this->deleteRejectedAfter7Days();
-        $masyarakat = Pengguna::where('id_peran', 2)->get();
-        return view('admin.datamaster.masyarakat.index', compact('masyarakat'));
+        $kurir = Pengguna::where('id_peran', 3)->get();
+        return view('admin.datamaster.kurir.index', compact('kurir'));
     }
 
-    public function getMasyarakatData(Request $request)
+    public function getDokumen($id)
+    {
+        try {
+            $dokumen = DokumenKurir::with('pengguna')
+                ->where('id_pengguna', $id)->get();
+
+            if ($dokumen->isEmpty()) {
+                return response()->json(['message' => 'Dokumen tidak ditemukan.'], 404);
+            }
+
+            return response()->json(['data' => $dokumen], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
+    public function getKurirData(Request $request)
     {
         try {
             $statusVerifikasi = $request->input('status_verifikasi', '');
@@ -39,7 +57,7 @@ class MasyarakatAdminController extends Controller
                 $orderColumn = 'created_at';
             }
 
-            $masyarakatQuery = Pengguna::where('id_peran', 2)
+            $masyarakatQuery = Pengguna::where('id_peran', 3)
                 ->when($statusVerifikasi, function ($query, $statusVerifikasi) {
                     return $query->where('status_verifikasi', $statusVerifikasi);
                 })
@@ -224,8 +242,8 @@ class MasyarakatAdminController extends Controller
 
     public function destroy($id)
     {
-        $masyarakat = Pengguna::findOrFail($id);
-        $masyarakat->delete();
+        $kurir = Pengguna::findOrFail($id);
+        $kurir->delete();
 
         return response()->json(['success' => 'Data berhasil dihapus.']);
     }
