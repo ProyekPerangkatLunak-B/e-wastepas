@@ -51,11 +51,16 @@ class Penjemputan extends Model
 
     public function sampahDetail()
     {
-        return $this->belongsToMany(SampahDetail::class, 'id_penjemputan');
+        return $this->hasMany(SampahDetail::class, 'id_penjemputan');
     }
 
     public function pelacakan()
     {
-        return $this->belongsToMany(Pelacakan::class, 'id_penjemputan');
+        return $this->hasMany(Pelacakan::class, 'id_penjemputan');
+    }
+
+    public function getLatestPelacakan()
+    {
+        return $this->hasOne(Pelacakan::class, 'id_penjemputan')->latest();
     }
 }

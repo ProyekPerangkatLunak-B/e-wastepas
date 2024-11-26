@@ -22,11 +22,11 @@ class Kategori extends Model
 
     public function jenis()
     {
-        return $this->belongsToMany(Jenis::class, 'id_kategori');
+        return $this->hasMany(Jenis::class, 'id_jenis');
     }
 
     public function sampahDetail()
     {
-        return $this->belongsToMany(SampahDetail::class, 'id_kategori');
+        return $this->hasMany(SampahDetail::class, 'id_kategori');
     }
 }

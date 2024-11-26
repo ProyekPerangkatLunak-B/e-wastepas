@@ -30,11 +30,11 @@ class Dropbox extends Model
 
     public function penjemputan()
     {
-        return $this->belongsToMany(Penjemputan::class, 'id_dropbox');
+        return $this->hasMany(Penjemputan::class, 'id_dropbox');
     }
 
     public function pelacakan()
     {
-        return $this->belongsToMany(Pelacakan::class, 'id_dropbox');
+        return $this->hasMany(Pelacakan::class, 'id_dropbox');
     }
 }

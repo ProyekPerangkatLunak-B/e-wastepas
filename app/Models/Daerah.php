@@ -22,11 +22,11 @@ class Daerah extends Model
 
     public function dropbox()
     {
-        return $this->belongsToMany(Dropbox::class, 'id_daerah', 'id_daerah');
+        return $this->hasMany(Dropbox::class, 'id_daerah');
     }
 
     public function penjemputan()
     {
-        return $this->belongsToMany(Penjemputan::class, 'id_daerah');
+        return $this->hasMany(Penjemputan::class, 'id_daerah');
     }
 }

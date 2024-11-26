@@ -28,6 +28,6 @@ class Jenis extends Model
 
     public function sampahDetail()
     {
-        return $this->belongsToMany(SampahDetail::class, 'id_jenis');
+        return $this->hasMany(SampahDetail::class, 'id_jenis');
     }
 }
