@@ -190,6 +190,21 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#dropbox").select2({
         placeholder: "Pilih Dropbox",
         allowClear: true,
+        // ajax: {
+        //     url: "/api/dropbox-option",
+        //     dataType: "json",
+        //     delay: 250,
+        //     data: function (params) {
+        //         return {
+        //             q: params.term,
+        //         };
+        //     },
+        //     processResults: function (data) {
+        //         return {
+        //             results: data,
+        //         };
+        //     },
+        // },
     });
 
     $("#kategori").select2({
@@ -200,6 +215,21 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#jenis").select2({
         placeholder: "Pilih jenis sampah",
         allowClear: true,
+        // ajax: {
+        //     url: "/api/jenis-option/2",
+        //     dataType: "json",
+        //     delay: 250,
+        //     data: function (params) {
+        //         return {
+        //             q: params.term,
+        //         };
+        //     },
+        //     processResults: function (data) {
+        //         return {
+        //             results: data,
+        //         };
+        //     },
+        // },
     });
 });
 

@@ -48,7 +48,7 @@
                     <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
                         <div class="flex justify-between">
                             <span class="mx-6 my-2 text-lg font-bold text-gray-800">
-                                {{ $p->waktu_permintaan }}
+                                {{ $p->tanggal_penjemputan }}
                             </span>
                         </div>
 
@@ -56,9 +56,10 @@
                         <div class="flex px-6 mt-4 space-x-6">
                             <!-- Bagian Jenis dan Deskripsi Sampah -->
                             <div class="flex-grow my-4">
-                                @foreach ($p->sampah as $s)
-                                    <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis_sampah }}</p>
+                                @foreach ($p->sampahDetail as $s)
+                                    <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
                                 @endforeach
+                                <p class="mt-6 text-sm text-gray-500">{{ $p->catatan }}</p>
                             </div>
                             <div class="flex flex-col items-center justify-between">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
@@ -67,7 +68,7 @@
                                 <div class="absolute right-0 bottom-1">
                                     <span
                                         class="px-4 py-2 font-semibold text-white-normal bg-tertiary-600 rounded-tl-3xl rounded-br-xl">
-                                        {{ $p->status_permintaan }}
+                                        {{ $p->getLatestPelacakan }}
                                     </span>
                                 </div>
                             </div>

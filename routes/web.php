@@ -1,21 +1,22 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Manajemen\LoginController;
+use App\Http\Controllers\Admin\KurirAdminController;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Admin\DropboxAdminController;
+use App\Http\Controllers\Admin\MasyarakatAdminController;
 use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
-use App\Http\Controllers\Admin\KurirAdminController;
-use App\Http\Controllers\Admin\MasyarakatAdminController;
-use App\Http\Controllers\Manajemen\LoginController;
-use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
-use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
-use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
-use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
-use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\ForgotPasswordController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
+use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
+use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
+use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -315,4 +316,18 @@ Route::get('/mitra-kurir/registrasi/document-upload', function () {
 // reset password
 Route::get('/mitra-kurir/registrasi/reset-password', function () {
     return view('mitra-kurir/registrasi/reset-password');
+});
+
+Route::group([
+    'prefix' => 'api/',
+    'as' => 'api.',
+], function () {
+    Route::get('kategori', [APIController::class, 'getKategori'])->name('kategori');
+    Route::get('jenis/{id}', [APIController::class, 'getJenis'])->name('jenis');
+    Route::get('daerah', [APIController::class, 'getDaerah'])->name('daerah');
+    Route::get('dropbox/{id}', [APIController::class, 'getDropbox'])->name('dropbox');
+
+    // Untuk Dropdown Select2 Kel 2
+    Route::get('jenis-option/{id}', [APIController::class, 'JenisOption'])->name('jenis-option');
+    Route::get('dropbox-option/{id}', [APIController::class, 'DropboxOption'])->name('dropbox-option');
 });

@@ -78,7 +78,7 @@
                         <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
                             <option value="">Pilih Dropbox</option>
                             @foreach ($dropbox as $d)
-                                <option value="{{ $d->id_dropbox }}">{{ $d->nama_lokasi }}</option>
+                                <option value="{{ $d->id_dropbox }}">{{ $d->nama_dropbox }}</option>
                             @endforeach
                         </x-select>
 
@@ -97,7 +97,7 @@
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
                         <div class="space-y-4 overflow-y-auto h-[500px]" id="boxSemuaSampah">
                             <!-- Card Sampah 1 -->
-                            <div
+                            {{-- <div
                                 class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
                                 <div class="p-2 space-y-1">
                                     <p class="font-semibold">Layar dan Monitor</p>
@@ -105,7 +105,7 @@
                                     <p class="font-semibold">Televisi</p>
                                 </div>
                                 <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -139,7 +139,7 @@
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option value="">Pilih Kategori</option>
                             @foreach ($kategori as $k)
-                                <option value="{{ $k->id_kategori_sampah }}">{{ $k->nama_kategori_sampah }}</option>
+                                <option value="{{ $k->id_kategori }}">{{ $k->nama_kategori }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -149,7 +149,7 @@
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option value="">Pilih Jenis</option>
                             @foreach ($jenis as $j)
-                                <option value="{{ $j->id_jenis_sampah }}">{{ $j->nama_jenis_sampah }}</option>
+                                <option value="{{ $j->id_jenis }}">{{ $j->nama_jenis }}</option>
                             @endforeach
                         </select>
 

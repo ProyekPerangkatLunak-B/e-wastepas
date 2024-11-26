@@ -71,4 +71,9 @@ class Pengguna extends Authenticatable
     {
         return $this->hasMany(DokumenKurir::class, 'id_pengguna', 'id_pengguna');
     }
+
+    public function penjemputan()
+    {
+        return $this->hasMany(Penjemputan::class, 'id_pengguna_masyarakat', 'id_pengguna');
+    }
 }
