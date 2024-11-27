@@ -21,21 +21,24 @@ class RegistrasiMitraKurirController extends Controller
 
     public function LoginAuth(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'kata_sandi' => ['required']
-        ]);
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'kata_sandi' => ['required']
+    ]);
 
+    $user = User::where('email', $credentials['email'])->first();
 
+    if ($user && Hash::check($credentials['kata_sandi'], $user->kata_sandi)) {
+        Auth::login($user);
 
-        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['kata_sandi']])) {
-            $request->session()->regenerate();
+        $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
-        }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return redirect()->intended('/dashboard');
+    }
+
+    return back()->withErrors([
+        'email' => 'Password atau Email Salah',
+    ])->onlyInput('email');
     }
 
 
@@ -55,15 +58,9 @@ class RegistrasiMitraKurirController extends Controller
         $otp = UserOTP::where('otp_token', $request->otp_token)->where('otp_kadaluarsa','>',now())->first();
     if (!$otp) {
         return redirect()->back()->withErrors([
-            'otp_code' => 'OTP CODE tidak ditemukan.'
-        ]);
-    }elseif($otp->otp_kadaluarsa <= now()){
-        return redirect()->back()->withErrors([
-            'otp_code' => 'OTP CODE telah kadaluarsa.'
+            'otp_code' => 'OTP CODE tidak ditemukan atau sudah kadaluarsa'
         ]);
     }
-
-
     $otp->user->tanggal_email_diverifikasi = Date::now();
     $otp->user->save();
     $otp->delete();
