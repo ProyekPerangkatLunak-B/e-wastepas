@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kategori_sampah', function (Blueprint $table) {
-            $table->id('id_kategori_sampah');
-            $table->string('nama_kategori_sampah')->nullable();
-            $table->text('deskripsi_kategori_sampah')->nullable();
+        Schema::create('kategori', function (Blueprint $table) {
+            $table->id('id_kategori');
+            $table->string('nama_kategori')->nullable();
+            $table->text('deskripsi_kategori')->nullable();
+            $table->integer('poin')->nullable();
             $table->timestamps();
         });
     }

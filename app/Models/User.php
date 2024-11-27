@@ -12,10 +12,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable 
 {
+    use HasFactory, Notifiable;
     // /** @use HasFactory<\Database\Factories\UserFactory> */
     // use HasFactory, Notifiable;
     protected $table = 'pengguna';
     protected $primaryKey = 'id_pengguna';
+
 // /**azQA  z   ZQ
     //  * The attributes that are mass assignable.
     //  *

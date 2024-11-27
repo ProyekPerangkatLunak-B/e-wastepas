@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Daerah;
+use App\Models\Dropbox;
+use App\Models\Pengguna;
+use App\Models\Pelacakan;
+use App\Models\SampahDetail;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Penjemputan extends Model
 {
@@ -13,23 +18,49 @@ class Penjemputan extends Model
     protected $primaryKey = 'id_penjemputan';
 
     protected $fillable = [
-        'id_pengguna',
+        'id_daerah',
         'id_dropbox',
+        'id_pengguna_masyarakat',
+        'id_pengguna_kurir',
+        'total_berat',
+        'total_poin',
+        'tanggal_penjemputan',
+        'alamat_penjemputan',
         'catatan',
-        'subtotal_berat',
-        'subtotal_poin',
-        'lokasi_penjemputan',
-        'status_permintaan',
-        'waktu_permintaan',
     ];
 
-    public function pengguna()
+    public function daerah()
     {
-        return $this->belongsTo(UserMasyarakat::class, 'id_pengguna');
+        return $this->belongsTo(Daerah::class, 'id_daerah');
     }
 
     public function dropbox()
     {
         return $this->belongsTo(Dropbox::class, 'id_dropbox');
+    }
+
+    public function penggunaMasyarakat()
+    {
+        return $this->belongsTo(Pengguna::class, 'id_pengguna_masyarakat');
+    }
+
+    public function penggunaKurir()
+    {
+        return $this->belongsTo(Pengguna::class, 'id_pengguna_kurir');
+    }
+
+    public function sampahDetail()
+    {
+        return $this->hasMany(SampahDetail::class, 'id_penjemputan');
+    }
+
+    public function pelacakan()
+    {
+        return $this->hasMany(Pelacakan::class, 'id_penjemputan');
+    }
+
+    public function getLatestPelacakan()
+    {
+        return $this->hasOne(Pelacakan::class, 'id_penjemputan')->latest();
     }
 }

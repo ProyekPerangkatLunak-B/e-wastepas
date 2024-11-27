@@ -14,17 +14,15 @@
                 </svg>
             </span>
             <!-- Teks "Back" di luar lingkaran -->
-            <span class="ml-2">Back</span>
+            <span class="ml-2">Kembali</span>
         </a>
 
         <!-- Bagian Kiri: Form Forgot Password -->
-        <div
-            class="w-full md:w-1/2 flex flex-col justify-center items-center bg-white p-8 md:pl-20 border-r-2 border-gray-200">
+        <div class="w-full md:w-1/2 flex flex-col justify-center items-center bg-white p-8 md:pl-20 border-r-2 border-gray-200">
             <div class="w-full max-w-sm bg-white p-10 shadow-xl rounded-lg">
                 <!-- Judul dan Deskripsi -->
-                <h2 class="text-3xl font-extrabold text-center mb-4">Forgot Password</h2>
-                <p class="text-gray-600 text-center text-base mb-4">No Worries! Enter your email address below, and we'll
-                    send a link to reset your password.</p>
+                <h2 class="text-3xl font-extrabold text-center mb-4">Lupa kata sandi</h2>
+                <p class="text-gray-600 text-center text-base mb-4">Masukan alamat email anda dibawah ini, dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi anda!!!</p>
 
                 <!-- Form -->
                 <form action="{{ route('manajemen.password.email') }}" method="POST">
@@ -37,7 +35,7 @@
                     </div>
                     <div>
                         <button type="submit"
-                            class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg shadow-sm">
+                        class="w-full py-4 mt-4 text-base font-bold rounded-lg text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l text-center shadow-md transition-all">
                             Submit
                         </button>
                     </div>

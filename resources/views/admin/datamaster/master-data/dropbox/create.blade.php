@@ -57,7 +57,7 @@
                 <form action="{{ route('admin.datamaster.dropbox.store') }}" method="POST">
                     @csrf
                     <div class="mb-6">
-                        <label for="id_daerah" class="block text-sm font-medium text-gray-800 mb-1">ID Daerah</label>
+                        <label for="id_daerah" class="block text-sm font-medium text-gray-800 mb-1">Daerah</label>
                         <select id="idDaerahSelect" class="w-full" style="width: 100%" name="id_daerah" required></select>
                     </div>
 
@@ -154,7 +154,7 @@
                                 let newOption = new Option(response.text, response.id,
                                     true, true);
                                 $('#idDaerahSelect').append(newOption).trigger(
-                                'change');
+                                    'change');
                             },
                             error: function() {
                                 alert('Failed to add new region');

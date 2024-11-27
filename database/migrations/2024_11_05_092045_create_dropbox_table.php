@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('id_daerah')->nullable()
                 ->constrained('daerah', 'id_daerah') // Specify the referenced column
                 ->onDelete('cascade');
-            $table->string('nama_lokasi')->nullable();
-            $table->text('alamat')->nullable();
+            $table->string('nama_dropbox')->nullable();
+            $table->text('alamat_dropbox')->nullable();
             $table->tinyInteger('status_dropbox')->nullable();
-            $table->integer('total_transaksi_dropbox')->nullable();
+            $table->integer('total_poin')->nullable();
             $table->timestamps();
         });
     }

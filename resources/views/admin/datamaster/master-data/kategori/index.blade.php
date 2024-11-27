@@ -224,6 +224,16 @@
                 window.changePage = function(page) {
                     table.page(page).draw('page');
                 };
+
+                // Alert untuk tambah data
+                @if (session('success'))
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
             });
         });
 
