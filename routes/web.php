@@ -294,8 +294,8 @@ Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::cl
 Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
 // rute otp
-Route::get('/mitra-kurir/registrasi/otp2', function () {
-    return view('mitra-kurir/registrasi/otp2');
+Route::get('/mitra-kurir/registrasi/otp', function () {
+    return view('mitra-kurir/registrasi/otp');
 });
 
 // forgot password
@@ -318,6 +318,22 @@ Route::get('/mitra-kurir/registrasi/reset-password', function () {
     return view('mitra-kurir/registrasi/reset-password');
 });
 
+// halaman profile
+Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
+    return view('mitra-kurir/registrasi/account-profile/profile');
+})->name('mitra-kurir.registrasi.account-profile.profile');
+
+// halaman account 
+Route::get('/mitra-kurir/registrasi/account-profile/account', function () {
+    return view('mitra-kurir/registrasi/account-profile/account');
+})->name('mitra-kurir.registrasi.account-profile.account');
+
+// change password
+Route::get('/mitra-kurir/registrasi/account-profile/change-password', function () {
+    return view('mitra-kurir/registrasi/account-profile/change-password');
+})->name('mitra-kurir.registrasi.account-profile.change-password');
+
+
 Route::group([
     'prefix' => 'api/',
     'as' => 'api.',
@@ -331,3 +347,4 @@ Route::group([
     Route::get('jenis-option/{id}', [APIController::class, 'JenisOption'])->name('jenis-option');
     Route::get('dropbox-option/{id}', [APIController::class, 'DropboxOption'])->name('dropbox-option');
 });
+
