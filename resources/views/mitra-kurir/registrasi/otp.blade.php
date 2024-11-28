@@ -23,8 +23,33 @@
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form action="{{ url('/mitra-kurir/registrasi/verify-otp') }}" method="POST" class="mt-6 sm:mt-8 space-y-4 sm:space-y-6">
                     {{ csrf_field() }}
-                    @include('components.mitra-kurir.otp.input')
-                    {{-- @include('components.mitra-kurir.otp.change-email') --}}
+                    {{-- @include('components.mitra-kurir.otp.input') --}}
+                    <div>
+                        <div class="flex justify-center">
+                            <div class="flex gap-2 sm:gap-4">
+                                <input id="otp1" name="otp1" type="text" maxlength="1"  
+                                    class="w-14 sm:w-20 md:w-24 lg:w-28
+                                           h-14 sm:h-20 md:h-24 lg:h-28 text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold border border-gray-300 rounded-lg bg-gray-100 shadow-md
+                                    focus:ring-2 focus:ring-green-600 focus:outline-none transition duration-200 ease-in-out 
+                                    hover:scale-105">
+                                <input id="otp2" name="otp2" type="text" maxlength="1"  
+                                    class="w-14 sm:w-20 md:w-24 lg:w-28
+                                           h-14 sm:h-20 md:h-24 lg:h-28 text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold border border-gray-300 rounded-lg bg-gray-100 shadow-md
+                                    focus:ring-2 focus:ring-green-600 focus:outline-none transition duration-200 ease-in-out 
+                                    hover:scale-105">
+                                <input id="otp3" name="otp3" type="text" maxlength="1"  
+                                    class="w-14 sm:w-20 md:w-24 lg:w-28
+                                           h-14 sm:h-20 md:h-24 lg:h-28 text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold border border-gray-300 rounded-lg bg-gray-100 shadow-md
+                                    focus:ring-2 focus:ring-green-600 focus:outline-none transition duration-200 ease-in-out 
+                                    hover:scale-105">
+                                <input id="otp4" name="otp4" type="text" maxlength="1"  
+                                    class="w-14 sm:w-20 md:w-24 lg:w-28
+                                           h-14 sm:h-20 md:h-24 lg:h-28 text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold border border-gray-300 rounded-lg bg-gray-100 shadow-md
+                                    focus:ring-2 focus:ring-green-600 focus:outline-none transition duration-200 ease-in-out 
+                                    hover:scale-105">
+                            </div>
+                        </div>
+                    </div>
                 </form>
                 <div class="flex justify-center">
                     <button type="submit" style="color: white !important;" class="flex w-3/4 justify-center rounded-lg bg-gradient-to-r from-green-500 to-green-700 mt-6 px-4 py-2 text-sm font-semibold leading-6 shadow-sm hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Kirim</button>
