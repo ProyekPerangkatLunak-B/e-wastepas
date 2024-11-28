@@ -52,10 +52,10 @@
                     </div>
                 </form>
                 <div class="flex justify-center">
-                    <button type="submit" style="color: white !important;" class="flex w-3/4 justify-center rounded-lg bg-gradient-to-r from-green-500 to-green-700 mt-6 px-4 py-2 text-sm font-semibold leading-6 shadow-sm hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Kirim</button>
+                    <button type="submit" style="color: white !important;" class="flex w-full justify-center rounded-lg bg-gradient-to-r from-green-500 to-green-700 mt-10 px-4 py-3 text-md font-semibold leading-6 shadow-sm hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Kirim</button>
                 </div>
                 <div class="flex justify-center">
-                    <button type="submit" class="flex w-3/4 justify-center rounded-lg text-green-600 mt-6 px-4 py-2 text-sm font-semibold leading-6 shadow-sm hover:text-white hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" style="color: #4CAF50; transition: color 0.3s ease; background-color: transparent;"
+                    <button type="submit" class="flex w-full justify-center rounded-lg text-green-600 mt-6 px-4 py-3 text-md font-semibold leading-6 shadow-sm hover:text-white hover:bg-gradient-to-r hover:from-green-500 hover:to-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border border-green-600" style="color: #4CAF50; transition: color 0.3s ease; background-color: transparent;"
                     onmouseover="this.style.color='white'" onmouseout="this.style.color='#4CAF50'">Kirim Ulang</button>
                 </div>
             </div>
