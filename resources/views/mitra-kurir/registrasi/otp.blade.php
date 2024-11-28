@@ -12,10 +12,10 @@
                 <img src="/img/mitra-kurir/icon-otp.png" alt="logo OTP" class="w-48 sm:w-56 !important">
             </div>
             <div class="text-center mb-8">
-                <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+                <h2 class="text-xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
                     Konfirmasi OTP
                 </h2>
-                <p class="text-gray-500 text-xs sm:text-sm mb-8 sm:mb-12 px-4">
+                <p class="text-gray-500 text-md sm:text-md mb-8 sm:mb-12 px-4">
                     Silahkan masukan kode verifikasi yang kami kirim kan ke email anda
                 </p>
             </div>
