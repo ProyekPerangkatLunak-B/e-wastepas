@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rules\Unique;
 
-return new class extends Migration 
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -28,13 +28,12 @@ return new class extends Migration
             $table->string('nomor_telepon', 255)->nullable();
             $table->string('no_rekening', 255)->nullable();
             $table->integer('subtotal_poin')->nullable();
-            $table->enum('status', ['Diterima', 'Diproses', 'Ditolak'])->nullable();
             $table->tinyInteger('nomor_terverifikasi')->nullable();
             $table->timestamp('tanggal_email_diverifikasi')->nullable();
             $table->timestamp('tanggal_update')->nullable();
             $table->timestamp('tanggal_dihapus')->nullable();
             $table->timestamp('tanggal_diverifikasi')->nullable();
-            $table->enum('status_verifikasi', ['Diterima', 'Ditolak'])->nullable();
+            $table->enum('status_verifikasi', ['Diterima', 'Ditolak', 'Diproses'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

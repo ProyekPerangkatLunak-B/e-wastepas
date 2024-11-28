@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\JenisSampah;
 use App\Models\KategoriSampah;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class JenisSampahAdminController extends Controller
@@ -17,12 +17,11 @@ class JenisSampahAdminController extends Controller
         return view('admin.datamaster.master-data.jenis.index', compact('jenisSampah'));
     }
 
-
     public function getJenisSampahData()
     {
         try {
-            $jenisSampah = JenisSampah::with('kategoriSampah')
-                ->select('jenis_sampah.*');
+            $jenisSampah = JenisSampah::join('kategori_sampah', 'kategori_sampah.id_kategori_sampah', '=', 'jenis_sampah.id_kategori_sampah')
+                ->select('jenis_sampah.*', 'kategori_sampah.nama_kategori_sampah');
 
             return DataTablesDataTables::of($jenisSampah)
                 ->addColumn('nama_kategori_sampah', function ($row) {
@@ -46,7 +45,6 @@ class JenisSampahAdminController extends Controller
         }
     }
 
-
     public function create()
     {
         $kategoriSampah = KategoriSampah::all(); // Pastikan model KategoriSampah diimport
@@ -58,7 +56,6 @@ class JenisSampahAdminController extends Controller
         $request->validate([
             'id_kategori_sampah' => 'required|integer',
             'nama_jenis_sampah' => 'required|string|max:255',
-            'deskripsi_jenis_sampah' => 'nullable|string',
             'poin' => 'required|integer',
         ]);
 
@@ -78,7 +75,6 @@ class JenisSampahAdminController extends Controller
         $request->validate([
             'id_kategori_sampah' => 'required|integer',
             'nama_jenis_sampah' => 'required|string|max:255',
-            'deskripsi_jenis_sampah' => 'nullable|string',
             'poin' => 'required|integer',
         ]);
 

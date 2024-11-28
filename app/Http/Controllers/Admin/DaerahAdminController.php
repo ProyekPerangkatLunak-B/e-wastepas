@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Daerah;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Daerah;
+use App\Models\Dropbox;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class DaerahAdminController extends Controller
@@ -19,7 +21,13 @@ class DaerahAdminController extends Controller
     public function getDaerahData()
     {
         try {
-            $daerah = Daerah::select(['id_daerah', 'nama_daerah', 'status_daerah', 'total_dropbox']);
+            $daerah = Daerah::select([
+                'id_daerah',
+                'nama_daerah',
+                'status_daerah',
+                DB::raw('(SELECT COUNT(*) FROM dropbox WHERE dropbox.id_daerah = daerah.id_daerah) as total_dropbox')
+            ]);
+
             return DataTablesDataTables::of($daerah)
                 ->addColumn('action', function ($row) {
                     return '
@@ -38,6 +46,7 @@ class DaerahAdminController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
 
     //search
     public function search(Request $request)
@@ -63,8 +72,8 @@ class DaerahAdminController extends Controller
 
         // Set default values for status_daerah and total_dropbox
         $data = $request->all();
-        $data['status_daerah'] = 1; // Automatically set status_daerah to 1
-        $data['total_dropbox'] = 1; // Automatically set total_dropbox to 1
+        $data['status_daerah'] = 1;
+        $data['total_dropbox'] = 0;
 
         // Create the new Daerah record
         $daerah = Daerah::create($data);
@@ -80,8 +89,6 @@ class DaerahAdminController extends Controller
         return response()->json($response);
     }
 
-
-
     public function create()
     {
         return view('admin.datamaster.master-data.daerah.create');
@@ -92,8 +99,9 @@ class DaerahAdminController extends Controller
         $request->validate([
             'nama_daerah' => 'required|string|max:255',
             'status_daerah' => 'required|boolean',
-            'total_dropbox' => 'required|integer',
         ]);
+
+        $request->merge(['total_dropbox' => 0]);
 
         Daerah::create($request->all());
 
@@ -111,7 +119,6 @@ class DaerahAdminController extends Controller
         $request->validate([
             'nama_daerah' => 'required|string|max:255',
             'status_daerah' => 'required|boolean',
-            'total_dropbox' => 'required|integer',
         ]);
 
         $daerah = Daerah::findOrFail($id);
@@ -123,6 +130,7 @@ class DaerahAdminController extends Controller
     public function destroy($id)
     {
         $daerah = Daerah::findOrFail($id);
+        Dropbox::where('id_daerah', $id)->delete();
         $daerah->delete();
 
         return response()->json(['success' => 'Data berhasil dihapus.']);
