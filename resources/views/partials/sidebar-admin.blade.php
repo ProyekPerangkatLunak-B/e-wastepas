@@ -71,32 +71,3 @@
         </nav>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const menu = document.getElementById('dropdown-menu');
-        const icon = document.getElementById('dropdown-icon');
-
-        // Set initial dropdown state based on current route
-        let dropdownOpen = {{ Request::is('admin/datamaster/master-data/*') ? 'true' : 'false' }};
-        if (dropdownOpen) {
-            menu.classList.remove('hidden');
-            icon.textContent = '⌄'; // Down arrow
-        } else {
-            menu.classList.add('hidden');
-            icon.textContent = '>'; // Right arrow
-        }
-
-        // Toggle function
-        window.toggleDropdown = function() {
-            dropdownOpen = !dropdownOpen;
-            if (dropdownOpen) {
-                menu.classList.remove('hidden');
-                icon.textContent = '⌄';
-            } else {
-                menu.classList.add('hidden');
-                icon.textContent = '>';
-            }
-        };
-    });
-</script>

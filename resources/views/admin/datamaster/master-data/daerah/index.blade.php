@@ -271,7 +271,7 @@
                                 'Data berhasil dihapus.',
                                 'success'
                             );
-                            $('#kategoriTable').DataTable().ajax.reload();
+                            $('#daerahTable').DataTable().ajax.reload();
                         },
                         error: function(xhr) {
                             Swal.fire(

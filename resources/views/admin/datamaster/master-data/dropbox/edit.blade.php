@@ -59,7 +59,7 @@
                     @method('PUT')
 
                     <div class="mb-6">
-                        <label for="id_daerah" class="block text-sm font-medium text-gray-800 mb-1">ID Daerah</label>
+                        <label for="id_daerah" class="block text-sm font-medium text-gray-800 mb-1">Daerah</label>
                         <select id="idDaerahSelect" class="w-full" style="width: 100%" name="id_daerah" required>
                             <option value="{{ $dropbox->id_daerah }}" selected>
                                 {{ $dropbox->daerah->nama_daerah ?? 'Pilih Daerah' }}</option>

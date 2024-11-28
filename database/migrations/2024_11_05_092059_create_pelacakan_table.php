@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('status_pelacakan', function (Blueprint $table) {
-            $table->id('id_status_pelacakan');
+        Schema::create('pelacakan', function (Blueprint $table) {
+            $table->id('id_pelacakan');
             $table->foreignId('id_penjemputan')->nullable()
-                ->constrained('penjemputan', 'id_penjemputan') // Specify the referenced column
+                ->constrained('penjemputan', 'id_penjemputan')
                 ->onDelete('cascade');
-            $table->enum('status', ['Dalam Proses', 'Selesai', 'Dibatalkan'])->nullable();
+            $table->foreignId('id_dropbox')->nullable()
+                ->constrained('dropbox', 'id_dropbox')
+                ->onDelete('cascade');
             $table->text('keterangan')->nullable();
-            $table->string('lokasi_dropbox')->nullable();
-            $table->timestamp('dibuat_pada')->nullable();
+            $table->enum('status', ['Menunggu Konfirmasi', 'Dijemput Driver', 'Menuju Dropbox', 'E-Waste Tiba'])->nullable();
+            $table->datetime('estimasi_waktu')->nullable();
             $table->timestamps();
         });
     }

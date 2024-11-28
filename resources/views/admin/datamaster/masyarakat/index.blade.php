@@ -145,7 +145,7 @@
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">status</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">aksi</th>
+                                    style="color: white">action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -257,20 +257,47 @@
                             data: 'id_pengguna',
                             name: 'id_pengguna',
                             orderable: false,
-                            render: function(data) {
-                                return `
-                                    <div class="flex space-x-2">
-                                        <a href="/admin/datamaster/master-data/jenis/${data}/edit"
-                                            style="color: white"
-                                            class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition">
-                                            Edit
-                                        </a>
-                                        <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition"
-                                            onclick="confirmDelete(${data})"
-                                            style="color: white">
-                                            Hapus
-                                        </button>
-                                    </div>`;
+                            render: function(data, type, row) {
+                                let tempElement = document.createElement('div');
+                                tempElement.innerHTML = row.status_verifikasi;
+                                let statusText = tempElement.textContent.trim();
+
+                                if (statusText === "Diproses") {
+                                    return `
+                <div class="flex items-center space-x-2 justify-center">
+                    <button class="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transform hover:-translate-y-1 transition"
+                        onclick="approveVerification(${data})">
+                        ✔️
+                    </button>
+                    <button class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition"
+                        onclick="rejectVerification(${data})">
+                        ❌
+                    </button>
+                </div>
+            `;
+                                } else if (statusText === "Diterima") {
+                                    return `
+                <div class="flex flex-col items-center space-y-2" style="color: white">
+                    <a href="/admin/masyarakat/detail/${data}"
+                        class="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transform hover:-translate-y-1 transition">
+                        Detail
+                    </a>
+                    <button onclick="deleteData('${data}')"
+                        class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition">
+                        Hapus
+                    </button>
+                </div>
+            `;
+                                } else {
+                                    return `
+                <div class="flex items-center justify-center" style="color: white">
+                    <button onclick="deleteData('${data}')"
+                        class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition">
+                        Hapus
+                    </button>
+                </div>
+            `;
+                                }
                             }
                         }
                     ],
@@ -313,8 +340,101 @@
         });
 
 
-        // Move confirmDelete outside of DOMContentLoaded
-        function confirmDelete(id) {
+        // Approve Verification
+        function approveVerification(id) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan menyetujui verifikasi ini!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Setujui!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/admin/masyarakat/${id}/approve`, // Endpoint approve
+                        type: 'PATCH',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Verifikasi telah disetujui.',
+                                'success'
+                            );
+                            $('#masyarakatTable').DataTable().ajax.reload(); // Reload DataTable
+                        },
+                        error: function(xhr) {
+                            Swal.fire(
+                                'Gagal!',
+                                xhr.responseJSON && xhr.responseJSON.error ?
+                                `Gagal menyetujui verifikasi: ${xhr.responseJSON.error}` :
+                                'Terjadi kesalahan saat menyetujui verifikasi.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        }
+
+        // Reject Verification with Reason
+        function rejectVerification(id) {
+            Swal.fire({
+                title: 'Tolak Verifikasi',
+                input: 'textarea',
+                inputPlaceholder: 'Masukkan alasan penolakan...',
+                inputAttributes: {
+                    'aria-label': 'Masukkan alasan penolakan'
+                },
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Tolak',
+                cancelButtonText: 'Batal',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Alasan penolakan harus diisi!';
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/admin/masyarakat/${id}/reject`, // Endpoint reject
+                        type: 'PATCH',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            alasan_penolakan: result.value // Kirim alasan penolakan
+                        },
+                        success: function(response) {
+                            Swal.fire(
+                                'Ditolak!',
+                                'Verifikasi telah ditolak.',
+                                'success'
+                            );
+                            $('#masyarakatTable').DataTable().ajax.reload(); // Reload DataTable
+                        },
+                        error: function(xhr) {
+                            Swal.fire(
+                                'Gagal!',
+                                xhr.responseJSON && xhr.responseJSON.error ?
+                                `Gagal menolak verifikasi: ${xhr.responseJSON.error}` :
+                                'Terjadi kesalahan saat menolak verifikasi.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        }
+
+
+        function deleteData(id) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
                 text: "Data ini akan dihapus secara permanen!",
@@ -327,7 +447,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `{{ route('admin.datamaster.jenis.destroy', '') }}/${id}`,
+                        url: `{{ route('admin.datamaster.masyarakat.destroy', '') }}/${id}`,
                         type: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -20,8 +20,8 @@ class JenisSampahAdminController extends Controller
     public function getJenisSampahData()
     {
         try {
-            $jenisSampah = JenisSampah::with('kategoriSampah')
-                ->select('jenis_sampah.*');
+            $jenisSampah = JenisSampah::join('kategori_sampah', 'kategori_sampah.id_kategori_sampah', '=', 'jenis_sampah.id_kategori_sampah')
+                ->select('jenis_sampah.*', 'kategori_sampah.nama_kategori_sampah');
 
             return DataTablesDataTables::of($jenisSampah)
                 ->addColumn('nama_kategori_sampah', function ($row) {

@@ -34,7 +34,6 @@
   </script>
 </head>
 <body class="h-full font-sans">
-    {{-- @include('include.header') --}}
     @yield('content')
 </body>
 </html>

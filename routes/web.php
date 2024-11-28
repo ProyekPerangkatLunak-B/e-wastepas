@@ -1,19 +1,22 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Manajemen\LoginController;
+use App\Http\Controllers\Admin\KurirAdminController;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Admin\DropboxAdminController;
+use App\Http\Controllers\Admin\MasyarakatAdminController;
 use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
-use App\Http\Controllers\Admin\MasyarakatAdminController;
-use App\Http\Controllers\Manajemen\LoginController;
+use App\Http\Controllers\Masyarakat\ForgotPasswordController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
-use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
-use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
+use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -26,6 +29,13 @@ Route::prefix('admin')
     ->middleware(['auth', 'role:Admin'])
     ->group(function () {
 
+        Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
+            Route::get('/detail/{id}', [MasyarakatAdminController::class, 'show'])->name('show');
+        });
+        Route::prefix('kurir')->name('kurir.')->group(function () {
+            Route::get('/detail/{id}', [KurirAdminController::class, 'show'])->name('show');
+        });
+
         // Submodul Datamaster
         Route::prefix('datamaster')->as('datamaster.')->group(function () {
             Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
@@ -33,6 +43,13 @@ Route::prefix('admin')
                 Route::put('/{id}', [MasyarakatAdminController::class, 'update'])->name('update');
                 Route::delete('/{id}', [MasyarakatAdminController::class, 'destroy'])->name('destroy');
                 Route::get('/data', [MasyarakatAdminController::class, 'getMasyarakatData'])->name('getData');
+            });
+            Route::prefix('kurir')->name('kurir.')->group(function () {
+                Route::get('/', [KurirAdminController::class, 'index'])->name('index');
+                Route::put('/{id}', [KurirAdminController::class, 'update'])->name('update');
+                Route::delete('/{id}', [KurirAdminController::class, 'destroy'])->name('destroy');
+                Route::get('/data', [KurirAdminController::class, 'getKurirData'])->name('getData');
+                Route::get('/{id}/dokumen', [KurirAdminController::class, 'getDokumen'])->name('dokumen');
             });
 
             Route::view('kurir', 'admin.datamaster.kurir.index')->name('kurir.index');
@@ -113,7 +130,11 @@ Route::prefix('admin')
         Route::post('/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
         Route::get('/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
         Route::view('/login', 'admin.datamaster.auth.login.index')->name('login.index');
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::patch('masyarakat/{id}/approve', [MasyarakatAdminController::class, 'approve'])->name('approve');
+        Route::patch('masyarakat/{id}/reject', [MasyarakatAdminController::class, 'reject'])->name('reject');
+        Route::patch('kurir/{id}/approve', [KurirAdminController::class, 'approve'])->name('approve');
+        Route::patch('kurir/{id}/reject', [KurirAdminController::class, 'reject'])->name('reject');
     });
 
 
@@ -189,7 +210,7 @@ Route::group([
         return view('masyarakat.registrasi.login');
     })->name('login');
 
-    Route::post('login', [LoginMasyarakat::class, 'login'])->name('login.submit');
+    Route::post('login', [LoginMasyarakat::class, 'authenticate'])->name('login.submit');
 
     // Submodul Registrasi
     Route::get('register', function () {
@@ -221,8 +242,8 @@ Route::group([
     });
 
     //forgot pass masyarakat
-    Route::post('/masyarakat/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('masyarakat.password.email');
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('penjemputan.kategori');
@@ -273,8 +294,8 @@ Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::cl
 Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
 // rute otp
-Route::get('/mitra-kurir/registrasi/otp2', function () {
-    return view('mitra-kurir/registrasi/otp2');
+Route::get('/mitra-kurir/registrasi/otp', function () {
+    return view('mitra-kurir/registrasi/otp');
 });
 
 // forgot password
@@ -296,3 +317,34 @@ Route::get('/mitra-kurir/registrasi/document-upload', function () {
 Route::get('/mitra-kurir/registrasi/reset-password', function () {
     return view('mitra-kurir/registrasi/reset-password');
 });
+
+// halaman profile
+Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
+    return view('mitra-kurir/registrasi/account-profile/profile');
+})->name('mitra-kurir.registrasi.account-profile.profile');
+
+// halaman account 
+Route::get('/mitra-kurir/registrasi/account-profile/account', function () {
+    return view('mitra-kurir/registrasi/account-profile/account');
+})->name('mitra-kurir.registrasi.account-profile.account');
+
+// change password
+Route::get('/mitra-kurir/registrasi/account-profile/change-password', function () {
+    return view('mitra-kurir/registrasi/account-profile/change-password');
+})->name('mitra-kurir.registrasi.account-profile.change-password');
+
+
+Route::group([
+    'prefix' => 'api/',
+    'as' => 'api.',
+], function () {
+    Route::get('kategori', [APIController::class, 'getKategori'])->name('kategori');
+    Route::get('jenis/{id}', [APIController::class, 'getJenis'])->name('jenis');
+    Route::get('daerah', [APIController::class, 'getDaerah'])->name('daerah');
+    Route::get('dropbox/{id}', [APIController::class, 'getDropbox'])->name('dropbox');
+
+    // Untuk Dropdown Select2 Kel 2
+    Route::get('jenis-option/{id}', [APIController::class, 'JenisOption'])->name('jenis-option');
+    Route::get('dropbox-option/{id}', [APIController::class, 'DropboxOption'])->name('dropbox-option');
+});
+

@@ -26,10 +26,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.tambahKeBox = function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
-            toggleModal(false);
-            return;
-        }
-        const box = `
+            // Jika kategori, jenis, atau berat kosong, tampilkan pesan error
+            btnOk.setAttribute("type", "button");
+            alertModal.classList.remove("hidden");
+            alertMessage.innerHTML =
+                "Silahkan Isi Data Sampah Terlebih Dahulu!";
+            updateAlertClasses("cancel");
+            // Menambahkan event listener untuk menutup modal saat tombol OK diklik
+            btnOk.removeEventListener("click", closeAlertModal);
+            btnOk.addEventListener("click", closeAlertModal);
+        } else {
+            // Jika kategori, jenis, dan berat sudah diisi, tambahkan ke box
+            btnOk.setAttribute("type", "button");
+            alertModal.classList.remove("hidden");
+            alertMessage.innerHTML = "Data berhasil ditambahkan ke dalam box!";
+            updateAlertClasses("inserted");
+            // Menambahkan event listener untuk menutup modal saat tombol OK diklik
+            btnOk.removeEventListener("click", closeAlertModal);
+            btnOk.addEventListener("click", closeAlertModal);
+            const box = `
         <div class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
             <input type="text" value="${
                 kategori.value
@@ -53,9 +68,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }kg</p>
         </div>
                     `;
-        boxSemuaSampah.innerHTML += box;
-        resetInput();
-        toggleModal(false);
+            boxSemuaSampah.innerHTML += box;
+            resetInput();
+            toggleModal(false);
+        }
     };
 
     function resetInput() {
@@ -129,6 +145,16 @@ document.addEventListener("DOMContentLoaded", function () {
             notifikasiAlert.classList.remove("text-secondary-normal");
             underlineAlert.classList.add("bg-red-normal");
             underlineAlert.classList.remove("bg-secondary-normal");
+        } else if (status == "inserted") {
+            btnOk.classList.add(
+                "bg-secondary-normal",
+                "hover:bg-secondary-400"
+            );
+            btnOk.classList.remove("bg-red-normal", "hover:bg-red-300");
+            notifikasiAlert.classList.add("text-secondary-normal");
+            notifikasiAlert.classList.remove("text-red-normal");
+            underlineAlert.classList.add("bg-secondary-normal");
+            underlineAlert.classList.remove("bg-red-normal");
         }
     }
 
@@ -190,6 +216,21 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#dropbox").select2({
         placeholder: "Pilih Dropbox",
         allowClear: true,
+        // ajax: {
+        //     url: "/api/dropbox-option",
+        //     dataType: "json",
+        //     delay: 250,
+        //     data: function (params) {
+        //         return {
+        //             q: params.term,
+        //         };
+        //     },
+        //     processResults: function (data) {
+        //         return {
+        //             results: data,
+        //         };
+        //     },
+        // },
     });
 
     $("#kategori").select2({
@@ -200,6 +241,21 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#jenis").select2({
         placeholder: "Pilih jenis sampah",
         allowClear: true,
+        // ajax: {
+        //     url: "/api/jenis-option/2",
+        //     dataType: "json",
+        //     delay: 250,
+        //     data: function (params) {
+        //         return {
+        //             q: params.term,
+        //         };
+        //     },
+        //     processResults: function (data) {
+        //         return {
+        //             results: data,
+        //         };
+        //     },
+        // },
     });
 });
 
