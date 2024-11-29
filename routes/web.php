@@ -284,19 +284,18 @@ Route::group([
     })->name('penjemputan.riwayat-penjemputan');
 
     // Submodul Registrasi
-    Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
+    
+    Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'RegisterIndex'])->name('registrasi.register');
+    Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
+    Route::get('registrasi/uploadData', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->name('/mitra-kurir/registrasi/document-upload');
+
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
     Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
-    Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
 });
 
-Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
+Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->name('otp.validation');
 Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
-// rute otp
-Route::get('/mitra-kurir/registrasi/otp', function () {
-    return view('mitra-kurir/registrasi/otp');
-});
 
 // forgot password
     Route::get('/mitra-kurir/registrasi/forgot-password', function () {
