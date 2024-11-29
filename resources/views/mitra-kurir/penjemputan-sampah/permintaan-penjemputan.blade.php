@@ -33,20 +33,30 @@
                 </div>
             </div>
 
+{{--            @if (count($pengguna) == 0)--}}
+{{--                <div--}}
+{{--                    class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">--}}
+{{--                    <div class="text-center">--}}
+{{--                        <p class="text-lg font-semibold text-gray-500">Pengguna {{ $search ?? 'pengguna' }} tidak ditemukan.</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @else--}}
             {{-- Card Section --}}
             <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
-                <x-card-permintaan
-                    name="Sarah Martins" 
-                    status="Sedang Diproses " 
-                    image="https://picsum.photos/700/700" 
-                    imageItem="https://picsum.photos/700/700"
-                    {{-- untuk item barang nya --}}
-                    item="televisi"
-                    pcs="3"
-                    link="{{ route('mitra-kurir.penjemputan.detail-permintaan') }}"
-                    />
-        
+                @foreach ($data as $item)
+                            <x-card-permintaan
+                                name="{{ $item->nama }}"
+                                status="{{ $item->status }}"
+                                image="https://picsum.photos/700/700"
+                                imageItem="https://picsum.photos/700/700"
+                                item="{{ $item->nama_jenis }}"
+                                pcs="{{ $item->berat }}"
+                                link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $item->id_penjemputan) }}"
+                                />
+                @endforeach
             </div>
+{{--            @endif--}}
+            {{-- Pagination --}}
         </div>
     </div>
 @endsection
