@@ -1,7 +1,7 @@
 @extends('mitra-kurir.registrasi.layout')
 @section('title', 'Forgot Password')
 @section('content')
-<div class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<div class="bg-cover bg-center min-h-screen relative flex items-center justify-center p-4" style="background-image: url('/img/mitra-kurir/bg-otp.png');">
     <div style="background-color: white;" 
          class="rounded-[2rem] shadow-2xl w-full 
                 sm:max-w-xl md:max-w-2xl lg:max-w-3xl

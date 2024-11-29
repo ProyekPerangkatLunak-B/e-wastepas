@@ -45,7 +45,7 @@
 
 
 
-            <div class="w-[1380px] h-[800px] pb-2 shadow-lg bg-white-normal rounded-2xl">
+            <div class="w-[1380px] h-auto pb-2 shadow-lg bg-white-normal rounded-2xl">
                 <div class="grid grid-cols-1 gap-8 pt-5 mx-12 lg:grid-cols-2">
                     <!-- Kolom Kiri: Pilih Sampah, Dropbox, Tanggal/Waktu, dan Alamat Penjemputan -->
                     <div class="pt-6 space-y-6">
@@ -90,29 +90,31 @@
                         <!-- Alamat Penjemputan -->
                         <x-textarea id="alamat_penjemputan" name="alamat" label="Alamat Penjemputan"
                             placeholder="Jl. Kapten Abdul Hamid No 86" />
+
+                        {{-- Catatan --}}
+                        <x-textarea id="catatan" name="catatan" label="Catatan" placeholder="Hatihati bang kurir" />
                     </div>
 
                     <!-- Kolom Kanan: Daftar Sampah yang Dipilih -->
                     <div class="pt-8 space-y-4">
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
                         <div class="space-y-4 overflow-y-auto h-[500px]" id="boxSemuaSampah">
-                            <!-- Card Sampah 1 -->
-                            {{-- <div
+                            <!-- Card  -->
+                            <div
                                 class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
                                 <div class="p-2 space-y-1">
-                                    <p class="font-semibold">Layar dan Monitor</p>
-                                    <p class="ml-48 text-sm text-center text-gray-500">Lorem ipsum dolor sit amet.</p>
-                                    <p class="font-semibold">Televisi</p>
+                                    <p class="font-semibold">Sampah masih kosong.</p>
+                                    <p class="font-semibold">Kosong nih.</p>
                                 </div>
                                 <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
                 <!-- Tombol Kembali dan Kirim Permintaan -->
-                <div class="flex justify-end mt-8 mr-10 space-x-4">
+                <div class="flex justify-end my-6 mr-10 space-x-4">
                     <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Kembali</a>
                     <button type="button" id="submit-request" name="submit" onclick="kirimKonfirmasi()"
                         class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
@@ -159,13 +161,6 @@
                         <input id="berat" name="" type="number" step="0.01"
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
                             placeholder="0 Kg">
-                    </div>
-                    <div>
-                        <label for="catatan" class="block text-sm font-medium text-gray-700">Catatan</label>
-                        <textarea id="catatan" name="" rows="8"
-                            class="block w-[460px] h-[170px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-                            placeholder="Catatan untuk barang"></textarea>
-                        <p class="text-sm text-gray-500">*Catatan untuk barang yang akan dijemput</p>
                     </div>
                 </div>
 

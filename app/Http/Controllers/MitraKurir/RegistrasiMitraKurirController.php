@@ -18,28 +18,27 @@ class RegistrasiMitraKurirController extends Controller
     {
         return view('mitra-kurir.registrasi.register');
     }
-
-    public function LoginAuth(Request $request)
-    {
-    $credentials = $request->validate([
+public function LoginAuth(Request $request)
+{
+    // Validasi input
+    $validated = $request->validate([
         'email' => ['required', 'email'],
-        'kata_sandi' => ['required']
+        'kata_sandi' => ['required', 'string', 'min:8'],
     ]);
 
     $user = User::where('email', $credentials['email'])->first();
 
-    if ($user && Hash::check($credentials['kata_sandi'], $user->kata_sandi)) {
-        Auth::login($user);
-
+    if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['kata_sandi']], $request->has('remember'))) {
+        // Regenerasi sesi untuk menghindari session fixation
         $request->session()->regenerate();
-
-        return redirect()->intended('/dashboard');
+        return view('mitra-kurir.penjemputan-sampah.kategori');
     }
 
+    // Jika gagal, kembalikan pesan error
     return back()->withErrors([
-        'email' => 'Password atau Email Salah',
-    ])->onlyInput('email');
-    }
+        'email' => 'Email atau kata sandi tidak sesuai.',
+    ])->withInput($request->except('kata_sandi'));
+}
 
 
 
@@ -65,7 +64,7 @@ class RegistrasiMitraKurirController extends Controller
     $otp->user->save();
     $otp->delete();
 
-    return redirect('mitra-kurir/registrasi/login');
+    return redirect('mitra-kurir/registrasi/document-upload');
     }
 
     public function simpanData(Request $request)
