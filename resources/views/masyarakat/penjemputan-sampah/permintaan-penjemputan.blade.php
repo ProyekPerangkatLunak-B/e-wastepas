@@ -85,7 +85,6 @@
                         <!-- Tanggal dan Waktu Penjemputan -->
                         <x-input type="date" id="tanggal_penjemputan" name="tanggal_penjemputan"
                             label="Tanggal dan Waktu Penjemputan" placeholder="mm/dd/yyyy" />
-                        <p class="text-sm text-gray-500">*Jika ingin diambil ke rumah</p>
 
                         <!-- Alamat Penjemputan -->
                         <x-textarea id="alamat_penjemputan" name="alamat" label="Alamat Penjemputan"
@@ -98,15 +97,14 @@
                     <!-- Kolom Kanan: Daftar Sampah yang Dipilih -->
                     <div class="pt-8 space-y-4">
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
-                        <div class="space-y-4 overflow-y-auto h-[500px]" id="boxSemuaSampah">
+                        <div class="h-auto space-y-4 overflow-y-auto" id="boxSemuaSampah">
                             <!-- Card  -->
                             <div
-                                class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-                                <div class="p-2 space-y-1">
-                                    <p class="font-semibold">Sampah masih kosong.</p>
-                                    <p class="font-semibold">Kosong nih.</p>
-                                </div>
-                                <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
+                            class="flex justify-start items-center col-span-full border border-gray-200 bg-white-normal w-[500px] h-[120px] rounded-2xl" id="box-kosong">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
+                                    alt="Tidak Ditemukan" class="w-[50px] h-[50px] ml-12">
+                                <p class="w-64 ml-12 font-bold text-center text-black-normal">Data {{ $search ?? 'Sampah Elektronik' }}
+                                    tidak ditemukan / Masih Kosong.</p>
                             </div>
                         </div>
                     </div>

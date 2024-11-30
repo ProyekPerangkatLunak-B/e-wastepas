@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const jenis = document.getElementById("jenis");
     const berat = document.getElementById("berat");
     const catatan = document.getElementById("catatan");
+    const boxKosong = document.getElementById("box-kosong");
 
     window.tambahKeBox = function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
@@ -36,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
             btnOk.removeEventListener("click", closeAlertModal);
             btnOk.addEventListener("click", closeAlertModal);
         } else {
+            if (!boxKosong.classList.contains("hidden"))
+                boxKosong.classList.add("hidden");
             // Jika kategori, jenis, dan berat sudah diisi, tambahkan ke box
             btnOk.setAttribute("type", "button");
             alertModal.classList.remove("hidden");
