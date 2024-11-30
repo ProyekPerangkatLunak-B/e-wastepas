@@ -48,7 +48,7 @@
             <div class="w-[1380px] h-auto pb-2 shadow-lg bg-white-normal rounded-2xl">
                 <div class="grid grid-cols-1 gap-8 pt-5 mx-12 lg:grid-cols-2">
                     <!-- Kolom Kiri: Pilih Sampah, Dropbox, Tanggal/Waktu, dan Alamat Penjemputan -->
-                    <div class="pt-6 space-y-6">
+                    <div class="pt-8 space-y-3">
                         <!-- Tambah Sampah -->
                         <div class="flex items-center space-x-4">
                             <div class="w-3/4">

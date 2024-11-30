@@ -55,7 +55,7 @@
             @foreach ($penjemputan as $p)
             <!-- Card -->
             <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
-                <div class="relative w-[450px] h-[230px] bg-white shadow-md rounded-xl hover:shadow-lg">
+                <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
                     <!-- Header Card -->
                     <div class="flex justify-between px-6 py-4">
                         <span class="text-lg font-bold text-gray-800">{{ $p->tanggal_penjemputan }}</span>
@@ -68,7 +68,7 @@
                             @foreach ($p->sampahDetail as $s)
                                 <p class="text-xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
                             @endforeach
-                            {{-- <p class="mt-8 text-sm text-black-normal">{{ $p->catatan }}</p> --}}
+                            <p class="absolute bottom-0 text-sm text-gray-500 left- top-28">{{ $p->catatan }}</p>
                         </div>
 
                         <!-- Jumlah Poin -->
@@ -79,19 +79,18 @@
                     </div>
 
                     <!-- Status Button -->
-                    <div class="absolute right-0 bottom-2">
+                    <div class="absolute right-0 bottom-1">
                         <span
-                            class="px-8 py-3 font-semibold text-white-normal text-md rounded-tl-3xl rounded-br-xl"
-                            style="background-color:
-                                @if ($p->getLatestPelacakan->status === 'Menunggu konfirmasi') #888E86
-                                @elseif ($p->getLatestPelacakan->status === 'Dijemput Driver') #595959
-                                @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') #437252
-                                @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') #60B15B
-                                @else #888E86
-                                @endif;">
+                            class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
+                                @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
+                                @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') bg-secondary-normal
+                                @else bg-tertiary-600
+                                @endif">
                             {{ $p->getLatestPelacakan->status }}
                         </span>
                     </div>
+
                 </div>
             </a>
             @endforeach

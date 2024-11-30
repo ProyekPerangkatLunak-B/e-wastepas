@@ -54,30 +54,32 @@
 
                         <!-- Isi Konten -->
                         <div class="flex px-6 mt-4 space-x-6">
-                            <!-- Bagian Jenis dan Deskripsi Sampah -->
-                            <div class="flex-grow my-4">
+                        <!-- Bagian Jenis dan Deskripsi Sampah -->
+                        <div class="relative flex flex-col justify-between my-4 h-full">
+                            <div>
                                 @foreach ($p->sampahDetail as $s)
                                     <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
                                 @endforeach
-                                <p class="mt-6 text-sm text-gray-500">{{ $p->catatan }}</p>
                             </div>
+                            <p class="mt-auto text-sm text-gray-500">{{ $p->catatan }}</p>
+                        </div>
+
                             <div class="flex flex-col items-center justify-between">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
                                     alt="Icon" class="w-[100px] h-[100px]">
-                                    <!-- Status -->
-                                    <div class="absolute right-0 bottom-1">
-                                        <span
-                                            class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl"
-                                            style="background-color:
-                                                @if ($p->getLatestPelacakan->status === 'Menunggu konfirmasi') #888E86
-                                                @elseif ($p->getLatestPelacakan->status === 'Dijemput Driver') #595959
-                                                @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') #437252
-                                                @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') #60B15B
-                                                @else #888E86
-                                                @endif;">
-                                            {{ $p->getLatestPelacakan->status }}
-                                        </span>
-                                    </div>
+                                <!-- Status -->
+                                <div class="absolute right-0 bottom-1">
+                                    <span
+                                        class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                            @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
+                                            @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
+                                            @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') bg-secondary-normal
+                                            @else bg-tertiary-600
+                                            @endif">
+                                        {{ $p->getLatestPelacakan->status }}
+                                    </span>
+                                </div>
+
                             </div>
                         </div>
                     </div>

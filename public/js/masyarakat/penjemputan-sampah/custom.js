@@ -48,28 +48,26 @@ document.addEventListener("DOMContentLoaded", function () {
             btnOk.removeEventListener("click", closeAlertModal);
             btnOk.addEventListener("click", closeAlertModal);
             const box = `
-        <div class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-            <input type="text" value="${
-                kategori.value
-            }" name="kategori[]" hidden>
-            <input type="text" value="${jenis.value}" name="jenis[]" hidden>
-            <input type="text" value="${berat.value}" name="berat[]" hidden>
-            <input type="text" value="${catatan.value}" name="catatan[]" hidden>
-            <div class="p-2 space-y-1">
-                <p class="font-semibold">${
-                    kategori.options[kategori.selectedIndex].text
-                }</p>
-                <p class="ml-48 text-sm text-center text-gray-500">${
-                    catatan.value
-                }</p>
-                <p class="font-semibold">${
-                    jenis.options[jenis.selectedIndex].text
-                }</p>
+            <div class="relative flex items-center justify-between w-[500px] h-[120px] px-10 py-4 bg-gray-100 border border-green-500 rounded-2xl opacity-100">
+                <input type="text" value="${
+                    kategori.value
+                }" name="kategori[]" hidden>
+                <input type="text" value="${jenis.value}" name="jenis[]" hidden>
+                <input type="text" value="${berat.value}" name="berat[]" hidden>
+
+                <div class="flex flex-col justify-start w-[60%] space-y-1">
+                    <p class="font-semibold truncate">${
+                        kategori.options[kategori.selectedIndex].text
+                    }</p>
+                    <p class="font-semibold truncate">${
+                        jenis.options[jenis.selectedIndex].text
+                    }</p>
+                </div>
+
+                <p class="text-xl font-bold text-green-500 w-[30%] text-right">${
+                    berat.value
+                }x</p>
             </div>
-            <p class="mr-6 text-xl font-bold text-secondary-normal">${
-                berat.value
-            }kg</p>
-        </div>
                     `;
             boxSemuaSampah.innerHTML += box;
             resetInput();

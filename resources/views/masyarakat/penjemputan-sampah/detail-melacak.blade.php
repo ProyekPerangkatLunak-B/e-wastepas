@@ -30,7 +30,7 @@
     <div class="flex items-center justify-between ml-20 mr-[9.5rem]">
         <div>
             <h2 class="text-xl font-semibold leading-relaxed">Detail Melacak Penjemputan</h2>
-            <p class="text-base font-normal text-gray-600">ID Penjemputan CO92328393 di akun anda.</p>
+            <p class="text-base font-normal text-gray-500">Dibuat pada : 08.00, 27 Desember 2024</p>
         </div>
 
         <!-- Button Batalkan Penjemputan -->
@@ -112,8 +112,6 @@
 
                     <h3 class="mt-4 mb-2 text-lg font-bold">Dikirim ke</h3>
                     <p class="text-gray-600">DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142.</p>
-
-                    <p class="pt-12 mt-2 font-medium text-gray-600">Dibuat pada : 08.00, 27 Desember 2024</p>
                 </div>
 
                 <!-- Sampah Section -->
@@ -155,20 +153,20 @@
 </div>
 
     <!-- Modal Batalkan Penjemputan -->
-<div id="alertModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">x`
-    <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
-        <h2 class="text-lg font-semibold text-red-normal">Notifikasi</h2>
-         {{-- Underline  --}}
-        <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
+    <div id="alertModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">x`
+        <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
+            <h2 class="text-lg font-semibold text-red-normal">Notifikasi</h2>
+            {{-- Underline  --}}
+            <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
 
-        <p class="mt-4 text-center text-gray-700">Apakah yakin ingin membatalkan penjemputan sampah ini?</p>
-        <p class="mt-2 text-sm text-center text-gray-500">*Keterangan Lorem ipsum dolor sit amet</p>
+            <p class="mt-4 text-center text-gray-700">Apakah yakin ingin membatalkan penjemputan sampah ini?</p>
+            <p class="mt-2 text-sm text-center text-gray-500">*Keterangan Lorem ipsum dolor sit amet</p>
 
-        <div class="flex justify-end mt-12 space-x-4">
-            <button onclick="closeModal()" class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
-            <button class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Batalkan</button>
+            <div class="flex justify-end mt-12 space-x-4">
+                <button onclick="closeModal()" class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
+                <button class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Batalkan</button>
+            </div>
         </div>
     </div>
-</div>
 
 @endsection
