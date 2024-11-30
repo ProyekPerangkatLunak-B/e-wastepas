@@ -9,6 +9,8 @@ use App\Models\JenisSampah;
 use App\Models\KategoriSampah;
 use Illuminate\Database\Seeder;
 use Database\Seeders\seed\AdminSeeder;
+use Database\Seeders\seed\DaerahSeeder;
+use Database\Seeders\seed\DropboxSeeder;
 use Database\Seeders\seed\JenisSeeder;
 use Database\Seeders\seed\KategoriSeeder;
 use Database\Seeders\seed\MasyarakatSeeder;
@@ -26,15 +28,19 @@ class DatabaseSeeder extends Seeder
         //     JenisSampah::factory()->count(12)->create(['id_kategori_sampah' => $kategori->id_kategori_sampah]);
         // });
 
-        Daerah::factory()->count(10)->create()->each(function ($daerah) {
-            Dropbox::factory()->count(15)->create(['id_daerah' => $daerah->id_daerah]);
-        });
+        // Data daerah dan dropbox dengan factory
+        // Daerah::factory()->count(10)->create()->each(function ($daerah) {
+        //     Dropbox::factory()->count(15)->create(['id_daerah' => $daerah->id_daerah]);
+        // });
 
         $this->call([
             AdminSeeder::class,
             MasyarakatSeeder::class,
             KategoriSeeder::class,
             JenisSeeder::class,
+            // Data daerah dan dropbox tanpa factory
+            DaerahSeeder::class,
+            DropboxSeeder::class,
         ]);
     }
 }
