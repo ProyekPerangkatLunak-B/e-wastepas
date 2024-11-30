@@ -56,7 +56,7 @@
                         <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
                             <div class="flex justify-between">
                                 <span class="mx-6 my-2 text-lg font-bold text-gray-800">
-                                    {{ $p->tanggal_penjemputan }}
+                                    {{ date("H:i d/m", $p->waktu_penjemputan) }}
                                 </span>
                             </div>
 
@@ -103,6 +103,7 @@
                 @endforeach
             @endif
         </div>
+    </div>
 
 
         {{-- Pagination --}}
