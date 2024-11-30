@@ -30,7 +30,7 @@
     <div class="flex items-center justify-between ml-20 mr-[9.5rem]">
         <div>
             <h2 class="text-xl font-semibold leading-relaxed">Detail Melacak Penjemputan</h2>
-            <p class="text-base font-normal text-gray-600">ID Penjemputan CO92328393 di akun anda.</p>
+            <p class="text-base font-normal text-gray-600">Dibuat pada : 08.00, 27 Desember 2024</p>
         </div>
 
         <!-- Button Batalkan Penjemputan -->
@@ -113,7 +113,6 @@
                     <h3 class="mt-4 mb-2 text-lg font-bold">Dikirim ke</h3>
                     <p class="text-gray-600">DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142.</p>
 
-                    <p class="pt-12 mt-2 font-medium text-gray-600">Dibuat pada : 08.00, 27 Desember 2024</p>
                 </div>
 
                 <!-- Sampah Section -->
