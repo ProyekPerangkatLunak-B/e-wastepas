@@ -46,7 +46,7 @@
             <!-- Button Batalkan Penjemputan -->
             <a href="{{ route('masyarakat.penjemputan.riwayat') }}"
                 class="flex items-center justify-center w-[220px] h-[50px] px-4 py-2 text-black-normal transition duration-300 bg-secondary-200 hover:bg-secondary-300 rounded-2xl shadow-md border border-secondary-normal">
-                Tampilan lebih banyak
+                Tampilkan lebih banyak
             </a>
         </div>
 
@@ -72,14 +72,16 @@
                                 @endif
                                 <p class="text-xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
                             @endforeach
-                            {{-- <p class="mt-8 text-sm text-black-normal">{{ $p->catatan }}</p> --}}
-                            <p class="mt-8 text-sm text-black-normal">
-                                @if (strlen($p->catatan) > 25)
-                                    {{ substr($p->catatan, 0, 25) }}...
-                                @else
-                                    {{ $p->catatan }}
-                                @endif
-                            </p>
+                            {{-- Catatan --}}
+                            <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
+                                <p class="text-sm text-black-normal">
+                                    @if (strlen($p->catatan) > 25)
+                                        {{ substr($p->catatan, 0, 25) }}...
+                                    @else
+                                        {{ $p->catatan }}
+                                    @endif
+                                </p>
+                            </div>
                         </div>
 
                         <!-- Jumlah Poin -->
@@ -90,14 +92,13 @@
                     </div>
 
                     <!-- Status Button -->
-                    <div class="absolute right-0 bottom-2">
-                        <span class="px-8 py-3 font-semibold text-white-normal text-md rounded-tl-3xl rounded-br-xl"
-                            style="background-color:
-                                @if ($p->getLatestPelacakan->status === 'Menunggu konfirmasi') #888E86
-                                @elseif ($p->getLatestPelacakan->status === 'Dijemput Driver') #595959
-                                @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') #437252
-                                @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') #60B15B
-                                @else #888E86 @endif;">
+                    <div class="absolute right-0 bottom-1">
+                        <span class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                            @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
+                            @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
+                            @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') bg-secondary-normal
+                            @else bg-tertiary-600
+                            @endif;">
                             {{ $p->getLatestPelacakan->status }}
                         </span>
                     </div>
