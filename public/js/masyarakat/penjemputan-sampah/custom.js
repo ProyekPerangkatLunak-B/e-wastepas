@@ -54,13 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }" name="kategori[]" hidden>
             <input type="text" value="${jenis.value}" name="jenis[]" hidden>
             <input type="text" value="${berat.value}" name="berat[]" hidden>
-            <input type="text" value="${catatan.value}" name="catatan[]" hidden>
             <div class="p-2 space-y-1">
                 <p class="font-semibold">${
                     kategori.options[kategori.selectedIndex].text
-                }</p>
-                <p class="ml-48 text-sm text-center text-gray-500">${
-                    catatan.value
                 }</p>
                 <p class="font-semibold">${
                     jenis.options[jenis.selectedIndex].text
