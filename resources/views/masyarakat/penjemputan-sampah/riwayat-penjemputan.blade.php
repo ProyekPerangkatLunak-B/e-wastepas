@@ -69,38 +69,66 @@
 
     <!-- Container Grid Card -->
     <div class="grid grid-cols-3 gap-4 mt-6">
-        <!-- Card 1 -->
-        <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
-            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-between">
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
-                </div>
-
-                <!-- Isi Konten -->
-                <div class="flex items-center px-6 mt-4 space-x-4">
-                    <div class="pl-[10px]">
-                        <p class="text-2xl font-semibold">Rice Cooker</p>
-                        <p class="text-2xl font-semibold">Laptop</p>
-                        <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
+        @if($penjemputan->isEmpty())
+        <!-- Tampilkan pesan jika tidak ada riwayat -->
+        <div class="w-1/2 p-6 mx-auto mt-64 text-center shadow-lg col-span-full bg-white-normal rounded-2xl">
+            <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
+                alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
+            <p class="text-lg font-semibold text-gray-500">Tidak ada riwayat penjemputan tersedia.</p>
+        </div>
+    @else
+        @foreach ($penjemputan as $p)
+            <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
+                <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                    <div class="flex justify-between">
+                        <span class="mx-6 my-2 text-lg font-bold text-gray-800">
+                            {{ date("H:i d/m", $p->waktu_penjemputan) }}
+                        </span>
                     </div>
-                    {{-- Jumlah poin --}}
-                    <div class="flex items-center justify-center mb-10">
-                        <div class="inline-block">
-                            <span class="ml-4 text-6xl font-bold leading-none text-secondary-normal">+45</span>
-                            <span class="ml-4 text-lg font-bold leading-none text-black-normal">Poin</span>
+
+                    <!-- Isi Konten -->
+                    <div class="flex px-6 mt-4 space-x-6">
+                        <!-- Bagian Jenis dan Deskripsi Sampah -->
+                        <div class="flex-grow my-4">
+                            @foreach ($p->sampahDetail as $s)
+                                @if ($loop->index == 2 && count($p->sampahDetail) > 3)
+                                    <p class="text-lg font-semibold">...</p>
+                                    @break
+                                @endif
+                                <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
+                            @endforeach
+                            {{-- Catatan --}}
+                            <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
+                                <p class="text-sm text-black-normal">
+                                    @if (strlen($p->catatan) > 25)
+                                        {{ substr($p->catatan, 0, 25) }}...
+                                    @else
+                                        {{ $p->catatan }}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center justify-between">
+                            <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
+                                alt="Icon" class="w-[100px] h-[100px]">
+                            <!-- Status -->
+                            <div class="absolute right-0 bottom-1">
+                                <span class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                    @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
+                                    @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
+                                    @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') bg-secondary-normal
+                                    @else bg-tertiary-600
+                                    @endif;">
+                                    {{ $p->getLatestPelacakan->status }}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Status Button -->
-                <div class="absolute right-0 bottom-1.5">
-                    <span class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">Sudah Sampai</span>
-                </div>
-            </div>
-        </a>
-
+            </a>
+        @endforeach
+    @endif
+</div>
         {{-- Pagination --}}
         <div class="flex items-center justify-end mt-4">
             <div class="relative space-x-2 left-[58rem]">
@@ -113,6 +141,5 @@
                 <button class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;&gt;</button>
             </div>
         </div>
-    </div>
 </div>
 @endsection

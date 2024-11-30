@@ -74,8 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     function resetInput() {
-        kategori.selectedIndex = 0;
-        jenis.selectedIndex = 0;
+        $("#kategori").val("").trigger("change");
+        $("#jenis").val("").trigger("change");
         berat.value = "";
         catatan.value = "";
     }
