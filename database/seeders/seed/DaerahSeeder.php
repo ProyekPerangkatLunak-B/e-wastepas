@@ -32,6 +32,6 @@ class DaerahSeeder extends Seeder
     }
     private function StatusProbability()
     {
-        return rand(0, 99) < 80; // 80% kesaempatan true
+        return rand(0, 99) < 79; // 80% kesaempatan true
     }
 }
