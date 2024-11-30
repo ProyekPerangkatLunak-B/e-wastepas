@@ -51,42 +51,50 @@
         </div>
 
         <!-- Container Grid Card -->
-        @foreach ($penjemputan as $p)
-            <div class="grid grid-cols-3 gap-4 mt-6">
-                <!-- Card 1 -->
-                <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
-                    <div
-                        class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                        <div class="flex justify-between">
-                            <span class="mx-6 my-2 text-lg font-bold text-gray-800">{{ $p->tanggal_penjemputan }}</span>
+        <div class="grid grid-cols-3 gap-4 mt-6">
+            @foreach ($penjemputan as $p)
+            <!-- Card -->
+            <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
+                <div class="relative w-[450px] h-[230px] bg-white shadow-md rounded-xl hover:shadow-lg">
+                    <!-- Header Card -->
+                    <div class="flex justify-between px-6 py-4">
+                        <span class="text-lg font-bold text-gray-800">{{ $p->tanggal_penjemputan }}</span>
+                    </div>
+
+                    <!-- Konten Card -->
+                    <div class="flex items-start justify-between px-6 mt-2">
+                        <!-- Informasi Sampah -->
+                        <div class="flex-1">
+                            @foreach ($p->sampahDetail as $s)
+                                <p class="text-xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
+                            @endforeach
+                            {{-- <p class="mt-8 text-sm text-black-normal">{{ $p->catatan }}</p> --}}
                         </div>
 
-                        <!-- Isi Konten -->
-                        <div class="flex items-center px-6 mt-4 space-x-4">
-                            <div class="pl-[10px]">
-                                @foreach ($p->sampahDetail as $s)
-                                    <p class="text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
-                                @endforeach
-                                <p class="mt-6 text-sm text-gray-500">{{ $p->catatan }}</p>
-                            </div>
-                            {{-- Jumlah poin --}}
-                            <div class="flex items-center justify-center mb-10">
-                                <div class="inline-block">
-                                    <span class="ml-4 text-6xl font-bold leading-none text-secondary-normal">+
-                                        {{ $p->total_poin }}</span>
-                                    <span class="ml-4 text-lg font-bold leading-none text-black-normal">Poin</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Status Button -->
-                        <div class="absolute right-0 bottom-1.5">
-                            <span
-                                class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">{{ $p->getLatestPelacakan }}</span>
+                        <!-- Jumlah Poin -->
+                        <div class="flex items-baseline justify-end mt-4 space-x-2">
+                            <span class="text-6xl font-bold text-secondary-normal">+{{ $p->total_poin }}</span>
+                            <span class="text-lg font-bold text-black-normal">Poin</span>
                         </div>
                     </div>
-                </a>
-            </div>
-        @endforeach
+
+                    <!-- Status Button -->
+                    <div class="absolute right-0 bottom-2">
+                        <span
+                            class="px-8 py-3 font-semibold text-white-normal text-md rounded-tl-3xl rounded-br-xl"
+                            style="background-color:
+                                @if ($p->getLatestPelacakan->status === 'Menunggu konfirmasi') #888E86
+                                @elseif ($p->getLatestPelacakan->status === 'Dijemput Driver') #595959
+                                @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') #437252
+                                @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') #60B15B
+                                @else #888E86
+                                @endif;">
+                            {{ $p->getLatestPelacakan->status }}
+                        </span>
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
     </div>
 @endsection

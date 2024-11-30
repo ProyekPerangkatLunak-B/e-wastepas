@@ -64,13 +64,20 @@
                             <div class="flex flex-col items-center justify-between">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
                                     alt="Icon" class="w-[100px] h-[100px]">
-                                <!-- Status -->
-                                <div class="absolute right-0 bottom-1">
-                                    <span
-                                        class="px-4 py-2 font-semibold text-white-normal bg-tertiary-600 rounded-tl-3xl rounded-br-xl">
-                                        {{ $p->getLatestPelacakan }}
-                                    </span>
-                                </div>
+                                    <!-- Status -->
+                                    <div class="absolute right-0 bottom-1">
+                                        <span
+                                            class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl"
+                                            style="background-color:
+                                                @if ($p->getLatestPelacakan->status === 'Menunggu konfirmasi') #888E86
+                                                @elseif ($p->getLatestPelacakan->status === 'Dijemput Driver') #595959
+                                                @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') #437252
+                                                @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') #60B15B
+                                                @else #888E86
+                                                @endif;">
+                                            {{ $p->getLatestPelacakan->status }}
+                                        </span>
+                                    </div>
                             </div>
                         </div>
                     </div>
