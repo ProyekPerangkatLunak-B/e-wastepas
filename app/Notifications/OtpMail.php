@@ -25,6 +25,6 @@ class OtpMail extends Notification
             ->subject('Kode OTP Anda')
             ->line('Berikut adalah kode OTP Anda:')
             ->line($this->otp)
-            ->line('Kode ini berlaku selama beberapa menit saja.');
+            ->line('Kode ini berlaku selama beberapa 5 menit saja.');
     }
 }   
