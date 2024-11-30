@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             btnOk.removeEventListener("click", closeAlertModal);
             btnOk.addEventListener("click", closeAlertModal);
             const box = `
+
             <div class="relative flex items-center justify-between w-[500px] h-[120px] px-10 py-4 bg-gray-100 border border-green-500 rounded-2xl opacity-100">
                 <input type="text" value="${
                     kategori.value
