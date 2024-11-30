@@ -57,51 +57,59 @@
                             <!-- Bagian Jenis dan Deskripsi Sampah -->
                             <div class="flex-grow my-4">
                                 @foreach ($p->sampahDetail as $s)
-                                    <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
-                                @endforeach
-                                <p class="mt-6 text-sm text-gray-500">{{ $p->catatan }}</p>
-                            </div>
-                            <div class="flex flex-col items-center justify-between">
-                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
-                                    alt="Icon" class="w-[100px] h-[100px]">
-                                    <!-- Status -->
-                                    <div class="absolute right-0 bottom-1">
-                                        <span
-                                            class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl"
-                                            style="background-color:
+                                    @if ($loop->index == 2 && count($p->sampahDetail) > 3)
+                                        <p class="text-lg font-semibold">...</p>
+                                    @break
+                                @endif
+                                <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
+                            @endforeach
+                            <p class="mt-6 text-sm text-gray-500">
+                                @if (strlen($p->catatan) > 25)
+                                    {{ substr($p->catatan, 0, 25) }}...
+                                @else
+                                    {{ $p->catatan }}
+                                @endif
+                            </p>
+                        </div>
+                        <div class="flex flex-col items-center justify-between">
+                            <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
+                                alt="Icon" class="w-[100px] h-[100px]">
+                            <!-- Status -->
+                            <div class="absolute right-0 bottom-1">
+                                <span class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl"
+                                    style="background-color:
                                                 @if ($p->getLatestPelacakan->status === 'Menunggu konfirmasi') #888E86
                                                 @elseif ($p->getLatestPelacakan->status === 'Dijemput Driver') #595959
                                                 @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') #437252
-                                                @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') #60B15B
-                                                @else #888E86
-                                                @endif;">
-                                            {{ $p->getLatestPelacakan->status }}
-                                        </span>
-                                    </div>
+                                                @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') #60B15B
+                                                @else #888E86 @endif;">
+                                    {{ $p->getLatestPelacakan->status }}
+                                </span>
                             </div>
                         </div>
                     </div>
-                </a>
-            @endforeach
-        </div>
+                </div>
+            </a>
+        @endforeach
+    </div>
 
-        {{-- Pagination --}}
-        <div class="flex items-center justify-end mt-4">
-            <div class="relative space-x-2 left-[58rem]">
-                <button
-                    class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;&lt;</button>
-                <button
-                    class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;</button>
+    {{-- Pagination --}}
+    <div class="flex items-center justify-end mt-4">
+        <div class="relative space-x-2 left-[58rem]">
+            <button
+                class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;&lt;</button>
+            <button
+                class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;</button>
 
-                <button
-                    class="w-[50px] h-[50px] px-3 py-1 font-bold text-green-700 shadow-sm bg-green-200 rounded">1</button>
+            <button
+                class="w-[50px] h-[50px] px-3 py-1 font-bold text-green-700 shadow-sm bg-green-200 rounded">1</button>
 
-                <button
-                    class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;</button>
-                <button
-                    class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;&gt;</button>
-            </div>
+            <button
+                class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;</button>
+            <button
+                class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;&gt;</button>
         </div>
     </div>
-    </div>
+</div>
+</div>
 @endsection

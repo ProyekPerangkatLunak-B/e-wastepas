@@ -69,7 +69,7 @@ class PenjemputanSampahMasyarakatController extends Controller
             $penjemputan->total_poin = $totalPoin;
             $penjemputan->alamat_penjemputan = $request->alamat;
             $penjemputan->tanggal_penjemputan = $request->tanggal_penjemputan;
-            $penjemputan->catatan = 'TESTING';
+            $penjemputan->catatan = $request->catatan;
             $penjemputan->save();
 
             foreach ($request->kategori as $key => $value) {
@@ -111,7 +111,9 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function totalRiwayatPenjemputan()
     {
-        $totalSampah = Pengguna::where('id_pengguna', '1')->first()->penjemputan->count();
+        $totalSampah = SampahDetail::whereHas('penjemputan.penggunaMasyarakat', function ($query) {
+            $query->where('id_pengguna', '1');
+        })->count();
         $totalPoin = Penjemputan::sum('total_poin');
         $penjemputan = Penjemputan::all();
         return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'));
