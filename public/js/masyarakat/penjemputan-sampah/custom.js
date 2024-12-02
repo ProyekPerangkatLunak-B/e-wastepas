@@ -23,26 +23,40 @@ document.addEventListener("DOMContentLoaded", function () {
     const jenis = document.getElementById("jenis");
     const berat = document.getElementById("berat");
     const catatan = document.getElementById("catatan");
+    const boxKosong = document.getElementById("box-kosong");
 
     window.tambahKeBox = function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
-            toggleModal(false);
-            return;
-        }
-        const box = `
-        <div class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
+            // Jika kategori, jenis, atau berat kosong, tampilkan pesan error
+            btnOk.setAttribute("type", "button");
+            alertModal.classList.remove("hidden");
+            alertMessage.innerHTML =
+                "Silahkan Isi Data Sampah Terlebih Dahulu!";
+            updateAlertClasses("cancel");
+            // Menambahkan event listener untuk menutup modal saat tombol OK diklik
+            btnOk.removeEventListener("click", closeAlertModal);
+            btnOk.addEventListener("click", closeAlertModal);
+        } else {
+            if (!boxKosong.classList.contains("hidden"))
+                boxKosong.classList.add("hidden");
+            // Jika kategori, jenis, dan berat sudah diisi, tambahkan ke box
+            btnOk.setAttribute("type", "button");
+            alertModal.classList.remove("hidden");
+            alertMessage.innerHTML = "Data berhasil ditambahkan ke dalam box!";
+            updateAlertClasses("inserted");
+            // Menambahkan event listener untuk menutup modal saat tombol OK diklik
+            btnOk.removeEventListener("click", closeAlertModal);
+            btnOk.addEventListener("click", closeAlertModal);
+            const box = `
+        <div class="flex items-center justify-between w-[500px] h-[120px] px-4 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
             <input type="text" value="${
                 kategori.value
             }" name="kategori[]" hidden>
             <input type="text" value="${jenis.value}" name="jenis[]" hidden>
             <input type="text" value="${berat.value}" name="berat[]" hidden>
-            <input type="text" value="${catatan.value}" name="catatan[]" hidden>
             <div class="p-2 space-y-1">
                 <p class="font-semibold">${
                     kategori.options[kategori.selectedIndex].text
-                }</p>
-                <p class="ml-48 text-sm text-center text-gray-500">${
-                    catatan.value
                 }</p>
                 <p class="font-semibold">${
                     jenis.options[jenis.selectedIndex].text
@@ -53,14 +67,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }kg</p>
         </div>
                     `;
-        boxSemuaSampah.innerHTML += box;
-        resetInput();
-        toggleModal(false);
+            boxSemuaSampah.innerHTML += box;
+            resetInput();
+            toggleModal(false);
+        }
     };
 
     function resetInput() {
-        kategori.selectedIndex = 0;
-        jenis.selectedIndex = 0;
+        $("#kategori").val("").trigger("change");
+        $("#jenis").val("").trigger("change");
         berat.value = "";
         catatan.value = "";
     }
@@ -129,6 +144,16 @@ document.addEventListener("DOMContentLoaded", function () {
             notifikasiAlert.classList.remove("text-secondary-normal");
             underlineAlert.classList.add("bg-red-normal");
             underlineAlert.classList.remove("bg-secondary-normal");
+        } else if (status == "inserted") {
+            btnOk.classList.add(
+                "bg-secondary-normal",
+                "hover:bg-secondary-400"
+            );
+            btnOk.classList.remove("bg-red-normal", "hover:bg-red-300");
+            notifikasiAlert.classList.add("text-secondary-normal");
+            notifikasiAlert.classList.remove("text-red-normal");
+            underlineAlert.classList.add("bg-secondary-normal");
+            underlineAlert.classList.remove("bg-red-normal");
         }
     }
 

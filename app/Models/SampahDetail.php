@@ -24,7 +24,7 @@ class SampahDetail extends Model
 
     public function penjemputan()
     {
-        return $this->belongsTo(Penjemputan::class, 'id_penjemptuan');
+        return $this->belongsTo(Penjemputan::class, 'id_penjemputan');
     }
 
     public function jenis()

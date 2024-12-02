@@ -249,6 +249,9 @@ Route::group([
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('penjemputan.kategori');
     Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMasyarakatController::class, 'permintaan'])->name('penjemputan.permintaan');
     Route::get('penjemputan-sampah/melacak-penjemputan', [PenjemputanSampahMasyarakatController::class, 'melacak'])->name('penjemputan.melacak');
+    Route::get('penjemputan-sampah/detail-kategori', function () {
+        return redirect()->route('masyarakat.penjemputan.kategori');
+    });
     Route::get('penjemputan-sampah/detail-kategori/{id}', [PenjemputanSampahMasyarakatController::class, 'detailKategori'])->name('penjemputan.detail');
     Route::get('penjemputan-sampah/detail-melacak', [PenjemputanSampahMasyarakatController::class, 'detailMelacak'])->name('penjemputan.detail-melacak');
     Route::get('penjemputan-sampah/total-riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'totalRiwayatPenjemputan'])->name('penjemputan.total-riwayat');
@@ -284,19 +287,18 @@ Route::group([
     })->name('penjemputan.riwayat-penjemputan');
 
     // Submodul Registrasi
-    Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'index'])->name('registrasi.register');
+
+    Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'RegisterIndex'])->name('registrasi.register');
+    Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
+    Route::get('registrasi/uploadData', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->name('/mitra-kurir/registrasi/document-upload');
+
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
     Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
-    Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
 });
 
-Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->middleware([])->name('otp.validation');
+Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->name('otp.validation');
 Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 
-// rute otp
-Route::get('/mitra-kurir/registrasi/otp', function () {
-    return view('mitra-kurir/registrasi/otp');
-});
 
 // forgot password
 Route::get('/mitra-kurir/registrasi/forgot-password', function () {
@@ -328,7 +330,7 @@ Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
     return view('mitra-kurir/registrasi/account-profile/profile');
 })->name('mitra-kurir.registrasi.account-profile.profile');
 
-// halaman account 
+// halaman account
 Route::get('/mitra-kurir/registrasi/account-profile/account', function () {
     return view('mitra-kurir/registrasi/account-profile/account');
 })->name('mitra-kurir.registrasi.account-profile.account');
@@ -352,4 +354,3 @@ Route::group([
     Route::get('jenis-option/{id}', [APIController::class, 'JenisOption'])->name('jenis-option');
     Route::get('dropbox-option/{id}', [APIController::class, 'DropboxOption'])->name('dropbox-option');
 });
-

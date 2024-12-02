@@ -43,50 +43,74 @@
                 <p class="text-base font-normal text-gray-600">Daftar penjemputan sampah terbaru di akun anda.</p>
             </div>
 
-            <!-- Button Batalkan Penjemputan -->
+            <!-- Button Tampilkan lebih banyak -->
             <a href="{{ route('masyarakat.penjemputan.riwayat') }}"
                 class="flex items-center justify-center w-[220px] h-[50px] px-4 py-2 text-black-normal transition duration-300 bg-secondary-200 hover:bg-secondary-300 rounded-2xl shadow-md border border-secondary-normal">
-                Tampilan lebih banyak
+                Lihat selengkapnya
             </a>
         </div>
 
         <!-- Container Grid Card -->
-        @foreach ($penjemputan as $p)
-            <div class="grid grid-cols-3 gap-4 mt-6">
-                <!-- Card 1 -->
+        <div class="grid grid-cols-3 gap-4 mt-6">
+            @if($penjemputan->isEmpty())
+            <!-- Tampilkan pesan jika tidak ada riwayat -->
+            <div class="w-1/2 p-6 mx-auto mt-64 text-center shadow-lg col-span-full bg-white-normal rounded-2xl">
+                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
+                    alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
+                <p class="text-lg font-semibold text-gray-500">Tidak ada riwayat penjemputan tersedia.</p>
+            </div>
+        @else
+            @foreach ($penjemputan as $p)
                 <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
-                    <div
-                        class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                    <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
                         <div class="flex justify-between">
-                            <span class="mx-6 my-2 text-lg font-bold text-gray-800">{{ $p->tanggal_penjemputan }}</span>
+                            <span class="mx-6 my-2 text-lg font-bold text-gray-800">
+                                {{ date("H:i d/m", $p->waktu_penjemputan) }}
+                            </span>
                         </div>
 
                         <!-- Isi Konten -->
-                        <div class="flex items-center px-6 mt-4 space-x-4">
-                            <div class="pl-[10px]">
+                        <div class="flex px-6 mt-4 space-x-6">
+                            <!-- Bagian Jenis dan Deskripsi Sampah -->
+                            <div class="flex-grow my-4">
                                 @foreach ($p->sampahDetail as $s)
-                                    <p class="text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
+                                    @if ($loop->index == 2 && count($p->sampahDetail) > 3)
+                                        <p class="text-lg font-semibold">...</p>
+                                        @break
+                                    @endif
+                                    <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
                                 @endforeach
-                                <p class="mt-6 text-sm text-gray-500">{{ $p->catatan }}</p>
+                                {{-- Catatan --}}
+                                <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
+                                    <p class="text-sm text-black-normal">
+                                        @if (strlen($p->catatan) > 25)
+                                            {{ substr($p->catatan, 0, 25) }}...
+                                        @else
+                                            {{ $p->catatan }}
+                                        @endif
+                                    </p>
+                                </div>
                             </div>
-                            {{-- Jumlah poin --}}
-                            <div class="flex items-center justify-center mb-10">
-                                <div class="inline-block">
-                                    <span class="ml-4 text-6xl font-bold leading-none text-secondary-normal">+
-                                        {{ $p->total_poin }}</span>
-                                    <span class="ml-4 text-lg font-bold leading-none text-black-normal">Poin</span>
+                            <div class="flex flex-col items-center justify-between">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
+                                    alt="Icon" class="w-[100px] h-[100px]">
+                                <!-- Status -->
+                                <div class="absolute right-0 bottom-1">
+                                    <span class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                        @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
+                                        @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
+                                        @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') bg-secondary-normal
+                                        @else bg-tertiary-600
+                                        @endif;">
+                                        {{ $p->getLatestPelacakan->status }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Status Button -->
-                        <div class="absolute right-0 bottom-1.5">
-                            <span
-                                class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">{{ $p->getLatestPelacakan }}</span>
-                        </div>
                     </div>
                 </a>
-            </div>
-        @endforeach
+            @endforeach
+        @endif
     </div>
+</div>
 @endsection
