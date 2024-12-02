@@ -21,10 +21,9 @@ class DropboxAdminController extends Controller
             $dropbox = Dropbox::join('daerah', 'daerah.id_daerah', '=', 'dropbox.id_daerah')
                 ->select([
                     'dropbox.id_dropbox',
-                    'dropbox.nama_lokasi',
-                    'dropbox.alamat',
+                    'dropbox.nama_dropbox',
+                    'dropbox.alamat_dropbox',
                     'dropbox.status_dropbox',
-                    'dropbox.total_transaksi_dropbox',
                     'daerah.nama_daerah',
                 ]);
             return DataTablesDataTables::of($dropbox)
@@ -55,8 +54,8 @@ class DropboxAdminController extends Controller
     {
         $request->validate([
             'id_daerah' => 'required|integer',
-            'nama_lokasi' => 'required|string|max:255',
-            'alamat' => 'required|string',
+            'nama_dropbox' => 'required|string|max:255',
+            'alamat_dropbox' => 'required|string',
             'status_dropbox' => 'required|boolean',
             'total_transaksi_dropbox' => 'nullable|integer',
         ]);
@@ -78,8 +77,8 @@ class DropboxAdminController extends Controller
     {
         $request->validate([
             'id_daerah' => 'required|integer',
-            'nama_lokasi' => 'required|string|max:255',
-            'alamat' => 'required|string',
+            'nama_dropbox' => 'required|string|max:255',
+            'alamat_dropbox' => 'required|string',
             'status_dropbox' => 'required|boolean',
             'total_transaksi_dropbox' => 'nullable|integer',
         ]);

@@ -26,7 +26,7 @@ Route::get('/', function () {
 // Route Modul Admin
 Route::prefix('admin')
     ->as('admin.')
-    ->middleware(['auth', 'role:Admin'])
+    // ->middleware(['auth', 'role:Admin'])
     ->group(function () {
 
         Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
