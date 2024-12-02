@@ -109,18 +109,6 @@
                         </div>
                     </form>
                 </div>
-
-                <!-- Tombol Kirim di Bawah -->
-                <div class="mt-6">
-                    <button type="button"
-                            onclick="showVerificationModal()"
-                            class="w-full sm:w-32 float-right
-                                   bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
-                                   hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
-                                   transform hover:scale-105 text-sm sm:text-base">
-                        Simpan
-                    </button>
-                </div>
             </div>
         </div>
     </div>
