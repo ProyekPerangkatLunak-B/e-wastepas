@@ -74,13 +74,13 @@
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
         </button>
 
-        <h2 class="text-lg font-bold mb-4">Periksa Email Anda</h2>
-        <p class="text-gray-700 mt-4">Kami akan mengirimkan tautan pengaturan ulang kata sandi ke email Anda. Silakan periksa kotak masuk Anda.</p>
-        <div class="flex justify-center mb-4">
-            <img src="/img/mitra-kurir/email-sent-icon.png" alt="Success Icon" class="w-32 sm:w-40 !important">
+        <h2 class="text-xl font-bold mb-4">Periksa Email Anda</h2>
+        <p class="text-gray-700 mt-4 text-lg">Kami akan mengirimkan OTP ke email Anda. Silakan periksa kotak masuk Anda.</p>
+        <div class="flex justify-center mb-6">
+            <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="w-32 sm:w-40 !important">
         </div>
         <div class="text-center mt-3 sm:mt-4">
-            <p class="text-gray-600 text-sm sm:text-base">Tidak menerima email? 
+            <p class="text-gray-600 text-lg sm:text-lg">Tidak menerima email? 
             <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Kirim Ulang</a></p> 
         </div>
     </div>
