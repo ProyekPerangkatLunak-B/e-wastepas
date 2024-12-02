@@ -1,7 +1,7 @@
 @extends('mitra-kurir.registrasi.account-profile.layout')
 @section('title', 'Profile')
 @section('content')
-<div class="min-h-screen bg-gray-100 flex items-center justify-center w-full py-8 mt-[5.5rem]">
+<div class="min-h-screen bg-gray-100 flex items-center justify-center w-full py-8 mt-0">
     <div class="flex-1 bg-gray-100">
         {{-- Container utama untuk profil --}}
         <div class="container px-4 mx-auto py-8">
@@ -11,7 +11,7 @@
             p-4 sm:p-6 md:p-8 
             min-h-[500px] sm:min-h-[600px] md:min-h-[700px] 
             relative flex flex-col justify-center items-center
-            mx-auto -mt-14">
+            mx-auto">
 
                 {{-- Bagian judul profil --}}
                 <div class="text-left w-full mb-8">

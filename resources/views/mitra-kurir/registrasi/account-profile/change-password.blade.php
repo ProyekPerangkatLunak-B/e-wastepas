@@ -1,7 +1,7 @@
 @extends('mitra-kurir.registrasi.account-profile.layout')
 @section('title', 'Ganti Password')
 @section('content')
-<div class="min-h-screen bg-gray-100 flex items-center justify-center w-full py-8 mt-[5.5rem]">
+<div class="min-h-screen bg-gray-100 flex items-center justify-center w-full py-8 mt-0">
     <div class="flex-1 bg-gray-100">
         <div class="container px-4 mx-auto py-8">
             <div style="background-color: white;" 
@@ -10,7 +10,7 @@
             p-4 sm:p-6 md:p-8 
             min-h-[500px] sm:min-h-[600px] md:min-h-[700px] 
             relative flex flex-col justify-center items-center
-            mx-auto -mt-14">
+            mx-auto">
 
                 <div class="text-left w-full mb-8">
                     <h2 class="text-2xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3">
