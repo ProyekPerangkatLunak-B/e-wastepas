@@ -168,6 +168,8 @@ Route::group([
         return view('manajemen.registrasi.register'); // Mengarah ke folder registrasi
     })->name('registrasi.register');
 
+    Route::post('/register', [RegistrasiManajemenController::class, 'register'])->name('register.submit');
+
     Route::get('/verify-otp', function () {
         return view('manajemen.registrasi.verify-otp');
     })->name('registrasi.verify-otp');
@@ -304,12 +306,6 @@ Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::c
 Route::get('/mitra-kurir/registrasi/forgot-password', function () {
     return view('mitra-kurir/registrasi/forgot-password');
 });
-
-// change password
-Route::get('/mitra-kurir/registrasi/change-password', function () {
-    return view('mitra-kurir/registrasi/change-password');
-});
-
 // syarat & ketentuan
 Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
     return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
@@ -335,7 +331,7 @@ Route::get('/mitra-kurir/registrasi/account-profile/account', function () {
     return view('mitra-kurir/registrasi/account-profile/account');
 })->name('mitra-kurir.registrasi.account-profile.account');
 
-// change password - account profile 
+// change password
 Route::get('/mitra-kurir/registrasi/account-profile/change-password', function () {
     return view('mitra-kurir/registrasi/account-profile/change-password');
 })->name('mitra-kurir.registrasi.account-profile.change-password');

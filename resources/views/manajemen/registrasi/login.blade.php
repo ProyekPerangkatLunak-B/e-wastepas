@@ -55,7 +55,7 @@
             </form>
 
             <!-- Link Daftar -->
-            <p class="mt-6 text-sm text-gray-600">Belum punya akun? <a href="#"
+            <p class="mt-6 text-sm text-gray-600">Belum punya akun? <a href="{{ route('manajemen.registrasi.register') }}"
                     style="color: #3c674a; font-weight: 600; hover:underline;">Daftar</a></p>
         </div>
     </div>
