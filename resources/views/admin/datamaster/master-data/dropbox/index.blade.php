@@ -135,8 +135,6 @@
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Nama Lokasi</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Daerah</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Alamat</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Total Transaksi
-                                    Dropbox</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Status Dropbox
                                 </th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-white">Aksi</th>
@@ -171,20 +169,16 @@
                     serverSide: true,
                     ajax: '{{ route('admin.datamaster.dropbox.data') }}',
                     columns: [{
-                            data: 'nama_lokasi',
-                            name: 'nama_lokasi'
+                            data: 'nama_dropbox',
+                            name: 'nama_dropbox'
                         },
                         {
                             data: 'nama_daerah',
                             name: 'daerah.nama_daerah'
                         },
                         {
-                            data: 'alamat',
-                            name: 'alamat'
-                        },
-                        {
-                            data: 'total_transaksi_dropbox',
-                            name: 'total_transaksi_dropbox'
+                            data: 'alamat_dropbox',
+                            name: 'alamat_dropbox'
                         },
                         {
                             data: 'status_dropbox',

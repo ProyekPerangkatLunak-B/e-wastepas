@@ -164,13 +164,13 @@
                     serverSide: true,
                     ajax: '{{ route('admin.datamaster.kategori.data') }}',
                     columns: [{
-                            data: 'nama_kategori_sampah',
-                            name: 'nama_kategori_sampah',
+                            data: 'nama_kategori',
+                            name: 'nama_kategori',
                             orderable: true
                         },
                         {
-                            data: 'deskripsi_kategori_sampah',
-                            name: 'deskripsi_kategori_sampah',
+                            data: 'deskripsi_kategori',
+                            name: 'deskripsi_kategori',
                             orderable: true
                         },
                         {

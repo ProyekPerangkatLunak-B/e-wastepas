@@ -19,7 +19,7 @@ class KategoriSampahAdminController extends Controller
     public function getKategoriData()
     {
         try {
-            $kategoriSampah = KategoriSampah::select(['id_kategori_sampah', 'nama_kategori_sampah', 'deskripsi_kategori_sampah']);
+            $kategoriSampah = KategoriSampah::select(['id_kategori', 'nama_kategori', 'deskripsi_kategori']);
             return DataTablesDataTables::of($kategoriSampah)
                 ->addColumn('action', function ($row) {
                     return '
