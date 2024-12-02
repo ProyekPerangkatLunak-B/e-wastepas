@@ -14,6 +14,9 @@ use Database\Seeders\seed\DropboxSeeder;
 use Database\Seeders\seed\JenisSeeder;
 use Database\Seeders\seed\KategoriSeeder;
 use Database\Seeders\seed\MasyarakatSeeder;
+use Database\Seeders\seed\PenjemputanSeeder;
+use Database\Seeders\seed\SampahDetailAndPenjemputanSeeder;
+use Database\Seeders\seed\SampahDetailSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,6 +44,14 @@ class DatabaseSeeder extends Seeder
             // Data daerah dan dropbox tanpa factory
             DaerahSeeder::class,
             DropboxSeeder::class,
+            // Logic 2: one-to-many (satu penjemputan dapat memiliki banyak detail sampah).
+            // PenjemputanSeeder::class,
+            // SampahDetailSeeder::class,
+            /*
+*           Logic 2: 1 pengguna masyarakat dari 5(contoh) sampahDetail, di jemput oleh 5(contoh) 
+*           penjemputan, dan di kirim oleh 1 kurir.
+            */
+            SampahDetailAndPenjemputanSeeder::class,
         ]);
     }
 }
