@@ -101,7 +101,7 @@
                     <!-- Tombol Kirim -->
                     <div class="mt-6">
                         <button type="button"
-                                onclick="showVerificationModal()"
+                                onclick="showUpdateModal()"
                                 class="w-full sm:w-32 float-right
                                        bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
                                        hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
@@ -111,6 +111,30 @@
                     </div>
                 </form>
             </div>    
+        </div>
+    </div>
+</div>
+
+<!-- Pop-up Notification -->
+<div name="account-update-modal" 
+     style="display: none; background: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; align-items: center; justify-content: center; z-index: 50;">
+    <div style="background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 400px; text-align: center; position: relative;">
+        <button onclick="closeUpdateModal()" 
+                class="absolute top-3 right-3 hover:bg-gray-300 p-2 rounded-full transition-colors duration-300 ease-in-out transform hover:scale-105 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+            </svg>
+        </button>
+        <h2 class="text-xl font-bold mb-4">Data Berhasil Diubah</h2>
+        <div class="flex justify-center mb-6">
+            <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="w-32 sm:w-40">
+        </div>
+        <div class="text-center mt-3 sm:mt-4">
+            <p class="text-gray-600 text-lg sm:text-lg">Data profil Anda telah berhasil diperbarui.</p>
+            <button onclick="closeUpdateModal()" 
+                    class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">
+                Kembali
+            </button>
         </div>
     </div>
 </div>
@@ -162,5 +186,24 @@ function handlePhotoUpload(input) {
         */
     }
 }
+
+function showUpdateModal() {
+    const modal = document.querySelector('[name="account-update-modal"]');
+    modal.style.display = 'flex';
+    console.log('Pop-up ditampilkan:', modal.style.display);
+}
+
+function closeUpdateModal() {
+    const modal = document.querySelector('[name="account-update-modal"]');
+    modal.style.display = 'none';
+    console.log('Pop-up disembunyikan:', modal.style.display);
+}
+
+// Close modal ketika user klik di luar modal
+document.querySelector('[name="account-update-modal"]').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeUpdateModal();
+    }
+});
 </script>
 @endsection
