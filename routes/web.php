@@ -159,7 +159,7 @@ Route::group([
 
     // Submodul Registrasi
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan
-    Route::post('/login', [LoginController::class, 'login'])->name('registrasi.login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
     Route::get('/forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('/forgot-password', [RegistrasiManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
