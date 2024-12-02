@@ -174,8 +174,8 @@
                             orderable: true
                         },
                         {
-                            data: 'id_kategori_sampah',
-                            name: 'id_kategori_sampah',
+                            data: 'id_kategori',
+                            name: 'id_kategori',
                             orderable: false,
                             render: function(data, type, row) {
                                 return `
