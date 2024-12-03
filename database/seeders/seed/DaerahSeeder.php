@@ -13,7 +13,7 @@ class DaerahSeeder extends Seeder
      */
     public function run(): void
     {
-        $statusDaerah = rand(0, 99) < 80; // 80% kesaempatan true
+        $statusDaerah = rand(0, 99) < 98; // 80% kesaempatan true
 
         $daerah = [
             ['nama_daerah' => 'Jakarta Pusat', 'status_daerah' => $statusDaerah, 'total_poin' => 120, 'created_at' => now(), 'updated_at' => now(),],
@@ -29,9 +29,5 @@ class DaerahSeeder extends Seeder
         ];
 
         DB::table('daerah')->insert($daerah);
-    }
-    private function StatusProbability()
-    {
-        return rand(0, 99) < 79; // 80% kesaempatan true
     }
 }
