@@ -52,30 +52,30 @@
 
         <!-- Container Grid Card -->
         <div class="grid grid-cols-3 gap-4 mt-6">
-            @if($penjemputan->isEmpty())
-            <!-- Tampilkan pesan jika tidak ada riwayat -->
-            <div class="w-1/2 p-6 mx-auto mt-64 text-center shadow-lg col-span-full bg-white-normal rounded-2xl">
-                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
-                    alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
-                <p class="text-lg font-semibold text-gray-500">Tidak ada riwayat penjemputan tersedia.</p>
-            </div>
-        @else
-            @foreach ($penjemputan as $p)
-                <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
-                    <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                        <div class="flex justify-between">
-                            <span class="mx-6 my-2 text-lg font-bold text-gray-800">
-                                {{ date("H:i d/m", $p->waktu_penjemputan) }}
-                            </span>
-                        </div>
+            @if ($penjemputan->isEmpty())
+                <!-- Tampilkan pesan jika tidak ada riwayat -->
+                <div class="w-1/2 p-6 mx-auto mt-64 text-center shadow-lg col-span-full bg-white-normal rounded-2xl">
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}" alt="Tidak Ditemukan"
+                        class="w-[100px] h-[100px] mx-auto mb-4">
+                    <p class="text-lg font-semibold text-gray-500">Tidak ada riwayat penjemputan tersedia.</p>
+                </div>
+            @else
+                @foreach ($penjemputan as $p)
+                    <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
+                        <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                            <div class="flex justify-between">
+                                <span class="mx-6 my-2 text-lg font-bold text-gray-800">
+                                    {{ date('H:i d/m', $p->waktu_penjemputan) }}
+                                </span>
+                            </div>
 
-                        <!-- Isi Konten -->
-                        <div class="flex px-6 mt-4 space-x-6">
-                            <!-- Bagian Jenis dan Deskripsi Sampah -->
-                            <div class="flex-grow my-4">
-                                @foreach ($p->sampahDetail as $s)
-                                    @if ($loop->index == 2 && count($p->sampahDetail) > 3)
-                                        <p class="text-lg font-semibold">...</p>
+                            <!-- Isi Konten -->
+                            <div class="flex px-6 mt-4 space-x-6">
+                                <!-- Bagian Jenis dan Deskripsi Sampah -->
+                                <div class="flex-grow my-4">
+                                    @foreach ($p->detailPenjemputan as $s)
+                                        @if ($loop->index == 2 && count($p->detailPenjemputan) > 3)
+                                            <p class="text-lg font-semibold">...</p>
                                         @break
                                     @endif
                                     <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
@@ -96,12 +96,12 @@
                                     alt="Icon" class="w-[100px] h-[100px]">
                                 <!-- Status -->
                                 <div class="absolute right-0 bottom-1">
-                                    <span class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                    <span
+                                        class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
                                         @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
                                         @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
                                         @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') bg-secondary-normal
-                                        @else bg-tertiary-600
-                                        @endif;">
+                                        @else bg-tertiary-600 @endif;">
                                         {{ $p->getLatestPelacakan->status }}
                                     </span>
                                 </div>

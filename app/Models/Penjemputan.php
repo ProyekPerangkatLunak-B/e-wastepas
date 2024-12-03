@@ -6,7 +6,7 @@ use App\Models\Daerah;
 use App\Models\Dropbox;
 use App\Models\Pengguna;
 use App\Models\Pelacakan;
-use App\Models\SampahDetail;
+use App\Models\DetailPenjemputan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -27,6 +27,7 @@ class Penjemputan extends Model
         'tanggal_penjemputan',
         'alamat_penjemputan',
         'catatan',
+        'status',
     ];
 
     public function daerah()
@@ -49,9 +50,9 @@ class Penjemputan extends Model
         return $this->belongsTo(Pengguna::class, 'id_pengguna_kurir');
     }
 
-    public function sampahDetail()
+    public function detailPenjemputan()
     {
-        return $this->hasMany(SampahDetail::class, 'id_penjemputan');
+        return $this->hasMany(DetailPenjemputan::class, 'id_penjemputan');
     }
 
     public function pelacakan()

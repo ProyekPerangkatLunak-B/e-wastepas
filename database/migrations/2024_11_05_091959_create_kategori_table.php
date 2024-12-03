@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('id_kategori');
             $table->string('nama_kategori')->nullable();
             $table->text('deskripsi_kategori')->nullable();
-            $table->integer('poin')->nullable();
             $table->timestamps();
         });
     }
