@@ -10,7 +10,7 @@ use App\Models\Kategori;
 use App\Models\Pengguna;
 use App\Models\Pelacakan;
 use App\Models\Penjemputan;
-use App\Models\SampahDetail;
+use App\Models\DetailPenjemputan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -73,12 +73,12 @@ class PenjemputanSampahMasyarakatController extends Controller
             $penjemputan->save();
 
             foreach ($request->kategori as $key => $value) {
-                $SampahDetail = new SampahDetail();
-                $SampahDetail->id_penjemputan = $penjemputan->id_penjemputan;
-                $SampahDetail->id_kategori = $value;
-                $SampahDetail->id_jenis = $request->jenis[$key];
-                $SampahDetail->berat = $request->berat[$key];
-                $SampahDetail->save();
+                $detailPenjemputan = new DetailPenjemputan();
+                $detailPenjemputan->id_penjemputan = $penjemputan->id_penjemputan;
+                $detailPenjemputan->id_kategori = $value;
+                $detailPenjemputan->id_jenis = $request->jenis[$key];
+                $detailPenjemputan->berat = $request->berat[$key];
+                $detailPenjemputan->save();
             }
 
             $pelacakan = new Pelacakan();
@@ -111,7 +111,7 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function totalRiwayatPenjemputan()
     {
-        $totalSampah = SampahDetail::whereHas('penjemputan.penggunaMasyarakat', function ($query) {
+        $totalSampah = DetailPenjemputan::whereHas('penjemputan.penggunaMasyarakat', function ($query) {
             $query->where('id_pengguna', '1');
         })->count();
         $totalPoin = Penjemputan::sum('total_poin');
