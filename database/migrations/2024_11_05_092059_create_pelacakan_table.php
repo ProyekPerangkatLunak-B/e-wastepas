@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('status_pelacakan');
+        Schema::dropIfExists('status');
     }
 };

@@ -46,7 +46,7 @@ class SampahDetailAndPenjemputanSeeder extends Seeder
                     $idJenis = $jenis->random();
                     $poin = $berat * rand(5, 10);
 
-                    DB::table('sampah_detail')->insert([
+                    DB::table('detail_penjemputan')->insert([
                         'id_penjemputan' => $penjemputanId,
                         'id_kategori' => $idKategori,
                         'id_jenis' => $idJenis,
