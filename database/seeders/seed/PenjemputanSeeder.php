@@ -2,54 +2,54 @@
 
 namespace Database\Seeders\seed;
 
-use App\Models\Daerah;
-use App\Models\Dropbox;
-use App\Models\Pengguna;
-use App\Models\Penjemputan;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory as Faker;
 
 class PenjemputanSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $daerahs = Daerah::all();
-        $dropboxes = Dropbox::all();
-        $penggunaMasyarakat = Pengguna::whereHas('peran', function ($query) {
-            $query->where('nama_peran', 'Masyarakat');
-        })->get();
-        $penggunaKurir = Pengguna::whereHas('peran', function ($query) {
-            $query->where('nama_peran', 'Kurir');
-        })->get();
+        $faker = Faker::create('id_ID');
+        $dat = 10; // jumlah data eksekusi
 
-        // Validasi data
-        if ($daerahs->isEmpty() || $dropboxes->isEmpty() || $penggunaMasyarakat->isEmpty() || $penggunaKurir->isEmpty()) {
-            $this->command->error('Pastikan tabel "daerah", "dropbox", dan pengguna memiliki data.');
-            return;
-        }
+        $penggunaMasyarakatIds = DB::table('pengguna')
+            ->where('id_peran', 2) // Peran masyarakat
+            ->pluck('id_pengguna')
+            ->toArray();
 
-        foreach (range(1, 50) as $index) {
-            $kurir = $penggunaKurir->random();
-            $masyarakat = $penggunaMasyarakat->random();
-            $daerah = $daerahs->random();
-            $dropbox = $dropboxes->random();
+        $penggunaKurirIds = DB::table('pengguna')
+            ->where('id_peran', 3) // Peran kurir
+            ->pluck('id_pengguna')
+            ->toArray();
 
-            Penjemputan::create([
+        $daerahIds = DB::table('daerah')->pluck('id_daerah')->toArray();
+        $dropboxIds = DB::table('dropbox')->pluck('id_dropbox')->toArray();
+
+        $data = [];
+        for ($i = 1; $i <= $dat; $i++) {
+            $daerah = DB::table('daerah')
+                ->where('id_daerah', $daerahIds[array_rand($daerahIds)])
+                ->first();
+            $penggunaMasyarakat = DB::table('pengguna')
+                ->where('id_pengguna', $penggunaMasyarakatIds[array_rand($penggunaMasyarakatIds)])->first();
+
+            $data[] = [
                 'id_daerah' => $daerah->id_daerah,
-                'id_dropbox' => $dropbox->id_dropbox,
-                'id_pengguna_masyarakat' => $masyarakat->id_pengguna,
-                'id_pengguna_kurir' => $kurir->id_pengguna,
-                'total_berat' => 0,
-                'total_poin' => 0,
-                'tanggal_penjemputan' => now()->subDays(rand(1, 30)),
-                'alamat_penjemputan' => "Alamat Penjemputan {$index}, {$daerah->nama_daerah}",
-                'catatan' => $index % 5 === 0 ? "Catatan untuk penjemputan {$index}" : null,
-            ]);
+                'id_dropbox' => $dropboxIds[array_rand($dropboxIds)],
+                'id_pengguna_masyarakat' => $penggunaMasyarakat->id_pengguna,
+                'id_pengguna_kurir' => $penggunaKurirIds[array_rand($penggunaKurirIds)],
+                'total_berat' => 0, // init
+                'total_poin' => 0, // init
+                'tanggal_penjemputan' => now(),
+                'alamat_penjemputan' => $i . '. ' . $daerah->nama_daerah . ', ' . $penggunaMasyarakat->alamat,
+                'catatan' => $i . ". " . $faker->realText(rand(50, 100)),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
+
+        DB::table('penjemputan')->insert($data);
     }
 }
