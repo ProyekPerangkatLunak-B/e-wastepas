@@ -61,7 +61,7 @@
                             </div>
 
                             <!-- Isi Konten -->
-                            <div class="flex px-6 mt-4 space-x-6">
+                            <div class="flex px-6 space-x-6">
                                 <!-- Bagian Jenis dan Deskripsi Sampah -->
                                 <div class="flex-grow my-4">
                                     @foreach ($p->detailPenjemputan as $s)
@@ -69,7 +69,7 @@
                                             <p class="text-lg font-semibold">...</p>
                                         @break
                                     @endif
-                                    <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
+                                    <p class="mb-1 text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
                                 @endforeach
                                 {{-- Catatan --}}
                                 <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
@@ -84,7 +84,7 @@
                             </div>
                             <div class="flex flex-col items-center justify-between">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
-                                    alt="Icon" class="w-[100px] h-[100px]">
+                                    alt="Icon" class="mt-4 w-[100px] h-[100px]">
                                 <!-- Status -->
                                 <div class="absolute right-0 bottom-1">
                                     <span

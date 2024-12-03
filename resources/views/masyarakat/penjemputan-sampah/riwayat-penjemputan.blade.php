@@ -98,7 +98,7 @@
                             </div>
 
                             <!-- Isi Konten -->
-                            <div class="flex px-6 mt-4 space-x-6">
+                            <div class="flex px-6 space-x-6">
                                 <!-- Bagian Jenis dan Deskripsi Sampah -->
                                 <div class="flex-grow my-4">
                                     @foreach ($p->detailPenjemputan as $s)
@@ -106,7 +106,7 @@
                                             <p class="text-lg font-semibold">...</p>
                                         @break
                                     @endif
-                                    <p class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</p>
+                                    <p class="text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
                                 @endforeach
                                 {{-- Catatan --}}
                                 <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
@@ -119,9 +119,12 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex flex-col items-center justify-between">
-                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
-                                    alt="Icon" class="w-[100px] h-[100px]">
+                              {{-- Poin Sampah --}}
+                              <div class="flex flex-col items-center justify-between">
+                                <div class="flex items-baseline mx-auto mt-8">
+                                    <p class="text-6xl font-bold text-secondary-normal">+{{ $p->total_poin }}</p>
+                                    <span class="ml-2 text-2xl font-bold text-gray-700">Poin</span>
+                                </div>
                                 <!-- Status -->
                                 <div class="absolute right-0 bottom-1">
                                     <span

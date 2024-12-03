@@ -12,8 +12,8 @@ class DetailPenjemputan extends Model
 {
     use HasFactory;
 
-    protected $table = 'sampah_detail';
-    protected $primaryKey = 'id_sampah_detail';
+    protected $table = 'detail_penjemputan';
+    protected $primaryKey = 'id_detail_penjemputan';
 
     protected $fillable = [
         'id_penjemputan',
