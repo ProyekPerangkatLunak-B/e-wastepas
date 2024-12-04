@@ -90,30 +90,29 @@
             @endif
 
             {{-- Pagination --}}
-            @if (count($jenis) > 0)
-                <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
-                    {{-- Button < & << --}}
-                    @if ($jenis->currentPage() > 1)
-                        <button onclick="window.location.href='{{ $jenis->url(1) }}'"
-                            class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
-                        <button onclick="window.location.href='{{ $jenis->previousPageUrl() }}'"
-                            class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
-                    @endif
+            @if ($jenis->lastPage() > 1) <!-- Memeriksa apakah ada lebih dari 1 halaman -->
+            <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
+                {{-- Button < & << --}}
+                @if ($jenis->currentPage() > 1)
+                    <button onclick="window.location.href='{{ $jenis->url(1) }}'"
+                        class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                    <button onclick="window.location.href='{{ $jenis->previousPageUrl() }}'"
+                        class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                @endif
 
-                    {{-- Nomor halaman  --}}
-                    <button
-                        class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $jenis->currentPage() }}</button>
+                {{-- Nomor halaman --}}
+                <button
+                    class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $jenis->currentPage() }}</button>
 
-                    {{-- Button > & >> --}}
-                    @if ($jenis->hasMorePages())
-                        <button onclick="window.location.href='{{ $jenis->nextPageUrl() }}'"
-                            class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
-                        <button onclick="window.location.href='{{ $jenis->url($jenis->lastPage()) }}'"
-                            class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
-                    @endif
-                </div>
+                {{-- Button > & >> --}}
+                @if ($jenis->hasMorePages())
+                    <button onclick="window.location.href='{{ $jenis->nextPageUrl() }}'"
+                        class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                    <button onclick="window.location.href='{{ $jenis->url($jenis->lastPage()) }}'"
+                        class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                @endif
+            </div>
             @endif
-
         </div>
     </div>
 @endsection

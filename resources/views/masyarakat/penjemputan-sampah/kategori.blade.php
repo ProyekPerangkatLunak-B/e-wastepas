@@ -63,8 +63,6 @@
                     @endif
                 </div>
             </div>
-            {{-- Pagination --}}
-
         </div>
     </div>
 @endsection
