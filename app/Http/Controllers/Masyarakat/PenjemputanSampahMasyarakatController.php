@@ -115,7 +115,7 @@ class PenjemputanSampahMasyarakatController extends Controller
             $query->where('id_pengguna', '1');
         })->count();
         $totalPoin = Penjemputan::sum('total_poin');
-        $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(3);
+        $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(6);
         return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'));
     }
 
