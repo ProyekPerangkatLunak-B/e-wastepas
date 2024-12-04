@@ -96,7 +96,7 @@
                     <!-- button terima & tolak -->
                     <div class="grid grid-cols-2 gap-1 mb-1">
                         <div class="flex justify-end">
-                            <form action="{{ route('update', ['id' => $item->id_pelacakan]) }}" method="POST">
+                            <form action="{{ route('mitra-kurir.penjemputan.detail-permintaan', ['id' => $item->id_pelacakan]) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="status" value="Dijemput Driver">

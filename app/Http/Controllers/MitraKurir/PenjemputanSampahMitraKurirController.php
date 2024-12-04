@@ -9,7 +9,7 @@ use App\Models\Kategori;
 use App\Models\Pelacakan;
 use App\Models\Pengguna;
 use App\Models\Penjemputan;
-use App\Models\SampahDetail;
+use App\Models\Sampah;
 use Illuminate\Http\Request;
 use App\Models\JenisSampah;
 use App\Models\KategoriSampah;
@@ -38,27 +38,29 @@ class PenjemputanSampahMitraKurirController extends Controller
         $data = DB::table('penjemputan')
             ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
             ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
-            ->join('sampah_detail', 'penjemputan.id_pengguna_masyarakat', '=', 'sampah_detail.id_penjemputan')
-            ->join('jenis', 'jenis.id_jenis', '=', 'sampah_detail.id_jenis')
+            ->join('detail_penjemputan', 'penjemputan.id_penjemputan','=','detail_penjemputan.id_penjemputan',  )
+            ->join('jenis', 'jenis.id_jenis', '=', 'detail_penjemputan.id_jenis')
             ->where('pelacakan.status', 'Menunggu Konfirmasi')
-            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','sampah_detail.berat','penjemputan.id_penjemputan')
+            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','detail_penjemputan.berat','penjemputan.id_penjemputan')
             ->get();
 
         return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan', compact('data'));
     }
 
+
+
     public function detailPermintaan($id)
     {
         $data = DB::table('penjemputan')
+            ->join('detail_penjemputan', 'penjemputan.id_penjemputan','=','detail_penjemputan.id_penjemputan')
             ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
             ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
-            ->join('sampah_detail', 'penjemputan.id_pengguna_masyarakat', '=', 'sampah_detail.id_penjemputan')
-            ->join('jenis', 'jenis.id_jenis', '=', 'sampah_detail.id_jenis')
+            ->join('jenis', 'jenis.id_jenis', '=', 'detail_penjemputan.id_jenis')
             ->join('kategori', 'jenis.id_kategori', '=', 'kategori.id_kategori')
             ->join('dropbox', 'penjemputan.id_dropbox', '=', 'dropbox.id_dropbox')
             ->where('penjemputan.id_penjemputan', $id)
-            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','sampah_detail.berat',
-                'penjemputan.id_penjemputan','penjemputan.alamat_penjemputan','penjemputan.tanggal_penjemputan','alamat_dropbox','kategori.nama_kategori')
+            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','detail_penjemputan.berat',
+                'penjemputan.id_penjemputan','penjemputan.alamat_penjemputan','penjemputan.tanggal_penjemputan','dropbox.alamat_dropbox','kategori.nama_kategori')
             ->get();
 
         return view('mitra-kurir.penjemputan-sampah.detail-permintaan', compact('data',));

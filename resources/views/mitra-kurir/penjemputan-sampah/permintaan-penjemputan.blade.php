@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-{{--            @if (count($pengguna) == 0)--}}
+{{--            @if (count($data) == 0)--}}
 {{--                <div--}}
 {{--                    class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">--}}
 {{--                    <div class="text-center">--}}
@@ -41,7 +41,7 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            @else--}}
-            {{-- Card Section --}}
+             Card Section
             <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                 @foreach ($data as $item)
                             <x-card-permintaan
