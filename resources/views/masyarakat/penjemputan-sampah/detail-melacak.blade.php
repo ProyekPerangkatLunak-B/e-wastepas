@@ -222,8 +222,8 @@
                     </div>
 
                     <div class="w-1/2 mt-2">
-                        <h3 class="mb-6 text-lg font-bold">Detail Pelacakan</h3>
-                        <div class="relative space-y-6">
+                        <h3 class="mb-2 text-lg font-bold">Detail Pelacakan</h3>
+                        <div class="relative max-h-[450px] space-y-4 overflow-y-auto">
                             <!-- Garis Vertikal -->
                             <div class="absolute top-0 bottom-0 w-1 bg-gray-200 left-3"></div>
 
@@ -259,15 +259,14 @@
 
                             @if ($penjemputan->status === 'Diterima')
                                 @foreach ($penjemputan->pelacakan as $p)
-                                    @if ($p->status === 'Menunggu Konfirmasi')
-                                    @break
-                                @endif
+                                @if ($p->status !== 'Menunggu Konfirmasi')
+
                                 <div class="relative flex items-start space-x-4">
-                                    <!-- Icon Bullet -->
-                                    <div
+                                        <!-- Icon Bullet -->
+                                        <div
                                         class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full
-                                            @if ($p->id_pelacakan === $penjemputan->getLatestPelacakan->id_pelacakan) bg-green-500
-                                            @else bg-gray-400 @endif
+                                        @if ($p->id_pelacakan === $penjemputan->getLatestPelacakan->id_pelacakan) bg-green-500
+                                        @else bg-gray-400 @endif
                                         ">
                                     </div>
                                     <!-- Text Content -->
@@ -280,11 +279,12 @@
                                         <p class="text-sm text-gray-600"></p>
                                     </div>
                                 </div>
+                                @endif
                             @endforeach
-                        @elseif($penjemputan->status === 'Dibatalkan')
+                            @elseif($penjemputan->status === 'Dibatalkan')
                             <div class="relative flex items-start space-x-4">
                                 <!-- Icon Bullet -->
-                                <div class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-red-500">
+                                <div class="relative z-10 flex-shrink-0 w-6 h-6 bg-red-500 rounded-full">
                                 </div>
                                 <!-- Text Content -->
                                 <div class="flex-1">
@@ -298,7 +298,7 @@
                         @elseif($penjemputan->status === 'Ditolak')
                             <div class="relative flex items-start space-x-4">
                                 <!-- Icon Bullet -->
-                                <div class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-red-500">
+                                <div class="relative z-10 flex-shrink-0 w-6 h-6 bg-red-500 rounded-full">
                                 </div>
                                 <!-- Text Content -->
                                 <div class="flex-1">
@@ -328,7 +328,7 @@
                         Daftar sampah yang ingin dijemput
                     </p>
                 </h3>
-                <div class="space-y-4">
+                <div class="max-h-[450px] space-y-4 overflow-y-auto">
                     <!-- Card Sampah -->
                     {{-- <div
                             class="flex items-center justify-between p-4 bg-gray-100 border shadow-sm rounded-2xl border-secondary-normal focus:ring-1 focus:bg-secondary-normal">
