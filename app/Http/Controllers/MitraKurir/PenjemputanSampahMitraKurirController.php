@@ -44,24 +44,64 @@ class PenjemputanSampahMitraKurirController extends Controller
             ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','sampah_detail.berat','penjemputan.id_penjemputan')
             ->get();
 
-        $pengguna = Pengguna::all();
-        $jenis = Jenis::all();
-        $sampah = SampahDetail::all();
-        $pelacakan = Pelacakan::where('status', 'Menunggu Konfirmasi')->get();
-        $penjemputan = Penjemputan::all();
-
         return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan', compact('data'));
     }
 
     public function detailPermintaan($id)
     {
-        $pengguna = Pengguna::find($id);
-        $jenis = Jenis::all();
-        $sampah = SampahDetail::all();
-        $dropbox = Dropbox::all();
-        $penjemputan = Penjemputan::all();
-        return view('mitra-kurir.penjemputan-sampah.detail-permintaan', compact('pengguna','jenis','sampah','dropbox','penjemputan'));
+        $data = DB::table('penjemputan')
+            ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
+            ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
+            ->join('sampah_detail', 'penjemputan.id_pengguna_masyarakat', '=', 'sampah_detail.id_penjemputan')
+            ->join('jenis', 'jenis.id_jenis', '=', 'sampah_detail.id_jenis')
+            ->join('kategori', 'jenis.id_kategori', '=', 'kategori.id_kategori')
+            ->join('dropbox', 'penjemputan.id_dropbox', '=', 'dropbox.id_dropbox')
+            ->where('penjemputan.id_penjemputan', $id)
+            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','sampah_detail.berat',
+                'penjemputan.id_penjemputan','penjemputan.alamat_penjemputan','penjemputan.tanggal_penjemputan','alamat_dropbox','kategori.nama_kategori')
+            ->get();
+
+        return view('mitra-kurir.penjemputan-sampah.detail-permintaan', compact('data',));
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:Menunggu Konfirmasi,Dijemput Driver',
+        ]);
+
+        // Ambil data pelacakan berdasarkan ID
+        $pelacakan = Pelacakan::find($id);
+
+        if (!$pelacakan) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+
+        // Update status
+        $pelacakan->status = $request->status;
+        $pelacakan->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diperbarui.');
+    }
+
+
+//    public function updateStatus(Request $request)
+//    {
+//        $request->validate([
+//            'status' => 'required|in:Menunggu Konfirmasi,Dijemput Driver',
+//        ]);
+//
+//        $pelacakan = Pelacakan::all();
+//
+//        if (!$pelacakan) {
+//            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+//        }
+//
+//        $pelacakan->status = $request->status;
+//        $pelacakan->save();
+//
+//        return redirect()->back()->with('success', 'Status berhasil diperbarui.');
+//    }
 
     public function dropbox()
     {
