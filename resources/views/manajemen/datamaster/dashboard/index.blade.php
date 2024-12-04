@@ -15,7 +15,8 @@
                 <i class="fa-solid fa-recycle text-3xl text-[#437252]"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Total Sampah Terkumpul</h5>
-                    <p class="text-2xl font-bold">174.265 Kg</p>
+                    {{-- <p class="text-2xl font-bold">174.265 Kg</p> --}}
+                    <p class="text-2xl font-bold">{{ number_format($totalSampah, 3) }} Kg</p>
                 </div>
             </div>
 
