@@ -56,7 +56,7 @@
                         <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
                             <div class="flex justify-between">
                                 <span class="mx-6 my-2 text-lg font-bold text-gray-800">
-                                    {{ date('H:i d/m', $p->waktu_penjemputan) }}
+                                    {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
                                 </span>
                             </div>
 
@@ -71,7 +71,7 @@
                                     @endif
                                     <p class="mb-1 text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
                                 @endforeach
-                                {{-- Catatan --}}
+                                <!-- Catatan -->
                                 <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
                                     <p class="text-sm text-black-normal">
                                         @if (strlen($p->catatan) > 25)
@@ -83,7 +83,13 @@
                                 </div>
                             </div>
                             <div class="flex flex-col items-center justify-between">
-                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/journal-check 2.png') }}"
+                                <img src="
+                                @if ($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Dijemput Driver') {{ asset('img/masyarakat/penjemputan-sampah/box-seam-abu.png') }}
+                                 @elseif($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Menuju Dropbox')
+                                    {{ asset('img/masyarakat/penjemputan-sampah/truck-abu.png') }}
+                                    @else
+                                    {{ asset('img/masyarakat/penjemputan-sampah/journal-check-abu.png') }} @endif
+                                 "
                                     alt="Icon" class="mt-4 w-[100px] h-[100px]">
                                 <!-- Status -->
                                 <div class="absolute right-0 bottom-1">
@@ -91,9 +97,8 @@
                                         class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
                                             @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
                                             @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
-                                            @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
                                             @else bg-tertiary-600 @endif;">
-                                        {{ $p->getLatestPelacakan->status }}
+                                        {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
                                     </span>
                                 </div>
                             </div>

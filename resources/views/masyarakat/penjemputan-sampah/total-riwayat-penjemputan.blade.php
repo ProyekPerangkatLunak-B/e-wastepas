@@ -67,7 +67,7 @@
                                     <!-- Waktu Penjemputan -->
                                     <div class="flex justify-between mx-6 mt-2">
                                         <span class="text-lg font-bold text-gray-800">
-                                            {{ date('H:i d/m', $p->waktu_penjemputan) }}
+                                            {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
                                         </span>
                                     </div>
 
