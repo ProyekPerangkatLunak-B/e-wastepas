@@ -17,7 +17,6 @@ return new class extends Migration
                 ->constrained('kategori', 'id_kategori')
                 ->onDelete('cascade');
             $table->string('nama_jenis')->nullable();
-            $table->text('deskripsi_jenis')->nullable();
             $table->integer('poin')->nullable();
             $table->timestamps();
         });

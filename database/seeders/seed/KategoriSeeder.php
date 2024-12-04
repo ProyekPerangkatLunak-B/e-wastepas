@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\seed;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,21 +16,21 @@ class KategoriSeeder extends Seeder
             [
                 'nama_kategori' => 'Besar',
                 'deskripsi_kategori' => 'Ini adalah kategori sampah elektronik besar.',
-                'poin' => 20,
+                // 'poin' => 20,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'nama_kategori' => 'Sedang',
                 'deskripsi_kategori' => 'Ini adalah kategori sampah elektronik sedang.',
-                'poin' => 10,
+                // 'poin' => 10,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'nama_kategori' => 'Kecil',
                 'deskripsi_kategori' => 'Ini adalah sampah elektronik kecil.',
-                'poin' => 5,
+                // 'poin' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

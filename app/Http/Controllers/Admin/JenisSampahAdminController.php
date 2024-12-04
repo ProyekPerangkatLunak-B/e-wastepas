@@ -20,12 +20,12 @@ class JenisSampahAdminController extends Controller
     public function getJenisSampahData()
     {
         try {
-            $jenisSampah = JenisSampah::join('kategori_sampah', 'kategori_sampah.id_kategori_sampah', '=', 'jenis_sampah.id_kategori_sampah')
-                ->select('jenis_sampah.*', 'kategori_sampah.nama_kategori_sampah');
+            $jenisSampah = JenisSampah::join('kategori', 'kategori.id_kategori', '=', 'jenis.id_kategori')
+                ->select('jenis.*', 'kategori.nama_kategori');
 
             return DataTablesDataTables::of($jenisSampah)
                 ->addColumn('nama_kategori_sampah', function ($row) {
-                    return $row->kategoriSampah ? $row->kategoriSampah->nama_kategori_sampah : '-';
+                    return $row->nama_kategori;
                 })
                 ->addColumn('action', function ($row) {
                     return '
@@ -54,8 +54,8 @@ class JenisSampahAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_kategori_sampah' => 'required|integer',
-            'nama_jenis_sampah' => 'required|string|max:255',
+            'id_kategori' => 'required|integer',
+            'nama_jenis' => 'required|string|max:255',
             'poin' => 'required|integer',
         ]);
 
@@ -73,8 +73,8 @@ class JenisSampahAdminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'id_kategori_sampah' => 'required|integer',
-            'nama_jenis_sampah' => 'required|string|max:255',
+            'id_kategori' => 'required|integer',
+            'nama_jenis' => 'required|string|max:255',
             'poin' => 'required|integer',
         ]);
 

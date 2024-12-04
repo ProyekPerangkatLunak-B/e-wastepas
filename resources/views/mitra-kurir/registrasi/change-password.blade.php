@@ -1,5 +1,5 @@
 @extends('mitra-kurir.registrasi.layout')
-@section('title', 'Forgot Password')
+@section('title', 'Change Password')
 @section('content')
 <div class="bg-cover bg-center min-h-screen relative flex items-center justify-center p-4" style="background-image: url('/img/mitra-kurir/bg-otp.png');">
     <div style="background-color: white;" 
@@ -12,12 +12,8 @@
         <div class="w-full max-w-md mx-auto">
             <div class="text-center mb-8">
                 <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
-                    Masukan Email Anda
+                    Ganti Password
                 </h2>
-                <p class="text-gray-500 text-xs sm:text-sm mb-8 sm:mb-12 px-4">
-                    Kami akan mengirimkan tautan pengaturan ulang kata sandi ke email Anda.
-                    Silakan periksa kotak masuk Anda.
-                </p>
             </div>
 
             <?php if (isset($error)): ?>
@@ -33,19 +29,9 @@
             <?php endif; ?>
 
             <form method="POST" class="max-w-md w-full mx-auto px-4">
-                <div class="mb-12 sm:mb-16 md:mb-24">
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        required
-                        class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none  focus:bg-white"
-                        placeholder="Email"
-                    >
-                </div>
+                {{ csrf_field() }}
+                @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'password', 'label' => 'Kata Sandi Baru', 'type' => 'password', 'placeholder' => 'Masukkan Kata Sandi Baru'])
+                @include('components.mitra-kurir.auth.input', ['id' => 'confirm-password', 'name' => 'ulangiPassword', 'label' => 'Konfirmasi Kata Sandi', 'type' => 'password', 'placeholder' => 'Masukkan Konfirmasi Kata Sandi'])
             </form>
         </div>
 
@@ -65,7 +51,7 @@
 </div>
 
 {{-- pop up --}}
-<div name="email-verification-modal" 
+<div name="password-verification-modal" 
      style="display: none; background: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; align-items: center; justify-content: center; z-index: 50;">
     <div style="background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 400px; text-align: center; position: relative;">
         <!-- Tombol Close -->
@@ -74,40 +60,65 @@
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
         </button>
 
-        <h2 class="text-xl font-bold mb-4">Periksa Email Anda</h2>
-        <p class="text-gray-700 mt-4 text-lg">Kami akan mengirimkan OTP ke email Anda. Silakan periksa kotak masuk Anda.</p>
+        <h2 class="text-xl font-bold mb-4">Password Berhasil Diganti</h2>
         <div class="flex justify-center mb-6">
             <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="w-32 sm:w-40 !important">
         </div>
         <div class="text-center mt-3 sm:mt-4">
-            <p class="text-gray-600 text-lg sm:text-lg">Tidak menerima email? 
-            <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Kirim Ulang</a></p> 
+            <p class="text-gray-600 text-lg sm:text-lg">Sekarang Anda bisa log in dengan kata sandi baru</p> 
+            <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">Kembali
+            </button> 
         </div>
     </div>
 </div>
 
 <script>
     function showVerificationModal() {
-        const email = document.getElementById('email').value;
-        if (!email) {
-            alert('Please enter your email address');
-            return;
-        }
-        
-        // Tampilkan modal
-        document.querySelector('[name="email-verification-modal"]').style.display = 'flex';
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    
+    console.log('Password:', password); // Debugging line
+    console.log('Confirm Password:', confirmPassword); // Debugging line
+    
+    if (!password || !confirmPassword) {
+        alert('Please fill in both password fields');
+        return;
     }
 
-    function closeVerificationModal() {
-        // Sembunyikan modal
-        document.querySelector('[name="email-verification-modal"]').style.display = 'none';
+    if (password !== confirmPassword) {
+        alert('Password and confirmation password do not match');
+        return;
     }
 
-    // Close modal ketika user klik di luar modal
-    document.querySelector('[name="email-verification-modal"]').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeVerificationModal();
-        }
-    });
+    // Debugging line to check if the modal is being shown
+    console.log('Showing password verification modal');
+    
+    // Tampilkan modal
+    const modal = document.querySelector('[name="password-verification-modal"]');
+    modal.style.display = 'flex';
+    
+    // Check if modal display is 'flex' in the console
+    console.log('Modal display style:', modal.style.display);
+}
+
+function closeVerificationModal() {
+    // Debugging line to check if the modal is being closed
+    console.log('Closing password verification modal');
+    
+    // Sembunyikan modal
+    const modal = document.querySelector('[name="password-verification-modal"]');
+    modal.style.display = 'none';
+    
+    // Check if modal display is 'none' in the console
+    console.log('Modal display style:', modal.style.display);
+}
+
+// Close modal ketika user klik di luar modal
+document.querySelector('[name="password-verification-modal"]').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeVerificationModal();
+    }
+});
+
 </script>
 @endsection

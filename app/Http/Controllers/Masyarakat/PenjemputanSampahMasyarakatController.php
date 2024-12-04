@@ -10,7 +10,7 @@ use App\Models\Kategori;
 use App\Models\Pengguna;
 use App\Models\Pelacakan;
 use App\Models\Penjemputan;
-use App\Models\SampahDetail;
+use App\Models\DetailPenjemputan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -69,16 +69,16 @@ class PenjemputanSampahMasyarakatController extends Controller
             $penjemputan->total_poin = $totalPoin;
             $penjemputan->alamat_penjemputan = $request->alamat;
             $penjemputan->tanggal_penjemputan = $request->tanggal_penjemputan;
-            $penjemputan->catatan = 'TESTING';
+            $penjemputan->catatan = $request->catatan;
             $penjemputan->save();
 
             foreach ($request->kategori as $key => $value) {
-                $SampahDetail = new SampahDetail();
-                $SampahDetail->id_penjemputan = $penjemputan->id_penjemputan;
-                $SampahDetail->id_kategori = $value;
-                $SampahDetail->id_jenis = $request->jenis[$key];
-                $SampahDetail->berat = $request->berat[$key];
-                $SampahDetail->save();
+                $detailPenjemputan = new DetailPenjemputan();
+                $detailPenjemputan->id_penjemputan = $penjemputan->id_penjemputan;
+                $detailPenjemputan->id_kategori = $value;
+                $detailPenjemputan->id_jenis = $request->jenis[$key];
+                $detailPenjemputan->berat = $request->berat[$key];
+                $detailPenjemputan->save();
             }
 
             $pelacakan = new Pelacakan();
@@ -111,15 +111,17 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function totalRiwayatPenjemputan()
     {
-        $totalSampah = Pengguna::where('id_pengguna', '1')->first()->penjemputan->count();
+        $totalSampah = DetailPenjemputan::whereHas('penjemputan.penggunaMasyarakat', function ($query) {
+            $query->where('id_pengguna', '1');
+        })->count();
         $totalPoin = Penjemputan::sum('total_poin');
-        $penjemputan = Penjemputan::all();
+        $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(3);
         return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'));
     }
 
     public function riwayatPenjemputan()
     {
-        $penjemputan = [];
+        $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(3);
         return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
     }
 

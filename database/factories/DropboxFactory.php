@@ -22,10 +22,10 @@ class DropboxFactory extends Factory
     {
         return [
             'id_daerah' => Daerah::factory(),
-            'nama_lokasi' => $this->faker->streetName(),
-            'alamat' => $this->faker->address(),
+            'nama_dropbox' => $this->faker->streetName(),
+            'alamat_dropbox' => $this->faker->address(),
             'status_dropbox' => $this->faker->boolean(80),
-            'total_transaksi_dropbox' => $this->faker->numberBetween(1, 100),
+            'total_poin' => $this->faker->numberBetween(1, 100),
             // 'diperbarui_pada' => $this->faker->dateTimeBetween('-1 years', 'now'),
             // 'diperbarui_pada' => $this->faker->dateTimeBetween('-1 years', 'now'),
         ];

@@ -30,6 +30,7 @@ return new class extends Migration
             $table->dateTime('tanggal_penjemputan')->nullable();
             $table->string('alamat_penjemputan')->nullable();
             $table->text('catatan')->nullable();
+            $table->enum('status', ['Diproses', 'Diterima'])->default('Diproses');
             $table->timestamps();
         });
     }

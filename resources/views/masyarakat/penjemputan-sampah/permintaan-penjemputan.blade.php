@@ -48,7 +48,7 @@
             <div class="w-[1380px] h-auto pb-2 shadow-lg bg-white-normal rounded-2xl">
                 <div class="grid grid-cols-1 gap-8 pt-5 mx-12 lg:grid-cols-2">
                     <!-- Kolom Kiri: Pilih Sampah, Dropbox, Tanggal/Waktu, dan Alamat Penjemputan -->
-                    <div class="pt-6 space-y-6">
+                    <div class="pt-8 space-y-4">
                         <!-- Tambah Sampah -->
                         <div class="flex items-center space-x-4">
                             <div class="w-3/4">
@@ -85,7 +85,6 @@
                         <!-- Tanggal dan Waktu Penjemputan -->
                         <x-input type="date" id="tanggal_penjemputan" name="tanggal_penjemputan"
                             label="Tanggal dan Waktu Penjemputan" placeholder="mm/dd/yyyy" />
-                        <p class="text-sm text-gray-500">*Jika ingin diambil ke rumah</p>
 
                         <!-- Alamat Penjemputan -->
                         <x-textarea id="alamat_penjemputan" name="alamat" label="Alamat Penjemputan"
@@ -98,15 +97,13 @@
                     <!-- Kolom Kanan: Daftar Sampah yang Dipilih -->
                     <div class="pt-8 space-y-4">
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
-                        <div class="space-y-4 overflow-y-auto h-[500px]" id="boxSemuaSampah">
-                            <!-- Card  -->
-                            <div
-                                class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-                                <div class="p-2 space-y-1">
-                                    <p class="font-semibold">Sampah masih kosong.</p>
-                                    <p class="font-semibold">Kosong nih.</p>
-                                </div>
-                                <p class="mr-6 text-xl font-bold text-secondary-normal">1x</p>
+                        <div class="max-h-[500px] space-y-4 overflow-y-auto" id="boxSemuaSampah">
+                            <!-- Card -->
+                            <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[500px] h-[120px] rounded-2xl shadow-lg" id="box-kosong">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
+                                    alt="Tidak Ditemukan" class="w-[50px] h-[50px] ml-12">
+                                <p class="w-64 ml-12 font-bold text-center text-black-normal">Data {{ $search ?? 'Sampah Elektronik' }}
+                                    tidak ditemukan / Masih Kosong.</p>
                             </div>
                         </div>
                     </div>
@@ -114,7 +111,7 @@
                 </div>
 
                 <!-- Tombol Kembali dan Kirim Permintaan -->
-                <div class="flex justify-end my-6 mr-10 space-x-4">
+                <div class="flex justify-end mx-10 my-6 space-x-4">
                     <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Kembali</a>
                     <button type="button" id="submit-request" name="submit" onclick="kirimKonfirmasi()"
                         class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">

@@ -167,8 +167,8 @@
                     serverSide: true,
                     ajax: '{{ route('admin.datamaster.jenis.data') }}',
                     columns: [{
-                            data: 'nama_jenis_sampah',
-                            name: 'nama_jenis_sampah'
+                            data: 'nama_jenis',
+                            name: 'nama_jenis'
                         },
                         {
                             data: 'nama_kategori_sampah',
@@ -182,8 +182,8 @@
                             }
                         },
                         {
-                            data: 'id_jenis_sampah',
-                            name: 'id_jenis_sampah',
+                            data: 'id_jenis',
+                            name: 'id_jenis',
                             orderable: false,
                             render: function(data) {
                                 return `

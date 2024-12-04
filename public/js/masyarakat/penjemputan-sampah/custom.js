@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const jenis = document.getElementById("jenis");
     const berat = document.getElementById("berat");
     const catatan = document.getElementById("catatan");
+    const boxKosong = document.getElementById("box-kosong");
 
     window.tambahKeBox = function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
@@ -36,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
             btnOk.removeEventListener("click", closeAlertModal);
             btnOk.addEventListener("click", closeAlertModal);
         } else {
+            if (!boxKosong.classList.contains("hidden"))
+                boxKosong.classList.add("hidden");
             // Jika kategori, jenis, dan berat sudah diisi, tambahkan ke box
             btnOk.setAttribute("type", "button");
             alertModal.classList.remove("hidden");
@@ -45,19 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
             btnOk.removeEventListener("click", closeAlertModal);
             btnOk.addEventListener("click", closeAlertModal);
             const box = `
-        <div class="flex items-center justify-between w-4/5 px-6 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
+        <div class="flex items-center justify-between w-[500px] h-[120px] px-4 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
             <input type="text" value="${
                 kategori.value
             }" name="kategori[]" hidden>
             <input type="text" value="${jenis.value}" name="jenis[]" hidden>
             <input type="text" value="${berat.value}" name="berat[]" hidden>
-            <input type="text" value="${catatan.value}" name="catatan[]" hidden>
             <div class="p-2 space-y-1">
                 <p class="font-semibold">${
                     kategori.options[kategori.selectedIndex].text
-                }</p>
-                <p class="ml-48 text-sm text-center text-gray-500">${
-                    catatan.value
                 }</p>
                 <p class="font-semibold">${
                     jenis.options[jenis.selectedIndex].text
@@ -75,8 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     function resetInput() {
-        kategori.selectedIndex = 0;
-        jenis.selectedIndex = 0;
+        $("#kategori").val("").trigger("change");
+        $("#jenis").val("").trigger("change");
         berat.value = "";
         catatan.value = "";
     }
