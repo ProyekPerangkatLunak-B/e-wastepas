@@ -10,10 +10,10 @@ class KategoriSampah extends Model
     use HasFactory;
 
     protected $table = 'kategori';
-    protected $primaryKey = 'id_kategori_sampah';
+    protected $primaryKey = 'id_kategori';
 
     protected $fillable = [
-        'nama_kategori_sampah',
-        'deskripsi_kategori_sampah',
+        'nama_kategori',
+        'deskripsi_kategori',
     ];
 }

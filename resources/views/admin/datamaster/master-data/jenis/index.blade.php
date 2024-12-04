@@ -182,8 +182,8 @@
                             }
                         },
                         {
-                            data: 'id_jenis_sampah',
-                            name: 'id_jenis_sampah',
+                            data: 'id_jenis',
+                            name: 'id_jenis',
                             orderable: false,
                             render: function(data) {
                                 return `

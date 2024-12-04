@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Kategori;
-use App\Models\SampahDetail;
+use App\Models\DetailPenjemputan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -26,8 +26,8 @@ class Jenis extends Model
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
 
-    public function sampahDetail()
+    public function detailPenjemputan()
     {
-        return $this->hasMany(SampahDetail::class, 'id_jenis');
+        return $this->hasMany(DetailPenjemputan::class, 'id_jenis');
     }
 }
