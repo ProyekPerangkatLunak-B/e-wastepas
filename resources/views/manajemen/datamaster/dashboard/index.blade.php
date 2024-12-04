@@ -15,7 +15,8 @@
                 <i class="fa-solid fa-recycle text-3xl text-[#437252]"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Total Sampah Terkumpul</h5>
-                    <p class="text-2xl font-bold">174.265 Kg</p>
+                    {{-- <p class="text-2xl font-bold">174.265 Kg</p> --}}
+                    <p class="text-2xl font-bold">{{ number_format($totalSampah, 0) }} Kg</p>
                 </div>
             </div>
 
@@ -24,7 +25,8 @@
                 <i class="fa-solid fa-coins text-green text-3xl"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Total Poin Terkumpul</h5>
-                    <p class="text-2xl font-bold">3045 Poin</p>
+                    {{-- <p class="text-2xl font-bold">3045 Poin</p> --}}
+                    <p class="text-2xl font-bold">{{ number_format($totalPoin, 0) }} Poin</p>
                 </div>
             </div>
 
@@ -33,7 +35,8 @@
                 <i class="fa-solid fa-users text-[#437252] text-3xl"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Masyarakat Yang Terdaftar</h5>
-                    <p class="text-2xl font-bold">1019</p>
+                    {{-- <p class="text-2xl font-bold">1019</p> --}}
+                    <p class="text-2xl font-bold">{{ number_format($terdaftar, 0) }} orang</p>
                 </div>
             </div>
 
@@ -42,7 +45,8 @@
                 <i class="fa-solid fa-clipboard-list text-3xl text-[#437252]"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Transaksi Terselesaikan</h5>
-                    <p class="text-2xl font-bold">5362</p>
+                    {{-- <p class="text-2xl font-bold">5362</p> --}}
+                    <p class="text-2xl font-bold">{{ number_format($riwayat, 0) }} transaksi</p>
                 </div>
             </button>
         </div>

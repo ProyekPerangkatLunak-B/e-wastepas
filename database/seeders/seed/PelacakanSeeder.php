@@ -4,6 +4,7 @@ namespace Database\Seeders\seed;
 
 use App\Models\Pelacakan;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Faker\Factory as Faker;
