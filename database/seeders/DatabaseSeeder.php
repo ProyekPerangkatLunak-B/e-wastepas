@@ -15,6 +15,7 @@ use Database\Seeders\seed\DropboxSeeder;
 use Database\Seeders\seed\JenisSeeder;
 use Database\Seeders\seed\KategoriSeeder;
 use Database\Seeders\seed\MasyarakatSeeder;
+use Database\Seeders\seed\PelacakanSeeder;
 use Database\Seeders\seed\PenjemputanSeeder;
 use Database\Seeders\seed\SampahDetailAndPenjemputanSeeder;
 use Database\Seeders\seed\SampahDetailSeeder;
@@ -49,6 +50,7 @@ class DatabaseSeeder extends Seeder
             //  ~~ * ~~
             PenjemputanSeeder::class,
             DetailPenjemputanSeeder::class,
+            PelacakanSeeder::class,
         ]);
     }
 }
