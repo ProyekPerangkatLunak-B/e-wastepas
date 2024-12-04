@@ -9,7 +9,7 @@ use App\Notifications\OtpMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
-use App\Models\DokumenKurir;
+
 
 
 class RegistrasiMitraKurirController extends Controller
