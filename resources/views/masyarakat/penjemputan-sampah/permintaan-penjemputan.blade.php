@@ -97,6 +97,10 @@
                     <!-- Kolom Kanan: Daftar Sampah yang Dipilih -->
                     <div class="pt-8 space-y-4">
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
+                        {{-- Total Sampah --}}
+                        <div class="mb-4 text-lg font-bold text-start">
+                            Total Sampah: <span id="totalSampah">0</span> Pcs
+                        </div>
                         <div class="max-h-[450px] space-y-4 overflow-y-auto" id="boxSemuaSampah">
                             <!-- Card -->
                             <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[500px] h-[120px] rounded-2xl shadow-lg"
@@ -107,10 +111,6 @@
                                     {{ $search ?? 'Sampah Elektronik' }}
                                     tidak ditemukan / Masih Kosong.</p>
                             </div>
-                        </div>
-                        {{-- Total Sampah --}}
-                        <div class="mt-4 text-lg font-bold me-12 text-end">
-                            Total Sampah: <span id="totalSampah">0</span> Pcs
                         </div>
                     </div>
 

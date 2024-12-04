@@ -57,7 +57,7 @@ class PelacakanSeeder extends Seeder
                 'id_penjemputan' => $penjemputan->id_penjemputan,
                 'id_dropbox' => $penjemputan->id_dropbox,
                 'keterangan' => $faker->realText(rand(50, 100)),
-                'status' => 'Menunggu Konfirmasi',
+                'status' => ($penjemputan->status == 'Diterima') ? 'Dijemput Driver' : 'Menunggu Konfirmasi',
                 'estimasi_waktu' => $estimasiWaktu,
                 'created_at' => now(),
                 'updated_at' => now(),
