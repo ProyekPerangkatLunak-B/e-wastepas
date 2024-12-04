@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const berat = document.getElementById("berat");
     const catatan = document.getElementById("catatan");
     const boxKosong = document.getElementById("box-kosong");
+    const totalSampah = document.getElementById("totalSampah");
 
     window.tambahKeBox = function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
@@ -77,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
             boxSemuaSampah.innerHTML += box;
+            totalSampah.innerHTML = parseInt(totalSampah.innerHTML) + 1;
             resetInput();
             toggleModal(false);
         }

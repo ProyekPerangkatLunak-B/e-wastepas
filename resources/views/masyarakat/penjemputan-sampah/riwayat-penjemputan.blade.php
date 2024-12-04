@@ -119,10 +119,16 @@
                                     </p>
                                 </div>
                             </div>
-                              {{-- Poin Sampah --}}
-                              <div class="flex flex-col items-center justify-between">
+                            {{-- Poin Sampah --}}
+                            <div class="flex flex-col items-center justify-between">
                                 <div class="flex items-baseline mx-auto mt-8">
-                                    <p class="text-6xl font-bold text-secondary-normal">+{{ $p->total_poin }}</p>
+                                    <p
+                                        class="text-6xl font-bold
+                                    @if ($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Sudah Sampai') text-secondary-normal
+                                            @else text-tertiary-600 @endif
+                                            ">
+                                        +{{ $p->total_poin }}
+                                    </p>
                                     <span class="ml-2 text-2xl font-bold text-gray-700">Poin</span>
                                 </div>
                                 <!-- Status -->
@@ -131,9 +137,11 @@
                                         class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
                                     @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
                                     @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
-                                    @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') bg-secondary-normal
+                                    @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
+                                    @elseif ($p->status === 'Ditolak') bg-red-500
+                                    @elseif ($p->status === 'Dibatalkan') bg-red-normal
                                     @else bg-tertiary-600 @endif;">
-                                        {{ $p->getLatestPelacakan->status }}
+                                        {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
                                     </span>
                                 </div>
                             </div>
@@ -144,21 +152,28 @@
         @endif
     </div>
     {{-- Pagination --}}
-    <div class="flex items-center justify-end mt-4">
-        <div class="relative space-x-2 left-[58rem]">
-            <button
-                class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;&lt;</button>
-            <button
-                class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&lt;</button>
+    @if ($penjemputan->total() > 6)
+        <div class="flex items-center justify-end mt-4 ml-24 space-x-2">
+            {{-- Button < & << --}}
+            @if ($penjemputan->currentPage() > 1)
+                <button onclick="window.location.href='{{ $penjemputan->url(1) }}'"
+                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                <button onclick="window.location.href='{{ $penjemputan->previousPageUrl() }}'"
+                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+            @endif
 
+            {{-- Nomor halaman --}}
             <button
-                class="w-[50px] h-[50px] px-3 py-1 font-bold text-green-700 shadow-sm bg-green-200 rounded">1</button>
+                class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $penjemputan->currentPage() }}</button>
 
-            <button
-                class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;</button>
-            <button
-                class="w-[50px] h-[50px] px-2 py-1 text-gray-600 rounded shadow-sm bg-white-200 hover:bg-white-300">&gt;&gt;</button>
+            {{-- Button > & >> --}}
+            @if ($penjemputan->hasMorePages())
+                <button onclick="window.location.href='{{ $penjemputan->nextPageUrl() }}'"
+                    class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                <button onclick="window.location.href='{{ $penjemputan->url($penjemputan->lastPage()) }}'"
+                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+            @endif
         </div>
-    </div>
+    @endif
 </div>
 @endsection

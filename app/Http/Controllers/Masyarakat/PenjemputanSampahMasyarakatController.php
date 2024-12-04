@@ -94,7 +94,11 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function melacak()
     {
-        $penjemputan = Penjemputan::orderByDesc('created_at')->paginate(6);
+        $penjemputan = Penjemputan::where('status', 'Diterima')
+            ->whereHas('pelacakan', function ($query) {
+                $query->where('status', '!=', 'Sudah Sampai');
+            })
+            ->orderByDesc('created_at')->paginate(6);
         return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
     }
 
@@ -104,24 +108,26 @@ class PenjemputanSampahMasyarakatController extends Controller
         return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis'));
     }
 
-    public function detailMelacak()
+    public function detailMelacak($id)
     {
         return view('masyarakat.penjemputan-sampah.detail-melacak');
     }
 
     public function totalRiwayatPenjemputan()
     {
-        $totalSampah = DetailPenjemputan::whereHas('penjemputan.penggunaMasyarakat', function ($query) {
-            $query->where('id_pengguna', '1');
+        $totalSampah = DetailPenjemputan::whereHas('penjemputan.pelacakan', function ($query) {
+            $query->where('status', 'Sudah Sampai');
         })->count();
-        $totalPoin = Penjemputan::sum('total_poin');
+        $totalPoin = Penjemputan::whereHas('pelacakan', function ($query) {
+            $query->where('status', 'Sudah Sampai');
+        })->sum('total_poin');
         $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(6);
         return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'));
     }
 
     public function riwayatPenjemputan()
     {
-        $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(3);
+        $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(6);
         return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
     }
 
