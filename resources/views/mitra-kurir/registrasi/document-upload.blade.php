@@ -4,16 +4,16 @@
 <div class="flex items-center justify-center min-h-screen ">
     <div class="container mx-auto px-4 py-8 max-w-2xl">
         <h1 class="text-2xl font-bold mb-8">Upload Berkas</h1>
-        
-        <form action="upload.php" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{ route('upload-validate', $user->id_pengguna) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             <!-- KTP Upload -->
+            @csrf
             <div>
                 <label class="block mb-2">
                     <span class="text-gray-700">Upload KTP<span class="text-red-500">*</span></span>
                 </label>
                 <div class="border-2 border-dashed border-gray-400 rounded-lg p-6 bg-[#EFEFEF]">
                     <div class="flex flex-col items-center justify-center space-y-2">
-                        <input type="file" name="ktp" id="ktp" class="hidden" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <input type="file" name="ktp" id="ktp" class="hidden file-input" accept=".pdf,.jpg,.jpeg,.png" >
                         <label for="ktp" class="cursor-pointer text-center">
                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -32,7 +32,7 @@
                 </label>
                 <div class="border-2 border-dashed border-gray-400 rounded-lg p-6 bg-[#EFEFEF]">
                     <div class="flex flex-col items-center justify-center space-y-2">
-                        <input type="file" name="kk" id="kk" class="hidden" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <input type="file" name="kk" id="kk" class="hidden file-input" accept=".pdf,.jpg,.jpeg,.png" >
                         <label for="kk" class="cursor-pointer text-center">
                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -47,11 +47,11 @@
             <!-- NPWP Upload -->
             <div>
                 <label class="block mb-2">
-                    <span class="text-gray-700">Upload NPWP (Opsional)</span>
+                    <span class="text-gray-700">Upload NPWP (Optional)</span>
                 </label>
                 <div class="border-2 border-dashed border-gray-400 rounded-lg p-6 bg-[#EFEFEF]">
                     <div class="flex flex-col items-center justify-center space-y-2">
-                        <input type="file" name="npwp" id="npwp" class="hidden" accept=".pdf,.jpg,.jpeg,.png">
+                        <input type="file" name="npwp" id="npwp" class="hidden file-input" accept=".pdf,.jpg,.jpeg,.png">
                         <label for="npwp" class="cursor-pointer text-center">
                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -62,13 +62,23 @@
                     </div>
                 </div>
             </div>
+            <div id="error-message" class="text-red-500 text-sm hidden mt-4"></div>
 
+            @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                <div class="relative px-4 py-3 mt-4 text-red-700 bg-red-100 rounded" role="alert">
+                        <li>{{ $error }}</li>
+                    </div>
+                    @endforeach
+                </ul>
+        @endif
             <div class="flex justify-end">
-                <button type="submit" class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-colors">
+                <button type="submit" class="mt-10 px-6 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-colors">
                     Kirim Dokumen
                 </button>
             </div>
-        </form>
+            </form>
 
         <!-- Success Modal -->
         <div id="successModal" style="display: none; background: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; align-items: center; justify-content: center; z-index: 50;">
@@ -90,6 +100,95 @@
     </div>
 </div>
 
+<script>
+document.querySelectorAll('.file-input').forEach(input => {
+    input.addEventListener('change', event => {
+        const file = event.target.files[0];
+        const label = document.querySelector(`label[for="${event.target.id}"]`);
+        const currentPreview = label.querySelector('.file-preview');
+
+        // Clear any error message but keep the existing preview
+        const existingPreview = currentPreview ? currentPreview.cloneNode(true) : null;
+        label.innerHTML = '';
+
+        if (file) {
+            const fileType = file.type;
+
+            // Check if the file is an image or a PDF
+            if (fileType.startsWith('image/') || fileType === 'application/pdf') {
+                // Generate preview for images
+                if (fileType.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.alt = 'File Preview';
+                    img.classList.add('file-preview', 'max-w-[150px]', 'max-h-[150px]', 'rounded-md', 'shadow-md', 'mt-4');
+                    label.appendChild(img);
+                }
+                // Generate preview for PDF
+                else if (fileType === 'application/pdf') {
+                    const pdfLink = document.createElement('a');
+                    pdfLink.href = URL.createObjectURL(file);
+                    pdfLink.target = '_blank';
+                    pdfLink.textContent = 'Preview PDF';
+                    pdfLink.classList.add('file-preview', 'text-blue-500', 'underline', 'text-sm', 'mt-4');
+                    label.appendChild(pdfLink);
+                }
+            } else {
+                // Display an error message and "Change File" button if the file is invalid
+                displayError(label, input, existingPreview);
+            }
+        } else {
+            // Restore the existing preview if no new file is selected
+            if (existingPreview) {
+                label.appendChild(existingPreview);
+            } else {
+                // Reset to original SVG if no file exists
+                resetLabel(label);
+            }
+        }
+    });
+});
+
+
+// Function to display an error and "Change File" button
+function displayError(label, input, existingPreview) {
+    const errorText = document.createElement('p');
+    errorText.textContent = 'File type bukan Image atau PDF, tolong pilih ulang file';
+    errorText.classList.add('text-red-500', 'text-sm', 'mt-4');
+    label.appendChild(errorText);
+
+    // Create a "Change File" button
+    const changeButton = document.createElement('button');
+    changeButton.textContent = 'Change File';
+    changeButton.type = 'button';
+    changeButton.classList.add('mt-2', 'px-4', 'py-2', 'bg-gray-200', 'rounded', 'text-sm', 'hover:bg-gray-300', 'transition');
+    changeButton.addEventListener('click', () => {
+        input.value = ''; // Clear the file input
+        if (existingPreview) {
+            label.innerHTML = '';
+            label.appendChild(existingPreview);
+        } else {
+            resetLabel(label); // Restore the default label
+        }
+    });
+    label.appendChild(changeButton);
+}
+
+// Function to restore the default label content
+function resetLabel(label) {
+    const svg = `
+        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="text-sm text-gray-600">Drag & drop or click to choose file</p>
+    `;
+    label.innerHTML = svg;
+}
+
+
+</script>
+
+{{-- 
 <script>
     const dropZones = document.querySelectorAll('.border-dashed');
     
@@ -142,5 +241,5 @@ document.querySelector('#successModal').addEventListener('click', function(e) {
     }
 });
 
-</script>
+</script> --}}
 @endsection

@@ -287,7 +287,6 @@ Route::group([
     
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'RegisterIndex'])->name('registrasi.register');
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->name('registrasi.login');
-    Route::get('registrasi/uploadData', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->name('/mitra-kurir/registrasi/document-upload');
 
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
     Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
@@ -295,6 +294,9 @@ Route::group([
 
 Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->name('otp.validation');
 Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
+// upload dokumen
+Route::get('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->name('upload-data-index');
+Route::post('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadValidation'])->name('upload-validate');
 
 
 // forgot password
@@ -305,11 +307,6 @@ Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::c
     Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
         return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
     })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
-
-// upload dokumen
-Route::get('/mitra-kurir/registrasi/document-upload', function () {
-    return view('/mitra-kurir/registrasi/document-upload');
-})->name('/mitra-kurir/registrasi/document-upload');
 
 // reset password
     Route::get('/mitra-kurir/registrasi/reset-password', function () {
