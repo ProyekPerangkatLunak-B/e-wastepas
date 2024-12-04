@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\seed;
 
 use App\Models\Pengguna;
 use App\Models\Peran;

@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kategori_sampah', function (Blueprint $table) {
-            $table->id('id_kategori_sampah');
-            $table->string('nama_kategori_sampah')->nullable();
-            $table->text('deskripsi_kategori_sampah')->nullable();
+        Schema::create('jenis', function (Blueprint $table) {
+            $table->id('id_jenis');
+            $table->foreignId('id_kategori')->nullable()
+                ->constrained('kategori', 'id_kategori')
+                ->onDelete('cascade');
+            $table->string('nama_jenis')->nullable();
+            $table->integer('poin')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kategori_sampah');
+        Schema::dropIfExists('jenis_sampah');
     }
 };

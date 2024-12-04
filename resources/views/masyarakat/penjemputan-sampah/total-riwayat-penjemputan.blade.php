@@ -1,86 +1,119 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="w-[81%] min-h-screen px-[5rem] py-14 mx-[22rem] bg-gray-100">
-    <h2 class="text-xl font-semibold leading-relaxed">Total Sampah dan Poin</h2>
-    <div class="flex items-center justify-between">
-        <h4 class="text-base font-normal">Semua total sampah elektronik dan poin di akun anda.</h4>
-    </div>
-
-    {{-- Section 1 Total Sampah dan Total Poin --}}
-    <div class="grid grid-cols-2 gap-4 mt-4 mr-60">
-        <!-- Card Total Sampah -->
-        <div class="relative w-[550px] h-[130px] p-6 shadow-md bg-white-normal rounded-2xl group hover:shadow-lg flex items-center">
-            <div class="flex items-center mr-8">
-                <span class="text-6xl font-bold leading-none text-green-600">48</span>
-                <span class="mx-auto mt-8 text-lg font-bold leading-none text-black-normal">Pcs</span>
-            </div>
-            <div class="flex flex-col justify-center ml-8">
-                <h3 class="text-2xl font-semibold text-center text-gray-900">Total Sampah</h3>
-                <p class="text-gray-500 text-md">Total sampah yang sudah diangkut.</p>
-            </div>
+    <div class="w-[81%] min-h-screen px-[5rem] py-14 mx-[22rem] bg-gray-100">
+        <h2 class="text-xl font-semibold leading-relaxed">Total Sampah dan Poin</h2>
+        <div class="flex items-center justify-between">
+            <h4 class="text-base font-normal">Semua total sampah elektronik dan poin di akun anda.</h4>
         </div>
 
-        <!-- Card Total Poin -->
-        <div class="relative w-[550px] h-[130px] p-6 shadow-md bg-white-normal rounded-2xl group hover:shadow-lg flex items-center">
-            <div class="flex items-center mr-8">
-                <span class="text-6xl font-bold leading-none text-green-600">690</span>
-                <span class="mx-auto mt-8 text-lg font-bold leading-none text-black-normal">Poin</span>
-            </div>
-            <div class="flex flex-col justify-center ml-8">
-                <h3 class="text-2xl font-semibold text-center text-black-normal">Total Poin</h3>
-                <p class="text-gray-500 text-md">Total poin yang sudah didapatkan.</p>
-            </div>
-        </div>
-    </div>
-
-    {{-- Section 2 Riwayat Penjemputan --}}
-    <div class="flex items-center justify-between mx-auto mt-6">
-        <div>
-            <h2 class="text-xl font-semibold leading-relaxed">Riwayat Penjemputan</h2>
-            <p class="text-base font-normal text-gray-600">Daftar penjemputan sampah terbaru di akun anda.</p>
-        </div>
-
-        <!-- Button Batalkan Penjemputan -->
-        <a href="{{ route('masyarakat.penjemputan.riwayat') }}"
-           class="flex items-center justify-center w-[220px] h-[50px] px-4 py-2 text-black-normal transition duration-300 bg-secondary-200 hover:bg-secondary-300 rounded-2xl shadow-md border border-secondary-normal">
-            Tampilan lebih banyak
-        </a>
-    </div>
-
-    <!-- Container Grid Card -->
-    <div class="grid grid-cols-3 gap-4 mt-6">
-        <!-- Card 1 -->
-        <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
-            <div class="relative w-[450px] h-[230px] pb-16 mr-12 bg-white-normal shadow-md rounded-xl hover:shadow-lg">
-                <div class="flex justify-between">
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">08.00 10/11</span>
-                    <span class="mx-6 my-2 text-lg font-bold text-gray-800">C032378923</span>
+        {{-- Section 1 Total Sampah dan Total Poin --}}
+        <div class="grid grid-cols-2 gap-4 mt-4 mr-60">
+            <!-- Card Total Sampah -->
+            <div
+                class="relative w-[550px] h-[130px] p-6 shadow-md bg-white-normal rounded-2xl group hover:shadow-lg flex items-center">
+                <div class="flex items-center mr-8">
+                    <span class="text-6xl font-bold leading-none text-green-600">{{ $totalSampah }}</span>
+                    <span class="mx-auto mt-8 text-lg font-bold leading-none text-black-normal">Pcs</span>
                 </div>
+                <div class="flex flex-col justify-center ml-8">
+                    <h3 class="text-2xl font-semibold text-center text-gray-900">Total Sampah</h3>
+                    <p class="text-gray-500 text-md">Total sampah yang sudah diangkut.</p>
+                </div>
+            </div>
 
-                <!-- Isi Konten -->
-                <div class="flex items-center px-6 mt-4 space-x-4">
-                    <div class="pl-[10px]">
-                        <p class="text-2xl font-semibold">Rice Cooker</p>
-                        <p class="text-2xl font-semibold">Laptop</p>
-                        <p class="text-2xl font-semibold">TV</p>
-                        <p class="mt-6 text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    {{-- Jumlah poin --}}
-                    <div class="flex items-center justify-center mb-10">
-                        <div class="inline-block">
-                            <span class="ml-4 text-6xl font-bold leading-none text-secondary-normal">+45</span>
-                            <span class="ml-4 text-lg font-bold leading-none text-black-normal">Poin</span>
+            <!-- Card Total Poin -->
+            <div
+                class="relative w-[550px] h-[130px] p-6 shadow-md bg-white-normal rounded-2xl group hover:shadow-lg flex items-center">
+                <div class="flex items-center mr-8">
+                    <span class="text-6xl font-bold leading-none text-green-600">{{ $totalPoin }}</span>
+                    <span class="mx-auto mt-8 text-lg font-bold leading-none text-black-normal">Poin</span>
+                </div>
+                <div class="flex flex-col justify-center ml-8">
+                    <h3 class="text-2xl font-semibold text-center text-black-normal">Total Poin</h3>
+                    <p class="text-gray-500 text-md">Total poin yang sudah didapatkan.</p>
+                </div>
+            </div>
+        </div>
+
+        {{-- Section 2 Riwayat Penjemputan --}}
+        <div class="flex items-center justify-between mx-auto mt-6">
+            <div>
+                <h2 class="text-xl font-semibold leading-relaxed">Riwayat Penjemputan</h2>
+                <p class="text-base font-normal text-gray-600">Daftar penjemputan sampah terbaru di akun anda.</p>
+            </div>
+
+            <!-- Button Tampilkan lebih banyak -->
+            <a href="{{ route('masyarakat.penjemputan.riwayat') }}"
+                class="flex items-center justify-center w-[220px] h-[50px] px-4 py-2 text-black-normal transition duration-300 bg-secondary-200 hover:bg-secondary-300 rounded-2xl shadow-md border border-secondary-normal">
+                Lihat selengkapnya
+            </a>
+        </div>
+
+        <!-- Container Grid Card -->
+        <div class="grid grid-cols-3 gap-4 mt-6">
+            @if ($penjemputan->isEmpty())
+                <!-- Tampilkan pesan jika tidak ada riwayat -->
+                <div class="w-1/2 p-6 mx-auto mt-64 text-center shadow-lg col-span-full bg-white-normal rounded-2xl">
+                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}" alt="Tidak Ditemukan"
+                        class="w-[100px] h-[100px] mx-auto mb-4">
+                    <p class="text-lg font-semibold text-gray-500">Tidak ada riwayat penjemputan tersedia.</p>
+                </div>
+            @else
+                @foreach ($penjemputan as $p)
+                    <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
+                        <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                            <div class="flex justify-between">
+                                <span class="mx-6 my-2 text-lg font-bold text-gray-800">
+                                    {{ date('H:i d/m', $p->waktu_penjemputan) }}
+                                </span>
+                            </div>
+
+                            <!-- Isi Konten -->
+                            <div class="flex px-6 space-x-6">
+                                <!-- Bagian Jenis dan Deskripsi Sampah -->
+                                <div class="flex-grow my-4">
+                                    @foreach ($p->detailPenjemputan as $s)
+                                        @if ($loop->index == 2 && count($p->detailPenjemputan) > 3)
+                                            <p class="text-lg font-semibold">...</p>
+                                        @break
+                                    @endif
+                                    <p class="text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
+                                @endforeach
+                                {{-- Catatan --}}
+                                <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
+                                    <p class="text-sm text-black-normal">
+                                        @if (strlen($p->catatan) > 25)
+                                            {{ substr($p->catatan, 0, 25) }}...
+                                        @else
+                                            {{ $p->catatan }}
+                                        @endif
+                                    </p>
+                                </div>
+                            </div>
+                           {{-- Poin Sampah --}}
+                           <div class="flex flex-col items-center justify-between">
+                            <div class="flex items-baseline mx-auto mt-8">
+                                <p class="text-6xl font-bold text-secondary-normal">+{{ $p->total_poin }}</p>
+                                <span class="ml-2 text-2xl font-bold text-gray-700">Poin</span>
+                            </div>
+                                <!-- Status -->
+                                <div class="absolute right-0 bottom-1">
+                                    <span
+                                        class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                        @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
+                                        @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
+                                        @elseif ($p->getLatestPelacakan->status === 'E-Waste Tiba') bg-secondary-normal
+                                        @else bg-tertiary-600 @endif;">
+                                        {{ $p->getLatestPelacakan->status }}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Status Button -->
-                <div class="absolute right-0 bottom-1.5">
-                    <span class="px-10 py-2 font-semibold text-gray-100 bg-secondary-normal text-md rounded-tl-3xl rounded-br-xl">Sudah Sampai</span>
-                </div>
-            </div>
-        </a>
+                </a>
+            @endforeach
+        @endif
     </div>
 </div>
 @endsection

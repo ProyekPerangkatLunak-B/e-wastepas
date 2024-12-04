@@ -22,7 +22,7 @@ class DaerahFactory extends Factory
         return [
             'nama_daerah' => $this->faker->state(),
             'status_daerah' => $this->faker->boolean(50),
-            'total_dropbox' => $this->faker->numberBetween(1, 100),
+            'total_poin' => $this->faker->numberBetween(1, 100),
         ];
     }
 }

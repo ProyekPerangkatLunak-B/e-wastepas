@@ -29,7 +29,6 @@ class Pengguna extends Authenticatable
         'no_rekening',
         'subtotal_poin',
         'status',
-        'nomor_terverifikasi',
         'tanggal_email_diverifikasi',
         'tanggal_update',
         'tanggal_dihapus',
@@ -52,7 +51,7 @@ class Pengguna extends Authenticatable
     ];
 
     /**
-     * Relasi dengan tabel `peran` (foreign key `id_peran`)
+     * Relasi dengan tabel peran (foreign key id_peran)
      */
     public function peran()
     {
@@ -60,7 +59,7 @@ class Pengguna extends Authenticatable
     }
 
     /**
-     * Relasi dengan tabel `otp_cache`
+     * Relasi dengan tabel otp_cache
      */
     public function otps()
     {
@@ -71,4 +70,14 @@ class Pengguna extends Authenticatable
     {
         return $this->hasMany(DokumenKurir::class, 'id_pengguna', 'id_pengguna');
     }
+
+    public function penjemputan()
+    {
+        return $this->hasMany(Penjemputan::class, 'id_pengguna_masyarakat', 'id_pengguna');
+    }
+
+    public function getAuthPassword()
+{
+    return $this->kata_sandi;
+}
 }

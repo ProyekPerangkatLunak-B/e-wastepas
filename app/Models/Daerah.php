@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Dropbox;
+use App\Models\Penjemputan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -16,13 +17,16 @@ class Daerah extends Model
     protected $fillable = [
         'nama_daerah',
         'status_daerah',
-        'total_dropbox',
-        // 'created_at',
-        // 'updated_at'
+        'total_poin',
     ];
 
     public function dropbox()
     {
-        return $this->hasMany(Dropbox::class, 'id_daerah', 'id_daerah');
+        return $this->hasMany(Dropbox::class, 'id_daerah');
+    }
+
+    public function penjemputan()
+    {
+        return $this->hasMany(Penjemputan::class, 'id_daerah');
     }
 }

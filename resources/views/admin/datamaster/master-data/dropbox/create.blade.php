@@ -62,14 +62,14 @@
                     </div>
 
                     <div class="mb-6">
-                        <label for="nama_lokasi" class="block text-sm font-medium text-gray-800 mb-1">Nama Lokasi</label>
-                        <input type="text" name="nama_lokasi" id="nama_lokasi" required
+                        <label for="nama_dropbox" class="block text-sm font-medium text-gray-800 mb-1">Nama Lokasi</label>
+                        <input type="text" name="nama_dropbox" id="nama_dropbox" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="alamat" class="block text-sm font-medium text-gray-800 mb-1">Alamat</label>
-                        <textarea name="alamat" id="alamat" required
+                        <label for="alamat_dropbox" class="block text-sm font-medium text-gray-800 mb-1">Alamat</label>
+                        <textarea name="alamat_dropbox" id="alamat_dropbox" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700 h-28"></textarea>
                     </div>
 
@@ -81,13 +81,6 @@
                             <option value="1">Aktif</option>
                             <option value="0">Tidak Aktif</option>
                         </select>
-                    </div>
-
-                    <div class="mb-6">
-                        <label for="total_transaksi_dropbox" class="block text-sm font-medium text-gray-800 mb-1">Total
-                            Transaksi Dropbox</label>
-                        <input type="number" name="total_transaksi_dropbox" id="total_transaksi_dropbox" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="flex justify-end" style="color: white">

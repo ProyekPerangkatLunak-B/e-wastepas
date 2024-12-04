@@ -13,20 +13,25 @@ return new class extends Migration
     {
         Schema::create('penjemputan', function (Blueprint $table) {
             $table->id('id_penjemputan');
+            $table->foreignId('id_daerah')->nullable()
+                ->constrained('daerah', 'id_daerah')
+                ->onDelete('cascade');
             $table->foreignId('id_dropbox')->nullable()
-                ->constrained('dropbox', 'id_dropbox') // Specify the referenced column
+                ->constrained('dropbox', 'id_dropbox')
                 ->onDelete('cascade');
-            $table->foreignId('id_pengguna')->nullable()
-                ->constrained('pengguna', 'id_pengguna') // Specify the referenced column
+            $table->foreignId('id_pengguna_masyarakat')->nullable()
+                ->constrained('pengguna', 'id_pengguna')
                 ->onDelete('cascade');
+            $table->foreignId('id_pengguna_kurir')->nullable()
+                ->constrained('pengguna', 'id_pengguna')
+                ->onDelete('cascade');
+            $table->double('total_berat')->nullable();
+            $table->integer('total_poin')->nullable();
+            $table->dateTime('tanggal_penjemputan')->nullable();
+            $table->string('alamat_penjemputan')->nullable();
             $table->text('catatan')->nullable();
-            $table->double('subtotal_berat')->nullable();
-            $table->integer('subtotal_poin')->nullable();
-            $table->string('lokasi_penjemputan')->nullable();
-            $table->enum('status_permintaan', ['Menunggu Konfirmasi', 'Dijemput Kurir', 'Menuju Dropbox', 'E-Waste Tiba'])->nullable();
-            $table->dateTime('waktu_permintaan')->nullable();
+            $table->enum('status', ['Diproses', 'Diterima'])->default('Diproses');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

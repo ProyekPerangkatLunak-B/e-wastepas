@@ -3,9 +3,11 @@
 @section('content')
   <div class="flex flex-col md:flex-row min-h-screen">
     <div class="w-full md:w-1/2 flex flex-col justify-center px-6 py-12 lg:px-8">
+        <a href="{{ url('/') }}">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-24 w-auto" src="/img/logoEwaste.png" alt="Logo e-waste">
         </div>         
+        </a>
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#498D43]">Welcome!</h2>
         </div> 
