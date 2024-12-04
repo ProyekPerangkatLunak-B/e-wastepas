@@ -4,7 +4,7 @@
 
 
 <div class="min-h-screen bg-white text-gray-900  w-full">
-    <a href="./register">
+    <a href="./forgot-password">
         <button class="mt-6 ms-8 flex items-center">
             <img src="../img/masyarakat/registrasi/back-button.png" class="w-6 h-6 mr-2" alt="Kembali">
             <span>Kembali</span>

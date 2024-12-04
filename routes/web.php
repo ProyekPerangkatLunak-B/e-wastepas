@@ -149,7 +149,7 @@ Route::group([
     Route::get('datamaster/dashboard', function () {
         return view('manajemen.datamaster.dashboard.index');
     })->name('datamaster.dashboard.index');
-    
+
 
     // Submodul Registrasi
     Route::get('forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
@@ -184,9 +184,9 @@ Route::group([
     Route::post('register', [RegistrasiMasyarakatController::class, 'register'])->name('register.submit');
 
     // Rute untuk tampilan OTP
-    Route::get('otp', function () {
+    Route::get('registrasi-otp', function () {
         return view('masyarakat.registrasi.verify_otp');
-    })->name('otp');
+    })->name('registrasi-otp');
 
     Route::post('otp', [RegistrasiMasyarakatController::class, 'verifyOtp'])->name('otp.verify');
 
@@ -197,12 +197,20 @@ Route::group([
         return view('masyarakat/registrasi/forgot-password');
     });
 
-    Route::get('/check-mail', function () {
-        return view('masyarakat/registrasi/check-mail');
+    Route::get('/forgot-password-otp', function () {
+        return view('masyarakat/registrasi/verify_otp2');
     });
 
     Route::get('/reset-password', function () {
         return view('masyarakat/registrasi/reset-password');
+    });
+
+    Route::get('/ubah-password', function () {
+        return view('masyarakat/registrasi/ubah-password');
+    });
+
+    Route::get('/profil', function () {
+        return view('masyarakat/registrasi/profil');
     });
 
     //forgot pass masyarakat

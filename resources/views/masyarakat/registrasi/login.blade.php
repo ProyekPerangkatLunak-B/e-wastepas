@@ -85,8 +85,8 @@
                         <input
                             class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-green-200 text-md focus:outline-none focus:border-green-400 focus:bg-white"
                             type="email"/>
-                    </div>       
-                    <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label> 
+                    </div>
+                    <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label>
                         <input
                             class="w-full px-8 py-4 mt-2 rounded-lg font-medium bg-gray-100 border border-green-200 text-sm focus:outline-none focus:border-green-400 focus:bg-white mt-5"
                             type="password"/>
