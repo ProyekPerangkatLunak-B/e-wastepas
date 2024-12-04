@@ -44,7 +44,7 @@ class RegistrasiMitraKurirController extends Controller
                 Auth::login($user);
 
         $request->session()->regenerate();
-                return view('mitra-kurir.penjemputan-sampah.kategori');
+            return redirect('mitra-kurir/penjemputan-sampah/kategori');
     }
     return back()->withErrors([
             'email' => 'Password atau Email Salah',
