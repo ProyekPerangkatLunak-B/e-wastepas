@@ -14,9 +14,7 @@ use App\Http\Controllers\Admin\JenisSampahAdminController;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Masyarakat\ForgotPasswordController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Masyarakat\ProfileMasyarakatController;
-use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
@@ -267,7 +265,7 @@ Route::group([
     //forgot pass masyarakat
     Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('masyarakat.password.email');
-    
+
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('penjemputan.kategori');
