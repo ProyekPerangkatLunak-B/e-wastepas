@@ -5,7 +5,6 @@ use App\Http\Controllers\APIController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\Admin\KurirAdminController;
-use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Admin\DropboxAdminController;
 use App\Http\Controllers\Admin\ManajemenAdminController;
