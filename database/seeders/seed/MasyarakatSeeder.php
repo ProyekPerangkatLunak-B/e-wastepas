@@ -17,7 +17,7 @@ class MasyarakatSeeder extends Seeder
      */
     public function run()
     {
-        // Pastikan peran "Masyarakat" sudah ada di database
+        // Pastikan peran "Masyarakat", "Kurir", dan "Manajemen" sudah ada di database
         $masyarakatRole = Peran::firstOrCreate(
             ['nama_peran' => 'Masyarakat'],
             ['deskripsi_peran' => 'User with limited access', 'status' => 1]
@@ -25,7 +25,12 @@ class MasyarakatSeeder extends Seeder
 
         $kurirRole = Peran::firstOrCreate(
             ['nama_peran' => 'Kurir'],
-            ['deskripsi_peran' => 'User with limited access', 'status' => 1]
+            ['deskripsi_peran' => 'User with delivery access', 'status' => 1]
+        );
+
+        $manajemenRole = Peran::firstOrCreate(
+            ['nama_peran' => 'Manajemen'],
+            ['deskripsi_peran' => 'User with management access', 'status' => 1]
         );
 
         for ($i = 1; $i <= 80; $i++) {
@@ -54,11 +59,16 @@ class MasyarakatSeeder extends Seeder
             }
 
             $isKurir = $i % 4 == 0;
+            $isManajemen = $i % 10 == 0; // Setiap pengguna ke-10 menjadi manajemen
 
             $pengguna = Pengguna::create([
-                'id_peran' => $isKurir ? $kurirRole->id_peran : $masyarakatRole->id_peran,
+                'id_peran' => $isManajemen
+                    ? $manajemenRole->id_peran
+                    : ($isKurir
+                        ? $kurirRole->id_peran
+                        : $masyarakatRole->id_peran),
                 'nomor_ktp' => $nomorKTP,
-                'nama' => "Masyarakat User $i",
+                'nama' => $isManajemen ? "Manajemen User $i" : "Masyarakat User $i",
                 'alamat' => "Jl. Masyarakat Sejahtera No. $i",
                 'email' => "user$i@example.com",
                 'kata_sandi' => Hash::make('password123'),

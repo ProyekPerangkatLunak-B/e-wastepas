@@ -37,6 +37,14 @@
                             class="text-lg {{ Request::is('admin/datamaster/kurir') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.datamaster.manajemen.index') }}"
+                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/datamaster/kurir') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                        manajemen
+                        <span
+                            class="text-lg {{ Request::is('admin/datamaster/kurir') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+                    </a>
+                </li>
             </ul>
 
             <h2 class="mt-8 text-sm font-bold text-gray-800">Data Master</h2>
