@@ -51,7 +51,7 @@ class LoginMasyarakat extends Controller
         // Jika email dan password valid, lakukan login
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate(); // Regenerasi session untuk keamanan
-            return redirect()->intended('dashboard')->with('success', 'Login berhasil.');
+            return redirect()->intended('masyarakat.penjemputan.kategori')->with('success', 'Login berhasil.');
         }
     
         // Default fallback jika login gagal (seharusnya tidak tercapai)
