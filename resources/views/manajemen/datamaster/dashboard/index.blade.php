@@ -59,7 +59,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Chart: Top Masyarakat -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left  hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]" >
-                            <a href="melacak-penjemputan?tab=masyarakat">
+                            <a href="top-10?tab=masyarakat">
                             <h2 class="text-lg font-bold mb-2">Top Masyarakat</h2>
                             <div id="chart-top-masyarakat" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
                         </a>
@@ -67,7 +67,7 @@
 
                         <!-- Chart: Top Kurir -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                            <a href="melacak-penjemputan?tab=kurir">
+                            <a href="top-10?tab=kurir">
                             <h2 class="text-lg font-bold mb-2">Top Kurir</h2>
                             <div id="chart-top-kurir" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
                         </a>
@@ -78,7 +78,7 @@
                         <!-- Chart: Top Jenis Sampah -->
 
                         <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                            <a href="melacak-penjemputan?tab=jenis-sampah">
+                            <a href="top-10?tab=jenis-sampah">
                             <h2 class="text-lg font-bold mb-2">Top Jenis Sampah</h2>
                             <div id="chart-total-sampah" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
                             </a>
@@ -93,6 +93,7 @@
 
                         <!-- Chart: Top Jenis Sampah -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left w-full hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
+                            <a href="kategori">
                             <h2 class="text-lg font-bold mb-2">Top Sampah per Kategori</h2>
                             <p class="text-sm text-gray-500 mb-4">Berdasarkan Kategori</p>
 

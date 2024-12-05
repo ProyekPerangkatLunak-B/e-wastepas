@@ -19,6 +19,9 @@ use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
 use App\Http\Controllers\Manajemen\DashboardController;
+use App\Http\Controllers\Manajemen\DashboardKategori;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
+
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -164,13 +167,13 @@ Route::group([
 
     Route::get('/datamaster/dashboard', [DashboardController::class, 'index'])->name('datamaster.dashboard.index');
 
-    Route::get('/datamaster/melacak-penjemputan', function () {
-        return view('manajemen.datamaster.melacak-penjemputan.index');
-    })->name('datamaster.melacak-penjemputan.index');
+    Route::get('/datamaster/top-10', function () {
+        return view('manajemen.datamaster.top-10.index');
+    })->name('datamaster.top-10.index');
 
-    Route::get('/datamaster/total-sampah', function () {
-        return view('manajemen.datamaster.total-sampah.index');
-    })->name('datamaster.total-sampah.index');
+    Route::get('/datamaster/kategori', function () {
+        return view('manajemen.datamaster.kategori.index');
+    })->name('datamaster.kategori.index');
 
     // Submodul Registrasi
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan

@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Manajemen;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Jenis;
+use App\Models\Daerah;
+use App\Models\Dropbox;
+use App\Models\Kategori;
 
 class DashboardController extends Controller
 {
@@ -26,5 +30,18 @@ class DashboardController extends Controller
             'riwayat' => $riwayat,
             'terdaftar' => $terdaftar,
         ]);
+
+        // Ambil data dari database
+        $jenis = Jenis::all(); // Pastikan model dan tabel benar
+
+        // Kirim data ke view
+        return view('manajemen.datamaster.kategori.index', compact('jenis'));
+
     }
+
+
+
+    
+    
+
 }
