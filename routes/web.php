@@ -24,6 +24,7 @@ Route::get('/', function () {
     return view('index');
 });
 
+
 // Route Modul Admin
 Route::prefix('admin')
     ->as('admin.')
@@ -219,6 +220,8 @@ Route::group([
     'as' => 'masyarakat.',
 ], function () {
 
+
+
     // Submodul Login
     Route::get('login', function () {
         return view('masyarakat.registrasi.login');
@@ -255,6 +258,8 @@ Route::group([
         return view('masyarakat/registrasi/reset-password');
     });
 
+    
+
 
     //profileEdit
     Route::get('profile', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.profile.show');
@@ -283,6 +288,7 @@ Route::group([
     Route::get('penjemputan-sampah/detail-riwayat', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::post('penjemputan-sampah/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('penjemputan.tambah');
+
 });
 
 // Route Modul Mitra-kurir
