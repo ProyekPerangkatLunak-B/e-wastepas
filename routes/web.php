@@ -28,6 +28,7 @@ Route::get('/', function () {
     return view('index');
 });
 
+
 // Route Modul Admin
 Route::prefix('admin')
     ->as('admin.')
@@ -225,6 +226,8 @@ Route::group([
     'as' => 'masyarakat.',
 ], function () {
 
+
+
     // Submodul Login
     Route::get('login', function () {
         return view('masyarakat.registrasi.login');
@@ -261,6 +264,8 @@ Route::group([
         return view('masyarakat/registrasi/reset-password');
     });
 
+    
+
 
     //profileEdit
     Route::get('profile', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.profile.show');
@@ -289,6 +294,7 @@ Route::group([
     Route::get('penjemputan-sampah/detail-riwayat', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::post('penjemputan-sampah/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('penjemputan.tambah');
+
 });
 
 // Route Modul Mitra-kurir
@@ -300,14 +306,12 @@ Route::group([
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMitraKurirController::class, 'kategori'])->name('penjemputan.kategori');
     Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->name('penjemputan.detail-kategori');
+    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->name('penjemputan.permintaan');
+    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}',[PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->name('penjemputan.detail-permintaan');
 
-    Route::get('penjemputan-sampah/permintaan-penjemputan', function () {
-        return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan');
-    })->name('penjemputan.permintaan');
-
-    Route::get('penjemputan-sampah/permintaan-penjemputan/detail', function () {
-        return view('mitra-kurir.penjemputan-sampah.detail-permintaan');
-    })->name('penjemputan.detail-permintaan');
+    //    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
+//    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
+//    Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::get('penjemputan-sampah/dropbox', function () {
         return view('mitra-kurir.penjemputan-sampah.dropbox');
