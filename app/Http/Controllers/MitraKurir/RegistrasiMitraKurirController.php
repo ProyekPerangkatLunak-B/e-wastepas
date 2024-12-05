@@ -83,7 +83,7 @@ class RegistrasiMitraKurirController extends Controller
          $user = User::create([
                 'nama' => $validateData['nama'],
                 'nomor_ktp' => $validateData['KTP'],
-                'nomor_hp' => $validateData['NomorHP'],
+                'nomor_telepon' => $validateData['NomorHP'],
                 'email' => $validateData['Email'],
                 'kata_sandi' => Hash::make($validateData['password']),
                 'tanggal_dibuat' => now()
