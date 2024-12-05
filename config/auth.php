@@ -65,6 +65,14 @@ return [
             'model' => App\Models\Pengguna::class,
         ],
 
+        'providers' => [
+            'users' => [
+                'driver' => 'eloquent',
+                'model' => App\Models\UserMasyarakat::class,
+            ],
+        ],
+        
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

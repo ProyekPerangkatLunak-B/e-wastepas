@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Masyarakat;
 
 use App\Models\Jenis;
 use App\Models\Daerah;
-use App\Models\Sampah;
 use App\Models\Dropbox;
 use App\Models\Kategori;
-use App\Models\Pengguna;
 use App\Models\Pelacakan;
 use App\Models\Penjemputan;
-use App\Models\SampahDetail;
+use App\Models\DetailPenjemputan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -62,7 +60,7 @@ class PenjemputanSampahMasyarakatController extends Controller
         try {
             $penjemputan = new Penjemputan();
             $penjemputan->id_pengguna_masyarakat = '1';
-            $penjemputan->id_pengguna_kurir = '2';
+            $penjemputan->id_pengguna_kurir = null;
             $penjemputan->id_daerah = $request->daerah;
             $penjemputan->id_dropbox = $request->dropbox;
             $penjemputan->total_berat = array_sum($request->berat);
@@ -73,17 +71,16 @@ class PenjemputanSampahMasyarakatController extends Controller
             $penjemputan->save();
 
             foreach ($request->kategori as $key => $value) {
-                $SampahDetail = new SampahDetail();
-                $SampahDetail->id_penjemputan = $penjemputan->id_penjemputan;
-                $SampahDetail->id_kategori = $value;
-                $SampahDetail->id_jenis = $request->jenis[$key];
-                $SampahDetail->berat = $request->berat[$key];
-                $SampahDetail->save();
+                $detailPenjemputan = new DetailPenjemputan();
+                $detailPenjemputan->id_penjemputan = $penjemputan->id_penjemputan;
+                $detailPenjemputan->id_kategori = $value;
+                $detailPenjemputan->id_jenis = $request->jenis[$key];
+                $detailPenjemputan->berat = $request->berat[$key];
+                $detailPenjemputan->save();
             }
 
             $pelacakan = new Pelacakan();
-            $pelacakan->id_penjemputan = $penjemputan->id_penjemputan;
-            $pelacakan->status = 'Menunggu Konfirmasi';
+            $pelacakan->id_penjemputan = $penjemputan->id_penjemputan;;
             $pelacakan->save();
             return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
         } catch (\Exception $e) {
@@ -94,7 +91,9 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function melacak()
     {
-        $penjemputan = Penjemputan::orderByDesc('created_at')->paginate(6);
+        $penjemputan = Penjemputan::whereHas('pelacakan', function ($query) {
+            $query->where('status', '<>', 'Sudah Sampai');
+        })->orderByDesc('created_at')->paginate(6);
         return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
     }
 
@@ -104,24 +103,27 @@ class PenjemputanSampahMasyarakatController extends Controller
         return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis'));
     }
 
-    public function detailMelacak()
+    public function detailMelacak($id)
     {
-        return view('masyarakat.penjemputan-sampah.detail-melacak');
+        $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
+        return view('masyarakat.penjemputan-sampah.detail-melacak', compact('penjemputan'));
     }
 
     public function totalRiwayatPenjemputan()
     {
-        $totalSampah = SampahDetail::whereHas('penjemputan.penggunaMasyarakat', function ($query) {
-            $query->where('id_pengguna', '1');
+        $totalSampah = DetailPenjemputan::whereHas('penjemputan.pelacakan', function ($query) {
+            $query->where('status', 'Sudah Sampai');
         })->count();
-        $totalPoin = Penjemputan::sum('total_poin');
-        $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(3);
+        $totalPoin = Penjemputan::whereHas('pelacakan', function ($query) {
+            $query->where('status', 'Sudah Sampai');
+        })->sum('total_poin');
+        $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
         return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'));
     }
 
     public function riwayatPenjemputan()
     {
-        $penjemputan = Penjemputan::orderBy("created_at", "DESC")->paginate(3);
+        $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
         return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
     }
 

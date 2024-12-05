@@ -54,23 +54,23 @@
             <h4 class="text-base font-normal ml-14">Silakan ubah data berikut untuk memperbarui jenis sampah.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_kategori_sampah) }}" method="POST">
+                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_jenis) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="mb-6">
-                        <label for="nama_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
+                        <label for="nama_jenis" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
                             Sampah</label>
-                        <input type="text" name="nama_jenis_sampah" id="nama_jenis_sampah" required
+                        <input type="text" name="nama_jenis" id="nama_jenis" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700"
-                            value="{{ $jenisSampah->nama_jenis_sampah }}" />
+                            value="{{ $jenisSampah->nama_jenis }}" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Kategori
+                        <label for="id_kategori" class="block text-sm font-medium text-gray-800 mb-1">Kategori
                             Sampah</label>
-                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori_sampah">
-                            <option value="{{ $jenisSampah->id_kategori_sampah }}" selected>
-                                {{ $jenisSampah->kategoriSampah->nama_kategori_sampah }}</option>
+                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori">
+                            <option value="{{ $jenisSampah->id_kategori }}" selected>
+                                {{ $jenisSampah->kategoriSampah->nama_kategori }}</option>
                         </select>
                     </div>
 

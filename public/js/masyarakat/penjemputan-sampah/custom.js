@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const berat = document.getElementById("berat");
     const catatan = document.getElementById("catatan");
     const boxKosong = document.getElementById("box-kosong");
+    const totalSampah = document.getElementById("totalSampah");
 
     window.tambahKeBox = function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
@@ -47,32 +48,77 @@ document.addEventListener("DOMContentLoaded", function () {
             // Menambahkan event listener untuk menutup modal saat tombol OK diklik
             btnOk.removeEventListener("click", closeAlertModal);
             btnOk.addEventListener("click", closeAlertModal);
+
+            totalSampah.innerHTML = parseInt(totalSampah.innerHTML) + 1;
+
             const box = `
-        <div class="flex items-center justify-between w-[500px] h-[120px] px-4 py-4 bg-gray-100 border border-secondary-normal rounded-xl">
-            <input type="text" value="${
-                kategori.value
-            }" name="kategori[]" hidden>
-            <input type="text" value="${jenis.value}" name="jenis[]" hidden>
-            <input type="text" value="${berat.value}" name="berat[]" hidden>
-            <div class="p-2 space-y-1">
-                <p class="font-semibold">${
-                    kategori.options[kategori.selectedIndex].text
-                }</p>
-                <p class="font-semibold">${
-                    jenis.options[jenis.selectedIndex].text
-                }</p>
-            </div>
-            <p class="mr-6 text-xl font-bold text-secondary-normal">${
-                berat.value
-            }kg</p>
-        </div>
-                    `;
+                <div class="relative flex items-center w-4/5 mb-4 overflow-hidden rounded-xl border border-secondary-normal shadow-lg" id="boxInput${
+                    totalSampah.innerHTML
+                }">
+
+                    <input type="text" value="${
+                        kategori.value
+                    }" name="kategori[]" hidden>
+                    <input type="text" value="${
+                        jenis.value
+                    }" name="jenis[]" hidden>
+                    <input type="text" value="${
+                        berat.value
+                    }" name="berat[]" hidden>
+
+                    <div class="flex items-center flex-grow p-4 bg-gray-100">
+                        <!-- Bagian Gambar -->
+                        <div class="flex items-center justify-center w-20 h-20 overflow-hidden rounded-lg flex-shrink-0">
+                            <img src="https://picsum.photos/400/400" alt="Sampah" class="object-cover w-full h-full">
+                        </div>
+
+                        <div class="flex-1 px-4 text-center">
+                            <p class="font-medium text-gray-600 mb-2 text-md">
+                                Kategori ${
+                                    kategori.options[kategori.selectedIndex]
+                                        .text
+                                }
+                            </p>
+                            <p class="text-lg font-bold text-black">
+                                ${jenis.options[jenis.selectedIndex].text}
+                            </p>
+                        </div>
+
+                        <div class="text-lg font-bold text-green-500">
+                            ${berat.value} Kilogram
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <button type="button"
+                            class="flex flex-col items-center justify-center bg-red-normal text-white-normal h-full px-4 py-8 hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${
+                                totalSampah.innerHTML
+                            })">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash mb-1" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                            </svg>
+                            <span class="text-sm">Hapus</span>
+                        </button>
+                    </div>
+                </div>
+                `;
             boxSemuaSampah.innerHTML += box;
             resetInput();
             toggleModal(false);
         }
     };
 
+    window.hapusDariBox = function (id) {
+        const box = document.getElementById("boxInput" + id);
+        box.remove();
+        totalSampah.innerHTML = parseInt(totalSampah.innerHTML) - 1;
+        if (totalSampah.innerHTML == 0) {
+            boxKosong.classList.remove("hidden");
+        }
+    };
+
+    // Fungsi untuk reset
     function resetInput() {
         $("#kategori").val("").trigger("change");
         $("#jenis").val("").trigger("change");

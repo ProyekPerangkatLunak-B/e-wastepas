@@ -4,7 +4,7 @@
 
     <form action="{{ route('masyarakat.penjemputan.tambah') }}" method="POST">
         @csrf
-        <div class="w-[81%] min-h-screen px-20 py-12 mx-[22rem] bg-gray-100">
+        <div class="w-[83%] min-h-screen px-20 py-12 mx-[22rem] bg-gray-100">
             <div class="mb-8">
                 <h2 class="text-xl font-semibold leading-relaxed">Mengajukan Permintaan Penjemputan</h2>
                 <p class="text-base font-normal text-gray-600">Form permintaan untuk permintaan penjemputan sampah
@@ -97,12 +97,18 @@
                     <!-- Kolom Kanan: Daftar Sampah yang Dipilih -->
                     <div class="pt-8 space-y-4">
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
-                        <div class="max-h-[500px] space-y-4 overflow-y-auto" id="boxSemuaSampah">
+                        {{-- Total Sampah --}}
+                        <div class="mb-4 text-lg font-bold text-start">
+                            Total Sampah: <span id="totalSampah">0</span> Pcs
+                        </div>
+                        <div class="max-h-[450px] space-y-4 overflow-y-auto" id="boxSemuaSampah">
                             <!-- Card -->
-                            <div class="flex justify-start items-center col-span-full border border-gray-300 bg-white-normal w-[500px] h-[120px] rounded-2xl shadow-md" id="box-kosong">
+                            <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[500px] h-[120px] rounded-2xl shadow-lg"
+                                id="box-kosong">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
                                     alt="Tidak Ditemukan" class="w-[50px] h-[50px] ml-12">
-                                <p class="w-64 ml-12 font-bold text-center text-black-normal">Data {{ $search ?? 'Sampah Elektronik' }}
+                                <p class="w-64 ml-12 font-bold text-center text-black-normal">Data
+                                    {{ $search ?? 'Sampah Elektronik' }}
                                     tidak ditemukan / Masih Kosong.</p>
                             </div>
                         </div>

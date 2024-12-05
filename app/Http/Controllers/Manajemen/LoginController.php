@@ -26,7 +26,7 @@ class LoginController extends Controller
         // Coba autentikasi dengan data yang diberikan
         if (Auth::attempt($request->only('email', 'password'))) {
             // Jika login berhasil, arahkan ke dashboard atau halaman lain
-            return redirect()->intended('/dashboard'); // Sesuaikan dengan halaman tujuan
+            return redirect()->intended('/manajemen/datamaster/dashboard'); // Sesuaikan dengan halaman tujuan
         }
 
         // Jika gagal, kembali ke halaman login dengan pesan error

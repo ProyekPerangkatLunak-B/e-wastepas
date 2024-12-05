@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Jenis;
-use App\Models\SampahDetail;
+use App\Models\DetailPenjemputan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,7 +17,6 @@ class Kategori extends Model
     protected $fillable = [
         'nama_kategori',
         'deskripsi_kategori',
-        'poin'
     ];
 
     public function jenis()
@@ -25,8 +24,8 @@ class Kategori extends Model
         return $this->hasMany(Jenis::class, 'id_jenis');
     }
 
-    public function sampahDetail()
+    public function detailPenjemputan()
     {
-        return $this->hasMany(SampahDetail::class, 'id_kategori');
+        return $this->hasMany(DetailPenjemputan::class, 'id_kategori');
     }
 }

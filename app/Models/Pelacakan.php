@@ -18,7 +18,7 @@ class Pelacakan extends Model
         'id_penjemputan',
         'id_dropbox',
         'keterangan',
-        'status_pelacakan',
+        'status',
         'estimasi_waktu',
     ];
 

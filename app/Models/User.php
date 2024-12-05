@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->hasOne(UserOTP::class,'id_pengguna')->where('otp_kadaluarsa','>', 'now()');
     }
 
+    public function uploadDoc()
+    {
+        return $this->hasOne(UploadDocuments::class,"id_pengguna");
+    }
+
     public function getAuthPasswordName()
     {
         return 'kata_sandi';

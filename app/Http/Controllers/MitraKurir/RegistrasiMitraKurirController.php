@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\MitraKurir;
-
 use App\Models\UserOTP;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\UploadDocuments;
 use App\Models\User;
 use App\Notifications\OtpMail;
 use Illuminate\Support\Facades\Auth;
@@ -11,21 +11,28 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 
 
+
 class RegistrasiMitraKurirController extends Controller
 {
     public function RegisterIndex(){
         return view('mitra-kurir.registrasi.register');
     }
-
+    
     public function loginIndex(){
         return view('mitra-kurir.registrasi.login');
     }
-
-    public function UploadDataIndex(){
-        return view('mitra-kurir.registrasi.document-upload');
+    
+    public function UploadDataIndex($id_pengguna){
+        $user = User::find($id_pengguna);
+        
+        return view('mitra-kurir.registrasi.document-upload', compact("user"));
     }
-
-
+    
+    public function OtpRedirect($id_pengguna){
+        $user = User::find($id_pengguna);
+        return view('mitra-kurir.registrasi.otp-verification', compact('user'));
+    }
+    
     public function LoginAuth(Request $request)
     {
     $credentials = $request->validate([
@@ -37,19 +44,15 @@ class RegistrasiMitraKurirController extends Controller
                 Auth::login($user);
 
         $request->session()->regenerate();
-                return redirect()->intended('/dashboard');
+            return redirect('mitra-kurir/penjemputan-sampah/kategori');
     }
     return back()->withErrors([
             'email' => 'Password atau Email Salah',
          ])->onlyInput('email');
     }
 
-    public function OtpRedirect($id_pengguna){
-        $user = User::find($id_pengguna);
-        return view('mitra-kurir.registrasi.otp-verification', compact('user'));
-    }
 
-    public function OtpValidation($id_pengguna, Request $request){
+    public function OtpValidation(Request $request){
 
         $otpInp = $request->input('otp1') . $request->input('otp2') . $request->input('otp3') . $request->input('otp4');
 
@@ -63,7 +66,7 @@ class RegistrasiMitraKurirController extends Controller
     $otp->user->save();
     $otp->delete();
 
-    return redirect('mitra-kurir/registrasi/login');
+    return redirect()->route('upload-data-index', $otp->id_pengguna);
     }
 
     public function simpanData(Request $request)
@@ -93,6 +96,7 @@ class RegistrasiMitraKurirController extends Controller
             ]);
             $user->notify(new OtpMail($otp->otp_token));
             return redirect()->route('otp-verification', $user->id_pengguna);
+
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() === '23000') {
                 $errorMessages = [];
@@ -110,5 +114,49 @@ class RegistrasiMitraKurirController extends Controller
         }
     }
 
+    public function UploadValidation(Request $request, $id_pengguna)
+{
+    $user = User::find($id_pengguna);
 
+    $request->validate([
+        'ktp' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240', 
+        'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240',  
+        'npwp' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240', 
+    ]);
+
+    // Save uploaded files
+    $ktp = $request->file('ktp')->store('uploads/ktp', 'public');
+    $kk = $request->file('kk')->store('uploads/kk', 'public');
+    $npwp = $request->hasFile('npwp') 
+                     ? $request->file('npwp')->store('uploads/npwp', 'public') 
+                     : null;
+
+    // Handle KTP upload
+    if ($request->hasFile('ktp')) {
+        UploadDocuments::create([
+            'id_pengguna' => $user->id_pengguna,  
+            'tipe_dokumen' => 'KTP',
+            'file_dokumen' => $ktp
+        ]);
+    }
+
+    // Handle KK upload
+    if ($request->hasFile('kk')) {
+        UploadDocuments::create([
+            'id_pengguna' => $user->id_pengguna,  // Ensure user id is correct
+            'tipe_dokumen' => 'KK',
+            'file_dokumen' => $kk
+        ]);
+    }
+
+    // Handle NPWP upload (optional)
+    if ($request->hasFile('npwp')) {
+        UploadDocuments::create([
+            'id_pengguna' => $user->id_pengguna,  // Ensure user id is correct
+            'tipe_dokumen' => 'NPWP',
+            'file_dokumen' => $npwp
+        ]);
+    }
+    return redirect('mitra-kurir/registrasi/login');
+   }
 }

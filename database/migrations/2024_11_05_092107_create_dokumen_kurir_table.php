@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_pengguna')->nullable()
                 ->constrained('pengguna', 'id_pengguna') // Specify the referenced column
                 ->onDelete('cascade');
-            $table->enum('tipe_dokumen', ['KTP', 'KK'])->nullable();
+            $table->enum('tipe_dokumen', ['KTP', 'KK','NPWP'])->nullable();
             $table->string('file_dokumen')->nullable();
             $table->text('catatan_admin')->nullable();
             $table->timestamps();

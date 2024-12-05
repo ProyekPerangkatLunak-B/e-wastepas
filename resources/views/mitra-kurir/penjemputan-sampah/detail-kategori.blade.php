@@ -3,7 +3,7 @@
 @section('content')
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
         <div class="py-8">
-            
+
             <h2 class="text-xl font-bold leading-relaxed ml-14">Sampah Elektronik {{ htmlspecialchars($kategori->nama_kategori_sampah) }}  </h2>
             <div class="flex items-center justify-between">
                 <h4 class="text-base font-normal ml-14 w-1/2">Daftar jenis sampah elektronik dari kategori {{ htmlspecialchars($kategori->nama_kategori_sampah) }}  yang dapat dijemput</h4>
@@ -34,40 +34,28 @@
                 </div>
             </div>
 
-            {{-- Kondisi ketika jenis tidak ada --}}
+
             @if (count($jenis) == 0)
-                <div class="flex justify-center ml-[500px] mt-40 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
+                <div
+                    class="flex justify-center ml-[500px] mt-40 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
                     <div class="text-center">
-                        <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}" alt="Tidak Ditemukan"
-                            class="w-[100px] h-[100px] mx-auto mb-4">
-                        <p class="text-lg font-semibold text-gray-500">Jenis {{ $search ?? 'Sampah Elektronik' }} tidak
-                            ditemukan.</p>
+                        <p class="text-lg font-semibold text-gray-500">Jenis {{ $search ?? 'Sampah Elektronik' }} tidak ditemukan.</p>
                     </div>
                 </div>
             @else
             {{-- Card Section --}}
-            <div class="grid grid-cols-1 gap-4 px-12 mx-6 lg:grid-cols-3 lg:gap-4 pt-5">
+            <div class="flex justify-center mt-4">
+                <div class="grid grid-cols-3 gap-6 mx-auto">
                 @foreach ($jenis as $jenisSampah)
-                    <x-detail-card
-                    title="{{ $jenisSampah->nama_jenis_sampah }}"
-                    description="{{ $jenisSampah->deskripsi_jenis_sampah }}"
-                    image="https://picsum.photos/700/700" />
-                @endforeach
-            </div>
-
-            @endif
-
-            {{-- Card Section
-
-                @foreach ($jenis as $jenisSampah)    
                     <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                         <x-card-detail
-                            title="{{ $jenisSampah->nama_jenis_sampah }}"
-                            description="{{ $jenisSampah->deskripsi_jenis_sampah }}"
+                            title="{{ $jenisSampah->nama_jenis }}"
+                            description="{{ $jenisSampah->deskripsi_jenis }}"
                             image="https://picsum.photos/700/700" />
                     </div>
-                @endforeach --}}
-            
+                @endforeach
+            @endif
+
             {{-- Pagination --}}
             <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
                 {{-- Button < & << --}}
