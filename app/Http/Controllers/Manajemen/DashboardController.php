@@ -6,38 +6,34 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Jenis;
-use App\Models\Daerah;
-use App\Models\Dropbox;
+use App\Models\Penjemputan;
+use App\Models\Pengguna;
 use App\Models\Kategori;
 
 class DashboardController extends Controller
 {
     public function index()
-    {
-        // Menghitung total berat sampah
-        $totalSampah = DB::table('penjemputan')->sum('total_berat');
+{
+    // Menggunakan Eloquent untuk menghitung total berat sampah
+    $totalSampah = Penjemputan::sum('total_berat');
 
-        $totalPoin = DB::table('penjemputan')->sum('total_poin');
+    $totalPoin = Penjemputan::sum('total_poin');
 
-        $riwayat = DB::table('penjemputan')->where('status', 'Diterima')->sum('status')/2;
-        
-        $terdaftar = DB::table('pengguna')->count('id_pengguna');
+    $riwayat = Penjemputan::where('status', 'Diterima')->count() / 2;
 
-        // Mengembalikan data ke view
-        return view('manajemen.datamaster.dashboard.index', [
-            'totalSampah' => $totalSampah,
-            'totalPoin' => $totalPoin,
-            'riwayat' => $riwayat,
-            'terdaftar' => $terdaftar,
-        ]);
+    $terdaftar = Pengguna::count();
 
-        // Ambil data dari database
-        $jenis = Jenis::all(); // Pastikan model dan tabel benar
+    // Ambil data jenis menggunakan Eloquent
+    $jenis = Jenis::all(); // Pastikan model Jenis sudah ada
 
-        // Kirim data ke view
-        return view('manajemen.datamaster.kategori.index', compact('jenis'));
-
-    }
+    // Mengembalikan data ke view
+    return view('manajemen.datamaster.dashboard.index', [
+        'totalSampah' => $totalSampah,
+        'totalPoin' => $totalPoin,
+        'riwayat' => $riwayat,
+        'terdaftar' => $terdaftar,
+    ]);
+}
 
 
 
