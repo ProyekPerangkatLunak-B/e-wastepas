@@ -11,23 +11,23 @@
         {{-- Card Section --}}
         <div class="grid grid-cols-3 gap-6 px-12 pb-6 mt-4 lg:grid-cols-3 lg:gap-6">
             <x-index-card
-                title="Lampu"
-                description="Kategori sampah elektronik"
+                title="{{ $NamaKategori1->nama_kategori }}"
+                description="{{ $NamaKategori1->deskripsi_kategori }}"
                 image="https://picsum.photos/720/720"
                 link="{{}}"
-                points="27468" />
+                points="{{$kategori1}}" />
             <x-index-card
-                title="Layarnya Monitor"
-                description="Kategori sampah elektronik"
+                title="{{ $NamaKategori2->nama_kategori }}"
+                description="{{ $NamaKategori2->deskripsi_kategori }}"
                 image="https://picsum.photos/720/720"
                 link="{{}}"
-                points="84731" />
+                points="{{$kategori2}}" />
             <x-index-card
-                title="Peralatan Pertukaran Suhu"
-                description="Kategori sampah elektronik"
+                title="{{ $NamaKategori3->nama_kategori }}"
+                description="{{ $NamaKategori3->deskripsi_kategori }}"
                 image="https://picsum.photos/720/720"
                 link="{{}}"
-                points="29418" />
+                points="{{$kategori3}}" />
             <x-index-card
                 title="Peralatan Besar"
                 description="Kategori sampah elektronik"
