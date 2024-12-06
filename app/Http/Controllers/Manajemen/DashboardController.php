@@ -23,8 +23,7 @@ class DashboardController extends Controller
 
     $terdaftar = Pengguna::count();
 
-    // Ambil data jenis menggunakan Eloquent
-    $jenis = Jenis::all(); // Pastikan model Jenis sudah ada
+    // $jenis = Jenis::all();
 
     // Mengembalikan data ke view
     return view('manajemen.datamaster.dashboard.index', [
