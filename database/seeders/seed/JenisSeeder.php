@@ -36,6 +36,37 @@ class JenisSeeder extends Seeder
             ['id_kategori' => 3, 'nama_jenis' => 'Headphone', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
             ['id_kategori' => 3, 'nama_jenis' => 'Smartwatch', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
             ['id_kategori' => 3, 'nama_jenis' => 'Smartband', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+
+            // Kategori 4 - Perangkat Kecil
+            ['id_kategori' => 4, 'nama_jenis' => 'Mouse', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 4, 'nama_jenis' => 'Keyboard', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 4, 'nama_jenis' => 'Charger', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 4, 'nama_jenis' => 'Earphone', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 4, 'nama_jenis' => 'Speaker', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 4, 'nama_jenis' => 'Headphone', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 4, 'nama_jenis' => 'Smartwatch', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 4, 'nama_jenis' => 'Smartband', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+
+            // Kategori 5 - Perangkat Kecil
+            ['id_kategori' => 5, 'nama_jenis' => 'Mouse', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 5, 'nama_jenis' => 'Keyboard', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 5, 'nama_jenis' => 'Charger', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 5, 'nama_jenis' => 'Earphone', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 5, 'nama_jenis' => 'Speaker', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 5, 'nama_jenis' => 'Headphone', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 5, 'nama_jenis' => 'Smartwatch', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 5, 'nama_jenis' => 'Smartband', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+
+            // Kategori 6 - Perangkat Kecil
+            ['id_kategori' => 6, 'nama_jenis' => 'Mouse', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 6, 'nama_jenis' => 'Keyboard', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 6, 'nama_jenis' => 'Charger', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 6, 'nama_jenis' => 'Earphone', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 6, 'nama_jenis' => 'Speaker', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 6, 'nama_jenis' => 'Headphone', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 6, 'nama_jenis' => 'Smartwatch', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['id_kategori' => 6, 'nama_jenis' => 'Smartband', 'poin' => 5, 'created_at' => now(), 'updated_at' => now()],
+
         ];
 
         DB::table('jenis')->insert($data);

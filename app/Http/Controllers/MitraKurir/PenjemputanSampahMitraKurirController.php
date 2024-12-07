@@ -13,19 +13,20 @@ use App\Models\Sampah;
 use Illuminate\Http\Request;
 use App\Models\JenisSampah;
 use App\Models\KategoriSampah;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class PenjemputanSampahMitraKurirController extends Controller
 {
 
-    //untuk mengambil data dari database tabel kategori_sampah
+    //untuk mengambil data dari database tabel kategori
     public function kategori()
     {
         $kategori = Kategori::all();
         return view(('mitra-kurir.penjemputan-sampah.kategori'), compact('kategori'));
     }
 
-    //untuk mengambil data dari database tabel jenis_sampah
+    //untuk mengambil data dari database tabel jenis
     public function detailKategori($id)
     {
         $jenis = Jenis::where('id_kategori', $id)->paginate(6);
@@ -33,24 +34,51 @@ class PenjemputanSampahMitraKurirController extends Controller
         return view('mitra-kurir.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori'));
     }
 
+    //untuk mengambil data dari database tabel penjemputan
     public function permintaan()
     {
+//        $data = Penjemputan::with([
+//            'detail_penjemputan.jenis.kategori',
+//            'pelacakan',
+//            'pengguna',
+//            'dropbox'
+//        ])
+//            ->where('status', 'Menunggu Konfirmasi')
+//            ->get()
+//            ->map(function ($penjemputan) {
+//                return [
+//                    'nama' => $penjemputan->pengguna->nama,
+//                    'status' => $penjemputan->pelacakan->status,
+//                    'id_pelacakan' => $penjemputan->pelacakan->id_pelacakan,
+//                    'nama_jenis' => $penjemputan->detailPenjemputan->pluck('jenis.nama_jenis'),
+//                    'berat' => $penjemputan->detailPenjemputan->pluck('berat'),
+//                    'id_penjemputan' => $penjemputan->id_penjemputan,
+//                    'alamat_penjemputan' => $penjemputan->alamat_penjemputan,
+//                    'tanggal_penjemputan' => $penjemputan->tanggal_penjemputan,
+//                    'alamat_dropbox' => $penjemputan->dropbox->alamat_dropbox,
+//                    'nama_kategori' => $penjemputan->detailPenjemputan->pluck('jenis.kategori.nama_kategori'),
+//                    'catatan' => $penjemputan->catatan,
+//                ];
+//            });
+
         $data = DB::table('penjemputan')
             ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
             ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
             ->join('detail_penjemputan', 'penjemputan.id_penjemputan','=','detail_penjemputan.id_penjemputan',  )
-            ->join('jenis', 'jenis.id_jenis', '=', 'detail_penjemputan.id_jenis')
+            ->join('jenis', 'detail_penjemputan.id_jenis', '=', 'jenis.id_jenis')
             ->where('pelacakan.status', 'Menunggu Konfirmasi')
-            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','detail_penjemputan.berat','penjemputan.id_penjemputan')
+            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','detail_penjemputan.berat',
+                'penjemputan.id_penjemputan')
             ->get();
 
         return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan', compact('data'));
     }
 
 
-
+    //untuk mengambil data dari database tabel penjemputan berdasarkan id
     public function detailPermintaan($id)
     {
+
         $data = DB::table('penjemputan')
             ->join('detail_penjemputan', 'penjemputan.id_penjemputan','=','detail_penjemputan.id_penjemputan')
             ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
@@ -60,12 +88,14 @@ class PenjemputanSampahMitraKurirController extends Controller
             ->join('dropbox', 'penjemputan.id_dropbox', '=', 'dropbox.id_dropbox')
             ->where('penjemputan.id_penjemputan', $id)
             ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','detail_penjemputan.berat',
-                'penjemputan.id_penjemputan','penjemputan.alamat_penjemputan','penjemputan.tanggal_penjemputan','dropbox.alamat_dropbox','kategori.nama_kategori')
+                'penjemputan.id_penjemputan','penjemputan.alamat_penjemputan','penjemputan.tanggal_penjemputan','dropbox.alamat_dropbox',
+                'kategori.nama_kategori','penjemputan.catatan')
             ->get();
 
         return view('mitra-kurir.penjemputan-sampah.detail-permintaan', compact('data',));
     }
 
+    //update status dari menunggu konfirmasi menjadi dijemput driver
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
@@ -85,25 +115,6 @@ class PenjemputanSampahMitraKurirController extends Controller
 
         return redirect()->back()->with('success', 'Status berhasil diperbarui.');
     }
-
-
-//    public function updateStatus(Request $request)
-//    {
-//        $request->validate([
-//            'status' => 'required|in:Menunggu Konfirmasi,Dijemput Driver',
-//        ]);
-//
-//        $pelacakan = Pelacakan::all();
-//
-//        if (!$pelacakan) {
-//            return redirect()->back()->with('error', 'Data tidak ditemukan.');
-//        }
-//
-//        $pelacakan->status = $request->status;
-//        $pelacakan->save();
-//
-//        return redirect()->back()->with('success', 'Status berhasil diperbarui.');
-//    }
 
     public function dropbox()
     {

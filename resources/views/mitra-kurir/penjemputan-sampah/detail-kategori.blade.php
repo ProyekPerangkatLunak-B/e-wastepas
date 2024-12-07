@@ -34,8 +34,9 @@
                 </div>
             </div>
 
-
-            @if (count($jenis) == 0)
+            <div class="flex justify-center mt-4">
+                <div class="grid grid-cols-3 gap-6 mx-auto">
+                    @if (count($jenis) == 0)
                 <div
                     class="flex justify-center ml-[500px] mt-40 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
                     <div class="text-center">
@@ -44,18 +45,14 @@
                 </div>
             @else
             {{-- Card Section --}}
-            <div class="flex justify-center mt-4">
-                <div class="grid grid-cols-3 gap-6 mx-auto">
                 @foreach ($jenis as $jenisSampah)
-                    <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                         <x-card-detail
                             title="{{ $jenisSampah->nama_jenis }}"
                             description="{{ $jenisSampah->deskripsi_jenis }}"
                             image="https://picsum.photos/700/700" />
-                    </div>
                 @endforeach
-            @endif
-
+                </div>
+            </div>
             {{-- Pagination --}}
             <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
                 {{-- Button < & << --}}
@@ -73,6 +70,7 @@
                     <button onclick="window.location.href='{{ $jenis->url($jenis->lastPage()) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
                 @endif
             </div>
+            @endif
         </div>
     </div>
 @endsection
