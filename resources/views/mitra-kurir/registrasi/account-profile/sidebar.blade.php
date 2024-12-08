@@ -3,10 +3,12 @@
     <div class="p-6">
         <!-- Logo section -->
         <div class="flex items-center justify-between mb-10">
+            <a href="{{ url('mitra-kurir/penjemputan-sampah/kategori') }}">
             <div class="flex items-center">
                 <img src="{{ asset('img/logoEwaste.png') }}" alt="Logo" class="w-12 h-12">
                 <h1 class="ml-4 text-xl font-bold text-green-500">E-WastePas</h1>
             </div>
+            </a>
             <!-- Close button untuk mobile -->
             <button id="closeSidebar" class="lg:hidden text-gray-500 hover:text-gray-700">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
