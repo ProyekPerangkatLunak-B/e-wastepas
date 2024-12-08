@@ -1,6 +1,26 @@
 @extends('layouts.main-manajemen')
 
 @section('content')
+<style>
+    .relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
+
+.bg-white {
+    background-color: white;
+}
+.text-[#60B15B] {
+    color: #60B15B;
+}
+.z-10 {
+    z-index: 10; /* Pastikan berada di atas gambar */
+}
+
+</style>
+
 <div class="min-h-screen mx-auto bg-gray-100 w-full">   
 
     <div class="py-8">
