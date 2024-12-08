@@ -330,11 +330,16 @@ Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::c
 Route::get('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->name('upload-data-index');
 Route::post('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadValidation'])->name('upload-validate');
 
+// change password setelah forgot password
+Route::get('/mitra-kurir/registrasi/change-password', function () {
+    return view('mitra-kurir/registrasi/change-password');
+});
 
 // forgot password
 Route::get('/mitra-kurir/registrasi/forgot-password', function () {
     return view('mitra-kurir/registrasi/forgot-password');
 });
+
 // syarat & ketentuan
 Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
     return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
