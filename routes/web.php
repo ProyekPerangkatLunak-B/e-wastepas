@@ -18,6 +18,11 @@ use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
+use App\Http\Controllers\Manajemen\DashboardController;
+use App\Http\Controllers\Manajemen\DashboardKategori;
+use App\Http\Controllers\Masyarakat\LoginMasyarakat;
+use App\Http\Controllers\Manajemen\KategoriController;
+use App\Models\Kategori;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -158,17 +163,22 @@ Route::group([
 ], function () {
 
     // Submodul Dashboard
-    Route::get('/datamaster/dashboard', function () {
-        return view('manajemen.datamaster.dashboard.index');
-    })->name('datamaster.dashboard.index');
+    // Route::get('/datamaster/dashboard', function () {
+    //     return view('manajemen.datamaster.dashboard.index');
+    // })->name('datamaster.dashboard.index');
 
-    Route::get('/datamaster/melacak-penjemputan', function () {
-        return view('manajemen.datamaster.melacak-penjemputan.index');
-    })->name('datamaster.melacak-penjemputan.index');
+    Route::get('/datamaster/dashboard', [DashboardController::class, 'index'])->name('datamaster.dashboard.index');
 
-    Route::get('/datamaster/total-sampah', function () {
-        return view('manajemen.datamaster.total-sampah.index');
-    })->name('datamaster.total-sampah.index');
+    Route::get('/datamaster/top-10', function () {
+        return view('manajemen.datamaster.top-10.index');
+    })->name('datamaster.top-10.index');
+
+    // Route::get('/datamaster/kategori', function () {
+    //     return view('manajemen.datamaster.kategori.index');
+    // })->name('datamaster.kategori.index');
+
+    Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+
 
     // Submodul Registrasi
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan

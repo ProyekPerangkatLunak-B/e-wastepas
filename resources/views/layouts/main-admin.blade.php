@@ -33,7 +33,7 @@
     @include('partials.sidebar-admin')
 
     {{-- Main Content --}}
-    <div class="pt-6 pl-[20rem]">
+    
         @yield('content')
     </div>
 
