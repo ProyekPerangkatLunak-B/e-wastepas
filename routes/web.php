@@ -365,7 +365,6 @@ Route::get('/mitra-kurir/registrasi/account-profile/change-password', function (
     return view('mitra-kurir/registrasi/account-profile/change-password');
 })->name('mitra-kurir.registrasi.account-profile.change-password');
 
-
 Route::group([
     'prefix' => 'api/',
     'as' => 'api.',
