@@ -50,7 +50,7 @@
                     </a>
 
                     <!-- Logout Button -->
-                    <form action="#" method="POST">
+                    <form action="{{ route('mitra-kurir.registrasi.logout') }}" method="POST">
                         @csrf
                         <button type="submit"
                             class="flex items-center justify-center w-[313px] h-[45px] mx-auto px-4 py-3 mt-4 space-x-2 text-sm text-white rounded-2xl bg-red-normal hover:bg-red-400">

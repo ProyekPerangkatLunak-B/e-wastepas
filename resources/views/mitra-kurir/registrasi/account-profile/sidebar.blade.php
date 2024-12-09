@@ -49,7 +49,7 @@
     </div>
 
     <div class="p-6 border-t border-gray-200">
-        <form action="#" method="POST">
+        <form action="{{ route('mitra-kurir.registrasi.logout') }}" method="POST">
             @csrf
             <button type="submit"
                 class="flex items-center justify-center w-full h-[45px] px-4 py-3 space-x-2 text-sm text-white rounded-2xl bg-red-normal hover:bg-red-400">
@@ -59,6 +59,7 @@
                     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
                 </svg>
             </button>
+            
         </form>
     </div>
 </div>

@@ -33,6 +33,17 @@ class RegistrasiMitraKurirController extends Controller
         return view('mitra-kurir/registrasi/forgot-password');
     }
 
+    public function ForgotPasswordFormIndex(Request $request){
+        $token = $request->query('token');
+        $email = $request->query('email');
+
+        $tokenCache = Cache::get('password_reset'.$email);
+
+        if(!$tokenCache || !$tokenCache == $token){
+            return redirect('/')->withErrors(['token' => 'Invalid or expired token.']);
+        }
+        return view('mitra-kurir.registrasi.change-password', ['token' => $token, 'email' => $email]);
+    }
 
     public function OtpRedirect($id_pengguna){
         $user = User::find($id_pengguna);
@@ -40,22 +51,37 @@ class RegistrasiMitraKurirController extends Controller
     }
     
     public function LoginAuth(Request $request)
-    {
+{
     $credentials = $request->validate([
         'email' => ['required', 'email'],
         'kata_sandi' => ['required']
     ]);
-        $user = User::where('email', $credentials['email'])->first();
-            if ($user && Hash::check($credentials['kata_sandi'], $user->kata_sandi)) {
-                Auth::login($user);
 
+    $user = User::where('email', $credentials['email'])->first();
+
+    if ($user && Hash::check($credentials['kata_sandi'], $user->kata_sandi)) {
+        Auth::login($user);
         $request->session()->regenerate();
-            return redirect('mitra-kurir/penjemputan-sampah/kategori');
+        return redirect()->route('mitra-kurir.penjemputan.kategori');
     }
+
     return back()->withErrors([
-            'email' => 'Password atau Email Salah',
-         ])->onlyInput('email');
-    }
+        'email' => 'Password atau Email Salah',
+    ])->onlyInput('email');
+
+}
+
+public function LogoutAuth(Request $request)
+{
+    Auth::logout();
+
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+
+    return redirect()->route('mitra-kurir.registrasi.login');
+}
+
 
 
     public function OtpValidation(Request $request){
@@ -176,11 +202,31 @@ class RegistrasiMitraKurirController extends Controller
         
         Cache::put('password_reset'. $user->email, $token, now()->addMinutes(30));
 
-        $resetLink = url('/reset-password?token=' . $token . '&email=' . $user->email);
+        $resetLink = url('/mitra-kurir/registrasi/forgot-password-form?token=' . $token . '&email=' . $user->email);
 
         $user->notify(new PasswordResetMail($resetLink));
         return back()->with('status', 'Password reset link sent!');
-
    }    
+
+   public function ChangeForgotPassword(Request $request)
+{
+    $request->validate([
+        'password' => 'required|min:8',
+        'ulangiPassword' => 'required|min:8|same:password',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+    if (!$user) {
+        return back()->withErrors(['email' => 'User not found.']);
+    }
+
+    $user->kata_sandi = Hash::make($request->password);
+    $user->tanggal_update = now();
+    $user->save();
+
+    Cache::forget('password_reset' . $request->email);
+
+    return redirect('mitra-kurir/registrasi/login')->with('status', 'Password successfully reset!');
+}
 
 }

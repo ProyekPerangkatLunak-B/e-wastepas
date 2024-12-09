@@ -11,7 +11,6 @@
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#498D43]">Welcome!</h2>
         </div> 
-  
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <!-- Tampilkan Alert Jika Ada Kesalahan -->
             @if ($errors->any())

@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->hasOne(UploadDocuments::class,"id_pengguna");
     }
 
-    public function getAuthPasswordName()
+    public function getAuthPassword()
     {
         return 'kata_sandi';
     }

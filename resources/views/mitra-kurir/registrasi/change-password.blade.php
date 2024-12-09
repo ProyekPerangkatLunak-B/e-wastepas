@@ -16,6 +16,17 @@
                 </h2>
             </div>
 
+            @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">Oops!</strong>
+                <span class="block sm:inline">There were some problems with your input:</span>
+                <ul class="mt-2 list-disc pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             <?php if (isset($error)): ?>
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 max-w-md mx-auto text-sm">
                     <?php echo $error; ?>
@@ -28,25 +39,27 @@
                 </div>
             <?php endif; ?>
 
-            <form method="POST" class="max-w-md w-full mx-auto px-4">
+            <form method="POST" action="{{ route('reset-password-form.post'); }}" class="max-w-md w-full mx-auto px-4">
                 {{ csrf_field() }}
+                <input type="hidden" name="token" value="{{ $token }}">
+                <input type="hidden" name="email" value="{{ $email }}" required>
                 @include('components.mitra-kurir.auth.input', ['id' => 'password', 'name' => 'password', 'label' => 'Kata Sandi Baru', 'type' => 'password', 'placeholder' => 'Masukkan Kata Sandi Baru'])
                 @include('components.mitra-kurir.auth.input', ['id' => 'confirm-password', 'name' => 'ulangiPassword', 'label' => 'Konfirmasi Kata Sandi', 'type' => 'password', 'placeholder' => 'Masukkan Konfirmasi Kata Sandi'])
+                <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 w-full px-4 sm:px-8 md:px-12">
+                    <button
+                        type="submit"
+                        onclick="showVerificationModal()"
+                        class="w-full sm:w-32 float-right
+                               bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
+                               hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
+                                transform hover:scale-105 !important text-sm sm:text-base"
+                    >
+                        Kirim
+                    </button>
+                </div>
             </form>
         </div>
 
-        <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 w-full px-4 sm:px-8 md:px-12">
-            <button
-                type="button"
-                onclick="showVerificationModal()"
-                class="w-full sm:w-32 float-right
-                       bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
-                       hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
-                        transform hover:scale-105 !important text-sm sm:text-base"
-            >
-                Kirim
-            </button>
-        </div>
     </div>
 </div>
 
@@ -72,7 +85,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     function showVerificationModal() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
@@ -120,5 +133,5 @@ document.querySelector('[name="password-verification-modal"]').addEventListener(
     }
 });
 
-</script>
+</script> --}}
 @endsection

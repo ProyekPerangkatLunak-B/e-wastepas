@@ -19,6 +19,7 @@ use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
+use GuzzleHttp\Middleware;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -299,7 +300,7 @@ Route::group([
 ], function () {
 
     // Submodul Penjemputan Sampah
-    Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMitraKurirController::class, 'kategori'])->name('penjemputan.kategori');
+    Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMitraKurirController::class, 'kategori'])->middleware('auth')->name('penjemputan.kategori');
     Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->name('penjemputan.detail-kategori');
     Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->name('penjemputan.permintaan');
     Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}',[PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->name('penjemputan.detail-permintaan');
@@ -322,7 +323,8 @@ Route::group([
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->middleware('guest')->name('registrasi.login');
 
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
-    Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
+    Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');                
+    Route::post('registrasi/logout', [RegistrasiMitraKurirController::class, 'LogoutAuth'])->name('registrasi.logout');                
 });
 
 Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->name('otp.validation');
@@ -331,14 +333,12 @@ Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::c
 Route::get('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->name('upload-data-index');
 Route::post('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadValidation'])->name('upload-validate');
 
-// change password setelah forgot password
-Route::get('/mitra-kurir/registrasi/change-password', function () {
-    return view('mitra-kurir/registrasi/change-password');
-});
 
 // forgot password
+Route::get('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ForgotPasswordFormIndex'])->middleware('guest')->name('reset-password-form');
+Route::post('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ChangeForgotPassword'])->middleware('guest')->name('reset-password-form.post');
 Route::get('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'ForgotPasswordIndex'])->middleware('guest')->name('reset-password');
-Route::post('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'SendForgotPassword'])-> name('reset-password.post');
+Route::post('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'SendForgotPassword'])->middleware('guest')->name('reset-password.post');
 
 // syarat & ketentuan
 Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
@@ -353,12 +353,12 @@ Route::get('/mitra-kurir/registrasi/reset-password', function () {
 // halaman profile
 Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
     return view('mitra-kurir/registrasi/account-profile/profile');
-})->name('mitra-kurir.registrasi.account-profile.profile');
+})->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile');
 
 // halaman account
 Route::get('/mitra-kurir/registrasi/account-profile/security', function () {
     return view('mitra-kurir/registrasi/account-profile/security');
-})->name('mitra-kurir.registrasi.account-profile.security');
+})->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
 
 Route::group([
     'prefix' => 'api/',
