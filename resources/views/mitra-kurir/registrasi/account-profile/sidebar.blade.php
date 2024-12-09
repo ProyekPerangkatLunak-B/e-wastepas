@@ -35,19 +35,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('mitra-kurir.registrasi.account-profile.account') }}" class="flex items-center justify-between p-4 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('mitra-kurir/registrasi/account-profile/account') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
-                        Akun
-                        <span class="text-lg {{ Request::is('mitra-kurir/registrasi/account-profile/account') ? 'text-green-600' : 'text-gray-400' }}">
-                            <svg class="w-[20px] h-[20px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5 7 7-7 7"/>
-                            </svg>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('mitra-kurir.registrasi.account-profile.change-password') }}" class="flex items-center justify-between p-4 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('mitra-kurir/registrasi/account-profile/change-password') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
-                        Ganti Kata Sandi
-                        <span class="text-lg {{ Request::is('mitra-kurir/registrasi/account-profile/change-password') ? 'text-green-600' : 'text-gray-400' }}">
+                    <a href="{{ route('mitra-kurir.registrasi.account-profile.security') }}" class="flex items-center justify-between p-4 text-sm font-semibold text-gray-700 border bg-slate-100 {{ Request::is('mitra-kurir/registrasi/account-profile/security') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-2xl">
+                        Keamanan
+                        <span class="text-lg {{ Request::is('mitra-kurir/registrasi/account-profile/security') ? 'text-green-600' : 'text-gray-400' }}">
                             <svg class="w-[20px] h-[20px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5 7 7-7 7"/>
                             </svg>
