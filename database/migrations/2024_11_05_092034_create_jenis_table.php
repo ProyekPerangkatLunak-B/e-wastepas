@@ -18,6 +18,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('nama_jenis')->nullable();
             $table->integer('poin')->nullable();
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

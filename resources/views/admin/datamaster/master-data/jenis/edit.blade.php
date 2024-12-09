@@ -54,9 +54,11 @@
             <h4 class="text-base font-normal ml-14">Silakan ubah data berikut untuk memperbarui jenis sampah.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_jenis) }}" method="POST">
+                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_jenis) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
                     <div class="mb-6">
                         <label for="nama_jenis" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
                             Sampah</label>
@@ -81,10 +83,24 @@
                             value="{{ $jenisSampah->poin }}" />
                     </div>
 
-                    <div class="flex justify-end" style="color: white">
+                    <div class="mb-6">
+                        <label for="gambar" class="block text-sm font-medium text-gray-800 mb-1">Gambar (Optional)</label>
+                        <input type="file" name="gambar" id="gambar" accept="image/*"
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+
+                        @if ($jenisSampah->gambar)
+                            <div class="mt-2">
+                                <label class="text-sm text-gray-600">Current Image:</label>
+                                <img src="{{ asset('img/admin/' . $jenisSampah->gambar) }}" alt="Current Image"
+                                    class="mt-2" width="200" />
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="flex justify-end">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Simpan Perubahan
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition">
+                            Update
                         </button>
                     </div>
                 </form>

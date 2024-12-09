@@ -1,4 +1,8 @@
-<div class=" w-full h-auto max-w-sm bg-neutral-50 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg">
+<div class="relative w-full h-auto max-w-sm bg-neutral-50 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg">
+    <div class="absolute top-0 left-0 bg-secondary-normal text-white-100 font-semibold px-4 py-1 rounded-tl-2xl rounded-br-2xl">
+        {{ $berat }} Kg
+    </div>
+
     <div class="flex flex-col items-center pb-5">
         <div class="h-20 rounded-full overflow-hidden bg-white mt-5">
             <img class="object-cover w-full h-full" src="{{ $image }}" alt="{{ $name }}"/>
@@ -18,7 +22,6 @@
                     <span class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-base font-medium text-lime-900  ">{{ $pcs }} Pcs</span>
                     </a>
                 </li>
-                
             </ul>
             <div class="flex flex-col items-center text-center">
                 <a href="{{ $link }}" type="button" class="focus:outline-none  text-white-100 bg-gradient-to-b from-green-400 to-green-600 hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300 font-semibold w-40 rounded-2xl text-base px-5 py-2.5 me-2 mb-2 ">Detail</a>

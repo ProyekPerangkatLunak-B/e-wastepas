@@ -19,7 +19,7 @@ class KategoriSampahAdminController extends Controller
     public function getKategoriData()
     {
         try {
-            $kategoriSampah = KategoriSampah::select(['id_kategori', 'nama_kategori', 'deskripsi_kategori']);
+            $kategoriSampah = KategoriSampah::select(['id_kategori', 'nama_kategori', 'deskripsi_kategori','gambar']);
             return DataTablesDataTables::of($kategoriSampah)
                 ->addColumn('action', function ($row) {
                     return '
@@ -58,16 +58,33 @@ class KategoriSampahAdminController extends Controller
 
     public function store(Request $request)
     {
+        // Validate the incoming data
         $request->validate([
             'nama_kategori' => 'required|string|max:255',
             'deskripsi_kategori' => 'nullable|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        KategoriSampah::create($request->all());
+        // Handle the image upload if present
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension(); // Generate a unique name for the image
+            $image->move(public_path('img/admin'), $imageName); // Save the image in the public/img/admin directory
+        } else {
+            $imageName = null; // If no image is uploaded, set it to null
+        }
 
+        // Create a new category record
+        KategoriSampah::create([
+            'nama_kategori' => $request->nama_kategori,
+            'deskripsi_kategori' => $request->deskripsi_kategori,
+            'gambar' => $imageName, // Save the image file name in the database
+        ]);
+
+        // Redirect with success message
         return redirect()->route('admin.datamaster.kategori.index')->with('success', 'Data berhasil ditambahkan.');
-
     }
+
 
     public function storeKategori(Request $request)
     {
@@ -98,14 +115,39 @@ class KategoriSampahAdminController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Validate the incoming data
         $request->validate([
             'nama_kategori' => 'required|string|max:255',
             'deskripsi_kategori' => 'nullable|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate image (optional)
         ]);
 
+        // Find the existing KategoriSampah record
         $kategori = KategoriSampah::findOrFail($id);
-        $kategori->update($request->all());
 
+        // Check if a new image was uploaded
+        if ($request->hasFile('gambar')) {
+            // Delete the old image from storage if it exists
+            if ($kategori->gambar && file_exists(public_path('img/admin/' . $kategori->gambar))) {
+                unlink(public_path('img/admin/' . $kategori->gambar)); // Remove the old image
+            }
+
+            // Handle the new image upload
+            $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension(); // Generate a unique name for the image
+            $image->move(public_path('img/admin'), $imageName); // Save the new image
+
+            // Update the image path in the database
+            $kategori->gambar = $imageName;
+        }
+
+        // Update other fields without changing the image if no new image is provided
+        $kategori->update([
+            'nama_kategori' => $request->nama_kategori,
+            'deskripsi_kategori' => $request->deskripsi_kategori,
+        ]);
+
+        // Redirect with success message
         return redirect()->route('admin.datamaster.kategori.index')->with('success', 'Data berhasil diperbarui.');
     }
 

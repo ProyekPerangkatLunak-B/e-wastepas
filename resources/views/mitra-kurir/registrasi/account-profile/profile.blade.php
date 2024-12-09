@@ -1,165 +1,121 @@
 @extends('mitra-kurir.registrasi.account-profile.layout')
 @section('title', 'Profile')
 @section('content')
-<div class="min-h-screen bg-gray-100 flex items-center justify-center w-full py-8 mt-0">
+<div class="min-h-screen bg-gray-100 flex items-center justify-center w-full py-8 mt-12">
     <div class="flex-1 bg-gray-100">
-        {{-- Container utama untuk profil --}}
         <div class="container px-4 mx-auto py-8">
-            <div style="background-color: white;" 
-            class="rounded-[2rem] shadow-2xl w-full 
-            sm:max-w-xl md:max-w-3xl lg:max-w-4xl
-            p-4 sm:p-6 md:p-8 
-            min-h-[500px] sm:min-h-[600px] md:min-h-[700px] 
-            relative flex flex-col justify-center items-center
-            mx-auto">
+            <div style="background-color: white;" class="rounded-[2rem] shadow-2xl w-full 
+                sm:max-w-xl md:max-w-3xl lg:max-w-4xl
+                p-4 sm:p-6 md:p-8 
+                min-h-[500px] sm:min-h-[600px] md:min-h-[700px] 
+                relative flex flex-col mx-auto">
 
-                {{-- Bagian judul profil --}}
-                <div class="text-left w-full mb-8">
-                    <h2 class="text-2xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3">
-                        Profile
-                    </h2>
+                <div class="text-left w-full mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-900">Profil</h2>
                 </div>
-                
-                {{-- Bagian Foto Profil --}}
-                <div class="w-full max-w-md mx-auto mb-8">
-                    <div class="flex flex-col items-center">
-                        {{-- Pratinjau Gambar Profil --}}
-                        <div class="relative group">
-                            <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 mb-4">
-                                @if(isset($profile->photo))
-                                    <img src="{{ asset('storage/' . $profile->photo) }}" 
-                                         alt="Profile Photo"
-                                         class="w-full h-full object-cover" />
-                                @else
-                                    <div class="w-full h-full flex items-center justify-center">
-                                        <img src="{{ asset('/img/mitra-kurir/icon-account.png') }}" 
-                                             alt="Default Profile Photo"
-                                             class="w-full h-full object-cover" />                                    
-                                    </div>
-                                @endif
-                            </div>
-                            
-                            
-                            <!-- Upload Button Overlay -->
-                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <label for="photo-upload" 
-                                       class="absolute bottom-0 w-full h-1/3 bg-black bg-opacity-50 flex items-center justify-center cursor-pointer">
-                                       <img src="{{ asset('/img/mitra-kurir/icon-camera.png') }}" 
-                                       alt="Camera Icon"
-                                       class="w-6 h-6" />                                
-                                </label>
-                            </div>
-                            
-                            <!-- Hidden File Input -->
-                            <input type="file" 
-                                   id="photo-upload" 
-                                   name="photo" 
-                                   accept="image/*"
-                                   class="hidden"
-                                   onchange="handlePhotoUpload(this)" />
-                        </div>
 
+                {{-- Bagian Profil Pengguna --}}
+                <div class="bg-[#F7F7F7] border border-[#C0C0C0] rounded-lg p-6 shadow-sm relative mb-6">
+                    <a href="#" id="editButton" class="absolute top-4 right-4 flex items-center gap-2 font-light text-gray-600 py-2 px-4 rounded-md 
+                        border border-gray-300 hover:bg-gray-100 transition-all duration-300" onclick="enableEditMode()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.213l-4.346 1.087 1.087-4.346L16.862 3.487z" />
+                        </svg>
+                        Edit
+                    </a>
+                    <div class="flex items-start gap-6">
+                        <div class="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                            <input id="photoInput" name="photo" type="file" class="hidden" onchange="previewImage(event)" />
+                            <label for="photoInput" class="cursor-pointer">
+                                @if(isset($profile->photo))
+                                    <img id="profilePhoto" src="{{ asset('storage/' . $profile->photo) }}" alt="Profile Photo" class="w-full h-full object-cover" />
+                                @else
+                                    <img id="profilePhoto" src="{{ asset('/img/mitra-kurir/icon-account.png') }}" alt="Default Profile Photo" class="w-full h-full object-cover" />
+                                @endif
+                            </label>
+                        </div>
                         <div>
-                            <p class="text-sm sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-3">Nama</p>
+                            <input id="nameInput" type="text" class="text-2xl font-semibold text-gray-900 bg-transparent border-0 focus:ring-0 focus:outline-none" value="Jane Doe" readonly />
+                            <p class="text-sm font-semibold text-gray-700">Mitra Kurir</p>
+                            <p class="text-sm font-medium text-green-600">Sudah tervalidasi</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="w-full max-w-md mx-auto">
-                    <?php if (isset($error)): ?>
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 max-w-md mx-auto text-sm">
-                            <?php echo $error; ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (isset($success)): ?>
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 max-w-md mx-auto text-sm">
-                            <?php echo $success; ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <form method="POST" class="max-w-md w-full mx-auto px-4" enctype="multipart/form-data">
+                {{-- Bagian Data Diri --}}
+                <div class="bg-[#F9F9F9] border border-[#E0E0E0] rounded-lg p-6 shadow-sm relative mt-6">
+                    <h5 class="text-xl font-semibold text-gray-900 mb-5">Data Diri</h5>
+                    
+                    <form method="POST" class="w-full" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-2">
-                            @include('components.mitra-kurir.auth.input', [
-                                'id' => 'email', 
-                                'name' => 'Email', 
-                                'label' => 'Email', 
-                                'type' => 'email', 
-                                'placeholder' => 'Masukkan Email'
-                            ])
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <div class="mb-4">
+                                    <label for="email" class="block mt-2 text-sm font-medium leading-7 text-gray-500">Email</label>
+                                    <div class="relative mt-2">
+                                        <input id="email" name="email" type="email" placeholder="Masukkan Email" class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white" value="user@example.com" readonly />
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="phone" class="block mt-2 text-sm font-medium leading-7 text-gray-500">No. HP</label>
+                                    <div class="relative mt-2">
+                                        <input id="phone" name="phone" type="tel" placeholder="Masukkan No.HP" class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white" value="08123456789" readonly />
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="address" class="block mt-2 text-sm font-medium leading-7 text-gray-500">Alamat</label>
+                                    <div class="relative mt-2">
+                                        <input id="address" name="address" type="text" placeholder="Masukkan Alamat" class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white" value="Jalan Raya No.123" readonly />
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <div class="mb-4">
+                                    <label for="tanggalLahir" class="block mt-2 text-sm font-medium leading-7 text-gray-500">Tanggal Lahir</label>
+                                    <div class="relative mt-2">
+                                        <input id="tanggalLahir" name="tanggalLahir" type="date" placeholder="Masukkan Tanggal Lahir" class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white" value="1990-01-01" readonly />
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="noRekening" class="block mt-2 text-sm font-medium leading-7 text-gray-500">No. Rekening</label>
+                                    <div class="relative mt-2">
+                                        <input id="noRekening" name="noRekening" type="text" placeholder="Masukkan No Rekening" class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white" value="1234567890" readonly />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            @include('components.mitra-kurir.auth.input', [
-                                'id' => 'phone', 
-                                'name' => 'NomorHP', 
-                                'label' => 'No. Telepon', 
-                                'type' => 'tel', 
-                                'placeholder' => 'Masukkan No.Telepon'
-                            ])
-                        </div>
-                        <div class="mb-2">
-                            @include('components.mitra-kurir.auth.input', [
-                                'id' => 'name', 
-                                'name' => 'nama', 
-                                'label' => 'Alamat', 
-                                'type' => 'text', 
-                                'placeholder' => 'Masukkan Alamat'
-                            ])
+
+                        <div class="mt-8">
+                            <button type="button" id="saveButton" style="display:none;" class="w-full sm:w-32 float-right bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
+                                                hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
+                                                transform hover:scale-105 text-sm sm:text-base">
+                                Simpan
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+</div>  
 
-    <script>
-    function handlePhotoUpload(input) {
-        if (input.files && input.files[0]) {
-            const file = input.files[0];
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                const imgPreview = input.parentElement.querySelector('img') || 
-                                 input.parentElement.querySelector('.flex');
-                
-                if (imgPreview.tagName === 'IMG') {
-                    imgPreview.src = e.target.result;
-                } else {
-                    // Create new image if doesn't exist
-                    const newImg = document.createElement('img');
-                    newImg.src = e.target.result;
-                    newImg.classList.add('w-full', 'h-full', 'object-cover');
-                    imgPreview.parentElement.replaceChild(newImg, imgPreview);
-                }
-            };
-            
-            reader.readAsDataURL(file);
-            
-            // Here you might want to trigger the form submission or handle the upload
-            // Example:
-            const formData = new FormData();
-            formData.append('photo', file);
-            
-            // Uncomment and modify this section to handle the upload
-            /*
-            fetch('/upload-profile-photo', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Handle success
-                } else {
-                    // Handle error
-                }
-            });
-            */
-        }
+<script>
+    function enableEditMode() {
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => input.removeAttribute('readonly'));
+        
+        document.getElementById('saveButton').style.display = 'inline-block';
+        document.getElementById('editButton').style.display = 'none';
     }
-    </script>
+
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById('profilePhoto');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 @endsection
