@@ -325,6 +325,10 @@ Route::group([
         return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan');
     })->name('penjemputan.riwayat-penjemputan');
 
+    Route::get('penjemputan-sampah/riwayat-penjemputan/detail', function () {
+        return view('mitra-kurir.penjemputan-sampah.detail-riwayat');
+    })->name('penjemputan.detail-riwayat');
+
     // Submodul Registrasi
 
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'RegisterIndex'])->name('registrasi.register');
