@@ -53,7 +53,7 @@
             @else
                 @foreach ($penjemputan as $p)
                     <a href="{{ route('masyarakat.penjemputan.detail-melacak', $p->id_penjemputan) }}" class="block">
-                        <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                        <div class="relative w-[450px] h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                             <div class="flex justify-between">
                                 <span class="mx-6 my-2 text-lg font-bold text-gray-800">
                                     {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}

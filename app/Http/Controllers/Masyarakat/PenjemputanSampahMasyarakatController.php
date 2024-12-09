@@ -127,8 +127,9 @@ class PenjemputanSampahMasyarakatController extends Controller
         return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
     }
 
-    public function detailRiwayat()
+    public function detailRiwayat($id)
     {
-        return view('masyarakat.penjemputan-sampah.detail-riwayat');
+        $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
+        return view('masyarakat.penjemputan-sampah.detail-riwayat', compact('penjemputan'));
     }
 }
