@@ -79,7 +79,7 @@ public function LogoutAuth(Request $request)
 
     $request->session()->regenerateToken();
 
-    return redirect()->route('mitra-kurir.registrasi.login');
+    return redirect()->route('mitra-kurir.registrasi.login')->with('status', 'Berhasil Logout!');
 }
 
 
@@ -134,15 +134,15 @@ public function LogoutAuth(Request $request)
                 $errorMessages = [];
 
                 if (str_contains($e->getMessage(), 'email_unique')) {
-                    $errorMessages['email'] = 'Email already taken.';
+                    $errorMessages['email'] = 'Email Sudah terdaftar ';
                 }
         
                 if (str_contains($e->getMessage(), 'nomor_ktp_unique')) {
-                    $errorMessages['ktp'] = 'No KTP already taken.';
+                    $errorMessages['ktp'] = 'No KTP Sudah terdaftar';
                 }
                 return back()->withErrors($errorMessages);
             }
-            return back()->withErrors(['error' => 'An error occurred during registration.']);
+            return back()->withErrors(['error' => 'Ada kesalahan dalam proses registrasi']);
         }
     }
 

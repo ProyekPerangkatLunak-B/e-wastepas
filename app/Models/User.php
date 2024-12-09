@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function uploadDoc()
     {
-        return $this->hasOne(UploadDocuments::class,"id_pengguna");
+        return $this->hasMany(UploadDocuments::class,"id_pengguna");
     }
 
     public function getAuthPassword()
