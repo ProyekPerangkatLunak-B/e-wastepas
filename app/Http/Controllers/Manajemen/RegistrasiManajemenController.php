@@ -57,7 +57,7 @@ class RegistrasiManajemenController extends Controller
         Otp::create([
             'id_pengguna' => $pengguna->id_pengguna, // Gunakan ID pengguna
             'otp_token' => $otpCode,
-            'otp_kadaluarsa' => now()->addMinutes(10),
+            // 'otp_kadaluarsa' => now()->adMinutes(10),
             'otp_status' => 0, // Status awal OTP, misal 0 untuk belum diverifikasi
         ]);
 

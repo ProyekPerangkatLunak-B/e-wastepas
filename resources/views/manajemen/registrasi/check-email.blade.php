@@ -1,4 +1,6 @@
-@extends('manajemen.registrasi.app') <!-- Menggunakan layout utama jika ada -->
+@extends('manajemen.registrasi.app')
+
+@section('title', 'Check Email')
 
 @section('content')
     <div class="min-h-screen flex">
@@ -16,28 +18,28 @@
             </div>
 
             <!-- Judul dan Deskripsi dengan font yang lebih ringan -->
-            <h2 class="text-3xl font-semibold text-center mb-2">Periksa email anda</h2>
+            <h2 class="text-3xl font-semibold text-center mb-2">Periksa Email Anda</h2>
             <p class="text-gray-600 text-center text-base max-w-md px-4">
-                Kami akan mengirimkan tautan pengaturan ulang kata sandi ke email anda. silahkan periksa kotak masuk anda.
+                Kami telah mengirimkan tautan pengaturan ulang kata sandi ke email Anda. Silakan periksa kotak masuk Anda.
             </p>
 
             <!-- Tombol Buka Email yang lebih persegi panjang dengan warna hijau -->
             <a href="https://mail.google.com" target="_blank"
-               class="w-full max-w-xs bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l text-slate-50 text-center font-bold py-2 px-8 rounded-lg mb-4 shadow-md transition-all">
-                BUKA GMAIL
+                class="w-full max-w-xs bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l text-slate-50 text-center font-bold py-2 px-8 rounded-lg mb-4 shadow-md transition-all">
+                Buka Gmail
             </a>
 
             <!-- Link untuk Resend Email -->
             <p class="text-center text-gray-600 text-sm">
                 Tidak menerima email?
                 <a href="{{ route('manajemen.password.request') }}"
-                   class="text-[#009688] font-semibold hover:underline">Kirim ulang</a>
+                    class="text-[#009688] font-semibold hover:underline">Kirim Ulang</a>
             </p>
         </div>
 
         <!-- Bagian Kanan: Gambar Latar -->
         <div class="hidden md:block md:w-1/2 bg-cover bg-center"
-             style="background-image: url('/images/tree-microchip.png'); min-height: 100vh;">
+            style="background-image: url('{{ asset('images/tree-microchip.png') }}'); min-height: 100vh;">
             <!-- Background image sesuai path yang diinginkan -->
         </div>
     </div>
