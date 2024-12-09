@@ -16,6 +16,7 @@ class JenisSampah extends Model
         'id_kategori',
         'nama_jenis',
         'poin',
+        'gambar',
     ];
 
     public function kategoriSampah()
