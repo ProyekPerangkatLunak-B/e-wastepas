@@ -40,9 +40,9 @@
                 </li>
                 <li>
                     <a href="{{ route('masyarakat.penjemputan.total-riwayat') }}"
-                        class="flex items-center justify-between p-3 text-sm bg-gray-100 font-semibold border rounded-2xl {{ Request::is('masyarakat/penjemputan-sampah/total-riwayat-penjemputan') || Request::is('masyarakat/penjemputan-sampah/riwayat-penjemputan') || Request::is('masyarakat/penjemputan-sampah/detail-riwayat') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-green-600' }}">
+                        class="flex items-center justify-between p-3 text-sm bg-gray-100 font-semibold border rounded-2xl {{ Request::is('masyarakat/penjemputan-sampah/total-riwayat-penjemputan') || Request::is('masyarakat/penjemputan-sampah/riwayat-penjemputan') || Request::is('masyarakat/penjemputan-sampah/detail-riwayat*') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-green-600' }}">
                         Total Sampah & Riwayat Penjemputan
-                        <span class="text-lg {{ Request::is('masyarakat/penjemputan-sampah/toal-riwayat-penjemputan') || Request::is('masyarakat/penjemputan-sampah/riwayat-penjemputan') || Request::is('masyarakat/penjemputan-sampah/detail-riwayat') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+                        <span class="text-lg {{ Request::is('masyarakat/penjemputan-sampah/toal-riwayat-penjemputan') || Request::is('masyarakat/penjemputan-sampah/riwayat-penjemputan') || Request::is('masyarakat/penjemputan-sampah/detail-riwayat*') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
                     </a>
                 </li>
             </ul>

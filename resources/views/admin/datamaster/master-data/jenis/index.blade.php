@@ -135,6 +135,8 @@
                                     style="color: white">Nama Kategori Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Poin</th>
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Gambar</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Aksi</th>
                             </tr>
@@ -179,6 +181,18 @@
                             name: 'poin',
                             render: function(data) {
                                 return `<span class="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">${data}</span>`;
+                            }
+                        },
+                        {
+                            data: 'gambar', // Make sure 'gambar' field is returned in the response
+                            name: 'gambar',
+                            render: function(data, type, row) {
+                                if (data) {
+                                    return '<img src="{{ asset('img/admin/') }}/' + data +
+                                        '" alt="Gambar" class="w-16 h-16 object-cover rounded-lg">';
+                                } else {
+                                    return '<span>No Image</span>';
+                                }
                             }
                         },
                         {

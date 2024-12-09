@@ -27,7 +27,7 @@ class AdminSeeder extends Seeder
             'nomor_ktp' => '1234567890123456',
             'nama' => 'Admin',
             'alamat' => 'Jl. Admin Utama No. 114G Sethiabudi',
-            'email' => 'yayansupirna20@gmail.com',
+            'email' => 'adiyazam03@gmail.com',
             'kata_sandi' => Hash::make('password'), // Gantilah dengan password yang aman
             'tanggal_lahir' => '1990-01-01',
             'foto_profil' => null,

@@ -19,7 +19,10 @@ use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
-use GuzzleHttp\Middleware;
+use App\Http\Controllers\Manajemen\DashboardController;
+use App\Http\Controllers\Manajemen\DashboardKategori;
+use App\Http\Controllers\Manajemen\KategoriController;
+use App\Models\Kategori;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -160,17 +163,22 @@ Route::group([
 ], function () {
 
     // Submodul Dashboard
-    Route::get('/datamaster/dashboard', function () {
-        return view('manajemen.datamaster.dashboard.index');
-    })->name('datamaster.dashboard.index');
+    // Route::get('/datamaster/dashboard', function () {
+    //     return view('manajemen.datamaster.dashboard.index');
+    // })->name('datamaster.dashboard.index');
 
-    Route::get('/datamaster/melacak-penjemputan', function () {
-        return view('manajemen.datamaster.melacak-penjemputan.index');
-    })->name('datamaster.melacak-penjemputan.index');
+    Route::get('/datamaster/dashboard', [DashboardController::class, 'index'])->name('datamaster.dashboard.index');
 
-    Route::get('/datamaster/total-sampah', function () {
-        return view('manajemen.datamaster.total-sampah.index');
-    })->name('datamaster.total-sampah.index');
+    Route::get('/datamaster/top-10', function () {
+        return view('manajemen.datamaster.top-10.index');
+    })->name('datamaster.top-10.index');
+
+    // Route::get('/datamaster/kategori', function () {
+    //     return view('manajemen.datamaster.kategori.index');
+    // })->name('datamaster.kategori.index');
+
+    Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+
 
     // Submodul Registrasi
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan
@@ -287,7 +295,10 @@ Route::group([
     Route::get('penjemputan-sampah/detail-melacak/{id}', [PenjemputanSampahMasyarakatController::class, 'detailMelacak'])->name('penjemputan.detail-melacak');
     Route::get('penjemputan-sampah/total-riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'totalRiwayatPenjemputan'])->name('penjemputan.total-riwayat');
     Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat');
-    Route::get('penjemputan-sampah/detail-riwayat', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
+    Route::get('penjemputan-sampah/detail-riwayat', function () {
+        return redirect()->route('masyarakat.penjemputan.riwayat');
+    });
+    Route::get('penjemputan-sampah/detail-riwayat/{id}', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::post('penjemputan-sampah/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('penjemputan.tambah');
 
@@ -316,6 +327,10 @@ Route::group([
     Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
         return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan');
     })->name('penjemputan.riwayat-penjemputan');
+
+    Route::get('penjemputan-sampah/riwayat-penjemputan/detail', function () {
+        return view('mitra-kurir.penjemputan-sampah.detail-riwayat');
+    })->name('penjemputan.detail-riwayat');
 
     // Submodul Registrasi
 

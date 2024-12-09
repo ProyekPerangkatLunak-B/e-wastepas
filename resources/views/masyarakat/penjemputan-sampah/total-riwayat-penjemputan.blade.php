@@ -45,7 +45,7 @@
 
                     <!-- Button Tampilkan Lebih Banyak -->
                     <a href="{{ route('masyarakat.penjemputan.riwayat') }}"
-                        class="flex items-center justify-center w-[220px] h-[50px] px-4 py-2 text-black-normal transition duration-300 bg-secondary-200 hover:bg-secondary-300 rounded-2xl shadow-md border border-secondary-normal">
+                        class="flex items-center justify-center w-[220px] h-[50px] px-4 py-2 text-black-normal transition duration-300 bg-secondary-200 hover:bg-secondary-300 rounded-2xl shadow-sm border border-secondary-normal">
                         Tampilkan Lebih Banyak
                     </a>
                 </div>
@@ -61,9 +61,9 @@
                         </div>
                     @else
                         @foreach ($penjemputan as $p)
-                            <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
+                            <a href="{{ route('masyarakat.penjemputan.detail-riwayat', $p->id_penjemputan) }}" class="block">
                                 <div
-                                    class="relative flex flex-col justify-between h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                                    class="relative flex flex-col justify-between h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                                     <!-- Waktu Penjemputan -->
                                     <div class="flex justify-between mx-6 mt-2">
                                         <span class="text-lg font-bold text-gray-800">

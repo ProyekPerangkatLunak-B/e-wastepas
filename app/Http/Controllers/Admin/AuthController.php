@@ -94,7 +94,7 @@ class AuthController extends Controller
         $user = Pengguna::where('email', $request->email)->firstOrFail();
         Auth::login($user);
 
-        return redirect()->intended('admin/datamaster/dashboard');
+        return redirect()->intended('admin/datamaster/masyarakat');
     }
     public function logout(Request $request)
     {
