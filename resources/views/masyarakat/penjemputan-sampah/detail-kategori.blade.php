@@ -83,7 +83,7 @@
                 {{-- Card Section --}}
                 <div class="grid grid-cols-1 gap-4 px-12 mx-6 lg:grid-cols-3 lg:gap-4">
                     @foreach ($jenis as $j)
-                        <x-detail-card title="{{ $j->nama_jenis }}" description="{{ $j->deskripsi_jenis }}"
+                        <x-detail-card title="{{ $j->nama_jenis }}" poin="{{ $j->poin }}"
                             image="https://picsum.photos/700/700" />
                     @endforeach
                 </div>
