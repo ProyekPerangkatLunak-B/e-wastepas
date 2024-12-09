@@ -53,13 +53,30 @@ class JenisSampahAdminController extends Controller
 
     public function store(Request $request)
     {
+        // Validate incoming data
         $request->validate([
             'id_kategori' => 'required|integer',
             'nama_jenis' => 'required|string|max:255',
             'poin' => 'required|integer',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validating image
         ]);
 
-        jenisSampah::create($request->all());
+        // Handle the image upload
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension(); // Generate unique image name
+            $image->move(public_path('img/admin'), $imageName);
+        } else {
+            $imageName = null;
+        }
+
+        // Create a new record for JenisSampah
+        JenisSampah::create([
+            'id_kategori' => $request->id_kategori,
+            'nama_jenis' => $request->nama_jenis,
+            'poin' => $request->poin,
+            'gambar' => $imageName,
+        ]);
 
         return redirect()->route('admin.datamaster.jenis.index')->with('success', 'Data berhasil ditambahkan.');
     }
@@ -72,14 +89,40 @@ class JenisSampahAdminController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Validate incoming data
         $request->validate([
             'id_kategori' => 'required|integer',
             'nama_jenis' => 'required|string|max:255',
             'poin' => 'required|integer',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validating image
         ]);
 
-        $jenisSampah = jenisSampah::findOrFail($id);
-        $jenisSampah->update($request->all());
+        $jenisSampah = JenisSampah::findOrFail($id);
+
+        // Handle the image upload if a new image is provided
+        if ($request->hasFile('gambar')) {
+            // Delete old image if exists
+            if ($jenisSampah->gambar) {
+                $oldImagePath = public_path('img/admin/' . $jenisSampah->gambar);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath); // Delete the old image file
+                }
+            }
+
+            $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension(); // Generate unique image name
+            $image->move(public_path('img/admin'), $imageName); // Save the new image to public/img/admin folder
+        } else {
+            $imageName = $jenisSampah->gambar; // Keep the old image if no new image is uploaded
+        }
+
+        // Update the record with new data
+        $jenisSampah->update([
+            'id_kategori' => $request->id_kategori,
+            'nama_jenis' => $request->nama_jenis,
+            'poin' => $request->poin,
+            'gambar' => $imageName, // Update the image file name
+        ]);
 
         return redirect()->route('admin.datamaster.jenis.index')->with('success', 'Data berhasil diperbarui.');
     }

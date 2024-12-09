@@ -54,8 +54,9 @@
             <h4 class="text-base font-normal ml-14">Silakan isi form berikut untuk menambah jenis sampah baru.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.jenis.store') }}" method="POST">
+                <form action="{{ route('admin.datamaster.jenis.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
                     <div class="mb-6">
                         <label for="nama_jenis" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
                             Sampah</label>
@@ -76,10 +77,19 @@
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
+                    <!-- Image Input -->
+                    <div class="mb-6">
+                        <label for="gambar" class="block text-sm font-medium text-gray-800 mb-1">Gambar Jenis
+                            Sampah</label>
+                        <input type="file" name="gambar" id="gambar"
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+                        <small class="text-gray-500">Maksimal ukuran file: 2MB. Format: JPEG, PNG, JPG, GIF, SVG.</small>
+                    </div>
+
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Simpan
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white font-semibold rounded-lg hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500">
+                            Simpan
                         </button>
                     </div>
                 </form>
