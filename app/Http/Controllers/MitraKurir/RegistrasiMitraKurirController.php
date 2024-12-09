@@ -1,15 +1,17 @@
 <?php
 namespace App\Http\Controllers\MitraKurir;
-use App\Models\UserOTP;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\UploadDocuments;
 use App\Models\User;
+use App\Models\UserOTP;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Notifications\OtpMail;
+use App\Models\UploadDocuments;
+use App\Http\Controllers\Controller;
+use App\Mail\PasswordResetMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Cache;
 
 
 class RegistrasiMitraKurirController extends Controller
@@ -27,7 +29,11 @@ class RegistrasiMitraKurirController extends Controller
         
         return view('mitra-kurir.registrasi.document-upload', compact("user"));
     }
-    
+    public function ForgotPasswordIndex(){
+        return view('mitra-kurir/registrasi/forgot-password');
+    }
+
+
     public function OtpRedirect($id_pengguna){
         $user = User::find($id_pengguna);
         return view('mitra-kurir.registrasi.otp-verification', compact('user'));
@@ -124,7 +130,6 @@ class RegistrasiMitraKurirController extends Controller
         'npwp' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240', 
     ]);
 
-    // Save uploaded files
     $ktp = $request->file('ktp')->store('uploads/ktp', 'public');
     $kk = $request->file('kk')->store('uploads/kk', 'public');
     $npwp = $request->hasFile('npwp') 
@@ -159,4 +164,23 @@ class RegistrasiMitraKurirController extends Controller
     }
     return redirect('mitra-kurir/registrasi/login');
    }
+
+   public function SendForgotPassword(Request $request){
+        $request -> validate(['email' => 'required|email']);
+        $user = User::where('email', $request->email)->first();
+        
+        if (!$user) {
+            return back()->withErrors(['email' => 'Email not found.']);
+        }
+        $token = Str::random(64);
+        
+        Cache::put('password_reset'. $user->email, $token, now()->addMinutes(30));
+
+        $resetLink = url('/reset-password?token=' . $token . '&email=' . $user->email);
+
+        $user->notify(new PasswordResetMail($resetLink));
+        return back()->with('status', 'Password reset link sent!');
+
+   }    
+
 }

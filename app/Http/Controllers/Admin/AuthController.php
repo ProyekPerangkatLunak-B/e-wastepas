@@ -50,7 +50,7 @@ class AuthController extends Controller
                         now()->addMinutes(30),
                         ['email' => $email]
                     );
-
+                        
                     $namaPengguna = $pengguna->nama ?? 'Pengguna';
 
                     $ipAddress = $request->ip();

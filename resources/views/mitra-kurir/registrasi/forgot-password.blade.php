@@ -32,7 +32,8 @@
                 </div>
             <?php endif; ?>
 
-            <form method="POST" class="max-w-md w-full mx-auto px-4">
+            <form method="POST" action="{{ route('reset-password.post'); }}" class="max-w-md w-full mx-auto px-4">
+                @csrf
                 <div class="mb-12 sm:mb-16 md:mb-24">
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                         Email
@@ -46,21 +47,22 @@
                         placeholder="Email"
                     >
                 </div>
+                <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 w-full px-4 sm:px-8 md:px-12">
+                    <button
+                        type="button"
+                        onclick="showVerificationModal()"
+                        class="w-full sm:w-32 float-right
+                               bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
+                               hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
+                                transform hover:scale-105 !important text-sm sm:text-base"
+                    >
+                        Kirim
+                    </button>
+                </div>
             </form>
         </div>
 
-        <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 w-full px-4 sm:px-8 md:px-12">
-            <button
-                type="button"
-                onclick="showVerificationModal()"
-                class="w-full sm:w-32 float-right
-                       bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
-                       hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
-                        transform hover:scale-105 !important text-sm sm:text-base"
-            >
-                Kirim
-            </button>
-        </div>
+        
     </div>
 </div>
 
@@ -87,27 +89,27 @@
 </div>
 
 <script>
-    function showVerificationModal() {
-        const email = document.getElementById('email').value;
-        if (!email) {
-            alert('Please enter your email address');
-            return;
-        }
+    // function showVerificationModal() {
+    //     const email = document.getElementById('email').value;
+    //     if (!email) {
+    //         alert('Please enter your email address');
+    //         return;
+    //     }
         
-        // Tampilkan modal
-        document.querySelector('[name="email-verification-modal"]').style.display = 'flex';
-    }
+    //     // Tampilkan modal
+    //     document.querySelector('[name="email-verification-modal"]').style.display = 'flex';
+    // }
 
-    function closeVerificationModal() {
-        // Sembunyikan modal
-        document.querySelector('[name="email-verification-modal"]').style.display = 'none';
-    }
+    // function closeVerificationModal() {
+    //     // Sembunyikan modal
+    //     document.querySelector('[name="email-verification-modal"]').style.display = 'none';
+    // }
 
-    // Close modal ketika user klik di luar modal
-    document.querySelector('[name="email-verification-modal"]').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeVerificationModal();
-        }
-    });
+    // // Close modal ketika user klik di luar modal
+    // document.querySelector('[name="email-verification-modal"]').addEventListener('click', function(e) {
+    //     if (e.target === this) {
+    //         closeVerificationModal();
+    //     }
+    // });
 </script>
 @endsection
