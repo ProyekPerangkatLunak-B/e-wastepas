@@ -168,7 +168,7 @@
                 </div>
 
                 <div class="flex justify-end mt-6 space-x-4">
-                    <button type="button" onclick="toggleModal(false)"
+                    <button type="button" onclick="new function(){toggleModal(false); resetInput()}"
                         class="px-4 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Batal</button>
                     <button type="button" onclick="tambahKeBox()"
                         class="px-4 py-2 text-white rounded-lg bg-secondary-200 hover:bg-secondary-normal">Tambah</button>
