@@ -48,16 +48,14 @@
         </div>
     </div>
 </div>
-
-
             {{-- Chart --}}
             <div class="px-12 mt-8">
                 <div class="container mx-auto p-6 grid gap-6">
                     <!-- Baris 1: 2 Kolom -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Chart: Top Masyarakat -->
-                        <button class="bg-white p-4 rounded-lg shadow-md text-left  hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                            <a href="total-sampah">
+                        <button class="bg-white p-4 rounded-lg shadow-md text-left  hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]" >
+                            <a href="melacak-penjemputan?tab=masyarakat">
                             <h2 class="text-lg font-bold mb-2">Top Masyarakat</h2>
                             <div id="chart-top-masyarakat" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
                         </a>
@@ -65,18 +63,18 @@
 
                         <!-- Chart: Top Kurir -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                            <a href="total-sampah">
+                            <a href="melacak-penjemputan?tab=kurir">
                             <h2 class="text-lg font-bold mb-2">Top Kurir</h2>
                             <div id="chart-top-kurir" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
                         </a>
                         </button>
                     </div>
-                  
+
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- Chart: Top Jenis Sampah -->
 
                         <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                            <a href="total-sampah">
+                            <a href="melacak-penjemputan?tab=jenis-sampah">
                             <h2 class="text-lg font-bold mb-2">Top Jenis Sampah</h2>
                             <div id="chart-total-sampah" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
                             </a>
@@ -88,12 +86,12 @@
                         <div id="chart-daerah" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
                     </button>
 
-                      
+
                         <!-- Chart: Top Jenis Sampah -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left w-full hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
                             <h2 class="text-lg font-bold mb-2">Top Sampah per Kategori</h2>
                             <p class="text-sm text-gray-500 mb-4">Berdasarkan Kategori</p>
-                            
+
                             <div class="space-y-6">
                                 <!-- Handphone -->
                                 <div class="flex items-center space-x-4">
@@ -108,7 +106,7 @@
                                         </div>
                                     </div>
                                 </div>
-                          
+
                                 <!-- Laptop -->
                                 <div class="flex items-center space-x-4">
                                     <i class="fa-solid fa-laptop text-2xl text-gray-700 flex-shrink-0"></i>
@@ -122,7 +120,7 @@
                                         </div>
                                     </div>
                                 </div>
-                          
+
                                 <!-- Televisi -->
                                 <div class="flex items-center space-x-4">
                                     <i class="fa-solid fa-tv text-2xl text-gray-700 flex-shrink-0"></i>
@@ -142,7 +140,7 @@
                 </div>
             </div>
 
-            
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -155,7 +153,7 @@
           const chart = new ApexCharts(document.querySelector(selector), options);
           chart.render();
         };
-      
+
         // Chart: Top Masyarakat
         renderChart("#chart-top-masyarakat", {
           series: [{ data: [10, 15, 20, 25, 13, 17, 23] }],
@@ -169,7 +167,7 @@
             }
         }
         });
-      
+
         // Chart: Top Kurir
         renderChart("#chart-top-kurir", {
           series: [{ data: [20, 10, 15, 30] }],
@@ -183,14 +181,14 @@
             }
         }
         });
-      
+
         // Chart: Total Sampah Terkumpul
         renderChart("#chart-total-sampah", {
           series: [70, 50, 30],
           chart: { type: 'radialBar' },
           labels: ['Laptop', 'Televisi', 'Smartwatch']
         });
-      
+
         // Chart: Total Sampah Tiap Daerah
         renderChart("#chart-daerah", {
         series: [{ data: [38, 40, 23.3, 15.4, 28, 10] }], // Data dalam persen
@@ -219,6 +217,8 @@
             }
         }
     });
+
+    
 
       </script>
 @endsection

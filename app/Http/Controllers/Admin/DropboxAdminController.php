@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Dropbox;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class DropboxAdminController extends Controller
 {
-
     public function index()
     {
         $dropbox = Dropbox::all();
         return view('admin.datamaster.master-data.dropbox.index', compact('dropbox'));
     }
 
-
     public function getDropboxData()
     {
         try {
-            $dropbox = Dropbox::select(['nama_lokasi', 'alamat', 'status_dropbox', 'total_transaksi_dropbox', 'id_dropbox']);
+            $dropbox = Dropbox::join('daerah', 'daerah.id_daerah', '=', 'dropbox.id_daerah')
+                ->select([
+                    'dropbox.id_dropbox',
+                    'dropbox.nama_dropbox',
+                    'dropbox.alamat_dropbox',
+                    'dropbox.status_dropbox',
+                    'daerah.nama_daerah',
+                ]);
             return DataTablesDataTables::of($dropbox)
                 ->addColumn('action', function ($row) {
                     return '
@@ -40,8 +45,6 @@ class DropboxAdminController extends Controller
         }
     }
 
-
-
     public function create()
     {
         return view('admin.datamaster.master-data.dropbox.create');
@@ -51,8 +54,8 @@ class DropboxAdminController extends Controller
     {
         $request->validate([
             'id_daerah' => 'required|integer',
-            'nama_lokasi' => 'required|string|max:255',
-            'alamat' => 'required|string',
+            'nama_dropbox' => 'required|string|max:255',
+            'alamat_dropbox' => 'required|string',
             'status_dropbox' => 'required|boolean',
             'total_transaksi_dropbox' => 'nullable|integer',
         ]);
@@ -74,8 +77,8 @@ class DropboxAdminController extends Controller
     {
         $request->validate([
             'id_daerah' => 'required|integer',
-            'nama_lokasi' => 'required|string|max:255',
-            'alamat' => 'required|string',
+            'nama_dropbox' => 'required|string|max:255',
+            'alamat_dropbox' => 'required|string',
             'status_dropbox' => 'required|boolean',
             'total_transaksi_dropbox' => 'nullable|integer',
         ]);

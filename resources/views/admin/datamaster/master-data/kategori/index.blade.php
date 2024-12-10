@@ -164,18 +164,18 @@
                     serverSide: true,
                     ajax: '{{ route('admin.datamaster.kategori.data') }}',
                     columns: [{
-                            data: 'nama_kategori_sampah',
-                            name: 'nama_kategori_sampah',
+                            data: 'nama_kategori',
+                            name: 'nama_kategori',
                             orderable: true
                         },
                         {
-                            data: 'deskripsi_kategori_sampah',
-                            name: 'deskripsi_kategori_sampah',
+                            data: 'deskripsi_kategori',
+                            name: 'deskripsi_kategori',
                             orderable: true
                         },
                         {
-                            data: 'id_kategori_sampah',
-                            name: 'id_kategori_sampah',
+                            data: 'id_kategori',
+                            name: 'id_kategori',
                             orderable: false,
                             render: function(data, type, row) {
                                 return `
@@ -224,6 +224,16 @@
                 window.changePage = function(page) {
                     table.page(page).draw('page');
                 };
+
+                // Alert untuk tambah data
+                @if (session('success'))
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
             });
         });
 

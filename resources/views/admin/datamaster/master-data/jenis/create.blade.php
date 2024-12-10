@@ -57,24 +57,17 @@
                 <form action="{{ route('admin.datamaster.jenis.store') }}" method="POST">
                     @csrf
                     <div class="mb-6">
-                        <label for="nama_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
+                        <label for="nama_jenis" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
                             Sampah</label>
-                        <input type="text" name="nama_jenis_sampah" id="nama_jenis_sampah" required
+                        <input type="text" name="nama_jenis" id="nama_jenis" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Kategori
+                        <label for="id_kategori" class="block text-sm font-medium text-gray-800 mb-1">Kategori
                             Sampah</label>
-                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori_sampah">
+                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori">
                         </select>
-                    </div>
-
-                    <div class="mb-6">
-                        <label for="deskripsi_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Deskripsi
-                            Jenis Sampah</label>
-                        <textarea name="deskripsi_jenis_sampah" id="deskripsi_jenis_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700 h-28"></textarea>
                     </div>
 
                     <div class="mb-6">
@@ -140,7 +133,7 @@
                             method: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
-                                nama_kategori_sampah: data.text
+                                nama_kategori: data.text
                             },
                             success: function(response) {
                                 console.log(response);

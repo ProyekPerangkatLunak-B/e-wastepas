@@ -64,6 +64,7 @@
         button {
             transition: background-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
+            color: rgb(27, 27, 27);
             /* Hijau */
         }
 
@@ -97,7 +98,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14">Dashboard jenis</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-green-500">Dashboard jenis</h2>
             <h4 class="text-base font-light ml-14 text-gray-600">Selamat datang di dashboard jenis.</h4>
 
             <div class="flex justify-end px-12 mt-6" style="color: white">
@@ -133,8 +134,6 @@
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Nama Kategori Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">Deskripsi Jenis Sampah</th>
-                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Poin</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Aksi</th>
@@ -151,7 +150,7 @@
                     <div id="customInfo" class="text-sm  text-gray-700">
                         <!-- Informasi jumlah data akan diisi di sini -->
                     </div>
-                    <div class="space-x-2 ">
+                    <div class="space-x-2 class">
                         <!-- Tombol pagination akan dihasilkan di sini -->
                     </div>
                 </div>
@@ -162,34 +161,34 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             $(document).ready(function() {
+                // Inisialisasi DataTable
                 var table = $('#jenisTable').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: '{{ route('admin.datamaster.jenis.data') }}',
                     columns: [{
-                            data: 'nama_jenis_sampah',
-                            name: 'nama_jenis_sampah'
+                            data: 'nama_jenis',
+                            name: 'nama_jenis'
                         },
                         {
-                            data: 'kategori_sampah.nama_kategori_sampah',
+                            data: 'nama_kategori_sampah',
                             name: 'kategori_sampah.nama_kategori_sampah'
                         },
                         {
-                            data: 'deskripsi_jenis_sampah',
-                            name: 'deskripsi_jenis_sampah'
-                        },
-                        {
                             data: 'poin',
-                            name: 'poin'
+                            name: 'poin',
+                            render: function(data) {
+                                return `<span class="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">${data}</span>`;
+                            }
                         },
                         {
-                            data: 'id_jenis_sampah',
-                            name: 'id_jenis_sampah',
+                            data: 'id_jenis',
+                            name: 'id_jenis',
                             orderable: false,
                             render: function(data) {
                                 return `
                             <div class="flex space-x-2">
-                                <a href="/admin/datamaster/master-data/jenis/${data}/edit" style="color: white" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" >
+                                <a href="/admin/datamaster/master-data/jenis/${data}/edit" style="color: white" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition">
                                     Edit
                                 </a>
                                 <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" onclick="confirmDelete(${data})" style="color: white">
@@ -202,8 +201,30 @@
                     order: [
                         [0, 'asc']
                     ],
+                    pageLength: 10, // Jumlah default item per halaman
                     dom: 't',
+                    drawCallback: function(settings) {
+                        updateCustomPagination(
+                            table); // Update pagination setiap kali tabel di-render
+                    }
                 });
+
+                // Fungsi custom untuk memperbarui pagination
+                function updateCustomPagination(table) {
+                    var pageInfo = table.page.info();
+                    $('#customPagination').empty(); // Hapus pagination sebelumnya
+
+                    // Generate tombol pagination
+                    for (var i = 0; i < pageInfo.pages; i++) {
+                        $('#customPagination').append(`
+                        <button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="$('#jenisTable').DataTable().page(${i}).draw('page')">${i + 1}</button>
+                    `);
+                    }
+
+                    // Update informasi jumlah data
+                    $('#customInfo').text(
+                        `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`);
+                }
 
                 // Custom search input
                 $('#customSearch').on('keyup', function() {
@@ -228,6 +249,16 @@
                         $('#customPagination').append(button);
                     }
                 });
+
+                // Alert untuk tambah data
+                @if (session('success'))
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
             });
 
             function changePage(page) {

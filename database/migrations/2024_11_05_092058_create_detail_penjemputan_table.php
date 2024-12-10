@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('detail_penjemputan', function (Blueprint $table) {
             $table->id('id_detail_penjemputan');
-            $table->foreignId('id_sampah')->nullable()
-                ->constrained('sampah', 'id_sampah') // Specify the referenced column
-                ->onDelete('cascade');
             $table->foreignId('id_penjemputan')->nullable()
-                ->constrained('penjemputan', 'id_penjemputan') // Specify the referenced column
+                ->constrained('penjemputan', 'id_penjemputan')
                 ->onDelete('cascade');
-            $table->decimal('subtotal_sampah', 10, 2)->nullable();
-            $table->double('subtotal_berat')->nullable();
-            $table->integer('estimasi_point')->nullable();
+            $table->foreignId('id_kategori')->nullable()
+                ->constrained('kategori', 'id_kategori')
+                ->onDelete('cascade');
+            $table->foreignId('id_jenis')->nullable()
+                ->constrained('jenis', 'id_jenis')
+                ->onDelete('cascade');
+            $table->decimal('berat')->nullable();
             $table->timestamps();
         });
     }

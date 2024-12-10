@@ -38,7 +38,7 @@
     <div class="flex items-center justify-between mx-auto mt-8">
         <div>
             <h2 class="text-xl font-semibold leading-relaxed">Detail Riwayat</h2>
-            <p class="text-base font-normal text-gray-600">Detail Riwayat ID Penjemputan sampah 232800749.</p>
+            <p class="text-base font-normal text-gray-600">Dibuat pada : 08.00, 27 Desember 2024</p>
         </div>
         <div class="inline-flex items-center justify-end ml-auto space-x-4">
             {{-- Button PDF dan XLSX(Excel) --}}
@@ -71,7 +71,6 @@
 
                     <h3 class="mb-2 text-lg font-bold">Diambil dari</h3>
                     <p class="mb-8 text-gray-600">DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142</p>
-
                 </div>
 
                 <!--  Dikim ke Section -->
@@ -92,7 +91,6 @@
                 </div>
             </div>
         </div>
-        <p class="pt-2 mt-2 font-medium text-gray-600">Dibuat pada : 08.00, 27 Desember 2024</p>
     </div>
 </div>
 @endsection

@@ -54,31 +54,24 @@
             <h4 class="text-base font-normal ml-14">Silakan ubah data berikut untuk memperbarui jenis sampah.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_kategori_sampah) }}" method="POST">
+                <form action="{{ route('admin.datamaster.jenis.update', $jenisSampah->id_jenis) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="mb-6">
-                        <label for="nama_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
+                        <label for="nama_jenis" class="block text-sm font-medium text-gray-800 mb-1">Nama Jenis
                             Sampah</label>
-                        <input type="text" name="nama_jenis_sampah" id="nama_jenis_sampah" required
+                        <input type="text" name="nama_jenis" id="nama_jenis" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700"
-                            value="{{ $jenisSampah->nama_jenis_sampah }}" />
+                            value="{{ $jenisSampah->nama_jenis }}" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="id_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Kategori
+                        <label for="id_kategori" class="block text-sm font-medium text-gray-800 mb-1">Kategori
                             Sampah</label>
-                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori_sampah">
-                            <option value="{{ $jenisSampah->id_kategori_sampah }}" selected>
-                                {{ $jenisSampah->kategoriSampah->nama_kategori_sampah }}</option>
+                        <select id="mySelect2" class="w-full" style="width: 100%" name="id_kategori">
+                            <option value="{{ $jenisSampah->id_kategori }}" selected>
+                                {{ $jenisSampah->kategoriSampah->nama_kategori }}</option>
                         </select>
-                    </div>
-
-                    <div class="mb-6">
-                        <label for="deskripsi_jenis_sampah" class="block text-sm font-medium text-gray-800 mb-1">Deskripsi
-                            Jenis Sampah</label>
-                        <textarea name="deskripsi_jenis_sampah" id="deskripsi_jenis_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700 h-28">{{ $jenisSampah->deskripsi_jenis_sampah }}</textarea>
                     </div>
 
                     <div class="mb-6">
@@ -90,8 +83,8 @@
 
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Update
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
+                            <i class="fas fa-save mr-2"></i>Simpan Perubahan
                         </button>
                     </div>
                 </form>

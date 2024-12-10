@@ -57,25 +57,25 @@
                 <form action="{{ route('admin.datamaster.kategori.store') }}" method="POST">
                     @csrf
                     <div class="mb-6">
-                        <label for="nama_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama Kategori
+                        <label for="nama_kategori" class="block text-sm font-medium text-gray-800 mb-1">Nama Kategori
                             Sampah</label>
-                        <input type="text" name="nama_kategori_sampah" id="nama_kategori_sampah" required
+                        <input type="text" name="nama_kategori" id="nama_kategori" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="deskripsi_kategori_sampah"
-                            class="block text-sm font-medium text-gray-800 mb-1">Deskripsi Kategori Sampah</label>
-                        <textarea name="deskripsi_kategori_sampah" id="deskripsi_kategori_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700 h-28"></textarea>
-                    </div>
+                        <label for="deskripsi_kategori"
+                            class="block text-sm font-medium text-gray-800 mb-1">Deskripsi
+                            Kategori Sampah</label>
+                        <textarea name="deskripsi_kategori" id="deskripsi_kategori" required
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700"></textarea>
 
-                    <div class="flex justify-end" style="color: white">
-                        <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Simpan
-                        </button>
-                    </div>
+                        <div class="flex justify-end" style="color: white">
+                            <button type="submit"
+                                class="px-6 mt-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
+                                <i class="fas fa-save mr-2"></i>Simpan
+                            </button>
+                        </div>
                 </form>
             </div>
         </div>

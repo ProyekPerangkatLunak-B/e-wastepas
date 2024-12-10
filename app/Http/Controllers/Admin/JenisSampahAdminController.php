@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\JenisSampah;
 use App\Models\KategoriSampah;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class JenisSampahAdminController extends Controller
@@ -17,16 +17,15 @@ class JenisSampahAdminController extends Controller
         return view('admin.datamaster.master-data.jenis.index', compact('jenisSampah'));
     }
 
-
     public function getJenisSampahData()
     {
         try {
-            $jenisSampah = JenisSampah::with('kategoriSampah')
-                ->select('jenis_sampah.*');
+            $jenisSampah = JenisSampah::join('kategori', 'kategori.id_kategori', '=', 'jenis.id_kategori')
+                ->select('jenis.*', 'kategori.nama_kategori');
 
             return DataTablesDataTables::of($jenisSampah)
                 ->addColumn('nama_kategori_sampah', function ($row) {
-                    return $row->kategoriSampah ? $row->kategoriSampah->nama_kategori_sampah : '-';
+                    return $row->nama_kategori;
                 })
                 ->addColumn('action', function ($row) {
                     return '
@@ -46,7 +45,6 @@ class JenisSampahAdminController extends Controller
         }
     }
 
-
     public function create()
     {
         $kategoriSampah = KategoriSampah::all(); // Pastikan model KategoriSampah diimport
@@ -56,9 +54,8 @@ class JenisSampahAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_kategori_sampah' => 'required|integer',
-            'nama_jenis_sampah' => 'required|string|max:255',
-            'deskripsi_jenis_sampah' => 'nullable|string',
+            'id_kategori' => 'required|integer',
+            'nama_jenis' => 'required|string|max:255',
             'poin' => 'required|integer',
         ]);
 
@@ -76,9 +73,8 @@ class JenisSampahAdminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'id_kategori_sampah' => 'required|integer',
-            'nama_jenis_sampah' => 'required|string|max:255',
-            'deskripsi_jenis_sampah' => 'nullable|string',
+            'id_kategori' => 'required|integer',
+            'nama_jenis' => 'required|string|max:255',
             'poin' => 'required|integer',
         ]);
 

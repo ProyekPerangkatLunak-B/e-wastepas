@@ -9,18 +9,17 @@ class JenisSampah extends Model
 {
     use HasFactory;
 
-    protected $table = 'jenis_sampah';
-    protected $primaryKey = 'id_jenis_sampah';
+    protected $table = 'jenis';
+    protected $primaryKey = 'id_jenis';
 
     protected $fillable = [
-        'id_kategori_sampah',
-        'nama_jenis_sampah',
-        'deskripsi_jenis_sampah',
+        'id_kategori',
+        'nama_jenis',
         'poin',
     ];
 
     public function kategoriSampah()
     {
-        return $this->belongsTo(KategoriSampah::class, 'id_kategori_sampah');
+        return $this->belongsTo(KategoriSampah::class, 'id_kategori', 'id_kategori');
     }
 }

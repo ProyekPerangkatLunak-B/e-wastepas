@@ -4,6 +4,6 @@
     </div>
     <div class="flex flex-col items-start justify-center pt-4 text-center">
         <h3 class="mt-2 mb-2 ml-8 text-2xl font-semibold text-gray-900">{{ $title }}</h3>
-        <p class="ml-8 text-gray-500 text-md">{{ $description }}</p>
+        <p class="ml-8 text-gray-500 text-md text-left">{{ $description }}</p>
     </div>
 </div>

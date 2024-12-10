@@ -34,22 +34,25 @@
             </div>
 
             {{-- Card Section --}}
-            @if (count($kategori) == 0)
-                <div> 
-                    Kategori {{ $search ?? 'Sampah Elektronik' }} tidak ditemukan. 
-                </div> 
-            @else
-                @foreach ($kategori as $kategoriSampah)
-                    <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
-                        <x-card 
-                            title="{{ $kategoriSampah->nama_kategori_sampah }}"
-                            description="{{ $kategoriSampah->deskripsi_kategori_sampah }}"
-                            image="https://picsum.photos/1280/720" 
-                            link="{{ route('mitra-kurir.penjemputan.detail-kategori', $kategoriSampah->id_kategori_sampah) }}" 
-                        />
-                    </div>
-                @endforeach
-            @endif
+            <div class="flex justify-center mt-4">
+                <div class="grid grid-cols-3 gap-6 mx-auto">
+                @if (count($kategori) == 0)
+                        <div
+                            class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
+                            <div class="text-center">
+                                <p class="text-lg font-semibold text-gray-500">Kategori {{ $search ?? 'Sampah Elektronik' }} tidak ditemukan.</p>
+                            </div>
+                        </div>
+                @else
+                    @foreach ($kategori as $kategoriSampah)
+                            <x-card
+                                title="{{ $kategoriSampah->nama_kategori }}"
+                                description="{{ $kategoriSampah->deskripsi_kategori }}"
+                                image="https://picsum.photos/1280/720"
+                                link="{{ route('mitra-kurir.penjemputan.detail-kategori', $kategoriSampah->id_kategori) }}"
+                            />
+                    @endforeach
+                @endif
         </div>
     </div>
 @endsection

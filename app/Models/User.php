@@ -12,10 +12,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable 
 {
+    use HasFactory, Notifiable;
     // /** @use HasFactory<\Database\Factories\UserFactory> */
     // use HasFactory, Notifiable;
     protected $table = 'pengguna';
     protected $primaryKey = 'id_pengguna';
+
 // /**azQA  z   ZQ
     //  * The attributes that are mass assignable.
     //  *
@@ -42,6 +44,11 @@ class User extends Authenticatable
     public function activeOTP()
     {
         return $this->hasOne(UserOTP::class,'id_pengguna')->where('otp_kadaluarsa','>', 'now()');
+    }
+
+    public function uploadDoc()
+    {
+        return $this->hasOne(UploadDocuments::class,"id_pengguna");
     }
 
     public function getAuthPasswordName()

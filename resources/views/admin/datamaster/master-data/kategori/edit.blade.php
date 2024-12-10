@@ -54,31 +54,31 @@
             <h4 class="text-base font-normal ml-14">Silakan ubah informasi kategori sampah di bawah ini.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.kategori.update', $kategoriSampah->id_kategori_sampah) }}"
+                <form action="{{ route('admin.datamaster.kategori.update', $kategoriSampah->id_kategori) }}"
                     method="POST">
                     @csrf
                     @method('PUT')
                     <div class="mb-6">
-                        <label for="nama_kategori_sampah" class="block text-sm font-medium text-gray-800 mb-1">Nama Kategori
+                        <label for="nama_kategori" class="block text-sm font-medium text-gray-800 mb-1">Nama Kategori
                             Sampah</label>
-                        <input type="text" name="nama_kategori_sampah" id="nama_kategori_sampah"
-                            value="{{ $kategoriSampah->nama_kategori_sampah }}" required
+                        <input type="text" name="nama_kategori" id="nama_kategori"
+                            value="{{ $kategoriSampah->nama_kategori }}" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="mb-6">
-                        <label for="deskripsi_kategori_sampah"
-                            class="block text-sm font-medium text-gray-800 mb-1">Deskripsi Kategori Sampah</label>
-                        <textarea name="deskripsi_kategori_sampah" id="deskripsi_kategori_sampah" required
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700 h-28">{{ $kategoriSampah->deskripsi_kategori_sampah }}</textarea>
-                    </div>
+                        <label for="deskripsi_kategori"
+                            class="block text-sm font-medium text-gray-800 mb-1">Deskripsi
+                            Kategori Sampah</label>
+                        <textarea name="deskripsi_kategori" id="deskripsi_kategori" required
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700">{{ $kategoriSampah->deskripsi_kategori }}</textarea>
 
-                    <div class="flex justify-end" style="color: white">
-                        <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-teal-400 text-white rounded-lg hover:from-teal-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                            <i class="fas fa-save mr-2"></i>Simpan Perubahan
-                        </button>
-                    </div>
+                        <div class="flex justify-end" style="color: white">
+                            <button type="submit"
+                                class="px-6 mt-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
+                                <i class="fas fa-save mr-2"></i>Simpan Perubahan
+                            </button>
+                        </div>
                 </form>
             </div>
         </div>
