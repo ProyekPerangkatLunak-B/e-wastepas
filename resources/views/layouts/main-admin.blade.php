@@ -25,8 +25,14 @@
 
     {{-- Header --}}
     @include('partials.admin-header', [
+<<<<<<< HEAD
         'userName' => auth()->user()->nama ?? 'No name',
         'userRole' => auth()->user()->peran->nama_peran ?? 'No role assigned',
+=======
+        'userName' => 'Ahmad Zidane',
+        'userRole' => 'admin',
+        'profileImage' => 'https://via.placeholder.com/40',
+>>>>>>> da0dbcf49f73902facecdf5c0ecf24a2b64cc143
     ])
 
     {{-- Sidebar --}}
