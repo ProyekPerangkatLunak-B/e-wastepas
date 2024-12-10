@@ -11,7 +11,6 @@
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#498D43]">Welcome!</h2>
         </div> 
-  
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <!-- Tampilkan Alert Jika Ada Kesalahan -->
             @if ($errors->any())
@@ -25,7 +24,11 @@
                 </ul>
             </div>
         @endif
-            
+        @if (session('status'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
             <form class="space-y-0.5" action="{{ url('/mitra-kurir/registrasi/login') }}" method="POST">
                 @csrf
                 @include('components.mitra-kurir.auth.input', ['id' => 'email', 'name' => 'email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'Masukkan Email'])
