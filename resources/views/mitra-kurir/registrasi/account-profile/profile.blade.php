@@ -2,7 +2,7 @@
 @section('title', 'Profile')
 @section('content')
 <div class="min-h-screen bg-gray-100 flex items-center justify-center w-full py-8 mt-12">
-    <div class="flex-1 bg-gray-100">
+    <div class="flex-1 bg-gray-100 overflow-y-auto">
         <div class="container px-4 mx-auto py-8">
             <div style="background-color: white;" class="rounded-[2rem] shadow-2xl w-full 
                 sm:max-w-xl md:max-w-3xl lg:max-w-4xl
@@ -16,14 +16,14 @@
 
                 {{-- Bagian Profil Pengguna --}}
                 <div class="bg-[#F7F7F7] border border-[#C0C0C0] rounded-lg p-6 shadow-sm relative mb-6">
-                    <a href="#" id="editButton" class="absolute top-4 right-4 flex items-center gap-2 font-light text-gray-600 py-2 px-4 rounded-md 
-                        border border-gray-300 hover:bg-gray-100 transition-all duration-300" onclick="enableEditMode()">
+                    <a href="#" id="editButton" class="absolute top-4 right-4 z-10 flex items-center gap-2 font-light text-gray-600 py-2 px-4 rounded-md 
+                        border border-gray-300 bg-white hover:bg-gray-100 transition-all duration-300" onclick="enableEditMode()">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.213l-4.346 1.087 1.087-4.346L16.862 3.487z" />
                         </svg>
                         Edit
                     </a>
-                    <div class="flex items-start gap-6">
+                    <div class="flex flex-wrap md:flex-nowrap items-start gap-6">
                         <div class="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
                             <input id="photoInput" name="photo" type="file" class="hidden" onchange="previewImage(event)" />
                             <label for="photoInput" class="cursor-pointer">
@@ -35,9 +35,16 @@
                             </label>
                         </div>
                         <div>
-                            <input id="nameInput" type="text" class="text-2xl font-semibold text-gray-900 bg-transparent border-0 focus:ring-0 focus:outline-none" value="Jane Doe" readonly />
-                            <p class="text-sm font-semibold text-gray-700">Mitra Kurir</p>
-                            <p class="text-sm font-medium text-green-600">Sudah tervalidasi</p>
+                            {{-- <input id="nameInput" type="text" class="text-2xl font-semibold text-gray-900 bg-transparent border-0 focus:ring-0 focus:outline-none" value="Jane Doe" readonly /> --}}
+                            <div class="flex-1">
+                                <div class="relative mt-2">
+                                    <input id="nameInput" name="name" type="text" placeholder="Masukkan Nama" class="text-2xl font-semibold text-gray-900 w-full mt-2 px-5 py-4 rounded-2xl bg-gray-100 text-md focus:outline-none focus:bg-white" value="jane doe" readonly />
+                                </div>
+                            </div>
+                            <div class="flex flex-col ml-5">
+                                <p class="text-sm font-semibold text-gray-700">Mitra Kurir</p>
+                                <p class="text-sm font-medium text-green-600">Sudah tervalidasi</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,8 +93,13 @@
                             </div>
                         </div>
 
-                        <div class="mt-8">
-                            <button type="button" id="saveButton" style="display:none;" class="w-full sm:w-32 float-right bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
+                        <div class="mt-8 flex justify-end space-x-4">
+                            <button type="button" id="cancelButton" style="display:none;" class="w-full sm:w-32  bg-red-normal hover:bg-red-400 text-[#FFFFFF] py-2 px-4 rounded-md 
+                                                 transition-all duration-300 ease-in-out 
+                                                transform hover:scale-105 text-sm sm:text-base">
+                                Batal
+                            </button>
+                            <button type="button" id="saveButton" style="display:none;" class="w-full sm:w-32  bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
                                                 hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
                                                 transform hover:scale-105 text-sm sm:text-base">
                                 Simpan
@@ -106,6 +118,7 @@
         inputs.forEach(input => input.removeAttribute('readonly'));
         
         document.getElementById('saveButton').style.display = 'inline-block';
+        document.getElementById('cancelButton').style.display = 'inline-block';
         document.getElementById('editButton').style.display = 'none';
     }
 
