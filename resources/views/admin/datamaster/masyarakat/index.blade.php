@@ -68,7 +68,6 @@
         }
 
         button:hover {
-            background-color: #2ecc71;
             /* Hijau */
             box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
             /* Hijau lebih gelap */
@@ -155,13 +154,18 @@
                 </div>
 
                 <!-- Custom pagination -->
-                <div id="customPagination" class="flex justify-between mt-4" style="color: white">
-                    <div id="customInfo" class="text-sm  text-gray-700">
-                        <!-- Informasi jumlah data akan diisi di sini -->
-                    </div>
-                    <div class="space-x-2 ">
-                        <!-- Tombol pagination akan dihasilkan di sini -->
-                    </div>
+                <!-- Custom pagination -->
+                <div id="customPagination" class="flex justify-center items-center space-x-2 mt-4">
+                    <!-- Tombol sebelumnya -->
+                    <button class="pagination-btn">&lt;</button>
+
+                    <!-- Nomor halaman -->
+                    <button class="pagination-btn">1</button>
+                    <button class="pagination-btn active">2</button>
+                    <button class="pagination-btn">3</button>
+
+                    <!-- Tombol berikutnya -->
+                    <button class="pagination-btn">&gt;</button>
                 </div>
             </div>
         </div>
@@ -267,24 +271,24 @@
                 <div class="flex items-center space-x-2 justify-center">
                     <button class="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transform hover:-translate-y-1 transition"
                         onclick="approveVerification(${data})">
-                        ✔️
+                        <i class="fa-solid fa-check" style="color: #ffffff;"></i>
                     </button>
                     <button class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition"
                         onclick="rejectVerification(${data})">
-                        ❌
+                        <i class="fa-solid fa-x" style="color: #ffffff;"></i>
                     </button>
                 </div>
             `;
                                 } else if (statusText === "Diterima") {
                                     return `
-                <div class="flex flex-col items-center space-y-2" style="color: white">
+                           <div class="flex flex-row items-center space-x-2" style="color: white">
                     <a href="/admin/masyarakat/detail/${data}"
                         class="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transform hover:-translate-y-1 transition">
-                        Detail
+                        <i class="fa-solid fa-circle-info" style="color: #ffffff;"></i>
                     </a>
                     <button onclick="deleteData('${data}')"
                         class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition">
-                        Hapus
+                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                     </button>
                 </div>
             `;
