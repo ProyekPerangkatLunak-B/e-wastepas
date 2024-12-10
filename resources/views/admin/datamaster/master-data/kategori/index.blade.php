@@ -132,6 +132,8 @@
                                     style="color: white">Nama Kategori Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Deskripsi Kategori Sampah</th>
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Gambar</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Aksi</th>
                             </tr>
@@ -172,6 +174,19 @@
                             data: 'deskripsi_kategori',
                             name: 'deskripsi_kategori',
                             orderable: true
+                        },
+                        {
+                            data: 'gambar', // Make sure 'gambar' field is returned in the response
+                            name: 'gambar',
+                            render: function(data, type, row) {
+                                console.log(data);
+                                if (data) {
+                                    return '<img src="{{ asset('img/admin/') }}/' + data +
+                                        '" alt="Gambar" class="w-16 h-16 object-cover rounded-lg">';
+                                } else {
+                                    return '<span>No Image</span>';
+                                }
+                            }
                         },
                         {
                             data: 'id_kategori',

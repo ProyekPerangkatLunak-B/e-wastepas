@@ -54,10 +54,11 @@
             <h4 class="text-base font-normal ml-14">Silakan ubah informasi kategori sampah di bawah ini.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.kategori.update', $kategoriSampah->id_kategori) }}"
-                    method="POST">
+                <form action="{{ route('admin.datamaster.kategori.update', $kategoriSampah->id_kategori) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
                     <div class="mb-6">
                         <label for="nama_kategori" class="block text-sm font-medium text-gray-800 mb-1">Nama Kategori
                             Sampah</label>
@@ -67,18 +68,34 @@
                     </div>
 
                     <div class="mb-6">
-                        <label for="deskripsi_kategori"
-                            class="block text-sm font-medium text-gray-800 mb-1">Deskripsi
+                        <label for="deskripsi_kategori" class="block text-sm font-medium text-gray-800 mb-1">Deskripsi
                             Kategori Sampah</label>
                         <textarea name="deskripsi_kategori" id="deskripsi_kategori" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700">{{ $kategoriSampah->deskripsi_kategori }}</textarea>
+                    </div>
 
-                        <div class="flex justify-end" style="color: white">
-                            <button type="submit"
-                                class="px-6 mt-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
-                                <i class="fas fa-save mr-2"></i>Simpan Perubahan
-                            </button>
-                        </div>
+                    <div class="mb-6">
+                        <label for="gambar" class="block text-sm font-medium text-gray-800 mb-1">Gambar Kategori
+                            Sampah</label>
+                        <input type="file" name="gambar" id="gambar" accept="image/*"
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+
+                        <!-- Display current image if available -->
+                        @if ($kategoriSampah->gambar)
+                            <div class="mt-2">
+                                <img src="{{ asset('img/admin/' . $kategoriSampah->gambar) }}" alt="Current Image"
+                                    class="w-24 h-24 object-cover rounded-md">
+                                <p class="mt-1 text-sm text-gray-600">Gambar yang sedang digunakan</p>
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="flex justify-end" style="color: white">
+                        <button type="submit"
+                            class="px-6 mt-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
+                            <i class="fas fa-save mr-2"></i>Simpan Perubahan
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -68,11 +68,11 @@
                 </div>
                 {{-- Button PDF dan XLSX(Excel) --}}
                 <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-primary-lighten hover:bg-primary-200 rounded-2xl shadow-md">
+                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-primary-lighten hover:bg-primary-200 rounded-2xl shadow-sm">
                     XLSX
                 </a>
                 <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-md">
+                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
                     PDF
                 </a>
             </div>
@@ -89,8 +89,8 @@
                 </div>
             @else
                 @foreach ($penjemputan as $p)
-                    <a href="{{ route('masyarakat.penjemputan.detail-riwayat') }}" class="block">
-                        <div class="relative w-[450px] h-[230px] bg-white-normal shadow-md rounded-xl hover:shadow-lg">
+                    <a href="{{ route('masyarakat.penjemputan.detail-riwayat', $p->id_penjemputan) }}" class="block">
+                        <div class="relative w-[450px] h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                             <div class="flex justify-between">
                                 <span class="mx-6 my-2 text-lg font-bold text-gray-800">
                                     {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
@@ -124,7 +124,7 @@
                                 <div class="flex items-baseline mx-auto mt-8">
                                     <p
                                         class="text-6xl font-bold
-                                    @if ($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Sudah Sampai') text-secondary-normal
+                                            @if ($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Sudah Sampai') text-secondary-normal
                                             @else text-tertiary-600 @endif
                                             ">
                                         +{{ $p->total_poin }}

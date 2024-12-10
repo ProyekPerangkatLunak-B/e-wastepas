@@ -18,6 +18,7 @@ class Penjemputan extends Model
     protected $primaryKey = 'id_penjemputan';
 
     protected $fillable = [
+        'kode_penjemputan',
         'id_daerah',
         'id_dropbox',
         'id_pengguna_masyarakat',
