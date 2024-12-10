@@ -18,28 +18,33 @@
         <p class="text-gray-600 text-center mb-8">Silahkan masukan kode verifikasi yang kami kirimkan ke email anda</p>
 
         <!-- Input OTP -->
-        <div class="flex space-x-4 mb-8">
-            <input type="hidden" name="token" value="{{ $token }}"
-                class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
-            <input type="hidden" name="token" value="{{ $token }}"
-                class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
-            <input type="hidden" name="token" value="{{ $token }}"
-                class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
-            <input type="hidden" name="token" value="{{ $token }}"
-                class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
-            <input type="hidden" name="token" value="{{ $token }}"
-                class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
-        </div>
+        <form action="{{ route('manajemen.registrasi.register') }}" method="POST">
+            @csrf
+            <div class="flex space-x-4 mb-8">
+                <input type="text" maxlength="1"
+                    class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
+                <input type="text" maxlength="1"
+                    class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
+                <input type="text" maxlength="1"
+                    class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
+                <input type="text" maxlength="1"
+                    class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
+                <input type="text" maxlength="1"
+                    class="w-16 h-16 text-center text-xl font-semibold border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md" />
+            </div>
 
-        <!-- Tombol Konfirmasi -->
-        <button type="button"
-            class="w-full max-w-xs py-3 text-base font-bold text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg shadow-md transition-all">
-            DAFTAR
-        </button>
+            <!-- Tombol Konfirmasi -->
 
-        <!-- Link Kirim Ulang -->
-        <p class="mt-4 text-gray-600 text-sm">
-            <a href="#" class="text-green-500 font-semibold hover:underline">Kirim ulang</a>
-        </p>
+            <button type="button"
+                class="w-full max-w-xs py-3 text-base font-bold text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg shadow-md transition-all">
+                DAFTAR
+            </button>
+
+            <!-- Link Kirim Ulang -->
+            <p class="mt-4 text-gray-600 text-sm ">
+                <a href="{{ route('manajemen.registrasi.login') }}"
+                    class="text-green-500 font-semibold hover:underline">Kirim
+                    ulang</a>
+            </p>
     </div>
 @endsection

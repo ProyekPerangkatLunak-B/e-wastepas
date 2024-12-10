@@ -15,6 +15,7 @@ use App\Http\Controllers\Masyarakat\ForgotPasswordController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
 use App\Http\Controllers\Manajemen\ForgotPasswordManajemenController;
 use App\Http\Controllers\Manajemen\ResetPasswordManajemenController;
+use App\Http\Controllers\Manajemen\OtpManajemenController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
@@ -168,7 +169,7 @@ Route::group([
         return view('manajemen.registrasi.register');
     })->name('registrasi.register');
 
-    Route::post('/register', [RegistrasiManajemenController::class, 'register'])->name('register.submit');
+    Route::post('/register', [RegistrasiManajemenController::class, 'register'])->name('register.verify-otp.submit');
 
     // Route forgot password (Registrasi)
     Route::get('/forgot-password', [ForgotPasswordManajemenController::class, 'showLinkRequestForm'])->name('password.request');
@@ -201,6 +202,8 @@ Route::group([
         return view('manajemen.registrasi.verify-otp');
     })->name('registrasi.verify-otp');
 
+    Route::post('manajemen/verify-otp', [OtpManajemenController::class, 'verifyOtp']);
+
     // Route Data Total Sampah (Registrasi)
     Route::get('/data-total-sampah', function () {
         return view('manajemen.registrasi.data-total-sampah');
@@ -225,6 +228,11 @@ Route::group([
     Route::get('/check-email', function () {
         return view('manajemen.registrasi.check-email');
     })->name('password.check-email');
+
+
+    // Memverifikasi OTP
+    Route::post('verify-otp', [RegistrasiManajemenController::class, 'verifyOtp'])->name('manajemen.registrasi.verify-otp.submit');
+
 
     Route::get('manajemen/reset-password/{token}', [ResetPasswordManajemenController::class, 'showResetForm'])->name('manajemen.password.reset');
     Route::post('manajemen/reset-password', [ResetPasswordManajemenController::class, 'resetPassword'])->name('manajemen.password.update');
