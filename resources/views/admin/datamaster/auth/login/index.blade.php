@@ -65,11 +65,8 @@
                     {{-- Form Login --}}
                     <div class="w-full flex-20 mt-8">
                         <div class="mx-auto max-w-md">
-<<<<<<< HEAD
                             <form action="{{ route('admin.sendAdminLoginLink') }}" method="POST" onsubmit="showSpinner()">
-=======
                             <form action="{{ route('admin.sendAdminLoginLink') }}" method="POST">
->>>>>>> da0dbcf49f73902facecdf5c0ecf24a2b64cc143
                                 @csrf
                                 <div>
                                     <label for="email"

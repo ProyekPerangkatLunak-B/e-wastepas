@@ -1,10 +1,6 @@
 <header x-data="{ dropdownOpen: false }" class="top-0 right-0 z-0 ps-12 py-2 left-64 ms-[16rem]">
     <div class="container flex items-center justify-end">
-<<<<<<< HEAD
         <div class="relative flex items-center space-x-2 cursor-pointer">
-=======
-        <div class="relative flex items-center space-x-2">
->>>>>>> da0dbcf49f73902facecdf5c0ecf24a2b64cc143
             <!-- Toggler untuk Dropdown (Nama, Role, dan Gambar) -->
             <a @click="dropdownOpen = !dropdownOpen" class="flex items-center space-x-2 focus:outline-none">
                 <!-- Text Section -->

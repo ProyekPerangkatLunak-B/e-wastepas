@@ -17,17 +17,13 @@ class AuthController extends Controller
     {
         $request->validate(['email' => 'required|email']);
 
-<<<<<<< HEAD
         $email = htmlspecialchars($request->input('email'), ENT_QUOTES, 'UTF-8');
-=======
         // Buat link login aman yang akan kedaluwarsa dalam 30 menit
         $loginUrl = URL::temporarySignedRoute(
             'admin.login.verify',
             now()->addMinutes(30),
             ['email' => $request->email]
         );
->>>>>>> da0dbcf49f73902facecdf5c0ecf24a2b64cc143
-
         $loginAttemptsKey = 'login_attempts:' . $email;
         $blockKey = 'blocked_email:' . $email;
 
@@ -104,18 +100,6 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect()->intended('admin/datamaster/masyarakat');
-    }
-    public function logout(Request $request)
-    {
-        // Logout user
-        Auth::logout();
-
-        // Hapus sesi pengguna
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        // Redirect ke halaman login setelah logout
-        return redirect()->route('admin.login.index')->with('status', 'Anda telah keluar.');
     }
     public function logout(Request $request)
     {
