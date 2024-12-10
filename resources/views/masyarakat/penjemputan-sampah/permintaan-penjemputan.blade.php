@@ -69,21 +69,21 @@
                         <!-- Pilih Daerah -->
                         <x-select id="daerah" name="daerah" label="Pilih Daerah">
                             <option value="">Pilih Daerah</option>
-                            @foreach ($daerah as $d)
+                            {{-- @foreach ($daerah as $d)
                                 <option value="{{ $d->id_daerah }}">{{ $d->nama_daerah }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </x-select>
 
                         <!-- Pilih Dropbox -->
                         <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
                             <option value="">Pilih Dropbox</option>
-                            @foreach ($dropbox as $d)
+                            {{-- @foreach ($dropbox as $d)
                                 <option value="{{ $d->id_dropbox }}">{{ $d->nama_dropbox }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </x-select>
 
                         <!-- Tanggal dan Waktu Penjemputan -->
-                        <x-input type="date" id="tanggal_penjemputan" name="tanggal_penjemputan"
+                        <x-input type="datetime-local" id="tanggal_penjemputan" name="tanggal_penjemputan"
                             label="Tanggal dan Waktu Penjemputan" placeholder="mm/dd/yyyy" />
 
                         <!-- Alamat Penjemputan -->
@@ -143,9 +143,9 @@
                         <select id="kategori" name=""
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option value="">Pilih Kategori</option>
-                            @foreach ($kategori as $k)
+                            {{-- @foreach ($kategori as $k)
                                 <option value="{{ $k->id_kategori }}">{{ $k->nama_kategori }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                     <div>
@@ -153,9 +153,9 @@
                         <select id="jenis" name=""
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option value="">Pilih Jenis</option>
-                            @foreach ($jenis as $j)
+                            {{-- @foreach ($jenis as $j)
                                 <option value="{{ $j->id_jenis }}">{{ $j->nama_jenis }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
 
                     </div>
