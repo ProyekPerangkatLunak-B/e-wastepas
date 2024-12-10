@@ -32,7 +32,7 @@ class ProfileMasyarakatController extends Controller
 
         // Ambil data pengguna yang sedang login
         $user = Auth::user();
-        
+
         // Update data pengguna
         $user->nama = $request->input('nama');
         $user->nomor_telepon = $request->input('no_telepon');

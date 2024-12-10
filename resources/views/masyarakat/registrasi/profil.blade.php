@@ -17,44 +17,65 @@
                 </div>
                     <div class="mx-auto max-w-md">
                         <div class="container p-8">
-                            <h1 class="text-2xl font-bold mb-4">Profile</h1>
-                            <div class="flex flex-col md:flex-row mt-4">
-                                <div class="flex items-center mb-4">
-                                    <img src="" alt="Profile Image"
-                                    class="border border-green-300 rounded-full shadow-sm w-14 h-14">
-                                  <div class="ml-4 mt-2">
-                                    <p class="text-gray-500 font-semibold text-lg">Profile Picture</p>
-                                    <p class="text-md text-gray-400">PNG, JPEG, PDF under 1MB</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="5xl:w-1/2">
-                                <div class="grid grid-cols-1 w-full md:grid-cols-2 gap-6">
-                                  <div>
-                                    <label class="block text-sm font-medium text-gray-700">Nama</label>
-                                    <input type="nama" class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white">
-                                  </div>
-                                  <div>
-                                    <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                                    <input type="date" class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white">
-                                  </div>
-                                  <div>
-                                    <label class="block text-sm font-medium text-gray-700">No. Telepon</label>
-                                    <input type="tel" class= "w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white">
-                                  </div>
-                                  <div>
-                                    <label class="block text-sm font-medium text-gray-700">No. Rekening</label>
-                                    <input type="no-rek" class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white">
-                                  </div>
-                                  <div>
-                                    <label class="block text-sm font-medium text-gray-700">Alamat</label>
-                                    <input type="address" class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"></input>
-                                  </div>
-                                </div>
-                                <div class="flex justify-end mt-4">
-                                  <button class="focus:outline-none text-slate-50 bg-gradient-to-r w-[100px] py-3 from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg mt-8 text-base">Simpan</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                            <h1>Edit Profil Masyarakat</h1>
+
+    <form method="POST" action="{{ route('masyarakat.profile.update') }}" enctype="multipart/form-data">
+        @csrf
+
+        <div class="mb-3">
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama', $user->nama) }}" required>
+            @error('nama')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}" required>
+            @error('email')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="alamat" class="form-label">Alamat</label>
+            <input type="text" name="alamat" id="alamat" class="form-control" value="{{ old('alamat', $user->alamat) }}">
+            @error('alamat')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="nomor_telepon" class="form-label">Nomor Telepon</label>
+            <input type="text" name="nomor_telepon" id="nomor_telepon" class="form-control" value="{{ old('nomor_telepon', $user->nomor_telepon) }}">
+            @error('nomor_telepon')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="kata_sandi" class="form-label">Password Baru (Opsional)</label>
+            <input type="password" name="kata_sandi" id="kata_sandi" class="form-control">
+            @error('kata_sandi')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="kata_sandi_confirmation" class="form-label">Konfirmasi Password Baru</label>
+            <input type="password" name="kata_sandi_confirmation" id="kata_sandi_confirmation" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="foto_profil" class="form-label">Foto Profil (Opsional)</label>
+            <input type="file" name="foto_profil" id="foto_profil" class="form-control">
+            @error('foto_profil')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+    </form>
+</div>
 @endsection

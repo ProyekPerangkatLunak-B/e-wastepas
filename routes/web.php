@@ -250,12 +250,17 @@ Route::group([
         return view('masyarakat/registrasi/forgot-password');
     });
 
-    Route::get('/check-mail', function () {
-        return view('masyarakat/registrasi/check-mail');
-    });
-
     Route::get('/reset-password', function () {
         return view('masyarakat/registrasi/reset-password');
+    });
+    Route::get('/ubah-password', function () {
+        return view('masyarakat/registrasi/ubah-password');
+    });
+    Route::get('/profil', function () {
+        return view('masyarakat/registrasi/profil');
+    });
+    Route::get('/forgot-password-otp', function () {
+        return view('masyarakat/registrasi/forgot-password-otp');
     });
 
 
