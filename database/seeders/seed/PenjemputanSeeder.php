@@ -12,7 +12,7 @@ class PenjemputanSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        $dat = 10; // jumlah data eksekusi
+        $dat = 20; // jumlah data eksekusi
 
         $penggunaMasyarakatIds = DB::table('pengguna')
             ->where('id_peran', 2) // Peran masyarakat
@@ -37,7 +37,9 @@ class PenjemputanSeeder extends Seeder
             $penggunaMasyarakat = DB::table('pengguna')
                 ->where('id_pengguna', $penggunaMasyarakatIds[array_rand($penggunaMasyarakatIds)])->first();
 
+            $kodePenjemputan = 'U' . '001P' . now()->format('ym') . str_pad($i, 3, '0', STR_PAD_LEFT);
             $data[] = [
+                'kode_penjemputan' => $kodePenjemputan,
                 'id_daerah' => $daerah->id_daerah,
                 'id_dropbox' => $dropboxIds[array_rand($dropboxIds)],
                 'id_pengguna_masyarakat' => $penggunaMasyarakat->id_pengguna,
