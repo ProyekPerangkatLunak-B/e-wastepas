@@ -146,7 +146,6 @@ Route::prefix('admin')
         Route::post('/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
         Route::get('/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
         Route::view('/login', 'admin.datamaster.auth.login.index')->name('login.index');
-<<<<<<< HEAD
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::patch('masyarakat/{id}/approve', [MasyarakatAdminController::class, 'approve'])->name('approve');
         Route::patch('masyarakat/{id}/reject', [MasyarakatAdminController::class, 'reject'])->name('reject');
@@ -154,9 +153,6 @@ Route::prefix('admin')
         Route::patch('kurir/{id}/reject', [KurirAdminController::class, 'reject'])->name('reject');
         Route::patch('manajemen/{id}/approve', [ManajemenAdminController::class, 'approve'])->name('approve');
         Route::patch('manajemen/{id}/reject', [ManajemenAdminController::class, 'reject'])->name('reject');
-=======
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
->>>>>>> da0dbcf49f73902facecdf5c0ecf24a2b64cc143
     });
 
 
@@ -272,7 +268,7 @@ Route::group([
         return view('masyarakat/registrasi/reset-password');
     });
 
-    
+
 
 
     //profileEdit
