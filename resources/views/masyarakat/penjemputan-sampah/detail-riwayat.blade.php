@@ -100,12 +100,22 @@
 
                     </div>
 
-                    <div class="w-1/2 mt-2">
-                        <h3 class="mb-2 text-lg font-bold">Detail Pelacakan</h3>
+                    <div class="relative w-1/2 mt-2">
+                        <h3 class="mx-auto mb-2 text-lg font-bold">Detail Pelacakan</h3>
                         <div class="relative max-h-[450px] space-y-4 overflow-y-auto">
                             <!-- Garis Vertikal -->
-                            <div class="absolute top-0 bottom-0 w-1 bg-gray-200 left-3"></div>
+                            <div class="absolute top-0 bottom-0 w-1 bg-gray-200 left-[149px] h-auto"></div>
                             <div class="relative flex items-start space-x-4">
+                                <!-- Time and Date -->
+                                <div class="flex flex-col items-end">
+                                    <p class="text-sm font-semibold text-black">
+                                        {{ Carbon\Carbon::parse($penjemputan->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
+                                    </p>
+                                    <p class="text-sm text-gray-600">
+                                        {{ Carbon\Carbon::parse($penjemputan->created_at)->locale(app()->getLocale())->translatedFormat('j F Y') }}
+                                    </p>
+                                </div>
+
                                 <!-- Icon Bullet -->
                                 <div
                                     class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full
@@ -115,9 +125,6 @@
                                 </div>
                                 <!-- Text Content -->
                                 <div class="flex-1">
-                                    <p class="text-sm font-semibold text-black">
-                                        {{ Carbon\Carbon::parse($penjemputan->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
-                                    </p>
                                     <p class="text-base font-bold text-black">Menunggu Konfirmasi</p>
                                     <p class="text-sm text-gray-600">Penjemputan diajukan</p>
                                 </div>
@@ -128,23 +135,28 @@
                                 @if ($p->status !== 'Menunggu Konfirmasi')
 
                                 <div class="relative flex items-start space-x-4">
-                                        <!-- Icon Bullet -->
-                                        <div
-                                        class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full
-                                        @if ($p->id_pelacakan === $penjemputan->getLatestPelacakan->id_pelacakan) bg-green-500
-                                        @else bg-gray-400 @endif
-                                        ">
-                                    </div>
-                                    <!-- Text Content -->
-                                    <div class="flex-1">
+                                    <!-- Time and Date -->
+                                    <div class="flex flex-col items-end">
                                         <p class="text-sm font-semibold text-black">
                                             {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
                                         </p>
-                                        <p class="text-base font-bold text-black">{{ $p->status }}</p>
-                                        <p class="text-sm text-gray-600">{{ $p->keterangan }}</p>
-                                        <p class="text-sm text-gray-600"></p>
+                                        <p class="text-sm text-gray-600">
+                                            {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('j F Y') }}
+                                        </p>
                                     </div>
+                                    <!-- Icon Bullet -->
+                                    <div
+                                    class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full
+                                    @if ($p->id_pelacakan === $penjemputan->getLatestPelacakan->id_pelacakan) bg-green-500
+                                    @else bg-gray-400 @endif
+                                    ">
                                 </div>
+                                <!-- Text Content -->
+                                <div class="flex-1">
+                                    <p class="text-base font-bold text-black">{{ $p->status }}</p>
+                                    <p class="text-sm text-gray-600">{{ $p->keterangan }}</p>
+                                </div>
+                            </div>
                                 @endif
                             @endforeach
                             @elseif($penjemputan->status === 'Dibatalkan')
@@ -154,9 +166,6 @@
                                 </div>
                                 <!-- Text Content -->
                                 <div class="flex-1">
-                                    <p class="text-sm font-semibold text-black">
-                                        {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
-                                    </p>
                                     <p class="text-base font-bold text-black">{{ $penjemputan->status }}</p>
                                     <p class="text-sm text-gray-600">Pesanan dibatalkan oleh pengguna</p>
                                 </div>

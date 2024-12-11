@@ -68,12 +68,12 @@
                 </div>
                 {{-- Button PDF dan XLSX(Excel) --}}
                 <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-primary-lighten hover:bg-primary-200 rounded-2xl shadow-sm">
-                    XLSX
+                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-primary-normal hover:bg-primary-400 rounded-2xl shadow-sm">
+                    Export to Excel
                 </a>
                 <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
-                    PDF
+                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
+                    Export to PDF
                 </a>
             </div>
         </div>
