@@ -101,17 +101,17 @@
                         </div>
                         <div class="max-h-[450px] space-y-4 overflow-y-auto" id="boxSemuaSampah">
                             <!-- Card -->
-                                <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[90%] h-[120px] rounded-2xl shadow-sm"
-                                    id="box-kosong">
-                                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
-                                        alt="Tidak Ditemukan" class="w-[50px] h-[50px] mx-auto">
-                                    <p class="w-64 mr-32 font-bold text-center text-black-normal">Data
-                                        {{ $search ?? 'Sampah Elektronik' }}
-                                        tidak ditemukan / Masih Kosong.</p>
-                                </div>
+                            <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[90%] h-[120px] rounded-2xl shadow-sm"
+                                id="box-kosong">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
+                                    alt="Tidak Ditemukan" class="w-[50px] h-[50px] mx-auto">
+                                <p class="w-64 mr-32 font-bold text-center text-black-normal">Data
+                                    {{ $search ?? 'Sampah Elektronik' }}
+                                    tidak ditemukan / Masih Kosong.</p>
                             </div>
                         </div>
                     </div>
+                </div>
                     <!-- Tombol Kembali dan Kirim Permintaan -->
                     <div class="flex justify-end mx-10 space-x-4">
                         <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Reset Form</a>
