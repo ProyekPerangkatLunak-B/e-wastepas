@@ -33,6 +33,10 @@ class RegistrasiMitraKurirController extends Controller
         return view('mitra-kurir/registrasi/forgot-password');
     }
 
+    public function ChangePasswordIndex(){
+        return  view('mitra-kurir/registrasi/account-profile/security');
+    }
+
     public function ForgotPasswordFormIndex(Request $request){
         $token = $request->query('token');
         $email = $request->query('email');
@@ -232,5 +236,35 @@ public function LogoutAuth(Request $request)
 
     return redirect('mitra-kurir/registrasi/login')->with('status', 'Password successfully reset!');
 }
+
+
+public function ChangePassword(Request $request)
+{
+    $request->validate([
+        'PasswordOld' => 'required|min:8',
+        'PasswordNew' => 'required|min:8',
+        'passwordConfirm' => 'required|same:PasswordNew',
+    ]);
+    
+    $find = Auth::user()->email;   
+
+    $user = User::where('email',$find)->first();
+
+
+    if (!$user) {
+        return back()->withErrors(['email' => 'User not found.']);
+    }
+    if (!Hash::check($request->PasswordOld, $user->kata_sandi))  {
+        return back()->withErrors(['email' => 'Password Lama Salah']);
+    }
+    
+    $user->kata_sandi = Hash::make($request->PasswordNew);
+    $user->tanggal_update = now();
+    $user->save();
+
+    return  back()->with('status', 'Password successfully reset!');
+}
+
+
 
 }

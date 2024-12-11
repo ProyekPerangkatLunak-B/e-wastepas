@@ -355,25 +355,22 @@ Route::post('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKuri
 Route::get('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'ForgotPasswordIndex'])->middleware('guest')->name('reset-password');
 Route::post('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'SendForgotPassword'])->middleware('guest')->name('reset-password.post');
 
+Route::post('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePassword'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security.post');
+
 // syarat & ketentuan
 Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
     return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
 })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
 
-// reset password
-Route::get('/mitra-kurir/registrasi/reset-password', function () {
-    return view('mitra-kurir/registrasi/reset-password');
-});
 
 // halaman profile
 Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
     return view('mitra-kurir/registrasi/account-profile/profile');
 })->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile');
 
-// halaman account
-Route::get('/mitra-kurir/registrasi/account-profile/security', function () {
-    return view('mitra-kurir/registrasi/account-profile/security');
-})->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
+// halaman  security
+Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePasswordIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
+
 
 Route::group([
     'prefix' => 'api/',
