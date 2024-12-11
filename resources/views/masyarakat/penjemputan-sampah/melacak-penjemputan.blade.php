@@ -70,29 +70,24 @@
             <div class="relative w-[450px] h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                 <div class="flex justify-between">
                     <span class="mx-6 my-2 text-lg font-bold text-gray-800">
-                        {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
+                        {{ $p->kode_penjemputan }}
                     </span>
                 </div>
-
                 <!-- Isi Konten -->
                 <div class="flex px-6 space-x-6">
                     <!-- Bagian Jenis dan Deskripsi Sampah -->
                     <div class="flex-grow my-4">
                         @foreach ($p->detailPenjemputan as $s)
-                        @if ($loop->index == 2 && count($p->detailPenjemputan) > 3)
-                        <p class="text-lg font-semibold">...</p>
-                        @break
-                        @endif
+                            @if ($loop->index == 2 && count($p->detailPenjemputan) > 3)
+                            <p class="text-lg font-semibold">...</p>
+                            @break
+                            @endif
                         <p class="mb-1 text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
                         @endforeach
-                        <!-- Catatan -->
+                        <!-- Waktu Penjemputan -->
                         <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
-                            <p class="text-sm text-black-normal">
-                                @if (strlen($p->catatan) > 25)
-                                {{ substr($p->catatan, 0, 25) }}...
-                                @else
-                                {{ $p->catatan }}
-                                @endif
+                            <p class="text-md text-black-normal">
+                                {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
                             </p>
                         </div>
                     </div>

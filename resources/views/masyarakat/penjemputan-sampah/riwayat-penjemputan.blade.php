@@ -83,12 +83,12 @@
                 </form>
                 {{-- Button PDF dan XLSX(Excel) --}}
                 <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-primary-lighten hover:bg-primary-200 rounded-2xl shadow-sm">
-                    XLSX
+                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-primary-normal hover:bg-primary-400 rounded-2xl shadow-sm">
+                    Export to Excel
                 </a>
                 <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
-                    PDF
+                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
+                    Excel to PDF
                 </a>
             </div>
         </div>
@@ -108,7 +108,7 @@
                         <div class="relative w-[450px] h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                             <div class="flex justify-between">
                                 <span class="mx-5 my-2 text-lg font-bold text-gray-800">
-                                    {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
+                                    {{ $p->kode_penjemputan }}
                                 </span>
                             </div>
 
@@ -125,18 +125,14 @@
                                 @endforeach
                                 {{-- Catatan --}}
                                 <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
-                                    <p class="text-sm text-black-normal">
-                                        @if (strlen($p->catatan) > 25)
-                                            {{ substr($p->catatan, 0, 25) }}...
-                                        @else
-                                            {{ $p->catatan }}
-                                        @endif
+                                    <p class="text-md text-black-normal">
+                                        {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
                                     </p>
                                 </div>
                             </div>
                             {{-- Poin Sampah --}}
                             <div class="flex flex-col items-center justify-between">
-                                <div class="flex items-baseline mx-4 my-auto">
+                                <div class="flex items-baseline mx-4 my-10">
                                     <p
                                         class="text-5xl font-bold
                                              @switch($p->status)
