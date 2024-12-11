@@ -260,12 +260,17 @@ Route::group([
         return view('masyarakat/registrasi/forgot-password');
     });
 
-    Route::get('/check-mail', function () {
-        return view('masyarakat/registrasi/check-mail');
-    });
-
     Route::get('/reset-password', function () {
         return view('masyarakat/registrasi/reset-password');
+    });
+    Route::get('/ubah-password', function () {
+        return view('masyarakat/registrasi/ubah-password');
+    });
+    Route::get('/profil', function () {
+        return view('masyarakat/registrasi/profil');
+    });
+    Route::get('/forgot-password-otp', function () {
+        return view('masyarakat/registrasi/forgot-password-otp');
     });
 
 
@@ -315,9 +320,9 @@ Route::group([
     Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->name('penjemputan.permintaan');
     Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->name('penjemputan.detail-permintaan');
 
-    //    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
-    //    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
-    //    Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
+        Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
+        Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
+        Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::get('penjemputan-sampah/dropbox', function () {
         return view('mitra-kurir.penjemputan-sampah.dropbox');

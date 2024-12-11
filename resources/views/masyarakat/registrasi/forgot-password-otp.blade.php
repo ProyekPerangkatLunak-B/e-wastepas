@@ -1,14 +1,16 @@
 @extends('layouts/app')
 @section('content')
 
-<div class="w-full min-h-screen text-gray-900 bg-white">
-    <a href="./register">
-        <button class="flex items-center mt-6 ms-8">
+
+
+<div class="min-h-screen bg-white text-gray-900  w-full">
+    <a href="./forgot-password">
+        <button class="mt-6 ms-8 flex items-center">
             <img src="../img/masyarakat/registrasi/back-button.png" class="w-6 h-6 mr-2" alt="Kembali">
             <span>Kembali</span>
         </button>
     </a>
-        <div class="items-center mt-32">
+        <div class="mt-32 items-center">
             <div class="otp-img">
             <img src="../img/masyarakat/registrasi/otp.png" alt="" class="w-30 mx-auto flex justify-center">
                 <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Konfirmasi OTP</h2>
@@ -17,7 +19,7 @@
             </div>
 
               @if ($errors->any())
-                  <div class="p-3 text-center text-red-500 rounded-lg">
+                  <div class="text-red-500 p-3 rounded-lg text-center">
                       <ul>
                           @foreach ($errors->all() as $error)
                               <li>{{ $error }}</li>
@@ -26,16 +28,15 @@
                   </div>
               @endif
 
-              <div class="max-w-md mx-auto">
+              <div class="mx-auto max-w-md">
                   <form action="{{ route('masyarakat.otp.verify') }}" method="POST">
                       @csrf
                       <!--<div>
-                          <label for="otp" class="block mt-4 font-medium leading-9 text-gray-500 text-md">Kode OTP</label>
+                          <label for="otp" class="block mt-4 text-md font-medium leading-9 text-gray-500">Kode OTP</label>
                           <input
-                              class="w-full px-4 py-3 mt-2 font-medium bg-gray-100 border border-green-200 rounded-lg text-md focus:outline-none focus:border-green-400 focus:bg-white"
+                              class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-green-200 text-md focus:outline-none focus:border-green-400 focus:bg-white"
                               type="text" required name="otp" id="otp"/>
                       </div>-->
-
 
                       <div class="grid grid-cols-6  mt-10 ms-6 gap-x-10 my-2">
                         <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
@@ -55,16 +56,15 @@
                         </div>
                         <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
-
                         </div>
 
                       <!-- Button Submit -->
                       <button
-                          class="h-12 font-bold rounded-lg mt-14 ms-12 w-80 focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l" onclick="openModal('modelConfirm')">
+                          class="mt-14 ms-12 w-80 h-12 focus:outline-none text-slate-50 font-bold bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg" onclick="openModal('modelConfirm')">
                           Kirim
                       </button>
-                      <div id="modelConfirm" class="fixed inset-0 z-50 hidden w-full h-full px-4 overflow-y-auto bg-gray-900 bg-opacity-60 ">
-                        <div class="relative max-w-md mx-auto bg-gray-100 rounded-lg shadow-xl top-40">
+                      <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
+                        <div class="relative top-40 mx-auto shadow-xl rounded-lg bg-gray-100 max-w-md">
                             <div class="flex justify-end p-2">
                                 <button onclick="closeModal('modelConfirm')" type="button"
                                     class="text-gray-400 bg-white hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto items-center">
@@ -78,8 +78,8 @@
                             <div class="p-6 pt-0 text-center">
                                <h2 class="text-xl font-bold text-gray-900"> Konfirmasi OTP berhasil</h2>
                                <div class="mail-reset">
-                                   <img src="../img/masyarakat/registrasi/popup-reset.png" alt="" class="flex justify-center h-20 mx-auto w-25">
-                                <h3 class="mt-5 mb-6 font-medium text-gray-500 text-md"> Selamat Anda Berhasil Melakukan Konfirmasi Kode !! </h3>
+                                   <img src="../img/masyarakat/registrasi/popup-reset.png" alt="" class="w-25 h-20 mx-auto flex justify-center">
+                                <h3 class="text-md font-medium text-gray-500 mt-5 mb-6"> Selamat Anda Berhasil Melakukan Konfirmasi Kode !! </h3>
                                 <a href="#"  onclick="closeModal('modelConfirm')"
                                     class="focus:outline-none text-slate-50 font-bold bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg px-5 py-2.5 text-center mr-2">
                                     Kembali
@@ -114,7 +114,7 @@
                     </script>
                   </form>
               </div>
-              <a href="" class="font-semibold leading-6 text-gray-700 ms-48 text-md hover:text-gray-500">Kirim Ulang</a>
+              <a href="" class="font-semibold ms-48 leading-6 text-gray-700 text-md hover:text-gray-500">Kirim Ulang</a>
           </div>
         </div>
       </div>

@@ -71,14 +71,11 @@
 
             <!-- Tombol Simpan -->
             <div class="mt-6">
-                <a href="{{ route('masyarakat.penjemputan.kategori') }}" 
+                <a href="{{ route('masyarakat.penjemputan.kategori') }}"
                     class="block w-full text-center bg-green-500 text-white py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-green-600">
                     Simpan
                 </a>
             </div>
-            
-            
-            
         </form>
     </div>
 </div>
