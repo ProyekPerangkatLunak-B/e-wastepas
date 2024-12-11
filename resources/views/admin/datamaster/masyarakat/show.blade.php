@@ -97,7 +97,7 @@
 
             <div class="profile-header">
                 <div class="profile-image">
-                    @if($masyarakat->foto_profil)
+                    @if ($masyarakat->foto_profil)
                         <img src="{{ asset('storage/' . $masyarakat->foto_profil) }}" alt="Foto Profil">
                     @else
                         <img src="https://via.placeholder.com/120?text=No+Photo" alt="Foto Profil">
@@ -150,7 +150,7 @@
             </div>
 
             <div class="mt-6">
-                <a href="{{ route('admin.datamaster.masyarakat.index') }}" class="back-button">
+                <a href="javascript:history.back()" class="back-button">
                     Kembali
                 </a>
             </div>

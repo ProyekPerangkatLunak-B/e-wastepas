@@ -25,6 +25,7 @@
 
                 <div class="py-2">
                     <!-- Profile Link -->
+                    {{-- Route ini dibuat Dinamiskan saja karena semua modul pasti menggunakan, jadi gunakan saja kondisi disetiap route dibawah ini, --}}
                     <a href="#"
                         class="flex items-center px-8 py-3 space-x-3 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="text-secondary-normal bi bi-person" viewBox="0 0 16 16">
@@ -50,7 +51,7 @@
                     </a>
 
                     <!-- Logout Button -->
-                    <form action="#" method="POST">
+                    <form action="{{ route('mitra-kurir.registrasi.logout') }}" method="POST">
                         @csrf
                         <button type="submit"
                             class="flex items-center justify-center w-[313px] h-[45px] mx-auto px-4 py-3 mt-4 space-x-2 text-sm text-white rounded-2xl bg-red-normal hover:bg-red-400">

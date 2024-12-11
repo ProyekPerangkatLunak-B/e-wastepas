@@ -54,6 +54,9 @@ class ProfileMasyarakatController extends Controller
             'nomor_telepon' => 'nullable|string|max:15',
         ]);
 
+        // Ambil data pengguna yang sedang login
+        $user = Auth::user();
+
         // Update data pengguna
         $user->nama = $request->nama;
         $user->email = $request->email;

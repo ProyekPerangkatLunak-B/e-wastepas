@@ -24,7 +24,7 @@
             @endif
             <!-- Form Login -->
                 <div class="max-w-md mx-auto">
-                  
+
                 <form action="{{ route('masyarakat.login.submit') }}" method="POST">
                 @csrf
                   <div>

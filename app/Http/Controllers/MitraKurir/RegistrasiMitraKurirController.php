@@ -1,15 +1,17 @@
 <?php
 namespace App\Http\Controllers\MitraKurir;
-use App\Models\UserOTP;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\UploadDocuments;
 use App\Models\User;
+use App\Models\UserOTP;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Notifications\OtpMail;
+use App\Models\UploadDocuments;
+use App\Http\Controllers\Controller;
+use App\Mail\PasswordResetMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Cache;
 
 
 class RegistrasiMitraKurirController extends Controller
@@ -27,29 +29,59 @@ class RegistrasiMitraKurirController extends Controller
         
         return view('mitra-kurir.registrasi.document-upload', compact("user"));
     }
-    
+    public function ForgotPasswordIndex(){
+        return view('mitra-kurir/registrasi/forgot-password');
+    }
+
+    public function ForgotPasswordFormIndex(Request $request){
+        $token = $request->query('token');
+        $email = $request->query('email');
+
+        $tokenCache = Cache::get('password_reset'.$email);
+
+        if(!$tokenCache || !$tokenCache == $token){
+            return redirect('/')->withErrors(['token' => 'Invalid or expired token.']);
+        }
+        return view('mitra-kurir.registrasi.change-password', ['token' => $token, 'email' => $email]);
+    }
+
     public function OtpRedirect($id_pengguna){
         $user = User::find($id_pengguna);
         return view('mitra-kurir.registrasi.otp-verification', compact('user'));
     }
     
     public function LoginAuth(Request $request)
-    {
+{
     $credentials = $request->validate([
         'email' => ['required', 'email'],
         'kata_sandi' => ['required']
     ]);
-        $user = User::where('email', $credentials['email'])->first();
-            if ($user && Hash::check($credentials['kata_sandi'], $user->kata_sandi)) {
-                Auth::login($user);
 
+    $user = User::where('email', $credentials['email'])->first();
+
+    if ($user && Hash::check($credentials['kata_sandi'], $user->kata_sandi)) {
+        Auth::login($user);
         $request->session()->regenerate();
-            return redirect('mitra-kurir/penjemputan-sampah/kategori');
+        return redirect()->route('mitra-kurir.penjemputan.kategori');
     }
+
     return back()->withErrors([
-            'email' => 'Password atau Email Salah',
-         ])->onlyInput('email');
-    }
+        'email' => 'Password atau Email Salah',
+    ])->onlyInput('email');
+
+}
+
+public function LogoutAuth(Request $request)
+{
+    Auth::logout();
+
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+
+    return redirect()->route('mitra-kurir.registrasi.login')->with('status', 'Berhasil Logout!');
+}
+
 
 
     public function OtpValidation(Request $request){
@@ -83,7 +115,7 @@ class RegistrasiMitraKurirController extends Controller
          $user = User::create([
                 'nama' => $validateData['nama'],
                 'nomor_ktp' => $validateData['KTP'],
-                'nomor_hp' => $validateData['NomorHP'],
+                'nomor_telepon' => $validateData['NomorHP'],
                 'email' => $validateData['Email'],
                 'kata_sandi' => Hash::make($validateData['password']),
                 'tanggal_dibuat' => now()
@@ -102,15 +134,15 @@ class RegistrasiMitraKurirController extends Controller
                 $errorMessages = [];
 
                 if (str_contains($e->getMessage(), 'email_unique')) {
-                    $errorMessages['email'] = 'Email already taken.';
+                    $errorMessages['email'] = 'Email Sudah terdaftar ';
                 }
         
                 if (str_contains($e->getMessage(), 'nomor_ktp_unique')) {
-                    $errorMessages['ktp'] = 'No KTP already taken.';
+                    $errorMessages['ktp'] = 'No KTP Sudah terdaftar';
                 }
                 return back()->withErrors($errorMessages);
             }
-            return back()->withErrors(['error' => 'An error occurred during registration.']);
+            return back()->withErrors(['error' => 'Ada kesalahan dalam proses registrasi']);
         }
     }
 
@@ -124,7 +156,6 @@ class RegistrasiMitraKurirController extends Controller
         'npwp' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240', 
     ]);
 
-    // Save uploaded files
     $ktp = $request->file('ktp')->store('uploads/ktp', 'public');
     $kk = $request->file('kk')->store('uploads/kk', 'public');
     $npwp = $request->hasFile('npwp') 
@@ -159,4 +190,43 @@ class RegistrasiMitraKurirController extends Controller
     }
     return redirect('mitra-kurir/registrasi/login');
    }
+
+   public function SendForgotPassword(Request $request){
+        $request -> validate(['email' => 'required|email']);
+        $user = User::where('email', $request->email)->first();
+        
+        if (!$user) {
+            return back()->withErrors(['email' => 'Email not found.']);
+        }
+        $token = Str::random(64);
+        
+        Cache::put('password_reset'. $user->email, $token, now()->addMinutes(30));
+
+        $resetLink = url('/mitra-kurir/registrasi/forgot-password-form?token=' . $token . '&email=' . $user->email);
+
+        $user->notify(new PasswordResetMail($resetLink));
+        return back()->with('status', 'Password reset link sent!');
+   }    
+
+   public function ChangeForgotPassword(Request $request)
+{
+    $request->validate([
+        'password' => 'required|min:8',
+        'ulangiPassword' => 'required|min:8|same:password',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+    if (!$user) {
+        return back()->withErrors(['email' => 'User not found.']);
+    }
+
+    $user->kata_sandi = Hash::make($request->password);
+    $user->tanggal_update = now();
+    $user->save();
+
+    Cache::forget('password_reset' . $request->email);
+
+    return redirect('mitra-kurir/registrasi/login')->with('status', 'Password successfully reset!');
+}
+
 }

@@ -41,7 +41,7 @@
             <!-- Button Batalkan Penjemputan -->
             @if ($penjemputan->status === 'Diproses')
                 <a href="javascript:void(0);" onclick="openModal()"
-                    class="flex items-center justify-center w-[200px] h-[50px] me-24 py-2 text-gray-100 transition duration-300 bg-red-normal rounded-2xl shadow-md">
+                    class="flex items-center justify-center w-[200px] h-[50px] me-24 py-2 text-gray-100 transition duration-300 bg-red-normal rounded-2xl shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                         class="mr-2 bi bi-x-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -52,7 +52,7 @@
                 </a>
             @else
                 <button
-                    class="flex items-center justify-center w-[200px] h-[50px] me-24 py-2 text-white-normal transition duration-300 bg-gray-500 rounded-2xl shadow-md">
+                    class="flex items-center justify-center w-[200px] h-[50px] me-24 py-2 text-white-normal transition duration-300 bg-gray-500 rounded-2xl shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                         class="mr-2 bi bi-x-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -65,7 +65,7 @@
         </div>
 
         <!-- Container untuk ID Penjemputan, Estimasi Tiba, dan Tracking Status -->
-        <div class="w-[1380px] h-[250px] mx-auto mt-4 pt-2 pb-10 bg-white-normal shadow-md rounded-2xl">
+        <div class="w-[1380px] h-[250px] mx-auto mt-4 pt-2 pb-10 bg-white-normal shadow-sm rounded-2xl">
             <div class="flex items-start justify-between px-4">
                 <!-- ID Penjemputan di Ujung Kiri Atas -->
                 <div>
@@ -99,18 +99,18 @@
                      "
                         class="w-[60px] h-[60px]" alt="Dijemput Driver">
                     <span
-                        class="mt-2 text-md
+                        class="mt-2 text-md font-bold
                     @if ($penjemputan->status === 'Diproses') text-green-500
                     @else text-gray-500 @endif
                     ">Menunggu
                         Konfirmasi</span>
                 </div>
                 @if ($penjemputan->status === 'Diproses')
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-green-400 to-gray-300"></div>
+                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-green-400 to-gray-100 border-[1px] border-green-200"></div>
                 @elseif($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Dijemput Driver')
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-300 to-green-400"></div>
+                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-100 to-green-400 border-[1px] border-green-200"></div>
                 @else
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-300 to-gray-300"></div>
+                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-400 to-gray-400 border-[1px] border-green-200"></div>
                 @endif
 
                 <div class="flex flex-col items-center">
@@ -121,16 +121,16 @@
                      "
                         class="w-[60px] h-[60px]" alt="Dijemput Kurir">
                     <span
-                        class="mt-2 text-md
+                        class="mt-2 text-md font-bold
                     @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Dijemput Driver') text-green-500
                     @else text-gray-500 @endif
                     ">Dijemput
                         Driver</span>
                 </div>
                 @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Menuju Dropbox')
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-300 to-green-400"></div>
+                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-100 to-green-400 border-[1px] border-green-200"></div>
                 @else
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-300 to-gray-300"></div>
+                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-400 to-gray-400 border-[1px] border-green-200"></div>
                 @endif
 
                 <div class="flex flex-col items-center">
@@ -141,37 +141,37 @@
                      "
                         class="w-[60px] h-[60px]" alt="Menuju Dropbox">
                     <span
-                        class="mt-2 text-md
+                        class="mt-2 text-md font-bold
                     @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Menuju Dropbox') text-green-500
                     @else text-gray-500 @endif
                     ">Menuju
                         Dropbox</span>
-                </div>
-                @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai')
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-300 to-green-400"></div>
-                @else
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-300 to-gray-300"></div>
-                @endif
+                    </div>
+                    @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai')
+                        <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-100 to-green-400 border-[1px] border-green-200"></div>
+                    @else
+                        <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-400 to-gray-400 border-[1px] border-green-200"></div>
+                    @endif
 
-                <div class="flex flex-col items-center">
-                    <img src="
-                    @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai') {{ asset('img/masyarakat/penjemputan-sampah/patch-check-hijau.png') }}
-                         @else
-                        {{ asset('img/masyarakat/penjemputan-sampah/patch-check-abu.png') }} @endif
-                     "
-                        class="w-[60px] h-[60px]" alt="Sudah Sampai">
-                    <span
-                        class="mt-2 text-md
-                    @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai') text-green-500
-                    @else text-gray-500 @endif
-                    ">Sudah
-                        Sampai</span>
+                    <div class="flex flex-col items-center">
+                        <img src="
+                        @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai') {{ asset('img/masyarakat/penjemputan-sampah/patch-check-hijau.png') }}
+                            @else
+                            {{ asset('img/masyarakat/penjemputan-sampah/patch-check-abu.png') }} @endif
+                        "
+                            class="w-[60px] h-[60px]" alt="Sudah Sampai">
+                        <span
+                            class="mt-2 text-md font-bold
+                        @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai') text-green-500
+                        @else text-gray-500 @endif
+                        ">Sudah
+                            Sampai</span>
+                    </div>
                 </div>
-            </div>
         </div>
 
         <!-- Container untuk Detail Alamat dan Detail Pelacakan -->
-        <div class="w-[1380px] h-auto mx-auto pb-10 mt-6 bg-white-normal shadow-md rounded-xl">
+        <div class="w-[1380px] h-auto mx-auto pb-10 mt-6 bg-white-normal shadow-sm rounded-xl">
             <div class="flex justify-center mb-12 space-x-28">
                 <span class="w-24 h-2 bg-red-200 rounded"></span>
                 <span class="w-24 h-2 bg-blue-300 rounded"></span>
@@ -221,25 +221,22 @@
 
                     </div>
 
-                    <div class="w-1/2 mt-2">
-                        <h3 class="mb-2 text-lg font-bold">Detail Pelacakan</h3>
+                    <div class="relative w-1/2 mt-2">
+                        <h3 class="mx-auto mb-2 text-lg font-bold">Detail Pelacakan</h3>
                         <div class="relative max-h-[450px] space-y-4 overflow-y-auto">
                             <!-- Garis Vertikal -->
-                            <div class="absolute top-0 bottom-0 w-1 bg-gray-200 left-3"></div>
-
-                            {{-- <!-- Item 1 -->
+                            <div class="absolute top-0 bottom-0 w-1 bg-gray-200 left-[149px] h-auto"></div>
                             <div class="relative flex items-start space-x-4">
-                                <!-- Icon Bullet -->
-                                <div class="relative z-10 flex-shrink-0 w-6 h-6 bg-green-500 rounded-full"></div>
-                                <!-- Text Content -->
-                                <div class="flex-1">
-                                    <p class="text-sm font-semibold text-black">08:30 WIB</p>
-                                    <p class="text-base font-bold text-black">Persiapan</p>
-                                    <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet.</p>
+                                <!-- Time and Date -->
+                                <div class="flex flex-col items-end">
+                                    <p class="text-sm font-semibold text-black">
+                                        {{ Carbon\Carbon::parse($penjemputan->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
+                                    </p>
+                                    <p class="text-sm text-gray-600">
+                                        {{ Carbon\Carbon::parse($penjemputan->created_at)->locale(app()->getLocale())->translatedFormat('j F Y') }}
+                                    </p>
                                 </div>
-                            </div> --}}
 
-                            <div class="relative flex items-start space-x-4">
                                 <!-- Icon Bullet -->
                                 <div
                                     class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full
@@ -249,9 +246,6 @@
                                 </div>
                                 <!-- Text Content -->
                                 <div class="flex-1">
-                                    <p class="text-sm font-semibold text-black">
-                                        {{ Carbon\Carbon::parse($penjemputan->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
-                                    </p>
                                     <p class="text-base font-bold text-black">Menunggu Konfirmasi</p>
                                     <p class="text-sm text-gray-600">Penjemputan diajukan</p>
                                 </div>
@@ -262,23 +256,28 @@
                                 @if ($p->status !== 'Menunggu Konfirmasi')
 
                                 <div class="relative flex items-start space-x-4">
-                                        <!-- Icon Bullet -->
-                                        <div
-                                        class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full
-                                        @if ($p->id_pelacakan === $penjemputan->getLatestPelacakan->id_pelacakan) bg-green-500
-                                        @else bg-gray-400 @endif
-                                        ">
-                                    </div>
-                                    <!-- Text Content -->
-                                    <div class="flex-1">
+                                    <!-- Time and Date -->
+                                    <div class="flex flex-col items-end">
                                         <p class="text-sm font-semibold text-black">
                                             {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
                                         </p>
-                                        <p class="text-base font-bold text-black">{{ $p->status }}</p>
-                                        <p class="text-sm text-gray-600">{{ $p->keterangan }}</p>
-                                        <p class="text-sm text-gray-600"></p>
+                                        <p class="text-sm text-gray-600">
+                                            {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('j F Y') }}
+                                        </p>
                                     </div>
+                                    <!-- Icon Bullet -->
+                                    <div
+                                    class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full
+                                    @if ($p->id_pelacakan === $penjemputan->getLatestPelacakan->id_pelacakan) bg-green-500
+                                    @else bg-gray-400 @endif
+                                    ">
                                 </div>
+                                <!-- Text Content -->
+                                <div class="flex-1">
+                                    <p class="text-base font-bold text-black">{{ $p->status }}</p>
+                                    <p class="text-sm text-gray-600">{{ $p->keterangan }}</p>
+                                </div>
+                            </div>
                                 @endif
                             @endforeach
                             @elseif($penjemputan->status === 'Dibatalkan')
@@ -288,9 +287,6 @@
                                 </div>
                                 <!-- Text Content -->
                                 <div class="flex-1">
-                                    <p class="text-sm font-semibold text-black">
-                                        {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
-                                    </p>
                                     <p class="text-base font-bold text-black">{{ $penjemputan->status }}</p>
                                     <p class="text-sm text-gray-600">Pesanan dibatalkan oleh pengguna</p>
                                 </div>
@@ -316,52 +312,42 @@
         </div>
     </div>
     <!-- Container untuk Rincian Sampah dan Catatan -->
-    <div class="w-[1380px] h-auto mx-auto my-8 bg-white-normal shadow-md rounded-xl p-10">
+    <div class="w-[1380px] h-auto mx-auto my-8 bg-white-normal shadow-sm rounded-xl p-10">
         <div class="relative grid grid-cols-2 gap-12">
             <!-- Garis Tengah -->
-            <div class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gray-200"></div>
-
+            <div class="absolute left-1/2 top-0 bottom-0 w-[1px] h-full bg-gray-200"></div>
             <!-- Rincian Sampah -->
-            <div class="pr-8">
+            <div class="pr-8 ml-8">
                 <h3 class="mb-6 text-xl font-bold">Rincian Sampah
-                    <p class="text-sm font-normal text-black-normal">
-                        Daftar sampah yang ingin dijemput
+                    <p class="text-sm font-medium text-black-normal">
+                      Total Sampah : {{ count($penjemputan->detailPenjemputan) }} pcs
                     </p>
                 </h3>
                 <div class="max-h-[450px] space-y-4 overflow-y-auto">
-                    <!-- Card Sampah -->
-                    {{-- <div
-                            class="flex items-center justify-between p-4 bg-gray-100 border shadow-sm rounded-2xl border-secondary-normal focus:ring-1 focus:bg-secondary-normal">
-                            <!-- Gambar Sampah -->
-                            <div class="flex items-center justify-center w-20 h-20 overflow-hidden rounded-lg">
-                                <img src="https://picsum.photos/400/400" alt="Sampah"
-                                    class="object-cover w-full h-full">
-                            </div>
-                            <!-- Detail Sampah -->
-                            <div class="flex-1 px-4 text-center">
-                                <p class="font-medium text-gray-600 text-md">Kategori Sedang</p>
-                                <p class="text-lg font-bold text-black">Kipas Angin</p>
-                            </div>
-                            <!-- Jumlah -->
-                            <p class="text-2xl font-bold text-green-500">1 Pcs</p>
-                        </div> --}}
-
                     @foreach ($penjemputan->detailPenjemputan as $dp)
-                        <div
-                            class="flex items-center justify-between p-4 bg-gray-100 border shadow-sm rounded-2xl border-secondary-normal focus:ring-1 focus:bg-secondary-normal">
+                        <div class="relative flex items-center justify-between w-[500px] h-[120px] bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal">
                             <!-- Gambar Sampah -->
-                            <div class="flex items-center justify-center w-20 h-20 overflow-hidden rounded-lg">
-                                <img src="https://picsum.photos/400/400" alt="Sampah"
-                                    class="object-cover w-full h-full">
+                            <div class="flex items-center justify-center w-[120px] h-full overflow-hidden rounded-lg rounded-l-none rounded-t-none rounded-b-none">
+                                <img src="https://picsum.photos/400/400" alt="Sampah" class="object-cover w-full h-full">
                             </div>
+
                             <!-- Detail Sampah -->
-                            <div class="flex-1 px-4 text-center">
-                                <p class="font-medium text-gray-600 text-md">Kategori
-                                    {{ $dp->kategori->nama_kategori }}</p>
-                                <p class="text-lg font-bold text-black">{{ $dp->jenis->nama_jenis }}</p>
+                            <div class="flex flex-col items-center justify-center flex-1 px-4 ml-4">
+                                <p class="font-medium text-center text-gray-600 text-md">Kategori {{ $dp->kategori->nama_kategori }}</p>
+                                <p class="text-lg font-bold text-center text-black">{{ $dp->jenis->nama_jenis }}</p>
                             </div>
+
                             <!-- Jumlah -->
-                            <p class="text-2xl font-bold text-green-500">{{ $dp->berat }} Kilogram</p>
+                            <div class="flex flex-col items-center justify-center mr-6">
+                                <p class="font-bold text-green-500 text-md">{{ $dp->berat }} Kilogram</p>
+                            </div>
+
+                            <!-- Poin di Ujung Kanan Atas card sampah -->
+                            <div class="absolute top-0 right-0 px-1 py-1 shadow-sm bg-white-normal rounded-tr-2xl rounded-bl-2xl">
+                                <p class="text-2xl font-bold text-green-500">{{ $dp->jenis->poin }}
+                                    <span class="mr-1 text-sm text-black-normal">Poin</span>
+                                </p>
+                            </div>
                         </div>
                     @endforeach
                 </div>

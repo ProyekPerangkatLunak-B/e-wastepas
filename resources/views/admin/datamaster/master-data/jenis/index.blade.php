@@ -135,6 +135,8 @@
                                     style="color: white">Nama Kategori Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Poin</th>
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Gambar</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Aksi</th>
                             </tr>
@@ -146,14 +148,20 @@
                 </div>
 
                 <!-- Custom pagination -->
-                <div id="customPagination" class="flex justify-between mt-4" style="color: white">
-                    <div id="customInfo" class="text-sm  text-gray-700">
-                        <!-- Informasi jumlah data akan diisi di sini -->
-                    </div>
-                    <div class="space-x-2 class">
-                        <!-- Tombol pagination akan dihasilkan di sini -->
-                    </div>
+                <!-- Custom pagination -->
+                <div id="customPagination" class="flex justify-center items-center space-x-2 mt-4">
+                    <!-- Tombol sebelumnya -->
+                    <button class="pagination-btn">&lt;</button>
+
+                    <!-- Nomor halaman -->
+                    <button class="pagination-btn">1</button>
+                    <button class="pagination-btn active">2</button>
+                    <button class="pagination-btn">3</button>
+
+                    <!-- Tombol berikutnya -->
+                    <button class="pagination-btn">&gt;</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -182,6 +190,18 @@
                             }
                         },
                         {
+                            data: 'gambar', // Make sure 'gambar' field is returned in the response
+                            name: 'gambar',
+                            render: function(data, type, row) {
+                                if (data) {
+                                    return '<img src="{{ asset('img/admin/') }}/' + data +
+                                        '" alt="Gambar" class="w-16 h-16 object-cover rounded-lg">';
+                                } else {
+                                    return '<span>No Image</span>';
+                                }
+                            }
+                        },
+                        {
                             data: 'id_jenis',
                             name: 'id_jenis',
                             orderable: false,
@@ -189,10 +209,10 @@
                                 return `
                             <div class="flex space-x-2">
                                 <a href="/admin/datamaster/master-data/jenis/${data}/edit" style="color: white" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition">
-                                    Edit
+                                    <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                 </a>
                                 <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" onclick="confirmDelete(${data})" style="color: white">
-                                    Hapus
+                                    <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                 </button>
                             </div>`;
                             }
@@ -208,34 +228,34 @@
                             table); // Update pagination setiap kali tabel di-render
                     }
                 });
-
+    
                 // Fungsi custom untuk memperbarui pagination
                 function updateCustomPagination(table) {
                     var pageInfo = table.page.info();
                     $('#customPagination').empty(); // Hapus pagination sebelumnya
-
+    
                     // Generate tombol pagination
                     for (var i = 0; i < pageInfo.pages; i++) {
                         $('#customPagination').append(`
-                        <button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="$('#jenisTable').DataTable().page(${i}).draw('page')">${i + 1}</button>
+                        <button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>
                     `);
                     }
-
+    
                     // Update informasi jumlah data
                     $('#customInfo').text(
                         `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`);
                 }
-
+    
                 // Custom search input
                 $('#customSearch').on('keyup', function() {
                     table.search(this.value).draw();
                 });
-
+    
                 // Custom length menu
                 $('#customLengthMenu').on('change', function() {
                     table.page.len(this.value).draw();
                 });
-
+    
                 // Custom pagination and info display
                 table.on('draw', function() {
                     var pageInfo = table.page.info();
@@ -249,7 +269,7 @@
                         $('#customPagination').append(button);
                     }
                 });
-
+    
                 // Alert untuk tambah data
                 @if (session('success'))
                     Swal.fire({
@@ -260,13 +280,12 @@
                     });
                 @endif
             });
-
-            function changePage(page) {
-                $('#jenisTable').DataTable().page(page).draw('page');
-            }
         });
-
-        // Move confirmDelete outside of DOMContentLoaded
+    
+        function changePage(page) {
+            $('#jenisTable').DataTable().page(page).draw('page');
+        }
+    
         function confirmDelete(id) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',

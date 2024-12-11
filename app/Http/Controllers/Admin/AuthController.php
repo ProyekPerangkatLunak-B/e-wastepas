@@ -18,7 +18,12 @@ class AuthController extends Controller
         $request->validate(['email' => 'required|email']);
 
         $email = htmlspecialchars($request->input('email'), ENT_QUOTES, 'UTF-8');
-
+        // Buat link login aman yang akan kedaluwarsa dalam 30 menit
+        $loginUrl = URL::temporarySignedRoute(
+            'admin.login.verify',
+            now()->addMinutes(30),
+            ['email' => $request->email]
+        );
         $loginAttemptsKey = 'login_attempts:' . $email;
         $blockKey = 'blocked_email:' . $email;
 
@@ -50,7 +55,7 @@ class AuthController extends Controller
                         now()->addMinutes(30),
                         ['email' => $email]
                     );
-
+                        
                     $namaPengguna = $pengguna->nama ?? 'Pengguna';
 
                     $ipAddress = $request->ip();
@@ -94,7 +99,7 @@ class AuthController extends Controller
         $user = Pengguna::where('email', $request->email)->firstOrFail();
         Auth::login($user);
 
-        return redirect()->intended('admin/datamaster/dashboard');
+        return redirect()->intended('admin/datamaster/masyarakat');
     }
     public function logout(Request $request)
     {

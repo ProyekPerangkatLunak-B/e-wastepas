@@ -18,6 +18,7 @@ class Penjemputan extends Model
     protected $primaryKey = 'id_penjemputan';
 
     protected $fillable = [
+        'kode_penjemputan',
         'id_daerah',
         'id_dropbox',
         'id_pengguna_masyarakat',
@@ -63,5 +64,24 @@ class Penjemputan extends Model
     public function getLatestPelacakan()
     {
         return $this->hasOne(Pelacakan::class, 'id_penjemputan')->latest();
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        // Filter search berdasarkan pencarian nama_jenis
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->whereHas('detailPenjemputan.jenis', function ($query) use ($search) {
+                $query->where('nama_jenis', 'like', '%' . $search . '%');
+            });
+        });
+
+        // Filter berdasarkan kategori
+        $query->when($filters['kategori'] ?? false, function ($query, $kategori) {
+            if ($kategori != 'all' && $kategori != 'inactive') {
+                return $query->whereHas('detailPenjemputan.kategori', function ($query) use ($kategori) {
+                    $query->where('nama_kategori', $kategori);
+                });
+            }
+        });
     }
 }

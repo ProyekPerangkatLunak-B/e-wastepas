@@ -48,6 +48,18 @@ class PenjemputanSampahMasyarakatController extends Controller
             'tanggal_penjemputan' => 'required',
         ]);
 
+        $kodeAkhir = Penjemputan::orderByDesc('id_penjemputan')->first();
+        $hariIni = now()->format('ym');
+        if (!$kodeAkhir) {
+            $kode = 'U001P' . $hariIni . '001';
+        } else {
+            if (substr($kodeAkhir->kode_penjemputan, -7, 4) !== $hariIni) {
+                $kode = 'U001P' . $hariIni . '001';
+            } else {
+                $kode = 'U001P' . $hariIni . str_pad((int)substr($kodeAkhir->kode_penjemputan, -3) + 1, 3, '0', STR_PAD_LEFT);
+            }
+        }
+
         $poinKategori = 0;
         $poinJenis = 0;
         $totalPoin = 0;
@@ -59,6 +71,7 @@ class PenjemputanSampahMasyarakatController extends Controller
 
         try {
             $penjemputan = new Penjemputan();
+            $penjemputan->kode_penjemputan = $kode;
             $penjemputan->id_pengguna_masyarakat = '1';
             $penjemputan->id_pengguna_kurir = null;
             $penjemputan->id_daerah = $request->daerah;
@@ -80,7 +93,8 @@ class PenjemputanSampahMasyarakatController extends Controller
             }
 
             $pelacakan = new Pelacakan();
-            $pelacakan->id_penjemputan = $penjemputan->id_penjemputan;;
+            $pelacakan->id_penjemputan = $penjemputan->id_penjemputan;
+            $pelacakan->status = 'Menunggu Konfirmasi';
             $pelacakan->save();
             return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
         } catch (\Exception $e) {
@@ -91,10 +105,30 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function melacak()
     {
-        $penjemputan = Penjemputan::whereHas('pelacakan', function ($query) {
-            $query->where('status', '<>', 'Sudah Sampai');
-        })->orderByDesc('created_at')->paginate(6);
-        return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
+        $kategori = Kategori::all();
+        // $penjemputan = Penjemputan::whereHas(
+        //     'pelacakan',
+        //     function ($query) {
+        //         $query->where('status', 'Menunggu Konfirmasi')
+        //             ->orWhere('status', 'Dijemput Driver')
+        //             ->orWhere('status', 'Menuju Dropbox');
+        //     }
+        // )
+        //     ->where('status', 'Diproses')
+        //     ->orWhere('status', 'Diterima')
+        //     ->orderByDesc('created_at')->paginate(6);
+        $penjemputan = Penjemputan::filter(request(['search', 'kategori']))
+            ->where('status', '!=', 'Ditolak')
+            ->where('status', '!=', 'Dibatalkan')
+            ->orderByDesc('created_at')->paginate(6);
+
+        return view(
+            'masyarakat.penjemputan-sampah.melacak-penjemputan',
+            compact([
+                'penjemputan',
+                'kategori'
+            ])
+        );
     }
 
     public function detailKategori($id)
@@ -123,12 +157,24 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function riwayatPenjemputan()
     {
-        $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
-        return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
+        // $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
+        $penjemputan = Penjemputan::filter(request(['search', 'kategori']))->paginate(6);
+        $kategori = Kategori::all();
+
+        // dd($penjemputan);
+
+        return view(
+            'masyarakat.penjemputan-sampah.riwayat-penjemputan',
+            compact([
+                'penjemputan',
+                'kategori'
+            ])
+        );
     }
 
-    public function detailRiwayat()
+    public function detailRiwayat($id)
     {
-        return view('masyarakat.penjemputan-sampah.detail-riwayat');
+        $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
+        return view('masyarakat.penjemputan-sampah.detail-riwayat', compact('penjemputan'));
     }
 }

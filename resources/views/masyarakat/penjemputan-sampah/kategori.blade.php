@@ -42,7 +42,7 @@
             </div>
 
             {{-- Card Section --}}
-            <div class="flex justify-center mt-4">
+            <div class="flex items-center justify-center mt-4">
                 <div class="grid grid-cols-3 gap-6 mx-auto">
                     @if (count($kategori) == 0)
                         <div

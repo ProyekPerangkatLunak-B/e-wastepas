@@ -10,9 +10,10 @@
     </a>
         <div class="items-center mt-32">
             <div class="otp-img">
-            <img src="../img/masyarakat/registrasi/otp.png" alt="" class="flex justify-center mx-auto w-30">
-                <h2 class="text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Konfirmasi OTP</h2>
-                <p class="mt-2 text-center text-gray-500 text-md">Silahkan masukan kode verifikasi yang kami kirim kan ke email anda</p>
+            <img src="../img/masyarakat/registrasi/otp.png" alt="" class="w-30 mx-auto flex justify-center">
+                <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Konfirmasi OTP</h2>
+                <p class="mt-2 text-center text-md text-gray-500">Silahkan masukan kode verifikasi yang kami</p>
+                <p class="text-center text-md text-gray-500">kirim kan ke email anda</p>
             </div>
 
               @if ($errors->any())
@@ -35,24 +36,26 @@
                               type="text" required name="otp" id="otp"/>
                       </div>-->
 
-                      <div class="grid grid-cols-6 my-2 mt-10 ms-6 gap-x-10">
-                        <div contenteditable="true"  class="flex items-center justify-center bg-gray-200 rounded-lg shadow-md cursor-text dark:bg-gray-800 w-14 aspect-square">
-                          <span class="text-gray-900 dark:text-gray-400"></span>
+
+                      <div class="grid grid-cols-6  mt-10 ms-6 gap-x-10 my-2">
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                          <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="flex items-center justify-center bg-gray-200 rounded-lg shadow-md cursor-text dark:bg-gray-800 w-14 aspect-square">
-                          <span class="text-gray-900 dark:text-gray-400"></span>
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                          <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="flex items-center justify-center bg-gray-200 rounded-lg shadow-md cursor-text dark:bg-gray-800 w-14 aspect-square">
-                          <span class="text-gray-900 dark:text-gray-400"></span>
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                          <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="flex items-center justify-center bg-gray-200 rounded-lg shadow-md cursor-text dark:bg-gray-800 w-14 aspect-square">
-                          <span class="text-gray-900 dark:text-gray-400"></span>
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                          <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="flex items-center justify-center bg-gray-200 rounded-lg shadow-md cursor-text dark:bg-gray-800 w-14 aspect-square">
-                          <span class="text-gray-900 dark:text-gray-400"></span>
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                          <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="flex items-center justify-center bg-gray-200 rounded-lg shadow-md cursor-text dark:bg-gray-800 w-14 aspect-square">
-                          <span class="text-gray-900 dark:text-gray-400"></span>
+                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                          <span class="text-gray-900"></span>
+
                         </div>
 
                       <!-- Button Submit -->

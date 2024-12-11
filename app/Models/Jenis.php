@@ -7,6 +7,13 @@ use App\Models\DetailPenjemputan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ *
+ * @param \Illuminate\Database\Eloquent\Builder $query
+ * @param array $filters
+ * @return \Illuminate\Database\Eloquent\Builder
+ */
+
 class Jenis extends Model
 {
     use HasFactory;
@@ -23,7 +30,7 @@ class Jenis extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id_kategori');
     }
 
     public function detailPenjemputan()

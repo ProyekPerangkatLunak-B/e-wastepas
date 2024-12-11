@@ -4,7 +4,7 @@
 
     <form action="{{ route('masyarakat.penjemputan.tambah') }}" method="POST">
         @csrf
-        <div class="w-[83%] min-h-screen px-20 py-12 mx-[22rem] bg-gray-100">
+        <div class="w-[83%] h-full px-20 py-12 mx-[22rem] bg-gray-100">
             <div class="mb-8">
                 <h2 class="text-xl font-semibold leading-relaxed">Mengajukan Permintaan Penjemputan</h2>
                 <p class="text-base font-normal text-gray-600">Form permintaan untuk permintaan penjemputan sampah
@@ -43,9 +43,7 @@
                 </div>
             @endif
 
-
-
-            <div class="w-[1380px] h-auto pb-2 shadow-lg bg-white-normal rounded-2xl">
+            <div class="w-[1380px] h-full pb-8 shadow-lg bg-white-normal rounded-2xl">
                 <div class="grid grid-cols-1 gap-8 pt-5 mx-12 lg:grid-cols-2">
                     <!-- Kolom Kiri: Pilih Sampah, Dropbox, Tanggal/Waktu, dan Alamat Penjemputan -->
                     <div class="pt-8 space-y-4">
@@ -69,21 +67,21 @@
                         <!-- Pilih Daerah -->
                         <x-select id="daerah" name="daerah" label="Pilih Daerah">
                             <option value="">Pilih Daerah</option>
-                            @foreach ($daerah as $d)
+                            {{-- @foreach ($daerah as $d)
                                 <option value="{{ $d->id_daerah }}">{{ $d->nama_daerah }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </x-select>
 
                         <!-- Pilih Dropbox -->
                         <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
                             <option value="">Pilih Dropbox</option>
-                            @foreach ($dropbox as $d)
+                            {{-- @foreach ($dropbox as $d)
                                 <option value="{{ $d->id_dropbox }}">{{ $d->nama_dropbox }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </x-select>
 
                         <!-- Tanggal dan Waktu Penjemputan -->
-                        <x-input type="date" id="tanggal_penjemputan" name="tanggal_penjemputan"
+                        <x-input type="datetime-local" id="tanggal_penjemputan" name="tanggal_penjemputan"
                             label="Tanggal dan Waktu Penjemputan" placeholder="mm/dd/yyyy" />
 
                         <!-- Alamat Penjemputan -->
@@ -103,31 +101,30 @@
                         </div>
                         <div class="max-h-[450px] space-y-4 overflow-y-auto" id="boxSemuaSampah">
                             <!-- Card -->
-                            <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[500px] h-[120px] rounded-2xl shadow-lg"
+                            <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[90%] h-[120px] rounded-2xl shadow-sm"
                                 id="box-kosong">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
-                                    alt="Tidak Ditemukan" class="w-[50px] h-[50px] ml-12">
-                                <p class="w-64 ml-12 font-bold text-center text-black-normal">Data
+                                    alt="Tidak Ditemukan" class="w-[50px] h-[50px] mx-auto">
+                                <p class="w-64 mr-32 font-bold text-center text-black-normal">Data
                                     {{ $search ?? 'Sampah Elektronik' }}
                                     tidak ditemukan / Masih Kosong.</p>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-                <!-- Tombol Kembali dan Kirim Permintaan -->
-                <div class="flex justify-end mx-10 my-6 space-x-4">
-                    <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Kembali</a>
-                    <button type="button" id="submit-request" name="submit" onclick="kirimKonfirmasi()"
-                        class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
-                            class="mr-1 bi bi-send" viewBox="0 0 16 16">
-                            <path
-                                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
-                        </svg>
-                        Kirim Permintaan
-                    </button>
+                    <!-- Tombol Kembali dan Kirim Permintaan -->
+                    <div class="flex justify-end mx-10 space-x-4">
+                        <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Reset Form</a>
+                        <button type="button" id="submit-request" name="submit" onclick="kirimKonfirmasi()"
+                            class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                                class="mr-1 bi bi-send" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                            </svg>
+                            Kirim Permintaan
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,9 +140,9 @@
                         <select id="kategori" name=""
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option value="">Pilih Kategori</option>
-                            @foreach ($kategori as $k)
+                            {{-- @foreach ($kategori as $k)
                                 <option value="{{ $k->id_kategori }}">{{ $k->nama_kategori }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                     <div>
@@ -153,9 +150,9 @@
                         <select id="jenis" name=""
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option value="">Pilih Jenis</option>
-                            @foreach ($jenis as $j)
+                            {{-- @foreach ($jenis as $j)
                                 <option value="{{ $j->id_jenis }}">{{ $j->nama_jenis }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
 
                     </div>
@@ -168,7 +165,7 @@
                 </div>
 
                 <div class="flex justify-end mt-6 space-x-4">
-                    <button type="button" onclick="toggleModal(false)"
+                    <button type="button" onclick="new function(){toggleModal(false); resetInput()}"
                         class="px-4 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Batal</button>
                     <button type="button" onclick="tambahKeBox()"
                         class="px-4 py-2 text-white rounded-lg bg-secondary-200 hover:bg-secondary-normal">Tambah</button>

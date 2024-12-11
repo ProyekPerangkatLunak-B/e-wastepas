@@ -5,11 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const modalOverlay = document.getElementById("modal-overlay");
         modalOverlay.classList.toggle("hidden", !open);
     };
-});
-// END modal tambah sampah
 
-// START modal kirim permintaan dan notifikasi berhasil dan gagal
-document.addEventListener("DOMContentLoaded", function () {
     const confirmModal = document.getElementById("confirmModal");
     const btnOk = document.getElementById("closeAlertModal");
     const alertModal = document.getElementById("alertModal");
@@ -23,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const jenis = document.getElementById("jenis");
     const berat = document.getElementById("berat");
     const catatan = document.getElementById("catatan");
-    const boxKosong = document.getElementById("box-kosong");
     const totalSampah = document.getElementById("totalSampah");
+    let idBox = 0;
 
     window.tambahKeBox = function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
@@ -38,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
             btnOk.removeEventListener("click", closeAlertModal);
             btnOk.addEventListener("click", closeAlertModal);
         } else {
-            if (!boxKosong.classList.contains("hidden"))
-                boxKosong.classList.add("hidden");
+            if (!$("#box-kosong")[0].classList.contains("hidden"))
+                $("#box-kosong")[0].classList.add("hidden");
             // Jika kategori, jenis, dan berat sudah diisi, tambahkan ke box
             btnOk.setAttribute("type", "button");
             alertModal.classList.remove("hidden");
@@ -51,58 +47,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
             totalSampah.innerHTML = parseInt(totalSampah.innerHTML) + 1;
 
+            idBox++;
+
             const box = `
-                <div class="relative flex items-center w-4/5 mb-4 overflow-hidden rounded-xl border border-secondary-normal shadow-lg" id="boxInput${
-                    totalSampah.innerHTML
-                }">
+                    <div class="relative flex items-center justify-between w-[90%] h-[120px] border shadow-sm rounded-2xl overflow-hidden border-secondary-normal" id="boxInput${idBox}">
+                                    <button type="button" class="absolute top-0 right-0 flex flex-col items-center justify-center w-[76px] h-full rounded-l-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${idBox})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mb-1 bi bi-trash ms-2" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        </svg>
+                                        <span class="text-sm ms-2">Hapus</span>
+                                    </button>
 
-                    <input type="text" value="${
-                        kategori.value
-                    }" name="kategori[]" hidden>
-                    <input type="text" value="${
-                        jenis.value
-                    }" name="jenis[]" hidden>
-                    <input type="text" value="${
-                        berat.value
-                    }" name="berat[]" hidden>
+                                    <div class="relative flex items-center justify-between w-[89%] h-[120px] bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal" >
+                                        <div class="flex items-center justify-center w-[120px] h-full overflow-hidden rounded-lg rounded-l-none rounded-t-none rounded-b-none">
+                                            <img src="https://picsum.photos/400/400" alt="Sampah" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="flex flex-col items-center justify-center flex-1 px-2 ms-10">
+                                            <p class="text-sm font-medium text-center text-gray-600 text-wrap">
+                                                Kategori: ${
+                                                    kategori.options[
+                                                        kategori.selectedIndex
+                                                    ].text
+                                                }
+                                            </p>
+                                            <p class="font-bold text-center text-black text-md text-pretty">
+                                            ${
+                                                jenis.options[
+                                                    jenis.selectedIndex
+                                                ].text
+                                            }
+                                            </p>
+                                        </div>
+                                        <div class="flex flex-col items-center justify-center">
+                                            <p class="font-bold text-green-500 me-4 text-md">
+                                                ${berat.value} Kilogram
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                    `;
 
-                    <div class="flex items-center flex-grow p-4 bg-gray-100">
-                        <!-- Bagian Gambar -->
-                        <div class="flex items-center justify-center w-20 h-20 overflow-hidden rounded-lg flex-shrink-0">
-                            <img src="https://picsum.photos/400/400" alt="Sampah" class="object-cover w-full h-full">
-                        </div>
-
-                        <div class="flex-1 px-4 text-center">
-                            <p class="font-medium text-gray-600 mb-2 text-md">
-                                Kategori ${
-                                    kategori.options[kategori.selectedIndex]
-                                        .text
-                                }
-                            </p>
-                            <p class="text-lg font-bold text-black">
-                                ${jenis.options[jenis.selectedIndex].text}
-                            </p>
-                        </div>
-
-                        <div class="text-lg font-bold text-green-500">
-                            ${berat.value} Kilogram
-                        </div>
-                    </div>
-
-                    <div class="flex">
-                        <button type="button"
-                            class="flex flex-col items-center justify-center bg-red-normal text-white-normal h-full px-4 py-8 hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${
-                                totalSampah.innerHTML
-                            })">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash mb-1" viewBox="0 0 16 16">
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                            </svg>
-                            <span class="text-sm">Hapus</span>
-                        </button>
-                    </div>
-                </div>
-                `;
             boxSemuaSampah.innerHTML += box;
             resetInput();
             toggleModal(false);
@@ -114,20 +99,33 @@ document.addEventListener("DOMContentLoaded", function () {
         box.remove();
         totalSampah.innerHTML = parseInt(totalSampah.innerHTML) - 1;
         if (totalSampah.innerHTML == 0) {
-            boxKosong.classList.remove("hidden");
+            $("#box-kosong")[0].classList.remove("hidden");
         }
     };
 
     // Fungsi untuk reset
-    function resetInput() {
+    window.resetInput = function () {
         $("#kategori").val("").trigger("change");
         $("#jenis").val("").trigger("change");
         berat.value = "";
         catatan.value = "";
-    }
+    };
 
     // Fungsi untuk membuka modal konfirmasi
     window.kirimKonfirmasi = function () {
+        if (
+            totalSampah.innerHTML == 0 ||
+            document.getElementById("daerah").value == "" ||
+            document.getElementById("dropbox").value == ""
+        ) {
+            btnOk.setAttribute("type", "button");
+            alertModal.classList.remove("hidden");
+            alertMessage.innerHTML = "Lengkapi data terlebih dahulu!";
+            updateAlertClasses("cancel");
+            btnOk.removeEventListener("click", closeAlertModal);
+            btnOk.addEventListener("click", closeAlertModal);
+            return;
+        }
         openConfirmationModal();
     };
 
@@ -256,51 +254,97 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#daerah").select2({
         placeholder: "Pilih Daerah",
         allowClear: true,
+        ajax: {
+            url: "/api/daerah",
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_daerah,
+                            text: item.nama_daerah,
+                        };
+                    }),
+                };
+            },
+        },
     });
 
     $("#dropbox").select2({
         placeholder: "Pilih Dropbox",
         allowClear: true,
-        // ajax: {
-        //     url: "/api/dropbox-option",
-        //     dataType: "json",
-        //     delay: 250,
-        //     data: function (params) {
-        //         return {
-        //             q: params.term,
-        //         };
-        //     },
-        //     processResults: function (data) {
-        //         return {
-        //             results: data,
-        //         };
-        //     },
-        // },
+        ajax: {
+            url: function () {
+                const kategoriId = $("#daerah").val();
+                return kategoriId
+                    ? `/api/dropbox/${kategoriId}`
+                    : "/api/dropbox";
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_dropbox,
+                            text: item.nama_dropbox,
+                        };
+                    }),
+                };
+            },
+        },
     });
 
     $("#kategori").select2({
         placeholder: "Pilih Kategori Sampah",
         allowClear: true,
+        ajax: {
+            url: "/api/kategori",
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_kategori,
+                            text: item.nama_kategori,
+                        };
+                    }),
+                };
+            },
+        },
     });
 
     $("#jenis").select2({
         placeholder: "Pilih jenis sampah",
         allowClear: true,
-        // ajax: {
-        //     url: "/api/jenis-option/2",
-        //     dataType: "json",
-        //     delay: 250,
-        //     data: function (params) {
-        //         return {
-        //             q: params.term,
-        //         };
-        //     },
-        //     processResults: function (data) {
-        //         return {
-        //             results: data,
-        //         };
-        //     },
-        // },
+        ajax: {
+            url: function () {
+                const kategoriId = $("#kategori").val();
+                return kategoriId ? `/api/jenis/${kategoriId}` : "/api/jenis";
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_jenis,
+                            text: item.nama_jenis,
+                        };
+                    }),
+                };
+            },
+        },
+    });
+
+    $("#kategori").on("change", function () {
+        $("#jenis").val(null).trigger("change");
+    });
+
+    $("#daerah").on("change", function () {
+        $("#dropbox").val(null).trigger("change");
     });
 });
 

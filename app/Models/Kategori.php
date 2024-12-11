@@ -21,7 +21,7 @@ class Kategori extends Model
 
     public function jenis()
     {
-        return $this->hasMany(Jenis::class, 'id_jenis');
+        return $this->hasMany(Jenis::class, 'id_kategori', 'id_kategori');
     }
 
     public function detailPenjemputan()

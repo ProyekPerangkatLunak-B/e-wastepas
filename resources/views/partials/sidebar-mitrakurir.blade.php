@@ -1,9 +1,11 @@
 <div class="fixed inset-y-0 left-0 w-[22rem] bg-dark z-0 border-r border-gray-200 overflow-y-auto">
     <div class="p-6">
+        <a href="{{ url('/') }}">
         <div class="flex items-center mb-6">
             <img src="{{ asset('img/logoEwaste.png') }}" alt="Logo" class="w-12 h-12">
             <h1 class="ml-4 text-2xl font-bold text-green-500">E-WastePas</h1>
         </div>
+        </a>
         <hr class="mb-6 border-t-2 border-gray-100">
 
         <nav class="">

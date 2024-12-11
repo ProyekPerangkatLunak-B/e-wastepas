@@ -11,7 +11,7 @@
                 </div>
                 <!-- button jemput sekarang -->
                 <a href="#" id="openModalBtn"
-                    class="flex items-center justify-center px-10 py-2 bg-secondary-normal text-white-100 rounded-2xl shadow-md">
+                    class="flex items-center justify-center px-10 py-2 bg-gradient-to-b from-secondary-normal to-primary-normal text-white-100 rounded-2xl shadow-md">
                     Jemput Sekarang
                 </a>
             </div>
@@ -98,30 +98,39 @@
                                 </svg>
                                 Sarah Martins - 08323456777
                             </h3>
-                            <h3 class="text-lg font-semibold">Lokasi Penjemputan</h3>
+                            <h3 class="text-lg font-semibold">Alamat Penjemputan</h3>
                             <p class="text-gray-600">Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan Ledeng, Cidadap
                                 KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142</p>
-                            <h3 class="text-lg font-semibold mt-4">Lokasi Dropbox Terdekat</h3>
-                            <p class="text-gray-600">DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
-                                Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142.</p>
-                        </div>
+                                <h3 class="text-lg font-semibold mt-4">Daerah Penjemputan</h3>
+                                <p class="text-gray-600">Dayehkolot</p>
+                                <h3 class="text-lg font-semibold mt-4">Lokasi Dropbox Terdekat</h3>
+                                <p class="text-gray-600">DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
+                                    Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142.</p>
+                            </div>
 
                         <!-- sampah -->
                         <div class="w-1/2">
                             <h3 class="text-lg font-semibold">Sampah</h3>
                             <div class="grid grid-cols-2 gap-3 mt-4">
                                 <!-- card sampah -->
-                                <div class="relative  p-4 bg-gray-100 border rounded-2xl shadow-sm">
+                                <div class="relative  px-4 py-5 bg-gray-100 border rounded-2xl shadow-sm">
                                     <p class="text-base font-medium">Layar dan Monitor</p>
-                                    <p class="text-lg font-semibold">Televisi</p>
-                                    <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1x</p>
+                                    <p class="text-lg font-semibold mt-2">Televisi</p>
+                                    <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1 Pcs</p>
+                                    <div class="absolute bottom-0 right-0 bg-primary-normal text-white-100 font-semibold px-6 py-1 rounded-tl-2xl rounded-br-2xl text-sm">
+                                        1 Kg
+                                    </div>
                                 </div>
-                                <div class="relative  p-4 bg-gray-100 border rounded-2xl shadow-sm">
+                                <div class="relative  px-4 py-5 bg-gray-100 border rounded-2xl shadow-sm">
                                     <p class="text-base font-medium">Layar dan Monitor</p>
-                                    <p class="text-lg font-semibold">Televisi</p>
-                                    <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1x</p>
+                                    <p class="text-lg font-semibold mt-2">Televisi</p>
+                                    <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1 Pcs</p>
+                                    <div class="absolute bottom-0 right-0 bg-primary-normal text-white-100 font-semibold px-6 py-1 rounded-tl-2xl rounded-br-2xl text-sm">
+                                        1 Kg
+                                    </div>
                                 </div>
                             </div>
+                            {{-- catatan --}}
                             <p class="mt-4 font-bold text-red-normal">*Catatan</p>
                             <p class="text-black">Layar handphone pecah</p>
                         </div>

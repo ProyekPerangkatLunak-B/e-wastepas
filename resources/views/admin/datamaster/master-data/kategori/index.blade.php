@@ -132,6 +132,8 @@
                                     style="color: white">Nama Kategori Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Deskripsi Kategori Sampah</th>
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Gambar</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Aksi</th>
                             </tr>
@@ -143,13 +145,18 @@
                 </div>
 
                 <!-- Custom pagination -->
-                <div id="customPagination" class="flex justify-between mt-4" style="color: white">
-                    <div id="customInfo" class="text-sm text-gray-700">
-                        <!-- Informasi jumlah data akan diisi di sini -->
-                    </div>
-                    <div class="space-x-2">
-                        <!-- Tombol pagination akan dihasilkan di sini -->
-                    </div>
+                <!-- Custom pagination -->
+                <div id="customPagination" class="flex justify-center items-center space-x-2 mt-4">
+                    <!-- Tombol sebelumnya -->
+                    <button class="pagination-btn">&lt;</button>
+
+                    <!-- Nomor halaman -->
+                    <button class="pagination-btn">1</button>
+                    <button class="pagination-btn active">2</button>
+                    <button class="pagination-btn">3</button>
+
+                    <!-- Tombol berikutnya -->
+                    <button class="pagination-btn">&gt;</button>
                 </div>
             </div>
         </div>
@@ -174,6 +181,19 @@
                             orderable: true
                         },
                         {
+                            data: 'gambar', // Make sure 'gambar' field is returned in the response
+                            name: 'gambar',
+                            render: function(data, type, row) {
+                                console.log(data);
+                                if (data) {
+                                    return '<img src="{{ asset('img/admin/') }}/' + data +
+                                        '" alt="Gambar" class="w-16 h-16 object-cover rounded-lg">';
+                                } else {
+                                    return '<span>No Image</span>';
+                                }
+                            }
+                        },
+                        {
                             data: 'id_kategori',
                             name: 'id_kategori',
                             orderable: false,
@@ -181,10 +201,10 @@
                                 return `
                                     <div class="flex space-x-2">
                                         <a href="/admin/datamaster/master-data/kategori/${data}/edit" class="px-3 py-1 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition" style="color: white">
-                                            Edit
+                                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                         </a>
                                         <button class="px-3 py-1 bg-gradient-to-r from-red-500 to-red-400 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition" style="color: white" onclick="confirmDelete(${data})">
-                                            Hapus
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                         </button>
                                     </div>`;
                             }
