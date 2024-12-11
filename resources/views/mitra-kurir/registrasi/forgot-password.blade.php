@@ -24,17 +24,17 @@
             {{ session('status') }}
         </div>
          @endif
-            <?php if (isset($error)): ?>
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 max-w-md mx-auto text-sm">
-                    <?php echo $error; ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($success)): ?>
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 max-w-md mx-auto text-sm">
-                    <?php echo $success; ?>
-                </div>
-            <?php endif; ?>
+         @if ($errors->any())
+         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+             <strong class="font-bold">Oops!</strong>
+             <span class="block sm:inline">There were some problems with your input:</span>
+             <ul class="mt-2 list-disc pl-5">
+                 @foreach ($errors->all() as $error)
+                     <li>{{ $error }}</li>
+                 @endforeach
+             </ul>
+         </div>
+         @endif
 
             <form method="POST" action="{{ route('reset-password.post'); }}" class="max-w-md w-full mx-auto px-4">
                 @csrf

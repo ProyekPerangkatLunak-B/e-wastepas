@@ -34,7 +34,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                    @endif
 
                     <form method="POST"  action="{{ route('mitra-kurir.registrasi.account-profile.security.post'); }}" class="max-w-md w-full mx-auto px-4" enctype="multipart/form-data">
                         @csrf

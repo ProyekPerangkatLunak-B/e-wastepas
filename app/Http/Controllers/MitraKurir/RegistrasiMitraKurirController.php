@@ -257,7 +257,7 @@ public function ChangePassword(Request $request)
     if (!Hash::check($request->PasswordOld, $user->kata_sandi))  {
         return back()->withErrors(['email' => 'Password Lama Salah']);
     }
-    
+
     $user->kata_sandi = Hash::make($request->PasswordNew);
     $user->tanggal_update = now();
     $user->save();
