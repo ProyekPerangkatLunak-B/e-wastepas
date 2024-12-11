@@ -260,15 +260,20 @@ Route::group([
         return view('masyarakat/registrasi/forgot-password');
     });
 
-    Route::get('/check-mail', function () {
-        return view('masyarakat/registrasi/check-mail');
-    });
-
     Route::get('/reset-password', function () {
         return view('masyarakat/registrasi/reset-password');
     });
+    Route::get('/ubah-password', function () {
+        return view('masyarakat/registrasi/ubah-password');
+    });
+    Route::get('/profil', function () {
+        return view('masyarakat/registrasi/profil');
+    });
+    Route::get('/forgot-password-otp', function () {
+        return view('masyarakat/registrasi/forgot-password-otp');
+    });
 
-    
+
 
 
     //profileEdit
@@ -301,7 +306,6 @@ Route::group([
     Route::get('penjemputan-sampah/detail-riwayat/{id}', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::post('penjemputan-sampah/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('penjemputan.tambah');
-
 });
 
 // Route Modul Mitra-kurir
@@ -314,11 +318,11 @@ Route::group([
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMitraKurirController::class, 'kategori'])->middleware('auth')->name('penjemputan.kategori');
     Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->name('penjemputan.detail-kategori');
     Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->name('penjemputan.permintaan');
-    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}',[PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->name('penjemputan.detail-permintaan');
+    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->name('penjemputan.detail-permintaan');
 
-    //    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
-//    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
-//    Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
+        Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
+        Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
+        Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::get('penjemputan-sampah/dropbox', function () {
         return view('mitra-kurir.penjemputan-sampah.dropbox');
@@ -338,8 +342,8 @@ Route::group([
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->middleware('guest')->name('registrasi.login');
 
     Route::post('registrasi/register', [RegistrasiMitraKurirController::class, 'simpanData']);
-    Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');                
-    Route::post('registrasi/logout', [RegistrasiMitraKurirController::class, 'LogoutAuth'])->name('registrasi.logout');                
+    Route::post('registrasi/login', [RegistrasiMitraKurirController::class, 'LoginAuth'])->name('registrasi.login');
+    Route::post('registrasi/logout', [RegistrasiMitraKurirController::class, 'LogoutAuth'])->name('registrasi.logout');
 });
 
 Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->name('otp.validation');
@@ -372,13 +376,22 @@ Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
 Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePasswordIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
 
 
+// tes halaman pengganti otp
+Route::get('/mitra-kurir/registrasi/success-message', function () {
+    return view('mitra-kurir/registrasi/success-message');
+})->name('mitra-kurir.registrasi.success-message');
+
 Route::group([
     'prefix' => 'api/',
     'as' => 'api.',
 ], function () {
     Route::get('kategori', [APIController::class, 'getKategori'])->name('kategori');
+    Route::get('kategori/{id}', [APIController::class, 'getKategori'])->name('kategori');
+    Route::get('jenis', [APIController::class, 'getJenis'])->name('jenis');
     Route::get('jenis/{id}', [APIController::class, 'getJenis'])->name('jenis');
     Route::get('daerah', [APIController::class, 'getDaerah'])->name('daerah');
+    Route::get('daerah/{id}', [APIController::class, 'getDaerah'])->name('daerah');
+    Route::get('dropbox', [APIController::class, 'getDropbox'])->name('dropbox');
     Route::get('dropbox/{id}', [APIController::class, 'getDropbox'])->name('dropbox');
 
     // Untuk Dropdown Select2 Kel 2

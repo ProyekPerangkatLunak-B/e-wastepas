@@ -18,7 +18,12 @@ class AuthController extends Controller
         $request->validate(['email' => 'required|email']);
 
         $email = htmlspecialchars($request->input('email'), ENT_QUOTES, 'UTF-8');
-
+        // Buat link login aman yang akan kedaluwarsa dalam 30 menit
+        $loginUrl = URL::temporarySignedRoute(
+            'admin.login.verify',
+            now()->addMinutes(30),
+            ['email' => $request->email]
+        );
         $loginAttemptsKey = 'login_attempts:' . $email;
         $blockKey = 'blocked_email:' . $email;
 

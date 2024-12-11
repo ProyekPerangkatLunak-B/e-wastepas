@@ -5,11 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const modalOverlay = document.getElementById("modal-overlay");
         modalOverlay.classList.toggle("hidden", !open);
     };
-});
-// END modal tambah sampah
 
-// START modal kirim permintaan dan notifikasi berhasil dan gagal
-document.addEventListener("DOMContentLoaded", function () {
     const confirmModal = document.getElementById("confirmModal");
     const btnOk = document.getElementById("closeAlertModal");
     const alertModal = document.getElementById("alertModal");
@@ -119,15 +115,28 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Fungsi untuk reset
-    function resetInput() {
+    window.resetInput = function () {
         $("#kategori").val("").trigger("change");
         $("#jenis").val("").trigger("change");
         berat.value = "";
         catatan.value = "";
-    }
+    };
 
     // Fungsi untuk membuka modal konfirmasi
     window.kirimKonfirmasi = function () {
+        if (
+            totalSampah.innerHTML == 0 ||
+            document.getElementById("daerah").value == "" ||
+            document.getElementById("dropbox").value == ""
+        ) {
+            btnOk.setAttribute("type", "button");
+            alertModal.classList.remove("hidden");
+            alertMessage.innerHTML = "Lengkapi data terlebih dahulu!";
+            updateAlertClasses("cancel");
+            btnOk.removeEventListener("click", closeAlertModal);
+            btnOk.addEventListener("click", closeAlertModal);
+            return;
+        }
         openConfirmationModal();
     };
 
@@ -256,51 +265,97 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#daerah").select2({
         placeholder: "Pilih Daerah",
         allowClear: true,
+        ajax: {
+            url: "/api/daerah",
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_daerah,
+                            text: item.nama_daerah,
+                        };
+                    }),
+                };
+            },
+        },
     });
 
     $("#dropbox").select2({
         placeholder: "Pilih Dropbox",
         allowClear: true,
-        // ajax: {
-        //     url: "/api/dropbox-option",
-        //     dataType: "json",
-        //     delay: 250,
-        //     data: function (params) {
-        //         return {
-        //             q: params.term,
-        //         };
-        //     },
-        //     processResults: function (data) {
-        //         return {
-        //             results: data,
-        //         };
-        //     },
-        // },
+        ajax: {
+            url: function () {
+                const kategoriId = $("#daerah").val();
+                return kategoriId
+                    ? `/api/dropbox/${kategoriId}`
+                    : "/api/dropbox";
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_dropbox,
+                            text: item.nama_dropbox,
+                        };
+                    }),
+                };
+            },
+        },
     });
 
     $("#kategori").select2({
         placeholder: "Pilih Kategori Sampah",
         allowClear: true,
+        ajax: {
+            url: "/api/kategori",
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_kategori,
+                            text: item.nama_kategori,
+                        };
+                    }),
+                };
+            },
+        },
     });
 
     $("#jenis").select2({
         placeholder: "Pilih jenis sampah",
         allowClear: true,
-        // ajax: {
-        //     url: "/api/jenis-option/2",
-        //     dataType: "json",
-        //     delay: 250,
-        //     data: function (params) {
-        //         return {
-        //             q: params.term,
-        //         };
-        //     },
-        //     processResults: function (data) {
-        //         return {
-        //             results: data,
-        //         };
-        //     },
-        // },
+        ajax: {
+            url: function () {
+                const kategoriId = $("#kategori").val();
+                return kategoriId ? `/api/jenis/${kategoriId}` : "/api/jenis";
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_jenis,
+                            text: item.nama_jenis,
+                        };
+                    }),
+                };
+            },
+        },
+    });
+
+    $("#kategori").on("change", function () {
+        $("#jenis").val(null).trigger("change");
+    });
+
+    $("#daerah").on("change", function () {
+        $("#dropbox").val(null).trigger("change");
     });
 });
 

@@ -11,55 +11,43 @@ use App\Http\Controllers\Controller;
 
 class APIController extends Controller
 {
-    public function getKategori()
+    public function getKategori($id = null)
     {
-        $kategori = Kategori::all();
+        if (!$id) {
+            $kategori = Kategori::all();
+        } else {
+            $kategori = Kategori::where('id_kategori', $id)->get();
+        }
         return response()->json($kategori);
     }
 
-    public function getJenis($id)
+    public function getJenis($id = null)
     {
-        $jenis = Jenis::where('id_kategori', $id)->get();
+        if (!$id) {
+            $jenis = Jenis::all();
+        } else {
+            $jenis = Jenis::where('id_kategori', $id)->get();
+        }
         return response()->json($jenis);
     }
 
-    public function getDaerah()
+    public function getDaerah($id = null)
     {
-        $daerah = Daerah::all();
+        if (!$id) {
+            $daerah = Daerah::all();
+        } else {
+            $daerah = Daerah::where('id_daerah', $id)->get();
+        }
         return response()->json($daerah);
     }
 
-    public function getDropbox($id)
+    public function getDropbox($id = null)
     {
-        $dropbox = Dropbox::where('id_daerah', $id)->get();
+        if (!$id) {
+            $dropbox = Dropbox::all();
+        } else {
+            $dropbox = Dropbox::where('id_daerah', $id)->get();
+        }
         return response()->json($dropbox);
-    }
-
-    public function JenisOption($id)
-    {
-        $jenis = Jenis::where('id_kategori', $id)->get();
-        $output = array();
-        foreach ($jenis as $row) {
-            $output[] = array(
-                'id' => $row->id_jenis,
-                'text' => $row->nama_jenis
-            );
-        }
-
-        return response()->json($output);
-    }
-
-    public function DropboxOption($id)
-    {
-        $dropbox = Dropbox::where('id_daerah', $id)->get();
-        $output = array();
-        foreach ($dropbox as $row) {
-            $output[] = array(
-                'id' => $row->id_dropbox,
-                'text' => $row->nama_dropbox
-            );
-        }
-
-        return response()->json($output);
     }
 }

@@ -15,20 +15,28 @@
                 <div class="flex flex-col flex justify-around items-center">
             </div>
 
-            @if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li class="text-red-500 p-3 rounded-lg">{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
-
+             @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="text-red-500 p-3 rounded-lg">{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
 
             <!-- Form Registrasi -->
                 <div class="mx-auto max-w-md">
                 <form action="{{ route('masyarakat.register.submit') }}" method="POST">
                 @csrf
                   <div>
+                      @if ($errors->any())
+                        <div>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <label for="name" class="block mt-4 text-md font-medium leading-9 text-gray-500">Nama</label>
                         <input
                             class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
@@ -41,7 +49,7 @@
                             type="tel" required name="tel"/>
                     </div>
                   <div>
-                    <label for="no-rek" class="block mt-4 text-md font-medium leading-9 text-gray-500">No. Rekening</label>
+                    <label for="no-rek" class="block mt-4 text-md font-medium leading-9 text-gray-500">No. KTP</label>
                         <input
                             class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
                             type="no-rex" required name="no-rek"/>

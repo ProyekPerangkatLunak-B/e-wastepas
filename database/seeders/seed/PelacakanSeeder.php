@@ -16,33 +16,6 @@ class PelacakanSeeder extends Seeder
      */
     public function run(): void
     {
-        // $pelacakan = [
-        //     [
-        //         'id_penjemputan' => 1,
-        //         'id_dropbox' => 1,
-        //         'keterangan' => 'Sampah telah dijemput',
-        //         'status' => 'Diterima',
-        //         'estimasi_waktu' => '2024-11-05 09:20:52',
-        //     ],
-        //     [
-        //         'id_penjemputan' => 2,
-        //         'id_dropbox' => 2,
-        //         'keterangan' => 'Sampah telah dijemput',
-        //         'status' => 'Diterima',
-        //         'estimasi_waktu' => '2024-11-05 09:20:52',
-        //     ],
-        //     [
-        //         'id_penjemputan' => 3,
-        //         'id_dropbox' => 3,
-        //         'keterangan' => 'Sampah telah dijemput',
-        //         'status' => 'Diterima',
-        //         'estimasi_waktu' => '2024-11-05 09:20:52',
-        //     ],
-        // ];
-
-        // foreach ($pelacakan as $data) {
-        //     Pelacakan::create($data);
-        // }
         $faker = Faker::create('id_ID');
         $penjemputanData = DB::table('penjemputan')->get();
 
@@ -65,5 +38,56 @@ class PelacakanSeeder extends Seeder
         }
 
         DB::table('pelacakan')->insert($data);
+
+        // Pelacakan Lanjutan
+        $dijemput = DB::table('pelacakan')->where('status', 'Dijemput Driver')->get();
+        if ($dijemput->count() > 0) {
+            foreach ($dijemput as $d) {
+                if (rand(0, 1) == 1) {
+
+                    $estimasiWaktu = \Carbon\Carbon::parse($d->estimasi_waktu)
+                        ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+                        ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+
+                    $createUpdate = \Carbon\Carbon::parse($d->created_at)
+                        ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+                        ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+
+                    Pelacakan::create([
+                        'id_penjemputan' => $d->id_penjemputan,
+                        'id_dropbox' => $d->id_dropbox,
+                        'keterangan' => $faker->realText(rand(50, 100)),
+                        'status' => 'Menuju Dropbox',
+                        'estimasi_waktu' => $estimasiWaktu,
+                        'created_at' => $createUpdate,
+                        'updated_at' => $createUpdate,
+                    ]);
+                }
+            }
+            $menuju = DB::table('pelacakan')->where('status', 'Menuju Dropbox')->get();
+            if ($menuju->count() > 0) {
+                foreach ($menuju as $m) {
+                    if (rand(0, 1) == 1) {
+                        $estimasiWaktu = \Carbon\Carbon::parse($m->estimasi_waktu)
+                            ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+                            ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+
+                        $createUpdate = \Carbon\Carbon::parse($m->created_at)
+                            ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+                            ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+
+                        Pelacakan::create([
+                            'id_penjemputan' => $m->id_penjemputan,
+                            'id_dropbox' => $m->id_dropbox,
+                            'keterangan' => $faker->realText(rand(50, 100)),
+                            'status' => 'Sudah Sampai',
+                            'estimasi_waktu' => $estimasiWaktu,
+                            'created_at' => $createUpdate,
+                            'updated_at' => $createUpdate,
+                        ]);
+                    }
+                }
+            }
+        }
     }
 }
