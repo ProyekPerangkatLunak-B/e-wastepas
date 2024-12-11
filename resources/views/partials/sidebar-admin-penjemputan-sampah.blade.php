@@ -30,21 +30,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.penjemputan-sampah.pendapatan.index') }}"
-                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan-sampah/pendapatan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
-                        Pendapatan
+                    <a href="{{ route('admin.penjemputan-sampah.totalsampahdanriwayat.index') }}"
+                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan-sampah/totalsampahdanriwayat') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                        Total sampah dan Riwayat
                         <span
-                            class="text-lg {{ Request::is('admin/penjemputan-sampah/pendapatan') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+                            class="text-lg {{ Request::is('admin/penjemputan-sampah/totalsampahdanriwayat') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('admin.penjemputan-sampah.riwayat.index') }}"
-                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan-sampah/riwayat') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
-                        Riwayat Penjemputan
-                        <span
-                            class="text-lg {{ Request::is('admin/penjemputan-sampah/riwayat') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
-                    </a>
-                </li>
+                
                 
             </ul>
         </nav>

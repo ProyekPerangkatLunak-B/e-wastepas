@@ -28,6 +28,10 @@ Route::get('admin/penjemputan-sampah/tracking', function () {
     return view('admin.penjemputan-sampah.tracking.index');
 })->name('admin.penjemputan-sampah.tracking.index');
 
+Route::get('admin/penjemputan-sampah/tracking/detail', function () {
+    return view('admin.penjemputan-sampah.tracking.detail');
+})->name('admin.penjemputan-sampah.tracking.detail');
+
 Route::get('admin/penjemputan-sampah/permintaan', function () {
     return view('admin.penjemputan-sampah.permintaan.index');
 })->name('admin.penjemputan-sampah.permintaan.index');
@@ -36,17 +40,11 @@ Route::get('admin/penjemputan-sampah/permintaan/detail', function () {
     return view('admin.penjemputan-sampah.permintaan.detail');
 })->name('admin.penjemputan-sampah.permintaan.detail');
 
-Route::get('admin/penjemputan-sampah/pendapatan', function () {
-    return view('admin.penjemputan-sampah.pendapatan.index');
-})->name('admin.penjemputan-sampah.pendapatan.index');
+Route::get('admin/penjemputan-sampah/totalsampahdanriwayat', function () {
+    return view('admin.penjemputan-sampah.totalsampahdanriwayat.index');
+})->name('admin.penjemputan-sampah.totalsampahdanriwayat.index');
 
-Route::get('admin/penjemputan-sampah/pendapatan/total-poin', function () {
-    return view('admin.penjemputan-sampah.pendapatan.total-poin');
-})->name('admin.penjemputan-sampah.pendapatan.total-poin');
 
-Route::get('admin/penjemputan-sampah/riwayat', function () {
-    return view('admin.penjemputan-sampah.riwayat.index');
-})->name('admin.penjemputan-sampah.riwayat.index');
 
 // Route Modul Manajemen, registrasi dan dashboard
 

@@ -16,8 +16,17 @@ export default {
             },
             colors: {
                 "main-color": "#437252", 
-                "second-gray": "#60B15B",
+                "second-gray": "#888E86",
                 "tertiary-color": "#E2EDE0",
+                "first": "#E5E5E5",
+                "second": "#F0F0F0",
+                "third": "#595959",
+                "fourth": "#437252",
+                "five": "#F4F6F9",
+                "six": "#60B15B",
+                "seven": "#FF6969",
+                
+                
             },
         },
     },

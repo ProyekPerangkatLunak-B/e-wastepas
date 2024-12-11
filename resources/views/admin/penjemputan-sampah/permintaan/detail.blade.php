@@ -18,14 +18,14 @@
                     </div>
                     <h5 class="text-gray-600 font-bold text-center text-sm mb-4">Nama Masyarakat</h5>
                     <div class="mt-2 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24" fill="#437252">
                             <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
                         </svg>
                     </div>
                     <h5 class="text-gray-600 font-bold text-center text-sm">Alamat Penjemputan</h5>
                     <h5 class="text-gray-600 rounded-lg font-normal text-center text-xs mx-5 mb-4 px-5 ">Alamat Lengkap Lokasi Penjemputan</h5>
                     <div class="mt-2 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528 512" width="24" height="24" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528 512" width="24" height="24" fill="#437252">
                             <path d="M264.4 116.3l-132 84.3 132 84.3-132 84.3L0 284.1l132.3-84.3L0 116.3 132.3 32l132.1 84.3zM131.6 395.7l132-84.3 132 84.3-132 84.3-132-84.3zm132.8-111.6l132-84.3-132-83.6L395.7 32 528 116.3l-132.3 84.3L528 284.8l-132.3 84.3-131.3-85z"/>
                         </svg>
                     </div>
