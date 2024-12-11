@@ -25,7 +25,7 @@
                 @csrf
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">Email :</label>
-                    <input value="yayansupirna20@gmail.com" type="email" name="email" id="email"
+                    <input type="email" name="email" id="email"
                         class="mt-1 p-2 border w-full focus:outline-none focus:ring-2" placeholder="Email" required
                         style="border-color: #3c674a; border-radius: 12px; font-size: 1rem;">
                 </div>
@@ -33,7 +33,7 @@
                 <div class="mb-4">
                     <label for="password" class="block text-sm font-medium text-gray-700">Password :</label>
                     <div class="relative">
-                        <input value="password" type="password" name="password" id="password"
+                        <input type="password" name="password" id="password"
                             class="mt-1 p-2 border w-full focus:outline-none focus:ring-2" placeholder="Password" required
                             style="border-color: #3c674a; border-radius: 12px; font-size: 1rem;">
                         <span class="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"

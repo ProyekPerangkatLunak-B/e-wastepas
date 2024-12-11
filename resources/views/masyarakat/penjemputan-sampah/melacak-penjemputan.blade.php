@@ -77,13 +77,15 @@
                             <!-- Isi Konten -->
                             <div class="flex px-6 space-x-6">
                                 <!-- Bagian Jenis dan Deskripsi Sampah -->
-                                <div class="flex-grow my-4">
+                                <div class="flex-grow my-auto">
                                     @foreach ($p->detailPenjemputan as $s)
                                         @if ($loop->index == 2 && count($p->detailPenjemputan) > 3)
-                                            <p class="text-lg font-semibold">...</p>
+                                        <p class="text-lg font-light">Lainnya...</p>
                                         @break
                                     @endif
-                                    <p class="mb-1 text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
+                                    <p class="overflow-hidden text-xl font-semibold whitespace-nowrap text-ellipsis">
+                                        {{ \Illuminate\Support\Str::words($s->jenis->nama_jenis, 3, '...') }}
+                                    </p>
                                 @endforeach
                                 <!-- Waktu Penjemputan -->
                                 <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">

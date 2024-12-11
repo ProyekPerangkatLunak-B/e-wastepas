@@ -84,7 +84,8 @@
                 <div class="grid grid-cols-1 gap-4 px-12 mx-6 lg:grid-cols-3 lg:gap-4">
                     @foreach ($jenis as $j)
                         <x-detail-card title="{{ $j->nama_jenis }}" poin="{{ $j->poin }}"
-                            image="https://picsum.photos/700/700" />
+                            image="https://picsum.photos/seed/television/1280/720" />
+                            {{-- image="{{ asset('img/masyarakat/penjemputan-sampah/gambarJenisSampah/' . $j->image) }}" /> --}}
                     @endforeach
                 </div>
             @endif

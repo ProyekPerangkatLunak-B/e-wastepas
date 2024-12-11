@@ -66,27 +66,29 @@
                                 <div
                                     class="relative flex flex-col justify-between h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                                     <!-- Waktu Penjemputan -->
-                                    <div class="flex justify-between mx-6 mt-2">
+                                    <div class="flex justify-between mx-6 mt-4">
                                         <span class="text-lg font-bold text-gray-800">
-                                            {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
+                                            {{ $p->kode_penjemputan }}
                                         </span>
                                     </div>
 
                                     <!-- Konten -->
-                                    <div class="flex justify-between px-8">
-                                        <div>
+                                    <div class="flex justify-between px-4">
+                                        <div class="flex-grow px-2 my-auto">
                                             @foreach ($p->detailPenjemputan as $s)
                                                 @if ($loop->index == 2 && count($p->detailPenjemputan) > 2)
-                                                    <p class="text-xl font-semibold">...</p>
-                                                @break
-                                            @endif
-                                            <p class="text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
-                                        @endforeach
-                                    </div>
+                                                    <p class="text-lg font-light">Lainnya...</p>
+                                                    @break
+                                                @endif
+                                                <p class="overflow-hidden text-xl font-semibold whitespace-nowrap text-ellipsis">
+                                                    {{ \Illuminate\Support\Str::words($s->jenis->nama_jenis, 2, '...') }}
+                                                </p>
+                                            @endforeach
+                                        </div>
 
                                     <!-- Poin -->
                                     <div class="flex flex-col items-end">
-                                        <div class="flex items-baseline mx-2 my-auto">
+                                        <div class="flex items-baseline mx-auto my-10">
                                             <p
                                                 class="text-5xl font-bold
                                                 @switch($p->status)
@@ -112,11 +114,7 @@
                                 <!-- Catatan -->
                                 <div class="px-6">
                                     <p class="mb-4 text-sm text-gray-600">
-                                        @if (strlen($p->catatan) > 25)
-                                            {{ substr($p->catatan, 0, 25) }}...
-                                        @else
-                                            {{ $p->catatan }}
-                                        @endif
+                                        {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
                                     </p>
                                 </div>
 
