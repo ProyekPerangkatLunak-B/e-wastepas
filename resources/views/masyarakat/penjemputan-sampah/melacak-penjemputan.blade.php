@@ -107,13 +107,35 @@
                                 <div class="absolute right-0 bottom-1">
                                     <span
                                         class="px-10 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
-                                            @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
-                                            @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
-                                            @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
-                                            @elseif ($p->status === 'Ditolak') bg-red-500
-                                            @elseif ($p->status === 'Dibatalkan') bg-red-normal
-                                            @else bg-primary-normal @endif;">
-                                        {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
+                                            @switch($p->getLatestPelacakan->status)
+                                                @case('Dijemput Kurir')
+                                                @case('Menuju Lokasi Penjemputan')
+                                                @case('Sampah Diangkut')
+                                                    bg-primary-normal
+                                                    @break
+                                                @case('Menuju Dropbox')
+                                                @case('Menyimpan Sampah di Dropbox')
+                                                    bg-secondary-normal
+                                                    @break
+                                                @default
+                                                    bg-white-dark
+                                            @endswitch">
+                                        @switch($p->getLatestPelacakan->status)
+                                            @case('Dijemput Kurir')
+                                            @case('Menuju Lokasi Penjemputan')
+
+                                            @case('Sampah Diangkut')
+                                                Dijemput Kurir
+                                            @break
+
+                                            @case('Menuju Dropbox')
+                                            @case('Menyimpan Sampah di Dropbox')
+                                                Menuju Dropbox
+                                            @break
+
+                                            @default
+                                                Diproses
+                                        @endswitch
                                     </span>
                                 </div>
                             </div>

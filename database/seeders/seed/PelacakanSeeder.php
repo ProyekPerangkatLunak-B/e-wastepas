@@ -21,6 +21,7 @@ class PelacakanSeeder extends Seeder
 
         $statusDefault = ['Diproses', 'Dibatalkan'];
 
+        $dibatalkan = 0;
 
         $data = [];
         foreach ($penjemputanData as $penjemputan) {
@@ -28,6 +29,12 @@ class PelacakanSeeder extends Seeder
             $estimasiWaktu = \Carbon\Carbon::parse($penjemputan->tanggal_penjemputan)
                 ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
                 ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+
+            if ($dibatalkan > 4) {
+                $statusDefault = ['Diproses'];
+            } else {
+                $dibatalkan++;
+            }
 
             $data[] = [
                 'id_penjemputan' => $penjemputan->id_penjemputan,
@@ -43,11 +50,11 @@ class PelacakanSeeder extends Seeder
         DB::table('pelacakan')->insert($data);
 
         // Pelacakan Lanjutan
-        $status = ['Diproses', 'Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai', 'Dibatalkan'];
+        $status = ['Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai'];
         $currentStatus = 'Diproses';
 
         foreach ($status as $nextStatus) {
-            $records = DB::table('pelacakan')->where('status', $currentStatus)->get();
+            $records = Pelacakan::where('status', $currentStatus)->get();
             if ($records->count() > 0) {
                 foreach ($records as $record) {
                     if (rand(0, 1) == 1) {

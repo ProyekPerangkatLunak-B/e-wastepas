@@ -66,6 +66,7 @@ class Penjemputan extends Model
         return $this->hasOne(Pelacakan::class, 'id_penjemputan')->latest();
     }
 
+
     public function scopeFilter($query, array $filters)
     {
         // Filter search berdasarkan pencarian nama_jenis
