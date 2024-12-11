@@ -96,9 +96,8 @@ class PenjemputanSampahMasyarakatController extends Controller
             $pelacakan->id_penjemputan = $penjemputan->id_penjemputan;
             $pelacakan->status = 'Menunggu Konfirmasi';
             $pelacakan->save();
-            return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
+            return redirect()->route('masyarakat.penjemputan.detail-melacak', $pelacakan->id)->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
         } catch (\Exception $e) {
-            // dd($e);
             return redirect()->route('masyarakat.penjemputan.permintaan')->with('error', 'Gagal Mengajukan Permintaan Penjemputan!');
         }
     }

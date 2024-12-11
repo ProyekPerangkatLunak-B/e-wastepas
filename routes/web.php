@@ -357,9 +357,9 @@ Route::group([
     Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->name('penjemputan.permintaan');
     Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->name('penjemputan.detail-permintaan');
 
-        Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
-        Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
-        Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
+    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
+    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
+    Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::get('penjemputan-sampah/dropbox', function () {
         return view('mitra-kurir.penjemputan-sampah.dropbox');
@@ -441,13 +441,9 @@ Route::group([
     'as' => 'api.',
 ], function () {
     Route::get('kategori', [APIController::class, 'getKategori'])->name('kategori');
-    Route::get('kategori/{id}', [APIController::class, 'getKategori'])->name('kategori');
-    Route::get('jenis', [APIController::class, 'getJenis'])->name('jenis');
-    Route::get('jenis/{id}', [APIController::class, 'getJenis'])->name('jenis');
+    Route::get('jenis/{id?}', [APIController::class, 'getJenis'])->name('jenis');
     Route::get('daerah', [APIController::class, 'getDaerah'])->name('daerah');
-    Route::get('daerah/{id}', [APIController::class, 'getDaerah'])->name('daerah');
-    Route::get('dropbox', [APIController::class, 'getDropbox'])->name('dropbox');
-    Route::get('dropbox/{id}', [APIController::class, 'getDropbox'])->name('dropbox');
+    Route::get('dropbox/{id?}', [APIController::class, 'getDropbox'])->name('dropbox');
 
     // Untuk Dropdown Select2 Kel 2
     Route::get('jenis-option/{id}', [APIController::class, 'JenisOption'])->name('jenis-option');
