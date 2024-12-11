@@ -144,21 +144,22 @@
                         </div>
                     </div>
                 </div>
-                    <!-- Tombol Kembali dan Kirim Permintaan -->
-                    <div class="flex justify-end mx-10 space-x-4">
-                        <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Reset Form</a>
-                        <button type="button" id="submit-request" name="submit" onclick="kirimKonfirmasi()"
-                            class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
-                                class="mr-1 bi bi-send" viewBox="0 0 16 16">
-                                <path
-                                    d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
-                            </svg>
-                            Kirim Permintaan
-                        </button>
-                    </div>
+                <!-- Tombol Kembali dan Kirim Permintaan -->
+                <div class="flex justify-end mx-10 space-x-4">
+                    <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Reset
+                        Form</a>
+                    <button type="button" id="submit-request" name="submit" onclick="kirimKonfirmasi()"
+                        class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                            class="mr-1 bi bi-send" viewBox="0 0 16 16">
+                            <path
+                                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                        </svg>
+                        Kirim Permintaan
+                    </button>
                 </div>
             </div>
+        </div>
         </div>
         <!-- Modal Overlay -->
         <div id="modal-overlay"
