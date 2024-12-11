@@ -379,10 +379,25 @@ Route::get('/mitra-kurir/registrasi/account-profile/security', function () {
     return view('mitra-kurir/registrasi/account-profile/security');
 })->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
 
-// tes halaman pengganti otp
+// halaman success-message document-upload
 Route::get('/mitra-kurir/registrasi/success-message', function () {
     return view('mitra-kurir/registrasi/success-message');
 })->name('mitra-kurir.registrasi.success-message');
+
+// tes halaman success-message change-password
+Route::get('/mitra-kurir/registrasi/success-message-change-password', function () {
+    return view('mitra-kurir/registrasi/success-message-change-password');
+})->name('mitra-kurir.registrasi.success-message-change-password');
+
+// tes halaman success-message forgot-password
+Route::get('/mitra-kurir/registrasi/success-message-forgot-password', function () {
+    return view('mitra-kurir/registrasi/success-message-forgot-password');
+})->name('mitra-kurir.registrasi.success-message-forgot-password');
+
+// tes halaman success-message data
+Route::get('/mitra-kurir/registrasi/success-message-data', function () {
+    return view('mitra-kurir/registrasi/success-message-data');
+})->name('mitra-kurir.registrasi.success-message-data');
 
 Route::group([
     'prefix' => 'api/',

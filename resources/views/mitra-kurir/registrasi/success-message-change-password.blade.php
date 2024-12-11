@@ -1,5 +1,5 @@
 @extends('mitra-kurir.registrasi.layout')
-@section('title', 'Success Message')
+@section('title', 'Success Message Change Password')
 @section('content')
 <div class="bg-cover bg-center min-h-screen relative flex items-center justify-center p-4" style="background-image: url('/img/mitra-kurir/bg-otp.png');">
     <div style="background-color: white;" 
@@ -12,7 +12,7 @@
         <div class="w-full max-w-md mx-auto">
             <div class="text-center mb-8">
                 <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
-                    Selamat anda sudah berhasil menggunggah dokumen anda
+                    Ganti Kata Sandi Sukses
                 </h2>
             </div>
 
@@ -20,10 +20,9 @@
                 <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="w-32 sm:w-40 !important">
             </div>
         </div>
-
-        <p class="text-gray-700 mt-4">Butuh Waktu 7x24 Jam Untuk Admin Memvalidasi</p>
-                <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">Kembali ke Menu Utama
-        </button>
+        <div class="flex justify-center mb-4">
+            <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">Selesai</button>
+        </div>
     </div>
 </div>
 @endsection
