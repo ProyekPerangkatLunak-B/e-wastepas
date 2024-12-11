@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const jenis = document.getElementById("jenis");
     const berat = document.getElementById("berat");
     const catatan = document.getElementById("catatan");
-    const boxKosong = document.getElementById("box-kosong");
     const totalSampah = document.getElementById("totalSampah");
+    let idBox = 0;
 
     window.tambahKeBox = function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
             btnOk.removeEventListener("click", closeAlertModal);
             btnOk.addEventListener("click", closeAlertModal);
         } else {
-            if (!boxKosong.classList.contains("hidden"))
-                boxKosong.classList.add("hidden");
+            if (!$("#box-kosong")[0].classList.contains("hidden"))
+                $("#box-kosong")[0].classList.add("hidden");
             // Jika kategori, jenis, dan berat sudah diisi, tambahkan ke box
             btnOk.setAttribute("type", "button");
             alertModal.classList.remove("hidden");
@@ -47,10 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             totalSampah.innerHTML = parseInt(totalSampah.innerHTML) + 1;
 
+            idBox++;
+
             const box = `
-                        <div class="relative flex items-center justify-between w-[90%] h-[120px] bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal" id="boxInput${
-                            totalSampah.innerHTML
-                        }">
+                        <div class="relative flex items-center justify-between w-[90%] h-[120px] bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal" id="boxInput${idBox}">
                         <input type="text" value="${
                             kategori.value
                         }" name="kategori[]" hidden>
@@ -80,9 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             </p>
                         </div>
                         <div class="absolute top-0 right-0 h-full">
-                            <button type="button" class="flex flex-col items-center justify-center w-full h-full px-2 rounded-t-none rounded-b-none bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${
-                                totalSampah.innerHTML
-                            })">
+                            <button type="button" class="flex flex-col items-center justify-center w-full h-full px-2 rounded-t-lg rounded-b-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${idBox})">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mb-1 bi bi-trash" viewBox="0 0 16 16">
                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                                     <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
@@ -90,7 +88,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <span class="text-sm">Hapus</span>
                             </button>
                         </div>
-            `;
+            `;
+
             boxSemuaSampah.innerHTML += box;
             resetInput();
             toggleModal(false);
@@ -102,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
         box.remove();
         totalSampah.innerHTML = parseInt(totalSampah.innerHTML) - 1;
         if (totalSampah.innerHTML == 0) {
-            boxKosong.classList.remove("hidden");
+            $("#box-kosong")[0].classList.remove("hidden");
         }
     };
 

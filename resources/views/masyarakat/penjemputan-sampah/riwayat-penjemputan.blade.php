@@ -37,26 +37,37 @@
             {{-- Search and Filter options --}}
             <div class="flex items-center pt-4 pl-20 mx-auto space-x-5">
                 {{-- Search Box --}}
-                <div class="relative">
-                    <input type="text"
-                        class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
-                        placeholder="Cari....">
-                    <!-- SVG Icon Search -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="absolute text-gray-500 transform -translate-y-1/2 bi bi-search left-3 top-1/2"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                    </svg>
-                </div>
+                <form method="GET" action="{{ route('masyarakat.penjemputan.riwayat') }}">
+                    <div class="relative">
+                        <input type="text"
+                            class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
+                            placeholder="Cari di jenis sampah..." name="search" type="text"
+                            value="{{ request('search') }}">
+                        <!-- SVG Icon Search -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="absolute text-gray-500 transform -translate-y-1/2 bi bi-search left-3 top-1/2"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                        @if (request('kategori'))
+                            <input type="hidden" name="kategori" value="{{ request('kategori') }}">
+                        @endif
+                    </div>
+                </form>
 
                 {{-- Filter Dropdown --}}
-                <div class="relative">
-                    <select
+                <form class="relative" method="GET" action="{{ route('masyarakat.penjemputan.riwayat') }}">
+                    <select name="kategori" onchange="this.form.submit()"
                         class="w-[222px] h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200">
                         <option value="all">Filter</option>
-                        <option value="active">Aktif</option>
-                        <option value="inactive">Tidak Aktif</option>
+                        @foreach ($kategori as $k)
+                            <option value="{{ $k->nama_kategori }}"
+                                {{ request('kategori') == $k->nama_kategori ? 'selected' : '' }}>
+                                {{ $k->nama_kategori }}
+                            </option>
+                        @endforeach
+                        {{-- <option value="inactive">Tidak Aktif</option> --}}
                     </select>
                     <!-- SVG Icon Filter -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -65,15 +76,19 @@
                         <path
                             d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
                     </svg>
-                </div>
+                    <button type="submit" class="hidden">Submit</button>
+                    @if (request('search'))
+                        <input type="hidden" name="search" value="{{ request('search') }}">
+                    @endif
+                </form>
                 {{-- Button PDF dan XLSX(Excel) --}}
                 <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-primary-normal hover:bg-primary-400 rounded-2xl shadow-sm">
-                    Export to Excel
+                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-primary-lighten hover:bg-primary-200 rounded-2xl shadow-sm">
+                    XLSX
                 </a>
                 <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
-                    Export to PDF
+                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-black-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
+                    PDF
                 </a>
             </div>
         </div>
@@ -164,8 +179,7 @@
     {{-- Pagination --}}
     @if ($penjemputan->total() > 6)
         <div class="flex items-center justify-end mt-4 ml-24 space-x-2">
-            {{-- Button < & << --}}
-            @if ($penjemputan->currentPage() > 1)
+            {{-- Button < & << --}} @if ($penjemputan->currentPage() > 1)
                 <button onclick="window.location.href='{{ $penjemputan->url(1) }}'"
                     class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
                 <button onclick="window.location.href='{{ $penjemputan->previousPageUrl() }}'"
