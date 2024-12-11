@@ -43,13 +43,13 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             MasyarakatSeeder::class,
             KategoriSeeder::class,
-            // JenisSeeder::class,
+            JenisSeeder::class,
             // Data daerah dan dropbox tanpa factory
             DaerahSeeder::class,
             DropboxSeeder::class,
             //  ~~ * ~~
             PenjemputanSeeder::class,
-            DetailPenjemputanSeeder::class,
+            // DetailPenjemputanSeeder::class, benerin lagi
             PelacakanSeeder::class,
         ]);
     }

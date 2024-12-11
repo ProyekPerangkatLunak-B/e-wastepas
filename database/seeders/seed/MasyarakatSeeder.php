@@ -70,7 +70,7 @@ class MasyarakatSeeder extends Seeder
                 'nomor_ktp' => $nomorKTP,
                 'nama' => $isManajemen ? "Manajemen User $i" : "Masyarakat User $i",
                 'alamat' => "Jl. Masyarakat Sejahtera No. $i",
-                'email' => "user$i@example.com",
+                'email' => "dzikramf@gmail.com",
                 'kata_sandi' => Hash::make('password123'),
                 'tanggal_lahir' => now()->subYears(rand(18, 40))->format('Y-m-d'),
                 'foto_profil' => null,
