@@ -48,57 +48,49 @@ document.addEventListener("DOMContentLoaded", function () {
             totalSampah.innerHTML = parseInt(totalSampah.innerHTML) + 1;
 
             const box = `
-                <div class="relative flex items-center w-4/5 mb-4 overflow-hidden rounded-xl border border-secondary-normal shadow-lg" id="boxInput${
-                    totalSampah.innerHTML
-                }">
-
-                    <input type="text" value="${
-                        kategori.value
-                    }" name="kategori[]" hidden>
-                    <input type="text" value="${
-                        jenis.value
-                    }" name="jenis[]" hidden>
-                    <input type="text" value="${
-                        berat.value
-                    }" name="berat[]" hidden>
-
-                    <div class="flex items-center flex-grow p-4 bg-gray-100">
-                        <!-- Bagian Gambar -->
-                        <div class="flex items-center justify-center w-20 h-20 overflow-hidden rounded-lg flex-shrink-0">
-                            <img src="https://picsum.photos/400/400" alt="Sampah" class="object-cover w-full h-full">
+                        <div class="relative flex items-center justify-between w-[90%] h-[120px] bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal" id="boxInput${
+                            totalSampah.innerHTML
+                        }">
+                        <input type="text" value="${
+                            kategori.value
+                        }" name="kategori[]" hidden>
+                        <input type="text" value="${
+                            jenis.value
+                        }" name="jenis[]" hidden>
+                        <input type="text" value="${
+                            berat.value
+                        }" name="berat[]" hidden>
+                        <div class="flex items-center justify-center w-[120px] h-full overflow-hidden rounded-lg rounded-l-none rounded-t-none rounded-b-none">
+                                        <img src="https://picsum.photos/400/400" alt="Sampah" class="object-cover w-full h-full">
                         </div>
-
-                        <div class="flex-1 px-4 text-center">
-                            <p class="font-medium text-gray-600 mb-2 text-md">
-                                Kategori ${
+                        <div class="flex flex-col items-center justify-center flex-1 px-2 ml-10">
+                            <p class="text-sm font-medium text-center text-gray-600 text-wrap">
+                                Kategori: ${
                                     kategori.options[kategori.selectedIndex]
                                         .text
                                 }
                             </p>
-                            <p class="text-lg font-bold text-black">
+                            <p class="font-bold text-center text-black text-md text-pretty">
                                 ${jenis.options[jenis.selectedIndex].text}
                             </p>
                         </div>
-
-                        <div class="text-lg font-bold text-green-500">
-                            ${berat.value} Kilogram
+                        <div class="flex flex-col items-center justify-center mr-16">
+                            <p class="font-bold text-green-500 text-md">
+                                ${berat.value} Kilogram
+                            </p>
                         </div>
-                    </div>
-
-                    <div class="flex">
-                        <button type="button"
-                            class="flex flex-col items-center justify-center bg-red-normal text-white-normal h-full px-4 py-8 hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${
+                        <div class="absolute top-0 right-0 h-full">
+                            <button type="button" class="flex flex-col items-center justify-center w-full h-full px-2 rounded-t-lg rounded-b-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${
                                 totalSampah.innerHTML
                             })">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash mb-1" viewBox="0 0 16 16">
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                            </svg>
-                            <span class="text-sm">Hapus</span>
-                        </button>
-                    </div>
-                </div>
-                `;
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mb-1 bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                </svg>
+                                <span class="text-sm">Hapus</span>
+                            </button>
+                        </div>
+            `;
             boxSemuaSampah.innerHTML += box;
             resetInput();
             toggleModal(false);
