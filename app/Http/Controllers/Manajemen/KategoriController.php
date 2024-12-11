@@ -13,28 +13,27 @@ class KategoriController extends Controller
 {
     public function index()
     {
-        // Menghitung jumlah per kategori
-        $kategori1 = DetailPenjemputan::where('id_kategori', 1)->count();
-        $kategori1Total = $kategori1 * 20;
-
-        $kategori2 = DetailPenjemputan::where('id_kategori', 2)->count();
-        $kategori2Total = $kategori2 * 10;
-
-        $kategori3 = DetailPenjemputan::where('id_kategori', 3)->count();
-        $kategori3Total = $kategori3 * 5;
-
-        // Mendapatkan nama kategori
-        $NamaKategori1 = Kategori::where('nama_kategori', 'Besar')->first();
-        $NamaKategori2 = Kategori::where('nama_kategori', 'Sedang')->first();
-        $NamaKategori3 = Kategori::where('nama_kategori', 'Kecil')->first();
-
+        // Ambil data kategori dari database
+        $kategoriData = Kategori::all()->map(function ($kategori) {
+            // Hitung poin berdasarkan ID kategori
+            $jumlah = DetailPenjemputan::where('id_kategori', $kategori->id)->count();
+            $poinPerItem = match ($kategori->id) {
+                1 => 20,
+                2 => 10,
+                3 => 5,
+                default => 1, // Default poin jika ID tidak dikenali
+            };
+            $totalPoin = $jumlah * $poinPerItem;
+    
+            return [
+                'nama_kategori' => $kategori->nama_kategori,
+                'deskripsi_kategori' => $kategori->deskripsi_kategori,
+                'poin' => $totalPoin,
+            ];
+        });
+    
         return view('manajemen.datamaster.kategori.index', [
-            'kategori1' => $kategori1Total,
-            'kategori2' => $kategori2Total,
-            'kategori3' => $kategori3Total,
-            'NamaKategori1' => $NamaKategori1,
-            'NamaKategori2' => $NamaKategori2,
-            'NamaKategori3' => $NamaKategori3,
+            'kategoriData' => $kategoriData,
         ]);
     }
 
