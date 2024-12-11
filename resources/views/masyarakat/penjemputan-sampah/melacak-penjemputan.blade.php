@@ -94,13 +94,13 @@
                                 <!-- Status -->
                                 <div class="absolute right-0 bottom-1">
                                     <span
-                                        class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                        class="px-10 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
                                             @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
                                             @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
                                             @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
                                             @elseif ($p->status === 'Ditolak') bg-red-500
                                             @elseif ($p->status === 'Dibatalkan') bg-red-normal
-                                            @else bg-tertiary-600 @endif;">
+                                            @else bg-primary-normal @endif;">
                                         {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
                                     </span>
                                 </div>

@@ -161,9 +161,17 @@
                             @endforeach
                             @elseif($penjemputan->status === 'Dibatalkan')
                             <div class="relative flex items-start space-x-4">
-                                <!-- Icon Bullet -->
-                                <div class="relative z-10 flex-shrink-0 w-6 h-6 bg-red-500 rounded-full">
+                                <!-- Time and Date -->
+                                <div class="flex flex-col items-end">
+                                    <p class="text-sm font-semibold text-black">
+                                        {{ Carbon\Carbon::parse($penjemputan->updated_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
+                                    </p>
+                                    <p class="text-sm text-gray-600">
+                                        {{ Carbon\Carbon::parse($penjemputan->updated_at)->locale(app()->getLocale())->translatedFormat('j F Y') }}
+                                    </p>
                                 </div>
+                                <!-- Icon Bullet -->
+                                <div class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-red-normal"></div>
                                 <!-- Text Content -->
                                 <div class="flex-1">
                                     <p class="text-base font-bold text-black">{{ $penjemputan->status }}</p>
@@ -172,14 +180,19 @@
                             </div>
                         @elseif($penjemputan->status === 'Ditolak')
                             <div class="relative flex items-start space-x-4">
-                                <!-- Icon Bullet -->
-                                <div class="relative z-10 flex-shrink-0 w-6 h-6 bg-red-500 rounded-full">
-                                </div>
-                                <!-- Text Content -->
-                                <div class="flex-1">
+                                <!-- Time and Date -->
+                                <div class="flex flex-col items-end">
                                     <p class="text-sm font-semibold text-black">
                                         {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
                                     </p>
+                                    <p class="text-sm text-gray-600">
+                                        {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->created_at)->locale(app()->getLocale())->translatedFormat('j F Y') }}
+                                    </p>
+                                </div>
+                                <!-- Icon Bullet -->
+                                <div class="relative z-10 flex-shrink-0 w-6 h-6 bg-red-500 rounded-full"></div>
+                                <!-- Text Content -->
+                                <div class="flex-1">
                                     <p class="text-base font-bold text-black">{{ $penjemputan->status }}</p>
                                     <p class="text-sm text-gray-600">Permintaan penjemputan tidak diterima</p>
                                 </div>
@@ -197,7 +210,7 @@
             <div class="absolute text-center top-1.5 right-0">
                 <div>
                     <span
-                        class="px-12 py-2 text-white-normal text-lg font-semibold rounded-tr-2xl rounded-bl-2xl
+                        class="px-12 py-2 text-white-normal text-md font-semibold rounded-tr-2xl rounded-bl-2xl
                         @if ($penjemputan->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
                         @elseif ($penjemputan->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
                         @elseif ($penjemputan->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal

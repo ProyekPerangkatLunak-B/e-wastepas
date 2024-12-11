@@ -12,7 +12,7 @@
                 <div class="grid grid-cols-1 gap-6 mt-6 ">
                     <!-- Card Total Sampah -->
                     <div
-                        class="flex flex-col items-center w-4/5 p-8 shadow-lg bg-white-normal rounded-xl group hover:shadow-xl">
+                        class="flex flex-col items-center w-4/5 p-8 shadow-sm bg-white-normal rounded-xl group hover:shadow-md">
                         <h3 class="text-2xl font-bold text-gray-800">Total Sampah</h3>
                         <div class="flex items-baseline mt-4">
                             <span class="mb-2 text-6xl font-bold text-secondary-normal">{{ $totalSampah }}</span>
@@ -23,7 +23,7 @@
 
                     <!-- Card Total Poin -->
                     <div
-                        class="flex flex-col items-center w-4/5 p-8 shadow-lg bg-white-normal rounded-xl group hover:shadow-xl">
+                        class="flex flex-col items-center w-4/5 p-8 shadow-sm bg-white-normal rounded-xl group hover:shadow-md">
                         <h3 class="text-2xl font-bold text-gray-800">Total Poin</h3>
                         <div class="flex items-baseline mt-4">
                             <span class="mb-2 text-6xl font-bold text-secondary-normal">{{ $totalPoin }}</span>
@@ -72,11 +72,11 @@
                                     </div>
 
                                     <!-- Konten -->
-                                    <div class="flex justify-between px-6">
+                                    <div class="flex justify-between px-8">
                                         <div>
                                             @foreach ($p->detailPenjemputan as $s)
-                                                @if ($loop->index == 2 && count($p->detailPenjemputan) > 3)
-                                                    <p class="text-lg font-semibold">...</p>
+                                                @if ($loop->index == 2 && count($p->detailPenjemputan) > 2)
+                                                    <p class="text-xl font-semibold">...</p>
                                                 @break
                                             @endif
                                             <p class="text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
@@ -85,11 +85,21 @@
 
                                     <!-- Poin -->
                                     <div class="flex flex-col items-end">
-                                        <div class="flex items-baseline">
+                                        <div class="flex items-baseline mx-2 my-auto">
                                             <p
-                                                class="text-6xl font-bold
-                                            @if ($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Sudah Sampai') text-secondary-normal
-                                            @else text-tertiary-600 @endif
+                                                class="text-5xl font-bold
+                                                @switch($p->status)
+                                                    @case('Diterima')
+                                                            text-secondary-normal
+                                                        @break
+                                                        @case('Ditolak')
+                                                            text-red-300
+                                                        @break
+                                                            @case('Dibatalkan')
+                                                            text-red-normal
+                                                    @default
+                                                    text-primary-normal
+                                                @endswitch
                                             ">
                                                 +{{ $p->total_poin }}
                                             </p>
@@ -112,13 +122,13 @@
                                 <!-- Status -->
                                 <div class="absolute right-0 bottom-1">
                                     <span
-                                        class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                        class="px-10 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
                                         @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
                                         @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
                                         @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
                                         @elseif ($p->status === 'Ditolak') bg-red-500
                                         @elseif ($p->status === 'Dibatalkan') bg-red-normal
-                                        @else bg-tertiary-600 @endif;">
+                                        @else bg-primary-normal @endif;">
                                         {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
                                     </span>
                                 </div>
