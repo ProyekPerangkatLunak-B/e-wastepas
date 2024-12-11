@@ -64,7 +64,7 @@
                                 pcs="{{ $item->berat }}"
                                 link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $item->id_penjemputan) }}"
                                 />
-                            
+
                 @endforeach
             </div>
            @endif
