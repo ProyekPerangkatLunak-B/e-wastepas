@@ -101,81 +101,62 @@
 </div>
 
 <script>
-document.querySelectorAll('.file-input').forEach(input => {
+    document.querySelectorAll('.file-input').forEach(input => {
     input.addEventListener('change', event => {
         const file = event.target.files[0];
         const label = document.querySelector(`label[for="${event.target.id}"]`);
-        const currentPreview = label.querySelector('.file-preview');
-
-        // Clear any error message but keep the existing preview
-        const existingPreview = currentPreview ? currentPreview.cloneNode(true) : null;
-        label.innerHTML = '';
+        label.innerHTML = ''; // Clear the label content
 
         if (file) {
             const fileType = file.type;
 
-            // Check if the file is an image or a PDF
-            if (fileType.startsWith('image/') || fileType === 'application/pdf') {
-                // Generate preview for images
-                if (fileType.startsWith('image/')) {
-                    const img = document.createElement('img');
-                    img.src = URL.createObjectURL(file);
-                    img.alt = 'File Preview';
-                    img.classList.add('file-preview', 'max-w-[150px]', 'max-h-[150px]', 'rounded-md', 'shadow-md', 'mt-4');
-                    label.appendChild(img);
-                }
-                // Generate preview for PDF
-                else if (fileType === 'application/pdf') {
-                    const pdfLink = document.createElement('a');
-                    pdfLink.href = URL.createObjectURL(file);
-                    pdfLink.target = '_blank';
-                    pdfLink.textContent = 'Preview PDF';
-                    pdfLink.classList.add('file-preview', 'text-blue-500', 'underline', 'text-sm', 'mt-4');
-                    label.appendChild(pdfLink);
-                }
-            } else {
-                // Display an error message and "Change File" button if the file is invalid
-                displayError(label, input, existingPreview);
+            // Generate preview for images
+            if (fileType.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.alt = 'File Preview';
+                img.classList.add('file-preview', 'max-w-[150px]', 'max-h-[150px]', 'rounded-md', 'shadow-md', 'mt-4');
+                label.appendChild(img);
             }
+            // Generate preview for PDF
+            else if (fileType === 'application/pdf') {
+                const pdfLink = document.createElement('a');
+                pdfLink.href = URL.createObjectURL(file);
+                pdfLink.target = '_blank';
+                pdfLink.textContent = 'Preview PDF';
+                pdfLink.classList.add('file-preview', 'text-blue-500', 'underline', 'text-sm', 'mt-4', 'block'); // Ensure it appears as a block element
+                label.appendChild(pdfLink);
+            } else {
+                // Display an error message for unsupported file types
+                const errorText = document.createElement('p');
+                errorText.textContent = 'File type bukan Image atau PDF, tolong pilih ulang file';
+                errorText.classList.add('text-red-500', 'text-sm', 'mt-4');
+                label.appendChild(errorText);
+            }
+
+            // Add "Change File" button
+            createChangeButton(label, input);
         } else {
-            // Restore the existing preview if no new file is selected
-            if (existingPreview) {
-                label.appendChild(existingPreview);
-            } else {
-                // Reset to original SVG if no file exists
-                resetLabel(label);
-            }
+            resetLabel(label, input);
         }
     });
 });
 
-
-// Function to display an error and "Change File" button
-function displayError(label, input, existingPreview) {
-    const errorText = document.createElement('p');
-    errorText.textContent = 'File type bukan Image atau PDF, tolong pilih ulang file';
-    errorText.classList.add('text-red-500', 'text-sm', 'mt-4');
-    label.appendChild(errorText);
-
-    // Create a "Change File" button
+// Function to create a "Change File" button
+function createChangeButton(label, input) {
     const changeButton = document.createElement('button');
     changeButton.textContent = 'Change File';
     changeButton.type = 'button';
-    changeButton.classList.add('mt-2', 'px-4', 'py-2', 'bg-gray-200', 'rounded', 'text-sm', 'hover:bg-gray-300', 'transition');
+    changeButton.classList.add('mt-4', 'px-4', 'py-2', 'bg-gray-200', 'rounded', 'text-sm', 'hover:bg-gray-300', 'transition', 'block'); // Ensure button appears below
     changeButton.addEventListener('click', () => {
         input.value = ''; // Clear the file input
-        if (existingPreview) {
-            label.innerHTML = '';
-            label.appendChild(existingPreview);
-        } else {
-            resetLabel(label); // Restore the default label
-        }
+        resetLabel(label, input);
     });
     label.appendChild(changeButton);
 }
 
-// Function to restore the default label content
-function resetLabel(label) {
+// Function to reset the label to its default content
+function resetLabel(label, input) {
     const svg = `
         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -183,8 +164,8 @@ function resetLabel(label) {
         <p class="text-sm text-gray-600">Drag & drop or click to choose file</p>
     `;
     label.innerHTML = svg;
+    label.appendChild(input); // Re-attach the file input
 }
-
 
 </script>
 
