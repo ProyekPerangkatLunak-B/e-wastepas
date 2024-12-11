@@ -86,25 +86,36 @@
                                             @endforeach
                                         </div>
 
-                                    <!-- Poin -->
+                                    <!-- Poin Sampah -->
                                     <div class="flex flex-col items-end">
                                         <div class="flex items-baseline mx-auto my-10">
                                             <p
-                                                class="text-5xl font-bold
-                                                @switch($p->status)
-                                                    @case('Diterima')
+                                                class="text-4xl font-bold
+                                                @switch($p->getLatestPelacakan->status)
+                                                        @case('Diproses')
+                                                        @case('Diterima')
+                                                            text-tertiary-600
+                                                            @break
+                                                        @case('Dijemput Kurir')
+                                                        @case('Menuju Lokasi Penjemputan')
+                                                        @case('Sampah Diangkut')
+                                                            text-white-dark
+                                                            @break
+                                                        @case('Menuju Dropbox')
+                                                        @case('Menyimpan Sampah di Dropbox')
+                                                        text-primary-normal
+                                                            @break
+                                                        @case('Selesai')
                                                             text-secondary-normal
-                                                        @break
-                                                        @case('Ditolak')
-                                                            text-red-300
-                                                        @break
-                                                            @case('Dibatalkan')
-                                                            text-red-normal
-                                                    @default
-                                                    text-primary-normal
-                                                @endswitch
-                                            ">
-                                                +{{ $p->total_poin }}
+                                                            @break
+                                                        @case('Dibatalkan')
+                                                        text-red-normal
+                                                            @break
+                                                        @default
+                                                        text-tertiary-600
+                                                    @endswitch
+                                                ">
+                                        +{{ $p->total_poin }}
                                             </p>
                                             <span class="ml-1 text-2xl font-bold text-gray-700">Poin</span>
                                         </div>
@@ -124,22 +135,22 @@
                                         class="px-10 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
                                         bg-primary-normal
                                         @switch($p->getLatestPelacakan->status)
-                                            @case('Dijemput Kurir')
-                                            @case('Menuju Lokasi Penjemputan')
-                                            @case('Sampah Diangkut')
-                                                bg-primary-normal
-                                                @break
-                                            @case('Menuju Dropbox')
-                                            @case('Menyimpan Sampah di Dropbox')
-                                            @case('Selesai')
-                                                bg-secondary-normal
-                                                @break
-                                            @case('Dibatalkan')
-                                                bg-red-normal
-                                                @break
-                                            @default
-                                                bg-white-dark
-                                        @endswitch;">
+                                        @case('Dijemput Kurir')
+                                        @case('Menuju Lokasi Penjemputan')
+                                        @case('Sampah Diangkut')
+                                            bg-white-dark
+                                            @break
+                                        @case('Menuju Dropbox')
+                                        @case('Menyimpan Sampah di Dropbox')
+                                        @case('Selesai')
+                                            bg-secondary-normal
+                                            @break
+                                        @case('Dibatalkan')
+                                            bg-red-normal
+                                            @break
+                                        @default
+                                            bg-tertiary-600
+                                    @endswitch;">
                                         @switch($p->getLatestPelacakan->status)
                                             @case('Dijemput Kurir')
                                             @case('Menuju Lokasi Penjemputan')
