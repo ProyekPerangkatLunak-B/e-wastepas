@@ -136,18 +136,29 @@
                             <div class="flex flex-col items-center justify-between">
                                 <div class="flex items-baseline mx-auto my-10">
                                     <p
-                                        class="text-5xl font-bold
-                                                @switch($p->status)
+                                        class="text-4xl font-bold
+                                                @switch($p->getLatestPelacakan->status)
+                                                        @case('Diproses')
                                                         @case('Diterima')
-                                                                text-secondary-normal
+                                                            text-tertiary-600
                                                             @break
-                                                            @case('Ditolak')
-                                                                text-red-300
+                                                        @case('Dijemput Kurir')
+                                                        @case('Menuju Lokasi Penjemputan')
+                                                        @case('Sampah Diangkut')
+                                                            text-white-dark
                                                             @break
-                                                                @case('Dibatalkan')
-                                                                text-red-normal
-                                                        @default
+                                                        @case('Menuju Dropbox')
+                                                        @case('Menyimpan Sampah di Dropbox')
                                                         text-primary-normal
+                                                            @break
+                                                        @case('Selesai')
+                                                            text-secondary-normal
+                                                            @break
+                                                        @case('Dibatalkan')
+                                                        text-red-normal
+                                                            @break
+                                                        @default
+                                                        text-tertiary-600
                                                     @endswitch
                                                 ">
                                         +{{ $p->total_poin }}
@@ -162,7 +173,7 @@
                                         @case('Dijemput Kurir')
                                         @case('Menuju Lokasi Penjemputan')
                                         @case('Sampah Diangkut')
-                                            bg-primary-normal
+                                            bg-white-dark
                                             @break
                                         @case('Menuju Dropbox')
                                         @case('Menyimpan Sampah di Dropbox')
@@ -173,7 +184,7 @@
                                             bg-red-normal
                                             @break
                                         @default
-                                            bg-white-dark
+                                            bg-tertiary-600
                                     @endswitch;">
                                         @switch($p->getLatestPelacakan->status)
                                             @case('Dijemput Kurir')

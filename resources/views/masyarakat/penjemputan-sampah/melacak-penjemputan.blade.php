@@ -96,13 +96,24 @@
                             </div>
                             <div class="flex flex-col items-center justify-between">
                                 <img src="
-                                @if ($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Dijemput Driver') {{ asset('img/masyarakat/penjemputan-sampah/box-seam-abu.png') }}
-                                 @elseif($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Menuju Dropbox')
-                                    {{ asset('img/masyarakat/penjemputan-sampah/truck-abu.png') }}
-                                    @else
-                                    {{ asset('img/masyarakat/penjemputan-sampah/journal-check-abu.png') }} @endif
-                                 "
-                                    alt="Icon" class="mt-4 w-[100px] h-[100px]">
+                                @switch($p->getLatestPelacakan->status)
+                                    @case('Diproses')
+                                    @case('Diterima')
+                                        {{ asset('img/masyarakat/penjemputan-sampah/journal-check-abu.png') }}
+                                        @break
+                                    @case('Dijemput Kurir')
+                                    @case('Menuju Lokasi Penjemputan')
+                                    @case('Sampah Diangkut')
+                                        {{ asset('img/masyarakat/penjemputan-sampah/box-seam-abu.png') }}
+                                        @break
+                                    @case('Menuju Dropbox')
+                                    @case('Menyimpan Sampah di Dropbox')
+                                        {{ asset('img/masyarakat/penjemputan-sampah/truck-hijau.png') }}
+                                        @break
+                                    @default
+                                        {{ asset('img/masyarakat/penjemputan-sampah/journal-check-abu.png') }}
+                                @endswitch
+                                " alt="Icon" class="mt-4 w-[100px] h-[100px]">
                                 <!-- Status -->
                                 <div class="absolute right-0 bottom-1">
                                     <span
@@ -111,14 +122,14 @@
                                                 @case('Dijemput Kurir')
                                                 @case('Menuju Lokasi Penjemputan')
                                                 @case('Sampah Diangkut')
-                                                    bg-primary-normal
+                                                    bg-white-dark
                                                     @break
                                                 @case('Menuju Dropbox')
                                                 @case('Menyimpan Sampah di Dropbox')
-                                                    bg-secondary-normal
+                                                    bg-primary-normal
                                                     @break
                                                 @default
-                                                    bg-white-dark
+                                                    bg-tertiary-600
                                             @endswitch">
                                         @switch($p->getLatestPelacakan->status)
                                             @case('Dijemput Kurir')
