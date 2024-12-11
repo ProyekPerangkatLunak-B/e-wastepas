@@ -251,51 +251,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // START Semua Select 2
 document.addEventListener("DOMContentLoaded", function () {
-    $("#daerah").select2({
-        placeholder: "Pilih Daerah",
-        allowClear: true,
-        ajax: {
-            url: "/api/daerah",
-            dataType: "json",
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results: data.map(function (item) {
-                        return {
-                            id: item.id_daerah,
-                            text: item.nama_daerah,
-                        };
-                    }),
-                };
-            },
-        },
-    });
-
-    $("#dropbox").select2({
-        placeholder: "Pilih Dropbox",
-        allowClear: true,
-        ajax: {
-            url: function () {
-                const kategoriId = $("#daerah").val();
-                return kategoriId
-                    ? `/api/dropbox/${kategoriId}`
-                    : "/api/dropbox";
-            },
-            dataType: "json",
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results: data.map(function (item) {
-                        return {
-                            id: item.id_dropbox,
-                            text: item.nama_dropbox,
-                        };
-                    }),
-                };
-            },
-        },
-    });
-
     $("#kategori").select2({
         placeholder: "Pilih Kategori Sampah",
         allowClear: true,
@@ -303,6 +258,11 @@ document.addEventListener("DOMContentLoaded", function () {
             url: "/api/kategori",
             dataType: "json",
             delay: 250,
+            data: function (params) {
+                return {
+                    search: params.term,
+                };
+            },
             processResults: function (data) {
                 return {
                     results: data.map(function (item) {
@@ -326,12 +286,70 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             dataType: "json",
             delay: 250,
+            data: function (params) {
+                return {
+                    search: params.term, // Kirimkan keyword pencarian
+                };
+            },
             processResults: function (data) {
                 return {
                     results: data.map(function (item) {
                         return {
                             id: item.id_jenis,
                             text: item.nama_jenis,
+                        };
+                    }),
+                };
+            },
+        },
+    });
+
+    $("#daerah").select2({
+        placeholder: "Pilih Daerah",
+        allowClear: true,
+        ajax: {
+            url: "/api/daerah",
+            dataType: "json",
+            delay: 250,
+            data: function (params) {
+                return {
+                    search: params.term,
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_daerah,
+                            text: item.nama_daerah,
+                        };
+                    }),
+                };
+            },
+        },
+    });
+
+    $("#dropbox").select2({
+        placeholder: "Pilih Dropbox",
+        allowClear: true,
+        ajax: {
+            url: function () {
+                const daerahId = $("#daerah").val();
+                return daerahId ? `/api/dropbox/${daerahId}` : "/api/dropbox";
+            },
+            dataType: "json",
+            delay: 250,
+            data: function (params) {
+                return {
+                    search: params.term, // Kirimkan keyword pencarian
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data.map(function (item) {
+                        return {
+                            id: item.id_dropbox,
+                            text: item.nama_dropbox,
                         };
                     }),
                 };
