@@ -57,7 +57,7 @@
                     @else
                         @foreach ($kategori as $k)
                             <x-card title="{{ $k->nama_kategori }}" description="{{ $k->deskripsi_kategori }}"
-                                image="https://picsum.photos/1280/720"
+                                image="https://picsum.photos/seed/1280/720"
                                 link="{{ route('masyarakat.penjemputan.detail', $k->id_kategori) }}" />
                         @endforeach
                     @endif
