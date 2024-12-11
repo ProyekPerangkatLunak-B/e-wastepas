@@ -105,17 +105,28 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function melacak()
     {
-        $penjemputan = Penjemputan::whereHas(
-            'pelacakan',
-            function ($query) {
-                $query->where('status', 'Menunggu Konfirmasi')
-                    ->orWhere('status', 'Dijemput Driver')
-                    ->orWhere('status', 'Menuju Dropbox');
-            }
-        )
-            ->where('status', 'Diproses')
-            ->orWhere('status', 'Diterima')
-            ->orderByDesc('created_at')->paginate(6);
+        // $penjemputan = Penjemputan::whereHas(
+        //     'pelacakan',
+        //     function ($query) {
+        //         $query->where('status', 'Menunggu Konfirmasi')
+        //             ->orWhere('status', 'Dijemput Driver')
+        //             ->orWhere('status', 'Menuju Dropbox');
+        //     }
+        // )
+        //     ->where('status', 'Diproses')
+        //     ->orWhere('status', 'Diterima')
+        //     ->orderByDesc('created_at')->paginate(6);
+        $penjemputan = Penjemputan::where(function ($query) {
+            $query->where('status', 'Diproses')
+                ->orWhere(function ($subQuery) {
+                    $subQuery->where('status', 'Diterima')
+                        ->whereHas('pelacakan', function ($innerQuery) {
+                            $innerQuery->whereIn('status', ['Menunggu Konfirmasi', 'Dijemput Driver', 'Menuju Dropbox']);
+                        });
+                });
+        })
+            ->orderByDesc('created_at')
+            ->paginate(6);
         return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
     }
 
