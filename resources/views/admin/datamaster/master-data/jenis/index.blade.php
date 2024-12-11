@@ -228,34 +228,34 @@
                             table); // Update pagination setiap kali tabel di-render
                     }
                 });
-
+    
                 // Fungsi custom untuk memperbarui pagination
                 function updateCustomPagination(table) {
                     var pageInfo = table.page.info();
                     $('#customPagination').empty(); // Hapus pagination sebelumnya
-
+    
                     // Generate tombol pagination
                     for (var i = 0; i < pageInfo.pages; i++) {
                         $('#customPagination').append(`
-                        <button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="$('#jenisTable').DataTable().page(${i}).draw('page')">${i + 1}</button>
+                        <button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>
                     `);
                     }
-
+    
                     // Update informasi jumlah data
                     $('#customInfo').text(
                         `Menampilkan ${pageInfo.length} data dari ${pageInfo.recordsTotal} data`);
                 }
-
+    
                 // Custom search input
                 $('#customSearch').on('keyup', function() {
                     table.search(this.value).draw();
                 });
-
+    
                 // Custom length menu
                 $('#customLengthMenu').on('change', function() {
                     table.page.len(this.value).draw();
                 });
-
+    
                 // Custom pagination and info display
                 table.on('draw', function() {
                     var pageInfo = table.page.info();
@@ -269,7 +269,7 @@
                         $('#customPagination').append(button);
                     }
                 });
-
+    
                 // Alert untuk tambah data
                 @if (session('success'))
                     Swal.fire({
@@ -280,13 +280,12 @@
                     });
                 @endif
             });
-
-            function changePage(page) {
-                $('#jenisTable').DataTable().page(page).draw('page');
-            }
         });
-
-        // Move confirmDelete outside of DOMContentLoaded
+    
+        function changePage(page) {
+            $('#jenisTable').DataTable().page(page).draw('page');
+        }
+    
         function confirmDelete(id) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
