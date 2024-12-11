@@ -53,22 +53,41 @@
                 </div>
             @else
             {{-- Card Section --}}
+            @php
+                $groupData = $data->groupBy('nama');
+            @endphp
             <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
-                @foreach ($data as $item)
+                @foreach ($groupData as $name => $items)
                             <x-card-permintaan
-                                name="{{ $item->nama }}"
-                                status="{{ $item->status }}"
+                                name="{{ $name }}"
+                                status="{{ $items->first()->status }}"
                                 image="https://picsum.photos/700/700"
                                 imageItem="https://picsum.photos/700/700"
-                                item="{{ $item->nama_jenis }}"
-                                pcs="{{ $item->berat }}"
-                                link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $item->id_penjemputan) }}"
-                                />
-
+                                :items="$items"
+                                link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $items->first()->id_penjemputan) }}"
+                            />
                 @endforeach
             </div>
            @endif
             {{-- Pagination --}}
+            @if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator && $data->lastPage() > 1)
+                <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
+                    {{-- Button < & << --}}
+                    @if ($data->currentPage() > 1)
+                        <button onclick="window.location.href='{{ $data->url(1) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                        <button onclick="window.location.href='{{ $data->previousPageUrl() }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                    @endif
+
+                    {{-- Nomor halaman  --}}
+                    <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $data->currentPage() }}</button>
+
+                    {{-- Button > & >>--}}
+                    @if ($data->hasMorePages())
+                        <button onclick="window.location.href='{{ $data->nextPageUrl() }}'" class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                        <button onclick="window.location.href='{{ $data->url($data->lastPage()) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                    @endif
+                </div>
+            @endif
         </div>
     </div>
 @endsection

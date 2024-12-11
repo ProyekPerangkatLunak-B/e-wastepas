@@ -64,10 +64,10 @@ class PenjemputanSampahMitraKurirController extends Controller
         $data = DB::table('penjemputan')
             ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
             ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
-            ->join('detail_penjemputan', 'penjemputan.id_penjemputan','=','detail_penjemputan.id_penjemputan',  )
-            ->join('jenis', 'detail_penjemputan.id_jenis', '=', 'jenis.id_jenis')
-            ->where('pelacakan.status', 'Menunggu Konfirmasi')
-            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','jenis.nama_jenis','detail_penjemputan.berat',
+            ->join('detail_penjemputan', 'penjemputan.id_penjemputan','=','detail_penjemputan.id_penjemputan')
+            ->join('kategori', 'detail_penjemputan.id_kategori', '=', 'kategori.id_kategori')
+            ->where('pelacakan.status', 'Diproses')
+            ->select('pengguna.nama', 'pelacakan.status','pelacakan.id_pelacakan','kategori.nama_kategori','detail_penjemputan.berat',
                 'penjemputan.id_penjemputan')
             ->get();
 
@@ -99,7 +99,7 @@ class PenjemputanSampahMitraKurirController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:Menunggu Konfirmasi,Dijemput Driver',
+            'status' => 'required|in:Diproses,Diterima',
         ]);
 
         // Ambil data pelacakan berdasarkan ID

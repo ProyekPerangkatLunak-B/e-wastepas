@@ -8,11 +8,11 @@
 
             {{-- Card Section --}}
             <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
-                @foreach($data as $item)
                 <!-- Left Card: informasi user -->
+                @if($data->isNotEmpty())
                 <div class="bg-white-100 rounded-2xl shadow-md p-6 flex flex-col items-center text-center">
                     <img src="https://picsum.photos/700/700" alt="User Avatar" class="w-24 h-24 rounded-full mb-4">
-                    <h3 class="text-lg font-semibold">{{ $item->nama }}</h3>
+                    <h3 class="text-lg font-semibold">{{ $data->first()->nama }}</h3>
                     <div class="text-sm mt-2">
                         <div class="flex justify-center items-center">
                             <svg class="w-[31px] h-[31px] text-green-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -20,7 +20,7 @@
                             </svg>
                         </div>
                         <p class="font-bold mt-1">Alamat Penjemputan</p>
-                        <p>{{ $item->alamat_penjemputan }}</p>
+                        <p>{{ $data->first()->alamat_penjemputan }}</p>
                     </div>
                     <div class="text-sm mt-4">
                         <div class="flex justify-center items-center">
@@ -30,81 +30,55 @@
                             </svg>
                         </div>
                         <p class="font-bold">Dropbox Terdekat</p>
-                        <p>{{ $item->alamat_dropbox }}</p>
+                        <p>{{ $data->first()->alamat_dropbox }}</p>
                     </div>
                     <div class="text-sm mt-4">
                         <p class="font-bold">Tanggal Permintaan Penjemputan</p>
-                        <p>{{ $item->tanggal_penjemputan }}</p>
+                        <p>{{ $data->first()->tanggal_penjemputan }}</p>
                     </div>
                 </div>
+                @endif
 
                 <!-- Right Card: detail sampah -->
                 <div class="lg:col-span-2 bg-white-100 rounded-2xl shadow-md p-6">
                     <h3 class="text-lg font-semibold mb-4">Sampah</h3>
 
                     {{-- detail item --}}
+                    @foreach($data as $detail)
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">
                             <div class="grid grid-cols-2 gap-x-2">
                                 <span class="font-semibold">Kategori</span>
-                                <span>: {{ $item->nama_kategori }}</span>
+                                <span>: {{ $detail->nama_kategori }}</span>
                                 <span class="font-semibold">Jenis</span>
-                                <span>: {{ $item->nama_jenis }}</span>
+                                <span>: {{ $detail->nama_jenis }}</span>
                                 <span class="font-semibold">Jumlah</span>
                                 <span>: 1 Pcs</span>
                             </div>
                         </div>
-
-
-{{--                        <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">--}}
-{{--                            <div class="grid grid-cols-2 gap-x-2">--}}
-{{--                                <span class="font-semibold">Kategori</span>--}}
-{{--                                <span>: Layar dan Monitor</span>--}}
-{{--                                <span class="font-semibold">Jenis</span>--}}
-{{--                                <span>: Handphone</span>--}}
-{{--                                <span class="font-semibold">Jumlah</span>--}}
-{{--                                <span>: 1 Pcs</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">--}}
-{{--                            <div class="grid grid-cols-2 gap-x-2">--}}
-{{--                                <span class="font-semibold">Kategori</span>--}}
-{{--                                <span>: Layar dan Monitor</span>--}}
-{{--                                <span class="font-semibold">Jenis</span>--}}
-{{--                                <span>: Handphone</span>--}}
-{{--                                <span class="font-semibold">Jumlah</span>--}}
-{{--                                <span>: 1 Pcs</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">--}}
-{{--                            <div class="grid grid-cols-2 gap-x-2">--}}
-{{--                                <span class="font-semibold">Kategori</span>--}}
-{{--                                <span>: Layar dan Monitor</span>--}}
-{{--                                <span class="font-semibold">Jenis</span>--}}
-{{--                                <span>: Handphone</span>--}}
-{{--                                <span class="font-semibold">Jumlah</span>--}}
-{{--                                <span>: 1 Pcs</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </div>
+                    @endforeach
+
 
                     <!-- catatan & status -->
+                        @if($data->isNotEmpty())
                     <h3 class="text-lg font-semibold mb-2">Catatan</h3>
                     <div class="bg-gray-100 p-4 rounded-xl text-sm mb-2 border border-gray-300">
-                        <p>{{ $item->catatan }}</p>
+                        <p>{{ $data->first()->catatan }}</p>
                     </div>
-                    <h4 class="text-base font-semibold mb-7">Status Permintaan Penjemputan: {{ $item->status }}</h4>
+                    <h4 class="text-base font-semibold mb-7">Status Permintaan Penjemputan: {{ $data->first()->status }}</h4>
+                    @endif
 
                     <!-- button terima & tolak -->
                     <div class="grid grid-cols-2 gap-1 mb-1">
                         <div class="flex justify-end">
-                            <form action="{{ route('mitra-kurir.penjemputan.detail-permintaan', ['id' => $item->id_pelacakan]) }}" method="POST">
+                            <form action="{{ route('mitra-kurir.penjemputan.detail-permintaan', $data->first()->id_pelacakan) }}" method="POST">
                                 @csrf
                                 @method('PUT')
-                                    <input type="hidden" name="status" value="Dijemput Driver">
+                                    <input type="hidden" name="status" value="Diterima">
                                     <button type="submit" id="openModalBtn" class="focus:outline-none font-bold rounded-xl text-base px-16 py-2 me-2 mr-4
-                                        {{ $item->status == 'Dijemput Driver' ? 'bg-gray-400 cursor-not-allowed' : 'text-slate-50 bg-secondary-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300' }}"
-                                        {{ $item->status == 'Dijemput Driver' ? 'disabled' : '' }}>
+                                        {{ $data->first()->status == 'Diterima' ? 'bg-gray-400 cursor-not-allowed' : 'text-slate-50 bg-secondary-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300' }}"
+                                        {{ $data->first()->status == 'Diterima' ? 'disabled' : '' }}>
                                         Terima
                                     </button>
                             </form>
@@ -114,7 +88,7 @@
             </div>
         </div>
     </div>
-            @endforeach
+
     <!-- Modal -->
     <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
         <div class="bg-white-100 rounded-2xl shadow-lg p-6 max-w-sm w-full text-center">
@@ -140,13 +114,10 @@
     </div>
 
     <script>
-{{--        @foreach($updateStatus as $konfirmasi)--}}
         document.getElementById('openModalBtn').addEventListener('click', function () {
             document.getElementById('modal').classList.remove('hidden');
             document.body.classList.add('overflow-hidden');
-{{--            {{ $konfirmasi->updateStatus($item->id_penjemputan) }}--}}
         });
-{{--        @endforeach--}}
 
         document.getElementById('closeModalBtn').addEventListener('click', function () {
             document.getElementById('modal').classList.add('hidden');
