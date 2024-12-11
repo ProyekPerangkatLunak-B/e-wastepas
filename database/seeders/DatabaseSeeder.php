@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             DropboxSeeder::class,
             //  ~~ * ~~
             PenjemputanSeeder::class,
-            // DetailPenjemputanSeeder::class, benerin lagi
+            DetailPenjemputanSeeder::class,
             PelacakanSeeder::class,
         ]);
     }
