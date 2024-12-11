@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             </p>
                         </div>
                         <div class="absolute top-0 right-0 h-full">
-                            <button type="button" class="flex flex-col items-center justify-center w-full h-full px-2 rounded-t-lg rounded-b-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${
+                            <button type="button" class="flex flex-col items-center justify-center w-full h-full px-2 rounded-t-none rounded-b-none bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${
                                 totalSampah.innerHTML
                             })">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mb-1 bi bi-trash" viewBox="0 0 16 16">

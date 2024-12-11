@@ -146,28 +146,28 @@
                     @else text-gray-500 @endif
                     ">Menuju
                         Dropbox</span>
-                </div>
-                @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai')
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-100 to-green-400 border-[1px] border-green-200"></div>
-                @else
-                    <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-400 to-gray-400 border-[1px] border-green-200"></div>
-                @endif
+                    </div>
+                    @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai')
+                        <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-100 to-green-400 border-[1px] border-green-200"></div>
+                    @else
+                        <div class="w-[220px] h-[12px] rounded bg-gradient-to-r from-gray-400 to-gray-400 border-[1px] border-green-200"></div>
+                    @endif
 
-                <div class="flex flex-col items-center">
-                    <img src="
-                    @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai') {{ asset('img/masyarakat/penjemputan-sampah/patch-check-hijau.png') }}
-                         @else
-                        {{ asset('img/masyarakat/penjemputan-sampah/patch-check-abu.png') }} @endif
-                     "
-                        class="w-[60px] h-[60px]" alt="Sudah Sampai">
-                    <span
-                        class="mt-2 text-md font-bold
-                    @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai') text-green-500
-                    @else text-gray-500 @endif
-                    ">Sudah
-                        Sampai</span>
+                    <div class="flex flex-col items-center">
+                        <img src="
+                        @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai') {{ asset('img/masyarakat/penjemputan-sampah/patch-check-hijau.png') }}
+                            @else
+                            {{ asset('img/masyarakat/penjemputan-sampah/patch-check-abu.png') }} @endif
+                        "
+                            class="w-[60px] h-[60px]" alt="Sudah Sampai">
+                        <span
+                            class="mt-2 text-md font-bold
+                        @if ($penjemputan->status === 'Diterima' && $penjemputan->getLatestPelacakan->status === 'Sudah Sampai') text-green-500
+                        @else text-gray-500 @endif
+                        ">Sudah
+                            Sampai</span>
+                    </div>
                 </div>
-            </div>
         </div>
 
         <!-- Container untuk Detail Alamat dan Detail Pelacakan -->
