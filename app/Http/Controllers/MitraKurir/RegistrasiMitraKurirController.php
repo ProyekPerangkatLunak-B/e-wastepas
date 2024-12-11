@@ -126,6 +126,10 @@ public function LogoutAuth(Request $request)
                 'otp_token' => rand(1000,9999),
                 'otp_kadaluarsa' => Date::now()->addMinutes(5)
             ]);
+
+            Auth::login($user);
+            $request->session()->regenerate();
+
             $user->notify(new OtpMail($otp->otp_token));
             return redirect()->route('otp-verification', $user->id_pengguna);
 
@@ -188,7 +192,7 @@ public function LogoutAuth(Request $request)
             'file_dokumen' => $npwp
         ]);
     }
-    return redirect('mitra-kurir/registrasi/login');
+           return redirect()->route('mitra-kurir.penjemputan.kategori');
    }
 
    public function SendForgotPassword(Request $request){
