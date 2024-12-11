@@ -106,14 +106,8 @@ class PenjemputanSampahMasyarakatController extends Controller
     public function melacak()
     {
         $kategori = Kategori::all();
-        $penjemputan = Penjemputan::whereHas('pelacakan', function ($query) {
-            $query->where('status', 'Diproses')
-                ->orWhere('status', 'Diterima')
-                ->orWhere('status', 'Dijemput Kurir')
-                ->orWhere('status', 'Menuju Lokasi Penjemputan')
-                ->orWhere('status', 'Sampah Diangkut')
-                ->orWhere('status', 'Menuju Dropbox')
-                ->orWhere('status', 'Menyimpan Sampah di Dropbox');
+        $penjemputan = Penjemputan::whereHas('getLatestPelacakan', function ($query) {
+            $query->whereNotIn('status', ['Selesai', 'Dibatalkan']);
         })->paginate(6);
 
         return view(
