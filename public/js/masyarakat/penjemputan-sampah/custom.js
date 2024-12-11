@@ -139,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fungsi untuk mengirim form setelah konfirmasi
     window.sendAddRequest = function () {
+        confirmModal.classList.add("hidden");
         alertModal.classList.remove("hidden");
         btnOk.setAttribute("type", "submit");
         alertMessage.innerHTML = "Permintaan Penjemputan Sedang Diproses!";

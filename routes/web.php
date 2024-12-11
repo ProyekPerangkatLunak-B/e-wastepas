@@ -306,6 +306,7 @@ Route::group([
     Route::get('penjemputan-sampah/detail-riwayat/{id}', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
     Route::post('penjemputan-sampah/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('penjemputan.tambah');
+    Route::post('penjemputan-sampah/detail-melacak/{id}', [PenjemputanSampahMasyarakatController::class, 'batal'])->name('penjemputan.batalkan');
 });
 
 // Route Modul Mitra-kurir

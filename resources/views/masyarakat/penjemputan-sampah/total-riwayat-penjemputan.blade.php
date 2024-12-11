@@ -61,7 +61,8 @@
                         </div>
                     @else
                         @foreach ($penjemputan as $p)
-                            <a href="{{ route('masyarakat.penjemputan.detail-riwayat', $p->id_penjemputan) }}" class="block">
+                            <a href="{{ route('masyarakat.penjemputan.detail-riwayat', $p->id_penjemputan) }}"
+                                class="block">
                                 <div
                                     class="relative flex flex-col justify-between h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                                     <!-- Waktu Penjemputan -->
@@ -123,13 +124,48 @@
                                 <div class="absolute right-0 bottom-1">
                                     <span
                                         class="px-10 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
-                                        @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
-                                        @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
-                                        @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
-                                        @elseif ($p->status === 'Ditolak') bg-red-500
-                                        @elseif ($p->status === 'Dibatalkan') bg-red-normal
-                                        @else bg-primary-normal @endif;">
-                                        {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
+                                        bg-primary-normal
+                                        @switch($p->getLatestPelacakan->status)
+                                            @case('Dijemput Kurir')
+                                            @case('Menuju Lokasi Penjemputan')
+                                            @case('Sampah Diangkut')
+                                                bg-primary-normal
+                                                @break
+                                            @case('Menuju Dropbox')
+                                            @case('Menyimpan Sampah di Dropbox')
+                                            @case('Selesai')
+                                                bg-secondary-normal
+                                                @break
+                                            @case('Dibatalkan')
+                                                bg-red-normal
+                                                @break
+                                            @default
+                                                bg-white-dark
+                                        @endswitch;">
+                                        @switch($p->getLatestPelacakan->status)
+                                            @case('Dijemput Kurir')
+                                            @case('Menuju Lokasi Penjemputan')
+
+                                            @case('Sampah Diangkut')
+                                                Dijemput Kurir
+                                            @break
+
+                                            @case('Menuju Dropbox')
+                                            @case('Menyimpan Sampah di Dropbox')
+                                                Menuju Dropbox
+                                            @break
+
+                                            @case('Selesai')
+                                                Selesai
+                                            @break
+
+                                            @case('Dibatalkan')
+                                                Dibatalkan
+                                            @break
+
+                                            @default
+                                                Diproses
+                                        @endswitch
                                     </span>
                                 </div>
                             </div>
