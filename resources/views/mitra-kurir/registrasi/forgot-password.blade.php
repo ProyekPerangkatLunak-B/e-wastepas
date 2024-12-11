@@ -50,22 +50,22 @@
                         class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none  focus:bg-white"
                         placeholder="Email"
                     >
-                </div>
-                <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 w-full px-4 sm:px-8 md:px-12">
-                    <button
-                        type="button"
-                        onclick="showVerificationModal()"
-                        class="w-full sm:w-32 float-right
-                               bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
-                               hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
-                                transform hover:scale-105 !important text-sm sm:text-base"
-                    >
-                        Kirim
-                    </button>
-                </div>
+                </div>       
             </form>
         </div>
 
+        <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 w-full px-4 sm:px-8 md:px-12">
+            <button
+                type="button"
+                onclick="showVerificationModal()"
+                class="w-full sm:w-32 float-right
+                       bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
+                       hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
+                        transform hover:scale-105 !important text-sm sm:text-base"
+            >
+                Kirim
+            </button>
+        </div>
         
     </div>
 </div>

@@ -5,11 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const modalOverlay = document.getElementById("modal-overlay");
         modalOverlay.classList.toggle("hidden", !open);
     };
-});
-// END modal tambah sampah
 
-// START modal kirim permintaan dan notifikasi berhasil dan gagal
-document.addEventListener("DOMContentLoaded", function () {
     const confirmModal = document.getElementById("confirmModal");
     const btnOk = document.getElementById("closeAlertModal");
     const alertModal = document.getElementById("alertModal");
@@ -119,15 +115,28 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Fungsi untuk reset
-    function resetInput() {
+    window.resetInput = function () {
         $("#kategori").val("").trigger("change");
         $("#jenis").val("").trigger("change");
         berat.value = "";
         catatan.value = "";
-    }
+    };
 
     // Fungsi untuk membuka modal konfirmasi
     window.kirimKonfirmasi = function () {
+        if (
+            totalSampah.innerHTML == 0 ||
+            document.getElementById("daerah").value == "" ||
+            document.getElementById("dropbox").value == ""
+        ) {
+            btnOk.setAttribute("type", "button");
+            alertModal.classList.remove("hidden");
+            alertMessage.innerHTML = "Lengkapi data terlebih dahulu!";
+            updateAlertClasses("cancel");
+            btnOk.removeEventListener("click", closeAlertModal);
+            btnOk.addEventListener("click", closeAlertModal);
+            return;
+        }
         openConfirmationModal();
     };
 
