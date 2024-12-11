@@ -56,8 +56,12 @@
                         </div>
                     @else
                         @foreach ($kategori as $k)
+                            @php
+                                $imagePath = 'img/masyarakat/penjemputan-sampah/gambarJenisSampah/' . ($k->gambar ?? $k->nama_kategori . '.png');
+                                $image = file_exists(public_path($imagePath)) ? $imagePath : 'img/masyarakat/penjemputan-sampah/no-image.png';
+                            @endphp
                             <x-card title="{{ $k->nama_kategori }}" description="{{ $k->deskripsi_kategori }}"
-                                image="https://picsum.photos/seed/1280/720"
+                                image="{{ asset($image) }}"
                                 link="{{ route('masyarakat.penjemputan.detail', $k->id_kategori) }}" />
                         @endforeach
                     @endif
