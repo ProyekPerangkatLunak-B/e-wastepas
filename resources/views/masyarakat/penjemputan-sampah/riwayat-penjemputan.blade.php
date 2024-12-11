@@ -107,93 +107,95 @@
                     <a href="{{ route('masyarakat.penjemputan.detail-riwayat', $p->id_penjemputan) }}" class="block">
                         <div class="relative w-[450px] h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                             <div class="flex justify-between">
-                                <span class="mx-5 my-2 text-lg font-bold text-gray-800">
+                                <span class="mx-6 mt-4 text-lg font-bold text-gray-800">
                                     {{ $p->kode_penjemputan }}
                                 </span>
                             </div>
 
                             <!-- Isi Konten -->
-                            <div class="flex px-6 space-x-6">
+                            <div class="flex px-4 space-x-6">
                                 <!-- Bagian Jenis dan Deskripsi Sampah -->
-                                <div class="flex-grow px-2 my-3">
+                                <div class="flex-grow px-2 my-auto">
                                     @foreach ($p->detailPenjemputan as $s)
                                         @if ($loop->index == 2 && count($p->detailPenjemputan) > 2)
-                                            <p class="text-lg font-semibold">...</p>
-                                        @break
-                                    @endif
-                                    <p class="text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
-                                @endforeach
-                                {{-- Catatan --}}
-                                <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
-                                    <p class="text-md text-black-normal">
-                                        {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
-                                    </p>
+                                            <p class="text-lg font-light">Lainnya...</p>
+                                            @break
+                                        @endif
+                                        <p class="overflow-hidden text-xl font-semibold whitespace-nowrap text-ellipsis">
+                                            {{ \Illuminate\Support\Str::words($s->jenis->nama_jenis, 2, '...') }}
+                                        </p>
+                                    @endforeach
+                                    {{-- Waktu Penjemputan --}}
+                                    <div class="absolute left-6 bottom-4 w-[calc(100%-1.5rem)]">
+                                        <p class="text-md text-black-normal">
+                                            {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            {{-- Poin Sampah --}}
-                            <div class="flex flex-col items-center justify-between">
-                                <div class="flex items-baseline mx-4 my-10">
-                                    <p
-                                        class="text-5xl font-bold
-                                             @switch($p->status)
-                                                    @case('Diterima')
-                                                            text-secondary-normal
-                                                        @break
-                                                        @case('Ditolak')
-                                                            text-red-300
-                                                        @break
-                                                            @case('Dibatalkan')
-                                                            text-red-normal
-                                                    @default
-                                                    text-primary-normal
-                                                @endswitch
-                                            ">
-                                        +{{ $p->total_poin }}
-                                    </p>
-                                    <span class="ml-1 text-2xl font-bold text-gray-700">Poin</span>
-                                </div>
-                                <!-- Status -->
-                                <div class="absolute right-0 bottom-1">
-                                    <span
-                                        class="px-10 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
-                                    @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
-                                    @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
-                                    @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
-                                    @elseif ($p->status === 'Ditolak') bg-red-500
-                                    @elseif ($p->status === 'Dibatalkan') bg-red-normal
-                                    @else bg-primary-normal @endif;">
-                                        {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
-                                    </span>
+                                {{-- Poin Sampah --}}
+                                <div class="flex flex-col items-center justify-between">
+                                    <div class="flex items-baseline mx-auto my-10">
+                                        <p
+                                            class="text-5xl font-bold
+                                                @switch($p->status)
+                                                        @case('Diterima')
+                                                                text-secondary-normal
+                                                            @break
+                                                            @case('Ditolak')
+                                                                text-red-300
+                                                            @break
+                                                                @case('Dibatalkan')
+                                                                text-red-normal
+                                                        @default
+                                                        text-primary-normal
+                                                    @endswitch
+                                                ">
+                                            +{{ $p->total_poin }}
+                                        </p>
+                                        <span class="ml-1 text-2xl font-bold text-gray-700">Poin</span>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="absolute right-0 bottom-1">
+                                        <span
+                                            class="px-10 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                        @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
+                                        @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
+                                        @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
+                                        @elseif ($p->status === 'Ditolak') bg-red-500
+                                        @elseif ($p->status === 'Dibatalkan') bg-red-normal
+                                        @else bg-primary-normal @endif;">
+                                            {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            @endforeach
-        @endif
-    </div>
-    {{-- Pagination --}}
-    @if ($penjemputan->total() > 6)
-        <div class="flex items-center justify-end mt-4 ml-24 space-x-2">
-            {{-- Button < & << --}} @if ($penjemputan->currentPage() > 1)
-                <button onclick="window.location.href='{{ $penjemputan->url(1) }}'"
-                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
-                <button onclick="window.location.href='{{ $penjemputan->previousPageUrl() }}'"
-                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
-            @endif
-
-            {{-- Nomor halaman --}}
-            <button
-                class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $penjemputan->currentPage() }}</button>
-
-            {{-- Button > & >> --}}
-            @if ($penjemputan->hasMorePages())
-                <button onclick="window.location.href='{{ $penjemputan->nextPageUrl() }}'"
-                    class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
-                <button onclick="window.location.href='{{ $penjemputan->url($penjemputan->lastPage()) }}'"
-                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                    </a>
+                @endforeach
             @endif
         </div>
-    @endif
-</div>
+        {{-- Pagination --}}
+        @if ($penjemputan->total() > 6)
+            <div class="flex items-center justify-end mt-4 ml-24 space-x-2">
+                {{-- Button < & << --}} @if ($penjemputan->currentPage() > 1)
+                    <button onclick="window.location.href='{{ $penjemputan->url(1) }}'"
+                        class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                    <button onclick="window.location.href='{{ $penjemputan->previousPageUrl() }}'"
+                        class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                @endif
+
+                {{-- Nomor halaman --}}
+                <button
+                    class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $penjemputan->currentPage() }}</button>
+
+                {{-- Button > & >> --}}
+                @if ($penjemputan->hasMorePages())
+                    <button onclick="window.location.href='{{ $penjemputan->nextPageUrl() }}'"
+                        class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                    <button onclick="window.location.href='{{ $penjemputan->url($penjemputan->lastPage()) }}'"
+                        class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                @endif
+            </div>
+        @endif
+    </div>
 @endsection
