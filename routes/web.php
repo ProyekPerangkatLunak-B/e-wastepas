@@ -15,6 +15,9 @@ use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Masyarakat\ForgotPasswordController;
 use App\Http\Controllers\Masyarakat\ProfileMasyarakatController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
+use App\Http\Controllers\Manajemen\ForgotPasswordManajemenController;
+use App\Http\Controllers\Manajemen\ResetPasswordManajemenController;
+use App\Http\Controllers\Manajemen\OtpManajemenController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
@@ -184,44 +187,78 @@ Route::group([
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan
     Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-    Route::get('/forgot-password', [RegistrasiManajemenController::class, 'showLinkRequestForm'])->name('password.request');
-    Route::post('/forgot-password', [RegistrasiManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
-
+    // Route register (Registrasi)
     Route::get('/register', function () {
-        return view('manajemen.registrasi.register'); // Mengarah ke folder registrasi
+        return view('manajemen.registrasi.register');
     })->name('registrasi.register');
 
-    Route::post('/register', [RegistrasiManajemenController::class, 'register'])->name('register.submit');
+    Route::post('/register', [RegistrasiManajemenController::class, 'register'])->name('register.verify-otp.submit');
 
-    Route::get('/verify-otp', function () {
-        return view('manajemen.registrasi.verify-otp');
-    })->name('registrasi.verify-otp');
+    // Route forgot password (Registrasi)
+    Route::get('/forgot-password', [ForgotPasswordManajemenController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/forgot-password', [ForgotPasswordManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
 
-    Route::get('/data-total-sampah', function () {
-        return view('manajemen.registrasi.data-total-sampah');
-    })->name('registrasi.data-total-sampah');
+    Route::prefix('manajemen')->name('manajemen.')->group(function () {
 
-    Route::get('/data-profil', function () {
-        return view('manajemen.registrasi.data-profil');
-    })->name('registrasi.data-profil');
+        // Menampilkan form untuk forgot password (Registrasi)
+        Route::get('forgot-password', [ForgotPasswordManajemenController::class, 'showLinkRequestForm'])
+            ->name('password.request');  // Form untuk meminta reset password
 
+        // Mengirimkan email link reset password (Registrasi)
+        Route::post('forgot-password', [ForgotPasswordManajemenController::class, 'sendResetLinkEmail'])
+            ->name('password.email');  // Kirim email reset password
+
+    });
+
+    // OTP Confirmation Success (Registrasi)
     Route::get('/otp-confirmation-success', function () {
         return view('manajemen.registrasi.otp-confirmation-success');
     })->name('registrasi.otp-confirmation-success');
 
+    // OTP Change Password Success (Registrasi)
     Route::get('/otp-change-password-success', function () {
         return view('manajemen.registrasi.otp-change-password-success');
     })->name('registrasi.otp-change-password-success');
 
+    // Route Verfy Otp (Registrasi)
+    Route::get('/verify-otp', function () {
+        return view('manajemen.registrasi.verify-otp');
+    })->name('registrasi.verify-otp');
+
+    Route::post('manajemen/verify-otp', [OtpManajemenController::class, 'verifyOtp']);
+
+    // Route Data Total Sampah (Registrasi)
+    Route::get('/data-total-sampah', function () {
+        return view('manajemen.registrasi.data-total-sampah');
+    })->name('registrasi.data-total-sampah');
+
+    // Route Data Profil (Registrasi)
+    Route::get('/data-profil', function () {
+        return view('manajemen.registrasi.data-profil');
+    })->name('registrasi.data-profil');
+
+    // Route Otp Konfirmasi Sukses (Registrasi)
+    Route::get('/otp-confirmation-success', function () {
+        return view('manajemen.registrasi.otp-confirmation-success');
+    })->name('registrasi.otp-confirmation-success');
+
+    // Route Otp Change Password Sukses (Registrasi)
+    Route::get('/otp-change-password-success', function () {
+        return view('manajemen.registrasi.otp-change-password-success');
+    })->name('registrasi.otp-change-password-success');
+
+    // Route Check Email (Registrasi)
     Route::get('/check-email', function () {
-        return view('manajemen.registrasi.check-email'); // Mengarah ke folder registrasi
+        return view('manajemen.registrasi.check-email');
     })->name('password.check-email');
 
-    Route::get('/reset-password/{token}', function ($token) {
-        return view('manajemen.registrasi.reset-password', ['token' => $token]); // Mengarah ke folder registrasi
-    })->name('password.reset');
 
-    Route::post('/reset-password', [RegistrasiManajemenController::class, 'reset'])->name('password.update');
+    // Memverifikasi OTP
+    Route::post('verify-otp', [RegistrasiManajemenController::class, 'verifyOtp'])->name('manajemen.registrasi.verify-otp.submit');
+
+
+    Route::get('manajemen/reset-password/{token}', [ResetPasswordManajemenController::class, 'showResetForm'])->name('manajemen.password.reset');
+    Route::post('manajemen/reset-password', [ResetPasswordManajemenController::class, 'resetPassword'])->name('manajemen.password.update');
 });
 
 // Route Modul Masyarakat
