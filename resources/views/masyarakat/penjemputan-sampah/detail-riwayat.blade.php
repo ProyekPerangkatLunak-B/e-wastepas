@@ -106,7 +106,10 @@
                     </div>
 
                     <div class="relative w-1/2 mt-2">
-                        <h3 class="mx-auto mb-2 text-lg font-bold">Detail Pelacakan</h3>
+                        <h3 class="mx-auto text-lg font-bold">Detail Pelacakan</h3>
+                        <p class="text-base font-normal text-gray-600">Permintaan Penjemputan:
+                            {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->created_at)->locale(app()->getLocale())->translatedFormat('H:i, j F Y') }}
+                        </p>
                         <div class="relative max-h-[450px] space-y-4 overflow-y-auto">
                             <!-- Garis Vertikal -->
                             <div class="absolute top-0 bottom-0 w-1 bg-gray-200 left-[149px] h-auto"></div>
@@ -143,8 +146,7 @@
             </div>
         </div>
 
-        <div
-            class="w-[1380px] h-[623px] flex items-center justify-between mt-4 rounded-2xl shadow-sm bg-white-normal relative">
+        <div class="w-[1380px] h-auto pb-8 flex items-center justify-between mt-4 rounded-2xl shadow-sm bg-white-normal relative">
             <div class="flex justify-between w-full px-8">
                 <!-- Status Selesai -->
                 <div class="absolute text-center top-1.5 right-0">
@@ -197,19 +199,39 @@
 
                     <!-- Gambar Ceklis Hijau -->
                     <div class="mx-auto mt-4">
-                        <img src="{{ asset('img/masyarakat/penjemputan-sampah/box-seam-hijau.png') }}" alt="Ceklis Hijau"
-                            class="w-16 h-16 mx-auto">
+                        <img src="
+                                @switch($penjemputan->getLatestPelacakan->status)
+                                    @case('Diproses')
+                                    @case('Diterima')
+                                        {{ asset('img/masyarakat/penjemputan-sampah/journal-check-abu.png') }}
+                                        @break
+                                    @case('Dijemput Kurir')
+                                    @case('Menuju Lokasi Penjemputan')
+                                    @case('Sampah Diangkut')
+                                        {{ asset('img/masyarakat/penjemputan-sampah/box-seam-abu.png') }}
+                                        @break
+                                    @case('Menuju Dropbox')
+                                    @case('Menyimpan Sampah di Dropbox')
+                                        {{ asset('img/masyarakat/penjemputan-sampah/truck-hijau.png') }}
+                                        @break
+                                    @case('Dibatalkan')
+                                        {{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}
+                                    @break
+                                    @default
+                                        {{ asset('img/masyarakat/penjemputan-sampah/journal-check-abu.png') }}
+                                @endswitch
+                                " alt="Icon" class="w-20 h-20 mx-auto mt-4">
                     </div>
 
-                    <!-- Waktu Penjemputan -->
+                    {{-- <!-- Waktu Penjemputan -->
                     <div class="mx-auto mt-2">
                         <p class="text-2xl font-bold text-secondary-normal">
                             {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->estimasi_waktu)->locale(app()->getLocale())->translatedFormat('H:i') }}
                         </p>
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- Bagian Rincian Sampah -->
-                <div class="w-1/2 mb-4 ml-12">
+                <div class="w-1/2 mt-10 mb-4 ml-10">
                     <h3 class="mb-4 text-xl font-bold">Rincian Sampah</h3>
                     <div class="max-h-[450px] space-y-4 overflow-y-auto pr-4">
                         @foreach ($penjemputan->detailPenjemputan as $dp)
@@ -247,7 +269,7 @@
                 </div>
 
                 <!-- Bagian Total Sampah -->
-                <div class="w-1/2 pr-10 mx-16">
+                <div class="w-1/2 pr-10 mx-16 mt-10">
                     <!-- Total Sampah -->
                     <h3 class="mb-4 text-xl font-bold">Total Sampah</h3>
                     <p class="font-normal text-md text-black-normal">
@@ -282,6 +304,5 @@
             </div>
         </div>
 
-    </div>
     </div>
 @endsection

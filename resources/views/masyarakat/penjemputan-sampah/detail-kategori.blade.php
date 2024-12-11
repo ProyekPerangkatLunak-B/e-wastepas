@@ -83,9 +83,12 @@
                 {{-- Card Section --}}
                 <div class="grid grid-cols-1 gap-4 px-12 mx-6 lg:grid-cols-3 lg:gap-4">
                     @foreach ($jenis as $j)
+                        @php
+                            $imagePath = 'img/masyarakat/penjemputan-sampah/gambarJenisSampah/' . ($j->gambar ?? $j->nama_jenis . '.png');
+                            $image = file_exists(public_path($imagePath)) ? $imagePath : 'img/masyarakat/penjemputan-sampah/no-image.png';
+                        @endphp
                         <x-detail-card title="{{ $j->nama_jenis }}" poin="{{ $j->poin }}"
-                            image="https://picsum.photos/seed/television/1280/720" />
-                            {{-- image="{{ asset('img/masyarakat/penjemputan-sampah/gambarJenisSampah/' . $j->image) }}" /> --}}
+                            image="{{ asset($image) }}" />
                     @endforeach
                 </div>
             @endif
