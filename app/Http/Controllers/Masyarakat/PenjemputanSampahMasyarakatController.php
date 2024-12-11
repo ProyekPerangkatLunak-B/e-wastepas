@@ -107,8 +107,13 @@ class PenjemputanSampahMasyarakatController extends Controller
     {
         $kategori = Kategori::all();
         $penjemputan = Penjemputan::whereHas('pelacakan', function ($query) {
-            $query->where('status', '!=', 'Selesai')
-                ->where('status', '!=', 'Dibatalkan');
+            $query->where('status', 'Diproses')
+                ->orWhere('status', 'Diterima')
+                ->orWhere('status', 'Dijemput Kurir')
+                ->orWhere('status', 'Menuju Lokasi Penjemputan')
+                ->orWhere('status', 'Sampah Diangkut')
+                ->orWhere('status', 'Menuju Dropbox')
+                ->orWhere('status', 'Menyimpan Sampah di Dropbox');
         })->paginate(6);
 
         return view(
@@ -174,6 +179,6 @@ class PenjemputanSampahMasyarakatController extends Controller
         $pelacakan->status = 'Dibatalkan';
         $pelacakan->save();
 
-        return redirect()->route('masyarakat.penjemputan.riwayat-penjemputan')->with('success', 'Permintaan Penjemputan Berhasil Dibatalkan!');
+        return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Dibatalkan!');
     }
 }

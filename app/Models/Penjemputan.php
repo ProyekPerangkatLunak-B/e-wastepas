@@ -63,9 +63,8 @@ class Penjemputan extends Model
 
     public function getLatestPelacakan()
     {
-        return $this->hasOne(Pelacakan::class, 'id_penjemputan')->latest();
+        return $this->hasOne(Pelacakan::class, 'id_penjemputan')->latest('created_at');
     }
-
 
     public function scopeFilter($query, array $filters)
     {
