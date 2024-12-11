@@ -42,7 +42,7 @@
 
             <!-- Link Kirim Ulang -->
             <p class="mt-4 text-gray-600 text-sm ">
-                <a href="{{ route('manajemen.registrasi.login') }}"
+                <a href="{{ route('manajemen.registrasi.register') }}"
                     class="text-green-500 font-semibold hover:underline">Kirim
                     ulang</a>
             </p>

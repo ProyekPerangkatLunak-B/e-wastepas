@@ -19,12 +19,16 @@ class ResetPasswordManajemenController extends Controller
      */
     public function showResetForm(Request $request, $token = null)
     {
-        // Menampilkan halaman reset password dengan token dan email
+        if (!$token || !$request->query('email')) {
+            abort(404); // Jika token atau email tidak valid, tampilkan error 404
+        }
+
         return view('manajemen.registrasi.reset-password', [
             'token' => $token,
-            'email' => $request->query('email') // Mengambil email dari query parameter
+            'email' => $request->query('email')
         ]);
     }
+
 
     /**
      * Mengatur ulang password pengguna.
@@ -35,43 +39,32 @@ class ResetPasswordManajemenController extends Controller
     public function resetPassword(Request $request)
     {
         // Validasi input pengguna
-        $validated = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6|confirmed',
-            'token' => 'required'
+            'token' => 'required',
         ]);
 
         // Proses reset password
         $response = Password::reset(
-            $validated,
-            function ($user) use ($request) {
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
                 // Update password dengan hashing
                 $user->forceFill([
-                    'password' => Hash::make($request->password),
+                    'password' => Hash::make($password),
                 ])->save();
 
-                // Autentikasi pengguna setelah reset password
+                // Autentikasi pengguna setelah reset password (opsional)
                 Auth::guard('web')->login($user);
             }
         );
 
-        // Cek apakah reset berhasil
+        // Jika reset berhasil, arahkan ke halaman login dengan pesan sukses
         if ($response === Password::PASSWORD_RESET) {
-            return redirect()->route('manajemen.password.reset-success')
-                ->with('status', __('Password berhasil direset!'));
+            return redirect()->route('login')->with('status', __('Password berhasil direset! Silakan login.'));
         }
 
         // Jika gagal, kembalikan dengan pesan error
-        return back()->withErrors(['email' => __($response)]);
-    }
-
-    /**
-     * Menampilkan halaman sukses reset password.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function showResetSuccess()
-    {
-        return view('manajemen.registrasi.reset-password');
+        return back()->withErrors(['email' => __('Token reset password tidak valid atau kedaluwarsa.')]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Manajemen; // Ubah namespace menjadi Manajemen
+namespace App\Http\Controllers\Manajemen;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -26,8 +26,8 @@ class OtpManajemenController extends Controller
 
         // Mencari OTP berdasarkan email dan kode OTP yang dimasukkan
         $otp = Otp::where('email', $request->email)
-            ->where('otp', $request->otp) // Pastikan ini menggunakan nama kolom yang benar
-            ->where('expires_at', '>', now()) // Pastikan OTP belum kedaluwarsa
+            ->where('otp_token', $request->otp) // Nama kolom harus sesuai dengan database
+            ->where('expires_at', '>', now()) // OTP belum kedaluwarsa
             ->first();
 
         // Jika OTP ditemukan dan valid
@@ -36,17 +36,19 @@ class OtpManajemenController extends Controller
             User::create([
                 'name' => $request->session()->get('register_data.name'),
                 'email' => $request->email,
-                'nomor_telepon' => $request->nomor_telepon,
+                'nomor_telepon' => $request->session()->get('register_data.nomor_telepon'),
                 'password' => Hash::make($request->session()->get('register_data.password')),
             ]);
 
             // Hapus OTP setelah verifikasi berhasil
             $otp->delete();
 
-            return redirect()->route('login')->with('success', 'Registration successful! You can now login.');
+            // Redirect ke halaman konfirmasi sukses
+            return redirect()->route('manajemen.registrasi.otp-confirmation-success')
+                ->with('success', 'OTP berhasil diverifikasi!');
         }
 
         // Jika OTP tidak valid
-        return redirect()->back()->withErrors(['otp' => 'Invalid OTP code'])->withInput();
+        return redirect()->back()->withErrors(['otp' => 'Kode OTP salah atau sudah kedaluwarsa'])->withInput();
     }
 }
