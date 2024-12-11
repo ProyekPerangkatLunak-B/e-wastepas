@@ -105,6 +105,7 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function melacak()
     {
+        $kategori = Kategori::all();
         // $penjemputan = Penjemputan::whereHas(
         //     'pelacakan',
         //     function ($query) {
@@ -116,18 +117,18 @@ class PenjemputanSampahMasyarakatController extends Controller
         //     ->where('status', 'Diproses')
         //     ->orWhere('status', 'Diterima')
         //     ->orderByDesc('created_at')->paginate(6);
-        $penjemputan = Penjemputan::where(function ($query) {
-            $query->where('status', 'Diproses')
-                ->orWhere(function ($subQuery) {
-                    $subQuery->where('status', 'Diterima')
-                        ->whereHas('pelacakan', function ($innerQuery) {
-                            $innerQuery->whereIn('status', ['Menunggu Konfirmasi', 'Dijemput Driver', 'Menuju Dropbox']);
-                        });
-                });
-        })
-            ->orderByDesc('created_at')
-            ->paginate(6);
-        return view('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan'));
+        $penjemputan = Penjemputan::filter(request(['search', 'kategori']))
+            ->where('status', '!=', 'Ditolak')
+            ->where('status', '!=', 'Dibatalkan')
+            ->orderByDesc('created_at')->paginate(6);
+
+        return view(
+            'masyarakat.penjemputan-sampah.melacak-penjemputan',
+            compact([
+                'penjemputan',
+                'kategori'
+            ])
+        );
     }
 
     public function detailKategori($id)
@@ -156,8 +157,19 @@ class PenjemputanSampahMasyarakatController extends Controller
 
     public function riwayatPenjemputan()
     {
-        $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
-        return view('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan'));
+        // $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
+        $penjemputan = Penjemputan::filter(request(['search', 'kategori']))->paginate(6);
+        $kategori = Kategori::all();
+
+        // dd($penjemputan);
+
+        return view(
+            'masyarakat.penjemputan-sampah.riwayat-penjemputan',
+            compact([
+                'penjemputan',
+                'kategori'
+            ])
+        );
     }
 
     public function detailRiwayat($id)
