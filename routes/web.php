@@ -379,6 +379,11 @@ Route::get('/mitra-kurir/registrasi/account-profile/security', function () {
     return view('mitra-kurir/registrasi/account-profile/security');
 })->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
 
+// tes halaman pengganti otp
+Route::get('/mitra-kurir/registrasi/success-message', function () {
+    return view('mitra-kurir/registrasi/success-message');
+})->name('mitra-kurir.registrasi.success-message');
+
 Route::group([
     'prefix' => 'api/',
     'as' => 'api.',
