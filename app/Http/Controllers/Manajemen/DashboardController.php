@@ -9,6 +9,7 @@ use App\Models\Jenis;
 use App\Models\Penjemputan;
 use App\Models\Pengguna;
 use App\Models\Kategori;
+use App\Models\Pelacakan;
 
 class DashboardController extends Controller
 {
@@ -19,7 +20,7 @@ class DashboardController extends Controller
 
     $totalPoin = Penjemputan::sum('total_poin');
 
-    $riwayat = Penjemputan::where('status', 'Diterima')->count() / 2;
+    $riwayat = Pelacakan::where('status', 'Diterima')->count() / 2;
 
     $terdaftar = Pengguna::count();
 

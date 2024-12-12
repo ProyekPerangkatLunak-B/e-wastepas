@@ -20,7 +20,7 @@ return new class extends Migration
                 ->constrained('dropbox', 'id_dropbox')
                 ->onDelete('cascade');
             $table->text('keterangan')->nullable();
-            $table->enum('status', ['Menunggu Konfirmasi', 'Dijemput Driver', 'Menuju Dropbox', 'Sudah Sampai'])->nullable();
+            $table->enum('status', ['Diproses', 'Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai', 'Dibatalkan'])->default('Diproses')->nullable();
             $table->datetime('estimasi_waktu')->nullable();
             $table->timestamps();
         });

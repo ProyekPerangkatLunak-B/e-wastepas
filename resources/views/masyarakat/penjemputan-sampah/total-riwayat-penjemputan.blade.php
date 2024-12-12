@@ -12,7 +12,7 @@
                 <div class="grid grid-cols-1 gap-6 mt-6 ">
                     <!-- Card Total Sampah -->
                     <div
-                        class="flex flex-col items-center w-4/5 p-8 shadow-lg bg-white-normal rounded-xl group hover:shadow-xl">
+                        class="flex flex-col items-center w-4/5 p-8 shadow-sm bg-white-normal rounded-xl group hover:shadow-md">
                         <h3 class="text-2xl font-bold text-gray-800">Total Sampah</h3>
                         <div class="flex items-baseline mt-4">
                             <span class="mb-2 text-6xl font-bold text-secondary-normal">{{ $totalSampah }}</span>
@@ -23,7 +23,7 @@
 
                     <!-- Card Total Poin -->
                     <div
-                        class="flex flex-col items-center w-4/5 p-8 shadow-lg bg-white-normal rounded-xl group hover:shadow-xl">
+                        class="flex flex-col items-center w-4/5 p-8 shadow-sm bg-white-normal rounded-xl group hover:shadow-md">
                         <h3 class="text-2xl font-bold text-gray-800">Total Poin</h3>
                         <div class="flex items-baseline mt-4">
                             <span class="mb-2 text-6xl font-bold text-secondary-normal">{{ $totalPoin }}</span>
@@ -61,37 +61,61 @@
                         </div>
                     @else
                         @foreach ($penjemputan as $p)
-                            <a href="{{ route('masyarakat.penjemputan.detail-riwayat', $p->id_penjemputan) }}" class="block">
+                            <a href="{{ route('masyarakat.penjemputan.detail-riwayat', $p->id_penjemputan) }}"
+                                class="block">
                                 <div
                                     class="relative flex flex-col justify-between h-[230px] bg-white-normal shadow-sm rounded-xl hover:shadow-lg">
                                     <!-- Waktu Penjemputan -->
-                                    <div class="flex justify-between mx-6 mt-2">
+                                    <div class="flex justify-between mx-6 mt-4">
                                         <span class="text-lg font-bold text-gray-800">
-                                            {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
+                                            {{ $p->kode_penjemputan }}
                                         </span>
                                     </div>
 
                                     <!-- Konten -->
-                                    <div class="flex justify-between px-6">
-                                        <div>
+                                    <div class="flex justify-between px-4">
+                                        <div class="flex-grow px-2 my-auto">
                                             @foreach ($p->detailPenjemputan as $s)
-                                                @if ($loop->index == 2 && count($p->detailPenjemputan) > 3)
-                                                    <p class="text-lg font-semibold">...</p>
-                                                @break
-                                            @endif
-                                            <p class="text-2xl font-semibold">{{ $s->jenis->nama_jenis }}</p>
-                                        @endforeach
-                                    </div>
+                                                @if ($loop->index == 2 && count($p->detailPenjemputan) > 2)
+                                                    <p class="text-lg font-light">Lainnya...</p>
+                                                    @break
+                                                @endif
+                                                <p class="overflow-hidden text-xl font-semibold whitespace-nowrap text-ellipsis">
+                                                    {{ \Illuminate\Support\Str::words($s->jenis->nama_jenis, 2, '...') }}
+                                                </p>
+                                            @endforeach
+                                        </div>
 
-                                    <!-- Poin -->
+                                    <!-- Poin Sampah -->
                                     <div class="flex flex-col items-end">
-                                        <div class="flex items-baseline">
+                                        <div class="flex items-baseline mx-auto my-10">
                                             <p
-                                                class="text-6xl font-bold
-                                            @if ($p->status === 'Diterima' && $p->getLatestPelacakan->status === 'Sudah Sampai') text-secondary-normal
-                                            @else text-tertiary-600 @endif
-                                            ">
-                                                +{{ $p->total_poin }}
+                                                class="text-4xl font-bold
+                                                @switch($p->getLatestPelacakan->status)
+                                                        @case('Diproses')
+                                                        @case('Diterima')
+                                                            text-tertiary-600
+                                                            @break
+                                                        @case('Dijemput Kurir')
+                                                        @case('Menuju Lokasi Penjemputan')
+                                                        @case('Sampah Diangkut')
+                                                            text-white-dark
+                                                            @break
+                                                        @case('Menuju Dropbox')
+                                                        @case('Menyimpan Sampah di Dropbox')
+                                                        text-primary-normal
+                                                            @break
+                                                        @case('Selesai')
+                                                            text-secondary-normal
+                                                            @break
+                                                        @case('Dibatalkan')
+                                                        text-red-normal
+                                                            @break
+                                                        @default
+                                                        text-tertiary-600
+                                                    @endswitch
+                                                ">
+                                        +{{ $p->total_poin }}
                                             </p>
                                             <span class="ml-1 text-2xl font-bold text-gray-700">Poin</span>
                                         </div>
@@ -101,25 +125,56 @@
                                 <!-- Catatan -->
                                 <div class="px-6">
                                     <p class="mb-4 text-sm text-gray-600">
-                                        @if (strlen($p->catatan) > 25)
-                                            {{ substr($p->catatan, 0, 25) }}...
-                                        @else
-                                            {{ $p->catatan }}
-                                        @endif
+                                        {{ Carbon\Carbon::parse($p->created_at)->diffForHumans() }}
                                     </p>
                                 </div>
 
                                 <!-- Status -->
                                 <div class="absolute right-0 bottom-1">
                                     <span
-                                        class="px-4 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
-                                        @if ($p->getLatestPelacakan->status === 'Dijemput Driver') bg-white-dark
-                                        @elseif ($p->getLatestPelacakan->status === 'Menuju Dropbox') bg-primary-normal
-                                        @elseif ($p->getLatestPelacakan->status === 'Sudah Sampai') bg-secondary-normal
-                                        @elseif ($p->status === 'Ditolak') bg-red-500
-                                        @elseif ($p->status === 'Dibatalkan') bg-red-normal
-                                        @else bg-tertiary-600 @endif;">
-                                        {{ $p->status === 'Diterima' ? $p->getLatestPelacakan->status : $p->status }}
+                                        class="px-10 py-2 font-semibold text-white-normal rounded-tl-3xl rounded-br-xl
+                                        bg-primary-normal
+                                        @switch($p->getLatestPelacakan->status)
+                                        @case('Dijemput Kurir')
+                                        @case('Menuju Lokasi Penjemputan')
+                                        @case('Sampah Diangkut')
+                                            bg-white-dark
+                                            @break
+                                        @case('Menuju Dropbox')
+                                        @case('Menyimpan Sampah di Dropbox')
+                                        @case('Selesai')
+                                            bg-secondary-normal
+                                            @break
+                                        @case('Dibatalkan')
+                                            bg-red-normal
+                                            @break
+                                        @default
+                                            bg-tertiary-600
+                                    @endswitch;">
+                                        @switch($p->getLatestPelacakan->status)
+                                            @case('Dijemput Kurir')
+                                            @case('Menuju Lokasi Penjemputan')
+
+                                            @case('Sampah Diangkut')
+                                                Dijemput Kurir
+                                            @break
+
+                                            @case('Menuju Dropbox')
+                                            @case('Menyimpan Sampah di Dropbox')
+                                                Menuju Dropbox
+                                            @break
+
+                                            @case('Selesai')
+                                                Selesai
+                                            @break
+
+                                            @case('Dibatalkan')
+                                                Dibatalkan
+                                            @break
+
+                                            @default
+                                                Diproses
+                                        @endswitch
                                     </span>
                                 </div>
                             </div>

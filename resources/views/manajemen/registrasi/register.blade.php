@@ -23,29 +23,29 @@
                     </div>
                 @endif
 
-                <form action="{{ route('manajemen.register.submit') }}" method="POST">
+                <form action="{{ route('manajemen.registrasi.register') }}" method="POST">
                     @csrf
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700">Nama</label>
-                        <input value="nana" type="text" name="name" id="name"
-                            class="w-full p-2 mt-1 border rounded-xl" placeholder="Masukkan Nama" required>
+                        <input type="text" name="name" id="name" class="w-full p-2 mt-1 border rounded-xl"
+                            placeholder="Masukkan Nama" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="phone" class="block text-gray-700">No. Telepon</label>
-                        <input value="081231949388" type="text" name="phone" id="phone"
-                            class="w-full p-2 mt-1 border rounded-xl" placeholder="Masukkan No. Telepon" required>
+                        <input type="text" name="phone" id="phone" class="w-full p-2 mt-1 border rounded-xl"
+                            placeholder="Masukkan No. Telepon" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700">Email</label>
-                        <input value="nana@gmail.com" type="email" name="email" id="email"
-                            class="w-full p-2 mt-1 border rounded-xl" placeholder="Masukkan Email" required>
+                        <input type="email" name="email" id="email" class="w-full p-2 mt-1 border rounded-xl"
+                            placeholder="Masukkan Email" required>
                     </div>
 
                     <div class="relative mb-4">
                         <label for="password" class="block text-gray-700">Password</label>
-                        <input value="admin123" type="password" name="password" id="password"
+                        <input type="password" name="password" id="password"
                             class="w-full p-2 pr-10 mt-1 border rounded-xl" placeholder="Masukkan Password" required>
                         <span class="absolute right-3 bottom-2.5 cursor-pointer" onclick="togglePasswordVisibility()">
                             <i id="eyeIcon" class="fa fa-eye"></i>

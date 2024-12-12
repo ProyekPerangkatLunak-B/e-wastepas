@@ -23,7 +23,7 @@ class PackSeeder extends Seeder
             DaerahSeeder::class,
             DropboxSeeder::class,
             KategoriSeeder::class,
-            // JenisSeeder::class,
+            JenisSeeder::class,
             UserSeeder::class,
             PenjemputanSeeder::class,
             DetailPenjemputanSeeder::class,

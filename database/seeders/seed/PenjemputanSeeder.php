@@ -26,7 +26,6 @@ class PenjemputanSeeder extends Seeder
 
         $daerahIds = DB::table('daerah')->pluck('id_daerah')->toArray();
         $dropboxIds = DB::table('dropbox')->pluck('id_dropbox')->toArray();
-        $statusDefault = ['Diproses', 'Diterima', 'Dibatalkan', 'Ditolak'];
 
         $data = [];
         for ($i = 1; $i <= $dat; $i++) {
@@ -46,7 +45,6 @@ class PenjemputanSeeder extends Seeder
                 'id_pengguna_kurir' => $penggunaKurirIds[array_rand($penggunaKurirIds)],
                 'total_berat' => 0, // init
                 'total_poin' => 0, // init
-                'status' => $statusDefault[array_rand($statusDefault)],
                 'tanggal_penjemputan' => now(),
                 'alamat_penjemputan' => $i . '. ' . $daerah->nama_daerah . ', ' . $penggunaMasyarakat->alamat,
                 'catatan' => $i . ". " . $faker->realText(rand(50, 100)),
