@@ -30,14 +30,15 @@
         </div>
         {{-- Card Section --}}
         <div class="grid grid-cols-3 gap-6 px-12 pb-6 mt-4 lg:grid-cols-3 lg:gap-6">
-            @foreach($kategoriData as $kategori)
-                <x-kategori-card
-                    title="{{ $kategori['nama_kategori'] }}"
-                    description="{{ $kategori['deskripsi_kategori'] }}"
-                    image="https://picsum.photos/720/720"
-                    link="#"
-                    points="{{ $kategori['poin'] }}" />
-            @endforeach
+            @foreach($categories as $category)
+            <x-kategori-card
+                title="{{ $category['nama_kategori'] }}"
+                description="{{ $category['deskripsi_kategori'] }}"
+                image="https://picsum.photos/720/720"
+                link="#"
+                points="{{ number_format($category['total_poin'], 0) }}"
+                weight="{{ number_format($category['total_berat'], 0) }}" />
+        @endforeach
         </div>
     </div>
 </div>
