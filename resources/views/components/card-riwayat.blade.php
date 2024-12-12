@@ -11,7 +11,6 @@
         </div>
         <div class="flex flex-col items-center p-4 text-center">
             <h3 class="text-base font-semibold text-gray-900">{{ $name }}</h3>
-            <p class="mt-1 text-sm text-gray-500">{{ $status }}</p>
         </div>
         <div>
             @php
