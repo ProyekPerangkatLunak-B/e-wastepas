@@ -56,28 +56,5 @@ class KategoriSeeder extends Seeder
         foreach ($kategoriData as $kategori) {
             DB::table('kategori')->insert($kategori);
         }
-
-        // Data jenis (kita asumsikan setiap kategori memiliki beberapa jenis terkait)
-        $jenisData = [
-            ['id_kategori' => 1, 'nama_jenis' => 'Kulkas', 'poin' => 100, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 1, 'nama_jenis' => 'Freezer', 'poin' => 150, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 1, 'nama_jenis' => 'AC', 'poin' => 120, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 2, 'nama_jenis' => 'Televisi', 'poin' => 80, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 2, 'nama_jenis' => 'Monitor', 'poin' => 70, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 2, 'nama_jenis' => 'Laptop', 'poin' => 200, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 3, 'nama_jenis' => 'Lampu Fluoresen', 'poin' => 10, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 3, 'nama_jenis' => 'Lampu LED', 'poin' => 20, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 4, 'nama_jenis' => 'Mesin Cuci', 'poin' => 150, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 4, 'nama_jenis' => 'Pengering Pakaian', 'poin' => 160, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 5, 'nama_jenis' => 'Microwave', 'poin' => 50, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 5, 'nama_jenis' => 'Vacuum Cleaner', 'poin' => 40, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 6, 'nama_jenis' => 'Ponsel', 'poin' => 200, 'created_at' => now(), 'updated_at' => now()],
-            ['id_kategori' => 6, 'nama_jenis' => 'Router', 'poin' => 60, 'created_at' => now(), 'updated_at' => now()],
-        ];
-
-        // Insert jenis data
-        foreach ($jenisData as $jenis) {
-            DB::table('jenis')->insert($jenis);
-        }
     }
 }

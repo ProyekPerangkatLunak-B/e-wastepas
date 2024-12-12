@@ -54,6 +54,8 @@
                                 <span>: 1 Pcs</span>
                             </div>
                         </div>
+
+
 {{--                        <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">--}}
 {{--                            <div class="grid grid-cols-2 gap-x-2">--}}
 {{--                                <span class="font-semibold">Kategori</span>--}}
@@ -89,7 +91,7 @@
                     <!-- catatan & status -->
                     <h3 class="text-lg font-semibold mb-2">Catatan</h3>
                     <div class="bg-gray-100 p-4 rounded-xl text-sm mb-2 border border-gray-300">
-                        <p> Layar handphone pecah </p>
+                        <p>{{ $item->catatan }}</p>
                     </div>
                     <h4 class="text-base font-semibold mb-7">Status Permintaan Penjemputan: {{ $item->status }}</h4>
 
@@ -99,13 +101,13 @@
                             <form action="{{ route('mitra-kurir.penjemputan.detail-permintaan', ['id' => $item->id_pelacakan]) }}" method="POST">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" name="status" value="Dijemput Driver">
-                                <button type="submit" id="openModalBtn" class="focus:outline-none text-slate-50 bg-secondary-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300 font-bold rounded-xl text-base px-16 py-2 me-2 mr-4">Terima</button>
+                                    <input type="hidden" name="status" value="Dijemput Driver">
+                                    <button type="submit" id="openModalBtn" class="focus:outline-none font-bold rounded-xl text-base px-16 py-2 me-2 mr-4
+                                        {{ $item->status == 'Dijemput Driver' ? 'bg-gray-400 cursor-not-allowed' : 'text-slate-50 bg-secondary-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300' }}"
+                                        {{ $item->status == 'Dijemput Driver' ? 'disabled' : '' }}>
+                                        Terima
+                                    </button>
                             </form>
-                        </div>
-
-                        <div class="flex justify-start">
-                            <a href="#" type="button" id="tolakModalBtn" class="focus:outline-none  text-slate-50 bg-red-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300 font-bold rounded-xl text-base px-16 py-2 me-2 ml-4">Tolak</a>
                         </div>
                     </div>
                 </div>
