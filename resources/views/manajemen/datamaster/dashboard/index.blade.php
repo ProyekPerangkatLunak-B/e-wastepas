@@ -3,13 +3,13 @@
 @section('content')
     {{-- Container Utama --}}
 <div class="container max-w-full px-4 mx-auto bg-gray-100">
-    <div class="py-8">
+    <div class="py-8 ">
         {{-- Section Judul --}}
         <h2 class="text-xl font-semibold leading-relaxed ml-14">Dashboard Manajemen</h2>
         <h4 class="text-base font-normal ml-14">Selamat datang di dashboard Manajemen.</h4>
 
         {{-- Card Section --}}
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 px-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 px-12 bg-white">
             {{-- Card Total Sampah Terkumpul --}}
             <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2">
                 <i class="fa-solid fa-recycle text-3xl text-[#437252]"></i>
@@ -51,12 +51,12 @@
             </button>
         </div>
     </div>
-</div>
+
             {{-- Chart --}}
-            <div class="px-12 mt-8">
+            <div class="px-12 mt-8 ">
                 <div class="container mx-auto p-6 grid gap-6">
                     <!-- Baris 1: 2 Kolom -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- Chart: Top Masyarakat -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left  hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]" >
                             <a href="top-10?tab=masyarakat">
@@ -72,10 +72,6 @@
                             <div id="chart-top-kurir" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
                         </a>
                         </button>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Chart: Top Jenis Sampah -->
 
                         <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
                             <a href="top-10?tab=jenis-sampah">
@@ -84,12 +80,29 @@
                             </a>
                         </button>
 
-                    <!-- Chart: Total Sampah Tiap Daerah -->
-                    <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                        <h2 class="text-lg font-bold mb-2">Total Sampah Terkumpul Tiap Daerah</h2>
-                        <div id="chart-daerah" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
-                    </button>
 
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Chart: Top Jenis Sampah -->
+
+
+
+                    <!-- Chart: Total Sampah Tiap Daerah -->
+                    
+                    <button class="bg-white p-2 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
+                        <a href="per-daerah">
+                            <h2 class="text-lg font-bold mb-2">Total Sampah Terkumpul Tiap Daerah</h2>
+                            <div id="chart-daerah" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
+                        </a>
+                    </button>
+                    
+                    <button class="bg-white p-4 rounded-lg shadow-md text-left hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
+                        <a href="dropbox">
+                        <h2 class="text-lg font-bold mb-2">Dropbox</h2>
+                        <div id="chart-top-kurir" class="w-full" style="height: 300px;"></div> <!-- Set height di sini -->
+                    </a>
+                    </button>
 
                         <!-- Chart: Top Jenis Sampah -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left w-full hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
@@ -99,12 +112,12 @@
 
                             <div class="space-y-6">
                                 <!-- Handphone -->
-                                <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-4 ml-10">
                                     <i class="fa-solid fa-mobile-screen-button text-3xl text-gray-700 flex-shrink-0"></i>
-                                    <div class="w-full">
+                                    <div class="w-3/4">
                                         <div class="flex justify-between items-center">
-                                            <span class="text-sm font-medium ml-2">Handphone</span>
-                                            <span class="text-sm font-medium">80%</span>
+                                            <span class="text-lg font-medium ml-2">Lampu</span>
+                                            <span class="text-lg font-medium">80%</span>
                                         </div>
                                         <div class="w-full bg-gray-300 h-2 rounded-full mt-1 ml-2">
                                             <div class="bg-[#437252] h-2 rounded-full" style="width: 80%;"></div>
@@ -113,12 +126,12 @@
                                 </div>
 
                                 <!-- Laptop -->
-                                <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-4 ml-10">
                                     <i class="fa-solid fa-laptop text-2xl text-gray-700 flex-shrink-0"></i>
-                                    <div class="w-full">
+                                    <div class="w-3/4">
                                         <div class="flex justify-between items-center">
-                                            <span class="text-sm font-medium">Laptop</span>
-                                            <span class="text-sm font-medium">60%</span>
+                                            <span class="text-lg font-medium">Layar dan Monitor</span>
+                                            <span class="text-lg font-medium">60%</span>
                                         </div>
                                         <div class="w-full bg-gray-300 h-2 rounded-full mt-1">
                                             <div class="bg-[#437252] h-2 rounded-full" style="width: 60%;"></div>
@@ -127,12 +140,12 @@
                                 </div>
 
                                 <!-- Televisi -->
-                                <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-4 ml-10">
                                     <i class="fa-solid fa-tv text-2xl text-gray-700 flex-shrink-0"></i>
-                                    <div class="w-full">
+                                    <div class="w-3/4">
                                         <div class="flex justify-between items-center">
-                                            <span class="text-sm font-medium">Televisi</span>
-                                            <span class="text-sm font-medium">30%</span>
+                                            <span class="text-lg font-medium">Peralat Besar</span>
+                                            <span class="text-lg font-medium">30%</span>
                                         </div>
                                         <div class="w-full bg-gray-300 h-2 rounded-full mt-1">
                                             <div class="bg-[#437252] h-2 rounded-full" style="width: 30%;"></div>
@@ -144,6 +157,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
 
 
@@ -161,9 +175,9 @@
 
         // Chart: Top Masyarakat
         renderChart("#chart-top-masyarakat", {
-          series: [{ data: [10, 15, 20, 25, 13, 17, 23] }],
+          series: [{ data: [10, 15, 20] }],
           chart: { type: 'bar' },
-          xaxis: { categories: ['Aaliyah', 'Kim', 'Isa', 'Beyonce', 'Asep', 'Jajang', 'Maemunah'] },
+          xaxis: { categories: ['Aaliyah', 'Kim', 'Isa',] },
           colors: ['#437252'],
           plotOptions: {
             bar: {
@@ -175,9 +189,9 @@
 
         // Chart: Top Kurir
         renderChart("#chart-top-kurir", {
-          series: [{ data: [20, 10, 15, 30] }],
+          series: [{ data: [20, 10, 15] }],
           chart: { type: 'bar' },
-          xaxis: { categories: ['Asep', 'Iwan', 'Agus', 'Budi'] },
+          xaxis: { categories: ['Asep', 'Iwan', 'Agus',] },
           colors: ['#437252'],
           plotOptions: {
             bar: {
