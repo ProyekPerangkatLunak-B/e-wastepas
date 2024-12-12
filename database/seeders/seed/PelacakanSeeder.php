@@ -19,6 +19,10 @@ class PelacakanSeeder extends Seeder
         $faker = Faker::create('id_ID');
         $penjemputanData = DB::table('penjemputan')->get();
 
+        $statusDefault = ['Diproses', 'Dibatalkan'];
+
+        $dibatalkan = 0;
+
         $data = [];
         foreach ($penjemputanData as $penjemputan) {
             // Tambah kan waktu penjemputan dari table penjemputan dan tambahkan
@@ -26,11 +30,17 @@ class PelacakanSeeder extends Seeder
                 ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
                 ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
+            if ($dibatalkan > 4) {
+                $statusDefault = ['Diproses'];
+            } else {
+                $dibatalkan++;
+            }
+
             $data[] = [
                 'id_penjemputan' => $penjemputan->id_penjemputan,
                 'id_dropbox' => $penjemputan->id_dropbox,
                 'keterangan' => $faker->realText(rand(50, 100)),
-                'status' => ($penjemputan->status == 'Diterima') ? 'Dijemput Driver' : 'Menunggu Konfirmasi',
+                'status' => $statusDefault[array_rand($statusDefault)],
                 'estimasi_waktu' => $estimasiWaktu,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -40,47 +50,27 @@ class PelacakanSeeder extends Seeder
         DB::table('pelacakan')->insert($data);
 
         // Pelacakan Lanjutan
-        $dijemput = DB::table('pelacakan')->where('status', 'Dijemput Driver')->get();
-        if ($dijemput->count() > 0) {
-            foreach ($dijemput as $d) {
-                if (rand(0, 1) == 1) {
+        $status = ['Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai'];
+        $currentStatus = 'Diproses';
 
-                    $estimasiWaktu = \Carbon\Carbon::parse($d->estimasi_waktu)
-                        ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
-                        ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
-
-                    $createUpdate = \Carbon\Carbon::parse($d->created_at)
-                        ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
-                        ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
-
-                    Pelacakan::create([
-                        'id_penjemputan' => $d->id_penjemputan,
-                        'id_dropbox' => $d->id_dropbox,
-                        'keterangan' => $faker->realText(rand(50, 100)),
-                        'status' => 'Menuju Dropbox',
-                        'estimasi_waktu' => $estimasiWaktu,
-                        'created_at' => $createUpdate,
-                        'updated_at' => $createUpdate,
-                    ]);
-                }
-            }
-            $menuju = DB::table('pelacakan')->where('status', 'Menuju Dropbox')->get();
-            if ($menuju->count() > 0) {
-                foreach ($menuju as $m) {
+        foreach ($status as $nextStatus) {
+            $records = Pelacakan::where('status', $currentStatus)->get();
+            if ($records->count() > 0) {
+                foreach ($records as $record) {
                     if (rand(0, 1) == 1) {
-                        $estimasiWaktu = \Carbon\Carbon::parse($m->estimasi_waktu)
+                        $estimasiWaktu = \Carbon\Carbon::parse($record->estimasi_waktu)
                             ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
                             ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
-                        $createUpdate = \Carbon\Carbon::parse($m->created_at)
+                        $createUpdate = \Carbon\Carbon::parse($record->created_at)
                             ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
                             ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
                         Pelacakan::create([
-                            'id_penjemputan' => $m->id_penjemputan,
-                            'id_dropbox' => $m->id_dropbox,
+                            'id_penjemputan' => $record->id_penjemputan,
+                            'id_dropbox' => $record->id_dropbox,
                             'keterangan' => $faker->realText(rand(50, 100)),
-                            'status' => 'Sudah Sampai',
+                            'status' => $nextStatus,
                             'estimasi_waktu' => $estimasiWaktu,
                             'created_at' => $createUpdate,
                             'updated_at' => $createUpdate,
@@ -88,6 +78,7 @@ class PelacakanSeeder extends Seeder
                     }
                 }
             }
+            $currentStatus = $nextStatus;
         }
     }
 }

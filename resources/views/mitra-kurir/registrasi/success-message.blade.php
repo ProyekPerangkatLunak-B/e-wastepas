@@ -1,4 +1,3 @@
-
 @extends('mitra-kurir.registrasi.layout')
 @section('title', 'Success Message')
 @section('content')
