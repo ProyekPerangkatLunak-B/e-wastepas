@@ -12,30 +12,31 @@ use App\Models\Kategori;
 class KategoriController extends Controller
 {
     public function index()
-    {
-        // Ambil data kategori dari database
-        $kategoriData = Kategori::all()->map(function ($kategori) {
-            // Hitung poin berdasarkan ID kategori
-            $jumlah = DetailPenjemputan::where('id_kategori', $kategori->id)->count();
-            $poinPerItem = match ($kategori->id) {
-                1 => 20,
-                2 => 10,
-                3 => 5,
-                default => 1, // Default poin jika ID tidak dikenali
-            };
-            $totalPoin = $jumlah * $poinPerItem;
-    
-            return [
-                'nama_kategori' => $kategori->nama_kategori,
-                'deskripsi_kategori' => $kategori->deskripsi_kategori,
-                'poin' => $totalPoin,
-            ];
-        });
-    
-        return view('manajemen.datamaster.kategori.index', [
-            'kategoriData' => $kategoriData,
-        ]);
-    }
+{
+    $categories = Kategori::all()->map(function ($kategori) {
+        $totalBerat = DetailPenjemputan::join('penjemputan', 'detail_penjemputan.id_penjemputan', '=', 'penjemputan.id_penjemputan')
+            ->join('pelacakan', 'penjemputan.id_penjemputan', '=', 'pelacakan.id_penjemputan')
+            ->where('detail_penjemputan.id_kategori', $kategori->id_kategori)
+            ->where('pelacakan.status', 'Selesai')
+            ->sum('penjemputan.total_berat');
 
+        $totalPoin = DetailPenjemputan::join('penjemputan', 'detail_penjemputan.id_penjemputan', '=', 'penjemputan.id_penjemputan')
+            ->join('pelacakan', 'penjemputan.id_penjemputan', '=', 'pelacakan.id_penjemputan')
+            ->where('detail_penjemputan.id_kategori', $kategori->id_kategori)
+            ->where('pelacakan.status', 'Selesai')
+            ->sum('penjemputan.total_poin');
+
+        return [
+            'id_kategori' => $kategori->id_kategori,
+            'nama_kategori' => $kategori->nama_kategori,
+            'deskripsi_kategori' => $kategori->deskripsi_kategori,
+            'gambar' => $kategori->gambar,
+            'total_berat' => $totalBerat,
+            'total_poin' => $totalPoin,
+        ];
+    });
+
+    return view('manajemen.datamaster.kategori.index', compact('categories'));
+}
 
 }

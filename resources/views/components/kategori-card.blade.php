@@ -17,11 +17,11 @@
         <div class="flex justify-center gap-4 mt-6">
             <div class="flex items-center gap-4 px-6 py-3 text-base font-bold text-gray-900 bg-gray-200 rounded-2xl">
                 <i class="fa-solid fa-recycle text-2xl text-[#437252]"></i>
-                <span>234312 Poin</span>
+                <span>{{ $weight }} Kg</span>
             </div>
             <div class="flex items-center gap-4 px-6 py-3 text-base font-bold text-gray-900 bg-gray-200 rounded-2xl">
                 <i class="fa-solid fa-trophy text-2xl text-[#437252]"></i>
-                <span>513123 Poin</span>
+                <span>{{ $points }} Poin</span>
             </div>
         </div>
         <!-- Tombol Detail -->
