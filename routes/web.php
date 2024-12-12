@@ -315,12 +315,17 @@ Route::group([
     Route::get('/ubah-password', function () {
         return view('masyarakat/registrasi/ubah-password');
     });
-    Route::get('/profil', function () {
-        return view('masyarakat/registrasi/profil');
+    Route::get('/cek-mail', function () {
+        return view('masyarakat/registrasi/cek-mail');
     });
-    Route::get('/forgot-password-otp', function () {
-        return view('masyarakat/registrasi/forgot-password-otp');
-    });
+
+    //Route::get('/profil', function () {
+    //    return view('masyarakat/registrasi/profil');
+    //});
+
+    //Route::get('/forgot-password-otp', function () {
+    //    return view('masyarakat/registrasi/forgot-password-otp');
+    //});
 
 
 
