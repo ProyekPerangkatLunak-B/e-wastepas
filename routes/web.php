@@ -446,6 +446,11 @@ Route::get('/mitra-kurir/registrasi/success-message-data', function () {
     return view('mitra-kurir/registrasi/success-message-data');
 })->name('mitra-kurir.registrasi.success-message-data');
 
+// halaman forgot password link email
+Route::get('/mitra-kurir/registrasi/forgot-password-link', function () {
+    return view('mitra-kurir/registrasi/forgot-password-link');
+})->name('mitra-kurir.registrasi.forgot-password-link');
+
 Route::group([
     'prefix' => 'api/',
     'as' => 'api.',
