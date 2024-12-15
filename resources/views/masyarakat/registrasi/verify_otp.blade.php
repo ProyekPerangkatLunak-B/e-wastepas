@@ -29,14 +29,6 @@
               <div class="max-w-md mx-auto">
                   <form action="{{ route('masyarakat.otp.verify') }}" method="POST">
                       @csrf
-                      <!--<div>
-                          <label for="otp" class="block mt-4 font-medium leading-9 text-gray-500 text-md">Kode OTP</label>
-                          <input
-                              class="w-full px-4 py-3 mt-2 font-medium bg-gray-100 border border-green-200 rounded-lg text-md focus:outline-none focus:border-green-400 focus:bg-white"
-                              type="text" required name="otp" id="otp"/>
-                      </div>-->
-
-
                       <div class="grid grid-cols-6  mt-10 ms-6 gap-x-10 my-2">
                         <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
@@ -55,7 +47,6 @@
                         </div>
                         <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
-
                         </div>
 
                       <!-- Button Submit -->
@@ -80,7 +71,7 @@
                                <div class="mail-reset">
                                    <img src="../img/masyarakat/registrasi/popup-reset.png" alt="" class="flex justify-center h-20 mx-auto w-25">
                                 <h3 class="mt-5 mb-6 font-medium text-gray-500 text-md"> Selamat Anda Berhasil Melakukan Konfirmasi Kode !! </h3>
-                                <a href="#"  onclick="closeModal('modelConfirm')"
+                                <a href="{{ route('masyarakat.login') }}" onclick="closeModal('modelConfirm')"
                                     class="focus:outline-none text-slate-50 font-bold bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg px-5 py-2.5 text-center mr-2">
                                     Kembali
                                 </a>
