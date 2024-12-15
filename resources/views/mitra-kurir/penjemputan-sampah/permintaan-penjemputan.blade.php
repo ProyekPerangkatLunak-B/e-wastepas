@@ -44,31 +44,38 @@
                 </div>
             </div>
 
-            @if (count($data) == 0)
-                <div
-                    class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
-                    <div class="text-center">
-                        <p class="text-lg font-semibold text-gray-500">Pengguna {{ $search ?? 'pengguna' }} tidak ditemukan.</p>
-                    </div>
-                </div>
-            @else
-            {{-- Card Section --}}
-            @php
+            <div class="flex justify-center mt-4">
+                {{-- Card Section --}}
+                @php
                 $groupData = $data->groupBy('nama');
-            @endphp
-            <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
-                @foreach ($groupData as $name => $items)
-                            <x-card-permintaan
-                                name="{{ $name }}"
-                                status="{{ $items->first()->status }}"
-                                image="https://picsum.photos/700/700"
-                                imageItem="https://picsum.photos/700/700"
-                                :items="$items"
-                                link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $items->first()->id_penjemputan) }}"
-                            />
-                @endforeach
+                @endphp
+                    <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
+                        @if (count($data) == 0)
+                            <div
+                            class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
+                                <div class="text-center">
+                                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}"
+                                        alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
+                                    <p class="text-lg font-semibold text-gray-500">Pengguna {{ $search ?? 'pengguna' }}
+                                        tidak ditemukan.</p>
+                                </div>
+                            </div>
+                        @else
+                        @foreach ($groupData as $name => $items)
+                                    <x-card-permintaan
+                                        name="{{ $name }}"
+                                        status="{{ $items->first()->status }}"
+                                        image="https://picsum.photos/700/700"
+                                        imageItem="https://picsum.photos/700/700"
+                                        :items="$items"
+                                        link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $items->first()->id_penjemputan) }}"
+                                    />
+                        @endforeach
+                    </div>
+                @endif
             </div>
-           @endif
+            
+            
             {{-- Pagination --}}
             @if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator && $data->lastPage() > 1)
                 <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
@@ -88,6 +95,7 @@
                     @endif
                 </div>
             @endif
+            
         </div>
     </div>
 @endsection
