@@ -35,7 +35,7 @@
                 <h4 class="text-base font-normal ml-14">Daftar riwayat penjemputan sampah</h4>
 
                 {{-- Search and Filter options --}}
-                <div class="flex items-center mr-20 space-x-4">
+                <div class="flex items-center mr-14 space-x-4">
                     {{-- Search Box --}}
                     <div class="relative">
                         <input type="text"
@@ -69,19 +69,23 @@
                 </div>
             </div>
 
-            @if (count($data) == 0)
-                <div
-                    class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
-                    <div class="text-center">
-                        <p class="text-lg font-semibold text-gray-500">Pengguna {{ $search ?? 'pengguna' }} tidak ditemukan.</p>
-                    </div>
-                </div>
-            @else
-{{--                 Card Section --}}
+            <div class="flex justify-center mt-4">
+                {{-- Card Section --}}
                 @php
                     $groupData = $data->groupBy('nama');
                 @endphp
                 <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
+                @if (count($data) == 0)
+                    <div
+                        class="flex justify-center mt-20 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
+                        <div class="text-center">
+                            <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}"
+                                alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
+                            <p class="text-lg font-semibold text-gray-500">Pengguna {{ $search ?? 'pengguna' }}
+                                tidak ditemukan.</p>
+                        </div>
+                    </div>
+                @else
                     @foreach ($groupData as $name => $items)
                         <x-card-riwayat
                         name="{{ $name }}"
@@ -93,6 +97,26 @@
                         />
                         @endforeach
                     </div>
+                @endif
+            </div>
+            {{-- Pagination --}}
+            @if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator && $data->lastPage() > 1)
+                <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
+                    {{-- Button < & << --}}
+                    @if ($data->currentPage() > 1)
+                        <button onclick="window.location.href='{{ $data->url(1) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                        <button onclick="window.location.href='{{ $data->previousPageUrl() }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                    @endif
+
+                    {{-- Nomor halaman  --}}
+                    <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $data->currentPage() }}</button>
+
+                    {{-- Button > & >>--}}
+                    @if ($data->hasMorePages())
+                        <button onclick="window.location.href='{{ $data->nextPageUrl() }}'" class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                        <button onclick="window.location.href='{{ $data->url($data->lastPage()) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                    @endif
+                </div>
             @endif
         </div>
     </div>

@@ -8,7 +8,7 @@
                 <h4 class="text-base font-normal ml-14 w-1/2">Daftar jenis sampah elektronik dari kategori {{ htmlspecialchars($kategori->nama_kategori_sampah) }}  yang dapat dijemput</h4>
 
                 {{-- Search and Filter options --}}
-                <div class="flex items-center mr-20 space-x-4">
+                <div class="flex items-center mr-14 space-x-4">
                     {{-- Search Box --}}
                     <div class="relative">
                         <input type="text"
@@ -50,7 +50,7 @@
                         <div
                             class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
                             <div class="text-center">
-                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}"
                                     alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
                                 <p class="text-lg font-semibold text-gray-500">Kategori {{ $search ?? 'Sampah Elektronik' }}
                                     tidak ditemukan.</p>
@@ -58,7 +58,7 @@
                         </div>
                     @else
                         @foreach ($jenis as $jenisSampah)
-                            <x-detail-card
+                            <x-card-detail
                             title="{{ $jenisSampah->nama_jenis }}"
                             description="{{ $jenisSampah->deskripsi_jenis }}"
                             image="https://picsum.photos/700/700" />
