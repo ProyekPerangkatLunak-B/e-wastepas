@@ -6,6 +6,7 @@ use App\Http\Controllers\APIController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\admin\KurirAdminController;
+use App\Http\Controllers\Manajemen\DaerahController;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Manajemen\DashboardKategori;
@@ -190,9 +191,12 @@ Route::group([
     Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
 
-    Route::get('/datamaster/per-daerah', function () {
-        return view('manajemen.datamaster.per-daerah.index');
-    })->name('datamaster.per-daerah.index');
+    // Route::get('/datamaster/per-daerah', function () {
+    //     return view('manajemen.datamaster.per-daerah.index');
+    // })->name('datamaster.per-daerah.index');
+
+    Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
+    ->name('datamaster.per-daerah.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');
