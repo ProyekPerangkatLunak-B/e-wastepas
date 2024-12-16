@@ -43,12 +43,12 @@
 
             {{-- Card Section --}}
             <div class="flex items-center justify-center mt-4">
-                <div class="grid grid-cols-3 gap-6 mx-auto">
+                <div class="grid grid-cols-3 gap-4 mx-auto">
                     @if (count($kategori) == 0)
                         <div
-                            class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
+                            class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-sm">
                             <div class="text-center">
-                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}"
                                     alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
                                 <p class="text-lg font-semibold text-gray-500">Kategori {{ $search ?? 'Sampah Elektronik' }}
                                     tidak ditemukan.</p>
@@ -57,8 +57,8 @@
                     @else
                         @foreach ($kategori as $k)
                             @php
-                                $imagePath = 'img/masyarakat/penjemputan-sampah/gambarJenisSampah/' . ($k->gambar ?? $k->nama_kategori . '.png');
-                                $image = file_exists(public_path($imagePath)) ? $imagePath : 'img/masyarakat/penjemputan-sampah/no-image.png';
+                                $imagePath = 'img/masyarakat/gambarKategoriSampah/' . ($k->gambar ?? $k->nama_kategori . '.png');
+                                $image = file_exists(public_path($imagePath)) ? $imagePath : 'img/masyarakat/gambarKategoriSampah/no-image.png';
                             @endphp
                             <x-card title="{{ $k->nama_kategori }}" description="{{ $k->deskripsi_kategori }}"
                                 image="{{ asset($image) }}"
