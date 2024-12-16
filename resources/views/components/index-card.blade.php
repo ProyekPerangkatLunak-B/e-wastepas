@@ -1,11 +1,12 @@
-<div class="relative w-[450px] h-[400px] shadow-md bg-white-100 rounded-2xl group hover:shadow-lg">
-    <div class="w-[450px] h-[228px] overflow-hidden bg-white-normal rounded-t-xl z-0">
-        <img src="{{ $image }}" alt="{{ $title }}" class="object-cover w-full h-full">
-    </div>
-    <div class="flex flex-col items-start justify-center pt-4 text-center">
-        <h3 class="mx-auto my-2 text-2xl font-semibold text-gray-900">{{ $title }}</h3>
-        <p class="mx-auto text-gray-500 text-md">{{ $description }}</p>
-        <a href="{{ $link }}" class="inline-grid mx-auto items-center w-[400px] h-[45px] mt-4 text-md font-medium text-gray-100 border rounded-xl bg-gradient-to-r from-secondary-normal to-primary-normal border-tertiary-normal">Detail</a>
-
+<div class="w-[460px] h-64 bg-neutral-50 border-solid border-gray-200 rounded-2xl shadow-md hover:shadow-lg mx-auto overflow-hidden flex flex-col items-center text-center">
+    <div class="relative flex items-center justify-center w-full h-full text-center">
+        <img class="object-cover w-full h-full blur-[2px]" src="{{$image}}" alt=""/>
+        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-40">
+            <span class="text-2xl font-bold text-white-normal">{{$title}}</span>
+            <span class="mt-2 text-lg text-white-normal">{{$description}}</span>
+            <div class="flex flex-col items-center py-6 space-y-4">
+                <a href="{{ $link }}" class="inline-flex items-center justify-center w-48 h-12 text-base font-bold transition-transform duration-300 transform shadow-lg text-white-normal bg-gradient-to-r from-secondary-normal to-primary-normal rounded-2xl hover:scale-105">Detail</a>
+            </div>
+        </div>
     </div>
 </div>
