@@ -311,8 +311,15 @@
                                 <!-- Gambar Sampah -->
                                 <div
                                     class="flex items-center justify-center w-[120px] h-full overflow-hidden rounded-lg rounded-l-none rounded-t-none rounded-b-none">
-                                    <img src="https://picsum.photos/400/400" alt="Sampah"
-                                        class="object-cover w-full h-full">
+                                    @php
+                                        $imagePath =
+                                            'img/masyarakat/gambarJenisSampah/' .
+                                            ($dp->jenis->gambar ?? $dp->jenis->nama_jenis . '.png');
+                                        $image = file_exists(public_path($imagePath))
+                                            ? $imagePath
+                                            : 'img/masyarakat/gambarKategoriSampah/no-image.png';
+                                    @endphp
+                                    <img src="{{ asset($image) }}" alt="Sampah" class="object-cover w-full h-full">
                                 </div>
 
                                 <!-- Detail Sampah -->

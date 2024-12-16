@@ -146,7 +146,8 @@
             </div>
         </div>
 
-        <div class="w-[1380px] h-auto pb-8 flex items-center justify-between mt-4 rounded-2xl shadow-sm bg-white-normal relative">
+        <div
+            class="w-[1380px] h-auto pb-8 flex items-center justify-between mt-4 rounded-2xl shadow-sm bg-white-normal relative">
             <div class="flex justify-between w-full px-8">
                 <!-- Status Selesai -->
                 <div class="absolute text-center top-1.5 right-0">
@@ -220,7 +221,8 @@
                                     @default
                                         {{ asset('img/masyarakat/penjemputan-sampah/journal-check-abu.png') }}
                                 @endswitch
-                                " alt="Icon" class="w-20 h-20 mx-auto mt-4">
+                                "
+                            alt="Icon" class="w-20 h-20 mx-auto mt-4">
                     </div>
 
                     {{-- <!-- Waktu Penjemputan -->
@@ -240,8 +242,15 @@
                                 <!-- Gambar Sampah -->
                                 <div
                                     class="flex items-center justify-center w-[120px] h-full overflow-hidden rounded-lg rounded-l-none rounded-t-none rounded-b-none">
-                                    <img src="https://picsum.photos/400/400" alt="Sampah"
-                                        class="object-cover w-full h-full">
+                                    @php
+                                        $imagePath =
+                                            'img/masyarakat/gambarJenisSampah/' .
+                                            ($dp->jenis->gambar ?? $dp->jenis->nama_jenis . '.png');
+                                        $image = file_exists(public_path($imagePath))
+                                            ? $imagePath
+                                            : 'img/masyarakat/gambarKategoriSampah/no-image.png';
+                                    @endphp
+                                    <img src="{{ asset($image) }}" alt="Sampah" class="object-cover w-full h-full">
                                 </div>
 
                                 <!-- Detail Sampah -->
