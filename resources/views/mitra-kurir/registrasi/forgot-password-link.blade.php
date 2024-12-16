@@ -27,7 +27,7 @@
         <p class="text-center text-gray-700 mt-4">Kami akan mengirimkan tautan pengaturan ulang kata sandi ke email Anda. Silakan periksa kotak masuk Anda</p>
         @include('components.mitra-kurir.auth.auth-link', [
                 'message' => "Tidak menerima email?",
-                'linkUrl' => route('mitra-kurir.registrasi.register'), // rute sementara
+                'linkUrl' => route('mitra-kurir.registrasi.register'), 
                 'linkText' => 'Kirim Ulang'
         ])   
     </div>

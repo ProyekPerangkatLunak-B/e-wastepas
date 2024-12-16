@@ -72,7 +72,7 @@
                     </div>
                     @endforeach
                 </ul>
-        @endif
+            @endif
             <div class="flex justify-end">
                 <button type="submit" class="mt-10 px-6 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-colors">
                     Kirim Dokumen

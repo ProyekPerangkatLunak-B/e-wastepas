@@ -418,9 +418,9 @@ Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
 
 
 // halaman profile
-Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
-    return view('mitra-kurir/registrasi/account-profile/profile');
-})->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile');
+Route::get('/mitra-kurir/registrasi/account-profile/profile', [RegistrasiMitraKurirController::class, 'EditProfileIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile');
+Route::post('/mitra-kurir/registrasi/account-profile/profile', [RegistrasiMitraKurirController::class, 'UpdateProfile'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile.post');
+
 
 // halaman  security
 Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePasswordIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
