@@ -38,9 +38,11 @@
         </div>
 
         <!-- Bagian Kanan: Gambar Latar -->
-        <div class="hidden md:block md:w-1/2 bg-cover bg-center"
-            style="background-image: url('{{ asset('images/tree-microchip.png') }}'); min-height: 100vh;">
-            <!-- Background image sesuai path yang diinginkan -->
-        </div>
+        <!-- Bagian Kanan: Gambar Latar -->
+<div class="hidden md:block md:w-1/2 bg-cover bg-center"
+style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}'); min-height: 100vh;">
+<!-- Background image sesuai path yang diinginkan -->
+</div>
+
     </div>
 @endsection

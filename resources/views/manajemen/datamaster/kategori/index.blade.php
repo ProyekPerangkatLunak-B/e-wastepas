@@ -30,15 +30,14 @@
         </div>
         {{-- Card Section --}}
         <div class="grid grid-cols-3 gap-6 px-12 pb-6 mt-4 lg:grid-cols-3 lg:gap-6">
-            @foreach($results as $result)
-            {{ dd($result->nama_dropbox) }}
-            <x-dropbox-card
+            @foreach($categories as $category)
+            <x-kategori-card
+                title="{{ $category['nama_kategori'] }}"
+                description="{{ $category['deskripsi_kategori'] }}"
                 image="https://picsum.photos/720/720"
                 link="#"
-                nama_dropbox="{{ $result->nama_dropbox }}"
-                berat="{{ number_format($result->total_berat_sampah, 0) }}"
-                poin="{{ number_format($result->total_poin, 0) }}"
-            />
+                points="{{ number_format($category['total_poin'], 0) }}"
+                weight="{{ number_format($category['total_berat'], 0) }}" />
         @endforeach
         </div>
     </div>
