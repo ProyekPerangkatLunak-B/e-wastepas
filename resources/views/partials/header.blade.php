@@ -25,7 +25,6 @@
 
                 <div class="py-2">
                     <!-- Profile Link -->
-                    <a href="#"
                     {{-- Route ini dibuat Dinamiskan saja karena semua modul pasti menggunakan, jadi gunakan saja kondisi disetiap route dibawah ini, --}}
                     <a href="#"
                         class="flex items-center px-8 py-3 space-x-3 text-sm text-gray-700 border-b border-gray-200 hover:bg-gray-100">
