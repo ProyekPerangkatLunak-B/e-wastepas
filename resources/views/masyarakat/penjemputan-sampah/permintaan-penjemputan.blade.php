@@ -67,17 +67,11 @@
                         <!-- Pilih Daerah -->
                         <x-select id="daerah" name="daerah" label="Pilih Daerah">
                             <option value="">Pilih Daerah</option>
-                            {{-- @foreach ($daerah as $d)
-                                <option value="{{ $d->id_daerah }}">{{ $d->nama_daerah }}</option>
-                            @endforeach --}}
                         </x-select>
 
                         <!-- Pilih Dropbox -->
                         <x-select id="dropbox" name="dropbox" label="Pilih Dropbox">
                             <option value="">Pilih Dropbox</option>
-                            {{-- @foreach ($dropbox as $d)
-                                <option value="{{ $d->id_dropbox }}">{{ $d->nama_dropbox }}</option>
-                            @endforeach --}}
                         </x-select>
 
                         <!-- Tanggal dan Waktu Penjemputan -->
@@ -103,8 +97,8 @@
                             <!-- Card -->
                             <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[90%] h-[120px] rounded-2xl shadow-sm"
                                 id="box-kosong">
-                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}"
-                                    alt="Tidak Ditemukan" class="w-[50px] h-[50px] mx-auto">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}" alt="Tidak Ditemukan"
+                                    class="w-[50px] h-[50px] mx-auto">
                                 <p class="w-64 mr-32 font-bold text-center text-black-normal">Data
                                     {{ $search ?? 'Sampah Elektronik' }}
                                     tidak ditemukan / Masih Kosong.</p>
@@ -146,8 +140,10 @@
                 </div>
                 <!-- Tombol Kembali dan Kirim Permintaan -->
                 <div class="flex justify-end mx-10 space-x-4">
-                    <a href="#" class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">Reset
-                        Form</a>
+                    <button type="button" onclick="resetForm()"
+                        class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                        Reset Form
+                    </button>
                     <button type="button" id="submit-request" name="submit" onclick="kirimKonfirmasi()"
                         class="flex items-center px-8 py-2 text-gray-100 rounded-xl bg-primary-normal hover:bg-primary-400">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
@@ -173,9 +169,6 @@
                         <select id="kategori" name=""
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option value="">Pilih Kategori</option>
-                            {{-- @foreach ($kategori as $k)
-                                <option value="{{ $k->id_kategori }}">{{ $k->nama_kategori }}</option>
-                            @endforeach --}}
                         </select>
                     </div>
                     <div>
@@ -183,9 +176,6 @@
                         <select id="jenis" name=""
                             class="block w-[450px] h-[50px] px-3 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                             <option value="">Pilih Jenis</option>
-                            {{-- @foreach ($jenis as $j)
-                                <option value="{{ $j->id_jenis }}">{{ $j->nama_jenis }}</option>
-                            @endforeach --}}
                         </select>
 
                     </div>
