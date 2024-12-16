@@ -4,7 +4,6 @@ namespace Database\Seeders\seed;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DetailPenjemputanSeeder extends Seeder
 {
