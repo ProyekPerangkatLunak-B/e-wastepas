@@ -26,12 +26,12 @@
                   <form action="#" method="POST">
                     <label for="password" class="block mt-4 text-md font-bold leading-9 text-gray-900">Password baru</label>
                     <input
-                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
-                        type="password" placeholder="Enter your password" required name="password"/>
+                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
+                        type="password" placeholder="Masukkan Password" required name="password"/>
                     <label for="password" class="block mt-4 text-md font-bold leading-9 text-gray-900">Konfirmasi Password baru</label>
                     <input
-                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
-                        type="password"  placeholder="Enter your password" name="password"/>
+                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
+                        type="password"  placeholder="Masukkan Password" name="password"/>
               <!-- Button Submit
                   <button
                       class="mt-10 tracking-wide font-semibold bg-green-900  text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Simpan

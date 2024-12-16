@@ -334,9 +334,9 @@ Route::group([
 
 
     //profileEdit
-    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('profile.show');
+    Route::get('/test', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
     Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
-    
+
 
     //forgot pass masyarakat
     Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
