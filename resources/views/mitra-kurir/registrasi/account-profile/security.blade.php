@@ -16,27 +16,32 @@
                     <h2 class="text-2xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3">
                         Ganti Password
                     </h2>
+                </div>  
+                @if (session('status'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    {{ session('status') }}
                 </div>
-
+                @endif
+                
                 <div class="w-full max-w-md mx-auto">
-                    <?php if (isset($error)): ?>
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 max-w-md mx-auto text-sm">
-                            <?php echo $error; ?>
-                        </div>
-                    <?php endif; ?>
+                    @if ($errors->any())
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <strong class="font-bold">Oops!</strong>
+                        <span class="block sm:inline">There were some problems with your input:</span>
+                        <ul class="mt-2 list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
-                    <?php if (isset($success)): ?>
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 max-w-md mx-auto text-sm">
-                            <?php echo $success; ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <form method="POST" class="max-w-md w-full mx-auto px-4" enctype="multipart/form-data">
+                    <form method="POST"  action="{{ route('mitra-kurir.registrasi.account-profile.security.post'); }}" class="max-w-md w-full mx-auto px-4" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-6">
                             @include('components.mitra-kurir.auth.input', [
                                 'id' => 'old-password', 
-                                'name' => 'Password', 
+                                'name' => 'PasswordOld', 
                                 'label' => 'Kata Sandi Lama', 
                                 'type' => 'password', 
                                 'placeholder' => 'Masukkan Kata Sandi Lama'
@@ -45,7 +50,7 @@
                         <div class="mb-6">
                             @include('components.mitra-kurir.auth.input', [
                                 'id' => 'new-password', 
-                                'name' => 'Password', 
+                                'name' => 'PasswordNew', 
                                 'label' => 'Kata Sandi Baru', 
                                 'type' => 'password', 
                                 'placeholder' => 'Masukkan Kata Sandi Baru'
@@ -54,26 +59,26 @@
                         <div class="mb-6">
                             @include('components.mitra-kurir.auth.input', [
                                 'id' => 'confirm-password', 
-                                'name' => 'password', 
+                                'name' => 'passwordConfirm', 
                                 'label' => 'Konfirmasi Kata Sandi', 
                                 'type' => 'password', 
                                 'placeholder' => 'Konfirmasi Kata Sandi'
                             ])
                         </div>
+                        <div class="mt-6">
+                            <button type="submit"
+                                    class="w-full sm:w-32 float-right
+                                           bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
+                                           hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
+                                           transform hover:scale-105 text-sm sm:text-base">
+                                Simpan
+                            </button>
+                        </div>
                     </form>
                 </div>
 
                 <!-- Tombol Kirim di Bawah -->
-                <div class="mt-6">
-                    <button type="button"
-                            onclick="showVerificationModal()"
-                            class="w-full sm:w-32 float-right
-                                   bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
-                                   hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out 
-                                   transform hover:scale-105 text-sm sm:text-base">
-                        Simpan
-                    </button>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -94,13 +99,13 @@
             </div>
             <div class="text-center mt-3 sm:mt-4">
                 <p class="text-gray-600 text-lg sm:text-lg">Sekarang Anda bisa log in dengan kata sandi baru</p> 
-                <button onclick="closeVerificationModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">Selesai
-                </button> 
+                <button type="submit" onclick="closeVerificationModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">Selesai
+                </button>  
             </div>
         </div>
     </div> <!-- Added -->
 
-    <script>
+    {{-- <script>
         function showVerificationModal() {
             const oldPassword = document.getElementById('old-password').value;
             const newPassword = document.getElementById('new-password').value;
@@ -139,5 +144,5 @@
                 modal.style.display = 'none';
             }
         }
-    </script>
+    </script> --}}
 @endsection

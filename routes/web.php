@@ -394,37 +394,34 @@ Route::group([
 });
 
 Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->name('otp.validation');
-Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->middleware('guest')->name('otp-verification');
+Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->middleware('auth')->name('otp-verification');
 // upload dokumen
-Route::get('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->name('upload-data-index');
+Route::get('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->middleware('auth')->name('upload-data-index');
 Route::post('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadValidation'])->name('upload-validate');
 
 
 // forgot password
 Route::get('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ForgotPasswordFormIndex'])->middleware('guest')->name('reset-password-form');
-Route::post('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ChangeForgotPassword'])->middleware('guest')->name('reset-password-form.post');
+Route::post('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ChangeForgotPa ssword'])->middleware('guest')->name('reset-password-form.post');
 Route::get('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'ForgotPasswordIndex'])->middleware('guest')->name('reset-password');
 Route::post('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'SendForgotPassword'])->middleware('guest')->name('reset-password.post');
+
+Route::post('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePassword'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security.post');
 
 // syarat & ketentuan
 Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
     return view('/mitra-kurir/registrasi/syarat-dan-ketentuan');
 })->name('/mitra-kurir/registrasi/syarat-dan-ketentuan');
 
-// reset password
-Route::get('/mitra-kurir/registrasi/reset-password', function () {
-    return view('mitra-kurir/registrasi/reset-password');
-});
 
 // halaman profile
 Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
     return view('mitra-kurir/registrasi/account-profile/profile');
 })->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile');
 
-// halaman account
-Route::get('/mitra-kurir/registrasi/account-profile/security', function () {
-    return view('mitra-kurir/registrasi/account-profile/security');
-})->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
+// halaman  security
+Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePasswordIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
+
 
 // halaman success-message document-upload
 Route::get('/mitra-kurir/registrasi/success-message', function () {
