@@ -13,11 +13,15 @@
             {{-- Card Total Sampah Terkumpul --}}
             <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2">
                 <i class="fa-solid fa-recycle text-3xl text-[#437252]"></i>
-                <div class="text-start">
+                {{-- <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Total Sampah Terkumpul</h5>
                     {{-- <p class="text-2xl font-bold">174.265 Kg</p> --}}
+                    {{-- <p class="text-2xl font-bold">{{ number_format($totalSampah, 0) }} Kg</p> --}}
+                {{-- </div> --}}
+                <div class="text-start">
+                    <h5 class="text-gray-600 font-semibold">Total Sampah Terkumpul</h5>
                     <p class="text-2xl font-bold">{{ number_format($totalSampah, 0) }} Kg</p>
-                </div>
+                </div>                              
             </div>
 
             {{-- Card Total Poin Terkumpul --}}
@@ -25,7 +29,6 @@
                 <i class="fa-solid fa-coins text-green text-3xl"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Total Poin Terkumpul</h5>
-                    {{-- <p class="text-2xl font-bold">3045 Poin</p> --}}
                     <p class="text-2xl font-bold">{{ number_format($totalPoin, 0) }} Poin</p>
                 </div>
             </div>

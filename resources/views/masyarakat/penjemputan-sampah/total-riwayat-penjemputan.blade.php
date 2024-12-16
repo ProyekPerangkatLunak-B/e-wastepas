@@ -55,7 +55,7 @@
                     @if ($penjemputan->isEmpty())
                         <!-- Tampilkan pesan jika tidak ada riwayat -->
                         <div class="w-full p-6 text-center shadow-lg col-span-full bg-white-normal rounded-2xl">
-                            <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}" alt="Tidak Ditemukan"
+                            <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}" alt="Tidak Ditemukan"
                                 class="w-[100px] h-[100px] mx-auto mb-4">
                             <p class="text-lg font-semibold text-gray-500">Tidak ada riwayat penjemputan tersedia.</p>
                         </div>

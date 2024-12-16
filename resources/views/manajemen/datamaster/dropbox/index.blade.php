@@ -10,45 +10,19 @@
         <div class="px-12 pb-6 mt-4">
             <!-- Baris Pertama: 3 Kolom -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <x-dropbox-card
-                    image="https://picsum.photos/720/720"
-                    title="Laptop"
-                    jenis="Layar dan Monitor"                
-                    link="#"
-                    berat="37.932"
-                    poin="10.019" />
-                <x-dropbox-card
-                    image="https://picsum.photos/720/720"
-                    title="Monitor"
-                    jenis="Layar dan Monitor"                
-                    link="#"
-                    berat="20.000"
-                    poin="11.378" />
-                <x-dropbox-card
-                    image="https://picsum.photos/720/720"
-                    title="Notebook"
-                    jenis="Layar dan Monitor"                
-                    link="#"
-                    berat="30.000"
-                    poin="19.374" />
-                <x-dropbox-card
-                    image="https://picsum.photos/720/720"
-                    title="Tablet"
-                    jenis="Layar dan Monitor"                
-                    link="#"
-                    berat="39.374"
-                    poin="47.293" />
-                <x-dropbox-card
-                    image="https://picsum.photos/720/720"
-                    title="Televisi"
-                    jenis="Layar dan Monitor"                
-                    link="#"
-                    berat="54.952"
-                    poin="60.364" />
-
+                    @if($results->isNotEmpty())
+                    @foreach($results as $result)
+                        <x-dropbox-card
+                            :image="'https://picsum.photos/720/720'"
+                            :nama_dropbox="$result->nama_dropbox"
+                            :berat="number_format($result->total_berat_sampah, 1)" {{-- Sesuaikan format desimal --}}
+                            :poin="number_format($result->total_poin, 0)"
+                        />
+                    @endforeach
+                @else
+                    <p class="text-center">Tidak ada data Dropbox tersedia.</p>
+                @endif               
         </div>
-        
-
     </div>
 </div>
 

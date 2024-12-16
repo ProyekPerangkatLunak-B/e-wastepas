@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\admin\AuthController;
@@ -7,25 +8,25 @@ use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\admin\KurirAdminController;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
+use App\Http\Controllers\Manajemen\DashboardKategori;
+use App\Http\Controllers\Manajemen\DropboxController;
 use App\Http\Controllers\Admin\DropboxAdminController;
+use App\Http\Controllers\Manajemen\KategoriController;
+use App\Http\Controllers\Manajemen\DashboardController;
 use App\Http\Controllers\Admin\ManajemenAdminController;
 use App\Http\Controllers\Admin\MasyarakatAdminController;
 use App\Http\Controllers\Admin\JenisSampahAdminController;
+use App\Http\Controllers\Manajemen\OtpManajemenController;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Masyarakat\ForgotPasswordController;
 use App\Http\Controllers\Masyarakat\ProfileMasyarakatController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
-use App\Http\Controllers\Manajemen\ForgotPasswordManajemenController;
-use App\Http\Controllers\Manajemen\ResetPasswordManajemenController;
-use App\Http\Controllers\Manajemen\OtpManajemenController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use App\Http\Controllers\Manajemen\ResetPasswordManajemenController;
+use App\Http\Controllers\Manajemen\ForgotPasswordManajemenController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
-use App\Http\Controllers\Manajemen\DashboardController;
-use App\Http\Controllers\Manajemen\DashboardKategori;
-use App\Http\Controllers\Manajemen\KategoriController;
-use App\Models\Kategori;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -176,6 +177,12 @@ Route::group([
         return view('manajemen.datamaster.top-10.index');
     })->name('datamaster.top-10.index');
 
+    // Route::get('/datamaster/dropbox', function () {
+    //     return view('manajemen.datamaster.dropbox.index');
+    // })->name('datamaster.dropbox.index');
+
+    Route::get('/datamaster/dropbox', [DropboxController::class, 'index'])->name('datamaster.dropbox.index');
+
     // Route::get('/datamaster/kategori', function () {
     //     return view('manajemen.datamaster.kategori.index');
     // })->name('datamaster.kategori.index');
@@ -186,10 +193,6 @@ Route::group([
     Route::get('/datamaster/per-daerah', function () {
         return view('manajemen.datamaster.per-daerah.index');
     })->name('datamaster.per-daerah.index');
-
-    Route::get('/datamaster/dropbox', function () {
-        return view('manajemen.datamaster.dropbox.index');
-    })->name('datamaster.dropbox.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');
@@ -319,9 +322,9 @@ Route::group([
         return view('masyarakat/registrasi/cek-mail');
     });
 
-    //Route::get('/profil', function () {
+    // Route::get('/profil', function () {
     //    return view('masyarakat/registrasi/profil');
-    //});
+    // });
 
     //Route::get('/forgot-password-otp', function () {
     //    return view('masyarakat/registrasi/forgot-password-otp');
@@ -331,9 +334,9 @@ Route::group([
 
 
     //profileEdit
-    Route::get('profile', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.profile.show');
-    Route::get('profile/edit', [ProfileMasyarakatController::class, 'editProfile'])->name('masyarakat.profile.edit');
-    Route::post('profile/edit', [ProfileMasyarakatController::class, 'updateProfile'])->name('masyarakat.profile.update');
+    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('profile.show');
+    Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
+    
 
     //forgot pass masyarakat
     Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
@@ -371,25 +374,17 @@ Route::group([
 
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMitraKurirController::class, 'kategori'])->middleware('auth')->name('penjemputan.kategori');
-    Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->name('penjemputan.detail-kategori');
-    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->name('penjemputan.permintaan');
-    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->name('penjemputan.detail-permintaan');
+    Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->middleware('auth')->name('penjemputan.detail-kategori');
+    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->middleware('auth')->name('penjemputan.permintaan');
+    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->middleware('auth')->name('penjemputan.detail-permintaan');
+    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->middleware('auth')->name('update-status');
 
-    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
-    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
-    Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
+    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayat'])->middleware('auth')->name('penjemputan.riwayat-penjemputan');
+    Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->middleware('auth')->name('penjemputan.detail-riwayat');
 
     Route::get('penjemputan-sampah/dropbox', function () {
         return view('mitra-kurir.penjemputan-sampah.dropbox');
     })->name('penjemputan.dropbox');
-
-    Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
-        return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan');
-    })->name('penjemputan.riwayat-penjemputan');
-
-    Route::get('penjemputan-sampah/riwayat-penjemputan/detail', function () {
-        return view('mitra-kurir.penjemputan-sampah.detail-riwayat');
-    })->name('penjemputan.detail-riwayat');
 
     // Submodul Registrasi
 
@@ -450,6 +445,11 @@ Route::get('/mitra-kurir/registrasi/success-message-forgot-password', function (
 Route::get('/mitra-kurir/registrasi/success-message-data', function () {
     return view('mitra-kurir/registrasi/success-message-data');
 })->name('mitra-kurir.registrasi.success-message-data');
+
+// halaman forgot password link email
+Route::get('/mitra-kurir/registrasi/forgot-password-link', function () {
+    return view('mitra-kurir/registrasi/forgot-password-link');
+})->name('mitra-kurir.registrasi.forgot-password-link');
 
 Route::group([
     'prefix' => 'api/',

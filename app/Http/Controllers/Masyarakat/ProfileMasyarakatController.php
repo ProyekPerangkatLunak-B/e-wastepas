@@ -14,76 +14,51 @@ class ProfileMasyarakatController extends Controller
      */
     public function showProfile()
     {
-        // Asumsi user yang login disimpan di session atau middleware yang relevan
-        $user = UserMasyarakat::find(session('user_id')); // Gunakan session untuk mendapatkan ID pengguna
-        if (!$user) {
-            return redirect()->route('masyarakat.login')->with('error', 'Harap login terlebih dahulu.');
-        }
-        return view('masyarakat.profile.show', compact('user'));
+        return view('masyarakat.profile.show'); // Hanya menampilkan halaman profil
     }
 
     /**
-     * Menampilkan form edit profil.
+     * Memproses penyimpanan atau pembaruan data profil pengguna.
      */
-    public function editProfile()
+    public function saveProfile(Request $request)
     {
-        $user = UserMasyarakat::find(session('user_id')); // Gunakan session untuk mendapatkan ID pengguna
-        if (!$user) {
-            return redirect()->route('masyarakat.login')->with('error', 'Harap login terlebih dahulu.');
-        }
-        return view('masyarakat.profile.edit', compact('user'));
-    }
-
-    /**
-     * Memproses pembaruan profil pengguna.
-     */
-    public function updateProfile(Request $request)
-    {
-        $user = UserMasyarakat::find(session('user_id')); // Gunakan session untuk mendapatkan ID pengguna
-        if (!$user) {
-            return redirect()->route('masyarakat.login')->with('error', 'Harap login terlebih dahulu.');
-        }
-
-        // Validasi data
+        // Validasi data dari form
         $request->validate([
             'nama' => 'required|string|max:50',
-            'email' => 'required|email|unique:pengguna,email,' . $user->id_pengguna . ',id_pengguna',
-            'kata_sandi' => 'nullable|min:6|confirmed',
-            'foto_profil' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
-            'alamat' => 'nullable|string|max:255',
+            'tanggal_lahir' => 'nullable|date',
             'nomor_telepon' => 'nullable|string|max:15',
+            'no_rekening' => 'nullable|string|max:30',
+            'alamat' => 'nullable|string|max:255',
+            'foto_profil' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
-        // Ambil data pengguna yang sedang login
-        $user = Auth::user();
+        // Jika pengguna ID dikirimkan, update; jika tidak, buat pengguna baru
+        $user = UserMasyarakat::find($request->input('user_id')) ?? new UserMasyarakat();
 
-        // Update data pengguna
-        $user->nama = $request->nama;
-        $user->email = $request->email;
-        $user->alamat = $request->alamat;
-        $user->nomor_telepon = $request->nomor_telepon;
+        // Simpan atau perbarui data profil pengguna
+        $user->nama = $request->input('nama');
+        $user->tanggal_lahir = $request->input('tanggal_lahir');
+        $user->nomor_telepon = $request->input('nomor_telepon');
+        $user->no_rekening = $request->input('no_rekening');
+        $user->alamat = $request->input('alamat');
+        $user->foto_profil = $request->input('foto_profil');
 
-        // Perbarui kata sandi jika diisi
-        if ($request->kata_sandi) {
-            $user->kata_sandi = bcrypt($request->kata_sandi);
-        }
-
-        // Jika ada foto profil diunggah, proses upload
+        // Jika ada gambar profil yang diunggah, simpan ke storage
         if ($request->hasFile('foto_profil')) {
-            // Hapus foto lama jika ada
+            // Hapus foto profil lama jika ada
             if ($user->foto_profil) {
                 Storage::disk('public')->delete($user->foto_profil);
             }
 
             // Simpan foto baru
-            $path = $request->file('foto_profil')->store('profile_pictures', 'public');
-            $user->foto_profil = $path;
+            $path = $request->file('foto_profil')->store('foto_profil', 'public');
+            $user->profile_picture = $path;
         }
 
-        // Simpan perubahan ke database
+        // Simpan data ke database
         $user->save();
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('masyarakat.profile.show')->with('success', 'Profil berhasil diperbarui.');
+        // Redirect kembali ke halaman profil dengan pesan sukses
+        return redirect()->back()->with('success', 'Profil berhasil disimpan.');
     }
 }
