@@ -16,7 +16,6 @@
             <p class="text-gray-600 mb-8">Selamat Anda Dapat Masuk Dengan Kata Sandi Baru Anda.</p>
 
             <!-- Tombol Kembali -->
-            <a href="{{ route('login') }}">
                 <button type="button"
                     class="w-3/4 py-3 text-base font-bold text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg shadow-md transition-all">
                     KEMBALI

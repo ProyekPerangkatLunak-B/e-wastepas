@@ -3,148 +3,105 @@
 @section('title', 'Data Total Sampah')
 
 @section('content')
-<div class="flex min-h-screen bg-white">
+<div class="flex min-h-screen bg-gray-50">
     <!-- Sidebar -->
-    <aside class="w-1/5 bg-white p-6 shadow-md">
-        <div class="flex flex-col items-center mb-6">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo E-WastePas" class="w-12 h-12 mb-2">
-            <h1 class="text-xl font-bold text-green-700">E-WastePas</h1>
+    <aside class="w-1/5 bg-white shadow-md p-6 flex flex-col min-h-screen">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2 mb-6">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo E-WastePas" class="w-12 h-12">
+            <h1 class="text-xl font-bold text-green-600">E-WastePas</h1>
         </div>
-        <nav>
+
+        <!-- Menu -->
+        <nav class="flex-1">
+            <div class="flex items-center space-x-2 text-green-600 mb-6">
+                <i class="fas fa-users"></i>
+                <span class="font-medium">Manajemen</span>
+            </div>
             <ul>
                 <li class="mb-4">
-                    <div class="flex items-center justify-between p-2 border rounded-lg text-black hover:bg-gray-200">
-                        <span class="font-semibold">Kategori Sampah Elektronik</span>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </div>
-                </li>
-                <li class="mb-4">
-                    <div class="flex items-center justify-between p-2 border rounded-lg text-black hover:bg-gray-200">
-                        <span class="font-semibold">Mengajukan Permintaan Penjemputan</span>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </div>
-                </li>
-                <li class="mb-4">
-                    <div class="flex items-center justify-between p-2 border rounded-lg text-black hover:bg-gray-200">
-                        <span class="font-semibold">Melacak Penjemputan</span>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </div>
-                </li>
-                <li class="mb-4">
-                    <div class="flex items-center justify-between p-2 border rounded-lg bg-green-100 text-black">
-                        <span class="font-semibold">Total Sampah</span>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </div>
-                </li>
-                <li class="mb-4">
-                    <div class="flex items-center justify-between p-2 border rounded-lg text-black hover:bg-gray-200">
-                        <span class="font-semibold">Riwayat Penjemputan</span>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </div>
+                    <a href="#"
+                       class="flex items-center justify-between border border-green-300 rounded-lg px-4 py-2 text-gray-700 hover:bg-green-100 bg-gray-100">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-right text-green-500"></i>
+                    </a>
                 </li>
             </ul>
         </nav>
     </aside>
 
     <!-- Main Content -->
-    <div class="flex-1 bg-white">
-        <!-- Header -->
-        <div class="flex justify-between items-center bg-white px-6 py-4 border-b border-gray-300">
+    <div class="flex-1">
+        <!-- Header dengan Foto Profil -->
+        <header class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
             <h2 class="text-lg font-bold"></h2>
-            <div class="flex items-center">
-                <span class="mr-3 font-medium text-gray-700">Beyonce Kumalasari</span>
-                <img src="{{ asset('images/profile-placeholder.jpg') }}" alt="User Photo" class="w-8 h-8 rounded-full">
-            </div>
-        </div>
-
-        <div class="p-10">
-            <!-- Content Header -->
-            <div class="mb-6">
-                <h3 class="text-xl font-bold">Data Total Sampah tiap Daerah</h3>
-                <p class="text-gray-600">Daftar jenis sampah elektronik dari kategori yang dapat dijemput.</p>
-            </div>
-
-            <!-- Main Content Sections -->
-            <div class="grid grid-cols-3 gap-6">
-                <!-- Radar Chart -->
-                <div class="bg-white shadow p-4 rounded-lg col-span-2 border border-gray-300">
-                    <h3 class="text-lg font-bold mb-2">Total Sampah Per Tahun 2024</h3>
-                    <canvas id="radarChart"></canvas>
+            <div class="flex items-center space-x-4">
+                <div class="text-right">
+                    <h4 class="font-medium text-gray-700">Beyonce Kumalasari</h4>
+                    <span class="text-sm text-gray-500">Manajemen</span>
                 </div>
+                <img src="{{ asset('images/profile-placeholder.jpg') }}" alt="User Photo" class="w-10 h-10 rounded-full">
+            </div>
+        </header>
 
-                <!-- Data Berdasarkan Daerah -->
-                <div class="bg-white shadow p-4 rounded-lg border border-gray-300">
-                    <h3 class="text-lg font-bold mb-2">Data Total Sampah Berdasarkan Daerah</h3>
-                    <ul class="space-y-2">
-                        <li>Cikutra - 40%</li>
-                        <li>Cileunyi - 38%</li>
-                        <li>Cibiru - 38%</li>
-                        <li>Sarijadi - 23.3%</li>
-                        <li>Sukajadi - 23.3%</li>
-                        <li>Sukagalih - 15.4%</li>
-                    </ul>
+        <!-- Content -->
+        <div class="p-6">
+            <!-- Header Halaman -->
+            <div class="flex justify-between items-center mb-8">
+                <!-- Judul -->
+                <div>
+                    <h1 class="text-2xl font-bold">Total Sampah Per Kategori</h1>
+                    <p class="text-gray-600">Daftar kategori sampah elektronik dan total poin terkumpul</p>
+                </div>
+                <!-- Pencarian dan Filter -->
+                <div class="flex items-center space-x-3">
+                    <!-- Input Pencarian -->
+                    <div class="relative flex items-center bg-gray-100 border rounded-full px-3 py-2 shadow-sm w-56">
+                        <i class="fas fa-search text-gray-500 mr-2"></i>
+                        <input type="text" placeholder="Cari ..." class="bg-transparent focus:outline-none text-sm text-gray-700 placeholder-gray-500 w-full">
+                    </div>
+                    <!-- Tombol Filter -->
+                    <button class="relative flex items-center bg-gray-100 border rounded-full px-3 py-2 shadow-sm w-48 hover:bg-gray-200">
+                        <span class="text-sm text-gray-700">Filter</span>
+                        <i class="fas fa-chevron-down text-gray-500 absolute right-3"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Table Section -->
-            <div class="mt-8 bg-white shadow p-4 rounded-lg border border-gray-300">
-                <h3 class="text-lg font-bold mb-2">Jenis dan Kategori Sampah Yang Dapat Dijemput</h3>
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr>
-                            <th class="border p-2 text-left bg-gray-200">Jenis Sampah</th>
-                            <th class="border p-2 text-left bg-gray-200">Kategori Sampah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border p-2">Perangkat Komputer</td>
-                            <td class="border p-2">Komputer Desktop</td>
-                        </tr>
-                        <tr>
-                            <td class="border p-2">Perangkat Komunikasi</td>
-                            <td class="border p-2">Telepon Seluler</td>
-                        </tr>
-                        <tr>
-                            <td class="border p-2">Perangkat Audio-Visual</td>
-                            <td class="border p-2">Radio</td>
-                        </tr>
-                        <tr>
-                            <td class="border p-2">Peralatan Elektronik Kecil</td>
-                            <td class="border p-2">Kalkulator</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Grid Layout -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Iterasi Kategori -->
+                @foreach ([ 
+                    ['name' => 'Peralatan Besar', 'image' => 'peralatan-besar.png', 'description' => 'Seperti mesin cuci, pengering pakaian, mesin pencuci piring, kompor listrik, mesin cetak besar, mesin fotokopi, dan panel fotovoltaik.'],
+                    ['name' => 'Peralatan Kecil', 'image' => 'peralatan-kecil.png', 'description' => 'Seperti penyedot debu, microwave, peralatan ventilasi, pemanggang roti, ketel listrik, alat cukur elektrik, timbangan, kalkulator, dan alat kontrol.'],
+                    ['name' => 'Peralatan Pertukaran Suhu', 'image' => 'peralatan-suhu.png', 'description' => 'Peralatan yang sering disebut sebagai peralatan pendingin dan pembekuan, seperti kulkas, freezer, AC, dan pompa panas.'],
+                    ['name' => 'Peralatan IT dan Telekomunikasi Kecil', 'image' => 'peralatan-it.png', 'description' => 'Seperti ponsel, perangkat GPS, kalkulator saku, router, komputer pribadi, printer, dan telepon.'],
+                    ['name' => 'Layar dan Monitor', 'image' => 'layar-monitor.png', 'description' => 'Peralatan seperti televisi, monitor, laptop, notebook, dan tablet.'],
+                    ['name' => 'Lampu', 'image' => 'lampu.png', 'description' => 'Lampu fluoresen, lampu dengan intensitas tinggi, dan lampu LED.']
+                ] as $category)
+                <div class="bg-white shadow-lg rounded-lg flex flex-col h-full">
+                    <img src="{{ asset('images/' . $category['image']) }}" alt="{{ $category['name'] }}" class="w-full h-40 object-cover">
+                    <div class="flex flex-col justify-between flex-grow p-4">
+                        <div>
+                            <h3 class="text-lg font-bold mb-2">{{ $category['name'] }}</h3>
+                            <p class="text-sm text-gray-600 mb-4">{{ $category['description'] }}</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-600 flex items-center">
+                                    <i class="fas fa-recycle mr-1 text-green-500"></i> 30.000 Kg
+                                </span>
+                                <span class="text-sm text-gray-600 flex items-center">
+                                    <i class="fas fa-trophy mr-1 text-yellow-500"></i> 19.374 Poin
+                                </span>
+                            </div>
+                            <button class="w-full py-2 bg-green-600 rounded-lg hover:bg-green-700" style="color: white;">Detail</button>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </div>
 </div>
-
-<!-- Tambahkan Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('radarChart').getContext('2d');
-    const radarChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ['Cikutra', 'Cileunyi', 'Cibiru', 'Sarijadi', 'Sukajadi', 'Sukagalih'],
-            datasets: [{
-                label: 'Persentase Sampah',
-                data: [40, 38, 38, 23.3, 23.3, 15.4],
-                backgroundColor: 'rgba(72, 187, 120, 0.2)',
-                borderColor: 'rgba(72, 187, 120, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                r: {
-                    beginAtZero: true,
-                    max: 50
-                }
-            }
-        }
-    });
-</script>
 @endsection

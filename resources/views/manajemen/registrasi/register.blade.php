@@ -47,9 +47,11 @@
                         <label for="password" class="block text-gray-700">Password</label>
                         <input type="password" name="password" id="password"
                             class="w-full p-2 pr-10 mt-1 border rounded-xl" placeholder="Masukkan Password" required>
-                        <span class="absolute right-3 bottom-2.5 cursor-pointer" onclick="togglePasswordVisibility()">
+                        <span class="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer" onclick="togglePasswordVisibility()">
                             <i id="eyeIcon" class="fa fa-eye"></i>
                         </span>
+                            <!-- Teks tambahan di bawah kolom password -->
+                        <p class="mt-1 text-sm text-gray-500">Minimal harus terdiri dari 8 karakter.</p>
                     </div>
 
                     <button type="submit"
