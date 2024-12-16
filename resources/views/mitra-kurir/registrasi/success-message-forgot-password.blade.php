@@ -2,6 +2,9 @@
 @section('title', 'Success Message Forgot Password')
 @section('content')
 <div class="bg-cover bg-center min-h-screen relative flex items-center justify-center p-4" style="background-image: url('/img/mitra-kurir/bg-otp.png');">
+    <div class="absolute top-4 left-4 sm:top-6 sm:left-6">
+        <img src="/img/mitra-kurir/logoEwasteText.png" alt="logo OTP" class="w-full max-w-[200px] h-auto">
+    </div>
     <div style="background-color: white;" 
          class="rounded-[2rem] shadow-2xl w-full 
                 sm:max-w-xl md:max-w-2xl lg:max-w-3xl

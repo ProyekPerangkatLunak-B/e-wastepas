@@ -315,12 +315,17 @@ Route::group([
     Route::get('/ubah-password', function () {
         return view('masyarakat/registrasi/ubah-password');
     });
-    Route::get('/profil', function () {
-        return view('masyarakat/registrasi/profil');
+    Route::get('/cek-mail', function () {
+        return view('masyarakat/registrasi/cek-mail');
     });
-    Route::get('/forgot-password-otp', function () {
-        return view('masyarakat/registrasi/forgot-password-otp');
-    });
+
+    //Route::get('/profil', function () {
+    //    return view('masyarakat/registrasi/profil');
+    //});
+
+    //Route::get('/forgot-password-otp', function () {
+    //    return view('masyarakat/registrasi/forgot-password-otp');
+    //});
 
 
 
@@ -366,25 +371,17 @@ Route::group([
 
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMitraKurirController::class, 'kategori'])->middleware('auth')->name('penjemputan.kategori');
-    Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->name('penjemputan.detail-kategori');
-    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->name('penjemputan.permintaan');
-    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->name('penjemputan.detail-permintaan');
+    Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->middleware('auth')->name('penjemputan.detail-kategori');
+    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->middleware('auth')->name('penjemputan.permintaan');
+    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->middleware('auth')->name('penjemputan.detail-permintaan');
+    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->middleware('auth')->name('update-status');
 
-    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->name('update-status');
-    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat-penjemputan');
-    Route::get('penjemputan-sampah/riwayat-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
+    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayat'])->middleware('auth')->name('penjemputan.riwayat-penjemputan');
+    Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->middleware('auth')->name('penjemputan.detail-riwayat');
 
     Route::get('penjemputan-sampah/dropbox', function () {
         return view('mitra-kurir.penjemputan-sampah.dropbox');
     })->name('penjemputan.dropbox');
-
-    Route::get('penjemputan-sampah/riwayat-penjemputan', function () {
-        return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan');
-    })->name('penjemputan.riwayat-penjemputan');
-
-    Route::get('penjemputan-sampah/riwayat-penjemputan/detail', function () {
-        return view('mitra-kurir.penjemputan-sampah.detail-riwayat');
-    })->name('penjemputan.detail-riwayat');
 
     // Submodul Registrasi
 
@@ -445,6 +442,11 @@ Route::get('/mitra-kurir/registrasi/success-message-forgot-password', function (
 Route::get('/mitra-kurir/registrasi/success-message-data', function () {
     return view('mitra-kurir/registrasi/success-message-data');
 })->name('mitra-kurir.registrasi.success-message-data');
+
+// halaman forgot password link email
+Route::get('/mitra-kurir/registrasi/forgot-password-link', function () {
+    return view('mitra-kurir/registrasi/forgot-password-link');
+})->name('mitra-kurir.registrasi.forgot-password-link');
 
 Route::group([
     'prefix' => 'api/',

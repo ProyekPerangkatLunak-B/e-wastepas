@@ -6,7 +6,7 @@
         <div class="flex items-center justify-between">
             <h3 class="text-xl font-semibold text-gray-900 break-words">{{ $title }}</h3>
             <div class="flex items-baseline">
-                <span class="text-3xl font-bold text-secondary-normal">{{ $poin }}</span>
+{{--                <span class="text-3xl font-bold text-secondary-normal">{{ $poin }}</span>--}}
                 <span class="ml-1 font-bold text-md text-black-normal">Poin</span>
             </div>
         </div>
