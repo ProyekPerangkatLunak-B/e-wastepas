@@ -8,7 +8,7 @@
         <div class="flex items-center justify-center flex-1 p-8 bg-white">
             <div class="w-full max-w-lg">
                 <div class="mb-6 text-center">
-                    <img src="{{ asset('/images/logo.png') }}" alt="Logo E-WastePas" class="w-24 h-24 mx-auto mb-4">
+                    <img src="{{ asset('img/manajemen/registrasi/logo.png') }}" alt="Logo E-WastePas" class="w-24 h-24 mx-auto mb-4">
                     <h1 class="text-2xl font-bold text-green-700">Selamat Datang di E-WastePas!</h1>
                     <p class="text-gray-600">Isi formulir di bawah ini untuk mendaftar.</p>
                 </div>
@@ -68,7 +68,7 @@
         </div>
 
         <!-- Bagian Gambar -->
-        <div class="flex-1 bg-center bg-cover" style="background-image: url('{{ asset('/images/tree-microchip.png') }}');">
+        <div class="flex-1 bg-center bg-cover" style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}');">
         </div>
     </div>
 

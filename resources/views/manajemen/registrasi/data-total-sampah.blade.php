@@ -8,7 +8,7 @@
     <aside class="w-1/5 bg-white shadow-md p-6 flex flex-col min-h-screen">
         <!-- Logo -->
         <div class="flex items-center space-x-2 mb-6">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo E-WastePas" class="w-12 h-12">
+            <img src="{{ asset('img/manajemen/registrasi/logo.png') }}" alt="Logo E-WastePas" class="w-12 h-12">
             <h1 class="text-xl font-bold text-green-600">E-WastePas</h1>
         </div>
 
@@ -40,7 +40,7 @@
                     <h4 class="font-medium text-gray-700">Beyonce Kumalasari</h4>
                     <span class="text-sm text-gray-500">Manajemen</span>
                 </div>
-                <img src="{{ asset('images/profile-placeholder.jpg') }}" alt="User Photo" class="w-10 h-10 rounded-full">
+                <img src="{{ asset('img/manajemen/registrasi/profile-placeholder.jpg') }}" alt="User Photo" class="w-10 h-10 rounded-full">
             </div>
         </header>
 
@@ -72,15 +72,15 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Iterasi Kategori -->
                 @foreach ([ 
-                    ['name' => 'Peralatan Besar', 'image' => 'peralatan-besar.png', 'description' => 'Seperti mesin cuci, pengering pakaian, mesin pencuci piring, kompor listrik, mesin cetak besar, mesin fotokopi, dan panel fotovoltaik.'],
-                    ['name' => 'Peralatan Kecil', 'image' => 'peralatan-kecil.png', 'description' => 'Seperti penyedot debu, microwave, peralatan ventilasi, pemanggang roti, ketel listrik, alat cukur elektrik, timbangan, kalkulator, dan alat kontrol.'],
-                    ['name' => 'Peralatan Pertukaran Suhu', 'image' => 'peralatan-suhu.png', 'description' => 'Peralatan yang sering disebut sebagai peralatan pendingin dan pembekuan, seperti kulkas, freezer, AC, dan pompa panas.'],
-                    ['name' => 'Peralatan IT dan Telekomunikasi Kecil', 'image' => 'peralatan-it.png', 'description' => 'Seperti ponsel, perangkat GPS, kalkulator saku, router, komputer pribadi, printer, dan telepon.'],
-                    ['name' => 'Layar dan Monitor', 'image' => 'layar-monitor.png', 'description' => 'Peralatan seperti televisi, monitor, laptop, notebook, dan tablet.'],
+                    ['name' => 'Peralatan Besar', 'image' => 'Peralatan-Besar.png', 'description' => 'Seperti mesin cuci, pengering pakaian, mesin pencuci piring, kompor listrik, mesin cetak besar, mesin fotokopi, dan panel fotovoltaik.'],
+                    ['name' => 'Peralatan Kecil', 'image' => 'Peralatan-Kecil.png', 'description' => 'Seperti penyedot debu, microwave, peralatan ventilasi, pemanggang roti, ketel listrik, alat cukur elektrik, timbangan, kalkulator, dan alat kontrol.'],
+                    ['name' => 'Peralatan Pertukaran Suhu', 'image' => 'Peralatan-Suhu.png', 'description' => 'Peralatan yang sering disebut sebagai peralatan pendingin dan pembekuan, seperti kulkas, freezer, AC, dan pompa panas.'],
+                    ['name' => 'Peralatan IT dan Telekomunikasi Kecil', 'image' => 'Peralatan-it.png', 'description' => 'Seperti ponsel, perangkat GPS, kalkulator saku, router, komputer pribadi, printer, dan telepon.'],
+                    ['name' => 'Layar dan Monitor', 'image' => 'Layar-Monitor.png', 'description' => 'Peralatan seperti televisi, monitor, laptop, notebook, dan tablet.'],
                     ['name' => 'Lampu', 'image' => 'lampu.png', 'description' => 'Lampu fluoresen, lampu dengan intensitas tinggi, dan lampu LED.']
                 ] as $category)
                 <div class="bg-white shadow-lg rounded-lg flex flex-col h-full">
-                    <img src="{{ asset('images/' . $category['image']) }}" alt="{{ $category['name'] }}" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/manajemen/registrasi/' . $category['image']) }}" alt="{{ $category['name'] }}" class="w-full h-40 object-cover">
                     <div class="flex flex-col justify-between flex-grow p-4">
                         <div>
                             <h3 class="text-lg font-bold mb-2">{{ $category['name'] }}</h3>

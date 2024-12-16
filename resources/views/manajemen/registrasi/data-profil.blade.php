@@ -8,7 +8,7 @@
     <aside class="w-1/5 bg-white shadow-md p-6 flex flex-col min-h-screen">
         <!-- Logo -->
         <div class="flex items-center space-x-2 mb-6">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo E-WastePas" class="w-12 h-12">
+            <img src="{{ asset('img/manajemen/registrasi/logo.png') }}" alt="Logo E-WastePas" class="w-12 h-12">
             <h1 class="text-xl font-bold text-green-600">E-WastePas</h1>
         </div>
 
@@ -40,7 +40,7 @@
                     <h4 class="font-medium text-gray-700">Beyonce Kumalasari</h4>
                     <span class="text-sm text-gray-500">Manajemen</span>
                 </div>
-                <img src="{{ asset('images/profile-placeholder.jpg') }}" alt="User Photo" class="w-10 h-10 rounded-full">
+                <img src="{{ asset('img/manajemen/registrasi/profile-placeholder.jpg') }}" alt="User Photo" class="w-10 h-10 rounded-full">
             </div>
         </header>
 
@@ -52,7 +52,7 @@
             <div class="flex items-center space-x-10 mb-6">
                 <!-- Profile Picture -->
                 <div class="flex items-center space-x-4">
-                    <img src="{{ asset('images/profile-placeholder.jpg') }}" alt="Profile Picture" 
+                    <img src="{{ asset('img/manajemen/registrasi/profile-placeholder.jpg') }}" alt="Profile Picture" 
                          class="w-32 h-32 rounded-full object-cover">
                     <div class="flex flex-col">
                         <h3 class="text-lg font-bold text-gray-700 mb-1">Profile Picture</h3>

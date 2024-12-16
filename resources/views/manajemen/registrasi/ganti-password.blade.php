@@ -66,7 +66,7 @@
     <!-- Bagian Kanan: Gambar Background -->
     <div class="hidden md:block w-1/2 h-screen">
         <div class="h-full bg-cover bg-center" 
-            style="background-image: url('{{ asset('images/tree-microchip.png') }}'); background-size: cover;">
+            style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}'); background-size: cover;">
         </div>
     </div>
 </div>

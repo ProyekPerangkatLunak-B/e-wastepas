@@ -10,7 +10,7 @@
             <h1 class="text-2xl font-bold mb-4">Ubah Password Berhasil</h1>
 
             <!-- Gambar Ikon Sukses -->
-            <img src="{{ asset('images/OtpSucces.png') }}" alt="OTP Success" class="w-24 h-24 mx-auto mb-6">
+            <img src="{{ asset('img/manajemen/registrasi/OtpSucces.png') }}" alt="OTP Success" class="w-24 h-24 mx-auto mb-6">
 
             <!-- Pesan -->
             <p class="text-gray-600 mb-8">Selamat Anda Dapat Masuk Dengan Kata Sandi Baru Anda.</p>

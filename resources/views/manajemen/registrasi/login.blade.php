@@ -5,7 +5,7 @@
 @section('content')
     <div class="flex h-screen">
         <!-- Bagian Gambar di Kiri -->
-        <div class="hidden md:flex w-1/2 bg-cover bg-center" style="background-image: url('/images/tree-microchip.png');">
+        <div class="hidden md:flex w-1/2 bg-cover bg-center" style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}');">
             <!-- Gambar Latar Belakang -->
         </div>
 
@@ -13,7 +13,7 @@
         <div class="w-full md:w-1/2 flex flex-col justify-center items-center p-8">
             <!-- Logo dan Judul -->
             <div class="flex flex-col items-center mb-6">
-                <img src="/images/logo.png" alt="Logo E-Wastepas" class="w-28 h-28 mb-4">
+                <img src="{{ asset('img/manajemen/registrasi/logo.png') }}" alt="Logo E-Wastepas" class="w-28 h-28 mb-4">
             </div>
 
             <!-- Judul dan Subjudul -->

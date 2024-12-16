@@ -8,7 +8,7 @@
         <!-- Header dengan Logo dan Nama -->
         <div class="bg-gradient-to-b from-green-100 to-transparent py-4 px-8">
             <div class="flex items-center">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10 mr-3">
+                <img src="{{ asset('img/manajemen/registrasi/logo.png') }}" alt="Logo" class="h-10 w-10 mr-3">
                 <h2 class="text-green-700 text-xl font-bold">E-WastePas</h2>
             </div>
         </div>
@@ -46,7 +46,7 @@
 
                 <!-- Tombol Konfirmasi -->
                 <div class="flex justify-center w-full">
-                    <button type="button"
+                    <button type="submit"
                         class="w-full max-w-xs py-3 text-base font-bold text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l rounded-lg shadow-md transition-all">
                         Kirim
                     </button>
