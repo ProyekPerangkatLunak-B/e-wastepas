@@ -122,7 +122,8 @@ class PenjemputanSampahMasyarakatController extends Controller
     public function detailKategori($id)
     {
         $jenis = Jenis::where('id_kategori', $id)->paginate(6);
-        return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis'));
+        $kategori = Kategori::find($id);
+        return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori'));
     }
 
     public function detailMelacak($id)

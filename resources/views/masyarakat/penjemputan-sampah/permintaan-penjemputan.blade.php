@@ -93,17 +93,17 @@
                     </div>
 
                     <!-- Kolom Kanan: Daftar Sampah yang Dipilih -->
-                    <div class="pt-8 space-y-4">
+                    <div class="pt-8 space-y-1">
                         <h3 class="text-lg font-semibold">Semua Sampah</h3>
                         {{-- Total Sampah --}}
-                        <div class="mb-4 text-lg font-bold text-start">
+                        <div class="text-lg font-bold text-start">
                             Total Sampah: <span id="totalSampah">0</span> Pcs
                         </div>
                         <div class="max-h-[450px] space-y-4 overflow-y-auto" id="boxSemuaSampah">
                             <!-- Card -->
                             <div class="flex justify-start items-center col-span-full border border-gray-300 bg-gray-100 w-[90%] h-[120px] rounded-2xl shadow-sm"
                                 id="box-kosong">
-                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/x-circle 3.png') }}"
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}"
                                     alt="Tidak Ditemukan" class="w-[50px] h-[50px] mx-auto">
                                 <p class="w-64 mr-32 font-bold text-center text-black-normal">Data
                                     {{ $search ?? 'Sampah Elektronik' }}
