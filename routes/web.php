@@ -387,9 +387,8 @@ Route::group([
     Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayat'])->middleware('auth')->name('penjemputan.riwayat-penjemputan');
     Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->middleware('auth')->name('penjemputan.detail-riwayat');
 
-    Route::get('penjemputan-sampah/dropbox', function () {
-        return view('mitra-kurir.penjemputan-sampah.dropbox');
-    })->name('penjemputan.dropbox');
+    Route::get('penjemputan-sampah/dropbox',  [PenjemputanSampahMitraKurirController::class, 'dropbox'])->name('penjemputan.dropbox');
+    Route::post('penjemputan-sampah/dropbox', [PenjemputanSampahMitraKurirController::class, 'updateStatusPelacakan'])->name('penjemputan.updateStatus');
 
     // Submodul Registrasi
 
