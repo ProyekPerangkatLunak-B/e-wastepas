@@ -11,20 +11,30 @@ use App\Http\Controllers\Controller;
 
 class APIController extends Controller
 {
-    public function getKategori(Request $request)
+    public function getKategori(Request $request, $id = null)
     {
         $search = $request->input('search');
-        $id = $request->input('id');
 
         $query = Kategori::query();
 
         if ($id) {
             $query->where('id_kategori', $id);
-        } elseif ($search) {
+        }
+
+        if ($search) {
             $query->where('nama_kategori', 'like', '%' . $search . '%');
         }
 
         $kategori = $query->get();
+
+        return response()->json($kategori);
+    }
+
+    public function getKategoriByJenis(Request $request, $id_jenis)
+    {
+        $kategori = Kategori::whereHas('jenis', function ($query) use ($id_jenis) {
+            $query->where('id_jenis', $id_jenis);
+        })->first();
 
         return response()->json($kategori);
     }
@@ -35,12 +45,10 @@ class APIController extends Controller
 
         $query = Jenis::query();
 
-        // Filter berdasarkan id_kategori
         if ($id) {
             $query->where('id_kategori', $id);
         }
 
-        // Filter berdasarkan pencarian nama jenis
         if ($search) {
             $query->where('nama_jenis', 'like', '%' . $search . '%');
         }
@@ -68,18 +76,25 @@ class APIController extends Controller
         return response()->json($daerah);
     }
 
+    public function getDaerahByDropbox(Request $request, $id_dropbox)
+    {
+        $daerah = Daerah::whereHas('dropbox', function ($query) use ($id_dropbox) {
+            $query->where('id_dropbox', $id_dropbox);
+        })->first();
+
+        return response()->json($daerah);
+    }
+
     public function getDropbox(Request $request, $id = null)
     {
         $search = $request->input('search');
 
         $query = Dropbox::query();
 
-        // Filter berdasarkan id_daerah
         if ($id) {
             $query->where('id_daerah', $id);
         }
 
-        // Filter berdasarkan pencarian nama dropbox
         if ($search) {
             $query->where('nama_dropbox', 'like', '%' . $search . '%');
         }
