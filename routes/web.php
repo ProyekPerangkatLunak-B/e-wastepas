@@ -322,9 +322,9 @@ Route::group([
         return view('masyarakat/registrasi/cek-mail');
     });
 
-    //Route::get('/profil', function () {
+    // Route::get('/profil', function () {
     //    return view('masyarakat/registrasi/profil');
-    //});
+    // });
 
     //Route::get('/forgot-password-otp', function () {
     //    return view('masyarakat/registrasi/forgot-password-otp');
@@ -334,9 +334,9 @@ Route::group([
 
 
     //profileEdit
-    Route::get('profile', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.profile.show');
-    Route::get('profile/edit', [ProfileMasyarakatController::class, 'editProfile'])->name('masyarakat.profile.edit');
-    Route::post('profile/edit', [ProfileMasyarakatController::class, 'updateProfile'])->name('masyarakat.profile.update');
+    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('profile.show');
+    Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
+    
 
     //forgot pass masyarakat
     Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
