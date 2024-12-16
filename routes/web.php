@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\admin\AuthController;
@@ -7,25 +8,25 @@ use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\admin\KurirAdminController;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
+use App\Http\Controllers\Manajemen\DashboardKategori;
+use App\Http\Controllers\Manajemen\DropboxController;
 use App\Http\Controllers\Admin\DropboxAdminController;
+use App\Http\Controllers\Manajemen\KategoriController;
+use App\Http\Controllers\Manajemen\DashboardController;
 use App\Http\Controllers\Admin\ManajemenAdminController;
 use App\Http\Controllers\Admin\MasyarakatAdminController;
 use App\Http\Controllers\Admin\JenisSampahAdminController;
+use App\Http\Controllers\Manajemen\OtpManajemenController;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Masyarakat\ForgotPasswordController;
 use App\Http\Controllers\Masyarakat\ProfileMasyarakatController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
-use App\Http\Controllers\Manajemen\ForgotPasswordManajemenController;
-use App\Http\Controllers\Manajemen\ResetPasswordManajemenController;
-use App\Http\Controllers\Manajemen\OtpManajemenController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
+use App\Http\Controllers\Manajemen\ResetPasswordManajemenController;
+use App\Http\Controllers\Manajemen\ForgotPasswordManajemenController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
-use App\Http\Controllers\Manajemen\DashboardController;
-use App\Http\Controllers\Manajemen\DashboardKategori;
-use App\Http\Controllers\Manajemen\KategoriController;
-use App\Models\Kategori;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -176,6 +177,12 @@ Route::group([
         return view('manajemen.datamaster.top-10.index');
     })->name('datamaster.top-10.index');
 
+    // Route::get('/datamaster/dropbox', function () {
+    //     return view('manajemen.datamaster.dropbox.index');
+    // })->name('datamaster.dropbox.index');
+
+    Route::get('/datamaster/dropbox', [DropboxController::class, 'index'])->name('datamaster.dropbox.index');
+
     // Route::get('/datamaster/kategori', function () {
     //     return view('manajemen.datamaster.kategori.index');
     // })->name('datamaster.kategori.index');
@@ -186,10 +193,6 @@ Route::group([
     Route::get('/datamaster/per-daerah', function () {
         return view('manajemen.datamaster.per-daerah.index');
     })->name('datamaster.per-daerah.index');
-
-    Route::get('/datamaster/dropbox', function () {
-        return view('manajemen.datamaster.dropbox.index');
-    })->name('datamaster.dropbox.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');
