@@ -267,13 +267,14 @@ Route::group([
         return view('manajemen.registrasi.check-email');
     })->name('password.check-email');
 
+    // Route Ganti Password (Registrasi)
+    Route::get('/ganti-password', function () {
+        return view('manajemen.registrasi.ganti-password');
+    })->name('password.ganti-password');
+
 
     // Memverifikasi OTP
     Route::post('verify-otp', [RegistrasiManajemenController::class, 'verifyOtp'])->name('manajemen.registrasi.verify-otp.submit');
-
-
-    Route::get('manajemen/reset-password/{token}', [ResetPasswordManajemenController::class, 'showResetForm'])->name('manajemen.password.reset');
-    Route::post('manajemen/reset-password', [ResetPasswordManajemenController::class, 'resetPassword'])->name('manajemen.password.update');
 });
 
 // Route Modul Masyarakat
