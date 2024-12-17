@@ -1,84 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 font-sans">
+@extends('layouts.registrasi.main-profil')
 
-<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white p-8 rounded-lg shadow-lg">
-        <div class="flex items-center justify-between mb-8">
+@section('content')
+<div class="w-[81%] min-h-screen px-[5rem] py-12 mx-[22rem] bg-gray-100">
+
+    <div class="flex" aria-label="Breadcrumb">
+            <div class="flex items-center">
+            </div>
+            <div style="background-color: white;"
+            class="rounded-[2rem] w-full
+                   sm:max-w-2xl md:max-w-3xl lg:max-w-4xl
+                   p-6 sm:p-8 md:p-10 ms-24
+                   relative flex flex-col justify-content items-center">
+                   <div class="w-full flex-20 mt-4">
+                    <div class="flex flex-col flex justify-around items-center">
+                </div>
             <div>
-                <h2 class="text-3xl font-semibold text-gray-900">Profile</h2>
-                <p class="text-gray-500">Perbarui profil Anda</p>
+                <h2 class="text-3xl font-semibold text-gray-900 ms-24">Profile</h2>
             </div>
-            <div class="flex items-center space-x-4">
-                <img src="https://i.pinimg.com/originals/4d/7f/a0/4d7fa04f0b93e67d67b01558b8cb1c85.jpg" alt="User Profile" class="w-10 h-10 rounded-full">
-                <span class="text-sm font-semibold text-gray-700">Beyonce Kumalasari</span>
-            </div>
-        </div>
+            <div class="md:col-span-6 mt-4 ms-32">
+                <div class="mt-1 flex items-center">
+                  <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                    <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </span>
+                  <div class="container">
+                    <h3 class="ms-8 font-semibold text-xl">Profile Picture</h3>
+                    <p class="ms-8">PNG, JPG, JPEG Under 15MB</p>
+                </div>
+                </div>
+              </div>
 
         <!-- Form Profil -->
-        <form method="POST" action="" enctype="multipart/form-data" class="space-y-8">
-            @csrf
+        <form id="profileForm" method="POST" action="{{ route('masyarakat.profile.save') }}" enctype="multipart/form-data" class="space-y-8">
+            @csrf <!-- Token CSRF untuk keamanan -->
 
-            <!-- Foto Profil -->
-            <div class="flex items-center space-x-4 mb-8">
-                <div class="relative">
-                    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-24 h-24 rounded-full object-cover border-2 border-gray-300">
-                    <input type="file" name="profile_picture" accept="image/jpeg, image/png" id="profile_picture" class="absolute bottom-0 right-0 text-sm opacity-0 cursor-pointer">
+            <!-- Input untuk Nama -->
+            <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-3 justify-center w-full">
+                <div class="w-full mt-6">
+                    <label for="" class="dark:text-gray-300">Nama</label>
+                    <input type="text"
+                            class="p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            placeholder="Masukkan Nama">
                 </div>
-                <div class="text-sm text-gray-500">
-                    <label for="profile_picture" class="block font-semibold">Profile Picture</label>
-                    <p>JPG, JPEG, PNG, Under 15MB</p>
-                </div>
-            </div>
-
-            <!-- Nama dan Tanggal Lahir -->
-            <div class="grid grid-cols-2 gap-8">
-                <div>
-                    <label for="name" class="block text-gray-700 font-medium">Nama</label>
-                    <input type="text" name="nama" id="nama" value="" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Nama">
-                </div>
-
-                <div>
-                    <label for="dob" class="block text-gray-700 font-medium">Tanggal Lahir</label>
-                    <input type="date" name="dob" id="dob" value="" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Tanggal Lahir">
+                <div class="w-full mt-6">
+                    <h3 class="dark:text-gray-300">Tanggal Lahir</h3>
+                    <input type="date"
+                            class="text-grey p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            placeholder="Masukkan Tanggal Lahir">
                 </div>
             </div>
-
-            <!-- No. Telepon dan No. Rekening -->
-            <div class="grid grid-cols-2 gap-8">
-                <div>
-                    <label for="phone" class="block text-gray-700 font-medium">No. Telepon</label>
-                    <input type="text" name="phone" id="phone" value="" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan No Telepon">
+            <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-3 justify-center w-full">
+                <div class="w-full">
+                    <label for="no-telepon" class="dark:text-gray-300">Masukkan No. Telepon</label>
+                    <input type="tel"
+                            class="p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            placeholder="Masukkan No. Telepon">
                 </div>
-
-                <div>
-                    <label for="bank_account" class="block text-gray-700 font-medium">No. Rekening</label>
-                    <input type="text" name="bank_account" id="bank_account" value="" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan No Rekening">
+                <div class="w-full">
+                    <label for="no-rekening" class=" dark:text-gray-300">No. Rekening</label>
+                    <input type="text"
+                            class="p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            placeholder="Masukkan No. Rekening">
                 </div>
             </div>
-
-            <!-- Alamat -->
-            <div>
-                <label for="address" class="block text-gray-700 font-medium">Alamat</label>
-                <input type="text" name="address" id="address" value="" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan Alamat">
+            <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col">
+                <div class="">
+                    <label for="alamat" class="dark:text-gray-300">Alamat</label>
+                    <textarea type="text"
+                            class="p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            placeholder="Masukkan Alamat"></textarea>
+                </div>
             </div>
+            <!-- Input untuk Foto Profil -->
+         <!--   <div>
+                <label for="foto_profil" class="block text-gray-700 font-medium">Foto Profil</label>
+                <input type="file" name="foto_profil" id="foto_profil" accept="image/*" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div> -->
 
             <!-- Tombol Simpan -->
-            <div class="mt-6">
-                <a href="{{ route('masyarakat.penjemputan.kategori') }}"
-                    class="block w-full text-center bg-green-500 text-white py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-green-600">
+            <div class="mt-6 flex justify-end items-end">
+                <button type="button" onclick="validateForm()"
+                    class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l py-3 px-5 justify-end font-bold ms-80 rounded-lg text-base">
                     Simpan
-                </a>
+                </button>
             </div>
         </form>
     </div>
 </div>
 
-</body>
-</html>
+<!-- Modal -->
+<div id="modelConfirm" class="fixed inset-0 z-50 hidden w-full h-full px-4 overflow-y-auto bg-gray-900 bg-opacity-60">
+    <div class="relative max-w-md mx-auto bg-white rounded-lg shadow-xl top-40 flex flex-col">
+        <div class="flex justify-end p-2">
+            <button onclick="closeModal('modelConfirm')" type="button"
+                class="text-gray-400 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="p-6 text-center flex flex-col justify-between flex-grow">
+            <h2 class="text-xl font-bold text-gray-900">Profile Anda Berhasil Diperbaharui</h2>
+            <img src="../img/masyarakat/registrasi/popup-reset.png" alt="Success Icon" class="w-20 h-20 mx-auto mt-4">
+            <p class="mt-4 text-gray-500">Sekarang Anda Menggunakan Profile yang baru saja diperbaharui</p>
+            <a href="{{ route('masyarakat.penjemputan.kategori') }}"
+               class="px-5 py-2 mt-auto font-bold text-white bg-gradient-to-r from-lime-500 to-green-600 rounded-lg">
+                Kembali
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        const form = document.getElementById('profileForm');
+        const inputs = form.querySelectorAll('input');
+        let isValid = true;
+
+        // Check if any input is empty
+        inputs.forEach(input => {
+            if (input.required && !input.value) {
+                input.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                input.classList.remove('border-red-500');
+            }
+        });
+
+        // If all fields are filled, open the modal
+        if (isValid) {
+            openModal('modelConfirm');
+        } else {
+            alert('Tolong lengkapi semua data sebelum menyimpan.');
+        }
+    }
+
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = 'block';
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+        document.body.classList.remove('overflow-hidden');
+    }
+</script>
+</div>
+</div>
+
+@endsection

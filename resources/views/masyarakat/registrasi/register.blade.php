@@ -40,31 +40,31 @@
                     <label for="name" class="block mt-4 text-md font-medium leading-9 text-gray-500">Nama</label>
                         <input
                             class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="name" required name="name"/>
+                            type="name" required name="name" placeholder="Masukkan Nama"/>
                     </div>
                   <div>
-                    <label for="tel" class="block mt-4 text-md font-medium leading-9 text-gray-500">No. Telepon</label>
+                    <label for="telepon" class="block mt-4 text-md font-medium leading-9 text-gray-500">No. Telepon</label>
                         <input
                             class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="tel" required name="tel"/>
+                            type="tel" required name="tel" placeholder="Masukkan No. Telepon"/>
                     </div>
                   <div>
-                    <label for="no-rek" class="block mt-4 text-md font-medium leading-9 text-gray-500">No. KTP</label>
+                    <label for="no-ktp" class="block mt-4 text-md font-medium leading-9 text-gray-500">No. KTP</label>
                         <input
                             class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="no-rex" required name="no-rek"/>
+                            type="text" required name="no-rek" placeholder="Masukkan No. KTP"/>
                     </div>
                   <div>
                     <label for="email" class="block mt-4 text-md font-medium leading-9 text-gray-500">Email</label>
                         <input
                             class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="email" required name="email"/>
+                            type="email" required name="email" placeholder="Masukkan Email"/>
                     </div>
                     <div>
                     <label for="password" class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label>
                         <input
-                            class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="password" required name="password"/>
+                            class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
+                            type="password" required name="password" placeholder="Masukkan Password"/>
                     </div>
                       <div class="">
                 </div>

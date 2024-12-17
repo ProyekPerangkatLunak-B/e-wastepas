@@ -20,16 +20,16 @@
                       <form action="" method="GET">
                         <label for="password" class="block mt-6 text-md font-bold leading-9 text-gray-900">Password Lama</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="password" placeholder="Enter your password" required name="password"/>
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
+                            type="password" required name="password" placeholder="Masukkan Password"/>
                         <label for="password" class="block mt-6 text-md font-bold leading-9 text-gray-900">Password Baru</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="password"  placeholder="Enter your password" name="password"/>
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
+                            type="password" name="password" placeholder="Masukkan Password"/>
                         <label for="password" class="block mt-6 text-md font-bold leading-9 text-gray-900">Konfirmasi Password Baru</label>
                         <input
-                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-sm focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="password"  placeholder="Enter your password" name="password"/>
+                            class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
+                            type="password" name="password" placeholder="Masukkan Password"/>
 
                             <button class="focus:outline-none text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l py-2 px-4 ms-40 font-bold rounded-lg mt-8 text-base" onclick="openModal('modelConfirm')">
                                 Simpan

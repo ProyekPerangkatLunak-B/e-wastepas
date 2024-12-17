@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="min-h-screen mx-[22rem] pt-12 mt-2 pb-96 bg-gray-100 w-[82%]">
+    <div class="min-h-screen mx-[22rem] pt-12 mt-2 pb-48 bg-gray-100 w-[82%]">
         {{-- Breadcrumbs section --}}
         <div class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center mx-16 mb-6 space-x-1 md:space-x-3">
@@ -204,7 +204,7 @@
         </div>
 
         <!-- Container untuk Detail Alamat dan Detail Pelacakan -->
-        <div class="w-[1380px] h-auto mx-auto pb-10 mt-6 bg-white-normal shadow-sm rounded-xl">
+        <div class="w-[1380px] h-[430px] mx-auto pb-10 mt-6 bg-white-normal shadow-sm rounded-xl">
             <div class="flex justify-center mb-12 space-x-28">
                 <span class="w-24 h-2 bg-red-200 rounded"></span>
                 <span class="w-24 h-2 bg-blue-300 rounded"></span>
@@ -216,12 +216,12 @@
             </div>
 
             <!-- Tracking & Details -->
-            <div class="px-8 mt-6">
+            <div class="px-10 mt-6">
                 <div class="flex justify-between">
                     <!-- Nama, Alamat Penjemputan -->
-                    <div class="w-1/2 pr-6 mt-2">
+                    <div class="w-1/2 pr-6 mt-2 ml-4">
 
-                        <h3 class="mb-2 text-lg font-bold">Driver</h3>
+                        <h3 class="mb-2 text-lg font-bold">Nama Kurir</h3>
                         <p class="mb-8 text-gray-600">
                             {{-- Asep Surasep - 0851632668923 --}}
                             @if ($penjemputan->id_pengguna_kurir)
@@ -254,13 +254,30 @@
 
                     </div>
 
-                    <div class="relative w-1/2 mt-2">
-                        <h3 class="mx-auto mb-2 text-lg font-bold">Detail Pelacakan</h3>
-                        <div class="relative max-h-[450px] space-y-4 overflow-y-auto">
-                            <!-- Garis Vertikal -->
-                            <div class="absolute top-0 bottom-0 w-1 bg-gray-200 left-[149px] h-auto"></div>
-
+                    <div class="relative w-1/2 mt-2 mr-4">
+                        <h3 class="mx-auto text-lg font-bold">Detail Pelacakan</h3>
+                        <p class="text-base font-normal text-gray-600">Permintaan Penjemputan:
+                            {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->created_at)->locale(app()->getLocale())->translatedFormat('H:i, j F Y') }}
+                        </p>
+                        <div class="relative h-64 mt-4 space-y-4 overflow-y-auto">
                             @foreach ($penjemputan->pelacakan as $p)
+                            <!-- Garis Vertikal -->
+                            @php
+                            $status = $penjemputan->getLatestPelacakan->status;
+                            $bottomValue = match($status) {
+                                'Diproses' => 'bottom-44',
+                                'Diterima' => 'bottom-20',
+                                'Dijemput Kurir' => 'bottom-4',
+                                'Menuju Lokasi Penjemputan' => '-bottom-20',
+                                'Sampah Diangkut' => '-bottom-36',
+                                'Menuju Dropbox' => '-bottom-56',
+                                'Menyimpan Sampah di Dropbox' => '-bottom-80',
+                                'Selesai' => '-bottom-80',
+                                'Dibatalkan' => 'bottom-32',
+                                default => 'bottom-0',
+                            };
+                        @endphp
+                        <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[149px] "></div>
                                 @if ($p->status !== 'Menunggu Konfirmasi')
                                     <div class="relative flex items-start space-x-4">
                                         <!-- Time and Date -->
@@ -275,14 +292,15 @@
                                         <!-- Icon Bullet -->
                                         <div
                                             class="relative z-10 flex-shrink-0 w-6 h-6 rounded-full
-                                    @if ($p->id_pelacakan === $penjemputan->getLatestPelacakan->id_pelacakan) bg-green-500
-                                    @else bg-gray-400 @endif
-                                    ">
+                                            @if ($p->status === 'Dibatalkan') bg-red-normal
+                                            @elseif ($p->id_pelacakan === $penjemputan->getLatestPelacakan->id_pelacakan) bg-secondary-normal
+                                            @else bg-gray-400 @endif
+                                            ">
                                         </div>
                                         <!-- Text Content -->
                                         <div class="flex-1">
                                             <p class="text-base font-bold text-black">{{ $p->status }}</p>
-                                            <p class="text-sm text-gray-600">{{ $p->keterangan }}</p>
+                                            <p class="text-sm text-gray-600 min-h-10">{{ $p->keterangan }}</p>
                                         </div>
                                     </div>
                                 @endif
@@ -293,10 +311,10 @@
             </div>
         </div>
         <!-- Container untuk Rincian Sampah dan Catatan -->
-        <div class="w-[1380px] h-auto mx-auto my-8 bg-white-normal shadow-sm rounded-xl p-10">
+        <div class="w-[1380px] h-[424px] mx-auto my-8 bg-white-normal shadow-sm rounded-xl p-10">
             <div class="relative grid grid-cols-2 gap-12">
-                <!-- Garis Tengah -->
-                <div class="absolute left-1/2 top-0 bottom-0 w-[1px] h-full bg-gray-200"></div>
+                {{-- <!-- Garis Tengah -->
+                <div class="absolute left-1/2 top-0 bottom-0 w-[1px] h-full bg-gray-200"></div> --}}
                 <!-- Rincian Sampah -->
                 <div class="pr-8 ml-8">
                     <h3 class="mb-6 text-xl font-bold">Rincian Sampah
@@ -304,7 +322,7 @@
                             Total Sampah : {{ count($penjemputan->detailPenjemputan) }} pcs
                         </p>
                     </h3>
-                    <div class="max-h-[450px] space-y-4 overflow-y-auto">
+                    <div class="space-y-4 overflow-y-auto max-h-64">
                         @foreach ($penjemputan->detailPenjemputan as $dp)
                             <div
                                 class="relative flex items-center justify-between w-[500px] h-[120px] bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal">
@@ -347,15 +365,18 @@
                 </div>
 
                 <!-- Catatan -->
-                <div class="pl-6">
-                    <h3 class="mb-6 text-xl font-bold text-red-300">Catatan
-                        <p class="text-sm font-normal text-black-normal">
-                            Informasi tambahan yang diberikan oleh pengguna
+                <div class="pr-6">
+                    <!-- Total Berat -->
+                    <div class="mb-4">
+                        <h3 class="mb-2 text-xl font-bold">Total Berat</h3>
+                        <p class="text-base font-normal text-black-normal">
+                            {{ $penjemputan->detailPenjemputan->sum('berat') }} Kilogram
                         </p>
-                    </h3>
-                    <div class="w-4/5 h-auto p-6 bg-gray-100 border rounded-lg shadow-sm">
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold text-red-normal">*Catatan</h3>
+                    <div class="w-[500px] max-h-52 overflow-y-auto px-6 py-3 bg-gray-100 border rounded-2xl shadow-sm">
                         <p class="text-gray-800">
-                            {{ $penjemputan->catatan }}
+                            {{ $penjemputan->catatan ?? 'Tidak ada catatan tambahan.' }}
                         </p>
                     </div>
                 </div>

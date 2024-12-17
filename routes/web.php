@@ -333,7 +333,7 @@ Route::group([
     //});
 
     //profileEdit
-    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('profile.show');
+    Route::get('/test', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
     Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
 
 
@@ -387,9 +387,8 @@ Route::group([
     Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayat'])->middleware('auth')->name('penjemputan.riwayat-penjemputan');
     Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->middleware('auth')->name('penjemputan.detail-riwayat');
 
-    Route::get('penjemputan-sampah/dropbox', function () {
-        return view('mitra-kurir.penjemputan-sampah.dropbox');
-    })->name('penjemputan.dropbox');
+    Route::get('penjemputan-sampah/dropbox',  [PenjemputanSampahMitraKurirController::class, 'dropbox'])->name('penjemputan.dropbox');
+    Route::post('penjemputan-sampah/dropbox', [PenjemputanSampahMitraKurirController::class, 'updateStatusPelacakan'])->name('penjemputan.updateStatus');
 
     // Submodul Registrasi
 
@@ -423,9 +422,9 @@ Route::get('/mitra-kurir/registrasi/syarat-ketentuan', function () {
 
 
 // halaman profile
-Route::get('/mitra-kurir/registrasi/account-profile/profile', function () {
-    return view('mitra-kurir/registrasi/account-profile/profile');
-})->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile');
+Route::get('/mitra-kurir/registrasi/account-profile/profile', [RegistrasiMitraKurirController::class, 'EditProfileIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile');
+Route::post('/mitra-kurir/registrasi/account-profile/profile', [RegistrasiMitraKurirController::class, 'UpdateProfile'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.profile.post');
+
 
 // halaman  security
 Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePasswordIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
