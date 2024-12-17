@@ -12,7 +12,7 @@
                 </p>
             </div>
 
-            @if ($errors->any())
+            @if ($errors->any() || session('error'))
                 <div id="error-message"
                     class="p-4 mb-6 text-red-600 bg-red-100 border-l-4 border-red-600 rounded-lg shadow-lg">
                     <div class="flex items-center justify-between">
@@ -36,9 +36,13 @@
                         </button>
                     </div>
                     <div class="mt-2">
-                        @foreach ($errors->all() as $error)
-                            <p class="mt-2 text-sm leading-tight">{{ $error }}</p>
-                        @endforeach
+                        @if (session('error'))
+                            <p class="mt-2 text-sm leading-tight">{{ session('error') }}</p>
+                        @else
+                            @foreach ($errors->all() as $error)
+                                <p class="mt-2 text-sm leading-tight">{{ $error }}</p>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             @endif

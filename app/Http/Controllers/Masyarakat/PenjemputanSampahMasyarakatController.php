@@ -133,6 +133,10 @@ class PenjemputanSampahMasyarakatController extends Controller
             'tanggal_penjemputan' => 'required',
         ]);
 
+        if ($request->tanggal_penjemputan < now()) {
+            return redirect()->route('masyarakat.penjemputan.permintaan')->with('error', 'Tanggal penjemputan tidak boleh kurang dari hari ini!');
+        }
+
         $kodeAkhir = Penjemputan::orderByDesc('id_penjemputan')->first();
         $hariIni = now()->format('ym');
         if (

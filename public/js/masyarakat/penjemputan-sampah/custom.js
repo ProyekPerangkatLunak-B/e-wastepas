@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let idBox = 0;
 
     // Fungsi untuk menambahkan sampah ke dalam box
-    window.tambahKeBox = function () {
+    window.tambahKeBox = async function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
             // Jika kategori, jenis, atau berat kosong, tampilkan pesan error
             btnOk.setAttribute("type", "button");
@@ -52,6 +52,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
             idBox++;
 
+            // Ambil Gambar
+            const jenisData = await fetch(
+                `/api/jenis?search=${jenis.options[jenis.selectedIndex].text}`
+            )
+                .then((response) => response.json())
+                .then((data) => data)
+                .catch((error) => {
+                    console.error("Error fetching jenis data:", error);
+                    return null;
+                });
+            const namaGambar = jenisData[0].gambar;
+            const imagePath = `/img/masyarakat/gambarKategoriSampah/${namaGambar}`;
+            var image = $(location).attr("origin");
+            image += imagePath;
+
             const box = `
             <div class="relative flex items-center justify-between w-[90%] h-[120px] border-0 shadow-sm rounded-2xl overflow-hidden border-secondary-normal" id="boxInput${idBox}">
                 <button type="button" class="absolute top-0 right-0 flex flex-col items-center justify-center w-[76px] h-full rounded-l-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${idBox})">
@@ -64,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="relative flex items-center justify-between w-[89%] h-full bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal">
                     <div class="flex items-center justify-center w-[120px] h-full overflow-hidden">
-                        <img src="https://picsum.photos/400/400" alt="Sampah" class="object-cover w-full h-full">
+                        <img src="${image}" alt="Sampah" class="object-cover w-full h-full">
                     </div>
                     <input type="text" value="${
                         kategori.value
