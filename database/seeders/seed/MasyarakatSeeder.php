@@ -33,6 +33,13 @@ class MasyarakatSeeder extends Seeder
             ['deskripsi_peran' => 'User with management access', 'status' => 1]
         );
 
+        $emailRoles = [
+            'admin' => 'dzikramf1@gmail.com',
+            'masyarakat' => 'dzikramf2@gmail.com',
+            'kurir' => 'dzikramf3@gmail.com',
+            'manajemen' => 'dzikramf4@gmail.com',
+        ];
+
         for ($i = 1; $i <= 80; $i++) {
             if ($i % 3 == 0) {
                 $nomorKTP = str_pad('32' . str_pad($i, 14, '0', STR_PAD_LEFT), 16, '0', STR_PAD_LEFT);
@@ -61,19 +68,29 @@ class MasyarakatSeeder extends Seeder
             $isKurir = $i % 4 == 0;
             $isManajemen = $i % 10 == 0; // Setiap pengguna ke-10 menjadi manajemen
 
+            if ($isManajemen) {
+                $email = $emailRoles['manajemen'];
+                $nama = "Manajemen User $i";
+                $roleId = $manajemenRole->id_peran;
+            } elseif ($isKurir) {
+                $email = $emailRoles['kurir'];
+                $nama = "Kurir User $i";
+                $roleId = $kurirRole->id_peran;
+            } else {
+                $email = $emailRoles['masyarakat'];
+                $nama = "Masyarakat User $i";
+                $roleId = $masyarakatRole->id_peran;
+            }
+
             $pengguna = Pengguna::create([
-                'id_peran' => $isManajemen
-                    ? $manajemenRole->id_peran
-                    : ($isKurir
-                        ? $kurirRole->id_peran
-                        : $masyarakatRole->id_peran),
+                'id_peran' => $roleId,
                 'nomor_ktp' => $nomorKTP,
-                'nama' => $isManajemen ? "Manajemen User $i" : "Masyarakat User $i",
+                'nama' => $nama,
                 'alamat' => "Jl. Masyarakat Sejahtera No. $i",
-                'email' => "dzikramf@gmail.com",
+                'email' => $i . $email,
                 'kata_sandi' => Hash::make('password123'),
                 'tanggal_lahir' => now()->subYears(rand(18, 40))->format('Y-m-d'),
-                'foto_profil' => null,
+                'foto_profil' => 'https://picsum.photos/id/' . rand(0, 800) . '/200/300',
                 'nomor_telepon' => $nomorTelepon,
                 'no_rekening' => str_pad($i, 10, '0', STR_PAD_LEFT),
                 'subtotal_poin' => rand(0, 100),
