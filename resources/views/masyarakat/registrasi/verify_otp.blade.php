@@ -30,22 +30,22 @@
                   <form action="{{ route('masyarakat.otp.verify') }}" method="POST">
                       @csrf
                       <div class="grid grid-cols-6  mt-10 ms-6 gap-x-10 my-2">
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-lg bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-lg bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-lg bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-lg bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-lg bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
                         </div>
-                        <div contenteditable="true"  class="rounded-lg shadow-md bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
+                        <div contenteditable="true"  class="rounded-lg shadow-lg bg-gray-100 cursor-text w-14 aspect-square flex items-center justify-center">
                           <span class="text-gray-900"></span>
                         </div>
 

@@ -31,12 +31,12 @@
                     <label for="email" class="block mt-4 font-medium leading-9 text-gray-500 text-md">Email</label>
                         <input
                             class="w-full px-5 py-4 mt-2 font-medium bg-gray-100 border border-gray-300 rounded-lg text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="email" name="email" required/>
+                            type="email" name="email" required placeholder="Masukkan Email"/>
                     </div>
                     <label for="password" class="block mt-4 font-medium leading-9 text-gray-500 text-md">Password</label>
                         <input
-                            class="w-full px-5 py-4 mt-5 text-sm font-medium bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="password" name="password" required/>
+                            class="w-full px-5 py-4 mt-5 text-md font-medium bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:border-green-800 focus:bg-white"
+                            type="password" name="password" required placeholder="Masukkan Password"/>
                     <div class="flex justify-between">
                       <div class="">
                     </div>
