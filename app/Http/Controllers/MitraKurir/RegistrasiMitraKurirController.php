@@ -220,7 +220,7 @@ public function LogoutAuth(Request $request)
         $resetLink = url('/mitra-kurir/registrasi/forgot-password-form?token=' . $token . '&email=' . $user->email);
 
         $user->notify(new PasswordResetMail($resetLink));
-        return back()->with('status', 'Password reset link sent!');
+        return back()->with('status', 'Link reset telah dikirimkan ke email!');
    }    
 
    public function ChangeForgotPassword(Request $request)
@@ -241,7 +241,7 @@ public function LogoutAuth(Request $request)
 
     Cache::forget('password_reset' . $request->email);
 
-    return redirect('mitra-kurir/registrasi/login')->with('status', 'Password successfully reset!');
+    return redirect('mitra-kurir/registrasi/login')->with('status', 'Password berhasil di reset!');
 }
 
 
@@ -269,13 +269,12 @@ public function ChangePassword(Request $request)
     $user->tanggal_update = now();
     $user->save();
 
-    return  back()->with('status', 'Password successfully reset!');
+    return  back()->with('status', 'Password berhasil di ubah!');
 }
 
 public function UpdateProfile(Request $request){
     $validateData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|',
             'phone' => 'required|string|max:20',
             'address' => 'nullable|string|max:255',
             'tanggalLahir' => 'nullable|date',
@@ -288,19 +287,15 @@ public function UpdateProfile(Request $request){
         $user = User::where('email',$find)->first();
 
         $user->nama = $validateData['name'];
-        $user->email = $validateData['email'];
         $user->nomor_telepon = $validateData['phone'];
         $user->alamat = $validateData['address'];
         $user->tanggal_Lahir = $validateData['tanggalLahir'];
         $user->no_rekening = $validateData['noRekening'];
 
         if ($request->hasFile('photo')) {
-            // Delete the old photo if it exists
             if ($user->foto_profil && Storage::exists('public/' . $user->foto_profil)) {
                 Storage::delete('public/' . $user->foto_profil);
             }
-
-            // Store the new photo
             $path = $request->file('photo')->store('profile_photos', 'public');
             $user->foto_profil = $path;
         }

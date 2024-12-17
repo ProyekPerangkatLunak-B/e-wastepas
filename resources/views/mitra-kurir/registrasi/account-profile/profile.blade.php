@@ -101,12 +101,21 @@
                                     </div>
                                 </div>
                             </div>
+
         
                             <div>
                                 <div class="mb-4">
                                     <label for="tanggalLahir" class="block mt-2 text-sm font-medium leading-7 text-gray-500">Tanggal Lahir</label>
                                     <div class="relative mt-2">
-                                        <input id="tanggalLahir" name="tanggalLahir" type="date" placeholder="Masukkan Tanggal Lahir" class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white" value="{{ $user->tanggal_lahir }} " readonly />
+                                        <input 
+                                            id="tanggalLahir" 
+                                            name="tanggalLahir" 
+                                            type="date" 
+                                            placeholder="Masukkan Tanggal Lahir" 
+                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white" 
+                                            value="{{ \Carbon\Carbon::parse($user->tanggal_lahir)->format('Y-m-d') }}" 
+                                            readonly 
+                                        />
                                     </div>
                                 </div>
                                 <div class="mb-4">
