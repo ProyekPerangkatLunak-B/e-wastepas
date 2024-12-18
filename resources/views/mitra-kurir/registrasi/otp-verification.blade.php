@@ -117,7 +117,7 @@
                         <p class="text-xl font-semibold">Selamat anda sudah berhasil mengunggah dokumen anda</p>
                         <div class="mt-4">
                             <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="mx-auto h-16 w-16">
-                        </div>git ad
+                        </div>
                         <p class="mt-4">Butuh Waktu 7x24 Jam Untuk Admin Memvalidasi</p>
                         <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-green-700 text-[#FFFFFF] rounded-md">Kembali
                             ke Menu Utama</button>
