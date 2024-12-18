@@ -99,7 +99,7 @@
                                     <div class="relative mt-2">
                                         <input id="email" name="email" type="email" placeholder="Masukkan Email"
                                             class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
-                                            value="{{ $user->email }}" readonly />
+                                            value="{{ $user->email }}" disabled />
                                     </div>
                                 </div>
                                 <div class="mb-4">
@@ -108,7 +108,7 @@
                                     <div class="relative mt-2">
                                         <input id="noktp" name="address" type="text" placeholder="Masukkan Alamat"
                                             class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
-                                            value="{{ $user->nomor_ktp }}" readonly />
+                                            value="{{ $user->nomor_ktp }}" disabledgi />
                                     </div>
                                 </div>
                                 <div class="mb-4">
