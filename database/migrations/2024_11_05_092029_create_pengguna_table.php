@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nomor_ktp')->nullable()->unique();
             $table->string('nama', 50)->nullable();
             $table->string('alamat', 255)->nullable();
-            $table->string('email', 255)->nullable()->Unique();
+            $table->string('email', 255)->nullable()->unique();
             $table->string('kata_sandi', 255)->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('foto_profil', 255)->nullable();

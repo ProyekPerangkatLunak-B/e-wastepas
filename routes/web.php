@@ -401,7 +401,7 @@ Route::group([
 });
 
 Route::post('/{id_pengguna}/otp-validation', [RegistrasiMitraKurirController::class, 'OtpValidation'])->name('otp.validation');
-Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->middleware('auth')->name('otp-verification');
+Route::get('/{id_pengguna}/otp-verification', [RegistrasiMitraKurirController::class, 'OtpRedirect'])->name('otp-verification');
 // upload dokumen
 Route::get('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadDataIndex'])->middleware('auth')->name('upload-data-index');
 Route::post('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [RegistrasiMitraKurirController::class, 'UploadValidation'])->name('upload-validate');
@@ -433,7 +433,7 @@ Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraK
 // halaman success-message document-upload
 Route::get('/mitra-kurir/registrasi/success-message', function () {
     return view('mitra-kurir/registrasi/success-message');
-})->name('mitra-kurir.registrasi.success-message');
+})->middleware('auth')->name('mitra-kurir.registrasi.success-message');
 
 // tes halaman success-message change-password
 Route::get('/mitra-kurir/registrasi/success-message-change-password', function () {

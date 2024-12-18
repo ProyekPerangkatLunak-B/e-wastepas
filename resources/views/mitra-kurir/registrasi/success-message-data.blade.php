@@ -15,7 +15,7 @@
         <div class="w-full max-w-md mx-auto">
             <div class="text-center mb-8">
                 <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
-                    Data berhasil diubah
+                    Profile telah di update
                 </h2>
             </div>
 
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="flex justify-center mb-4">
-            <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">Selesai</button>
+            <a href="{{ route('mitra-kurir.registrasi.account-profile.profile') }}" onclick="closeModal()" class="mt-6 px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] rounded-md hover:bg-gradient-to-r hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out transform hover:scale-105">Selesai</a>
         </div>
     </div>
 </div>

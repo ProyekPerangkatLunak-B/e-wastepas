@@ -26,8 +26,6 @@
          @endif
          @if ($errors->any())
          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-             <strong class="font-bold">Oops!</strong>
-             <span class="block sm:inline">There were some problems with your input:</span>
              <ul class="mt-2 list-disc pl-5">
                  @foreach ($errors->all() as $error)
                      <li>{{ $error }}</li>
@@ -50,13 +48,11 @@
                         class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none  focus:bg-white"
                         placeholder="Email"
                     >
-                </div>       
+                </div>     
+                  
             </form>
-        </div>
-
-        <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 w-full px-4 sm:px-8 md:px-12">
             <button
-                type="button"
+                type="submit"
                 onclick="showVerificationModal()"
                 class="w-full sm:w-32 float-right
                        bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md 
@@ -65,6 +61,10 @@
             >
                 Kirim
             </button>
+        </div>
+
+        <div class="absolute bottom-6 sm:bottom-8 md:bottom-12 w-full px-4 sm:px-8 md:px-12">
+            
         </div>
         
     </div>
