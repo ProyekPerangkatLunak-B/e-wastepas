@@ -1,4 +1,4 @@
-@extends('manajemen.registrasi.app')
+@extends('manajemen.registrasi.app') 
 
 @section('title', 'Forgot Password')
 
@@ -22,7 +22,7 @@
                 <!-- Judul dan Deskripsi -->
                 <h2 class="text-3xl font-extrabold text-center mb-4">Lupa Kata Sandi</h2>
                 <p class="text-gray-600 text-center text-base mb-4">Masukkan alamat email Anda di bawah ini, dan kami akan
-                    mengirimkan tautan untuk mengatur ulang kata sandi Anda.</p>
+                    mengirimkan otp untuk mengatur ulang kata sandi Anda.</p>
 
                 <!-- Form -->
                 <form action="{{ route('manajemen.password.email') }}" method="POST">
@@ -39,24 +39,19 @@
                     <div>
                         <button type="submit"
                             class="w-full py-4 mt-4 text-base font-bold rounded-lg text-slate-50 bg-gradient-to-r from-lime-500 to-green-600 hover:bg-gradient-to-l text-center shadow-md transition-all">
-                            Kirim Link Reset
+                            Masuk
                         </button>
                     </div>
                 </form>
 
                 <!-- Informasi tambahan -->
-                <div class="mt-6 text-center">
-                    <p class="text-gray-500 text-sm">Tidak menerima email? <a
-                            href="{{ route('manajemen.password.request') }}" class="text-blue-500 hover:underline">Kirim
-                            ulang</a></p>
-                </div>
             </div>
         </div>
 
         <!-- Bagian Kanan: Gambar Ilustrasi -->
         <div class="hidden md:block w-1/2 h-screen">
             <div class="h-full bg-cover bg-center"
-                style="background-image: url('{{ asset('images/tree-microchip.png') }}'); background-size: cover;">
+                style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}'); background-size: cover;">
                 <!-- Background gambar ilustrasi -->
             </div>
         </div>

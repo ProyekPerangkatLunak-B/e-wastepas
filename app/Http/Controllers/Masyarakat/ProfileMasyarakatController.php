@@ -14,7 +14,7 @@ class ProfileMasyarakatController extends Controller
      */
     public function showProfile()
     {
-        return view('masyarakat.profile.show'); // Hanya menampilkan halaman profil
+        return view('masyarakat.registrasi.profile.show'); // Hanya menampilkan halaman profil
     }
 
     /**

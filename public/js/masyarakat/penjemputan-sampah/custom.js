@@ -1,11 +1,13 @@
-// START modal tambah sampah
 document.addEventListener("DOMContentLoaded", function () {
+    // START modal tambah sampah
+
     // Fungsi untuk membuka atau menutup modal tambah sampah
     window.toggleModal = function (open) {
         const modalOverlay = document.getElementById("modal-overlay");
         modalOverlay.classList.toggle("hidden", !open);
     };
 
+    // Variabel untuk modal konfirmasi
     const confirmModal = document.getElementById("confirmModal");
     const btnOk = document.getElementById("closeAlertModal");
     const alertModal = document.getElementById("alertModal");
@@ -22,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalSampah = document.getElementById("totalSampah");
     let idBox = 0;
 
-    window.tambahKeBox = function () {
+    // Fungsi untuk menambahkan sampah ke dalam box
+    window.tambahKeBox = async function () {
         if (kategori.value == "" || jenis.value == "" || berat.value == "") {
             // Jika kategori, jenis, atau berat kosong, tampilkan pesan error
             btnOk.setAttribute("type", "button");
@@ -49,34 +52,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
             idBox++;
 
+            // Ambil Gambar
+            const jenisData = await fetch(
+                `/api/jenis?search=${jenis.options[jenis.selectedIndex].text}`
+            )
+                .then((response) => response.json())
+                .then((data) => data)
+                .catch((error) => {
+                    console.error("Error fetching jenis data:", error);
+                    return null;
+                });
+            const namaGambar = jenisData[0].gambar;
+            const imagePath = `/img/masyarakat/gambarKategoriSampah/${namaGambar}`;
+            var image = $(location).attr("origin");
+            image += imagePath;
+
             const box = `
             <div class="relative flex items-center justify-between w-[90%] h-[120px] border-0 shadow-sm rounded-2xl overflow-hidden border-secondary-normal" id="boxInput${idBox}">
-                                <button type="button" class="absolute top-0 right-0 flex flex-col items-center justify-center w-[76px] h-full rounded-l-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${idBox})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mb-1 bi bi-trash ms-2" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                    </svg>
-                                    <span class="text-sm ms-2">Hapus</span>
-                                </button>
+                <button type="button" class="absolute top-0 right-0 flex flex-col items-center justify-center w-[76px] h-full rounded-l-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${idBox})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mb-1 bi bi-trash ms-2" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                    </svg>
+                    <span class="text-sm ms-2">Hapus</span>
+                </button>
 
-                                <div class="relative flex items-center justify-between w-[89%] h-full bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal">
-                                    <div class="flex items-center justify-center w-[120px] h-full overflow-hidden">
-                                        <img src="https://picsum.photos/400/400" alt="Sampah" class="object-cover w-full h-full">
-                                    </div>
-                                    <input type="text" value="${
-                                        kategori.value
-                                    }" name="kategori[]" hidden>
-                                    <input type="text" value="${
-                                        jenis.value
-                                    }" name="jenis[]" hidden>
-                                    <input type="text" value="${
-                                        berat.value
-                                    }" name="berat[]" hidden>
-                                    <div class="flex flex-col items-center justify-center flex-1 px-2 ms-10 min-w-[120px]">
+                <div class="relative flex items-center justify-between w-[89%] h-full bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal">
+                    <div class="flex items-center justify-center w-[120px] h-full overflow-hidden">
+                        <img src="${image}" alt="Sampah" class="object-cover w-full h-full">
+                    </div>
+                    <input type="text" value="${
+                        kategori.value
+                    }" name="kategori[]" hidden>
+                    <input type="text" value="${
+                        jenis.value
+                    }" name="jenis[]" hidden>
+                    <input type="text" value="${
+                        berat.value
+                    }" name="berat[]" hidden>
+                    <div class="flex flex-col items-center justify-center flex-1 px-2 ms-10 min-w-[120px]">
                         <p class="overflow-hidden text-sm font-medium text-center text-gray-600 text-wrap whitespace-nowrap text-ellipsis">
-                            Kategori: ${
-                                kategori.options[kategori.selectedIndex].text
-                            }
+                        Kategori: ${
+                            kategori.options[kategori.selectedIndex].text
+                        }
                         </p>
                         <p class="overflow-hidden font-bold text-center text-black text-md text-pretty whitespace-nowrap text-ellipsis">
                             ${jenis.options[jenis.selectedIndex].text}
@@ -84,12 +102,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                     <div class="flex flex-col items-center justify-center min-w-[80px]">
                         <p class="font-bold text-green-500 me-4 text-md">
-                            ${berat.value} Kilogram
+                        ${berat.value} Kilogram
                         </p>
                     </div>
                 </div>
             </div>
-        `;
+            `;
 
             boxSemuaSampah.innerHTML += box;
             resetInput();
@@ -224,21 +242,52 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         });
     }
-});
-// END modal kirim permintaan dan notifikasi berhasil dan gagal
+    // END modal kirim permintaan dan notifikasi berhasil dan gagal
 
-// START modal detail permintaan penjemputan
-window.openModal = function () {
-    document.getElementById("alertModal").classList.remove("hidden");
-};
+    // START Reset form
+    window.resetForm = function () {
+        const boxSemuaSampah = $("#boxSemuaSampah")[0].children;
 
-window.closeModal = function () {
-    document.getElementById("alertModal").classList.add("hidden");
-};
-// END modal detail permintaan penjemputan
+        const tanggal = $("#tanggal_penjemputan");
+        const alamat = $("#alamat_penjemputan");
+        const catatan = $("#catatan");
 
-// START Pesan Error ketika data tidak dimasukkan
-document.addEventListener("DOMContentLoaded", function () {
+        if (totalSampah.innerHTML != 0) totalSampah.innerHTML = 0;
+        if (tanggal.val() != "") tanggal.val("");
+        if (alamat.val() != "") alamat.val("");
+        if (catatan.val() != "") catatan.val("");
+
+        if (boxSemuaSampah.length == 0) return;
+        else {
+            for (let i = 1; i <= idBox; i++) {
+                const box = boxSemuaSampah[i];
+                box.remove();
+            }
+            $("#box-kosong")[0].classList.remove("hidden");
+            resetSelect2();
+            idBox = 0;
+        }
+    };
+    // END Reset form
+
+    window.resetSelect2 = function () {
+        $("#kategori").val("").trigger("change");
+        $("#jenis").val("").trigger("change");
+        $("#daerah").val("").trigger("change");
+        $("#dropbox").val("").trigger("change");
+    };
+
+    // START modal detail permintaan penjemputan
+    window.openModal = function () {
+        document.getElementById("alertModal").classList.remove("hidden");
+    };
+
+    window.closeModal = function () {
+        document.getElementById("alertModal").classList.add("hidden");
+    };
+    // END modal detail permintaan penjemputan
+
+    // START Pesan Error ketika data tidak dimasukkan
     const errorMessage = document.getElementById("error-message");
     const dismissButton = document.getElementById("dismiss-button");
 
@@ -250,11 +299,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-});
-// END Pesan Error ketika data tidak dimasukkan
+    // END Pesan Error ketika data tidak dimasukkan
 
-// START Semua Select 2
-document.addEventListener("DOMContentLoaded", function () {
+    // START Semua Select 2
     $("#kategori").select2({
         placeholder: "Pilih Kategori Sampah",
         allowClear: true,
@@ -361,13 +408,62 @@ document.addEventListener("DOMContentLoaded", function () {
         },
     });
 
+    let isAjaxTriggered = false;
+
     $("#kategori").on("change", function () {
-        $("#jenis").val(null).trigger("change");
+        if (!isAjaxTriggered) {
+            $("#jenis").val(null).trigger("change");
+        }
+        isAjaxTriggered = false;
+    });
+
+    $("#jenis").on("change", function () {
+        const jenisId = $(this).val();
+        if (jenisId) {
+            $.ajax({
+                url: `/api/kategori-by-jenis/${jenisId}`,
+                dataType: "json",
+                success: function (data) {
+                    if (data && data.id_kategori) {
+                        isAjaxTriggered = true;
+                        $("#kategori").select2("trigger", "select", {
+                            data: {
+                                id: data.id_kategori,
+                                text: data.nama_kategori,
+                            },
+                        });
+                    }
+                },
+            });
+        }
     });
 
     $("#daerah").on("change", function () {
-        $("#dropbox").val(null).trigger("change");
+        if (!isAjaxTriggered) {
+            $("#dropbox").val(null).trigger("change");
+        }
+        isAjaxTriggered = false;
     });
-});
 
-// END Semua Select 2
+    $("#dropbox").on("change", function () {
+        const dropboxId = $(this).val();
+        if (dropboxId) {
+            $.ajax({
+                url: `/api/daerah-by-dropbox/${dropboxId}`,
+                dataType: "json",
+                success: function (data) {
+                    if (data && data.id_daerah) {
+                        isAjaxTriggered = true;
+                        $("#daerah").select2("trigger", "select", {
+                            data: {
+                                id: data.id_daerah,
+                                text: data.nama_daerah,
+                            },
+                        });
+                    }
+                },
+            });
+        }
+    });
+    // END Semua Select 2
+});

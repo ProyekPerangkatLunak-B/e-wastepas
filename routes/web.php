@@ -6,6 +6,7 @@ use App\Http\Controllers\APIController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\admin\KurirAdminController;
+use App\Http\Controllers\Manajemen\DaerahController;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Manajemen\DashboardKategori;
@@ -190,9 +191,12 @@ Route::group([
     Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
 
-    Route::get('/datamaster/per-daerah', function () {
-        return view('manajemen.datamaster.per-daerah.index');
-    })->name('datamaster.per-daerah.index');
+    // Route::get('/datamaster/per-daerah', function () {
+    //     return view('manajemen.datamaster.per-daerah.index');
+    // })->name('datamaster.per-daerah.index');
+
+    Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
+    ->name('datamaster.per-daerah.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');
@@ -267,13 +271,14 @@ Route::group([
         return view('manajemen.registrasi.check-email');
     })->name('password.check-email');
 
+    // Route Ganti Password (Registrasi)
+    Route::get('/ganti-password', function () {
+        return view('manajemen.registrasi.ganti-password');
+    })->name('password.ganti-password');
+
 
     // Memverifikasi OTP
     Route::post('verify-otp', [RegistrasiManajemenController::class, 'verifyOtp'])->name('manajemen.registrasi.verify-otp.submit');
-
-
-    Route::get('manajemen/reset-password/{token}', [ResetPasswordManajemenController::class, 'showResetForm'])->name('manajemen.password.reset');
-    Route::post('manajemen/reset-password', [ResetPasswordManajemenController::class, 'resetPassword'])->name('manajemen.password.update');
 });
 
 // Route Modul Masyarakat
@@ -281,9 +286,6 @@ Route::group([
     'prefix' => 'masyarakat/',
     'as' => 'masyarakat.',
 ], function () {
-
-
-
     // Submodul Login
     Route::get('login', function () {
         return view('masyarakat.registrasi.login');
@@ -330,38 +332,41 @@ Route::group([
     //    return view('masyarakat/registrasi/forgot-password-otp');
     //});
 
-
-
-
     //profileEdit
-    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('profile.show');
+    Route::get('/test', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
     Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
-    
+
 
     //forgot pass masyarakat
     Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('masyarakat.password.email');
+
 
     // Submodul Penjemputan Sampah
     Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
     Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('penjemputan.kategori');
     Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMasyarakatController::class, 'permintaan'])->name('penjemputan.permintaan');
     Route::get('penjemputan-sampah/melacak-penjemputan', [PenjemputanSampahMasyarakatController::class, 'melacak'])->name('penjemputan.melacak');
+
     Route::get('penjemputan-sampah/detail-kategori', function () {
         return redirect()->route('masyarakat.penjemputan.kategori');
     });
     Route::get('penjemputan-sampah/detail-kategori/{id}', [PenjemputanSampahMasyarakatController::class, 'detailKategori'])->name('penjemputan.detail');
+
     Route::get('penjemputan-sampah/detail-melacak', function () {
         return redirect()->route('masyarakat.penjemputan.melacak');
     });
     Route::get('penjemputan-sampah/detail-melacak/{id}', [PenjemputanSampahMasyarakatController::class, 'detailMelacak'])->name('penjemputan.detail-melacak');
+
     Route::get('penjemputan-sampah/total-riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'totalRiwayatPenjemputan'])->name('penjemputan.total-riwayat');
     Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat');
+
     Route::get('penjemputan-sampah/detail-riwayat', function () {
         return redirect()->route('masyarakat.penjemputan.riwayat');
     });
     Route::get('penjemputan-sampah/detail-riwayat/{id}', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
 
+    // POST Method Routing
     Route::post('penjemputan-sampah/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('penjemputan.tambah');
     Route::post('penjemputan-sampah/detail-melacak/{id}', [PenjemputanSampahMasyarakatController::class, 'batal'])->name('penjemputan.batalkan');
 });
@@ -382,9 +387,8 @@ Route::group([
     Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayat'])->middleware('auth')->name('penjemputan.riwayat-penjemputan');
     Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->middleware('auth')->name('penjemputan.detail-riwayat');
 
-    Route::get('penjemputan-sampah/dropbox', function () {
-        return view('mitra-kurir.penjemputan-sampah.dropbox');
-    })->name('penjemputan.dropbox');
+    Route::get('penjemputan-sampah/dropbox',  [PenjemputanSampahMitraKurirController::class, 'dropbox'])->name('penjemputan.dropbox');
+    Route::post('penjemputan-sampah/dropbox', [PenjemputanSampahMitraKurirController::class, 'updateStatusPelacakan'])->name('penjemputan.updateStatus');
 
     // Submodul Registrasi
 
@@ -455,12 +459,11 @@ Route::group([
     'prefix' => 'api/',
     'as' => 'api.',
 ], function () {
-    Route::get('kategori', [APIController::class, 'getKategori'])->name('kategori');
+    Route::get('kategori/{id?}', [APIController::class, 'getKategori'])->name('kategori');
     Route::get('jenis/{id?}', [APIController::class, 'getJenis'])->name('jenis');
     Route::get('daerah', [APIController::class, 'getDaerah'])->name('daerah');
     Route::get('dropbox/{id?}', [APIController::class, 'getDropbox'])->name('dropbox');
 
-    // Untuk Dropdown Select2 Kel 2
-    Route::get('jenis-option/{id}', [APIController::class, 'JenisOption'])->name('jenis-option');
-    Route::get('dropbox-option/{id}', [APIController::class, 'DropboxOption'])->name('dropbox-option');
+    Route::get('kategori-by-jenis/{id}', [APIController::class, 'getKategoriByJenis'])->name('kategori-by-jenis');
+    Route::get('daerah-by-dropbox/{id}', [APIController::class, 'getDaerahByDropbox'])->name('daerah-by-dropbox');
 });

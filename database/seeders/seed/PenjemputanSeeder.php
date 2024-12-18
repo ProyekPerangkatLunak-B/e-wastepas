@@ -4,7 +4,6 @@ namespace Database\Seeders\seed;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Faker\Factory as Faker;
 
 class PenjemputanSeeder extends Seeder
@@ -30,13 +29,23 @@ class PenjemputanSeeder extends Seeder
         $data = [];
         for ($i = 1; $i <= $dat; $i++) {
 
+            // Ambil data daerah dan pengguna masyarakat secara acak
             $daerah = DB::table('daerah')
                 ->where('id_daerah', $daerahIds[array_rand($daerahIds)])
                 ->first();
             $penggunaMasyarakat = DB::table('pengguna')
                 ->where('id_pengguna', $penggunaMasyarakatIds[array_rand($penggunaMasyarakatIds)])->first();
 
-            $kodePenjemputan = 'U' . '001P' . now()->format('ym') . str_pad($i, 3, '0', STR_PAD_LEFT);
+            // Buat kode penjemputan
+            $kodeAkhir = $data ? (object) end($data) : null;
+            $hariIni = now()->format('ym');
+            if (!$kodeAkhir || substr($kodeAkhir->kode_penjemputan, 1, 3) !== str_pad($daerah->id_daerah, 3, '0', STR_PAD_LEFT) || substr($kodeAkhir->kode_penjemputan, -7, 4) !== $hariIni) {
+                $kodePenjemputan = 'D' . str_pad($daerah->id_daerah, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '001';
+            } else {
+                $kodePenjemputan = 'D' . str_pad($daerah->id_daerah, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . str_pad((int)substr($kodeAkhir->kode_penjemputan, -3) + 1, 3, '0', STR_PAD_LEFT);
+            }
+
+            // Tambahkan data penjemputan
             $data[] = [
                 'kode_penjemputan' => $kodePenjemputan,
                 'id_daerah' => $daerah->id_daerah,
@@ -46,8 +55,8 @@ class PenjemputanSeeder extends Seeder
                 'total_berat' => 0, // init
                 'total_poin' => 0, // init
                 'tanggal_penjemputan' => now(),
-                'alamat_penjemputan' => $i . '. ' . $daerah->nama_daerah . ', ' . $penggunaMasyarakat->alamat,
-                'catatan' => $i . ". " . $faker->realText(rand(50, 100)),
+                'alamat_penjemputan' => $daerah->nama_daerah . ', ' . $penggunaMasyarakat->alamat,
+                'catatan' => $faker->realText(rand(50, 100)),
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

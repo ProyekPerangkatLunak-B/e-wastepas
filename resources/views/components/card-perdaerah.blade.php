@@ -11,7 +11,7 @@
         <!-- Overlay Gelap -->
         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
             <span class="custom-white text-2xl font-bold text-center">{{$title}}</span>
-            <span class="custom-white text-lg">{{$jenis}}</span>
+            {{-- <span class="custom-white text-lg">{{$jenis}}</span> --}}
         </div>
     </div>
     <!-- Bagian Informasi -->
