@@ -13,16 +13,16 @@
                 <div class="text-left w-full mb-6">
                     <h2 class="text-2xl font-semibold text-gray-900">Profil</h2>
                 </div>
-                @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                <div class="relative px-4 py-3 mt-4 mb-4 text-red-700 bg-red-100 rounded" role="alert">
-                        <li>{{ $error }}</li>
-                    </div>
-                    @endforeach
-                </ul>
-                @endif
 
+                @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <ul class="mt-2 list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 @if (session('status'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
                     {{ session('status') }}
