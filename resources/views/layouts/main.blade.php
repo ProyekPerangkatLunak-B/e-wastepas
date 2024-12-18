@@ -12,28 +12,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;400;600;800&display=swap" rel="stylesheet">
 
-    {{-- Link Load CSS --}}
+    {{-- Link Load CSS & JS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Link load CSS Custom --}}
+    <link rel="stylesheet" href="{{ asset('css/masyarakat-penjemputan-sampah.css') }}">
 
     <title>E-WastePas</title>
 </head>
 
-<body>
+<body class="overflow-x-hidden">
+
+
+    {{-- Sidebar --}}
+    @include('partials.sidebar')
 
     {{-- Header --}}
     @include('partials.header', [
         'userName' => 'Ammar Bahtiar',
         'userRole' => 'Masyarakat',
-        'profileImage' => 'https://via.placeholder.com/40'
+        'profileImage' => 'https://ui-avatars.com/api/?name=Ammar+Bahtiar&background=random&color=fff'
+
     ])
 
-    {{-- Sidebar --}}
-    @include('partials.sidebar')
-
     {{-- Main Content --}}
-    <div class="pt-6 pl-[20rem]">
-        @yield('content')
-    </div>
+    @yield('content')
+
+    {{-- Custom JS --}}
+    <script type="text/javascript" src="{{ asset('js/masyarakat/penjemputan-sampah/custom.js') }}"></script>
 
 </body>
 </html>
+

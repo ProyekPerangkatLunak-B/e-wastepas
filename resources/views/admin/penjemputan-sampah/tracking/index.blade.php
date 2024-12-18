@@ -1,106 +1,196 @@
 @extends('layouts.main-admin')
 
 @section('content')
-    {{-- Container Utama --}}
-    <div class="container max-w-full px-4 mx-auto bg-gray-100">
-        <div class="pb-28 pt-4">
-            {{-- Section Judul --}}
-            <h2 class="text-xl font-semibold leading-relaxed ml-14">Tracking Penjemputan</h2>
-            <h4 class="text-base font-normal ml-14">Melakukan tracking terhadap permintaan penjemputan</h4>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 px-2">
-            <!-- Card -->
-                <div class="bg-white pt-6 pb-12 ml-4 mx-2 rounded-lg shadow-lg flex flex-col items-center">
-                    <div class="mb-2 flex items-center justify-center bg-gray-100 p-3 rounded-3xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="currentColor">
-                            <path d="M448 80c8.8 0 16 7.2 16 16l0 319.8-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3L48 96c0-8.8 7.2-16 16-16l384 0zM64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-gray-600 font-medium text-center text-sm mb-2">Sarah Martin</h5>
-                    <div class="mt-2 mb-2 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24" fill="#437252">
-                            <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-black font-semibold text-center text-sm ">Alamat Penjemputan</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-2 px-5 ">Jl. Telekomunikasi. 1, Terusan Buahbatu - Bojongsoang, Sukapura, Kec.Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</h5>
-                    <div class="mt-2 mb-2 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528 512" width="24" height="24" fill="#437252">
-                            <path d="M264.4 116.3l-132 84.3 132 84.3-132 84.3L0 284.1l132.3-84.3L0 116.3 132.3 32l132.1 84.3zM131.6 395.7l132-84.3 132 84.3-132 84.3-132-84.3zm132.8-111.6l132-84.3-132-83.6L395.7 32 528 116.3l-132.3 84.3L528 284.8l-132.3 84.3-131.3-85z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-black font-semibold text-center text-sm ">Dropbox Terdekat</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-4 px-5 ">Jl. Melati, Batununggal</h5>
-                    <h5 class="text-black font-semibold text-center text-sm ">Tanggal Permintaan Penjemputan</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-5 px-5 ">10/29/2024</h5>
-                    <a href="{{ route('admin.penjemputan-sampah.tracking.detail') }}"
-                        class=" {{ Request::is('admin/penjemputan-sampah/tracking/detail') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
-                        <button class="bg-first text-black rounded-xl font-semibold text-center px-10 py-1">Detail</button>
-                        
-                    </a>
-                </div>
-
-                <div class="bg-white pt-6 pb-12 ml-4 mx-2 rounded-lg shadow-lg flex flex-col items-center">
-                    <div class="mb-2 flex items-center justify-center bg-gray-100 p-3 rounded-3xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="currentColor">
-                            <path d="M448 80c8.8 0 16 7.2 16 16l0 319.8-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3L48 96c0-8.8 7.2-16 16-16l384 0zM64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-gray-600 font-medium text-center text-sm mb-2">Sarah Martin</h5>
-                    <div class="mt-2 mb-2 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24" fill="#437252">
-                            <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-black font-semibold text-center text-sm ">Alamat Penjemputan</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-2 px-5 ">Jl. Telekomunikasi. 1, Terusan Buahbatu - Bojongsoang, Sukapura, Kec.Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</h5>
-                    <div class="mt-2 mb-2 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528 512" width="24" height="24" fill="#437252">
-                            <path d="M264.4 116.3l-132 84.3 132 84.3-132 84.3L0 284.1l132.3-84.3L0 116.3 132.3 32l132.1 84.3zM131.6 395.7l132-84.3 132 84.3-132 84.3-132-84.3zm132.8-111.6l132-84.3-132-83.6L395.7 32 528 116.3l-132.3 84.3L528 284.8l-132.3 84.3-131.3-85z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-black font-semibold text-center text-sm ">Dropbox Terdekat</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-4 px-5 ">Jl. Melati, Batununggal</h5>
-                    <h5 class="text-black font-semibold text-center text-sm ">Tanggal Permintaan Penjemputan</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-5 px-5 ">10/29/2024</h5>
-                    <button class="bg-first text-black rounded-xl font-semibold text-center px-10 py-1">Detail</button>
-                </div>
-
-                <div class="bg-white pt-6 pb-12 ml-4 mx-2 rounded-lg shadow-lg flex flex-col items-center">
-                    <div class="mb-2 flex items-center justify-center bg-gray-100 p-3 rounded-3xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="currentColor">
-                            <path d="M448 80c8.8 0 16 7.2 16 16l0 319.8-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3L48 96c0-8.8 7.2-16 16-16l384 0zM64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-gray-600 font-medium text-center text-sm mb-2">Sarah Martin</h5>
-                    <div class="mt-2 mb-2 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24" fill="#437252">
-                            <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-black font-semibold text-center text-sm ">Alamat Penjemputan</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-2 px-5 ">Jl. Telekomunikasi. 1, Terusan Buahbatu - Bojongsoang, Sukapura, Kec.Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</h5>
-                    <div class="mt-2 mb-2 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528 512" width="24" height="24" fill="#437252">
-                            <path d="M264.4 116.3l-132 84.3 132 84.3-132 84.3L0 284.1l132.3-84.3L0 116.3 132.3 32l132.1 84.3zM131.6 395.7l132-84.3 132 84.3-132 84.3-132-84.3zm132.8-111.6l132-84.3-132-83.6L395.7 32 528 116.3l-132.3 84.3L528 284.8l-132.3 84.3-131.3-85z"/>
-                        </svg>
-                    </div>
-                    <h5 class="text-black font-semibold text-center text-sm ">Dropbox Terdekat</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-4 px-5 ">Jl. Melati, Batununggal</h5>
-                    <h5 class="text-black font-semibold text-center text-sm ">Tanggal Permintaan Penjemputan</h5>
-                    <h5 class="text-third rounded-lg font-normal text-center text-xs mx-5 mb-5 px-5 ">10/29/2024</h5>
-                    <button class="bg-first text-black rounded-xl font-semibold text-center px-10 py-1">Detail</button>
-                </div>
-                
-                
-                
-                
+    <style>
 
 
+        h2 {
+            color: black;
+            /* Hijau tua */
+            margin-bottom: 15px;
+            border-bottom: 3px solid black;
+            /* Hijau lebih gelap */
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        h4 {
+            color: black;
+            /* Hijau tua */
+        }
+
+        a.inline-block {
+            transition: all 0.3s ease;
+        }
+
+        a.inline-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 255, 0, 0.3);
+            /* Hijau */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        th {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            /* Gradasi hijau */
+            color: #ffffff;
+            padding: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            background: white;
             
             
+        }
+
+        td,
+        th {
+            text-align: left;
+        }
+
+        button {
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
+            /* Hijau */
+        }
+
+        button:hover {
+            /* Hijau */
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+            /* Hijau lebih gelap */
+        }
+
+        .flex.space-x-2 button {
+            margin: 0 3px;
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .flex.space-x-2 button:hover {
+            background-color: #27ae60;
+            /* Hijau lebih gelap */
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+            /* Hijau lebih gelap */
+        }
+
+        .flex.space-x-2 .active {
+            background-color: #2ecc71;
+            /* Hijau */
+            color: #fff;
+        }
+    </style>
+
+    <div class="container max-w-full px-4 mx-auto bg-[#F1F5F9]">
+        <div class="py-8">
+            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-black">Tracking Penjemputan</h2>
+            <h4 class="text-base font-light ml-14 text-black">Admin dapat melakukan tracking permintaan penjemputan sampah elektronik.</h4>
+
+            <div class="px-12 mt-6">
+                <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+                    <table id="masyarakatTable" class="w-full border border-gray-300 bg-white rounded-lg">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">ID Pelacakan</th>
+                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">ID Penjemputan</th>
+                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">Dropbox Tujuan</th>
+                                <th class="border px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">Status</th>
+                                <th class="border px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">Estimasi Waktu</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data akan dimuat melalui AJAX -->
+                        </tbody>
+                    </table>
+                </div>
+
+                
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Define the changePage function globally
+        function changePage(page) {
+            $('#masyarakatTable').DataTable().page(page).draw('page');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            $(document).ready(function() {
+                var table = $('#masyarakatTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: function(data, callback, settings) {
+                        var statusVerifikasi = $('#statusVerifikasiFilter').val();
+                        var searchQuery = data.search.value;
+                        var orderColumnIndex = data.order[0].column;
+                        var orderDirection = data.order[0].dir;
+                        var orderColumn = data.columns[orderColumnIndex]
+                            .name;
+
+                        var orderColumn = data.order && data.order.length ? data.columns[data
+                            .order[0].column].name : 'nama';
+                        var orderDirection = data.order && data.order.length ? data.order[0]
+                            .dir : 'asc';
+
+                        $.ajax({
+                            url: '{{ route('admin.datamaster.masyarakat.getData') }}',
+                            method: 'GET',
+                            data: {
+                                status_verifikasi: statusVerifikasi,
+                                search: searchQuery,
+                                order_column: orderColumn,
+                                order_direction: orderDirection,
+                                length: settings._iDisplayLength,
+                                start: settings._iDisplayStart,
+                            },
+                            success: function(response) {
+                                callback({
+                                    draw: settings.iDraw,
+                                    recordsTotal: response.recordsTotal,
+                                    recordsFiltered: response
+                                        .recordsFiltered,
+                                    data: response.data
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('AJAX error: ', error);
+                            }
+                        });
+                    },
+                    
+                    dom: 't',
+                });
+
+                
+
+                
+            });
+        });
+
+
+        
+
+    
+
+
+        
+    </script>
 @endsection

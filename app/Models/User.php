@@ -2,47 +2,57 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\UserOTP;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable 
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    // /** @use HasFactory<\Database\Factories\UserFactory> */
+    // use HasFactory, Notifiable;
+    protected $table = 'pengguna';
+    protected $primaryKey = 'id_pengguna';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+// /**azQA  z   ZQ
+    //  * The attributes that are mass assignable.
+    //  *
+    //  * @var array<int, string>
+    //  */
     protected $fillable = [
-        'name',
+        'nama',
         'email',
-        'password',
+        'kata_sandi',
+        'nomor_ktp',
+        'tanggal_lahir',
+        'no_rekening',
+        'nomor_telepon'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    // /**
+    //  * The attributes that should be hidden for serialization.
+    //  *
+    //  * @var array<int, string>
+    //  */
     protected $hidden = [
-        'password',
+        'kata_sandi',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function activeOTP()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(UserOTP::class,'id_pengguna')->where('otp_kadaluarsa','>', 'now()');
     }
+
+    public function uploadDoc()
+    {
+        return $this->hasMany(UploadDocuments::class,"id_pengguna");
+    }
+
+    public function getAuthPassword()
+    {
+        return 'kata_sandi';
+    }
+
 }

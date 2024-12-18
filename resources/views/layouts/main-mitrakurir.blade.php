@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- Link Fav Icon --}}
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     {{-- Icon fontawesome --}}
@@ -20,7 +21,7 @@
     <title>E-WastePas</title>
 </head>
 
-<body>
+<body class="overflow-x-hidden">
 
     {{-- Header --}}
     @include('partials.header', [
@@ -33,7 +34,7 @@
     @include('partials.sidebar-mitrakurir')
 
     {{-- Main Content --}}
-    <div class="pt-6 pl-[20rem]">
+    <div class=" pl-[22rem]">
         @yield('content')
     </div>
 

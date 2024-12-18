@@ -8,9 +8,9 @@
     };
 @endphp
 
-<p class="mt-10 {{ $positionClass }} text-sm text-gray-500">
+<p class="mt-2 {{ $positionClass }} text-sm text-gray-500">
     {{ $message }} 
-    <a href="{{ $linkUrl }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+    <a href="{{ $linkUrl }}" class="font-semibold leading-6 text-[#087FD3] hover:text-indigo-500">
         {{ $linkText }}
     </a>
 </p>
