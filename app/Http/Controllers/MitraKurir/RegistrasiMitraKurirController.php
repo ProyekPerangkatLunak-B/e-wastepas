@@ -377,7 +377,7 @@ public function UpdateProfile(Request $request){
 
         $user->tanggal_update = now();
         $user->save();
-        return back()->with('status', 'Profile telah di update.');
+        return redirect()->route('mitra-kurir.registrasi.success-message-data');
 }
 
 }
