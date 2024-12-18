@@ -15,7 +15,7 @@
         <div class="w-full max-w-md mx-auto">
             <div class="text-center mb-8">
                 <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
-                    Data berhasil diubah
+                    Profile telah di update
                 </h2>
             </div>
 
