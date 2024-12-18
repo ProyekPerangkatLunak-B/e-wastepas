@@ -126,6 +126,7 @@ public function LogoutAuth(Request $request)
     {       
         $messages = [
             'nama.required' => 'Nama lengkap harus diisi.',
+            'nama.regex' => 'Nama Tidak Boleh Mengandung Simbol Atau Spesial Character',
             'KTP.required' => 'Nomor KTP harus diisi.',
             'KTP.min' => 'Nomor KTP harus terdiri dari minimal 16 digit.',
             'KTP.numeric' => 'Nomor KTP harus berupa angka.',
@@ -150,7 +151,7 @@ public function LogoutAuth(Request $request)
              ],$messages);
         try {
          $user = User::create([
-                'nama' => $validateData['nama'],
+                'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
                 'nomor_ktp' => $validateData['KTP'],
                 'nomor_telepon' => $validateData['NomorHP'],
                 'email' => $validateData['Email'],
@@ -240,7 +241,7 @@ public function LogoutAuth(Request $request)
             'file_dokumen' => $npwp
         ]);
     }
-           return redirect()->route('mitra-kurir.penjemputan.kategori');
+           return redirect()->route('mitra-kurir.registrasi.success-message');
    }
 
    public function SendForgotPassword(Request $request){
@@ -333,6 +334,7 @@ public function UpdateProfile(Request $request){
     $messages = [
         'name.required' => 'Nama lengkap harus diisi.',
         'name.string' => 'Nama harus berupa teks.',
+        'name.regex' => 'Nama Tidak Boleh Mengandung Simbol Atau Spesial Character',
         'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
         'phone.string' => 'Nomor telepon harus berupa teks.',
         'phone.max' => 'Nomor telepon tidak boleh lebih dari 20 karakter.',
@@ -347,7 +349,7 @@ public function UpdateProfile(Request $request){
     ];
 
     $validateData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'phone' => 'nullable|string|min:12|max:20',
             'address' => 'nullable|string|max:255',
             'tanggalLahir' => 'nullable|date',

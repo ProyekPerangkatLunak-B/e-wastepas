@@ -433,7 +433,7 @@ Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraK
 // halaman success-message document-upload
 Route::get('/mitra-kurir/registrasi/success-message', function () {
     return view('mitra-kurir/registrasi/success-message');
-})->name('mitra-kurir.registrasi.success-message');
+})->middleware('auth')->name('mitra-kurir.registrasi.success-message');
 
 // tes halaman success-message change-password
 Route::get('/mitra-kurir/registrasi/success-message-change-password', function () {
