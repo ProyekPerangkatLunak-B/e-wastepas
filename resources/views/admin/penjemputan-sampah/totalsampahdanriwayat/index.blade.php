@@ -1,4 +1,4 @@
-@extends('layouts.main-admin-penjemputan-sampah')
+@extends('layouts.main-admin')
 
 @section('content')
     {{-- Container Utama --}}

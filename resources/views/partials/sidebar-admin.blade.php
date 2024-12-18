@@ -53,6 +53,36 @@
                     </a>
                 </li>
             </ul>
+            <h2 class="mt-4 mb-6 text-sm font-bold text-gray-800">Penjemputan Sampah</h2>
+            <ul class="space-y-2">
+                
+                <li>
+                    <a href="{{ route('admin.penjemputan-sampah.permintaan.index') }}"
+                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan-sampah/permintaan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                        Permintaan Penjemputan
+                        <span
+                            class="text-lg {{ Request::is('admin/penjemputan-sampah/permintaan') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.penjemputan-sampah.tracking.index') }}"
+                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan-sampah/tracking') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                        Tracking Penjemputan
+                        <span
+                            class="text-lg {{ Request::is('admin/penjemputan-sampah/tracking') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.penjemputan-sampah.totalsampahdanriwayat.index') }}"
+                        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan-sampah/totalsampahdanriwayat') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+                        Total sampah dan Riwayat
+                        <span
+                            class="text-lg {{ Request::is('admin/penjemputan-sampah/totalsampahdanriwayat') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+                    </a>
+                </li>
+                
+                
+            </ul>
         </nav>
     </div>
 </div>
