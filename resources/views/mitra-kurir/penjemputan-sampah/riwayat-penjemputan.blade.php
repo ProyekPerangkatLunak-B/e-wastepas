@@ -13,12 +13,12 @@
                 <!-- Total Sampah -->
                 <div class="bg-white-200 rounded-2xl shadow-md p-6 flex items-center space-x-4 w-1/3">
                     <div class="text-5xl font-bold text-green-600">{{ $totalSampah }}<span class="text-lg text-gray-900">pcs</span></div>
-                    <div class="flex flex-col">
-
-                        <h3 class="text-lg font-semibold text-center">Total Sampah</h3>
+                    <div class="flex flex-col items-center justify-center space-x-4">
+                        <h3 class="text-lg font-semibold text-center ">Total Sampah</h3>
                         <p class="text-sm text-gray-500 text-center">Total sampah yang sudah dijemput</p>
                     </div>
                 </div>
+                
 
                 <!-- Total Berat Sampah -->
                 <div class="bg-white-200 rounded-2xl shadow-md p-6 flex items-center space-x-4 w-1/3">

@@ -30,7 +30,7 @@
                             <option value="all">Filter</option>
                             <option value="active">Berat-Ringan</option>
                             <option value="inactive">Ringan-Berat</option>
-                            <option value="inactive">Belum Diproses</option>
+                            <option value="inactive">Diproses</option>
                             <option value="inactive">Selesai</option>
                         </select>
                         <!-- SVG Icon Filter -->
