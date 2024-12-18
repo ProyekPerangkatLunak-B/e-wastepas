@@ -24,27 +24,63 @@ class PenjemputanSampahMitraKurirController extends Controller
     //untuk mengambil data dari database tabel kategori
     public function kategori()
     {
-        $kategori = Kategori::all();
-        return view(('mitra-kurir.penjemputan-sampah.kategori'), compact('kategori'));
+        $search = request()->query('search', '');
+        $sort = request()->query('sort', 'asc');
+        $kategori = Kategori::where('nama_kategori', 'like', '%' . $search . '%')
+            ->orderBy('nama_kategori', $sort)
+            ->get();
+
+        return view(('mitra-kurir.penjemputan-sampah.kategori'), compact('kategori', 'sort', 'search'));
     }
 
     //untuk mengambil data dari database tabel jenis
     public function detailKategori($id)
     {
-        $jenis = Jenis::where('id_kategori', $id)->paginate(6);
+        $search = request()->query('search', '');
+        $sort = request()->query('sort', 'asc');
+
+        $jenis = Jenis::where('id_kategori', $id)
+            ->where('nama_jenis', 'like', '%' . $search . '%')
+            ->orderBy('nama_jenis', $sort)
+            ->paginate(6);
+
         $kategori = Kategori::find($id);
-        return view('mitra-kurir.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori'));
+
+        return view('mitra-kurir.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori','sort', 'search'));
     }
 
     //untuk mengambil data dari database tabel penjemputan
     public function permintaan()
     {
+        $search = request()->query('search', '');
+        $sort = request()->query('sort', 'asc');
+
+//        $data = Penjemputan::with(['daerah', 'dropbox', 'penggunaMasyarakat', 'pelacakan','detailPenjemputan','kategori'])
+//            ->whereHas('pelacakan', function ($query) {
+//                $query->where('status', 'Diproses');
+//            })
+//            ->whereHas('penggunaMasyarakat', function ($query) use ($search) {
+//                $query->where('nama', 'like', '%' . $search . '%');
+//            })
+//            ->select(
+//                'pengguna.nama',
+//                'pelacakan.status',
+//                'pelacakan.id_pelacakan',
+//                'kategori.nama_kategori',
+//                'detailPenjemputan.berat'
+//            )
+//            ->orderBy('created_at', $sort)
+//            ->paginate(6);
+
+
+
         $data = DB::table('penjemputan')
             ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
             ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
             ->join('detail_penjemputan', 'penjemputan.id_penjemputan', '=', 'detail_penjemputan.id_penjemputan')
             ->join('kategori', 'detail_penjemputan.id_kategori', '=', 'kategori.id_kategori')
             ->where('pelacakan.status', 'Diproses')
+            ->where('pengguna.nama', 'like', '%' . $search . '%')
             ->select(
                 'pengguna.nama',
                 'pelacakan.status',
@@ -52,10 +88,29 @@ class PenjemputanSampahMitraKurirController extends Controller
                 'kategori.nama_kategori',
                 'detail_penjemputan.berat',
                 'penjemputan.id_penjemputan'
-            )
-            ->get();
+            );
 
-        return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan', compact('data'));
+        switch ($sort) {
+            case 'berat-asc':
+                $data = $data->orderBy('detail_penjemputan.berat', 'desc');
+                break;
+            case 'berat-desc':
+                $data = $data->orderBy('detail_penjemputan.berat', 'asc');
+                break;
+            case 'diproses':
+                $data = $data->orderBy('pelacakan.status', 'asc');
+                break;
+            case 'diterima':
+                $data = $data->orderBy('pelacakan.status', 'desc');
+                break;
+            default:
+                $data = $data->orderBy('penjemputan.created_at', $sort);
+                break;
+        }
+
+        $data = $data->paginate(6);
+
+        return view('mitra-kurir.penjemputan-sampah.permintaan-penjemputan', compact('data','sort', 'search'));
     }
 
 
@@ -150,27 +205,46 @@ class PenjemputanSampahMitraKurirController extends Controller
 
     public function riwayat()
     {
+        $search = request()->query('search', '');
+        $sort = request()->query('sort', 'asc');
+
         $data = DB::table('penjemputan')
             ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
             ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
             ->join('detail_penjemputan', 'penjemputan.id_penjemputan', '=', 'detail_penjemputan.id_penjemputan')
             ->join('kategori', 'detail_penjemputan.id_kategori', '=', 'kategori.id_kategori')
             ->where('pelacakan.status', 'Selesai')
+            ->where('pengguna.nama', 'like', '%' . $search . '%')
             ->select(
                 'pengguna.nama',
+                'pengguna.nomor_telepon',
                 'pelacakan.status',
                 'pelacakan.id_pelacakan',
                 'kategori.nama_kategori',
                 'detail_penjemputan.berat',
                 'penjemputan.id_penjemputan'
-            )
-            ->get();
+            );
 
-        return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan', compact('data'));
+        switch ($sort) {
+            case 'berat-asc':
+                $data = $data->orderBy('detail_penjemputan.berat', 'desc');
+                break;
+            case 'berat-desc':
+                $data = $data->orderBy('detail_penjemputan.berat', 'asc');
+                break;
+            default:
+                $data = $data->orderBy('penjemputan.created_at', $sort);
+                break;
+        }
+
+        $data = $data->paginate(6);
+
+        return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan', compact('data', 'sort', 'search'));
     }
 
     public function detailRiwayat($id)
     {
+
         $data = DB::table('penjemputan')
             ->join('detail_penjemputan', 'penjemputan.id_penjemputan', '=', 'detail_penjemputan.id_penjemputan')
             ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
@@ -178,19 +252,23 @@ class PenjemputanSampahMitraKurirController extends Controller
             ->join('jenis', 'jenis.id_jenis', '=', 'detail_penjemputan.id_jenis')
             ->join('kategori', 'jenis.id_kategori', '=', 'kategori.id_kategori')
             ->join('dropbox', 'penjemputan.id_dropbox', '=', 'dropbox.id_dropbox')
+            ->join('daerah', 'penjemputan.id_daerah', '=', 'daerah.id_daerah')
             ->where('penjemputan.id_penjemputan', $id)
             ->select(
                 'pengguna.nama',
+                'pengguna.nomor_telepon',
                 'pelacakan.status',
                 'pelacakan.id_pelacakan',
                 'jenis.nama_jenis',
                 'detail_penjemputan.berat',
                 'penjemputan.id_penjemputan',
+                'penjemputan.kode_penjemputan',
                 'penjemputan.alamat_penjemputan',
                 'penjemputan.tanggal_penjemputan',
+                'penjemputan.catatan',
                 'dropbox.alamat_dropbox',
                 'kategori.nama_kategori',
-                'penjemputan.catatan'
+                'daerah.nama_daerah'
             )
             ->get();
 
