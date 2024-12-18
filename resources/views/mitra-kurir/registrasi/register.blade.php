@@ -21,14 +21,13 @@
                 @endif
                 <form class="space-y-0.5" action="{{ url('/mitra-kurir/registrasi/register') }}" method="POST">
                     {{ csrf_field() }}
-
                     @include('components.mitra-kurir.auth.input', [
                         'id' => 'name',
                         'name' => 'nama',
                         'label' => 'Nama',
                         'type' => 'text',
                         'placeholder' => 'Masukkan Nama',
-                        'value' => old('nama'), // Tambahkan ini
+                        'value' => old('nama'),
                     ])
                     @include('components.mitra-kurir.auth.input', [
                         'id' => 'ktp',
@@ -38,7 +37,6 @@
                         'placeholder' => 'Masukkan No. KTP',
                         'value' => old('KTP'),
                     ])
-
                     @include('components.mitra-kurir.auth.input', [
                         'id' => 'email',
                         'name' => 'Email',
@@ -47,7 +45,6 @@
                         'placeholder' => 'Masukkan Email',
                         'value' => old('Email'),
                     ])
-
                     @include('components.mitra-kurir.auth.input', [
                         'id' => 'phone',
                         'name' => 'NomorHP',

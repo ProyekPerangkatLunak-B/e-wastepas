@@ -51,7 +51,7 @@
                     </div>
 
                     <!-- Submit Button -->
-               
+
                         </button>
                     </div>
                 </form>
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    {{-- <!-- Modal -->
     <div name="password-verification-modal"
         class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
@@ -71,8 +71,8 @@
                         d="M14.348 5.652a.5.5 0 0 1 0 .708L10.707 10l3.641 3.64a.5.5 0 0 1-.707.708L10 10.707l-3.641 3.641a.5.5 0 1 1-.708-.707L9.293 10l-3.641-3.641a.5.5 0 0 1 .708-.708L10 9.293l3.641-3.641a.5.5 0 0 1 .707 0z"
                         clip-rule="evenodd" />
                 </svg>
-            </button>
-
+            </button> --}}
+{{--
             <!-- Modal Content -->
             <h3 class="text-lg font-semibold mb-4">Konfirmasi Password</h3>
             <p class="mb-6">Apakah Anda yakin ingin mengubah password?</p>
@@ -106,5 +106,5 @@
         document.querySelector('[name="password-verification-modal"]').addEventListener('click', function(e) {
             if (e.target === this) closeVerificationModal();
         });
-    </script>
+    </script> --}}
 @endsection
