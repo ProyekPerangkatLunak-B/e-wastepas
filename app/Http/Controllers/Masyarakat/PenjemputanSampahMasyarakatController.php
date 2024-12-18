@@ -6,8 +6,9 @@ use App\Models\Jenis;
 use App\Models\Kategori;
 use App\Models\Pelacakan;
 use App\Models\Penjemputan;
-use App\Models\DetailPenjemputan;
 use Illuminate\Http\Request;
+use App\Models\DetailPenjemputan;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class PenjemputanSampahMasyarakatController extends Controller
@@ -50,11 +51,13 @@ class PenjemputanSampahMasyarakatController extends Controller
     // Daftar Riwayat Penjemputan
     public function riwayatPenjemputan()
     {
+        $status = Pelacakan::getEnumValues('status');
+
         // $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
-        $penjemputan = Penjemputan::filter(request(['search', 'kategori']))
+        $penjemputan = Penjemputan::filter(request(['search', 'kategori', 'status']))
             ->orderByDesc("created_at")
             ->paginate(6);
-        $kategori = Kategori::all();
+        // $kategori = Kategori::all();
 
         // dd($penjemputan);
 
@@ -62,7 +65,7 @@ class PenjemputanSampahMasyarakatController extends Controller
             'masyarakat.penjemputan-sampah.riwayat-penjemputan',
             compact([
                 'penjemputan',
-                'kategori'
+                'status'
             ])
         );
     }
@@ -83,11 +86,14 @@ class PenjemputanSampahMasyarakatController extends Controller
     // Daftar Penjemputan yang sedang berlangsung
     public function melacak()
     {
-        $kategori = Kategori::all();
+        // // $kategori = Pelacakan::all();
+
+        $status = Pelacakan::getEnumValues('status');
+
         $penjemputan = Penjemputan::whereHas(
             'getLatestPelacakan',
             function ($query) {
-                $query->whereNotIn('status', ['Selesai', 'Dibatalkan']);
+                $query->whereNotIn('status', ['Selesai', 'Dibatalkan', 'status']);
             }
         )
             ->orderByDesc("created_at")
@@ -97,7 +103,7 @@ class PenjemputanSampahMasyarakatController extends Controller
             'masyarakat.penjemputan-sampah.melacak-penjemputan',
             compact([
                 'penjemputan',
-                'kategori'
+                'status'
             ])
         );
     }
