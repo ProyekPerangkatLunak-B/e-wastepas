@@ -67,7 +67,53 @@
                     </a>
                 </li>
             </ul>
+            <h2 class="mt-4 mb-6 text-sm font-bold text-gray-800">Penjemputan Sampah</h2>
+            <ul class="space-y-2">
+                
+            <li>
+    <a href="{{ route('admin.penjemputan-sampah.permintaan.index') }}"
+        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan/permintaan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+        Permintaan Penjemputan Sampah
+        <span
+            class="text-lg {{ Request::is('admin/penjemputan/permintaan') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+    </a>
+</li>
+<li>
+    <a href="{{ route('admin.penjemputan-sampah.penerimaan.index') }}"
+        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan/penerimaan') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+        Penerimaan Penjemputan Sampah
+        <span
+            class="text-lg {{ Request::is('admin/penjemputan/penerimaan') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+    </a>
+</li>
+<li>
+    <a href="{{ route('admin.penjemputan-sampah.tracking.index') }}"
+        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan/tracking') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+        Tracking Penjemputan
+        <span
+            class="text-lg {{ Request::is('admin/penjemputan/tracking') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+    </a>
+</li>
+<li>
+    <a href="{{ route('admin.penjemputan-sampah.total.index') }}"
+        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan/total') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+        Total sampah
+        <span
+            class="text-lg {{ Request::is('admin/penjemputan/total') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+    </a>
+</li>
+<li>
+    <a href="{{ route('admin.penjemputan-sampah.riwayat.index') }}"
+        class="flex items-center justify-between p-3 text-sm font-medium text-gray-700 border {{ Request::is('admin/penjemputan/riwayat') ? 'bg-gray-100 border-green-400 text-green-600' : 'border-gray-300 hover:bg-gray-200' }} rounded-lg">
+        Riwayat Sampah
+        <span
+            class="text-lg {{ Request::is('admin/penjemputan/riwayat') ? 'text-green-600' : 'text-gray-400' }}">&gt;</span>
+    </a>
+</li>
 
+                
+                
+            </ul>
         </nav>
     </div>
 </div>
