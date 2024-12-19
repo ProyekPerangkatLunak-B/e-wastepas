@@ -127,7 +127,7 @@
                                 'Menuju Dropbox' => '-bottom-56',
                                 'Menyimpan Sampah di Dropbox' => '-bottom-80',
                                 'Selesai' => '-bottom-80',
-                                'Dibatalkan' => 'bottom-[25rem]',
+                                'Dibatalkan' => 'bottom-36',
                                 default => 'bottom-0',
                             };
                         @endphp
