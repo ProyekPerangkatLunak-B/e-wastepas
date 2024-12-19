@@ -28,6 +28,11 @@ use App\Http\Controllers\Manajemen\ResetPasswordManajemenController;
 use App\Http\Controllers\Manajemen\ForgotPasswordManajemenController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
+use App\Http\Controllers\Admin\PermintaanPenjemputanSampahAdminController;
+use App\Http\Controllers\Admin\PenerimaanPenjemputanSampahAdminController;
+use App\Http\Controllers\Admin\TrackingPenjemputanSampahAdminController;
+use App\Http\Controllers\Admin\TotalSampahPenjemputanSampahAdminController;
+use App\Http\Controllers\Admin\RiwayatPenjemputanSampahAdminController;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -144,15 +149,16 @@ Route::prefix('admin')
         });
 
         // penjemputan sampah
-        Route::prefix('penjemputan')->as('penjemputan.')->group(function () {
-            
-            
-            Route::view('permintaan', 'admin.penjemputan-sampah.permintaan.index')->name('permintaan.index');
-            Route::view('total', 'admin.penjemputan-sampah.total.index')->name('total.index');
-            Route::view('penerimaan', 'admin.penjemputan-sampah.penerimaan.index')->name('penerimaan.index');
-            Route::view('riwayat', 'admin.penjemputan-sampah.riwayat.index')->name('riwayat.index');
-            Route::view('tracking', 'admin.penjemputan-sampah.tracking.index')->name('tracking.index');
+        Route::prefix('penjemputan')
+        ->as('penjemputan-sampah.')
+        ->group(function () {
+            Route::get('permintaan', [PermintaanPenjemputanSampahAdminController::class, 'index'])->name('permintaan.index');
+            Route::get('penerimaan', [PenerimaanPenjemputanSampahAdminController::class, 'index'])->name('penerimaan.index');
+            Route::get('tracking', [TrackingPenjemputanSampahAdminController::class, 'index'])->name('tracking.index');
+            Route::get('total', [TotalSampahPenjemputanSampahAdminController::class, 'index'])->name('total.index');
+            Route::get('riwayat', [RiwayatPenjemputanSampahAdminController::class, 'index'])->name('riwayat.index');
         });
+        
     });
 
 // Rute autentikasi

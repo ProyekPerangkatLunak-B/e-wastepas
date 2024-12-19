@@ -134,50 +134,54 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             $(document).ready(function() {
-                var table = $('#masyarakatTable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: function(data, callback, settings) {
-                        var statusVerifikasi = $('#statusVerifikasiFilter').val();
-                        var searchQuery = data.search.value;
-                        var orderColumnIndex = data.order[0].column;
-                        var orderDirection = data.order[0].dir;
-                        var orderColumn = data.columns[orderColumnIndex]
-                            .name;
-
-                        var orderColumn = data.order && data.order.length ? data.columns[data
-                            .order[0].column].name : 'nama';
-                        var orderDirection = data.order && data.order.length ? data.order[0]
-                            .dir : 'asc';
-
-                        $.ajax({
-                            url: '{{ route('admin.datamaster.masyarakat.getData') }}',
-                            method: 'GET',
-                            data: {
-                                status_verifikasi: statusVerifikasi,
-                                search: searchQuery,
-                                order_column: orderColumn,
-                                order_direction: orderDirection,
-                                length: settings._iDisplayLength,
-                                start: settings._iDisplayStart,
-                            },
-                            success: function(response) {
-                                callback({
-                                    draw: settings.iDraw,
-                                    recordsTotal: response.recordsTotal,
-                                    recordsFiltered: response
-                                        .recordsFiltered,
-                                    data: response.data
-                                });
-                            },
-                            error: function(xhr, status, error) {
-                                console.error('AJAX error: ', error);
-                            }
-                        });
-                    },
-                    
-                    dom: 't',
-                });
+        var table = $('#masyarakatTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route("admin.penjemputan-sampah.riwayat.index") }}',
+                type: 'GET'
+            },
+            columns: [
+                {
+                    data: 'id_penjemputan',
+                    name: 'id_penjemputan',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'nama_masyarakat',
+                    name: 'nama_masyarakat',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'nama_kurir',
+                    name: 'nama_kurir',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'tanggal_penjemputan',
+                    name: 'tanggal_penjemputan',
+                    orderable: true,
+                    searchable: false
+                },
+                {
+                    data: 'dropbox',
+                    name: 'nama_dropbox',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            order: [[0, 'asc']], // Sort by id_penjemputan ascending by default
+            dom: 't'
+        });
 
                 
 
