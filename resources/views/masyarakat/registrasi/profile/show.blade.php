@@ -40,13 +40,13 @@
                 <div class="w-full mt-6">
                     <label for="" class="dark:text-gray-300">Nama</label>
                     <input type="text"
-                            class="p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            class="p-4 w-full border-2 rounded-lg text-gray-200 border-gray-200"
                             placeholder="Masukkan Nama">
                 </div>
                 <div class="w-full mt-6">
                     <h3 class="dark:text-gray-300">Tanggal Lahir</h3>
                     <input type="date"
-                            class="text-grey p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            class="text-grey p-4 w-full border-2 rounded-lg text-gray-400 border-gray-200"
                             placeholder="Masukkan Tanggal Lahir">
                 </div>
             </div>
@@ -54,13 +54,13 @@
                 <div class="w-full">
                     <label for="no-telepon" class="dark:text-gray-300">Masukkan No. Telepon</label>
                     <input type="tel"
-                            class="p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            class="p-4 w-full border-2 rounded-lg text-gray-200 border-gray-200"
                             placeholder="Masukkan No. Telepon">
                 </div>
                 <div class="w-full">
                     <label for="no-rekening" class=" dark:text-gray-300">No. Rekening</label>
                     <input type="text"
-                            class="p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            class="p-4 w-full border-2 rounded-lg text-gray-200 border-gray-200"
                             placeholder="Masukkan No. Rekening">
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 <div class="">
                     <label for="alamat" class="dark:text-gray-300">Alamat</label>
                     <textarea type="text"
-                            class="p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                            class="p-4 w-full border-2 rounded-lg text-gray-200 border-gray-200"
                             placeholder="Masukkan Alamat"></textarea>
                 </div>
             </div>

@@ -54,10 +54,10 @@
                 <div class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
                     @if ($penjemputan->isEmpty())
                         <!-- Tampilkan pesan jika tidak ada riwayat -->
-                        <div class="w-full p-6 text-center shadow-lg col-span-full bg-white-normal rounded-2xl">
+                        <div class="w-[400px] h-[300px] pt-20 mx-auto mt-24 text-center shadow-lg col-span-full bg-white-normal rounded-2xl"">
                             <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}" alt="Tidak Ditemukan"
                                 class="w-[100px] h-[100px] mx-auto mb-4">
-                            <p class="text-lg font-semibold text-gray-500">Tidak ada riwayat penjemputan tersedia.</p>
+                            <p class="text-lg font-semibold text-gray-500">Data Penjemputan tidak ditemukan.</p>
                         </div>
                     @else
                         @foreach ($penjemputan as $p)
