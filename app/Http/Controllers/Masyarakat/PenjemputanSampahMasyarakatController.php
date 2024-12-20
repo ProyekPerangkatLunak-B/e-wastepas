@@ -61,10 +61,9 @@ class PenjemputanSampahMasyarakatController extends Controller
         // $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
         $penjemputan = Penjemputan::filter(request(['search', 'kategori', 'status']))
             ->orderByDesc("created_at")
-            ->paginate(6);
-        // $kategori = Kategori::all();
+            ->paginate(6)
+            ->appends(request()->query());
 
-        // dd($penjemputan);
 
         return view(
             'masyarakat.penjemputan-sampah.riwayat-penjemputan',
@@ -107,7 +106,9 @@ class PenjemputanSampahMasyarakatController extends Controller
             })
             ->orderByDesc('penjemputan.created_at')
             ->select('penjemputan.*')
-            ->paginate(6);
+            ->filter(request(['search', 'kategori', 'status']))
+            ->paginate(6)
+            ->appends(request()->query());
 
         return view(
             'masyarakat.penjemputan-sampah.melacak-penjemputan',
