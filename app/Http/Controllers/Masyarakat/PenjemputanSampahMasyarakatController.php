@@ -24,9 +24,14 @@ class PenjemputanSampahMasyarakatController extends Controller
     // Daftar Kategori
     public function kategori()
     {
-        $kategori = Kategori::orderBy('nama_kategori')
-            ->get();
-        return view('masyarakat.penjemputan-sampah.kategori', compact('kategori'));
+        try {
+            $kategori = Kategori::orderBy('nama_kategori')
+                ->get();
+            return view('masyarakat.penjemputan-sampah.kategori', compact('kategori'));
+        } catch (\Exception $e) {
+            $kategori = [];
+            return redirect()->route('masyarakat.penjemputan-sampah.kategori', compact('kategori'))->with('error', 'Gagal Menampilkan Daftar Kategori!');
+        }
     }
 
     // Daftar Permintaan Penjemputan
@@ -76,35 +81,37 @@ class PenjemputanSampahMasyarakatController extends Controller
     // Daftar Jenis mengacu pada Kategori
     public function detailKategori($id)
     {
-        $jenis = Jenis::where('id_kategori', $id)
-            ->orderBy('nama_jenis')
-            ->paginate(6);
-        $kategori = Kategori::find($id);
-        return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori'));
+        try {
+            $jenis = Jenis::where('id_kategori', $id)
+                ->orderBy('nama_jenis')
+                ->paginate(6);
+            $kategori = Kategori::find($id);
+            return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori'));
+        } catch (\Exception $e) {
+            return redirect()->route('masyarakat.penjemputan-sampah.kategori')->with('error', 'Gagal Menampilkan Daftar Jenis!');
+        }
     }
 
     // Daftar Penjemputan yang sedang berlangsung
     public function melacak()
     {
-        // // $kategori = Pelacakan::all();
-
         $status = Pelacakan::getEnumValues('status');
 
-        $penjemputan = Penjemputan::whereHas(
-            'getLatestPelacakan',
-            function ($query) {
-                $query->whereNotIn('status', ['Selesai', 'Dibatalkan', 'status']);
-            }
-        )
-            ->orderByDesc("created_at")
+        $penjemputan = Penjemputan::join('pelacakan', 'penjemputan.id_penjemputan', '=', 'pelacakan.id_penjemputan')
+            ->whereNotIn('pelacakan.status', ['Selesai', 'Dibatalkan'])
+            ->whereIn('pelacakan.id_pelacakan', function ($query) {
+
+                $query->select(DB::raw('MAX(id_pelacakan)'))
+                    ->from('pelacakan')
+                    ->groupBy('id_penjemputan');
+            })
+            ->orderByDesc('penjemputan.created_at')
+            ->select('penjemputan.*')
             ->paginate(6);
 
         return view(
             'masyarakat.penjemputan-sampah.melacak-penjemputan',
-            compact([
-                'penjemputan',
-                'status'
-            ])
+            compact('penjemputan', 'status')
         );
     }
 
@@ -199,15 +206,17 @@ class PenjemputanSampahMasyarakatController extends Controller
     }
 
     // Batalkan Penjemputan yang statusnya masih 'Diproses'
-    public function batal($id)
+    public function batal(Request $request, $id)
     {
         try {
+            $keterangan = $request->keterangan;
             $pelacakan = new Pelacakan();
             $pelacakan->id_penjemputan = $id;
             $pelacakan->status = 'Dibatalkan';
+            $pelacakan->keterangan = $keterangan;
             $pelacakan->save();
 
-            return redirect()->route('masyarakat.penjemputan.melacak')->with('success', 'Permintaan Penjemputan Berhasil Dibatalkan!');
+            return redirect()->route('masyarakat.penjemputan.detail-melacak', ['id' => $id])->with('success', 'Permintaan Penjemputan Berhasil Dibatalkan!');
         } catch (\Exception $e) {
             return redirect()->route('masyarakat.penjemputan.melacak')->with('error', 'Gagal Membatalkan Permintaan Penjemputan!');
         }

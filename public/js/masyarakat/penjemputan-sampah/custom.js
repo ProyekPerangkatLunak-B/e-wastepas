@@ -140,7 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             totalSampah.innerHTML == 0 ||
             document.getElementById("daerah").value == "" ||
-            document.getElementById("dropbox").value == ""
+            document.getElementById("dropbox").value == "" ||
+            document.getElementById("tanggal_penjemputan").value == "" ||
+            document.getElementById("alamat_penjemputan").value == ""
         ) {
             btnOk.setAttribute("type", "button");
             alertModal.classList.remove("hidden");
@@ -169,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Menutup modal konfirmasi
     window.cancelAddRequest = function () {
-        openKeteranganModal();
+        confirmModal.classList.add("hidden");
     };
 
     window.submitKeterangan = function () {
@@ -197,32 +199,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (status == "success") {
             // Status berhasil
+            btnOk.classList.remove("bg-red-normal", "hover:bg-red-400");
             btnOk.classList.add(
                 "bg-secondary-normal",
                 "hover:bg-secondary-300"
             );
-            btnOk.classList.remove("bg-red-normal", "hover:bg-red-400");
             notifikasiAlert.classList.add("text-secondary-normal");
             notifikasiAlert.classList.remove("text-red-normal");
             underlineAlert.classList.add("bg-secondary-normal");
             underlineAlert.classList.remove("bg-red-normal");
         } else if (status == "cancel") {
             // Status gagal
-            btnOk.classList.add("bg-red-normal", "hover:bg-red-400");
             btnOk.classList.remove(
                 "bg-secondary-normal",
                 "hover:bg-secondary-300"
             );
+            btnOk.classList.add("bg-red-normal", "hover:bg-red-400");
             notifikasiAlert.classList.add("text-red-normal");
             notifikasiAlert.classList.remove("text-secondary-normal");
             underlineAlert.classList.add("bg-red-normal");
             underlineAlert.classList.remove("bg-secondary-normal");
         } else if (status == "inserted") {
+            btnOk.classList.remove("bg-red-normal", "hover:bg-red-300");
             btnOk.classList.add(
                 "bg-secondary-normal",
-                "hover:bg-secondary-400"
+                "hover:bg-secondary-300"
             );
-            btnOk.classList.remove("bg-red-normal", "hover:bg-red-300");
             notifikasiAlert.classList.add("text-secondary-normal");
             notifikasiAlert.classList.remove("text-red-normal");
             underlineAlert.classList.add("bg-secondary-normal");
@@ -317,9 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("keteranganModal").classList.add("hidden");
     };
 
-    window.openConfirmationModal = function () {
-        const alasan = document.getElementById("textareaKeterangan").value;
-        document.getElementById("alasanPembatalan").value = alasan;
+    window.openConfirmKeteranganModal = function () {
         closeKeteranganModal();
         document.getElementById("alertModal").classList.remove("hidden");
     };
