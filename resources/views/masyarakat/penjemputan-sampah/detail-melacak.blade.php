@@ -40,7 +40,7 @@
 
             <!-- Button Batalkan Penjemputan -->
             @if ($penjemputan->getLatestPelacakan->status === 'Diproses')
-                <a href="javascript:void(0);" onclick="openModal()"
+                <a href="javascript:void(0);" onclick="openKeteranganModal()"
                     class="flex items-center justify-center w-[200px] h-[50px] me-24 py-2 text-gray-100 transition duration-300 bg-red-normal rounded-2xl shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                         class="mr-2 bi bi-x-circle" viewBox="0 0 16 16">
@@ -387,15 +387,13 @@
 
     <!-- Modal Batalkan Penjemputan -->
     <div id="alertModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">
-        x`
         <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
             <h2 class="text-lg font-semibold text-red-normal">Notifikasi</h2>
             {{-- Underline  --}}
             <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
 
-            <p class="mt-4 text-center text-gray-700">Apakah yakin ingin membatalkan penjemputan sampah ini?
+            <p class="my-8 text-center text-gray-700">Apakah yakin ingin membatalkan penjemputan sampah ini?
             </p>
-            <p class="mt-2 text-sm text-center text-gray-500">*Keterangan Lorem ipsum dolor sit amet</p>
 
             <div class="flex justify-end mt-12 space-x-4">
                 <button onclick="closeModal()"
@@ -403,9 +401,30 @@
                 <form action="{{ route('masyarakat.penjemputan.batalkan', $penjemputan->id_penjemputan) }}"
                     method="POST">
                     @csrf
+                    <input type="hidden" name="alasan_pembatalan" id="alasanPembatalan">
                     <button class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Batalkan</button>
                 </form>
             </div>
         </div>
     </div>
+
+    {{-- Modal untuk Keterangan Catatan Pembatalan Penjemputan --}}
+    <div id="keteranganModal"
+        class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">
+        <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
+            <h2 class="text-lg font-semibold text-red-normal">Keterangan Pembatalan</h2>
+            {{-- Underline  --}}
+            <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
+
+            <textarea id="textareaKeterangan" class="w-full p-6 mt-2 border rounded-lg focus:ring-2 focus:ring-red-normal focus:outline-none" rows="4" placeholder="Masukkan alasan pembatalan..."></textarea>
+
+            <div class="flex justify-end mt-12 space-x-4">
+                <button onclick="closeKeteranganModal()"
+                    class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
+                <button onclick="openConfirmationModal()"
+                    class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

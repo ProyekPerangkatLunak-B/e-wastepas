@@ -115,16 +115,7 @@
                     <span class="mx-6 mt-4 text-lg font-bold text-gray-800">
                         {{ $p->kode_penjemputan }}
                     </span>
-        <!-- Container Grid Card -->
-        <div class="grid grid-cols-3 gap-4 mt-6">
-            @if ($penjemputan->isEmpty())
-                <!-- Tampilkan pesan jika tidak ada riwayat -->
-                <div class="w-[400px] h-[300px] pt-20 mx-auto mt-64 text-center shadow-lg col-span-full bg-white-normal rounded-2xl"">
-                    <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}" alt="Tidak Ditemukan"
-                        class="w-[100px] h-[100px] mx-auto mb-4">
-                    <p class="text-lg font-semibold text-gray-500">Data Penjemputan tidak ditemukan.</p>
                 </div>
-
                 <!-- Isi Konten -->
                 <div class="flex px-4 space-x-6">
                     <!-- Bagian Jenis dan Deskripsi Sampah -->
@@ -234,24 +225,24 @@
     {{-- Pagination --}}
     @if ($penjemputan->total() > 6)
     <div class="flex items-center justify-end mt-4 ml-24 space-x-2">
-        {{-- Button < & << --}} @if ($penjemputan->currentPage() > 1)
+        {{-- Button < & << --}}
+        @if ($penjemputan->currentPage() > 1)
             <button onclick="window.location.href='{{ $penjemputan->url(1) }}'"
                 class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
             <button onclick="window.location.href='{{ $penjemputan->previousPageUrl() }}'"
                 class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
-            @endif
+        @endif
 
-            {{-- Nomor halaman --}}
-            <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{
-                $penjemputan->currentPage() }}</button>
+        {{-- Nomor halaman --}}
+        <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $penjemputan->currentPage() }}</button>
 
-            {{-- Button > & >> --}}
-            @if ($penjemputan->hasMorePages())
+        {{-- Button > & >> --}}
+        @if ($penjemputan->hasMorePages())
             <button onclick="window.location.href='{{ $penjemputan->nextPageUrl() }}'"
                 class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
             <button onclick="window.location.href='{{ $penjemputan->url($penjemputan->lastPage()) }}'"
                 class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
-            @endif
+        @endif
     </div>
     @endif
 </div>
