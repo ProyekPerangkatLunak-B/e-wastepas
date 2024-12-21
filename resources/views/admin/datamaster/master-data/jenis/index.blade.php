@@ -179,8 +179,8 @@
                             name: 'nama_jenis'
                         },
                         {
-                            data: 'nama_kategori_sampah',
-                            name: 'kategori_sampah.nama_kategori_sampah'
+                            data: 'nama_kategori',
+                            name: 'kategori.nama_kategori'
                         },
                         {
                             data: 'poin',
