@@ -12,7 +12,6 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #27ae60;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -61,11 +60,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        button:hover {
-            background-color: #e74c3c;
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
-        }
-
         #customLengthMenu,
         #customSearch {
             border: 1px solid #ddd;
@@ -100,30 +94,49 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-green-500">Dashboard Daerah</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-gray-700">Dashboard Daerah</h2>
             <h4 class="text-base font-light ml-14 text-gray-600">Selamat datang di dashboard Daerah.</h4>
-
-            <div class="flex justify-end px-12 mt-6" style="color: white">
-                <a href="{{ route('admin.datamaster.daerah.create') }}"
-                    class="inline-block px-5 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg shadow hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transition transform hover:-translate-y-1">
-                    <i class="fas fa-plus mr-2"></i> Tambah Data
-                </a>
-            </div>
 
             <div class="px-12 mt-6">
                 <!-- Custom search and length menu -->
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex items-center">
-                        <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
-                        <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="text" id="customSearch" placeholder="Cari..." class="border rounded px-4 py-1" />
+                <div class="mt-6 mb-6">
+                    <div class="flex justify-between items-center w-full">
+                        <!-- Left side filters -->
+                        <div class="flex items-center space-x-4">
+                            <!-- Status Dropbox Filter -->
+                            <div class="flex items-center">
+                                <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Dropbox:</label>
+                                <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
+                                    <option value="">Semua</option>
+                                    <option value="Diterima">Aktif</option>
+                                    <option value="Ditolak">Tidak Aktif</option>
+                                </select>
+                            </div>
+                            <!-- Tampilkan Dropdown -->
+                            <div class="flex items-center">
+                                <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
+                                <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Right side elements -->
+                        <div class="flex items-center space-x-4">
+                            <!-- Search input -->
+                            <div class="flex text-sm">
+                                <input type="text" id="customSearch" placeholder="Cari..."
+                                    class="border rounded px-2 py-1" />
+                            </div>
+                            <!-- Add button -->
+                            <a href="{{ route('admin.datamaster.daerah.create') }}"
+                                class="inline-block px-5 py-2 text-sm bg-gradient-to-r from-green-500 to-green-400 text-white-100 rounded-lg shadow hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transition transform hover:-translate-y-1">
+                                <i class="fas fa-plus mr-2"></i> Tambah Data
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -231,7 +244,7 @@
                     $('#customPagination').empty();
                     for (var i = 0; i < pageInfo.pages; i++) {
                         var button =
-                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 text-white' : 'bg-white'}" onclick="changePage(${i})">${i + 1}</button>`;
+                            `<button class="px-3 py-1 border rounded ${pageInfo.page === i ? 'bg-green-500 hover:bg-green-700 text-white-100' : 'bg-green-700'}" onclick="changePage(${i})">${i + 1}</button>`;
                         $('#customPagination').append(button);
                     }
                 });

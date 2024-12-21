@@ -12,7 +12,6 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #2ecc71;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -50,7 +49,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Tambah Kategori Sampah</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14">Tambah Kategori Sampah</h2>
             <h4 class="text-base font-normal ml-14">Silakan isi form berikut untuk menambah kategori baru.</h4>
 
             <div class="px-12 mt-4">

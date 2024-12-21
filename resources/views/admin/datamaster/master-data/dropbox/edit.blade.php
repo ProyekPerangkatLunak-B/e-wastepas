@@ -12,7 +12,6 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #27ae60;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -50,7 +49,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Edit Dropbox</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14">Edit Dropbox</h2>
             <h4 class="text-base font-normal ml-14">Silakan ubah data berikut untuk memperbarui dropbox.</h4>
 
             <div class="px-12 mt-4">
@@ -88,7 +87,7 @@
                             <option value="0" {{ !$dropbox->status_dropbox ? 'selected' : '' }}>Tidak Aktif</option>
                         </select>
                     </div>
-                    
+
                     <div class="flex justify-end" style="color: white">
                         <button type="submit"
                             class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
