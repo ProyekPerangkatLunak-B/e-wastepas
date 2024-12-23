@@ -6,10 +6,21 @@
     <div class="flex items-center justify-between">
         <h4 class="text-base font-normal">Daftar semua penjemputan sampah elektronik di akun anda.</h4>
 
+        @if (request('search'))
+            <input type="hidden" name="search" value="{{ request('search') }}">
+        @endif
+        
+        @if (request('status'))
+            <input type="hidden" name="status" value="{{ request('status') }}">
+        @endif
+
         {{-- Search and Filter options --}}
         <div class="flex items-center mr-4 space-x-4">
             {{-- Search Box --}}
             <form method="GET" action="{{ route('masyarakat.penjemputan.melacak') }}">
+                @if (request('status'))
+                    <input type="hidden" name="status" value="{{ request('status') }}">
+                @endif
                 <div class="relative">
                     <input type="text"
                         class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
@@ -21,19 +32,20 @@
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
-                    @if (request('kategori'))
-                    <input type="hidden" name="kategori" value="{{ request('kategori') }}">
-                    @endif
                 </div>
             </form>
 
             {{-- Filter Dropdown --}}
             <form class="relative" method="GET" action="{{ route('masyarakat.penjemputan.melacak') }}">
-                <select name="kategori" onchange="this.form.submit()"
+                @if (request('search'))
+                    <input type="hidden" name="search" value="{{ request('search') }}">
+                @endif
+
+                <select name="status" onchange="this.form.submit()"
                     class="w-[222px] h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200">
                     <option value="all">Filter</option>
                     @foreach ($status as $k)
-                    <option value="{{ $k }}" {{ request('kategori')==$k ? 'selected' : '' }}>
+                    <option value="{{ $k }}" {{ request('status')== $k ? 'selected' : '' }}>
                         {{ $k }}
                     </option>
                     @endforeach
@@ -47,9 +59,6 @@
                         d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
                 </svg>
                 <button type="submit" class="hidden">Submit</button>
-                @if (request('search'))
-                <input type="hidden" name="search" value="{{ request('search') }}">
-                @endif
             </form>
         </div>
     </div>

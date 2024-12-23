@@ -50,6 +50,10 @@
         <div class="flex items-center pt-4 pl-20 mx-auto space-x-5">
             {{-- Search Box --}}
             <form method="GET" action="{{ route('masyarakat.penjemputan.riwayat') }}">
+                @if (request('status'))
+                    <input type="hidden" name="status" value="{{ request('status') }}">
+                @endif
+
                 <div class="relative">
                     <input type="text"
                         class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
@@ -66,6 +70,10 @@
 
             {{-- Filter Dropdown --}}
             <form class="relative" method="GET" action="{{ route('masyarakat.penjemputan.riwayat') }}">
+                @if (request('search'))
+                    <input type="hidden" name="search" value="{{ request('search') }}">
+                @endif
+
                 <select name="status" onchange="this.form.submit()"
                     class="w-[222px] h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200">
                     <option value="all">Filter</option>
