@@ -122,11 +122,11 @@
                                 'Diproses' => 'bottom-44',
                                 'Diterima' => 'bottom-20',
                                 'Dijemput Kurir' => 'bottom-4',
-                                'Menuju Lokasi Penjemputan' => '-bottom-20',
+                                'Menuju Lokasi Penjemputan' => '-bottom-16',
                                 'Sampah Diangkut' => '-bottom-36',
                                 'Menuju Dropbox' => '-bottom-56',
                                 'Menyimpan Sampah di Dropbox' => '-bottom-80',
-                                'Selesai' => '-bottom-80',
+                                'Selesai' => '-bottom-[30rem]',
                                 'Dibatalkan' => 'bottom-36',
                                 default => 'bottom-0',
                             };
