@@ -55,7 +55,7 @@
     </div>
 
     <!-- Container Grid Card -->
-    <div class="grid grid-cols-3 gap-8 mt-6">
+    <div class="grid grid-cols-3 gap-4 mt-6">
         @if ($penjemputan->isEmpty())
         <!-- Tampilkan pesan jika tidak ada data -->
         <div class="w-1/2 p-6 mx-auto mt-64 text-center shadow-lg col-span-full bg-white-normal rounded-2xl">
@@ -155,7 +155,7 @@
     </div>
     {{-- Pagination --}}
     @if ($penjemputan->total() > 6)
-    <div class="flex items-center justify-end mt-4 ml-24 space-x-2">
+    <div class="flex items-center justify-end pr-4 mt-4 space-x-2">
         {{-- Button < & << --}} @if ($penjemputan->currentPage() > 1)
             <button onclick="window.location.href='{{ $penjemputan->url(1) }}'"
                 class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
