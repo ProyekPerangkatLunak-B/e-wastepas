@@ -217,6 +217,8 @@ class PenjemputanSampahMasyarakatController extends Controller
             $pelacakan->keterangan = $keterangan;
             $pelacakan->save();
 
+            Penjemputan::where('id_penjemputan', $id)->update(['updated_at' => now()]);
+
             return redirect()->route('masyarakat.penjemputan.detail-melacak', ['id' => $id])->with('success', 'Permintaan Penjemputan Berhasil Dibatalkan!');
         } catch (\Exception $e) {
             return redirect()->route('masyarakat.penjemputan.melacak')->with('error', 'Gagal Membatalkan Permintaan Penjemputan!');

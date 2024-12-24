@@ -41,7 +41,7 @@ class PelacakanSeeder extends Seeder
 
         $dibatalkan = 0;
         // Pelacakan Lanjutan
-        $status = ['Dibatalkan', 'Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai'];
+        $status = ['Dibatalkan', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai'];
         $currentStatus = 'Diproses';
 
         foreach ($status as $nextStatus) {
