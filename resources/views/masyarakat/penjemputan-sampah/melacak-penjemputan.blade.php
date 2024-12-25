@@ -9,7 +9,7 @@
         @if (request('search'))
             <input type="hidden" name="search" value="{{ request('search') }}">
         @endif
-        
+
         @if (request('status'))
             <input type="hidden" name="status" value="{{ request('status') }}">
         @endif
@@ -167,21 +167,21 @@
     <div class="flex items-center justify-end pr-4 mt-4 space-x-2">
         {{-- Button < & << --}} @if ($penjemputan->currentPage() > 1)
             <button onclick="window.location.href='{{ $penjemputan->url(1) }}'"
-                class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded-xl hover:bg-gray-300">&lt;&lt;</button>
             <button onclick="window.location.href='{{ $penjemputan->previousPageUrl() }}'"
-                class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded-xl hover:bg-gray-300">&lt;</button>
             @endif
 
             {{-- Nomor halaman --}}
-            <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{
+            <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded-xl">{{
                 $penjemputan->currentPage() }}</button>
 
             {{-- Button > & >> --}}
             @if ($penjemputan->hasMorePages())
             <button onclick="window.location.href='{{ $penjemputan->nextPageUrl() }}'"
-                class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded-xl hover:bg-gray-300">&gt;</button>
             <button onclick="window.location.href='{{ $penjemputan->url($penjemputan->lastPage()) }}'"
-                class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded-xl hover:bg-gray-300">&gt;&gt;</button>
             @endif
     </div>
     @endif

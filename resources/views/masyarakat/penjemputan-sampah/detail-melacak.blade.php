@@ -96,14 +96,14 @@
             <div class="flex items-start justify-between px-4">
                 <!-- ID Penjemputan di Ujung Kiri Atas -->
                 <div class="m-2">
-                    <p class="text-lg font-normal text-black-normal">ID Penjemputan :</p>
-                    <p class="font-bold text-md">{{ $penjemputan->kode_penjemputan }}</p>
+                    <p class="font-normal text-md text-black-normal">ID Penjemputan :</p>
+                    <p class="text-lg font-bold">{{ $penjemputan->kode_penjemputan }}</p>
                 </div>
 
                 <!-- Estimasi Tiba di Ujung Kanan Atas -->
                 <div class="m-2 text-right">
-                    <p class="text-lg font-normal text-black-normal">Estimasi Tiba :</p>
-                    <p class="font-bold text-md">
+                    <p class="font-normal text-md text-black-normal">Estimasi Tiba :</p>
+                    <p class="text-2xl font-bold">
                         @if (in_array($penjemputan->getLatestPelacakan->status, [
                                 'Diterima',
                                 'Dijemput Kurir',
@@ -121,7 +121,7 @@
             </div>
 
             <!-- Tracking Status di Tengah -->
-            <div class="flex items-center justify-center mt-8 space-x-1.5">
+            <div class="flex items-center justify-center mt-4 space-x-1.5">
                 <div class="flex flex-col items-center">
                     <img src="
                     @if ($penjemputan->getLatestPelacakan->status === 'Diproses' || $penjemputan->getLatestPelacakan->status === 'Diterima') {{ asset('img/masyarakat/penjemputan-sampah/journal-check-hijau.png') }}
@@ -233,13 +233,13 @@
         <!-- Container untuk Detail Alamat dan Detail Pelacakan -->
         <div class="w-[1380px] h-[430px] mx-auto pb-10 mt-6 bg-white-normal shadow-sm rounded-xl">
             <div class="flex justify-center mb-12 space-x-28">
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
             </div>
 
             <!-- Tracking & Details -->
@@ -294,21 +294,21 @@
                                     $bottomValue = match ($status) {
                                         'Diproses' => 'bottom-44',
                                         'Diterima' => 'bottom-20',
-                                        'Dijemput Kurir' => 'bottom-4',
-                                        'Menuju Lokasi Penjemputan' => '-bottom-20',
-                                        'Sampah Diangkut' => '-bottom-36',
-                                        'Menuju Dropbox' => '-bottom-56',
-                                        'Menyimpan Sampah di Dropbox' => '-bottom-80',
-                                        'Selesai' => '-bottom-80',
-                                        'Dibatalkan' => 'bottom-32',
+                                        'Dijemput Kurir' => '-bottom-8',
+                                        'Menuju Lokasi Penjemputan' => '-bottom-32',
+                                        'Sampah Diangkut' => '-bottom-56',
+                                        'Menuju Dropbox' => '-bottom-80',
+                                        'Menyimpan Sampah di Dropbox' => '-bottom-[26rem]',
+                                        'Selesai' => '-bottom-[27rem]',
+                                        'Dibatalkan' => 'bottom-36',
                                         default => 'bottom-0',
                                     };
                                 @endphp
-                                <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[149px] "></div>
+                                <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[10.5rem] "></div>
                                 @if ($p->status !== 'Menunggu Konfirmasi')
                                     <div class="relative flex items-start space-x-4">
                                         <!-- Time and Date -->
-                                        <div class="flex flex-col items-end">
+                                        <div class="flex flex-col items-end flex-shrink-0 w-36">
                                             <p class="text-sm font-semibold text-black">
                                                 {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
                                             </p>
@@ -327,7 +327,7 @@
                                         <!-- Text Content -->
                                         <div class="flex-1">
                                             <p class="text-base font-bold text-black">{{ $p->status }}</p>
-                                            <p class="text-sm text-gray-600 min-h-10">{{ $p->keterangan }}</p>
+                                            <p class="text-sm text-gray-600 min-h-14">{{ $p->keterangan }}</p>
                                         </div>
                                     </div>
                                 @endif
@@ -415,7 +415,7 @@
     <form method="POST" action="{{ route('masyarakat.penjemputan.batalkan', $penjemputan->id_penjemputan) }}">
         @csrf
         <!-- Modal Batalkan Penjemputan -->
-        <div id="alertModal"
+        <div id="alertModalMelacakPenjemputan"
             class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">
             <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
                 <h2 class="text-lg font-semibold text-red-normal">Notifikasi</h2>
@@ -426,7 +426,7 @@
                 </p>
 
                 <div class="flex justify-end mt-12 space-x-4">
-                    <button type="button" onclick="closeModal()"
+                    <button type="button" onclick="closeModalMelacakPenjemputan()"
                         class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
                     <button type="submit"
                         class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Batalkan</button>
@@ -435,7 +435,7 @@
         </div>
 
         {{-- Modal untuk Keterangan Catatan Pembatalan Penjemputan --}}
-        <div id="keteranganModal"
+        <div id="keteranganModalMelacakPenjemputan"
             class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">
             <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
                 <h2 class="text-lg font-semibold text-red-normal">Keterangan Pembatalan</h2>
@@ -447,9 +447,9 @@
                     placeholder="Masukkan alasan pembatalan..." name="keterangan"></textarea>
 
                 <div class="flex justify-end mt-12 space-x-4">
-                    <button type="button" onclick="closeKeteranganModal()"
+                    <button type="button" onclick="closeKeteranganModalMelacakPenjemputan()"
                         class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
-                    <button type="button" onclick="openConfirmKeteranganModal()"
+                    <button type="button" onclick="openConfirmKeteranganModalMelacakPenjemputan()"
                         class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Lanjutkan</button>
                 </div>
             </div>
