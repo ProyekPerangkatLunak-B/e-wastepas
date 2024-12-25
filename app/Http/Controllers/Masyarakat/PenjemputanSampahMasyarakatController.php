@@ -151,16 +151,14 @@ class PenjemputanSampahMasyarakatController extends Controller
             return redirect()->route('masyarakat.penjemputan.permintaan')->with('error', 'Tanggal penjemputan tidak boleh kurang dari hari ini!');
         }
 
-        $kodeAkhir = Penjemputan::orderByDesc('id_penjemputan')->first();
         $hariIni = now()->format('ym');
-        if (
-            !$kodeAkhir ||
-            substr($kodeAkhir->kode_penjemputan, 1, 3) !== $request->daerah ||
-            substr($kodeAkhir->kode_penjemputan, -7, 4) !== $hariIni
-        ) {
-            $kode = 'D' . str_pad($request->daerah, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '001';
+        if (Penjemputan::where('kode_penjemputan', 'LIKE', 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '%')->count() > 0) {
+            $kodeAkhir = Penjemputan::where('kode_penjemputan', 'like', 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '%')->orderByDesc('kode_penjemputan')->first();
+            $kodeUrut = (int) substr($kodeAkhir->kode_penjemputan, -3, 3) + 1;
+            $kodeUrut = str_pad($kodeUrut, 3, '0', STR_PAD_LEFT);
+            $kode = 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . $kodeUrut;
         } else {
-            $kode = 'D' . str_pad($request->daerah, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . str_pad((int)substr($kodeAkhir->kode_penjemputan, -3) + 1, 3, '0', STR_PAD_LEFT);
+            $kode = 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '001';
         }
 
         $poinKategori = 0;

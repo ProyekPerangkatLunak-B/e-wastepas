@@ -2,9 +2,10 @@
 
 namespace Database\Seeders\seed;
 
+use App\Models\Penjemputan;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
 class PenjemputanSeeder extends Seeder
 {
@@ -37,19 +38,30 @@ class PenjemputanSeeder extends Seeder
                 ->where('id_pengguna', $penggunaMasyarakatIds[array_rand($penggunaMasyarakatIds)])->first();
 
             // Buat kode penjemputan
-            $kodeAkhir = $data ? (object) end($data) : null;
             $hariIni = now()->format('ym');
-            if (!$kodeAkhir || substr($kodeAkhir->kode_penjemputan, 1, 3) !== str_pad($daerah->id_daerah, 3, '0', STR_PAD_LEFT) || substr($kodeAkhir->kode_penjemputan, -7, 4) !== $hariIni) {
-                $kodePenjemputan = 'D' . str_pad($daerah->id_daerah, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '001';
+            $dropboxId = $dropboxIds[array_rand($dropboxIds)];
+
+            // Filter untuk mencari kode penjemputan dengan pola tertentu dalam array $data
+            $filteredData = array_filter($data, function ($item) use ($dropboxId, $hariIni) {
+                return str_starts_with($item['kode_penjemputan'], 'D' . str_pad($dropboxId, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni);
+            });
+
+            if (!empty($filteredData)) {
+                // Ambil elemen terakhir berdasarkan kode penjemputan terbesar
+                $kodeAkhir = collect($filteredData)->sortByDesc('kode_penjemputan')->first();
+                $kodeUrut = (int) substr($kodeAkhir['kode_penjemputan'], -3, 3) + 1;
+                $kodeUrut = str_pad($kodeUrut, 3, '0', STR_PAD_LEFT);
+                $kodePenjemputan = 'D' . str_pad($dropboxId, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . $kodeUrut;
             } else {
-                $kodePenjemputan = 'D' . str_pad($daerah->id_daerah, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . str_pad((int)substr($kodeAkhir->kode_penjemputan, -3) + 1, 3, '0', STR_PAD_LEFT);
+                // Jika tidak ada data yang cocok, mulai dari urutan 001
+                $kodePenjemputan = 'D' . str_pad($dropboxId, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '001';
             }
 
             // Tambahkan data penjemputan
             $data[] = [
                 'kode_penjemputan' => $kodePenjemputan,
                 'id_daerah' => $daerah->id_daerah,
-                'id_dropbox' => $dropboxIds[array_rand($dropboxIds)],
+                'id_dropbox' => $dropboxId,
                 'id_pengguna_masyarakat' => $penggunaMasyarakat->id_pengguna,
                 'id_pengguna_kurir' => $penggunaKurirIds[array_rand($penggunaKurirIds)],
                 'total_berat' => 0, // init
