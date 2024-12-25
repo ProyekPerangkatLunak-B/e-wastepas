@@ -1,4 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // START MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
+    window.openKeteranganModal = function () {
+        console.log("Hi");
+        document.getElementById("keteranganModal").classList.remove("hidden");
+    };
+
+    window.closeKeteranganModal = function () {
+        document.getElementById("keteranganModal").classList.add("hidden");
+    };
+
+    window.openConfirmKeteranganModal = function () {
+        closeKeteranganModal();
+        document.getElementById("alertModal").classList.remove("hidden");
+    };
+
+    window.closeModal = function () {
+        document.getElementById("alertModal").classList.add("hidden");
+    };
+    // END MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
+
     // START modal tambah sampah
 
     // Fungsi untuk membuka atau menutup modal tambah sampah
@@ -357,25 +377,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
     // END Pesan Error ketika data tidak dimasukkan
-
-    // START MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
-    window.openKeteranganModal = function () {
-        document.getElementById("keteranganModal").classList.remove("hidden");
-    };
-
-    window.closeKeteranganModal = function () {
-        document.getElementById("keteranganModal").classList.add("hidden");
-    };
-
-    window.openConfirmKeteranganModal = function () {
-        closeKeteranganModal();
-        document.getElementById("alertModal").classList.remove("hidden");
-    };
-
-    window.closeModal = function () {
-        document.getElementById("alertModal").classList.add("hidden");
-    };
-    // END MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
 
     // START Semua Select 2
     $("#kategori").select2({

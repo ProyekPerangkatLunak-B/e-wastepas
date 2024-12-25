@@ -435,7 +435,7 @@
         </div>
 
         {{-- Modal untuk Keterangan Catatan Pembatalan Penjemputan --}}
-        <div id="keteranganModalMelacakPenjemputan"
+        <div id="keteranganModal"
             class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">
             <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
                 <h2 class="text-lg font-semibold text-red-normal">Keterangan Pembatalan</h2>
@@ -447,9 +447,9 @@
                     placeholder="Masukkan alasan pembatalan..." name="keterangan"></textarea>
 
                 <div class="flex justify-end mt-12 space-x-4">
-                    <button type="button" onclick="closeKeteranganModalMelacakPenjemputan()"
+                    <button type="button" onclick="closeKeteranganModal()"
                         class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
-                    <button type="button" onclick="openConfirmKeteranganModalMelacakPenjemputan()"
+                    <button type="button" onclick="openConfirmKeteranganModal()"
                         class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Lanjutkan</button>
                 </div>
             </div>
