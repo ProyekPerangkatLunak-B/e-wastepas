@@ -61,13 +61,13 @@
         <!-- Container untuk Detail Alamat dan Detail Pelacakan -->
         <div class="w-[1380px] h-[430px] mx-auto pb-10 mt-6 bg-white-normal shadow-sm rounded-xl">
             <div class="flex justify-center mb-12 space-x-28">
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
             </div>
 
             <!-- Tracking & Details -->
@@ -108,7 +108,7 @@
                 </p>
             </div>
 
-                    <div class="relative w-1/2 mt-2 mr-4">
+                    <div class="relative w-1/2 mt-2 mr-8">
                         <h3 class="mx-auto text-lg font-bold">Detail Pelacakan</h3>
                         <p class="text-base font-normal text-gray-600">Permintaan Penjemputan:
                             {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->created_at)->locale(app()->getLocale())->translatedFormat('H:i, j F Y') }}
@@ -121,21 +121,21 @@
                             $bottomValue = match($status) {
                                 'Diproses' => 'bottom-44',
                                 'Diterima' => 'bottom-20',
-                                'Dijemput Kurir' => 'bottom-4',
-                                'Menuju Lokasi Penjemputan' => '-bottom-16',
-                                'Sampah Diangkut' => '-bottom-36',
-                                'Menuju Dropbox' => '-bottom-56',
-                                'Menyimpan Sampah di Dropbox' => '-bottom-80',
-                                'Selesai' => '-bottom-[30rem]',
+                                'Dijemput Kurir' => '-bottom-8',
+                                'Menuju Lokasi Penjemputan' => '-bottom-32',
+                                'Sampah Diangkut' => '-bottom-56',
+                                'Menuju Dropbox' => '-bottom-80',
+                                'Menyimpan Sampah di Dropbox' => '-bottom-[26rem]',
+                                'Selesai' => '-bottom-[27rem]',
                                 'Dibatalkan' => 'bottom-36',
                                 default => 'bottom-0',
                             };
                         @endphp
-                        <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[149px] "></div>
+                        <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[10.5rem] "></div>
                                 @if ($p->status !== 'Menunggu Konfirmasi')
                                     <div class="relative flex items-start space-x-4">
                                         <!-- Time and Date -->
-                                        <div class="flex flex-col items-end">
+                                        <div class="flex flex-col items-end flex-shrink-0 w-36">
                                             <p class="text-sm font-semibold text-black">
                                                 {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
                                             </p>
@@ -154,7 +154,7 @@
                                         <!-- Text Content -->
                                         <div class="flex-1">
                                             <p class="text-base font-bold text-black">{{ $p->status }}</p>
-                                            <p class="text-sm text-gray-600 min-h-10">{{ $p->keterangan }}</p>
+                                            <p class="text-sm text-gray-600 min-h-14">{{ $p->keterangan }}</p>
                                         </div>
                                     </div>
                                 @endif
