@@ -41,57 +41,53 @@ class PelacakanSeeder extends Seeder
 
         $dibatalkan = 0;
         // Pelacakan Lanjutan
-        $status = ['Dibatalkan', 'Diproses', 'Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai'];
+        $status = ['Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai'];
         $currentStatus = 'Diproses';
 
         foreach ($status as $nextStatus) {
             $records = Pelacakan::where('status', $currentStatus)->get();
             if ($records->count() > 0) {
                 foreach ($records as $record) {
-                    if ($nextStatus == 'Dibatalkan') {
-                        if ($dibatalkan < 3) {
-                            if (rand(0, 1) == 1) {
-                                $estimasiWaktu = \Carbon\Carbon::parse($record->estimasi_waktu)
-                                    ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
-                                    ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+                    if ($dibatalkan < 3 && $currentStatus == 'Diproses') {
+                        if (rand(0, 1) == 1) {
+                            $estimasiWaktu = \Carbon\Carbon::parse($record->estimasi_waktu)
+                                ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+                                ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
-                                $createUpdate = \Carbon\Carbon::parse($record->created_at)
-                                    ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
-                                    ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+                            $createUpdate = \Carbon\Carbon::parse($record->created_at)
+                                ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+                                ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
-                                Pelacakan::create([
-                                    'id_penjemputan' => $record->id_penjemputan,
-                                    'id_dropbox' => $record->id_dropbox,
-                                    'keterangan' => $faker->realText(rand(50, 100)),
-                                    'status' => $nextStatus,
-                                    'estimasi_waktu' => $estimasiWaktu,
-                                    'created_at' => $createUpdate,
-                                    'updated_at' => $createUpdate,
-                                ]);
-                            }
+                            Pelacakan::create([
+                                'id_penjemputan' => $record->id_penjemputan,
+                                'id_dropbox' => $record->id_dropbox,
+                                'keterangan' => $faker->realText(rand(50, 100)),
+                                'status' => 'Dibatalkan',
+                                'estimasi_waktu' => $estimasiWaktu,
+                                'created_at' => $createUpdate,
+                                'updated_at' => $createUpdate,
+                            ]);
                         }
                         $dibatalkan++;
                     } else {
-                        if ($currentStatus !== 'Dibatalkan') {
-                            if (rand(0, 1) == 1) {
-                                $estimasiWaktu = \Carbon\Carbon::parse($record->estimasi_waktu)
-                                    ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
-                                    ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+                        if (rand(0, 1) == 1) {
+                            $estimasiWaktu = \Carbon\Carbon::parse($record->estimasi_waktu)
+                                ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+                                ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
-                                $createUpdate = \Carbon\Carbon::parse($record->created_at)
-                                    ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
-                                    ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+                            $createUpdate = \Carbon\Carbon::parse($record->created_at)
+                                ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+                                ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
-                                Pelacakan::create([
-                                    'id_penjemputan' => $record->id_penjemputan,
-                                    'id_dropbox' => $record->id_dropbox,
-                                    'keterangan' => $faker->realText(rand(50, 100)),
-                                    'status' => $nextStatus,
-                                    'estimasi_waktu' => $estimasiWaktu,
-                                    'created_at' => $createUpdate,
-                                    'updated_at' => $createUpdate,
-                                ]);
-                            }
+                            Pelacakan::create([
+                                'id_penjemputan' => $record->id_penjemputan,
+                                'id_dropbox' => $record->id_dropbox,
+                                'keterangan' => $faker->realText(rand(50, 100)),
+                                'status' => $nextStatus,
+                                'estimasi_waktu' => $estimasiWaktu,
+                                'created_at' => $createUpdate,
+                                'updated_at' => $createUpdate,
+                            ]);
                         }
                     }
                 }
