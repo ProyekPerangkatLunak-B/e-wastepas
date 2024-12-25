@@ -254,7 +254,23 @@ document.addEventListener("DOMContentLoaded", function () {
     // END modal kirim permintaan dan notifikasi berhasil dan gagal
 
     // START Reset form
+    const resetModal = document.getElementById("resetModal");
+    const closeResetModal = document.getElementById("closeResetModal");
+    const resetFormButton = document.getElementById("resetFormButton");
+
+    window.showResetModal = function () {
+        resetModal.classList.remove("hidden");
+    };
+
+    window.hideResetModal = function () {
+        resetModal.classList.add("hidden");
+    };
+
     window.resetForm = function () {
+        showResetModal();
+    };
+
+    window.confirmResetForm = function () {
         const boxSemuaSampah = $("#boxSemuaSampah")[0].children;
 
         const tanggal = $("#tanggal_penjemputan");
@@ -276,7 +292,39 @@ document.addEventListener("DOMContentLoaded", function () {
             resetSelect2();
             idBox = 0;
         }
+
+        // Show success alert
+        alertModal.classList.remove("hidden");
+        alertMessage.innerHTML = "Form berhasil direset!";
+        updateAlertClasses("success");
+        btnOk.setAttribute("type", "button");
+        btnOk.removeEventListener("click", closeAlertModal);
+        btnOk.addEventListener("click", closeAlertModal);
+
+        // Hide reset modal
+        hideResetModal();
     };
+
+    window.cancelResetForm = function () {
+        // Show cancel alert
+        alertModal.classList.remove("hidden");
+        alertMessage.innerHTML = "Reset form dibatalkan!";
+        updateAlertClasses("cancel");
+        btnOk.setAttribute("type", "button");
+        btnOk.removeEventListener("click", closeAlertModal);
+        btnOk.addEventListener("click", closeAlertModal);
+
+        // Hide reset modal
+        hideResetModal();
+    };
+
+    closeResetModal.addEventListener("click", window.cancelResetForm);
+    resetFormButton.addEventListener("click", window.confirmResetForm);
+
+    document
+        .getElementById("showResetModalBtn")
+        .addEventListener("click", window.resetForm);
+
     // END Reset form
 
     window.resetSelect2 = function () {
