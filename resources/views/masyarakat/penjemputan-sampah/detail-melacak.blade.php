@@ -95,15 +95,15 @@
         <div class="w-[1380px] h-[250px] mx-auto mt-4 pt-2 pb-10 bg-white-normal shadow-sm rounded-2xl">
             <div class="flex items-start justify-between px-4">
                 <!-- ID Penjemputan di Ujung Kiri Atas -->
-                <div>
-                    {{-- <p class="text-gray-600">ID Penjemputan:</p>
-                    <p class="text-xl font-semibold">232378923</p> --}}
+                <div class="m-2">
+                    <p class="text-lg font-normal text-black-normal">ID Penjemputan :</p>
+                    <p class="font-bold text-md">{{ $penjemputan->kode_penjemputan }}</p>
                 </div>
 
                 <!-- Estimasi Tiba di Ujung Kanan Atas -->
-                <div class="text-right">
-                    <p class="text-gray-600">Estimasi Tiba:</p>
-                    <p class="text-xl font-semibold">
+                <div class="m-2 text-right">
+                    <p class="text-lg font-normal text-black-normal">Estimasi Tiba :</p>
+                    <p class="font-bold text-md">
                         @if (in_array($penjemputan->getLatestPelacakan->status, [
                                 'Diterima',
                                 'Dijemput Kurir',
