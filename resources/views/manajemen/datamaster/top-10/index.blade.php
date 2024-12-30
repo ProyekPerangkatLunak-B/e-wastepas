@@ -21,35 +21,35 @@
     <!-- Card 1 -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-y-2 mb-6 relative ml-40 mt-10">
         <!-- Card Juara 2 -->
-        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-80 relative">
+        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-72 relative top-4">
           <img src="https://via.placeholder.com/50" alt="Agus" class="rounded-full mb-4 w-16 h-16" />
-          <h2 class="text-center text-2xl font-bold">Agus</h2>
-          <p class="text-center text-lg text-gray-500">Kurir</p>
+          <h2 class="text-center text-lg font-bold">Agus</h2>
+          <p class="text-center text-gray-500">Kurir</p>
           <div class="flex flex-col items-center mt-4 text-sm">
-            <p class="mb-2 text-lg">🏆 23,948 Poin</p>
-            <p class="text-lg">📅 2,921 Transaksi</p>
+            <p class="mb-2">🏆 23,948 Poin</p>
+            <p>📅 2,921 Transaksi</p>
           </div>
         </div>
       
         <!-- Card Juara 1 -->
-        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-80 relative -top-10">
+        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-80 relative -top-4">
           <img src="https://via.placeholder.com/50" alt="Asep" class="rounded-full mb-4 w-16 h-16" />
-          <h2 class="text-center text-2xl font-bold">Asep</h2>
-          <p class="text-center text-lg text-gray-500">Kurir</p>
+          <h2 class="text-center text-lg font-bold">Asep</h2>
+          <p class="text-center text-gray-500">Kurir</p>
           <div class="flex flex-col items-center mt-4 text-sm">
-            <p class="mb-2 text-lg">🏆 39,894 Poin</p>
-            <p class="text-lg">📅 3,000 Transaksi</p>
+            <p class="mb-2">🏆 39,894 Poin</p>
+            <p>📅 3,000 Transaksi</p>
           </div>
         </div>
       
         <!-- Card Juara 3 -->
-        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-68 relative ">
+        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-68 relative top-6">
           <img src="https://via.placeholder.com/50" alt="Iwan" class="rounded-full mb-4 w-16 h-16" />
-          <h2 class="text-center text-2xl font-bold">Iwan</h2>
-          <p class="text-center text-lg text-gray-500">Kurir</p>
+          <h2 class="text-center text-lg font-bold">Iwan</h2>
+          <p class="text-center text-gray-500">Kurir</p>
           <div class="flex flex-col items-center mt-4 text-sm">
-            <p class="mb-2 text-lg">🏆 28,647 Poin</p>
-            <p class="text-lg">📅 2,938 Transaksi</p>
+            <p class="mb-2">🏆 28,647 Poin</p>
+            <p>📅 2,938 Transaksi</p>
           </div>
         </div>
       </div>  
@@ -71,12 +71,14 @@
     </tr>
   </thead>
   <tbody>
+    @foreach($topMasyarakat as $key => $masyarakat)
     <tr class="border-t text-center">
-      <td class="p-4">1</td>
-      <td class="p-4">Asep</td>
-      <td class="p-4">3,000</td>
-      <td class="p-4">38,894</td>
+        <td class="p-4">{{ $key + 1 }}</td>
+        <td class="p-4">{{ $masyarakat->nama }}</td>
+        <td class="p-4">{{ $masyarakat->total_penjemputan }}</td>
+        <td class="p-4">{{ $masyarakat->poin }}</td>
     </tr>
+  @endforeach 
   </tbody>
 </table>
 
@@ -90,12 +92,14 @@
     </tr>
   </thead>
   <tbody>
+    @foreach($topKurir as $key => $kurir)
     <tr class="border-t text-center">
-      <td class="p-4">1</td>
-      <td class="p-4">Budi</td>
-      <td class="p-4">2,500</td>
-      <td class="p-4">30,000</td>
+        <td class="p-4">{{ $key + 1 }}</td>
+        <td class="p-4">{{ $kurir->nama }}</td>
+        <td class="p-4">{{ $kurir->total_penjemputan }}</td>
+        <td class="p-4">{{ $kurir->poin }}</td>
     </tr>
+@endforeach
   </tbody>
 </table>
 
@@ -108,11 +112,13 @@
     </tr>
   </thead>
   <tbody>
+    @foreach($topJenisSampah as $key => $jenis)
     <tr class="border-t text-center">
-      <td class="p-4">1</td>
-      <td class="p-4">Elektronik</td>
-      <td class="p-4">3,000</td>
+        <td class="p-4">{{ $key + 1 }}</td>
+        <td class="p-4">{{ $jenis->nama_jenis }}</td>
+        <td class="p-4">{{ $jenis->total_penjemputanJ }}</td>
     </tr>
+@endforeach
   </tbody>
 </table>
 
