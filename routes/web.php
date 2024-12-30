@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\admin\KurirAdminController;
 use App\Http\Controllers\Manajemen\DaerahController;
+use App\Http\Controllers\Manajemen\Top10Controller;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Manajemen\DashboardKategori;
@@ -191,9 +192,12 @@ Route::group([
 
     Route::get('/datamaster/dashboard', [DashboardController::class, 'index'])->name('datamaster.dashboard.index');
 
-    Route::get('/datamaster/top-10', function () {
-        return view('manajemen.datamaster.top-10.index');
-    })->name('datamaster.top-10.index');
+    // Route::get('/datamaster/top-10', function () {
+    //     return view('manajemen.datamaster.top-10.index');
+    // })->name('datamaster.top-10.index');
+
+    Route::get('/datamaster/top-10', [Top10Controller::class, 'index'])->name('datamaster.top-10.index');
+
 
     // Route::get('/datamaster/dropbox', function () {
     //     return view('manajemen.datamaster.dropbox.index');
