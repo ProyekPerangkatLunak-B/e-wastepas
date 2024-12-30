@@ -13,27 +13,30 @@ class Top10Controller extends Controller
     {
         // Ambil data berdasarkan id_pengguna_masyarakat
         $topMasyarakat = DB::table('penjemputan')
-            ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
-            ->select(
-                'pengguna.nama', 
-                DB::raw('COUNT(penjemputan.id_pengguna_masyarakat) as total_penjemputan'),
-                'pengguna.subtotal_poin as poin'   
-            )
-            ->groupBy('pengguna.id_pengguna', 'pengguna.nama', 'pengguna.subtotal_poin')
-            ->orderByDesc('total_penjemputan') // Urutkan berdasarkan total penjemputan
-            ->orderByDesc('poin') // Jika total penjemputan sama, urutkan berdasarkan poin
-            ->limit(10) // Ambil top 10 masyarakat
-            ->get();
+        ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
+        ->select(
+            'pengguna.nama',
+            'pengguna.foto_profil', // Menambahkan foto_profil
+            DB::raw('COUNT(penjemputan.id_pengguna_masyarakat) as total_penjemputan'),
+            'pengguna.subtotal_poin as poin'
+        )
+        ->groupBy('pengguna.id_pengguna', 'pengguna.nama', 'pengguna.foto_profil', 'pengguna.subtotal_poin')
+        ->orderByDesc('total_penjemputan') // Urutkan berdasarkan total penjemputan
+        ->orderByDesc('poin') // Jika total penjemputan sama, urutkan berdasarkan poin
+        ->limit(10) // Ambil top 10 masyarakat
+        ->get();
+    
 
         // Ambil data berdasarkan id_pengguna_kurir
         $topKurir = DB::table('penjemputan')
             ->join('pengguna', 'penjemputan.id_pengguna_kurir', '=', 'pengguna.id_pengguna')
             ->select(
                 'pengguna.nama', 
+                'pengguna.foto_profil',
                 DB::raw('COUNT(penjemputan.id_pengguna_kurir) as total_penjemputan'),
                 'pengguna.subtotal_poin as poin'
             )
-            ->groupBy('pengguna.id_pengguna', 'pengguna.nama', 'pengguna.subtotal_poin')
+            ->groupBy('pengguna.id_pengguna', 'pengguna.nama', 'pengguna.subtotal_poin','pengguna.foto_profil')
             ->orderByDesc('total_penjemputan') // Urutkan berdasarkan total penjemputan
             ->orderByDesc('poin') // Jika total penjemputan sama, urutkan berdasarkan poin
             ->limit(10) // Ambil top 10 kurir
