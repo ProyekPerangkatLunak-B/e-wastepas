@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Masyarakat;
 
 use App\Models\Jenis;
 use App\Models\Kategori;
+use App\Models\Pengguna;
 use App\Models\Pelacakan;
 use App\Models\Penjemputan;
 use Illuminate\Http\Request;
 use App\Models\DetailPenjemputan;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PenjemputanSampahMasyarakatController extends Controller
 {
@@ -221,5 +223,13 @@ class PenjemputanSampahMasyarakatController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('masyarakat.penjemputan.melacak')->with('error', 'Gagal Membatalkan Permintaan Penjemputan!');
         }
+    }
+
+    // Untuk Profile Header
+    public function showProfile()
+    {
+        $user = Pengguna::find(Auth::id());
+        $profileImage = $user->foto_profil ? asset('storage/' . $user->foto_profil) : null;
+        return view('layouts.main', compact('profileImage'));
     }
 }
