@@ -5,18 +5,14 @@
     'image' => '',
 ])
 
-<style>
-    .custom-white {
-    color: white !important;
-}
-</style>
+
 <div class="relative flex items-center w-[450px] shadow-md bg-white rounded-2xl hover:shadow-lg ml-10">
     <!-- Gambar -->
     <div class="relative w-1/2 bg-gray-200 rounded-l-2xl">
         <img src="{{ $image }}" alt="TPS CICAHEUM" class="w-full h-full object-cover rounded-l-2xl">
         <!-- Teks Menimpa Gambar -->
         <div class="absolute inset-0 flex items-center justify-center  bg-opacity-50 rounded-l-2xl">
-            <h2 class="text-2xl font-bold text-center custom-white">
+            <h2 class="text-2xl font-bold text-center text-white-normal">
                 {{ $nama_dropbox }}
             </h2>
         </div>
@@ -33,7 +29,3 @@
         </div>
     </div>
 </div>
-
-
-
-    
