@@ -199,9 +199,21 @@ Route::group([
     Route::get('/datamaster/top-10', [Top10Controller::class, 'index'])->name('datamaster.top-10.index');
 
 
-    // Route::get('/datamaster/dropbox', function () {
-    //     return view('manajemen.datamaster.dropbox.index');
-    // })->name('datamaster.dropbox.index');
+    Route::get('/datamaster/riwayat', function () {
+        return view('manajemen.datamaster.riwayat.index');
+    })->name('datamaster.riwayat.index');
+    
+    Route::get('/datamaster/detail-riwayat', function () {
+        return view('manajemen.datamaster.riwayat.detail-riwayat');
+    })->name('datamaster.riwayat.detail-riwayat');
+
+    Route::get('/datamaster/riwayat', function () {
+        return view('manajemen.datamaster.riwayat.index');
+    })->name('datamaster.riwayat.index');
+    
+    Route::get('/datamaster/detail-riwayat', function () {
+        return view('manajemen.datamaster.riwayat.detail-riwayat');
+    })->name('datamaster.riwayat.detail-riwayat');
 
     Route::get('/datamaster/dropbox', [DropboxController::class, 'index'])->name('datamaster.dropbox.index');
 
@@ -218,6 +230,10 @@ Route::group([
 
     Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
     ->name('datamaster.per-daerah.index');
+
+    Route::get('/datamaster/jenis', function () {
+        return view('manajemen.datamaster.jenis.index');
+    })->name('datamaster.jenis.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');

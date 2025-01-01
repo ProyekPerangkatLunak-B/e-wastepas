@@ -11,7 +11,7 @@
             <!-- Baris Pertama: 3 Kolom -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <x-card-jenis
-                    image="https://s3-alpha-sig.figma.com/img/fc66/304d/765acd835e93bc375a7210b475feeefe?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mBKNflc2zZrsaOAhxKokrknem-pEXn8fFM0al6wuZMPnvNxo29HmY5kCi4wuJzEwqfvrPfUEldywrKTF8-3J7x9qeLrAKxtUgQqVhNpOE6fCTl9t1pKFataATYjvjS-bGGewQdjliOV-htFLm2sZer4V4wYoGNU51KDZW8IgxxM41v-mUDrEpYMQeq~MUNdx2bEsp6t2VZnl9SeUQ6Fud9jRaNiAPBDxg9Y-WjlTSp20zfMJgWhslNhpnWCn6cPJpJ8H3x2036iaMqDDJ6CtDJ8kGvSvVnqh7bgEDE4EWNPlXZRe6Fb-LdC5-TuiFdZOcbEra-dDhBbtepCg~~sTlQ__"
+                    image="https://picsum.photos/720/720"
                     title="Laptop"
                     jenis="Layar dan Monitor"                
                     link="#"
@@ -45,7 +45,6 @@
                     link="#"
                     berat="54.952"
                     poin="60.364" />
-
         </div>
         
 
