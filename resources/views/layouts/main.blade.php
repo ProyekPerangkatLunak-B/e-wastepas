@@ -31,7 +31,7 @@
     @include('partials.header', [
         'userName' => 'Ammar Bahtiar',
         'userRole' => 'Masyarakat',
-        'profileImage' => $profileImage ?? asset('img/masyarakat/penjemputan-sampah/no-image.pngw')
+        'profileImage' => $profileImage ?? asset('img/masyarakat/penjemputan-sampah/no-image.png')
     ])
 
     {{-- Main Content --}}
