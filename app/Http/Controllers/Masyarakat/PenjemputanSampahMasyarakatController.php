@@ -232,4 +232,16 @@ class PenjemputanSampahMasyarakatController extends Controller
         $profileImage = $user->foto_profil ? asset('storage/' . $user->foto_profil) : null;
         return view('layouts.main', compact('profileImage'));
     }
+
+    // Untuk Export PDF dan Excel
+    public function exportPDFRiwayatPenjemputan()
+    {
+        return view('masyarakat.penjemputan-sampah.export.riwayat-penjemput');
+    }
+
+    public function exportPDFDetailRiwayat()
+    {
+        return view('masyarakat.penjemputan-sampah.export.detail-riwayat');
+    }
+
 }

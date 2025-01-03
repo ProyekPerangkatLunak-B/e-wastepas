@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
         else {
             for (let i = 1; i <= idBox; i++) {
                 const box = boxSemuaSampah[i];
-                box.remove();
+                boxSemuaSampah.remove();
             }
             $("#box-kosong")[0].classList.remove("hidden");
             resetSelect2();

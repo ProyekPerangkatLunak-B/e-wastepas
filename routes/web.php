@@ -159,7 +159,7 @@ Route::prefix('admin')
             Route::get('total', [TotalSampahPenjemputanSampahAdminController::class, 'index'])->name('total.index');
             Route::get('riwayat', [RiwayatPenjemputanSampahAdminController::class, 'index'])->name('riwayat.index');
         });
-        
+
     });
 
 // Rute autentikasi
@@ -202,7 +202,7 @@ Route::group([
     Route::get('/datamaster/riwayat', function () {
         return view('manajemen.datamaster.riwayat.index');
     })->name('datamaster.riwayat.index');
-    
+
     Route::get('/datamaster/detail-riwayat', function () {
         return view('manajemen.datamaster.riwayat.detail-riwayat');
     })->name('datamaster.riwayat.detail-riwayat');
@@ -210,7 +210,7 @@ Route::group([
     Route::get('/datamaster/riwayat', function () {
         return view('manajemen.datamaster.riwayat.index');
     })->name('datamaster.riwayat.index');
-    
+
     Route::get('/datamaster/detail-riwayat', function () {
         return view('manajemen.datamaster.riwayat.detail-riwayat');
     })->name('datamaster.riwayat.detail-riwayat');
@@ -402,6 +402,12 @@ Route::group([
         return redirect()->route('masyarakat.penjemputan.riwayat');
     });
     Route::get('penjemputan-sampah/detail-riwayat/{id}', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
+
+    Route::get('penjemputan-sampah/export/riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'exportPDFRiwayatPenjemputan'])->name('penjemputan.exportexportPDFRiwayatPenjemputan');
+
+    Route::get('penjemputan-sampah/export/detail-riwayat', [PenjemputanSampahMasyarakatController::class, 'exportPDFDetailRiwayat'])->name('penjemputan.exportPDFDetailRiwayat');
+
+
 
     // POST Method Routing
     Route::post('penjemputan-sampah/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('penjemputan.tambah');
