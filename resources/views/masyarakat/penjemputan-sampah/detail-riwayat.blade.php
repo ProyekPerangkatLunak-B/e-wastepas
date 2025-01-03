@@ -51,7 +51,8 @@
                     class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-primary-normal hover:bg-primary-300 rounded-2xl shadow-sm">
                     Export to Excel
                 </a>
-                <a href="#"
+                <a href="{{ route('masyarakat.penjemputan.exportPDFDetailRiwayat', $penjemputan->id_penjemputan) }}"
+                    target="_blank"
                     class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
                     Export to PDF
                 </a>
@@ -73,40 +74,40 @@
             <!-- Tracking & Details -->
             <div class="px-8 mt-6">
                 <div class="flex justify-between">
-            <!-- Nama, Alamat Penjemputan -->
-            <div class="w-1/2 pr-6 mt-2 ml-4">
+                    <!-- Nama, Alamat Penjemputan -->
+                    <div class="w-1/2 pr-6 mt-2 ml-4">
 
-                <h3 class="mb-2 text-lg font-bold">Nama Kurir</h3>
-                <p class="mb-8 text-gray-600">
-                    {{-- Asep Surasep - 0851632668923 --}}
-                    @if ($penjemputan->id_pengguna_kurir)
-                        {{ $penjemputan->penggunaKurir->nama }} - {{ $penjemputan->penggunaKurir->nomor_telepon }}
-                    @else
-                        -
-                    @endif
-                </p>
+                        <h3 class="mb-2 text-lg font-bold">Nama Kurir</h3>
+                        <p class="mb-8 text-gray-600">
+                            {{-- Asep Surasep - 0851632668923 --}}
+                            @if ($penjemputan->id_pengguna_kurir)
+                                {{ $penjemputan->penggunaKurir->nama }} - {{ $penjemputan->penggunaKurir->nomor_telepon }}
+                            @else
+                                -
+                            @endif
+                        </p>
 
-                <h3 class="mb-2 text-lg font-bold">Diambil dari</h3>
-                <p class="mb-8 text-gray-600">
-                    {{-- DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
+                        <h3 class="mb-2 text-lg font-bold">Diambil dari</h3>
+                        <p class="mb-8 text-gray-600">
+                            {{-- DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
                     Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142 --}}
-                    {{ $penjemputan->alamat_penjemputan }}
-                </p>
+                            {{ $penjemputan->alamat_penjemputan }}
+                        </p>
 
-                <h3 class="mt-4 mb-2 text-lg font-bold">Dikirim ke</h3>
-                <p class="text-gray-600">
-                    {{-- DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
+                        <h3 class="mt-4 mb-2 text-lg font-bold">Dikirim ke</h3>
+                        <p class="text-gray-600">
+                            {{-- DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
                     Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142. --}}
-                    @if (
-                        $penjemputan->getLatestPelacakan->status !== 'Diproses' &&
-                            $penjemputan->getLatestPelacakan->status !== 'Dibatalkan' &&
-                            $penjemputan->getLatestPelacakan->status !== 'Diterima')
-                        {{ $penjemputan->dropbox->nama_dropbox }} - {{ $penjemputan->dropbox->alamat_dropbox }}
-                    @else
-                        -
-                    @endif
-                </p>
-            </div>
+                            @if (
+                                $penjemputan->getLatestPelacakan->status !== 'Diproses' &&
+                                    $penjemputan->getLatestPelacakan->status !== 'Dibatalkan' &&
+                                    $penjemputan->getLatestPelacakan->status !== 'Diterima')
+                                {{ $penjemputan->dropbox->nama_dropbox }} - {{ $penjemputan->dropbox->alamat_dropbox }}
+                            @else
+                                -
+                            @endif
+                        </p>
+                    </div>
 
                     <div class="relative w-1/2 mt-2 mr-8">
                         <h3 class="mx-auto text-lg font-bold">Detail Pelacakan</h3>
@@ -115,23 +116,23 @@
                         </p>
                         <div class="relative h-64 mt-4 space-y-4 overflow-y-auto">
                             @foreach ($penjemputan->pelacakan as $p)
-                            <!-- Garis Vertikal -->
-                            @php
-                            $status = $penjemputan->getLatestPelacakan->status;
-                            $bottomValue = match($status) {
-                                'Diproses' => 'bottom-44',
-                                'Diterima' => 'bottom-20',
-                                'Dijemput Kurir' => '-bottom-8',
-                                'Menuju Lokasi Penjemputan' => '-bottom-32',
-                                'Sampah Diangkut' => '-bottom-56',
-                                'Menuju Dropbox' => '-bottom-80',
-                                'Menyimpan Sampah di Dropbox' => '-bottom-[26rem]',
-                                'Selesai' => '-bottom-[27rem]',
-                                'Dibatalkan' => 'bottom-36',
-                                default => 'bottom-0',
-                            };
-                        @endphp
-                        <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[10.5rem] "></div>
+                                <!-- Garis Vertikal -->
+                                @php
+                                    $status = $penjemputan->getLatestPelacakan->status;
+                                    $bottomValue = match ($status) {
+                                        'Diproses' => 'bottom-44',
+                                        'Diterima' => 'bottom-20',
+                                        'Dijemput Kurir' => '-bottom-8',
+                                        'Menuju Lokasi Penjemputan' => '-bottom-32',
+                                        'Sampah Diangkut' => '-bottom-56',
+                                        'Menuju Dropbox' => '-bottom-80',
+                                        'Menyimpan Sampah di Dropbox' => '-bottom-[26rem]',
+                                        'Selesai' => '-bottom-[27rem]',
+                                        'Dibatalkan' => 'bottom-36',
+                                        default => 'bottom-0',
+                                    };
+                                @endphp
+                                <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[10.5rem] "></div>
                                 @if ($p->status !== 'Menunggu Konfirmasi')
                                     <div class="relative flex items-start space-x-4">
                                         <!-- Time and Date -->

@@ -151,15 +151,14 @@ Route::prefix('admin')
 
         // penjemputan sampah
         Route::prefix('penjemputan')
-        ->as('penjemputan-sampah.')
-        ->group(function () {
-            Route::get('permintaan', [PermintaanPenjemputanSampahAdminController::class, 'index'])->name('permintaan.index');
-            Route::get('penerimaan', [PenerimaanPenjemputanSampahAdminController::class, 'index'])->name('penerimaan.index');
-            Route::get('tracking', [TrackingPenjemputanSampahAdminController::class, 'index'])->name('tracking.index');
-            Route::get('total', [TotalSampahPenjemputanSampahAdminController::class, 'index'])->name('total.index');
-            Route::get('riwayat', [RiwayatPenjemputanSampahAdminController::class, 'index'])->name('riwayat.index');
-        });
-
+            ->as('penjemputan-sampah.')
+            ->group(function () {
+                Route::get('permintaan', [PermintaanPenjemputanSampahAdminController::class, 'index'])->name('permintaan.index');
+                Route::get('penerimaan', [PenerimaanPenjemputanSampahAdminController::class, 'index'])->name('penerimaan.index');
+                Route::get('tracking', [TrackingPenjemputanSampahAdminController::class, 'index'])->name('tracking.index');
+                Route::get('total', [TotalSampahPenjemputanSampahAdminController::class, 'index'])->name('total.index');
+                Route::get('riwayat', [RiwayatPenjemputanSampahAdminController::class, 'index'])->name('riwayat.index');
+            });
     });
 
 // Rute autentikasi
@@ -229,7 +228,7 @@ Route::group([
     // })->name('datamaster.per-daerah.index');
 
     Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
-    ->name('datamaster.per-daerah.index');
+        ->name('datamaster.per-daerah.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');
@@ -378,40 +377,49 @@ Route::group([
     Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('masyarakat.password.email');
 
-
     // Submodul Penjemputan Sampah
-    Route::get('penjemputan-sampah', [PenjemputanSampahMasyarakatController::class, 'index'])->name('penjemputan.index');
-    Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('penjemputan.kategori');
-    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMasyarakatController::class, 'permintaan'])->name('penjemputan.permintaan');
-    Route::get('penjemputan-sampah/melacak-penjemputan', [PenjemputanSampahMasyarakatController::class, 'melacak'])->name('penjemputan.melacak');
+    Route::group([
+        'prefix' => 'penjemputan-sampah/',
+        'as' => 'penjemputan.',
+    ], function () {
+        Route::get('/', [PenjemputanSampahMasyarakatController::class, 'index'])->name('index');
+        Route::get('/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('kategori');
+        Route::get('/permintaan-penjemputan', [PenjemputanSampahMasyarakatController::class, 'permintaan'])->name('permintaan');
+        Route::get('/melacak-penjemputan', [PenjemputanSampahMasyarakatController::class, 'melacak'])->name('melacak');
 
-    Route::get('penjemputan-sampah/detail-kategori', function () {
-        return redirect()->route('masyarakat.penjemputan.kategori');
+        Route::get('/detail-kategori', function () {
+            return redirect()->route('masyarakat.kategori');
+        });
+        Route::get('/detail-kategori/{id}', [PenjemputanSampahMasyarakatController::class, 'detailKategori'])->name('detail');
+
+        Route::get('/detail-melacak', function () {
+            return redirect()->route('masyarakat.melacak');
+        });
+        Route::get('/detail-melacak/{id}', [PenjemputanSampahMasyarakatController::class, 'detailMelacak'])->name('detail-melacak');
+
+        Route::get('/total-riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'totalRiwayatPenjemputan'])->name('total-riwayat');
+        Route::get('/riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'riwayatPenjemputan'])->name('riwayat');
+
+        Route::get('/detail-riwayat', function () {
+            return redirect()->route('masyarakat.riwayat');
+        });
+        Route::get('/detail-riwayat/{id}', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('detail-riwayat');
+
+        Route::get('/export/riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'exportPDFRiwayatPenjemputan'])->name('exportexportPDFRiwayatPenjemputan');
+
+        Route::get('/export/detail-riwayat', function () {
+            return redirect()->route('masyarakat.penjemputan.riwayat');
+        });
+        Route::get('/export/detail-riwayat/{id}', [PenjemputanSampahMasyarakatController::class, 'exportPDFDetailRiwayat'])->name('exportPDFDetailRiwayat');
+
+        // POST Method Routing
+        Route::post('/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('tambah');
+        Route::post('/detail-melacak/{id}', [PenjemputanSampahMasyarakatController::class, 'batal'])->name('batalkan');
+
+        Route::any('/{any?}', function () {
+            return redirect()->route('masyarakat.penjemputan.index');
+        });
     });
-    Route::get('penjemputan-sampah/detail-kategori/{id}', [PenjemputanSampahMasyarakatController::class, 'detailKategori'])->name('penjemputan.detail');
-
-    Route::get('penjemputan-sampah/detail-melacak', function () {
-        return redirect()->route('masyarakat.penjemputan.melacak');
-    });
-    Route::get('penjemputan-sampah/detail-melacak/{id}', [PenjemputanSampahMasyarakatController::class, 'detailMelacak'])->name('penjemputan.detail-melacak');
-
-    Route::get('penjemputan-sampah/total-riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'totalRiwayatPenjemputan'])->name('penjemputan.total-riwayat');
-    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'riwayatPenjemputan'])->name('penjemputan.riwayat');
-
-    Route::get('penjemputan-sampah/detail-riwayat', function () {
-        return redirect()->route('masyarakat.penjemputan.riwayat');
-    });
-    Route::get('penjemputan-sampah/detail-riwayat/{id}', [PenjemputanSampahMasyarakatController::class, 'detailRiwayat'])->name('penjemputan.detail-riwayat');
-
-    Route::get('penjemputan-sampah/export/riwayat-penjemputan', [PenjemputanSampahMasyarakatController::class, 'exportPDFRiwayatPenjemputan'])->name('penjemputan.exportexportPDFRiwayatPenjemputan');
-
-    Route::get('penjemputan-sampah/export/detail-riwayat', [PenjemputanSampahMasyarakatController::class, 'exportPDFDetailRiwayat'])->name('penjemputan.exportPDFDetailRiwayat');
-
-
-
-    // POST Method Routing
-    Route::post('penjemputan-sampah/tambah', [PenjemputanSampahMasyarakatController::class, 'tambah'])->name('penjemputan.tambah');
-    Route::post('penjemputan-sampah/detail-melacak/{id}', [PenjemputanSampahMasyarakatController::class, 'batal'])->name('penjemputan.batalkan');
 });
 
 // Route Modul Mitra-kurir
