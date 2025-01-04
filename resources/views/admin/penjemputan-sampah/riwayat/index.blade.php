@@ -61,6 +61,9 @@
         button {
             transition: background-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
+            background-color: #437252;
+            color: #ffffff;
+            
             /* Hijau */
         }
 
@@ -92,9 +95,32 @@
     </style>
 
     <div class="container max-w-full px-4 mx-auto bg-[#F1F5F9]">
-        <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-black">Riwayat Penjemputan Sampah</h2>
-            <h4 class="text-base font-light ml-14 text-black">Admin dapat melihat history Penjemputan Sampah elektronik.</h4>
+        <div class="py-8 ">
+            <div class="py-8 flex items-center justify-between">
+                <div class="ml-14">
+                    <h2 class="text-2xl font-bold leading-relaxed text-black">Riwayat Penjemputan Sampah</h2>
+                    <h4 class="text-base font-light text-black">Admin dapat melihat history Penjemputan Sampah elektronik.</h4>
+                </div>
+                <div class="mr-14 relative">
+                    <button 
+                        class=" text-white font-medium py-2 px-4 rounded " 
+                        onclick="toggleDropdown()"
+                    >
+                        Filter
+                    </button>
+                    <div 
+                        id="filterDropdown" 
+                        class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg hidden"
+                    >
+                        <ul>
+                            <li><a href="#" class="block px-2 py-1 hover:bg-gray-200  text-center">Diterima</a></li>
+                            <li><a href="#" class="block px-2 py-1 hover:bg-gray-200  text-center">Dibatalkan</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            
 
             <div class="px-12 mt-6">
                 <div class="overflow-x-auto bg-white rounded-lg shadow-md">
@@ -191,6 +217,21 @@
 
 
         
+    function toggleDropdown() {
+        const dropdown = document.getElementById('filterDropdown');
+        dropdown.classList.toggle('hidden');
+    }
+
+    // Optional: Close the dropdown if clicked outside
+    document.addEventListener('click', function (event) {
+        const dropdown = document.getElementById('filterDropdown');
+        const button = event.target.closest('button');
+        
+        if (!dropdown.contains(event.target) && !button) {
+            dropdown.classList.add('hidden');
+        }
+    });
+
 
     
 
