@@ -169,7 +169,7 @@
                     <h3 class="mb-1 text-xl font-bold text-red-normal">Catatan</h3>
                     <div class="p-4 bg-gray-100 rounded-lg shadow-sm">
                         <p class="text-gray-600">
-                            Tidak ada catatan tambahan.
+                            {{ $penjemputan->catatan }}
                         </p>
                     </div>
                 </div>
