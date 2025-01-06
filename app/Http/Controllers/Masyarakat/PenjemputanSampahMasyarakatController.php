@@ -45,40 +45,53 @@ class PenjemputanSampahMasyarakatController extends Controller
     // Total Riwayat Penjemputan
     public function totalRiwayatPenjemputan()
     {
-        $totalSampah = DetailPenjemputan::whereHas('penjemputan.pelacakan', function ($query) {
-            $query->where('status', 'Selesai');
-        })->count();
-        $totalPoin = Penjemputan::whereHas('pelacakan', function ($query) {
-            $query->where('status', 'Selesai');
-        })
-            ->where('id_pengguna_masyarakat', Auth::id())
-            ->sum('total_poin');
-        $penjemputan = Penjemputan::orderByDesc("created_at")
-            ->where('id_pengguna_masyarakat', Auth::id())
-            ->paginate(6);
-        return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'));
+        try {
+            $totalSampah = DetailPenjemputan::whereHas('penjemputan.pelacakan', function ($query) {
+                $query->where('status', 'Selesai');
+            })->count();
+            $totalPoin = Penjemputan::whereHas('pelacakan', function ($query) {
+                $query->where('status', 'Selesai');
+            })
+                ->where('id_pengguna_masyarakat', Auth::id())
+                ->sum('total_poin');
+            $penjemputan = Penjemputan::orderByDesc("created_at")
+                ->where('id_pengguna_masyarakat', Auth::id())
+                ->paginate(6);
+            return view('masyarakat.penjemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'));
+        } catch (\Exception $e) {
+            $totalSampah = 0;
+            $totalPoin = 0;
+            $penjemputan = [];
+            return redirect()->route('masyarakat.penejemputan-sampah.total-riwayat-penjemputan', compact('totalSampah', 'totalPoin', 'penjemputan'))->with('error', 'Gagal Menampilkan Total Riwayat Penjemputan!');
+        }
     }
 
     // Daftar Riwayat Penjemputan
     public function riwayatPenjemputan()
     {
-        $status = Pelacakan::getEnumValues('status');
+        try {
+            $status = Pelacakan::getEnumValues('status');
 
-        // $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
-        $penjemputan = Penjemputan::filter(request(['search', 'kategori', 'status']))
-            ->where('id_pengguna_masyarakat', Auth::id())
-            ->orderByDesc("created_at")
-            ->paginate(6)
-            ->appends(request()->query());
+            // $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
+            $penjemputan = Penjemputan::filter(request(['search', 'kategori', 'status']))
+                ->where('id_pengguna_masyarakat', Auth::id())
+                ->orderByDesc("created_at")
+                ->paginate(6)
+                ->appends(request()->query());
 
 
-        return view(
-            'masyarakat.penjemputan-sampah.riwayat-penjemputan',
-            compact([
-                'penjemputan',
-                'status'
-            ])
-        );
+            return view(
+                'masyarakat.penjemputan-sampah.riwayat-penjemputan',
+                compact(
+                    'penjemputan',
+                    'status'
+                )
+            );
+        } catch (\Exception $e) {
+            $status = [];
+            $penjemputan = [];
+            return redirect()->route('masyarakat.penjemputan-sampah.riwayat-penjemputan', compact('penjemputan', 'status'))->with('error', 'Gagal Menampilkan Daftar Riwayat Penjemputan!');
+        }
     }
 
     // CRUD
@@ -101,47 +114,60 @@ class PenjemputanSampahMasyarakatController extends Controller
     // Daftar Penjemputan yang sedang berlangsung
     public function melacak()
     {
-        $status = Pelacakan::getEnumValues('status');
+        try {
+            $status = Pelacakan::getEnumValues('status');
 
-        $penjemputan = Penjemputan::join('pelacakan', 'penjemputan.id_penjemputan', '=', 'pelacakan.id_penjemputan')
-            ->whereNotIn('pelacakan.status', ['Selesai', 'Dibatalkan'])
-            ->whereIn('pelacakan.id_pelacakan', function ($query) {
+            $penjemputan = Penjemputan::join('pelacakan', 'penjemputan.id_penjemputan', '=', 'pelacakan.id_penjemputan')
+                ->whereNotIn('pelacakan.status', ['Selesai', 'Dibatalkan'])
+                ->whereIn('pelacakan.id_pelacakan', function ($query) {
+                    $query->select(DB::raw('MAX(id_pelacakan)'))
+                        ->from('pelacakan')
+                        ->groupBy('id_penjemputan');
+                })
+                ->where('penjemputan.id_pengguna_masyarakat', Auth::id())
+                ->orderByDesc('penjemputan.created_at')
+                ->select('penjemputan.*')
+                ->filter(request(['search', 'kategori', 'status']))
+                ->paginate(6)
+                ->appends(request()->query());
 
-                $query->select(DB::raw('MAX(id_pelacakan)'))
-                    ->from('pelacakan')
-                    ->groupBy('id_penjemputan');
-            })
-            ->where('penjemputan.id_pengguna_masyarakat', Auth::id())
-            ->orderByDesc('penjemputan.created_at')
-            ->select('penjemputan.*')
-            ->filter(request(['search', 'kategori', 'status']))
-            ->paginate(6)
-            ->appends(request()->query());
-
-        return view(
-            'masyarakat.penjemputan-sampah.melacak-penjemputan',
-            compact('penjemputan', 'status')
-        );
+            return view(
+                'masyarakat.penjemputan-sampah.melacak-penjemputan',
+                compact('penjemputan', 'status')
+            );
+        } catch (\Exception $e) {
+            $status = [];
+            $penjemputan = [];
+            return redirect()->route('masyarakat.penjemputan-sampah.melacak-penjemputan', compact('penjemputan', 'status'))->with('error', 'Gagal Menampilkan Daftar Penjemputan!');
+        }
     }
 
     // Detail penjemputan yang sedang berlangsung
     public function detailMelacak($id)
     {
-        if (Penjemputan::where('id_penjemputan', $id)->where('id_pengguna_masyarakat', Auth::id())->count() == 0) {
-            return redirect()->route('masyarakat.penjemputan.melacak')->with('error', 'Data Penjemputan Tidak Ditemukan!');
+        try {
+            if (Penjemputan::where('id_penjemputan', $id)->where('id_pengguna_masyarakat', Auth::id())->count() == 0) {
+                return redirect()->route('masyarakat.penjemputan.melacak')->with('error', 'Data Penjemputan Tidak Ditemukan!');
+            }
+            $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
+            return view('masyarakat.penjemputan-sampah.detail-melacak', compact('penjemputan'));
+        } catch (\Exception $e) {
+            return redirect()->route('masyarakat.penjemputan.melacak')->with('error', 'Gagal Menampilkan Detail Penjemputan!');
         }
-        $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
-        return view('masyarakat.penjemputan-sampah.detail-melacak', compact('penjemputan'));
     }
 
     // Daftar Riwayat Penjemputan
     public function detailRiwayat($id)
     {
-        if (Penjemputan::where('id_penjemputan', $id)->where('id_pengguna_masyarakat', Auth::id())->count() == 0) {
-            return redirect()->route('masyarakat.penjemputan.riwayat')->with('error', 'Data Penjemputan Tidak Ditemukan!');
+        try {
+            if (Penjemputan::where('id_penjemputan', $id)->where('id_pengguna_masyarakat', Auth::id())->count() == 0) {
+                return redirect()->route('masyarakat.penjemputan.riwayat')->with('error', 'Data Penjemputan Tidak Ditemukan!');
+            }
+            $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
+            return view('masyarakat.penjemputan-sampah.detail-riwayat', compact('penjemputan'));
+        } catch (\Exception $e) {
+            return redirect()->route('masyarakat.penjemputan.riwayat')->with('error', 'Gagal Menampilkan Detail Penjemputan!');
         }
-        $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
-        return view('masyarakat.penjemputan-sampah.detail-riwayat', compact('penjemputan'));
     }
 
 
@@ -165,26 +191,26 @@ class PenjemputanSampahMasyarakatController extends Controller
             return redirect()->route('masyarakat.penjemputan.permintaan')->with('error', 'Tanggal penjemputan tidak boleh kurang dari hari ini!');
         }
 
-        $hariIni = now()->format('ym');
-        if (Penjemputan::where('kode_penjemputan', 'LIKE', 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '%')->count() > 0) {
-            $kodeAkhir = Penjemputan::where('kode_penjemputan', 'like', 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '%')->orderByDesc('kode_penjemputan')->first();
-            $kodeUrut = (int) substr($kodeAkhir->kode_penjemputan, -3, 3) + 1;
-            $kodeUrut = str_pad($kodeUrut, 3, '0', STR_PAD_LEFT);
-            $kode = 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . $kodeUrut;
-        } else {
-            $kode = 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '001';
-        }
-
-        $poinKategori = 0;
-        $poinJenis = 0;
-        $totalPoin = 0;
-        foreach ($request->kategori as $key => $value) {
-            $poinKategori = Kategori::where('id_kategori', $value)->first()->poin;
-            $poinJenis = Jenis::where('id_jenis', $request->jenis[$key])->first()->poin;
-            $totalPoin += $poinKategori + $poinJenis;
-        }
-
         try {
+            $hariIni = now()->format('ym');
+            if (Penjemputan::where('kode_penjemputan', 'LIKE', 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '%')->count() > 0) {
+                $kodeAkhir = Penjemputan::where('kode_penjemputan', 'like', 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '%')->orderByDesc('kode_penjemputan')->first();
+                $kodeUrut = (int) substr($kodeAkhir->kode_penjemputan, -3, 3) + 1;
+                $kodeUrut = str_pad($kodeUrut, 3, '0', STR_PAD_LEFT);
+                $kode = 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . $kodeUrut;
+            } else {
+                $kode = 'D' . str_pad($request->dropbox, 3, '0', STR_PAD_LEFT) . 'P' . $hariIni . '001';
+            }
+
+            $poinKategori = 0;
+            $poinJenis = 0;
+            $totalPoin = 0;
+            foreach ($request->kategori as $key => $value) {
+                $poinKategori = Kategori::where('id_kategori', $value)->first()->poin;
+                $poinJenis = Jenis::where('id_jenis', $request->jenis[$key])->first()->poin;
+                $totalPoin += $poinKategori + $poinJenis;
+            }
+
             $penjemputan = new Penjemputan();
             $penjemputan->kode_penjemputan = $kode;
             $penjemputan->id_pengguna_masyarakat = Auth::id();
@@ -248,18 +274,27 @@ class PenjemputanSampahMasyarakatController extends Controller
     // Untuk Export PDF dan Excel
     public function exportPDFRiwayatPenjemputan()
     {
-        $riwayat = Penjemputan::orderByDesc("created_at")
-            ->where('id_pengguna_masyarakat', '4')
-            ->get();
-        return view('masyarakat.penjemputan-sampah.export.riwayat-penjemput', compact('riwayat'));
+        try {
+
+            $riwayat = Penjemputan::orderByDesc("created_at")
+                ->where('id_pengguna_masyarakat', Auth::id())
+                ->get();
+            return view('masyarakat.penjemputan-sampah.export.riwayat-penjemput', compact('riwayat'));
+        } catch (\Exception $e) {
+            return redirect()->route('masyarakat.penjemputan-sampah.total-riwayat-penjemputan')->with('error', 'Gagal Export PDF!');
+        }
     }
 
     public function exportPDFDetailRiwayat($id)
     {
-        if (Penjemputan::where('id_penjemputan', $id)->where('id_pengguna_masyarakat', Auth::id())->count() == 0) {
-            return redirect()->route('masyarakat.penjemputan.riwayat')->with('error', 'Data Penjemputan Tidak Ditemukan!');
+        try {
+            if (Penjemputan::where('id_penjemputan', $id)->where('id_pengguna_masyarakat', Auth::id())->count() == 0) {
+                return redirect()->route('masyarakat.penjemputan.riwayat')->with('error', 'Data Penjemputan Tidak Ditemukan!');
+            }
+            $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
+            return view('masyarakat.penjemputan-sampah.export.detail-riwayat', compact('penjemputan'));
+        } catch (\Exception $e) {
+            return redirect()->route('masyarakat.penjemputan.riwayat')->with('error', 'Gagal Export PDF!');
         }
-        $penjemputan = Penjemputan::where('id_penjemputan', $id)->first();
-        return view('masyarakat.penjemputan-sampah.export.detail-riwayat', compact('penjemputan'));
     }
 }

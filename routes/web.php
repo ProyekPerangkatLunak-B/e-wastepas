@@ -381,6 +381,7 @@ Route::group([
     Route::group([
         'prefix' => 'penjemputan-sampah/',
         'as' => 'penjemputan.',
+        'middleware' => ['auth'],
     ], function () {
         Route::get('/', [PenjemputanSampahMasyarakatController::class, 'index'])->name('index');
         Route::get('/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('kategori');
