@@ -76,14 +76,14 @@ class Penjemputan extends Model
             });
         });
 
-        // Filter berdasarkan kategori
-        $query->when($filters['kategori'] ?? false, function ($query, $kategori) {
-            if ($kategori != 'all' && $kategori != 'inactive') {
-                return $query->whereHas('detailPenjemputan.kategori', function ($query) use ($kategori) {
-                    $query->where('nama_kategori', $kategori);
-                });
-            }
-        });
+        // // Filter berdasarkan kategori
+        // $query->when($filters['kategori'] ?? false, function ($query, $kategori) {
+        //     if ($kategori != 'all' && $kategori != 'inactive') {
+        //         return $query->whereHas('detailPenjemputan.kategori', function ($query) use ($kategori) {
+        //             $query->where('nama_kategori', $kategori);
+        //         });
+        //     }
+        // });
 
         // Filter berdasarkan status
         $query->when($filters['status'] ?? false, function ($query, $status) {

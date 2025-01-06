@@ -73,7 +73,7 @@ class PenjemputanSampahMasyarakatController extends Controller
             $status = Pelacakan::getEnumValues('status');
 
             // $penjemputan = Penjemputan::orderByDesc("created_at")->paginate(6);
-            $penjemputan = Penjemputan::filter(request(['search', 'kategori', 'status']))
+            $penjemputan = Penjemputan::filter(request(['search', 'status']))
                 ->where('id_pengguna_masyarakat', Auth::id())
                 ->orderByDesc("created_at")
                 ->paginate(6)
@@ -127,7 +127,7 @@ class PenjemputanSampahMasyarakatController extends Controller
                 ->where('penjemputan.id_pengguna_masyarakat', Auth::id())
                 ->orderByDesc('penjemputan.created_at')
                 ->select('penjemputan.*')
-                ->filter(request(['search', 'kategori', 'status']))
+                ->filter(request(['search', 'status']))
                 ->paginate(6)
                 ->appends(request()->query());
 
