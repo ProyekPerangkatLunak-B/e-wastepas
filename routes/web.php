@@ -312,6 +312,16 @@ Route::group([
         return view('manajemen.registrasi.ganti-password');
     })->name('password.ganti-password');
 
+    // Route Ubah Password (Registrasi)
+    Route::get('/ubah-password', function () {
+        return view('manajemen.registrasi.ubah-password');
+    })->name('password.ubah-password');
+
+    // Route Konfirmasi Ubah Password (Registrasi)
+    Route::get('/konfirmasi-ubah-password', function () {
+        return view('manajemen.registrasi.konfirmasi-ubah-password');
+    })->name('password.konfirmasi-ubah-password');
+
 
     // Memverifikasi OTP
     Route::post('verify-otp', [RegistrasiManajemenController::class, 'verifyOtp'])->name('manajemen.registrasi.verify-otp.submit');
