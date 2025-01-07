@@ -17,18 +17,29 @@
             <div>
                 <h2 class="text-3xl font-semibold text-gray-900 ms-24">Profile</h2>
             </div>
-            <div class="md:col-span-6 mt-4 ms-32">
-                <div class="mt-1 flex items-center">
-                  <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                    <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  </span>
-                  <div class="container">
-                    <h3 class="ms-8 font-semibold text-xl">Profile Picture</h3>
-                    <p class="ms-8">PNG, JPG, JPEG Under 15MB</p>
-                </div>
-                </div>
+            <div class="md:col-span-6 mt-8 ms-32 flex items-center">
+                <div class="w-[85px] h-[85px] rounded-full bg-[url('https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxwZW9wbGV8ZW58MHwwfHx8MTcxMTExMTM4N3ww&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat mr-4">
+                <div class="mx-auto flex justify-center rounded-full text-center ml-28 w-6 h-6"></div>
+                <input type="file" name="profile" id="upload_profile" hidden required>
+
+              <label for="upload_profile" class="inline-flex items-center">
+                <svg data-slot="icon" class="mt-8 ml-16 w-5 h-5 text-black-800" fill="none" stroke-width="1.5"
+                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                     aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z">
+                  </path>
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z">
+                  </path>
+                </svg>
+              </label>
+            </div>
+              <div class="">
+                <h3 class="font-semibold text-xl">Profile Picture</h3>
+                <p>PNG, JPG, JPEG Under 15MB</p>
+              </div>
+            </div>
               </div>
 
         <!-- Form Profil -->
@@ -37,47 +48,33 @@
 
             <!-- Input untuk Nama -->
             <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-3 justify-center w-full">
-                <div class="w-full mt-6">
-                    <label for="" class="dark:text-gray-300">Nama</label>
+                <div class="w-full mt-8">
+                    <label for="" class="text-gray-500">Nama</label>
                     <input type="text"
-                            class="p-4 w-full border-2 rounded-lg text-gray-200 border-gray-200"
+                            class="p-4 w-full border-2 rounded-lg text-gray-800 border-gray-200"
                             placeholder="Masukkan Nama">
                 </div>
-                <div class="w-full mt-6">
-                    <h3 class="dark:text-gray-300">Tanggal Lahir</h3>
+                <div class="w-full mt-8">
+                    <h3 class="text-gray-500">Tanggal Lahir</h3>
                     <input type="date"
-                            class="text-grey p-4 w-full border-2 rounded-lg text-gray-400 border-gray-200"
+                            class="text-grey p-4 w-full border-2 rounded-lg text-gray-800 border-gray-200"
                             placeholder="Masukkan Tanggal Lahir">
                 </div>
             </div>
             <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-3 justify-center w-full">
-                <div class="w-full">
-                    <label for="no-telepon" class="dark:text-gray-300">Masukkan No. Telepon</label>
+                <div class="w-full mt-6">
+                    <label for="no-telepon" class="text-gray-500">Masukkan No. Telepon</label>
                     <input type="tel"
-                            class="p-4 w-full border-2 rounded-lg text-gray-200 border-gray-200"
+                            class="p-4 w-full border-2 rounded-lg text-gray-800 border-gray-200"
                             placeholder="Masukkan No. Telepon">
                 </div>
-                <div class="w-full">
-                    <label for="no-rekening" class=" dark:text-gray-300">No. Rekening</label>
+                <div class="w-full mt-6">
+                    <label for="alamat" class=" text-gray-500">Alamat</label>
                     <input type="text"
-                            class="p-4 w-full border-2 rounded-lg text-gray-200 border-gray-200"
-                            placeholder="Masukkan No. Rekening">
+                            class="p-4 w-full border-2 rounded-lg text-gray-800 border-gray-200"
+                            placeholder="Masukkan Alamat">
                 </div>
             </div>
-            <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col">
-                <div class="">
-                    <label for="alamat" class="dark:text-gray-300">Alamat</label>
-                    <textarea type="text"
-                            class="p-4 w-full border-2 rounded-lg text-gray-200 border-gray-200"
-                            placeholder="Masukkan Alamat"></textarea>
-                </div>
-            </div>
-            <!-- Input untuk Foto Profil -->
-         <!--   <div>
-                <label for="foto_profil" class="block text-gray-700 font-medium">Foto Profil</label>
-                <input type="file" name="foto_profil" id="foto_profil" accept="image/*" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div> -->
-
             <!-- Tombol Simpan -->
             <div class="mt-6 flex justify-end items-end">
                 <button type="button" onclick="validateForm()"
