@@ -333,7 +333,7 @@ Route::group([
     //});
 
     //profileEdit
-    Route::get('/test', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
+    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
     Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
 
 
