@@ -36,7 +36,13 @@
                 <td class="p-4">Asep</td>
                 <td class="p-4">3,000</td>
                 <td class="p-4">38,894</td>
-                <td class="p-4">View</td>
+                 
+                  <td class="p-4">
+                    <button>
+                      <a href="detail-riwayat">View</a> 
+                    </button>
+                  </td>
+                
               </tr>
               <tr class="border-t text-center">
                 <td class="p-4">2</td>

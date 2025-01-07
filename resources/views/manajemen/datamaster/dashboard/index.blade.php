@@ -9,15 +9,10 @@
         <h4 class="text-base font-normal ml-14">Selamat datang di dashboard Manajemen.</h4>
 
         {{-- Card Section --}}
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 px-12 bg-white">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 px-12 bg-white">
             {{-- Card Total Sampah Terkumpul --}}
             <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2">
                 <i class="fa-solid fa-recycle text-3xl text-[#437252]"></i>
-                {{-- <div class="text-start">
-                    <h5 class="text-gray-600 font-semibold">Total Sampah Terkumpul</h5>
-                    {{-- <p class="text-2xl font-bold">174.265 Kg</p> --}}
-                    {{-- <p class="text-2xl font-bold">{{ number_format($totalSampah, 0) }} Kg</p> --}}
-                {{-- </div> --}}
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Total Sampah Terkumpul</h5>
                     <p class="text-2xl font-bold">{{ number_format($totalSampah, 0) }} Kg</p>
@@ -33,15 +28,15 @@
                 </div>
             </div>
 
-            {{-- Card Masyarakat Yang Terdaftar --}}
+            {{-- Card Masyarakat Yang Terdaftar
             <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2">
                 <i class="fa-solid fa-users text-[#437252] text-3xl"></i>
                 <div class="text-start">
                     <h5 class="text-gray-600 font-semibold">Masyarakat Yang Terdaftar</h5>
                     {{-- <p class="text-2xl font-bold">1019</p> --}}
-                    <p class="text-2xl font-bold">{{ number_format($terdaftar, 0) }} orang</p>
-                </div>
-            </div>
+                    {{-- <p class="text-2xl font-bold">{{ number_format($terdaftar, 0) }} orang</p> --}}
+                {{-- </div> --}}
+            {{-- </div> --}}
 
             {{-- Card Transaksi Terselesaikan --}}
             <button class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-start space-y-2 cursor-pointer hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
