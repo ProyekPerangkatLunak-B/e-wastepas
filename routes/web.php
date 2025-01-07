@@ -38,8 +38,7 @@ use App\Http\Controllers\Admin\RiwayatPenjemputanSampahAdminController;
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
     return view('index');
-});
-
+})->middleware('role.redirect');
 
 // Route Modul Admin
 Route::prefix('admin')
@@ -167,7 +166,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::post('/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
         Route::get('/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
-        Route::view('/login', 'admin.datamaster.auth.login.index')->name('login.index');
+        Route::view('/login', 'admin.datamaster.auth.login.index')->name('login.index')->middleware('role.redirect');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::patch('masyarakat/{id}/approve', [MasyarakatAdminController::class, 'approve'])->name('approve');
         Route::patch('masyarakat/{id}/reject', [MasyarakatAdminController::class, 'reject'])->name('reject');

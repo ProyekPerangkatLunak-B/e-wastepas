@@ -19,7 +19,7 @@ class KategoriSampahAdminController extends Controller
     public function getKategoriData()
     {
         try {
-            $kategoriSampah = KategoriSampah::select(['id_kategori', 'nama_kategori', 'deskripsi_kategori','gambar']);
+            $kategoriSampah = KategoriSampah::select(['id_kategori', 'nama_kategori', 'deskripsi_kategori','gambar', 'poin']);
             return DataTablesDataTables::of($kategoriSampah)
                 ->addColumn('action', function ($row) {
                     return '
@@ -63,6 +63,7 @@ class KategoriSampahAdminController extends Controller
             'nama_kategori' => 'required|string|max:255',
             'deskripsi_kategori' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'poin' => 'nullable|integer',
         ]);
 
         // Handle the image upload if present
@@ -79,6 +80,7 @@ class KategoriSampahAdminController extends Controller
             'nama_kategori' => $request->nama_kategori,
             'deskripsi_kategori' => $request->deskripsi_kategori,
             'gambar' => $imageName, // Save the image file name in the database
+            'poin' => $request->poin,
         ]);
 
         // Redirect with success message
@@ -120,6 +122,7 @@ class KategoriSampahAdminController extends Controller
             'nama_kategori' => 'required|string|max:255',
             'deskripsi_kategori' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate image (optional)
+            'poin' => 'nullable|integer',
         ]);
 
         // Find the existing KategoriSampah record
@@ -145,6 +148,7 @@ class KategoriSampahAdminController extends Controller
         $kategori->update([
             'nama_kategori' => $request->nama_kategori,
             'deskripsi_kategori' => $request->deskripsi_kategori,
+            'poin' => $request->poin,
         ]);
 
         // Redirect with success message
