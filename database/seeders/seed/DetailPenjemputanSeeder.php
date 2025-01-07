@@ -36,9 +36,10 @@ class DetailPenjemputanSeeder extends Seeder
         // Masukkan data ke tabel detail_penjemputan
         DB::table('detail_penjemputan')->insert($detailData);
 
-        $penjemputanDetails = DB::table('detail_penjemputan')
-            ->select('id_penjemputan', DB::raw('SUM(berat) as total_berat'), DB::raw('SUM(poin) as total_poin'))
-            ->join('jenis', 'detail_penjemputan.id_jenis', '=', 'jenis.id_jenis')
+        $penjemputanDetails = DB::table('detail_penjemputan AS dp')
+            ->select('dp.id_penjemputan', DB::raw('SUM(j.berat) as total_berat'), DB::raw('SUM(j.poin) + SUM(k.poin) as total_poin'))
+            ->join('jenis AS j', 'dp.id_jenis', '=', 'j.id_jenis')
+            ->join('kategori AS k', 'dp.id_kategori', '=', 'k.id_kategori')
             ->groupBy('id_penjemputan')
             ->get();
 
