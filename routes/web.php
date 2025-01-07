@@ -150,15 +150,14 @@ Route::prefix('admin')
 
         // penjemputan sampah
         Route::prefix('penjemputan')
-        ->as('penjemputan-sampah.')
-        ->group(function () {
-            Route::get('permintaan', [PermintaanPenjemputanSampahAdminController::class, 'index'])->name('permintaan.index');
-            Route::get('penerimaan', [PenerimaanPenjemputanSampahAdminController::class, 'index'])->name('penerimaan.index');
-            Route::get('tracking', [TrackingPenjemputanSampahAdminController::class, 'index'])->name('tracking.index');
-            Route::get('total', [TotalSampahPenjemputanSampahAdminController::class, 'index'])->name('total.index');
-            Route::get('riwayat', [RiwayatPenjemputanSampahAdminController::class, 'index'])->name('riwayat.index');
-        });
-        
+            ->as('penjemputan-sampah.')
+            ->group(function () {
+                Route::get('permintaan', [PermintaanPenjemputanSampahAdminController::class, 'index'])->name('permintaan.index');
+                Route::get('penerimaan', [PenerimaanPenjemputanSampahAdminController::class, 'index'])->name('penerimaan.index');
+                Route::get('tracking', [TrackingPenjemputanSampahAdminController::class, 'index'])->name('tracking.index');
+                Route::get('total', [TotalSampahPenjemputanSampahAdminController::class, 'index'])->name('total.index');
+                Route::get('riwayat', [RiwayatPenjemputanSampahAdminController::class, 'index'])->name('riwayat.index');
+            });
     });
 
 // Rute autentikasi
@@ -213,7 +212,7 @@ Route::group([
     // })->name('datamaster.per-daerah.index');
 
     Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
-    ->name('datamaster.per-daerah.index');
+        ->name('datamaster.per-daerah.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');

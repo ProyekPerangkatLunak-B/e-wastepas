@@ -19,7 +19,8 @@ class PelacakanSeeder extends Seeder
         $faker = Faker::create('id_ID');
         $penjemputanData = DB::table('penjemputan')->get();
 
-        $statusDefault = ['Diproses', 'Dibatalkan'];
+        // $statusDefault = ['Diproses', 'Dibatalkan'];
+        $statusDefault = ['Diproses', 'Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai', 'Dibatalkan'];
 
         $dibatalkan = 0;
 
@@ -31,7 +32,7 @@ class PelacakanSeeder extends Seeder
                 ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
             if ($dibatalkan > 4) {
-                $statusDefault = ['Diproses'];
+                $statusDefault;
             } else {
                 $dibatalkan++;
             }
@@ -49,36 +50,36 @@ class PelacakanSeeder extends Seeder
 
         DB::table('pelacakan')->insert($data);
 
-        // Pelacakan Lanjutan
-        $status = ['Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai'];
-        $currentStatus = 'Diproses';
+        // // Pelacakan Lanjutan
+        // $status = ['Diterima', 'Dijemput Kurir', 'Menuju Lokasi Penjemputan', 'Sampah Diangkut', 'Menuju Dropbox', 'Menyimpan Sampah di Dropbox', 'Selesai'];
+        // $currentStatus = 'Diproses';
 
-        foreach ($status as $nextStatus) {
-            $records = Pelacakan::where('status', $currentStatus)->get();
-            if ($records->count() > 0) {
-                foreach ($records as $record) {
-                    if (rand(0, 1) == 1) {
-                        $estimasiWaktu = \Carbon\Carbon::parse($record->estimasi_waktu)
-                            ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
-                            ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+        // foreach ($status as $nextStatus) {
+        //     $records = Pelacakan::where('status', $currentStatus)->get();
+        //     if ($records->count() > 0) {
+        //         foreach ($records as $record) {
+        //             if (rand(0, 1) == 1) {
+        //                 $estimasiWaktu = \Carbon\Carbon::parse($record->estimasi_waktu)
+        //                     ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+        //                     ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
-                        $createUpdate = \Carbon\Carbon::parse($record->created_at)
-                            ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
-                            ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
+        //                 $createUpdate = \Carbon\Carbon::parse($record->created_at)
+        //                     ->addHours(rand(2, 6)) // Tambahkan antara 2 sampai 6 jam
+        //                     ->addDays(rand(0, 1)); // kadang tambahkan 1 hari
 
-                        Pelacakan::create([
-                            'id_penjemputan' => $record->id_penjemputan,
-                            'id_dropbox' => $record->id_dropbox,
-                            'keterangan' => $faker->realText(rand(50, 100)),
-                            'status' => $nextStatus,
-                            'estimasi_waktu' => $estimasiWaktu,
-                            'created_at' => $createUpdate,
-                            'updated_at' => $createUpdate,
-                        ]);
-                    }
-                }
-            }
-            $currentStatus = $nextStatus;
-        }
+        //                 Pelacakan::create([
+        //                     'id_penjemputan' => $record->id_penjemputan,
+        //                     'id_dropbox' => $record->id_dropbox,
+        //                     'keterangan' => $faker->realText(rand(50, 100)),
+        //                     'status' => $nextStatus,
+        //                     'estimasi_waktu' => $estimasiWaktu,
+        //                     'created_at' => $createUpdate,
+        //                     'updated_at' => $createUpdate,
+        //                 ]);
+        //             }
+        //         }
+        //     }
+        //     $currentStatus = $nextStatus;
+        // }
     }
 }
