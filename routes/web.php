@@ -334,6 +334,9 @@ Route::group([
 
     Route::post('login', [LoginMasyarakat::class, 'authenticate'])->name('login.submit');
 
+    //logout
+    Route::post('logout', [LoginMasyarakat::class, 'logout'])->name('logout');
+
     // Submodul Registrasi
     Route::get('register', function () {
         return view('masyarakat.registrasi.register');
@@ -360,11 +363,13 @@ Route::group([
     });
     Route::get('/ubah-password', function () {
         return view('masyarakat/registrasi/ubah-password');
-    });
+    })->name('ubah-password');
     Route::get('/cek-mail', function () {
         return view('masyarakat/registrasi/cek-mail');
     });
 
+    Route::get('/reset/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/masyarakat/reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
     // Route::get('/profil', function () {
     //    return view('masyarakat/registrasi/profil');
     // });
@@ -374,8 +379,10 @@ Route::group([
     //});
 
     //profileEdit
-    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
+    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('profile');
     Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
+    Route::put('/profile/update-password', [ForgotPasswordController::class, 'updatePassword'])->name('profile.update-password');
+
 
 
     //forgot pass masyarakat
@@ -386,7 +393,7 @@ Route::group([
     Route::group([
         'prefix' => 'penjemputan-sampah/',
         'as' => 'penjemputan.',
-        'middleware' => ['auth'],
+        'middleware' => ['auth', 'check.verification.status'],
     ], function () {
         Route::get('/', [PenjemputanSampahMasyarakatController::class, 'index'])->name('index');
         Route::get('/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('kategori');
