@@ -92,7 +92,7 @@
 
                     {{-- detail item --}}
                     <div class="grid lg:grid-cols-2 gap-2 mb-4 ">
-                        @foreach($data as $detail)
+                        @foreach ($data as $detail)
                             <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">
                                 <div class="grid grid-cols-3 gap-1">
                                     <!-- Kategori -->
@@ -102,7 +102,7 @@
                                     <div class="col-span-2">
                                         <span>: {{ $detail->nama_kategori }}</span>
                                     </div>
-                                
+
                                     <!-- Jenis -->
                                     <div class="">
                                         <span class="font-semibold">Jenis</span>
@@ -110,7 +110,7 @@
                                     <div class="col-span-2">
                                         <span>: {{ $detail->nama_jenis }}</span>
                                     </div>
-                                
+
                                     <!-- Jumlah -->
                                     <div class="">
                                         <span class="font-semibold">Jumlah</span>
@@ -128,12 +128,12 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
-                        </div>
-                    
-                    
-                    
-                    
+                        @endforeach
+                    </div>
+
+
+
+
 
 
                     <!-- catatan & status -->
@@ -154,11 +154,11 @@
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id_pelacakan" value="{{ $data->first()->id_pelacakan }}">
-                            <input type="hidden" name="status" value="Diterima">
+                            <input type="hidden" name="status" value="Dijemput Kurir">
                             <button type="submit" id="openModalBtn"
                                 class="focus:outline-none font-bold rounded-xl text-base px-16 py-2 me-2 mr-4
-                                    {{ $data->first()->status == 'Diterima' ? 'bg-gray-400 cursor-not-allowed' : 'text-slate-50 bg-gradient-to-b from-secondary-normal to-primary-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300' }}"
-                                {{ $data->first()->status == 'Diterima' ? 'disabled ' : '' }}>
+                                    {{ $data->first()->status == 'Dijemput Kurir' ? 'bg-gray-400 cursor-not-allowed' : 'text-slate-50 bg-gradient-to-b from-secondary-normal to-primary-normal hover:bg-gradient-to-t focus:ring-4 focus:ring-green-300' }}"
+                                {{ $data->first()->status == 'Dijemput Kurir' ? 'disabled ' : '' }}>
                                 Terima Penjemputan
                             </button>
                         </form>
@@ -173,9 +173,10 @@
         <div class="bg-white-100 rounded-2xl shadow-lg p-6 max-w-sm w-full text-center">
             <h2 class="text-base font-normal  justify-self-start text-gray-500">Notifikasi</h2>
             <div class="w-10 h-0.5 bg-secondary-normal rounded-xl ml-3"></div>
-            <p class="mb-6 mt-6 text-lg">Permintaan Penjemputan Diterima!</p>
+            <p class="mb-6 mt-6 text-lg">Permintaan Penjemputan Dijemput Kurir!</p>
 
-            <a href="{{ route('mitra-kurir.penjemputan.dropbox') }}"  class="px-10 py-2 bg-gradient-to-r from-secondary-normal to-primary-normal text-white-100 rounded-2xl font-normal hover:bg-gradient-to-l">
+            <a href="{{ route('mitra-kurir.penjemputan.dropbox') }}"
+                class="px-10 py-2 bg-gradient-to-r from-secondary-normal to-primary-normal text-white-100 rounded-2xl font-normal hover:bg-gradient-to-l">
 
                 OK
             </a>

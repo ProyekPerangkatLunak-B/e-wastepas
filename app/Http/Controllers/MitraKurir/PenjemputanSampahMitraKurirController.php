@@ -184,7 +184,7 @@ class PenjemputanSampahMitraKurirController extends Controller
 
     /**
      * fn: dropbox
-     * desk: Menampilkan penjemputan paling lama dengan status pelacakan selain 'Diproses', 'Selesai' atau 'Dibatalkan'.
+     * desk: Menampilkan penjemputan paling lama dengan status pelacakan selain 'Diproses','Diterima', 'Selesai' atau 'Dibatalkan'.
      *
      * @param NA
      * @return \Illuminate\View\View
@@ -195,7 +195,7 @@ class PenjemputanSampahMitraKurirController extends Controller
             /**
              * @ReadMe!!
              * Agar ini terlihat, pastikan login dengan dengan akun yang memiliki peran kurir dan memiliki penjemputan
-             * dengan pelacakan berstatus selain 'Diproses', 'Selesai' atau 'Dibatalkan'.
+             * dengan pelacakan berstatus selain 'Diproses','Diterima', 'Selesai' atau 'Dibatalkan'.
              */
             if (!Auth::user()) {
                 $userLogin = User::where('id_peran', 3)->first();
@@ -206,13 +206,13 @@ class PenjemputanSampahMitraKurirController extends Controller
             $penjemputan = Penjemputan::with(['daerah', 'dropbox', 'penggunaMasyarakat', 'penggunaKurir'])
                 ->where('id_pengguna_kurir', $userLogin)
                 ->whereHas('pelacakan', function ($query) {
-                    $query->whereNotIn('status', ['Diproses', 'Selesai', 'Dibatalkan']);
+                    $query->whereNotIn('status', ['Diproses', 'Diterima', 'Selesai', 'Dibatalkan']);
                 })
                 ->orderBy('created_at', 'asc') // ambil penjemputan yang paling lama
                 ->first();
 
             $pelacakan = Pelacakan::where('id_penjemputan', $penjemputan?->id_penjemputan)
-                ->whereNotIn('status', ['Diproses', 'Selesai', 'Dibatalkan'])
+                ->whereNotIn('status', ['Diproses', 'Diterima', 'Selesai', 'Dibatalkan'])
                 ->first();
 
             // dd($penjemputan);
