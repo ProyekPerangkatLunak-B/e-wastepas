@@ -140,6 +140,8 @@
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Deskripsi Kategori Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
+                                    style="color: white">Poin</th>
+                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Gambar</th>
                                 <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
                                     style="color: white">Aksi</th>
@@ -185,6 +187,11 @@
                         {
                             data: 'deskripsi_kategori',
                             name: 'deskripsi_kategori',
+                            orderable: true
+                        },
+                        {
+                            data: 'poin',
+                            name: 'poin',
                             orderable: true
                         },
                         {

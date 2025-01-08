@@ -4,7 +4,14 @@
     <div class="container max-w-full px-4 mx-auto  bg-gray-100">
         <div class="py-8">
             <h2 class="text-xl font-semibold leading-relaxed ml-14">Permintaan Penjemputan</h2>
+
             <div class="flex flex-col lg:flex-row items-center justify-between space-y-4 md:space-y-0">
+
+
+            <h3><b>Nama kurir:</b> {{ Auth::user()->nama }} - <i class="text-red-400">debugging</i></h3>
+            <h3><b>Peran:</b> {{ Auth::user()->peran->nama_peran }} - <i class="text-red-400">debugging</i></h3>
+            <div class="flex items-center justify-between">
+
                 <h4 class="text-base font-normal ml-14">Daftar permintaan penjemputan sampah.</h4>
 
                 {{-- Search and Filter options --}}
@@ -12,9 +19,11 @@
                     {{-- Search Box --}}
                     <div class="relative w-full md:w-[334px]">
                         <input type="text"
+
                             class="w-full h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
                             placeholder="Cari...."
                             value="{{ $search }}"
+
                             onkeydown="if(event.key === 'Enter') window.location.href='{{ url()->current() }}?search=' + this.value + '&sort={{ $sort }}'">
                         <!-- SVG Icon Search -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -49,34 +58,29 @@
             <div class="flex justify-center mt-4">
                 {{-- Card Section --}}
                 @php
-                $groupData = $data->groupBy('nama');
+                    $groupData = $data->groupBy('nama');
                 @endphp
-                @if (count($data) == 0)
-                    {{-- Kondisi Tidak Ada Data --}}
-                    <div class="flex justify-center items-center mt-56 w-full">
-                        <div class="flex flex-col justify-center items-center bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
-                            <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}" 
-                                 alt="Tidak Ditemukan" 
-                                 class="w-[100px] h-[100px] mx-auto mb-4">
-                            <p class="text-lg font-semibold text-gray-500 text-center">
-                                Data permintaan penjemputan {{ $search ?? 'pengguna' }} tidak ditemukan.
-                            </p>
+
+                <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
+                    @if (count($data) == 0)
+                        <div
+                            class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
+                            <div class="text-center">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}" alt="Tidak Ditemukan"
+                                    class="w-[100px] h-[100px] mx-auto mb-4">
+                                <p class="text-lg font-semibold text-gray-500">Pengguna {{ $search ?? 'pengguna' }}
+                                    tidak ditemukan.</p>
+                            </div>
                         </div>
-                    </div>
-                @else
-                    {{-- Kondisi Ada Data --}}
-                    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-full px-4 sm:px-6 md:px-0">
+                    @else
                         @foreach ($groupData as $name => $items)
-                            <x-card-permintaan
-                                name="{{ $name }}"
-                                status="{{ $items->first()->status }}"
-                                image="https://picsum.photos/700/700"
-                                imageItem="https://picsum.photos/700/700"
+                            <x-card-permintaan name="{{ $name }}" status="{{ $items->first()->status }}"
+                                image="https://picsum.photos/700/700" imageItem="https://picsum.photos/700/700"
                                 :items="$items"
-                                link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $items->first()->id_penjemputan) }}"
-                            />
+                                link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $items->first()->id_penjemputan) }}" />
+
                         @endforeach
-                    </div>
+                </div>
                 @endif
             </div>
             
@@ -88,17 +92,24 @@
                 <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
                     {{-- Button << & < --}}
                     @if ($data->currentPage() > 1)
-                        <button onclick="window.location.href='{{ $data->url(1) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
-                        <button onclick="window.location.href='{{ $data->previousPageUrl() }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                        <button onclick="window.location.href='{{ $data->url(1) }}'"
+                            class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                        <button onclick="window.location.href='{{ $data->previousPageUrl() }}'"
+                            class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
                     @endif
 
-                    {{-- Current Page --}}
-                    <button class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $data->currentPage() }}</button>
+
+                    {{-- Nomor halaman  --}}
+                    <button
+                        class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $data->currentPage() }}</button>
+
 
                     {{-- Button > & >> --}}
                     @if ($data->hasMorePages())
-                        <button onclick="window.location.href='{{ $data->nextPageUrl() }}'" class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
-                        <button onclick="window.location.href='{{ $data->url($data->lastPage()) }}'" class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                        <button onclick="window.location.href='{{ $data->nextPageUrl() }}'"
+                            class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                        <button onclick="window.location.href='{{ $data->url($data->lastPage()) }}'"
+                            class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
                     @endif
                 </div>
             @endif

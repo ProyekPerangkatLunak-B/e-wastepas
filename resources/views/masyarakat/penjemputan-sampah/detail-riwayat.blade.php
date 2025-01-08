@@ -46,11 +46,6 @@
                 </p>
             </div>
             <div class="inline-flex items-center justify-end ml-auto space-x-4">
-                {{-- Button PDF dan XLSX(Excel) --}}
-                <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-primary-normal hover:bg-primary-300 rounded-2xl shadow-sm">
-                    Export to Excel
-                </a>
                 <a href="{{ route('masyarakat.penjemputan.exportPDFDetailRiwayat', $penjemputan->id_penjemputan) }}"
                     target="_blank"
                     class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">

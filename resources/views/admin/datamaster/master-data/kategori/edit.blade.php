@@ -74,6 +74,12 @@
                     </div>
 
                     <div class="mb-6">
+                        <label for="poin" class="block text-sm font-medium text-gray-800 mb-1">Poin</label>
+                        <input type="number" name="poin" id="poin" value="{{ $kategoriSampah->poin }}" required
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+                    </div>
+
+                    <div class="mb-6">
                         <label for="gambar" class="block text-sm font-medium text-gray-800 mb-1">Gambar Kategori
                             Sampah</label>
                         <input type="file" name="gambar" id="gambar" accept="image/*"

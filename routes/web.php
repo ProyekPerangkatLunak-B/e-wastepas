@@ -38,8 +38,7 @@ use App\Http\Controllers\Admin\RiwayatPenjemputanSampahAdminController;
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
     return view('index');
-});
-
+})->middleware('role.redirect');
 
 // Route Modul Admin
 Route::prefix('admin')
@@ -167,7 +166,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::post('/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendAdminLoginLink');
         Route::get('/login/verify', [AuthController::class, 'verifyLogin'])->name('login.verify');
-        Route::view('/login', 'admin.datamaster.auth.login.index')->name('login.index');
+        Route::view('/login', 'admin.datamaster.auth.login.index')->name('login.index')->middleware('role.redirect');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::patch('masyarakat/{id}/approve', [MasyarakatAdminController::class, 'approve'])->name('approve');
         Route::patch('masyarakat/{id}/reject', [MasyarakatAdminController::class, 'reject'])->name('reject');
@@ -229,10 +228,6 @@ Route::group([
 
     Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
         ->name('datamaster.per-daerah.index');
-
-    Route::get('/datamaster/jenis', function () {
-        return view('manajemen.datamaster.jenis.index');
-    })->name('datamaster.jenis.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');
@@ -379,7 +374,7 @@ Route::group([
     //});
 
     //profileEdit
-    Route::get('/test', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
+    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
     Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
 
 
@@ -471,7 +466,7 @@ Route::post('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [Registrasi
 
 // forgot password
 Route::get('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ForgotPasswordFormIndex'])->middleware('guest')->name('reset-password-form');
-Route::post('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ChangeForgotPa ssword'])->middleware('guest')->name('reset-password-form.post');
+Route::post('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ChangeForgotPassword'])->middleware('guest')->name('reset-password-form.post');
 Route::get('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'ForgotPasswordIndex'])->middleware('guest')->name('reset-password');
 Route::post('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'SendForgotPassword'])->middleware('guest')->name('reset-password.post');
 

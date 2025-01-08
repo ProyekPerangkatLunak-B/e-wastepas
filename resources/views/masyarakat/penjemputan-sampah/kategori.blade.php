@@ -28,6 +28,7 @@
                                 $image = file_exists(public_path($imagePath)) ? $imagePath : 'img/masyarakat/gambarKategoriSampah/no-image.png';
                             @endphp
                             <x-card title="{{ $k->nama_kategori }}" description="{{ $k->deskripsi_kategori }}"
+                                poin="{{ $k->poin }}"
                                 image="{{ asset($image) }}"
                                 link="{{ route('masyarakat.penjemputan.detail', $k->id_kategori) }}" />
                         @endforeach
