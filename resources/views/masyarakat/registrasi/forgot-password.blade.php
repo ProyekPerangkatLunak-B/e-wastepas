@@ -28,8 +28,11 @@
                 <div>
                     <label for="email" class="block mt-4 text-md font-medium leading-9 text-gray-500">Email</label>
                         <input
-                            class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                            type="email" name="email" required placeholder="Masukkan Email"/>
+                            class="w-full mt-2 px-5 py-4 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white @error('email') border-red-500 @enderror"
+                            type="email" name="email" required placeholder="Masukkan Email" value="{{ old('email') }}"/>
+                            @error('email')
+                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
               <!-- Button Submit -->
               <button

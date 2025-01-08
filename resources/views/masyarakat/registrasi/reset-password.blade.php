@@ -24,14 +24,20 @@
             </div>
                 <div class="mx-auto max-w-md">
                   <form action="#" method="POST">
-                    <label for="password" class="block mt-4 text-md font-bold leading-9 text-gray-900">Password baru</label>
+                    <label for="password_baru" class="block mt-4 text-md font-bold leading-9 text-gray-900">Password baru</label>
                     <input
-                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                        type="password" placeholder="Masukkan Password" required name="password"/>
-                    <label for="password" class="block mt-4 text-md font-bold leading-9 text-gray-900">Konfirmasi Password baru</label>
+                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white @error('password_baru') border-red-500 @enderror"
+                        type="password_baru" placeholder="Masukkan Password" required name="password"/>
+                    @error('password_baru')
+                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                    @enderror
+                    <label for="konfirmasi_password_baru" class="block mt-4 text-md font-bold leading-9 text-gray-900">Konfirmasi Password baru</label>
                     <input
-                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                        type="password"  placeholder="Masukkan Password" name="password"/>
+                        class="w-full mt-2 px-4 py-3 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white @error('konfirmasi_password_baru') border-red-500 @enderror"
+                        type="konfirmasi_password_baru"  placeholder="Masukkan Password" name="konfirmasi_password_baru"/>
+                    @error('konfirmasi_password_baru')
+                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                    @enderror
               <!-- Button Submit
                   <button
                       class="mt-10 tracking-wide font-semibold bg-green-900  text-gray-100 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"> Simpan

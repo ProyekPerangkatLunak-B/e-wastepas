@@ -13,34 +13,30 @@
             <div class="w-full mt-4 flex-20">
                 <div class="flex flex-col items-center justify-around">
             </div>
-
-            @if ($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <strong class="font-bold"></strong>
-                <span class="block sm:inline">Email tidak terdaftar</span>
-                <ul class="mt-2 list-disc pl-5">
-                    @foreach ($errors->all() as $error)
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @if (session('status'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-            {{ session('status') }}
-        </div>
-        @endif
-
-           <!-- @if (session('success'))
-                <div class="w-full px-4 py-3 mt-4 text-green-700 bg-green-100 border border-green-400 rounded">
-                    {{ session('success') }}
-                </div>
-            @elseif (session('error'))
-                <div class="w-full px-4 py-3 mt-4 text-red-700 bg-red-100 border border-red-400 rounded">
-                    {{ session('error') }}
-                </div>
-            @endif -->
             <!-- Form Login -->
                 <div class="max-w-md mx-auto">
+
+        @if ($errors->has('email'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 flex items-center" role="alert">
+                <span class="block sm:inline">{{ $errors->first('email') }}</span>
+                <button type="button" class="ml-auto text-red-700" onclick="this.parentElement.style.display='none';">
+                    <svg class="fill-current h-6 w-6" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 00-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 001.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+                    </svg>
+                </button>
+            </div>
+        @endif
+
+        @if ($errors->has('password'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 flex items-center" role="alert">
+                <span class="block sm:inline">{{ $errors->first('password') }}</span>
+                <button type="button" class="ml-auto text-red-700" onclick="this.parentElement.style.display='none';">
+                    <svg class="fill-current h-6 w-6" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 00-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 001.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+                    </svg>
+                </button>
+            </div>
+        @endif
 
                 <form action="{{ route('masyarakat.login.submit') }}" method="POST">
                 @csrf

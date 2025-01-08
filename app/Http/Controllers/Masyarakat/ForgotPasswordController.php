@@ -11,6 +11,7 @@ use App\Models\User;
 
 class ForgotPasswordController extends Controller
 {
+
     public function sendResetLinkEmail(Request $request)
     {
         // Validasi input email
@@ -31,17 +32,17 @@ class ForgotPasswordController extends Controller
             $resetUrl = url('password/reset/' . $token);
 
             // Kirim email reset password
-            
+
             Mail::send([], [], function ($message) use ($user, $resetUrl) {
                 $message->to($user->email)
                         ->subject('Reset Password')
-                        ->html('Click the following link to reset your password: <a href="' . $resetUrl . '">Reset Password</a>'); 
+                        ->html('Click the following link to reset your password: <a href="' . $resetUrl . '">Reset Password</a>');
             });
             // Berikan respons sukses
             return back()->with(['status' => 'Link reset password telah dikirim ke email Anda.']);
         }
 
         // Jika email tidak ditemukan
-        return back()->withErrors(['email' => 'Email tidak ditemukan dalam sistem kami.']);
+        return back()->withErrors(['email' => 'Email tidak terdaftar']);
     }
 }
