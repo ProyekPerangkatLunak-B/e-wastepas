@@ -1,11 +1,40 @@
-@extends('layouts.main')
+<!doctype html>
+<html lang="en">
 
-@section('content')
-    <div class="min-h-screen mx-[22rem] pt-8 mt-2 bg-gray-100 w-[82%]">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- Link Fav Icon --}}
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
+
+    {{-- Link Font Google --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;400;600;800&display=swap" rel="stylesheet">
+
+    {{-- Link Load CSS & JS --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Link load CSS Custom --}}
+    <link rel="stylesheet" href="{{ asset('css/masyarakat-penjemputan-sampah.css') }}">
+
+    <title>E-WastePas</title>
+</head>
+
+<body>
+    <div class="w-full min-h-screen pt-8 mx-auto mt-2 bg-gray-100">
         <div class="container mx-auto">
-            <h2 class="mb-1 ml-20 text-xl font-bold text-black-normal">Detail Riwayat Penjemputan Sampah</h2>
-            <p class="ml-20 font-semibold text-gray-600 text-md">Hasil Invoice Detail Riwayat Penjemputan Sampah Elektronik
-            </p>
+            <div class="flex items-center justify-between mx-auto">
+                <div>
+                    <h2 class="mb-1 ml-20 text-xl font-bold text-black-normal">Detail Riwayat Penjemputan Sampah</h2>
+                    <p class="ml-20 font-semibold text-gray-600 text-md">Hasil Invoice Detail Riwayat Penjemputan Sampah Elektronik</p>
+                </div>
+                <div class="inline-flex items-center justify-end mr-20 space-x-4">
+                    <a href="#" target="_blank" class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
+                        Cetak PDF
+                    </a>
+                </div>
+            </div>
 
             {{-- Mulai Disini --}}
             <div class="w-[1380px] mx-auto mt-6 bg-white-normal shadow-sm rounded-xl p-10">
@@ -15,9 +44,7 @@
                     <div class="flex items-center justify-between mb-4">
                         <div>
                             <h3 class="mb-1 text-3xl font-bold text-black-normal">Invoice Penjemputan Sampah</h3>
-                            <p class="text-gray-600">Waktu:
-                                {{ Carbon\Carbon::parse($penjemputan->created_at)->locale(app()->getLocale())->translatedFormat('H:i, j F Y') }}
-                            </p>
+                            <p class="text-gray-600">Waktu: {{ Carbon\Carbon::parse($penjemputan->created_at)->locale(app()->getLocale())->translatedFormat('H:i, j F Y') }}</p>
                         </div>
                         <div class="flex items-center space-x-4">
                             <span class="text-lg font-semibold text-gray-600">Kode Penjemputan :</span>
@@ -35,8 +62,7 @@
                                 @if ($penjemputan->penggunaKurir == null)
                                     -
                                 @else
-                                    {{ $penjemputan->penggunaKurir->nama }} -
-                                    {{ $penjemputan->penggunaKurir->nomor_telepon }}
+                                    {{ $penjemputan->penggunaKurir->nama }} - {{ $penjemputan->penggunaKurir->nomor_telepon }}
                                 @endif
                             </p>
                         </div>
@@ -54,8 +80,7 @@
                         <table class="w-full border-collapse table-auto">
                             <thead>
                                 <tr class="bg-gray-400">
-                                    <th class="px-4 py-2 text-lg font-bold text-center text-gray-900 border">Jenis Sampah
-                                    </th>
+                                    <th class="px-4 py-2 text-lg font-bold text-center text-gray-900 border">Jenis Sampah</th>
                                     <th class="px-4 py-2 text-lg font-bold text-center text-gray-900 border">Kategori</th>
                                     <th class="px-4 py-2 text-lg font-bold text-center text-gray-900 border">Berat</th>
                                     <th class="px-4 py-2 text-lg font-bold text-center text-gray-900 border">Poin</th>
@@ -66,8 +91,7 @@
                                     <tr class="bg-gray-100 hover:bg-tertiary-200">
                                         <td class="px-4 py-2 border">
                                             <div class="flex items-center space-x-4">
-                                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/kategori-jenisSampah.jpg') }}"
-                                                    alt="Jenis Sampah" class="object-cover w-12 h-12 rounded-lg">
+                                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/kategori-jenisSampah.jpg') }}" alt="Jenis Sampah" class="object-cover w-12 h-12 rounded-lg">
                                                 <span class="text-lg font-semibold">{{ $s->jenis->nama_jenis }}</span>
                                             </div>
                                         </td>
@@ -79,8 +103,7 @@
                                 {{-- <tr class="bg-gray-100 hover:bg-tertiary-200">
                                     <td class="px-4 py-2 border">
                                         <div class="flex items-center space-x-4">
-                                            <img src="{{ asset('img/masyarakat/penjemputan-sampah/kategori-jenisSampah.jpg') }}"
-                                                alt="Jenis Sampah" class="object-cover w-12 h-12 rounded-lg">
+                                            <img src="{{ asset('img/masyarakat/penjemputan-sampah/kategori-jenisSampah.jpg') }}" alt="Jenis Sampah" class="object-cover w-12 h-12 rounded-lg">
                                             <span class="text-lg font-semibold">Sampah Organik</span>
                                         </div>
                                     </td>
@@ -112,12 +135,8 @@
                                 @foreach ($penjemputan->pelacakan as $p)
                                     <tr class="bg-gray-100 hover:bg-tertiary-200">
                                         <td class="px-4 py-2 border text-pretty">{{ $p->status }}</td>
-                                        <td class="px-4 py-2 border text-pretty">
-                                            {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('j F Y') }}
-                                        </td>
-                                        <td class="px-4 py-2 border text-pretty">
-                                            {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
-                                        </td>
+                                        <td class="px-4 py-2 border text-pretty">{{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('j F Y') }}</td>
+                                        <td class="px-4 py-2 border text-pretty">{{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}</td>
                                         <td class="px-4 py-2 border text-pretty">
                                             @if ($p->dropbox == null)
                                                 -
@@ -141,8 +160,7 @@
                                     <td class="px-4 py-2 border text-pretty">00.00</td>
                                     <td class="px-4 py-2 border text-pretty">Banda Aceh</td>
                                     <td class="px-4 py-2 border text-pretty">Dropbox A</td>
-                                    <td class="px-4 py-2 border text-pretty">Lorem ipsum, dolor sit amet consectetur
-                                        adipisicing elit. Quas, ea.</td>
+                                    <td class="px-4 py-2 border text-pretty">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas, ea.</td>
                                 </tr> --}}
                             </tbody>
                         </table>
@@ -156,7 +174,6 @@
                             <h4 class="text-xl font-bold">Total Berat</h4>
                             <p class="text-lg text-gray-600">{{ $penjemputan->total_berat }} Kilogram</p>
                         </div>
-
                         <div>
                             <h4 class="text-xl font-bold">Total Poin</h4>
                             <p class="text-lg text-gray-600">{{ $penjemputan->total_poin }} Poin</p>
@@ -168,12 +185,14 @@
                 <div class="p-10 mb-8">
                     <h3 class="mb-1 text-xl font-bold text-red-normal">Catatan</h3>
                     <div class="p-4 bg-gray-100 rounded-lg shadow-sm">
-                        <p class="text-gray-600">
-                            {{ $penjemputan->catatan }}
-                        </p>
+                        <p class="text-gray-600">{{ $penjemputan->catatan }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+    {{-- Custom JS --}}
+    <script type="text/javascript" src="{{ asset('js/masyarakat/penjemputan-sampah/custom.js') }}"></script>
+</body>
+
+</html>
