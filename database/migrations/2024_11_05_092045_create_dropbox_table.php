@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('nama_dropbox')->nullable();
             $table->text('alamat_dropbox')->nullable();
             $table->tinyInteger('status_dropbox')->nullable();
-            $table->integer('total_poin')->nullable();
             $table->timestamps();
         });
     }

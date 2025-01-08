@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_kategori')->nullable();
             $table->text('deskripsi_kategori')->nullable();
             $table->string('gambar')->nullable()->default('no-image.png');
+            $table->integer('poin')->nullable();
             $table->timestamps();
         });
     }

@@ -12,7 +12,6 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #2ecc71;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -50,7 +49,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Edit Jenis Sampah</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14">Edit Jenis Sampah</h2>
             <h4 class="text-base font-normal ml-14">Silakan ubah data berikut untuk memperbarui jenis sampah.</h4>
 
             <div class="px-12 mt-4">
@@ -97,10 +96,10 @@
                         @endif
                     </div>
 
-                    <div class="flex justify-end">
+                    <div class="flex justify-end" style="color: white">
                         <button type="submit"
-                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white text-sm rounded hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transform hover:-translate-y-1 transition">
-                            Update
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg hover:from-green-400 hover:to-green-500 shadow-md transition transform hover:-translate-y-1">
+                            <i class="fas fa-save mr-2"></i>Simpan Perubahan
                         </button>
                     </div>
                 </form>

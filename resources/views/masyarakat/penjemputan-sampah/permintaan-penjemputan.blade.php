@@ -144,7 +144,7 @@
                 </div>
                 <!-- Tombol Kembali dan Kirim Permintaan -->
                 <div class="flex justify-end mx-10 space-x-4">
-                    <button type="button" onclick="resetForm()"
+                    <button type="button" id="showResetModalBtn" onclick="resetForm()"
                         class="px-8 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
                         Reset Form
                     </button>
@@ -228,6 +228,23 @@
                 <button type="button"
                     class="px-4 py-2 bg-secondary-normal rounded-xl w-[200px] h-[40px] text-white-normal hover:bg-secondary-300"
                     id="closeAlertModal">OK</button>
+            </div>
+        </div>
+
+        {{-- Modal Reset Form --}}
+        <div id="resetModal" class="fixed inset-0 z-40 items-center justify-center hidden bg-gray-900 bg-opacity-50">
+            <div class="bg-white-normal w-[450px] p-6 mx-auto mt-96 rounded-lg shadow-lg text-center">
+                <h2 class="text-lg font-semibold text-gray-500 text-start">Notifikasi</h2>
+                {{-- Underline  --}}
+                <div id="underlineReset" class="w-3/12 h-1 mt-2 mb-8 bg-gray-500"></div>
+                <h3 class="mb-4 text-lg font-semibold">Reset Form</h3>
+                <p class="mb-6">Apakah Anda yakin ingin mereset form?</p>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="closeResetModal""
+                        class="px-4 py-2 w-[200px] h-[40px] bg-gray-300 rounded-xl hover:bg-gray-400">Batal</button>
+                    <button type="button" id="resetFormButton""
+                        class="px-4 py-2 w-[200px] h-[40px] bg-red-normal rounded-xl text-white-normal hover:bg-red-600">Reset</button>
+                </div>
             </div>
         </div>
     </form>

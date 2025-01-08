@@ -34,10 +34,26 @@
                 <p class="text-base font-normal text-gray-600">Daftar penjemputan sampah terbaru di akun anda.</p>
             </div>
 
+            @if (request('search'))
+                <input type="hidden" name="search" value="{{ request('search') }}">
+            @endif
+
+            @if (request('status'))
+                <input type="hidden" name="status" value="{{ request('status') }}">
+            @endif
+
+            {{-- @php
+            dump(request('status'));
+        @endphp --}}
+
             {{-- Search and Filter options --}}
-            <div class="flex items-center pt-4 pl-20 mx-auto space-x-5">
+            <div class="flex items-center pt-4 space-x-5 ms-8">
                 {{-- Search Box --}}
                 <form method="GET" action="{{ route('masyarakat.penjemputan.riwayat') }}">
+                    @if (request('status'))
+                        <input type="hidden" name="status" value="{{ request('status') }}">
+                    @endif
+
                     <div class="relative">
                         <input type="text"
                             class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
@@ -50,21 +66,21 @@
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
-                        @if (request('kategori'))
-                            <input type="hidden" name="kategori" value="{{ request('kategori') }}">
-                        @endif
                     </div>
                 </form>
 
                 {{-- Filter Dropdown --}}
                 <form class="relative" method="GET" action="{{ route('masyarakat.penjemputan.riwayat') }}">
-                    <select name="kategori" onchange="this.form.submit()"
+                    @if (request('search'))
+                        <input type="hidden" name="search" value="{{ request('search') }}">
+                    @endif
+
+                    <select name="status" onchange="this.form.submit()"
                         class="w-[222px] h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200">
                         <option value="all">Filter</option>
-                        @foreach ($kategori as $k)
-                            <option value="{{ $k->nama_kategori }}"
-                                {{ request('kategori') == $k->nama_kategori ? 'selected' : '' }}>
-                                {{ $k->nama_kategori }}
+                        @foreach ($status as $k)
+                            <option value="{{ $k }}" {{ request('status') == $k ? 'selected' : '' }}>
+                                {{ $k }}
                             </option>
                         @endforeach
                         {{-- <option value="inactive">Tidak Aktif</option> --}}
@@ -77,21 +93,15 @@
                             d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
                     </svg>
                     <button type="submit" class="hidden">Submit</button>
-                    @if (request('search'))
-                        <input type="hidden" name="search" value="{{ request('search') }}">
-                    @endif
                 </form>
-                {{-- Button PDF dan XLSX(Excel) --}}
-                <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-primary-normal hover:bg-primary-400 rounded-2xl shadow-sm">
-                    Export to Excel
-                </a>
-                <a href="#"
+                {{-- Button PDF --}}
+                <a href="{{ route('masyarakat.penjemputan.exportexportPDFRiwayatPenjemputan') }}" target="_blank"
                     class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
                     Excel to PDF
                 </a>
             </div>
         </div>
+
 
         <!-- Container Grid Card -->
         <div class="grid grid-cols-3 gap-4 mt-6">
@@ -111,7 +121,6 @@
                                     {{ $p->kode_penjemputan }}
                                 </span>
                             </div>
-
                             <!-- Isi Konten -->
                             <div class="flex px-4 space-x-6">
                                 <!-- Bagian Jenis dan Deskripsi Sampah -->
@@ -223,23 +232,24 @@
     {{-- Pagination --}}
     @if ($penjemputan->total() > 6)
         <div class="flex items-center justify-end mt-4 ml-24 space-x-2">
-            {{-- Button < & << --}} @if ($penjemputan->currentPage() > 1)
+            {{-- Button < & << --}}
+            @if ($penjemputan->currentPage() > 1)
                 <button onclick="window.location.href='{{ $penjemputan->url(1) }}'"
-                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
+                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded-xl hover:bg-gray-300">&lt;&lt;</button>
                 <button onclick="window.location.href='{{ $penjemputan->previousPageUrl() }}'"
-                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
+                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded-xl hover:bg-gray-300">&lt;</button>
             @endif
 
             {{-- Nomor halaman --}}
             <button
-                class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $penjemputan->currentPage() }}</button>
+                class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded-xl">{{ $penjemputan->currentPage() }}</button>
 
             {{-- Button > & >> --}}
             @if ($penjemputan->hasMorePages())
                 <button onclick="window.location.href='{{ $penjemputan->nextPageUrl() }}'"
-                    class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;</button>
+                    class="px-2 py-1 w-[50px] h-[50px] text-gray-600 bg-gray-200 rounded-xl hover:bg-gray-300">&gt;</button>
                 <button onclick="window.location.href='{{ $penjemputan->url($penjemputan->lastPage()) }}'"
-                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&gt;&gt;</button>
+                    class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded-xl hover:bg-gray-300">&gt;&gt;</button>
             @endif
         </div>
     @endif
