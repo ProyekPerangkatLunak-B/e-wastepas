@@ -5,18 +5,25 @@
         <div class="py-8">
             <h2 class="text-xl font-semibold leading-relaxed ml-14">Permintaan Penjemputan</h2>
 
+            <div class="flex flex-col lg:flex-row items-center justify-between space-y-4 md:space-y-0">
+
+
             <h3><b>Nama kurir:</b> {{ Auth::user()->nama }} - <i class="text-red-400">debugging</i></h3>
             <h3><b>Peran:</b> {{ Auth::user()->peran->nama_peran }} - <i class="text-red-400">debugging</i></h3>
             <div class="flex items-center justify-between">
+
                 <h4 class="text-base font-normal ml-14">Daftar permintaan penjemputan sampah.</h4>
 
                 {{-- Search and Filter options --}}
-                <div class="flex items-center mr-20 space-x-4">
+                <div class="flex flex-col lg:flex-row items-center md:mr-14 space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
                     {{-- Search Box --}}
-                    <div class="relative">
+                    <div class="relative w-full md:w-[334px]">
                         <input type="text"
-                            class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
-                            placeholder="Cari...." value="{{ $search }}"
+
+                            class="w-full h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
+                            placeholder="Cari...."
+                            value="{{ $search }}"
+
                             onkeydown="if(event.key === 'Enter') window.location.href='{{ url()->current() }}?search=' + this.value + '&sort={{ $sort }}'">
                         <!-- SVG Icon Search -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -28,15 +35,14 @@
                     </div>
 
                     {{-- Filter Dropdown --}}
-                    <div class="relative">
+                    <div class="relative w-full md:w-[222px]">
                         <select
-                            class="w-[222px] h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
+                            class="w-full h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
                             onchange="window.location.href='{{ url()->current() }}?sort=' + this.value + '&search={{ $search }}'">
-                            <option value="default">Filter</option>
                             <option value="berat-asc" {{ $sort == 'berat-asc' ? 'selected' : '' }}>Berat-Ringan</option>
                             <option value="berat-desc" {{ $sort == 'berat-desc' ? 'selected' : '' }}>Ringan-Berat</option>
-                            <option value="diproses" {{ $sort == 'diproses' ? 'selected' : '' }}>Diproses</option>
-                            <option value="diterima" {{ $sort == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                            {{-- <option value="diproses" {{ $sort == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                            <option value="diterima" {{ $sort == 'diterima' ? 'selected' : '' }}>Diterima</option> --}}
                         </select>
                         <!-- SVG Icon Filter -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -54,6 +60,7 @@
                 @php
                     $groupData = $data->groupBy('nama');
                 @endphp
+
                 <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                     @if (count($data) == 0)
                         <div
@@ -71,16 +78,19 @@
                                 image="https://picsum.photos/700/700" imageItem="https://picsum.photos/700/700"
                                 :items="$items"
                                 link="{{ route('mitra-kurir.penjemputan.detail-permintaan', $items->first()->id_penjemputan) }}" />
+
                         @endforeach
                 </div>
                 @endif
             </div>
+            
 
 
             {{-- Pagination --}}
-            @if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator && $data->lastPage() > 1)
+            @if ($data->total() > 6)
+                {{-- Pagination --}}
                 <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
-                    {{-- Button < & << --}}
+                    {{-- Button << & < --}}
                     @if ($data->currentPage() > 1)
                         <button onclick="window.location.href='{{ $data->url(1) }}'"
                             class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;&lt;</button>
@@ -88,9 +98,11 @@
                             class="px-2 w-[50px] h-[50px] py-1 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">&lt;</button>
                     @endif
 
+
                     {{-- Nomor halaman  --}}
                     <button
                         class="px-3 py-1 font-bold text-green-700 bg-green-200 w-[50px] h-[50px] rounded">{{ $data->currentPage() }}</button>
+
 
                     {{-- Button > & >> --}}
                     @if ($data->hasMorePages())
@@ -101,6 +113,8 @@
                     @endif
                 </div>
             @endif
+
+
 
         </div>
     </div>

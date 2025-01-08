@@ -91,20 +91,49 @@
                     <h3 class="text-lg font-semibold mb-4">Sampah</h3>
 
                     {{-- detail item --}}
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        @foreach ($data as $detail)
+                    <div class="grid lg:grid-cols-2 gap-2 mb-4 ">
+                        @foreach($data as $detail)
                             <div class="bg-gray-100 p-4 rounded-xl text-sm border border-gray-300">
-                                <div class="grid grid-cols-2 gap-x-2">
-                                    <span class="font-semibold">Kategori</span>
-                                    <span>: {{ $detail->nama_kategori }}</span>
-                                    <span class="font-semibold">Jenis</span>
-                                    <span>: {{ $detail->nama_jenis }}</span>
-                                    <span class="font-semibold">Jumlah</span>
-                                    <span>: 1 Pcs</span>
+                                <div class="grid grid-cols-3 gap-1">
+                                    <!-- Kategori -->
+                                    <div class="">
+                                        <span class="font-semibold">Kategori</span>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <span>: {{ $detail->nama_kategori }}</span>
+                                    </div>
+                                
+                                    <!-- Jenis -->
+                                    <div class="">
+                                        <span class="font-semibold">Jenis</span>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <span>: {{ $detail->nama_jenis }}</span>
+                                    </div>
+                                
+                                    <!-- Jumlah -->
+                                    <div class="">
+                                        <span class="font-semibold">Jumlah</span>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <span>: 1Pcs</span>
+                                    </div>
+
+                                    <!-- Berat -->
+                                    <div class="">
+                                        <span class="font-semibold">Berat</span>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <span>: 2 Kg</span>
+                                    </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
+                    
+                    
+                    
+                    
 
 
                     <!-- catatan & status -->
@@ -145,10 +174,11 @@
             <h2 class="text-base font-normal  justify-self-start text-gray-500">Notifikasi</h2>
             <div class="w-10 h-0.5 bg-secondary-normal rounded-xl ml-3"></div>
             <p class="mb-6 mt-6 text-lg">Permintaan Penjemputan Diterima!</p>
-            <button id="closeModalBtn"
-                class="px-10 py-2 bg-gradient-to-r from-secondary-normal to-primary-normal text-white-100 rounded-2xl font-normal hover:bg-gradient-to-l">
+
+            <a href="{{ route('mitra-kurir.penjemputan.dropbox') }}"  class="px-10 py-2 bg-gradient-to-r from-secondary-normal to-primary-normal text-white-100 rounded-2xl font-normal hover:bg-gradient-to-l">
+
                 OK
-            </button>
+            </a>
         </div>
     </div>
 

@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container max-w-full px-4 mx-auto bg-gray-100">
+
         @if ($penjemputan === null && $pelacakan === null)
             <div class="py-8">
             @else
@@ -233,6 +234,7 @@
                                     </div>
                                 @endforeach
                                 {{-- <div class="relative  px-4 py-5 bg-gray-100 border rounded-2xl shadow-sm">
+
                                     <p class="text-base font-medium">Layar dan Monitor</p>
                                     <p class="text-lg font-semibold mt-2">Televisi</p>
                                     <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1 Pcs</p>
