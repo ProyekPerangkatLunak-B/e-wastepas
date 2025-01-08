@@ -97,7 +97,7 @@
                 {{-- Button PDF --}}
                 <a href="{{ route('masyarakat.penjemputan.exportexportPDFRiwayatPenjemputan') }}" target="_blank"
                     class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
-                    Excel to PDF
+                    Export to PDF
                 </a>
             </div>
         </div>
