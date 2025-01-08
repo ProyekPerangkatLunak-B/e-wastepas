@@ -7,7 +7,7 @@
             color: black;
             /* Hijau tua */
             margin-bottom: 15px;
-            border-bottom: 3px solid black;
+            border-bottom: 3px solid #2ecc71;
             /* Hijau lebih gelap */
             display: inline-block;
             padding-bottom: 5px;
@@ -102,20 +102,17 @@
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Nama Kurir</th>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">ID Kurir</th>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
                                     style="color: white">ID Penjemputan</th>
                                 <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
                                     style="color: white">Lokasi Penjemputan</th>
-                                <th class="border px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Dropbox</th>
-                                <th class="border px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Kode</th>
-                                <th class="border px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Tanggal</th>
-
+                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">Dropbox Tujuan</th>
+                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">KOde Penjemputan</th>
+                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">Waktu dan Tanggal</th>
+                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
+                                    style="color: white">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -145,48 +142,7 @@
         type: 'GET'
     },
     columns: [
-        {
-            data: 'nama',
-            name: 'nama',
-            orderable: true,
-            searchable: true
-        },
-        {
-            data: 'id_pengguna_kurir',
-            name: 'id_pengguna_kurir', 
-            orderable: true,
-            searchable: false
-        },
-        {
-            data: 'id_penjemputan',
-            name: 'id_penjemputan',
-            orderable: true,
-            searchable: false
-        },
-        {
-            data: 'alamat_penjemputan',
-            name: 'alamat_penjemputan',
-            orderable: true,
-            searchable: true
-        },
-        {
-            data: 'alamat_dropbox',
-            name: 'alamat_dropbox',
-            orderable: true,
-            searchable: true
-        },
-        {
-            data: 'kode_penjemputan',
-            name: 'kode_penjemputan',
-            orderable: true,
-            searchable: true
-        },
-        {
-            data: 'tanggal_penjemputan',
-            name: 'tanggal_penjemputan',
-            orderable: true,
-            searchable: false
-        }
+        
     ],
     order: [[1, 'asc']], // Sort by id_pengguna_kurir ascending by default
     dom: 't'

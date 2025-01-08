@@ -7,7 +7,7 @@
             color: black;
             /* Hijau tua */
             margin-bottom: 15px;
-            border-bottom: 3px solid black;
+            border-bottom: 3px solid #2ecc71;
             /* Hijau lebih gelap */
             display: inline-block;
             padding-bottom: 5px;
@@ -96,13 +96,13 @@
             <h2 class="text-2xl font-bold leading-relaxed ml-14 text-black">Total Sampah & Poin</h2>
             <h4 class="text-base font-light ml-14 text-black">Admin dapat melihat total sampah elektronik & poin yang dikumpulkan dari masyarakat.</h4>
 
-            <div class="px-12 mt-6">
+            <div class="px-12 mt-6 grid grid-cols-2">
                 <div class="overflow-x-auto bg-white rounded-lg shadow-md">
                     <table id="masyarakatTable" class="w-full border border-gray-300 bg-white rounded-lg">
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">ID Masyarakat</th>
+                                    style="color: white">Dropbox</th>
                                 <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
                                     style="color: white">Total Sampah</th>
                                 <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
@@ -138,24 +138,7 @@
                 type: 'GET'
             },
             columns: [
-                {
-                    data: 'id_pengguna_masyarakat',
-                    name: 'id_pengguna_masyarakat',
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: 'total_sampah',
-                    name: 'total_sampah',
-                    orderable: true,
-                    searchable: false
-                },
-                {
-                    data: 'total_poin',
-                    name: 'total_poin',
-                    orderable: true,
-                    searchable: false
-                }
+                
             ],
             order: [[0, 'asc']], // Sort by id_pengguna_masyarakat ascending by default
             dom: 't'
