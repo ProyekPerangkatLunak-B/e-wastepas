@@ -35,18 +35,18 @@
                 {{-- Search and Filter options --}}
                 <div class="flex items-center mx-20 mb-6 space-x-4">
                     {{-- Search Box --}}
-                    <div class="relative">
-                        <input type="text"
+                    <form action="{{ route('masyarakat.penjemputan.detail', ['id' => $kategori->id_kategori]) }}" method="get"
+                        class="relative">
+                        <input
                             class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
-                            placeholder="Cari....">
+                            placeholder="Cari jenis sampah..." name="search" type="text" value="{{ request('search') }}">
                         <!-- SVG Icon Search -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                            class="absolute text-gray-500 transform -translate-y-1/2 bi bi-search left-3 top-1/2"
-                            viewBox="0 0 16 16">
+                            class="absolute text-gray-500 transform -translate-y-1/2 bi bi-search left-3 top-1/2" viewBox="0 0 16 16">
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                     <div class="text-center">
                         <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}" alt="Tidak Ditemukan"
                             class="w-[100px] h-[100px] mx-auto mb-4">
-                        <p class="text-lg font-semibold text-gray-500">Jenis {{ $search ?? 'Sampah Elektronik' }} tidak
+                        <p class="text-lg font-semibold text-gray-500">Jenis {{  request('search') ?? 'Sampah Elektronik' }} tidak
                             ditemukan.</p>
                     </div>
                 </div>
@@ -102,5 +102,7 @@
             </div>
             @endif
         </div>
+        {{-- @else
+        @endif --}}
     </div>
 @endsection

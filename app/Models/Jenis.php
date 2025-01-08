@@ -37,4 +37,11 @@ class Jenis extends Model
     {
         return $this->hasMany(DetailPenjemputan::class, 'id_jenis');
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where('nama_jenis', 'like', '%' . $search . '%');
+        });
+    }
 }
