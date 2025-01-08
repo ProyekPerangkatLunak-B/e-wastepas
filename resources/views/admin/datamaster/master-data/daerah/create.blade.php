@@ -53,22 +53,25 @@
             <h4 class="text-base font-normal ml-14">Silakan isi form berikut untuk menambah data daerah baru.</h4>
 
             <div class="px-12 mt-4">
-                <form action="{{ route('admin.datamaster.daerah.store') }}" method="POST">
+                <form action="{{ route('admin.datamaster.daerah.store') }}" method="POST" id="daerahForm">
                     @csrf
                     <div class="mb-6">
                         <label for="nama_daerah" class="block text-sm font-medium text-gray-800 mb-1">Nama Daerah</label>
-                        <input type="text" name="nama_daerah" id="nama_daerah" required
+                        <input type="text" name="nama_daerah" id="nama_daerah"
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
+                        <p id="nama_daerah_error" class="text-red-500 text-sm hidden">Mohon isi nama daerah.</p>
                     </div>
 
                     <div class="mb-6">
                         <label for="status_daerah" class="block text-sm font-medium text-gray-800 mb-1">Status
                             Daerah</label>
-                        <select name="status_daerah" id="status_daerah" required
+                        <select name="status_daerah" id="status_daerah"
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700">
+                            <option value="">Pilih status</option>
                             <option value="1">Aktif</option>
                             <option value="0">Tidak Aktif</option>
                         </select>
+                        <p id="status_daerah_error" class="text-red-500 text-sm hidden">Mohon pilih status daerah.</p>
                     </div>
 
                     <div class="flex justify-end" style="color: white">
@@ -81,4 +84,50 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('daerahForm');
+
+            form.addEventListener('submit', function(event) {
+                let isValid = true;
+
+                // Input elements
+                const namaDaerah = document.getElementById('nama_daerah');
+                const statusDaerah = document.getElementById('status_daerah');
+
+                // Error messages
+                const namaDaerahError = document.getElementById('nama_daerah_error');
+                const statusDaerahError = document.getElementById('status_daerah_error');
+
+                // Reset error states
+                [namaDaerah, statusDaerah].forEach(input => {
+                    input.classList.remove('border-red-500');
+                    input.classList.add('border-gray-300');
+                });
+
+                [namaDaerahError, statusDaerahError].forEach(error => {
+                    error.classList.add('hidden');
+                });
+
+                // Validate each field
+                if (!namaDaerah.value.trim()) {
+                    namaDaerah.classList.add('border-red-500');
+                    namaDaerahError.classList.remove('hidden');
+                    isValid = false;
+                }
+
+                if (!statusDaerah.value.trim()) {
+                    statusDaerah.classList.add('border-red-500');
+                    statusDaerahError.classList.remove('hidden');
+                    isValid = false;
+                }
+
+                // If invalid, prevent form submission
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 @endsection
