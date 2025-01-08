@@ -13,7 +13,6 @@
             color: #2ecc71;
             /* Hijau tua */
             margin-bottom: 15px;
-            border-bottom: 3px solid #27ae60;
             /* Hijau lebih gelap */
             display: inline-block;
             padding-bottom: 5px;
@@ -67,25 +66,11 @@
             /* Hijau */
         }
 
-        button:hover {
-            background-color: #2ecc71;
-            /* Hijau */
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
-            /* Hijau lebih gelap */
-        }
 
         .flex.space-x-2 button {
             margin: 0 3px;
             border-radius: 6px;
             transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-        }
-
-        .flex.space-x-2 button:hover {
-            background-color: #27ae60;
-            /* Hijau lebih gelap */
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
-            /* Hijau lebih gelap */
         }
 
         .flex.space-x-2 .active {
@@ -102,45 +87,50 @@
 
             <div class="px-12 mt-6">
                 <!-- Custom search and length menu -->
-                <div class="flex items-center mb-4">
-                    <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Verifikasi:</label>
-                    <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
-                        <option value="">Semua</option>
-                        <option value="Diterima">Diterima</option>
-                        <option value="Ditolak">Ditolak</option>
-                        <option value="Diproses">Diproses</option>
-                    </select>
-                </div>
-
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex items-center">
-                        <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
-                        <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
+                <div class="flex justify-between items-center mb-4 w-full">
+                    <!-- Left side filters -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Dropdown untuk Status Verifikasi -->
+                        <div class="flex items-center">
+                            <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Verifikasi:</label>
+                            <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
+                                <option value="">Semua</option>
+                                <option value="Diterima">Diterima</option>
+                                <option value="Ditolak">Ditolak</option>
+                                <option value="Diproses">Diproses</option>
+                            </select>
+                        </div>
+                        <!-- Dropdown untuk Tampilkan -->
+                        <div class="flex items-center">
+                            <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
+                            <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="flex items-center">
+
+                    <!-- Right side search -->
+                    <div class="flex">
                         <input type="text" id="customSearch" placeholder="Cari..." class="border rounded px-4 py-1" />
                     </div>
                 </div>
 
                 <div id="documentModal"
                     class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div class="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full" style="background-color: white">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-xl font-bold text-green-500">Detail Dokumen</h2>
-                            <button class="text-gray-500 hover:text-gray-700"
-                                onclick="closeDocumentModal()">&times;</button>
+                    <div class="bg-white rounded-lg shadow-lg items-center p-6 max-w-lg w-full"
+                        style="background-color: white">
+                        <div class="flex flex-col items-center mb-4">
+                            <h2 class="text-xl font-bold text-gray-500">Detail Dokumen</h2>
                         </div>
                         <div class="modal-body">
                             <!-- Data dokumen akan dimuat di sini -->
                         </div>
-                        <div class="mt-4 text-right">
-                            <button class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                                onclick="closeDocumentModal()">Tutup</button>
+                        <div class="mt-4 text-center">
+                            <button class="px-4 py-2 bg-green-500 rounded text-white-100 hover:bg-green-700"
+                                onclick="closeDocumentModal()">Kembali</button>
                         </div>
                     </div>
                 </div>
@@ -260,7 +250,7 @@
                             render: function(data, type, row) {
                                 return `
                             <div class="flex items-center space-x-2 justify-center">
-                                <button class="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition"
+                                <button class="px-3 py-1 bg-gray-500 text-white-100 text-sm rounded hover:bg-gray-600 transition"
                                     onclick="fetchDokumen(${row.id_pengguna})">
                                     Cek Dokumen
                                 </button>
@@ -326,7 +316,7 @@
                 <div class="flex items-center justify-center" style="color: white">
                     <button onclick="deleteData('${data}')"
                         class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition">
-                        Hapus
+                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                     </button>
                 </div>
             `;
@@ -529,7 +519,7 @@
 
                         modalContent += `
                     <p><strong>File Dokumen:</strong></p>
-                    <img src="${item.file_dokumen}" alt="Dokumen"class="w-96 h-64 justify-items-center rounded-lg mt-2 mb-4">
+                    <img src="${item.file_dokumen}" alt="Dokumen" class="w-96 h-64 ms-10 rounded-lg mt-2 mb-4">
                 `;
                     });
 

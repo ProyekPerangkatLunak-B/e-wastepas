@@ -20,7 +20,6 @@ class Dropbox extends Model
         'nama_dropbox',
         'alamat_dropbox',
         'status_dropbox',
-        'total_poin',
     ];
 
     public function daerah()

@@ -10,18 +10,10 @@
         }
 
         h2 {
-            color: #2ecc71;
-            /* Hijau tua */
             margin-bottom: 15px;
-            border-bottom: 3px solid #27ae60;
             /* Hijau lebih gelap */
             display: inline-block;
             padding-bottom: 5px;
-        }
-
-        h4 {
-            color: #2ecc71;
-            /* Hijau tua */
         }
 
         a.inline-block {
@@ -38,7 +30,9 @@
             border-collapse: collapse;
             width: 100%;
             overflow: hidden;
+            padding: 20px;
             border-radius: 12px;
+            margin-left: 30px;
         }
 
         th {
@@ -51,6 +45,12 @@
             border: none;
         }
 
+        tbody td {
+            background-color: #FFFFFF;
+            color: #4A5568;
+            font-size: 0.875rem;
+        }
+
         td {
             padding: 10px;
             border: 1px solid #e0e0e0;
@@ -61,30 +61,10 @@
             text-align: left;
         }
 
-        button {
-            transition: background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
-            /* Hijau */
-        }
-
-        button:hover {
-            /* Hijau */
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
-            /* Hijau lebih gelap */
-        }
-
         .flex.space-x-2 button {
             margin: 0 3px;
             border-radius: 6px;
             transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-        }
-
-        .flex.space-x-2 button:hover {
-            background-color: #27ae60;
-            /* Hijau lebih gelap */
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
-            /* Hijau lebih gelap */
         }
 
         .flex.space-x-2 .active {
@@ -95,80 +75,80 @@
     </style>
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
-        <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-green-500">Dashboard Masyarakat</h2>
+        <div class="py-2">
+            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-gray-600">Dashboard Masyarakat</h2>
             <h4 class="text-base font-light ml-14 text-gray-600">Selamat datang di dashboard masyarakat.</h4>
 
             <div class="px-12 mt-6">
                 <!-- Custom search and length menu -->
-                <div class="flex items-center mb-4">
-                    <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Verifikasi:</label>
-                    <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
-                        <option value="">Semua</option>
-                        <option value="Diterima">Diterima</option>
-                        <option value="Ditolak">Ditolak</option>
-                        <option value="Diproses">Diproses</option>
-                    </select>
-                </div>
-
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex items-center">
-                        <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
-                        <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
+                <div class="flex justify-between items-center mb-4 w-full">
+                    <!-- Left side filters -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Dropdown untuk Status Verifikasi -->
+                        <div class="flex items-center">
+                            <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Verifikasi:</label>
+                            <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
+                                <option value="">Semua</option>
+                                <option value="Diterima">Diterima</option>
+                                <option value="Ditolak">Ditolak</option>
+                                <option value="Diproses">Diproses</option>
+                            </select>
+                        </div>
+                        <!-- Dropdown untuk Tampilkan -->
+                        <div class="flex items-center">
+                            <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
+                            <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="flex items-center">
+
+                    <!-- Right side search -->
+                    <div class="flex">
                         <input type="text" id="customSearch" placeholder="Cari..." class="border rounded px-4 py-1" />
                     </div>
                 </div>
+            </div>
+
+            <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+                <table id="masyarakatTable" class="min-w-full table-auto border-collapse bg-white rounded-lg">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="border px-4 py-3 text-left text-sm font-semibold text-white-100">Nama</th>
+                            <th class="border px-4 py-3 text-left text-sm font-semibold text-white-100">No KTP</th>
+                            <th class="border px-4 py-3 text-left text-sm font-semibold text-white-100">No Telp</th>
+                            <th class="border px-4 py-3 text-left text-sm font-semibold text-white-100">Email</th>
+                            <th class="border px-4 py-3 text-left text-sm font-semibold text-white-100">Kelayakan akun</th>
+                            <th class="border px-4 py-3 text-left text-sm font-semibold text-white-100">Status</th>
+                            <th class="border px-4 py-3 text-left text-sm font-semibold text-white-100">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data akan dimuat melalui AJAX -->
+                    </tbody>
+                </table>
+            </div>
 
 
-                <div class="overflow-x-auto bg-white rounded-lg shadow-md">
-                    <table id="masyarakatTable" class="w-full border border-gray-300 bg-white rounded-lg">
-                        <thead class="bg-gray-100">
-                            <tr>
-                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">Nama</th>
-                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">No KTP</th>
-                                <th class="border cursor-pointer px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">No Telp</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">Email</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">Kelayakan akun</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">status</th>
-                                <th class="border px-4 py-2 text-left text-sm font-semibold text-gray-700"
-                                    style="color: white">action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data akan dimuat melalui AJAX -->
-                        </tbody>
-                    </table>
-                </div>
+            <!-- Custom pagination -->
+            <!-- Custom pagination -->
+            <div id="customPagination" class="flex justify-center items-center space-x-2 mt-4">
+                <!-- Tombol sebelumnya -->
+                <button class="pagination-btn">&lt;</button>
 
-                <!-- Custom pagination -->
-                <!-- Custom pagination -->
-                <div id="customPagination" class="flex justify-center items-center space-x-2 mt-4">
-                    <!-- Tombol sebelumnya -->
-                    <button class="pagination-btn">&lt;</button>
+                <!-- Nomor halaman -->
+                <button class="pagination-btn">1</button>
+                <button class="pagination-btn active">2</button>
+                <button class="pagination-btn">3</button>
 
-                    <!-- Nomor halaman -->
-                    <button class="pagination-btn">1</button>
-                    <button class="pagination-btn active">2</button>
-                    <button class="pagination-btn">3</button>
-
-                    <!-- Tombol berikutnya -->
-                    <button class="pagination-btn">&gt;</button>
-                </div>
+                <!-- Tombol berikutnya -->
+                <button class="pagination-btn">&gt;</button>
             </div>
         </div>
+    </div>
     </div>
 
     <script>
@@ -297,7 +277,7 @@
                 <div class="flex items-center justify-center" style="color: white">
                     <button onclick="deleteData('${data}')"
                         class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transform hover:-translate-y-1 transition">
-                        Hapus
+                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                     </button>
                 </div>
             `;

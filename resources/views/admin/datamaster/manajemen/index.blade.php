@@ -13,7 +13,6 @@
             color: #2ecc71;
             /* Hijau tua */
             margin-bottom: 15px;
-            border-bottom: 3px solid #27ae60;
             /* Hijau lebih gelap */
             display: inline-block;
             padding-bottom: 5px;
@@ -67,25 +66,10 @@
             /* Hijau */
         }
 
-        button:hover {
-            background-color: #2ecc71;
-            /* Hijau */
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
-            /* Hijau lebih gelap */
-        }
-
         .flex.space-x-2 button {
             margin: 0 3px;
             border-radius: 6px;
             transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-        }
-
-        .flex.space-x-2 button:hover {
-            background-color: #27ae60;
-            /* Hijau lebih gelap */
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
-            /* Hijau lebih gelap */
         }
 
         .flex.space-x-2 .active {
@@ -102,31 +86,36 @@
 
             <div class="px-12 mt-6">
                 <!-- Custom search and length menu -->
-                <div class="flex items-center mb-4">
-                    <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Verifikasi:</label>
-                    <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
-                        <option value="">Semua</option>
-                        <option value="Diterima">Diterima</option>
-                        <option value="Ditolak">Ditolak</option>
-                        <option value="Diproses">Diproses</option>
-                    </select>
-                </div>
-
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex items-center">
-                        <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
-                        <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
+                <div class="flex justify-between items-center mb-4 w-full">
+                    <!-- Left side filters -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Dropdown untuk Status Verifikasi -->
+                        <div class="flex items-center">
+                            <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Verifikasi:</label>
+                            <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
+                                <option value="">Semua</option>
+                                <option value="Diterima">Diterima</option>
+                                <option value="Ditolak">Ditolak</option>
+                                <option value="Diproses">Diproses</option>
+                            </select>
+                        </div>
+                        <!-- Dropdown untuk Tampilkan -->
+                        <div class="flex items-center">
+                            <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
+                            <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="flex items-center">
+
+                    <!-- Pencarian -->
+                    <div class="flex">
                         <input type="text" id="customSearch" placeholder="Cari..." class="border rounded px-4 py-1" />
                     </div>
                 </div>
-
 
                 <div class="overflow-x-auto bg-white rounded-lg shadow-md">
                     <table id="manajemenTable" class="w-full border border-gray-300 bg-white rounded-lg">

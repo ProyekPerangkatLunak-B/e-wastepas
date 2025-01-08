@@ -35,14 +35,34 @@
         <!-- Header dengan Foto Profil -->
         <header class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
             <h2 class="text-lg font-bold"></h2>
-            <div class="flex items-center space-x-4">
+            <div class="relative flex items-center space-x-4">
                 <div class="text-right">
                     <h4 class="font-medium text-gray-700">Beyonce Kumalasari</h4>
                     <span class="text-sm text-gray-500">Manajemen</span>
                 </div>
-                <img src="{{ asset('img/manajemen/registrasi/profile-placeholder.jpg') }}" alt="User Photo" class="w-10 h-10 rounded-full">
+                <img src="{{ asset('img/manajemen/registrasi/profile-placeholder.jpg') }}" alt="User Photo" class="w-10 h-10 rounded-full cursor-pointer" onclick="toggleDropdown()">
+                <!-- Dropdown -->
+                <div id="dropdownMenu" style="background-color: white !important;" class="origin-top-right absolute right-0 mt-12 w-48 shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 hidden z-50">
+                    <ul class="py-2">
+                        <li>
+                            <a href="/profile" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                                <i class="fas fa-user-circle text-green-600 mr-3"></i> Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                                <i class="fas fa-cog text-green-600 mr-3"></i> Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/logout" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-100 hover:text-red-800">
+                                <i class="fas fa-sign-out-alt text-red-600 mr-3"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </header>
+        </header>        
 
         <!-- Content -->
         <div class="p-6">
@@ -104,4 +124,18 @@
         </div>
     </div>
 </div>
+<script>
+    function toggleDropdown() {
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        dropdownMenu.classList.toggle("hidden");
+    }
+
+    document.addEventListener("click", function(event) {
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        const dropdownButton = document.querySelector("img[onclick='toggleDropdown()']");
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add("hidden");
+        }
+    });
+</script>
 @endsection

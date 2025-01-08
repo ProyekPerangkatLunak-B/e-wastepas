@@ -37,7 +37,6 @@ class DropboxSeeder extends Seeder
                     'nama_dropbox' => "Dropbox $nama_kecamatan",
                     'alamat_dropbox' => "Jl. $nama_kecamatan No." . ($index + 1),
                     'status_dropbox' => rand(0, 99) < 60,
-                    'total_poin' => rand(20, 100),
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];

@@ -13,7 +13,9 @@
                     <div class="relative">
                         <input type="text"
                             class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
-                            placeholder="Cari....">
+                            placeholder="Cari...."
+                               value="{{ $search }}"
+                               onkeydown="if(event.key === 'Enter') window.location.href='{{ url()->current() }}?search=' + this.value + '&sort={{ $sort }}'">
                         <!-- SVG Icon Search -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="absolute text-gray-500 transform -translate-y-1/2 bi bi-search left-3 top-1/2"
@@ -26,12 +28,13 @@
                     {{-- Filter Dropdown --}}
                     <div class="relative">
                         <select
-                            class="w-[222px] h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200">
-                            <option value="all">Filter</option>
-                            <option value="active">Berat-Ringan</option>
-                            <option value="inactive">Ringan-Berat</option>
-                            <option value="inactive">Belum Diproses</option>
-                            <option value="inactive">Selesai</option>
+                            class="w-[222px] h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
+                            onchange="window.location.href='{{ url()->current() }}?sort=' + this.value + '&search={{ $search }}'">
+                            <option value="default">Filter</option>
+                            <option value="berat-asc" {{ $sort == 'berat-asc' ? 'selected' : '' }}>Berat-Ringan</option>
+                            <option value="berat-desc" {{ $sort == 'berat-desc' ? 'selected' : '' }}>Ringan-Berat</option>
+                            <option value="diproses" {{ $sort == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                            <option value="diterima" {{ $sort == 'diterima' ? 'selected' : '' }}>Diterima</option>
                         </select>
                         <!-- SVG Icon Filter -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -74,8 +77,8 @@
                     </div>
                 @endif
             </div>
-            
-            
+
+
             {{-- Pagination --}}
             @if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator && $data->lastPage() > 1)
                 <div class="flex items-center justify-end mt-4 mr-20 space-x-2">
@@ -95,7 +98,7 @@
                     @endif
                 </div>
             @endif
-            
+
         </div>
     </div>
 @endsection
