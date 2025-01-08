@@ -23,12 +23,8 @@
                 <div class="mx-14 mt-4 bg-white-100 shadow-md rounded-2xl">
                     <div class="flex justify-between p-4">
                         <div>
-                            <p class="text-base text-gray-600">Kode Penjemputan: 
-                                {{ $penjemputan->id_penjemputan }}
-                            </p>
-                            <p class="text-lg font-semibold">
-                                {{ $penjemputan->kode_penjemputan }}
-                            </p>
+                            <p class="text-base text-gray-600">Kode Penjemputan: {{ $penjemputan->id_penjemputan }}</p>
+                            <p class="text-lg font-semibold">{{ $penjemputan->kode_penjemputan }}</p>
                         </div>
                         <div class="text-right">
                             <p class="text-lg font-semibold text-gray-900">Checkpoint Mitra Kurir</p>
@@ -108,43 +104,32 @@
                                 </h3>
                                 <h3 class="text-lg font-semibold">Alamat Penjemputan</h3>
                                 <p class="text-gray-600">
-                                    {{ $penjemputan->alamat_penjemputan }}
-                                </p>
+                                    {{ $penjemputan->alamat_penjemputan }}</p>
                                 <h3 class="text-lg font-semibold mt-4">Daerah Penjemputan</h3>
-                                <p class="text-gray-600">
-                                    {{ $penjemputan->daerah->nama_daerah }}
-                                </p>
+                                <p class="text-gray-600">{{ $penjemputan->daerah->nama_daerah }}</p>
                                 <h3 class="text-lg font-semibold mt-4">Lokasi Dropbox Terdekat</h3>
-                                <p class="text-gray-600">
-                                    {{ $penjemputan->dropbox->nama_dropbox }},
+                                <p class="text-gray-600">{{ $penjemputan->dropbox->nama_dropbox }},
                                     {{ $penjemputan->dropbox->alamat_dropbox }},
                                     {{ $penjemputan->dropbox->daerah->nama_daerah }}, CIDADAP?, JAWA BARAT?, ID?,
-                                    40142?.
-                                </p>
+                                    40142?.</p>
                             </div>
 
                             <!-- sampah -->
                             <div class="w-1/2">
                                 <h3 class="text-lg font-semibold">Sampah</h3>
-                                <div class="grid sm:grid-cols-2 gap-3 mt-4">
+                                <div class="grid grid-cols-2 gap-3 mt-4">
                                     <!-- card sampah -->
                                     @foreach ($penjemputan->detailPenjemputan as $det)
                                         <div class="relative  px-4 py-5 bg-gray-100 border rounded-2xl shadow-sm">
-                                            <p class="text-base font-medium pr-12 break-words max-w-full">
-                                                {{ $det->kategori->nama_kategori }} 
-                                            </p>
-                                            <p class="text-lg font-semibold mt-2 pr-12 break-words max-w-full">
-                                                {{ $det->jenis->nama_jenis }}
-                                            </p>
+                                            <p class="text-base font-medium">{{ $det->kategori->nama_kategori }}</p>
+                                            <p class="text-lg font-semibold mt-2">{{ $det->jenis->nama_jenis }}</p>
                                             <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1 pcs
                                             </p>
                                             <div
                                                 class="absolute bottom-0 right-0 bg-primary-normal text-white-100 font-semibold px-6 py-1 rounded-tl-2xl rounded-br-2xl text-sm">
-                                                {{ $det->berat }}
-                                                .Kg
+                                                {{ $det->berat }}.Kg
                                             </div>
                                         </div>
-                                        
                                     @endforeach
                                     {{-- <div class="relative  px-4 py-5 bg-gray-100 border rounded-2xl shadow-sm">
                                     <p class="text-base font-medium">Layar dan Monitor</p>
@@ -158,9 +143,7 @@
                                 </div>
                                 {{-- catatan --}}
                                 <p class="mt-4 font-bold text-red-normal">*Catatan</p>
-                                <p class="text-black">
-                                    {{ $penjemputan->catatan }}
-                                </p>
+                                <p class="text-black">{{ $penjemputan->catatan }}</p>
                             </div>
                         </div>
                     </div>
