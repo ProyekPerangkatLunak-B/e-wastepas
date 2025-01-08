@@ -153,7 +153,7 @@ public function LogoutAuth(Request $request)
 
     try {
         $user = User::create([
-            'nama' => $validateData['nama'],  // Corrected line: passing the actual value
+            'name' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_\@]+$/', 
             'nomor_ktp' => $validateData['KTP'],
             'nomor_telepon' => $validateData['NomorHP'],
             'email' => $validateData['Email'],
