@@ -233,10 +233,6 @@ Route::group([
         return view('manajemen.datamaster.jenis.index');
     })->name('datamaster.jenis.index');
 
-    Route::get('/datamaster/jenis', function () {
-        return view('manajemen.datamaster.jenis.index');
-    })->name('datamaster.jenis.index');
-
     // Submodul Registrasi
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan
     Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
