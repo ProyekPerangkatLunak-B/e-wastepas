@@ -27,14 +27,14 @@ class RegistrasiMitraKurirController extends Controller
     public function RegisterIndex(){
         return view('mitra-kurir.registrasi.register');
     }
-    
+
     public function loginIndex(){
         return view('mitra-kurir.registrasi.login');
     }
-    
+
     public function UploadDataIndex($id_pengguna){
         $user = User::find($id_pengguna);
-        
+
         return view('mitra-kurir.registrasi.document-upload', compact("user"));
     }
     public function ForgotPasswordIndex(){
@@ -61,7 +61,7 @@ class RegistrasiMitraKurirController extends Controller
         $user = User::find($id_pengguna);
         return view('mitra-kurir.registrasi.otp-verification', compact('user'));
     }
-    
+
     public function LoginAuth(Request $request)
 {
     $messages = [
@@ -123,7 +123,7 @@ public function LogoutAuth(Request $request)
     }
 
     public function simpanData(Request $request)
-{       
+{
     $messages = [
         'nama.required' => 'Nama lengkap harus diisi.',
         'nama.regex' => 'Nama Tidak Boleh Mengandung Simbol Atau Spesial Character',
@@ -197,32 +197,32 @@ public function LogoutAuth(Request $request)
         'ktp.file' => 'KTP harus berupa file.',
         'ktp.mimes' => 'File KTP bukan jpeg, png, atau pdf.',
         'ktp.max' => 'Ukuran file KTP tidak boleh lebih dari 10MB.',
-        
+
         'kk.required' => 'File KK harus diunggah.',
         'kk.file' => 'KK harus berupa file.',
         'kk.mimes' => 'File KK bukan jpeg, png, atau pdf.',
         'kk.max' => 'Ukuran file KK tidak boleh lebih dari 10MB.',
-        
+
         'npwp.file' => 'NPWP harus berupa file.',
         'npwp.mimes' => 'File bukan jpeg, png, atau pdf.',
         'npwp.max' => 'Ukuran file NPWP tidak boleh lebih dari 10MB.',
     ];
 
     $request->validate([
-        'ktp' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240', 
-        'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240',  
-        'npwp' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240', 
+        'ktp' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240',
+        'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240',
+        'npwp' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
     ],$messages);
 
     $ktp = $request->file('ktp')->store('uploads/ktp', 'public');
     $kk = $request->file('kk')->store('uploads/kk', 'public');
-    $npwp = $request->hasFile('npwp') 
-                     ? $request->file('npwp')->store('uploads/npwp', 'public') 
+    $npwp = $request->hasFile('npwp')
+                     ? $request->file('npwp')->store('uploads/npwp', 'public')
                      : null;
 
     if ($request->hasFile('ktp')) {
         UploadDocuments::create([
-            'id_pengguna' => $user->id_pengguna,  
+            'id_pengguna' => $user->id_pengguna,
             'tipe_dokumen' => 'KTP',
             'file_dokumen' => $ktp
         ]);
@@ -249,26 +249,26 @@ public function LogoutAuth(Request $request)
    public function SendForgotPassword(Request $request){
         $request -> validate(['email' => 'required|email']);
         $user = User::where('email', $request->email)->first();
-        
+
         if (!$user) {
             return back()->withErrors(['email' => 'Email Tidak terdaftar'])->withInput();
         }
         $token = Str::random(64);
-        
+
         Cache::put('password_reset'. $user->email, $token, now()->addMinutes(30));
 
         $resetLink = url('/mitra-kurir/registrasi/forgot-password-form?token=' . $token . '&email=' . $user->email);
 
         $user->notify(new PasswordResetMail($resetLink));
         return back()->with('status', 'Link reset telah dikirimkan ke email!');
-   }    
+   }
 
    public function ChangeForgotPassword(Request $request)
-{   
+{
     $messages = [
         'password.required' => 'Password harus diisi.',
         'password.min' => 'Password harus terdiri dari minimal 8 karakter.',
-        
+
         'ulangiPassword.required' => 'Ulangi password harus diisi.',
         'ulangiPassword.min' => 'Password konfirmasi harus terdiri dari minimal 8 karakter.',
         'ulangiPassword.same' => 'Password konfirmasi tidak sama dengan password yang baru.',
@@ -295,14 +295,14 @@ public function LogoutAuth(Request $request)
 
 
 public function ChangePassword(Request $request)
-{   
+{
     $messages = [
         'PasswordOld.required' => 'Password lama harus diisi.',
         'PasswordOld.min' => 'Password lama harus terdiri dari minimal 8 karakter.',
-        
+
         'PasswordNew.required' => 'Password baru harus diisi.',
         'PasswordNew.min' => 'Password baru harus terdiri dari minimal 8 karakter.',
-        
+
         'passwordConfirm.required' => 'Konfirmasi password harus diisi.',
         'passwordConfirm.same' => 'Konfirmasi password tidak sama dengan password baru.',
     ];
@@ -312,8 +312,8 @@ public function ChangePassword(Request $request)
         'PasswordNew' => 'required|min:8',
         'passwordConfirm' => 'required|same:PasswordNew',
     ],$messages);
-    
-    $find = Auth::user()->email;   
+
+    $find = Auth::user()->email;
 
     $user = User::where('email',$find)->first();
 
@@ -358,8 +358,8 @@ public function UpdateProfile(Request $request){
             'noRekening' => 'nullable|string|max:50',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ],$messages);
-        
-        $find = Auth::user()->email;   
+
+        $find = Auth::user()->email;
 
         $user = User::where('email',$find)->first();
 
