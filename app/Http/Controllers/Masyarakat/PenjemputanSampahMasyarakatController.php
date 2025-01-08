@@ -103,6 +103,7 @@ class PenjemputanSampahMasyarakatController extends Controller
         try {
             $jenis = Jenis::where('id_kategori', $id)
                 ->orderBy('nama_jenis')
+                ->filter(request(['search']))
                 ->paginate(6);
             $kategori = Kategori::find($id);
             return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori'));
