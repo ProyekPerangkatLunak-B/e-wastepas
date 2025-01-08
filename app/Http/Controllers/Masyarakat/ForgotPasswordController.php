@@ -17,7 +17,12 @@ class ForgotPasswordController extends Controller
     public function sendResetLinkEmail(Request $request)
     {
         // Validasi input email
-        $request->validate(['email' => 'required|email']);
+        $messages = [
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Email harus sesuai format, example@gmail.com',
+        ];
+
+        $request->validate(['email' => 'required|email'], $messages);
 
         // Cari user berdasarkan email
         $user = User::where('email', $request->email)->first();
@@ -45,7 +50,7 @@ class ForgotPasswordController extends Controller
         }
 
         // Jika email tidak ditemukan
-        return back()->withErrors(['email' => 'Email tidak ditemukan dalam sistem kami.']);
+        return back()->withErrors(['email' => 'Email tidak terdaftar']);
     }
 
     public function showResetForm($token, Request $request)
@@ -82,11 +87,19 @@ class ForgotPasswordController extends Controller
 
     public function resetPassword(Request $request)
     {
+        $messages = [
+            'token.required' => 'Token harus diisi.',
+            'password.required' => 'Password harus diisi.',
+            'password.min' => 'Password harus terdiri dari minimal 8 karakter.',
+            'password2.required' => 'Konfirmasi password harus diisi.',
+            'password2.same' => 'Konfirmasi password tidak sama dengan password yang baru.',
+        ];
+
         $validator = Validator::make($request->all(), [
             'token' => 'required',
             'password' => 'required|min:8',
             'password2' => 'required|same:password',
-        ]);
+        ], $messages);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -112,6 +125,6 @@ class ForgotPasswordController extends Controller
         // Hapus email dari sesi setelah selesai
         $request->session()->forget('email');
 
-        return redirect()->route('masyarakat.login')->with('status', 'Berhasil Reset Status.');
+        return redirect()->route('masyarakat.login')->with('done', value: 'Reset Password berhasil. Anda sekarang dapat masuk dengan kata sandi baru Anda.');
     }
 }

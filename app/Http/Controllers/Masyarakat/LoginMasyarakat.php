@@ -40,7 +40,8 @@ class LoginMasyarakat extends Controller
 
         // Jika login gagal
         return back()->withErrors([
-            'email' => 'Email atau password yang Anda masukkan salah.',
+            'email' => 'Email tidak terdaftar',
+            'password' => 'Password tidak sesuai',
         ]);
     }
 

@@ -22,6 +22,28 @@ class RegistrasiMasyarakatController extends Controller
 
     public function register(Request $request)
     {
+        $messages = [
+            'name.required' => 'Nama wajib diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'email.required' => 'Email wajib diisi.',
+            'email.string' => 'Email harus berupa teks.',
+            'email.email' => 'Email harus sesuai format, example@gmail.com',
+            'email.max' => 'Email tidak boleh lebih dari 255 karakter.',
+            'email.unique' => 'Email ini sudah terdaftar.',
+            'password.required' => 'Password wajib diisi.',
+            'password.string' => 'Password harus berupa teks.',
+            'password.min' => 'Password harus terdiri dari minimal 10 karakter.',
+            'ktp.required' => 'Nomor KTP wajib diisi.',
+            'ktp.string' => 'Nomor KTP harus berupa teks.',
+            'ktp.min' => 'Nomor KTP harus terdiri dari 16 digit.',
+            'ktp.max' => 'Nomor KTP harus terdiri dari 16 digit.',
+            'tel.required' => 'Nomor telepon wajib diisi.',
+            'tel.string' => 'Nomor telepon harus berupa teks.',
+            'tel.min' => 'Nomor telepon harus terdiri dari minimal 10 digit.',
+            'tel.max' => 'Nomor telepon tidak boleh lebih dari 13 digit.',
+        ];
+        
         // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
@@ -29,7 +51,7 @@ class RegistrasiMasyarakatController extends Controller
             'password' => 'required|string|min:10',
             'ktp' => 'required|string|min:16|max:16|',
             'tel' => 'required|string|min:10|max:13',
-        ]);
+        ], $messages);
 
         // Simpan pengguna di database
         $pengguna = Pengguna::create([

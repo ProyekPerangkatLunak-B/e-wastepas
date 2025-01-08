@@ -29,20 +29,14 @@
                         <form action="{{ route('masyarakat.register.submit') }}" method="POST">
                             @csrf
                             <div>
-                                @if ($errors->any())
-                                    <div>
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
                                 <label for="name"
                                     class="block mt-4 text-md font-medium leading-9 text-gray-500">Nama</label>
                                 <input
                                     class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
                                     type="name" required name="name" placeholder="Masukkan Nama" />
+                                @error('name')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div>
                                 <label for="telepon" class="block mt-4 text-md font-medium leading-9 text-gray-500">No.
@@ -50,6 +44,9 @@
                                 <input
                                     class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
                                     type="tel" required name="tel" placeholder="Masukkan No. Telepon" />
+                                @error('tel')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div>
                                 <label for="ktp" class="block mt-4 text-md font-medium leading-9 text-gray-500">No.
@@ -57,6 +54,9 @@
                                 <input
                                     class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
                                     type="text" required name="ktp" placeholder="Masukkan KTP" />
+                                @error('ktp')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div>
                                 <label for="email"
@@ -64,13 +64,21 @@
                                 <input
                                     class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
                                     type="email" required name="email" placeholder="Masukkan Email" />
+                                @error('email')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div>
                                 <label for="password"
                                     class="block mt-4 text-md font-medium leading-9 text-gray-500">Password</label>
                                 <input
                                     class="w-full mt-2 px-4 py-2 rounded-lg font-medium bg-gray-100 border border-gray-300 text-md focus:outline-none focus:border-green-800 focus:bg-white"
-                                    type="password" required name="password" placeholder="Masukkan Password" />
+                                    type="password" required name="password" placeholder="Masukkan Password"
+                                    id="password" />
+                                <span id="password-alert" class="error"></span>
+                                @error('password')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="">
                             </div>
@@ -97,5 +105,34 @@
         </div>
     </div>
 
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .success {
+            color: green;
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        const passwordInput = document.getElementById('password');
+        const alertBox = document.getElementById('password-alert');
+        passwordInput.addEventListener('input', () => {
+            const password = passwordInput.value;
+            // Cek panjang password
+            if (password.length < 10) {
+                alertBox.textContent = 'Password Anda terlalu lemah. Minimal 10 karakter.';
+                alertBox.classList.remove('success');
+                alertBox.classList.add('error');
+            } else {
+                // Password kuat
+                alertBox.textContent = 'Password Anda sudah kuat.';
+                alertBox.classList.remove('error');
+                alertBox.classList.add('success');
+            }
+        });
+    </script>
 
 @endsection
