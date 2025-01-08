@@ -28,6 +28,33 @@
             </ol>
         </div>
 
+        @if (session('success'))
+            <div class="px-24">
+                <div id="success-message"
+                    class="p-4 mb-6 text-green-600 bg-green-100 border-l-4 border-green-600 rounded-lg shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <!-- Icon Success -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 text-green-600" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M9 12l2 2l4-4"></path>
+                                <path d="M12 22a10 10 0 1 1 0-20a10 10 0 0 1 0 20z"></path>
+                            </svg>
+                            <p class="text-lg font-medium">{{ session('success') }}</p>
+                        </div>
+                        <!-- Dismiss Button -->
+                        <button id="dismiss-button" class="text-green-600 hover:text-green-800 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <!-- Section untuk ID Penjemputan dan Button Batalkan Penjemputan -->
         <div class="flex items-center justify-between mx-auto">
             <div class="ps-24">
@@ -40,7 +67,7 @@
 
             <!-- Button Batalkan Penjemputan -->
             @if ($penjemputan->getLatestPelacakan->status === 'Diproses')
-                <a href="javascript:void(0);" onclick="openModal()"
+                <a href="javascript:void(0);" onclick="openKeteranganModal()"
                     class="flex items-center justify-center w-[200px] h-[50px] me-24 py-2 text-gray-100 transition duration-300 bg-red-normal rounded-2xl shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                         class="mr-2 bi bi-x-circle" viewBox="0 0 16 16">
@@ -68,15 +95,15 @@
         <div class="w-[1380px] h-[250px] mx-auto mt-4 pt-2 pb-10 bg-white-normal shadow-sm rounded-2xl">
             <div class="flex items-start justify-between px-4">
                 <!-- ID Penjemputan di Ujung Kiri Atas -->
-                <div>
-                    {{-- <p class="text-gray-600">ID Penjemputan:</p>
-                    <p class="text-xl font-semibold">232378923</p> --}}
+                <div class="m-2">
+                    <p class="font-normal text-md text-black-normal">ID Penjemputan :</p>
+                    <p class="text-lg font-bold">{{ $penjemputan->kode_penjemputan }}</p>
                 </div>
 
                 <!-- Estimasi Tiba di Ujung Kanan Atas -->
-                <div class="text-right">
-                    <p class="text-gray-600">Estimasi Tiba:</p>
-                    <p class="text-xl font-semibold">
+                <div class="m-2 text-right">
+                    <p class="font-normal text-md text-black-normal">Estimasi Tiba :</p>
+                    <p class="text-2xl font-bold">
                         @if (in_array($penjemputan->getLatestPelacakan->status, [
                                 'Diterima',
                                 'Dijemput Kurir',
@@ -94,7 +121,7 @@
             </div>
 
             <!-- Tracking Status di Tengah -->
-            <div class="flex items-center justify-center mt-8 space-x-1.5">
+            <div class="flex items-center justify-center mt-4 space-x-1.5">
                 <div class="flex flex-col items-center">
                     <img src="
                     @if ($penjemputan->getLatestPelacakan->status === 'Diproses' || $penjemputan->getLatestPelacakan->status === 'Diterima') {{ asset('img/masyarakat/penjemputan-sampah/journal-check-hijau.png') }}
@@ -206,13 +233,13 @@
         <!-- Container untuk Detail Alamat dan Detail Pelacakan -->
         <div class="w-[1380px] h-[430px] mx-auto pb-10 mt-6 bg-white-normal shadow-sm rounded-xl">
             <div class="flex justify-center mb-12 space-x-28">
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
             </div>
 
             <!-- Tracking & Details -->
@@ -261,27 +288,27 @@
                         </p>
                         <div class="relative h-64 mt-4 space-y-4 overflow-y-auto">
                             @foreach ($penjemputan->pelacakan as $p)
-                            <!-- Garis Vertikal -->
-                            @php
-                            $status = $penjemputan->getLatestPelacakan->status;
-                            $bottomValue = match($status) {
-                                'Diproses' => 'bottom-44',
-                                'Diterima' => 'bottom-20',
-                                'Dijemput Kurir' => 'bottom-4',
-                                'Menuju Lokasi Penjemputan' => '-bottom-20',
-                                'Sampah Diangkut' => '-bottom-36',
-                                'Menuju Dropbox' => '-bottom-56',
-                                'Menyimpan Sampah di Dropbox' => '-bottom-80',
-                                'Selesai' => '-bottom-80',
-                                'Dibatalkan' => 'bottom-32',
-                                default => 'bottom-0',
-                            };
-                        @endphp
-                        <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[149px] "></div>
+                                <!-- Garis Vertikal -->
+                                @php
+                                    $status = $penjemputan->getLatestPelacakan->status;
+                                    $bottomValue = match ($status) {
+                                        'Diproses' => 'bottom-44',
+                                        'Diterima' => 'bottom-20',
+                                        'Dijemput Kurir' => '-bottom-8',
+                                        'Menuju Lokasi Penjemputan' => '-bottom-32',
+                                        'Sampah Diangkut' => '-bottom-56',
+                                        'Menuju Dropbox' => '-bottom-80',
+                                        'Menyimpan Sampah di Dropbox' => '-bottom-[26rem]',
+                                        'Selesai' => '-bottom-[27rem]',
+                                        'Dibatalkan' => 'bottom-36',
+                                        default => 'bottom-0',
+                                    };
+                                @endphp
+                                <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[10.5rem] "></div>
                                 @if ($p->status !== 'Menunggu Konfirmasi')
                                     <div class="relative flex items-start space-x-4">
                                         <!-- Time and Date -->
-                                        <div class="flex flex-col items-end">
+                                        <div class="flex flex-col items-end flex-shrink-0 w-36">
                                             <p class="text-sm font-semibold text-black">
                                                 {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
                                             </p>
@@ -300,7 +327,7 @@
                                         <!-- Text Content -->
                                         <div class="flex-1">
                                             <p class="text-base font-bold text-black">{{ $p->status }}</p>
-                                            <p class="text-sm text-gray-600 min-h-10">{{ $p->keterangan }}</p>
+                                            <p class="text-sm text-gray-600 min-h-14">{{ $p->keterangan }}</p>
                                         </div>
                                     </div>
                                 @endif
@@ -385,27 +412,48 @@
     </div>
     </div>
 
-    <!-- Modal Batalkan Penjemputan -->
-    <div id="alertModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">
-        x`
-        <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
-            <h2 class="text-lg font-semibold text-red-normal">Notifikasi</h2>
-            {{-- Underline  --}}
-            <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
+    <form method="POST" action="{{ route('masyarakat.penjemputan.batalkan', $penjemputan->id_penjemputan) }}">
+        @csrf
+        <!-- Modal Batalkan Penjemputan -->
+        <div id="alertModalMelacakPenjemputan"
+            class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">
+            <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
+                <h2 class="text-lg font-semibold text-red-normal">Notifikasi</h2>
+                {{-- Underline  --}}
+                <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
 
-            <p class="mt-4 text-center text-gray-700">Apakah yakin ingin membatalkan penjemputan sampah ini?
-            </p>
-            <p class="mt-2 text-sm text-center text-gray-500">*Keterangan Lorem ipsum dolor sit amet</p>
+                <p class="my-8 text-center text-gray-700">Apakah yakin ingin membatalkan penjemputan sampah ini?
+                </p>
 
-            <div class="flex justify-end mt-12 space-x-4">
-                <button onclick="closeModal()"
-                    class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
-                <form action="{{ route('masyarakat.penjemputan.batalkan', $penjemputan->id_penjemputan) }}"
-                    method="POST">
-                    @csrf
-                    <button class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Batalkan</button>
-                </form>
+                <div class="flex justify-end mt-12 space-x-4">
+                    <button type="button" onclick="closeModalMelacakPenjemputan()"
+                        class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
+                    <button type="submit"
+                        class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Batalkan</button>
+                </div>
             </div>
         </div>
+
+        {{-- Modal untuk Keterangan Catatan Pembatalan Penjemputan --}}
+        <div id="keteranganModal"
+            class="fixed inset-0 z-50 flex items-center justify-center hidden bg-opacity-50 bg-black-normal">
+            <div class="w-[450px] p-6 bg-white-normal rounded-2xl shadow-lg">
+                <h2 class="text-lg font-semibold text-red-normal">Keterangan Pembatalan</h2>
+                {{-- Underline  --}}
+                <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
+
+                <textarea id="textareaKeterangan"
+                    class="w-full p-6 mt-2 border rounded-lg focus:ring-2 focus:ring-red-normal focus:outline-none" rows="4"
+                    placeholder="Masukkan alasan pembatalan..." name="keterangan"></textarea>
+
+                <div class="flex justify-end mt-12 space-x-4">
+                    <button type="button" onclick="closeKeteranganModal()"
+                        class="px-4 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-200">Tutup</button>
+                    <button type="button" onclick="openConfirmKeteranganModal()"
+                        class="px-4 py-2 rounded-lg text-white-normal bg-red-normal hover:bg-red-400">Lanjutkan</button>
+                </div>
+            </div>
+        </div>
+    </form>
     </div>
 @endsection

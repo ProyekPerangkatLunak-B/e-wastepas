@@ -12,7 +12,6 @@
         h2 {
             color: #27ae60;
             margin-bottom: 15px;
-            border-bottom: 3px solid #27ae60;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -88,43 +87,63 @@
         }
 
         .flex.space-x-2 button:hover {
-            background-color: #4a90e2;
+            background-color: #27ae60;
             color: #fff;
             box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
         }
 
         .flex.space-x-2 .active {
-            background-color: #007bff;
+            background-color: #27ae60;
             color: #fff;
         }
     </style>
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-green-500">Dashboard Dropbox</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-gray-700">Dashboard Dropbox</h2>
             <h4 class="text-base font-light ml-14 text-gray-600">Selamat datang di dashboard Dropbox.</h4>
 
-            <div class="flex justify-end px-12 mt-6" style="color: white">
-                <a href="{{ route('admin.datamaster.dropbox.create') }}"
-                    class="inline-block px-5 py-2 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-lg shadow hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transition transform hover:-translate-y-1">
-                    <i class="fas fa-plus mr-2"></i> Tambah Data
-                </a>
-            </div>
 
             <div class="px-12 mt-6">
                 <!-- Custom search and length menu -->
-                <div class="flex justify-between items-center mb-4">
-                    <div class="flex items-center">
-                        <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
-                        <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="text" id="customSearch" placeholder="Cari..." class="border rounded px-4 py-1" />
+                <div class="mt-6 mb-6">
+                    <div class="flex justify-between items-center w-full">
+                        <!-- Left side filters -->
+                        <div class="flex items-center space-x-4">
+                            <!-- Status Dropbox Filter -->
+                            <div class="flex items-center">
+                                <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Dropbox:</label>
+                                <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
+                                    <option value="">Semua</option>
+                                    <option value="Diterima">Aktif</option>
+                                    <option value="Ditolak">Tidak Aktif</option>
+                                </select>
+                            </div>
+                            <!-- Tampilkan Dropdown -->
+                            <div class="flex items-center">
+                                <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>
+                                <select id="customLengthMenu" class="border rounded px-2 py-1 ml-2">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Right side elements -->
+                        <div class="flex items-center space-x-4">
+                            <!-- Search input -->
+                            <div class="flex text-sm">
+                                <input type="text" id="customSearch" placeholder="Cari..."
+                                    class="border rounded-sm px-2 py-2" />
+                            </div>
+                            <!-- Add button -->
+                            <a href="{{ route('admin.datamaster.dropbox.create') }}"
+                                class="inline-block px-5 py-2 text-sm bg-gradient-to-r from-green-500 to-green-400 text-white-100 rounded-lg shadow hover:bg-gradient-to-r hover:from-green-400 hover:to-green-500 transition transform hover:-translate-y-1">
+                                <i class="fas fa-plus mr-2"></i> Tambah Data
+                            </a>
+                        </div>
                     </div>
                 </div>
 

@@ -7,6 +7,7 @@ use App\Models\Dropbox;
 use App\Models\Pengguna;
 use App\Models\Pelacakan;
 use App\Models\DetailPenjemputan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -63,7 +64,7 @@ class Penjemputan extends Model
 
     public function getLatestPelacakan()
     {
-        return $this->hasOne(Pelacakan::class, 'id_penjemputan')->latest('created_at');
+        return $this->hasOne(Pelacakan::class, 'id_penjemputan')->latestOfMany('created_at');
     }
 
     public function scopeFilter($query, array $filters)
@@ -75,11 +76,20 @@ class Penjemputan extends Model
             });
         });
 
-        // Filter berdasarkan kategori
-        $query->when($filters['kategori'] ?? false, function ($query, $kategori) {
-            if ($kategori != 'all' && $kategori != 'inactive') {
-                return $query->whereHas('detailPenjemputan.kategori', function ($query) use ($kategori) {
-                    $query->where('nama_kategori', $kategori);
+        // // Filter berdasarkan kategori
+        // $query->when($filters['kategori'] ?? false, function ($query, $kategori) {
+        //     if ($kategori != 'all' && $kategori != 'inactive') {
+        //         return $query->whereHas('detailPenjemputan.kategori', function ($query) use ($kategori) {
+        //             $query->where('nama_kategori', $kategori);
+        //         });
+        //     }
+        // });
+
+        // Filter berdasarkan status
+        $query->when($filters['status'] ?? false, function ($query, $status) {
+            if ($status != 'all') {
+                return $query->whereHas('pelacakan', function ($query) use ($status) {
+                    $query->where('status', $status);
                 });
             }
         });

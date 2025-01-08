@@ -1,7 +1,3 @@
-<style>
-    .custom-white {
-    color: white !important;
-}
 </style>
 <div class="relative w-[450px] shadow-md bg-white rounded-2xl hover:shadow-lg ml-10">
     <!-- Gambar -->
@@ -25,7 +21,7 @@
             </div>
         </div>
         <!-- Tombol Detail -->
-        <a href="{{ $link }}" class="block w-full mt-6 py-3 text-md font-medium custom-white bg-gradient-to-r from-secondary-normal to-primary-normal rounded-xl hover:shadow-md">
+        <a href="{{ $link }}" class="block bottom-0 w-full mt-6 py-3 text-md font-medium text-white-normal bg-gradient-to-r from-secondary-normal to-primary-normal rounded-xl hover:shadow-md">
             Detail
         </a>
     </div>

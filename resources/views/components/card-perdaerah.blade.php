@@ -1,7 +1,3 @@
-<style>
-    .custom-white {
-    color: white !important;
-}
 
 </style>
 <div class="w-[321px] h-[373px] max-w-sm bg-neutral-50 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg mx-auto overflow-hidden">
@@ -10,7 +6,7 @@
         <img class="object-cover w-full h-full" src="{{$image}}" alt=""/>
         <!-- Overlay Gelap -->
         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
-            <span class="custom-white text-2xl font-bold text-center">{{$title}}</span>
+            <span class="text-white-normal text-2xl font-bold text-center">{{$title}}</span>
             {{-- <span class="custom-white text-lg">{{$jenis}}</span> --}}
         </div>
     </div>

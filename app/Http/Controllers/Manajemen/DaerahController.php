@@ -29,9 +29,9 @@ class DaerahController extends Controller
             ->orderByDesc('prioritas') // Prioritas tertinggi tetap muncul lebih dulu
             ->orderByDesc('total_berat_sampah') // Berat sampah tertinggi muncul lebih dulu
             ->orderBy('d.id_daerah')   // Urutan default jika semua sama
-            ->get();
-
+            ->paginate(8);  // Menambahkan pagination, 8 item per halaman
+    
         // Mengembalikan data ke view
         return view('manajemen.datamaster.per-daerah.index', ['dataDaerah' => $dataDaerah]);
     }
-}
+}    
