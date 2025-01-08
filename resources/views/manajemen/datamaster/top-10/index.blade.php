@@ -20,93 +20,110 @@
 
     <!-- Card 1 -->
     {{-- Masyarakat --}}
-    <div id="masyarakat" class="grid grid-cols-1 md:grid-cols-3 gap-y-2 mb-6 relative ml-40 mt-10 ">
-        <!-- Card Juara 2 -->
-        @foreach($topMasyarakat->skip(1)->take(1) as $key => $masyarakat)
-        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-72 relative top-4">
-          <img src="{{$masyarakat->foto_profil}}" alt="Not found" class="rounded-full mb-4 w-16 h-16" />
-          <h2 class="text-center text-lg font-bold">{{ $masyarakat->nama }}</h2>
-          <p class="text-center text-gray-500">Masyarakat</p>
-          <div class="flex flex-col items-center mt-4 text-sm">
-            <p class="mb-2">🏆 {{ $masyarakat->poin }} Poin</p>
-            <p>📅 {{ $masyarakat->total_penjemputan }} Transaksi</p>
-          </div>
-        </div>
-        @endforeach
-      
-        <!-- Card Juara 1 -->
-        @foreach($topMasyarakat->take(1) as $key => $masyarakat)
-        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-80 relative -top-4">
-          <img src="{{$masyarakat->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
-          <h2 class="text-center text-lg font-bold">{{ $masyarakat->nama }}</h2>
-          <p class="text-center text-gray-500">Masyarakat</p>
-          <div class="flex flex-col items-center mt-4 text-sm">
-            <p class="mb-2">🏆 {{ $masyarakat->poin }} Poin</p>
-            <p>📅 {{ $masyarakat->total_penjemputan }} Transaksi</p>
-          </div>
-        </div>
-        @endforeach
-      
-        <!-- Card Juara 3 -->
-        @foreach($topMasyarakat->skip(2)->take(1) as $key => $masyarakat)
-        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-68 relative top-6">
-          <img src="{{$masyarakat->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
-          <h2 class="text-center text-lg font-bold">{{$masyarakat->nama}}</h2>
-          <p class="text-center text-gray-500">Masyarakat</p>
-          <div class="flex flex-col items-center mt-4 text-sm">
-            <p class="mb-2">🏆 {{ $masyarakat->poin }} Poin</p>
-            <p>📅 {{ $masyarakat->total_penjemputan }} Transaksi</p>
-          </div>
-        </div>
-      </div>  
-      @endforeach
+      <div id="masyarakat" class="grid grid-cols-1 md:grid-cols-3 gap-y-2 mb-6 relative ml-40 mt-10 ">
+        @if ($topMasyarakat->isEmpty())
+            <h1 class="text-center text-lg font-bold">Tidak ada Data</h1>
+        @else
+            <!-- Card Juara 2 -->
+            @foreach($topMasyarakat->skip(1)->take(1) as $key => $masyarakat)
+            <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-72 relative top-4">
+              <img src="{{$masyarakat->foto_profil}}" alt="Not found" class="rounded-full mb-4 w-16 h-16" />
+              <h2 class="text-center text-lg font-bold">{{ $masyarakat->nama }}</h2>
+              <p class="text-center text-gray-500">Masyarakat</p>
+              <div class="flex flex-col items-center mt-4 text-sm">
+                <p class="mb-2">🏆 {{ $masyarakat->poin }} Poin</p>
+                <p>📅 {{ $masyarakat->total_penjemputan }} Transaksi</p>
+                <p class="flex flex-col items-center mt-4 text-sm">Peringkat 2</p>
+              </div>
+            </div>
+            @endforeach
+
+            <!-- Card Peringkat 1 -->
+            @foreach($topMasyarakat->take(1) as $key => $masyarakat)
+            <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-80 relative -top-4">
+              <img src="{{$masyarakat->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
+              <h2 class="text-center text-lg font-bold">{{ $masyarakat->nama }}</h2>
+              <p class="text-center text-gray-500">Masyarakat</p>
+              <div class="flex flex-col items-center mt-4 text-sm">
+                <p class="mb-2">🏆 {{ $masyarakat->poin }} Poin</p>
+                <p>📅 {{ $masyarakat->total_penjemputan }} Transaksi</p>
+                <p class="flex flex-col items-center mt-4 text-sm">Peringkat 1</p>
+              </div>
+            </div>
+            @endforeach
+
+            <!-- Card Peringkat 3 -->
+            @foreach($topMasyarakat->skip(2)->take(1) as $key => $masyarakat)
+            <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-68 relative top-6">
+              <img src="{{$masyarakat->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
+              <h2 class="text-center text-lg font-bold">{{$masyarakat->nama}}</h2>
+              <p class="text-center text-gray-500">Masyarakat</p>
+              <div class="flex flex-col items-center mt-4 text-sm">
+                <p class="mb-2">🏆 {{ $masyarakat->poin }} Poin</p>
+                <p>📅 {{ $masyarakat->total_penjemputan }} Transaksi</p>
+                <p class="flex flex-col items-center mt-4 text-sm">Peringkat 3</p>
+              </div>
+            </div>
+            @endforeach
+        @endif
+      </div>
 
       {{-- Kurir --}}
-<div id="kurir" class="grid grid-cols-1 md:grid-cols-3 gap-y-2 mb-6 relative ml-40 mt-10 hidden">
-  <!-- Card Juara 2 -->
-  @foreach($topKurir->skip(1)->take(1) as $key => $kurir)
-  <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-72 relative top-4">
-      <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
-      <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
-      <p class="text-center text-gray-500">Kurir</p>
-      <div class="flex flex-col items-center mt-4 text-sm">
-          <p class="mb-2">🏆 {{ $kurir->poin }} Poin</p>
-          <p>📅 {{ $kurir->total_penjemputan }} Transaksi</p>
-      </div>
-  </div>
-  @endforeach
+      <div id="kurir" class="grid grid-cols-1 md:grid-cols-3 gap-y-2 mb-6 relative ml-40 mt-10 hidden">
+        <!-- Card Peringkat 2 -->
+        @if ($topKurir->isEmpty())
+        <h1 class="text-center text-lg font-bold">Tidak ada Data</h1>
+    @else
+        @foreach($topKurir->skip(1)->take(1) as $key => $kurir)
+        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-72 relative top-4">
+            <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
+            <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
+            <p class="text-center text-gray-500">Kurir</p>
+            <div class="flex flex-col items-center mt-4 text-sm">
+                <p class="mb-2">🏆 {{ $kurir->poin }} Poin</p>
+                <p>📅 {{ $kurir->total_penjemputan }} Transaksi</p>
+                <p class="flex flex-col items-center mt-4 text-sm">Peringkat 2</p>
+            </div>
+        </div>
+        @endforeach
 
-  <!-- Card Juara 1 -->
-  @foreach($topKurir->take(1) as $key => $kurir)
-  <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-80 relative -top-4">
-      <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
-      <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
-      <p class="text-center text-gray-500">Kurir</p>
-      <div class="flex flex-col items-center mt-4 text-sm">
-          <p class="mb-2">🏆 {{ $kurir->poin }} Poin</p>
-          <p>📅 {{ $kurir->total_penjemputan }} Transaksi</p>
-      </div>
-  </div>
-  @endforeach
+        <!-- Card Peringkat 1 -->
+        @foreach($topKurir->take(1) as $key => $kurir)
+        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-80 relative -top-4">
+            <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
+            <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
+            <p class="text-center text-gray-500">Kurir</p>
+            <div class="flex flex-col items-center mt-4 text-sm">
+                <p class="mb-2">🏆 {{ $kurir->poin }} Poin</p>
+                <p>📅 {{ $kurir->total_penjemputan }} Transaksi</p>
+                <p class="flex flex-col items-center mt-4 text-sm">Peringkat 1</p>
+            </div>
+        </div>
+        @endforeach
 
-  <!-- Card Juara 3 -->
-  @foreach($topKurir->skip(2)->take(1) as $key => $kurir)
-  <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-68 relative top-6">
-      <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
-      <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
-      <p class="text-center text-gray-500">Kurir</p>
-      <div class="flex flex-col items-center mt-4 text-sm">
-          <p class="mb-2">🏆 {{ $kurir->poin }} Poin</p>
-          <p>📅 {{ $kurir->total_penjemputan }} Transaksi</p>
+        <!-- Card Peringkat 3 -->
+        @foreach($topKurir->skip(2)->take(1) as $key => $kurir)
+        <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-68 relative top-6">
+            <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
+            <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
+            <p class="text-center text-gray-500">Kurir</p>
+            <div class="flex flex-col items-center mt-4 text-sm">
+                <p class="mb-2">🏆 {{ $kurir->poin }} Poin</p>
+                <p>📅 {{ $kurir->total_penjemputan }} Transaksi</p>
+                <p class="flex flex-col items-center mt-4 text-sm">Peringkat 3</p>
+            </div>
+        </div>
+        @endforeach
+        @endif
       </div>
-  </div>
-  @endforeach
-</div>
 
 
 {{-- Jenis Sampah --}}
 <div id="jenis" class="grid grid-cols-1 md:grid-cols-3 gap-y-2 mb-6 relative ml-40 mt-10 hidden">
-  <!-- Card Juara 2 -->
+  @if ($topKurir->isEmpty())
+  <h1 class="text-center text-lg font-bold">Tidak ada Data</h1>
+  @else
+  <!-- Card Peringkat 2 -->
   @foreach($topJenisSampah->skip(1)->take(1) as $key => $jenis)
   <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-72 relative top-4">
       <img src="https://via.placeholder.com/50" alt="Jenis Sampah" class="rounded-full mb-4 w-16 h-16" />
@@ -114,11 +131,12 @@
       <p class="text-center text-gray-500">Jenis Sampah</p>
       <div class="flex flex-col items-center mt-4 text-sm">
           <p class="mb-2">📦 {{ $jenis->total_penjemputanJ }} Penjemputan</p>
+          <p class="flex flex-col items-center mt-4 text-sm">Peringkat 2</p>
       </div>
   </div>
   @endforeach
 
-  <!-- Card Juara 1 -->
+  <!-- Card Peringkat 1 -->
   @foreach($topJenisSampah->take(1) as $key => $jenis)
   <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-80 relative -top-4">
       <img src="https://via.placeholder.com/50" alt="Jenis Sampah" class="rounded-full mb-4 w-16 h-16" />
@@ -126,11 +144,12 @@
       <p class="text-center text-gray-500">Jenis Sampah</p>
       <div class="flex flex-col items-center mt-4 text-sm">
           <p class="mb-2">📦 {{ $jenis->total_penjemputanJ }} Penjemputan</p>
+          <p class="flex flex-col items-center mt-4 text-sm" >Peringkat 1</p>
       </div>
   </div>
   @endforeach
 
-  <!-- Card Juara 3 -->
+  <!-- Card Peringkat 3 -->
   @foreach($topJenisSampah->skip(2)->take(1) as $key => $jenis)
   <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-68 relative top-6">
       <img src="https://via.placeholder.com/50" alt="Jenis Sampah" class="rounded-full mb-4 w-16 h-16" />
@@ -138,9 +157,11 @@
       <p class="text-center text-gray-500">Jenis Sampah</p>
       <div class="flex flex-col items-center mt-4 text-sm">
           <p class="mb-2">📦 {{ $jenis->total_penjemputanJ }} Penjemputan</p>
+          <p class="flex flex-col items-center mt-4 text-sm">Peringkat 3</p>
       </div>
   </div>
   @endforeach
+  @endif
 </div>
 
 

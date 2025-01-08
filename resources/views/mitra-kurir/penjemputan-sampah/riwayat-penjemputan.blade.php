@@ -5,23 +5,22 @@
         <div class="py-8">
             <h2 class="text-xl font-semibold leading-relaxed ml-14">Total Sampah</h2>
             <h4 class="text-base font-normal ml-14 mb-8">Semua total sampah yang telah anda jemput</h4>
-            <div class="flex space-x-8 px-12 mb-8">
+            <div class="flex flex-wrap space-x-8 px-12 mb-8">
                 @php
                     $totalSampah = $data->count();
                     $totalBeratSampah = $data->sum('berat');
                 @endphp
-                    <!-- Total Sampah -->
-                <div class="bg-white-200 rounded-2xl shadow-md p-6 flex items-center space-x-4 w-1/3">
+                <!-- Total Sampah -->
+                <div class="bg-white-200 rounded-2xl shadow-md p-6 flex items-center space-x-4 w-full md:w-1/3 mb-4 md:mb-0">
                     <div class="text-5xl font-bold text-green-600">{{ $totalSampah }}<span class="text-lg text-gray-900">pcs</span></div>
                     <div class="flex flex-col items-center justify-center space-x-4">
-                        <h3 class="text-lg font-semibold text-center ">Total Sampah</h3>
+                        <h3 class="text-lg font-semibold text-center">Total Sampah</h3>
                         <p class="text-sm text-gray-500 text-center">Total sampah yang sudah dijemput</p>
                     </div>
                 </div>
-                
-
+            
                 <!-- Total Berat Sampah -->
-                <div class="bg-white-200 rounded-2xl shadow-md p-6 flex items-center space-x-4 w-1/3">
+                <div class="bg-white-200 rounded-2xl shadow-md p-6 flex items-center space-x-4 w-full md:w-1/3">
                     <div class="text-5xl font-bold text-green-600">{{ $totalBeratSampah }}<span class="text-lg text-gray-900">Kg</span></div>
                     <div class="flex flex-col">
                         <h3 class="text-lg font-semibold text-center">Total Berat Sampah</h3>
@@ -29,48 +28,52 @@
                     </div>
                 </div>
             </div>
+            
 
             <h2 class="text-xl font-semibold leading-relaxed ml-14">Riwayat Penjemputan</h2>
-            <div class="flex items-center justify-between">
-                <h4 class="text-base font-normal ml-14">Daftar riwayat penjemputan sampah</h4>
-
+            <div class="flex flex-col lg:flex-row items-center justify-between mt-4 space-y-4 md:space-y-0">
+                <h4 class="text-base font-normal ml-4 lg:ml-14 w-full lg:w-1/2 text-center lg:text-left">
+                    Daftar riwayat penjemputan sampah
+                </h4>
+            
                 {{-- Search and Filter options --}}
-                <div class="flex items-center mr-14 space-x-4">
+                <div class="flex flex-col lg:flex-row items-center md:mr-14 space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
                     {{-- Search Box --}}
-                    <div class="relative">
+                    <div class="relative w-full md:w-[334px]">
                         <input type="text"
-                               class="w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
-                               placeholder="Cari...."
-                               value="{{ $search }}"
-                               onkeydown="if(event.key === 'Enter') window.location.href='{{ url()->current() }}?search=' + this.value + '&sort={{ $sort }}'">
+                            class="w-full h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
+                            placeholder="Cari...."
+                            value="{{ $search }}"
+                            onkeydown="if(event.key === 'Enter') window.location.href='{{ url()->current() }}?search=' + this.value + '&sort={{ $sort }}'">
                         <!-- SVG Icon Search -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                             class="absolute text-gray-500 transform -translate-y-1/2 bi bi-search left-3 top-1/2"
-                             viewBox="0 0 16 16">
+                            class="absolute text-gray-500 transform -translate-y-1/2 bi bi-search left-3 top-1/2"
+                            viewBox="0 0 16 16">
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
                     </div>
-
+            
                     {{-- Filter Dropdown --}}
-                    <div class="relative">
+                    <div class="relative w-full md:w-[222px]">
                         <select
-                            class="w-[222px] h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
+                            class="w-full h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
                             onchange="window.location.href='{{ url()->current() }}?sort=' + this.value + '&search={{ $search }}'">
-                            <option value="default">Filter</option>
                             <option value="berat-asc" {{ $sort == 'berat-asc' ? 'selected' : '' }}>Berat-Ringan</option>
                             <option value="berat-desc" {{ $sort == 'berat-desc' ? 'selected' : '' }}>Ringan-Berat</option>
                         </select>
                         <!-- SVG Icon Filter -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                             class="absolute text-gray-500 transform -translate-y-1/2 right-3 top-1/2 bi bi-filter"
-                             viewBox="0 0 16 16">
+                            class="absolute text-gray-500 transform -translate-y-1/2 right-3 top-1/2 bi bi-filter"
+                            viewBox="0 0 16 16">
                             <path
                                 d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
                         </svg>
                     </div>
                 </div>
             </div>
+            
+            
 
             <div class="flex justify-center mt-4">
                 {{-- Card Section --}}
@@ -84,7 +87,7 @@
                             <div class="text-center">
                                 <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}"
                                      alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
-                                <p class="text-lg font-semibold text-gray-500">Pengguna {{ $search ?? 'pengguna' }}
+                                <p class="text-lg font-semibold text-gray-500">Riwayat penjemputan {{ $search ?? 'pengguna' }}
                                     tidak ditemukan.</p>
                             </div>
                         </div>

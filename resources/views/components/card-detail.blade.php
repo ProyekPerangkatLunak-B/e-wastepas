@@ -1,10 +1,8 @@
-<div class="relative w-[450px] h-[310px] shadow-sm bg-white-100 pb-10 rounded-2xl group hover:shadow-md">
-    <div class="w-full h-[228px] overflow-hidden bg-white rounded-t-2xl">
-        <img src="{{ $image }}" alt="{{ $title }}" class="object-cover w-full h-full">
+<div class="max-w-sm bg-white rounded-2xl shadow-sm bg-white-100 hover:shadow-md border border-gray-200 pb-4 flex flex-col">
+    <div class="aspect-w-4 aspect-h-3">
+        <img class="rounded-t-xl object-cover w-full h-full" src="{{ $image }}" alt="{{ $title }}" />
     </div>
-    <div class="flex flex-col px-8 pt-8 h-[calc(100%-228px)] justify-center">
-        <div class="flex items-center justify-center">
-            <h3 class="text-xl font-semibold text-gray-900 break-words">{{ $title }}</h3>
-        </div>
+    <div class="p-5 flex-grow">
+        <h3 class=" text-xl font-semibold tracking-tight text-center text-gray-900 dark:text-white">{{ $title }}</h3>
     </div>
 </div>
