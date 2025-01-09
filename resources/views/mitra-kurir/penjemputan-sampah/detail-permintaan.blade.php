@@ -131,10 +131,6 @@
                             @endforeach
                         </div>
                     
-                    
-                    
-                    
-
 
                     <!-- catatan & status -->
                     @if ($data->isNotEmpty())
