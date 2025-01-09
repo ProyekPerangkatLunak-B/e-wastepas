@@ -34,10 +34,11 @@ class RegistrasiMasyarakatController extends Controller
             'password.required' => 'Password wajib diisi.',
             'password.string' => 'Password harus berupa teks.',
             'password.min' => 'Password harus terdiri dari minimal 10 karakter.',
-            'ktp.required' => 'Nomor KTP wajib diisi.',
-            'ktp.string' => 'Nomor KTP harus berupa teks.',
-            'ktp.min' => 'Nomor KTP harus terdiri dari 16 digit.',
-            'ktp.max' => 'Nomor KTP harus terdiri dari 16 digit.',
+            'nomor_ktp.required' => 'Nomor KTP wajib diisi.',
+            'nomor_ktp.string' => 'Nomor KTP harus berupa teks.',
+            'nomor_ktp.min' => 'Nomor KTP harus terdiri dari 16 digit.',
+            'nomor_ktp.max' => 'Nomor KTP harus terdiri dari 16 digit.',
+            'nomor_ktp.unique' => 'Nomor KTP sudah terdaftar',
             'tel.required' => 'Nomor telepon wajib diisi.',
             'tel.string' => 'Nomor telepon harus berupa teks.',
             'tel.min' => 'Nomor telepon harus terdiri dari minimal 10 digit.',
@@ -49,7 +50,7 @@ class RegistrasiMasyarakatController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:pengguna,email',
             'password' => 'required|string|min:10',
-            'ktp' => 'required|string|min:16|max:16|',
+            'nomor_ktp' => 'required|string|min:16|max:16|unique:pengguna',
             'tel' => 'required|string|min:10|max:13',
         ], $messages);
 
@@ -59,7 +60,7 @@ class RegistrasiMasyarakatController extends Controller
             'email' => $request->email,
             'kata_sandi' => Hash::make($request->password),
             'id_peran' => 2, // Asumsi 2 adalah ID peran default
-            'nomor_ktp' => $request->ktp,
+            'nomor_ktp' => $request->nomor_ktp,
             'nomor_telepon' => $request->tel,
             'status_verifikasi' => 'Diproses',
         ]);

@@ -15,9 +15,11 @@ class DropboxAdminController extends Controller
         return view('admin.datamaster.master-data.dropbox.index', compact('dropbox'));
     }
 
-    public function getDropboxData()
+    public function getDropboxData(Request $request)
     {
         try {
+            $statusVerifikasi = $request->input('status_verifikasi', '');
+
             $dropbox = Dropbox::join('daerah', 'daerah.id_daerah', '=', 'dropbox.id_daerah')
                 ->select([
                     'dropbox.id_dropbox',
@@ -26,6 +28,11 @@ class DropboxAdminController extends Controller
                     'dropbox.status_dropbox',
                     'daerah.nama_daerah',
                 ]);
+
+            if (isset($statusVerifikasi)) {
+                $dropbox->where('status_dropbox', $statusVerifikasi);
+            }
+            
             return DataTablesDataTables::of($dropbox)
                 ->addColumn('action', function ($row) {
                     return '
