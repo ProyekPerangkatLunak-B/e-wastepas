@@ -47,7 +47,7 @@
         @endphp --}}
 
             {{-- Search and Filter options --}}
-            <div class="flex items-center pt-4 pl-20 mx-auto space-x-5">
+            <div class="flex items-center pt-4 space-x-5 ms-8">
                 {{-- Search Box --}}
                 <form method="GET" action="{{ route('masyarakat.penjemputan.riwayat') }}">
                     @if (request('status'))
@@ -94,14 +94,10 @@
                     </svg>
                     <button type="submit" class="hidden">Submit</button>
                 </form>
-                {{-- Button PDF dan XLSX(Excel) --}}
-                <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-primary-normal hover:bg-primary-400 rounded-2xl shadow-sm">
-                    Export to Excel
-                </a>
+                {{-- Button PDF --}}
                 <a href="{{ route('masyarakat.penjemputan.exportexportPDFRiwayatPenjemputan') }}" target="_blank"
                     class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
-                    Excel to PDF
+                    Export to PDF
                 </a>
             </div>
         </div>

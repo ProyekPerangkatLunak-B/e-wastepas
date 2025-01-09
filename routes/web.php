@@ -233,10 +233,6 @@ Route::group([
         return view('manajemen.datamaster.jenis.index');
     })->name('datamaster.jenis.index');
 
-    Route::get('/datamaster/jenis', function () {
-        return view('manajemen.datamaster.jenis.index');
-    })->name('datamaster.jenis.index');
-
     // Submodul Registrasi
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan
     Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
@@ -338,6 +334,9 @@ Route::group([
 
     Route::post('login', [LoginMasyarakat::class, 'authenticate'])->name('login.submit');
 
+    //logout
+    Route::post('logout', [LoginMasyarakat::class, 'logout'])->name('logout');
+
     // Submodul Registrasi
     Route::get('register', function () {
         return view('masyarakat.registrasi.register');
@@ -364,11 +363,13 @@ Route::group([
     });
     Route::get('/ubah-password', function () {
         return view('masyarakat/registrasi/ubah-password');
-    });
+    })->name('ubah-password');
     Route::get('/cek-mail', function () {
         return view('masyarakat/registrasi/cek-mail');
     });
 
+    Route::get('/reset/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/masyarakat/reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
     // Route::get('/profil', function () {
     //    return view('masyarakat/registrasi/profil');
     // });
@@ -378,8 +379,10 @@ Route::group([
     //});
 
     //profileEdit
-    Route::get('/test', [ProfileMasyarakatController::class, 'showProfile'])->name('masyarakat.registrasi.profile.show');
+    Route::get('/profile', [ProfileMasyarakatController::class, 'showProfile'])->name('profile');
     Route::post('/profile/save', [ProfileMasyarakatController::class, 'saveProfile'])->name('profile.save');
+    Route::put('/profile/update-password', [ForgotPasswordController::class, 'updatePassword'])->name('profile.update-password');
+
 
 
     //forgot pass masyarakat
@@ -390,7 +393,7 @@ Route::group([
     Route::group([
         'prefix' => 'penjemputan-sampah/',
         'as' => 'penjemputan.',
-        'middleware' => ['auth'],
+        'middleware' => ['auth', 'check.verification.status'],
     ], function () {
         Route::get('/', [PenjemputanSampahMasyarakatController::class, 'index'])->name('index');
         Route::get('/kategori', [PenjemputanSampahMasyarakatController::class, 'kategori'])->name('kategori');
@@ -470,7 +473,7 @@ Route::post('/mitra-kurir/registrasi/document-upload/{id_pengguna}', [Registrasi
 
 // forgot password
 Route::get('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ForgotPasswordFormIndex'])->middleware('guest')->name('reset-password-form');
-Route::post('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ChangeForgotPa ssword'])->middleware('guest')->name('reset-password-form.post');
+Route::post('/mitra-kurir/registrasi/forgot-password-form', [RegistrasiMitraKurirController::class, 'ChangeForgotPassword'])->middleware('guest')->name('reset-password-form.post');
 Route::get('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'ForgotPasswordIndex'])->middleware('guest')->name('reset-password');
 Route::post('/mitra-kurir/registrasi/forgot-password', [RegistrasiMitraKurirController::class, 'SendForgotPassword'])->middleware('guest')->name('reset-password.post');
 

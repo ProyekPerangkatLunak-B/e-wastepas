@@ -190,7 +190,12 @@
                 var table = $('#dropboxTable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '{{ route('admin.datamaster.dropbox.data') }}',
+                    ajax: {
+                        url: '{{ route('admin.datamaster.dropbox.data') }}',
+                        data: function(d) {
+                            d.status_verifikasi = $('#statusVerifikasiFilter').val();
+                        }
+                    },
                     columns: [{
                             data: 'nama_dropbox',
                             name: 'nama_dropbox'
@@ -243,6 +248,10 @@
                 // Custom length menu
                 $('#customLengthMenu').on('change', function() {
                     table.page.len(this.value).draw();
+                });
+
+                $('#statusVerifikasiFilter').on('change', function() {
+                    table.ajax.reload(); // Reload data table when filter status changes
                 });
 
                 // Custom pagination and info display

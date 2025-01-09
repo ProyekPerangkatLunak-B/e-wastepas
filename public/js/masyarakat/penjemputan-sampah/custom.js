@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.openConfirmKeteranganModal = function () {
         closeKeteranganModal();
-        document.getElementById("alertModal").classList.remove("hidden");
+        document
+            .getElementById("alertModalMelacakPenjemputan")
+            .classList.remove("hidden");
     };
 
     window.closeModal = function () {
