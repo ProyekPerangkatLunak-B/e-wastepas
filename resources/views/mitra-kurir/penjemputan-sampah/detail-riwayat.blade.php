@@ -18,12 +18,12 @@
                 <div class="text-green-600 mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="51" height="35" viewBox="0 0 51 35" fill="none" class="mx-auto">
                         <path d="M39.4091 31.7188C38.4869 31.7188 37.6024 31.373 36.9503 30.7577C36.2982 30.1423 35.9318 29.3077 35.9318 28.4375C35.9318 27.5673 36.2982 26.7327 36.9503 26.1173C37.6024 25.502 38.4869 25.1562 39.4091 25.1562C40.3313 25.1562 41.2158 25.502 41.8679 26.1173C42.52 26.7327 42.8864 27.5673 42.8864 28.4375C42.8864 29.3077 42.52 30.1423 41.8679 30.7577C41.2158 31.373 40.3313 31.7188 39.4091 31.7188ZM42.8864 12.0312L47.43 17.5H37.0909V12.0312M11.5909 31.7188C10.6687 31.7188 9.78422 31.373 9.1321 30.7577C8.47999 30.1423 8.11364 29.3077 8.11364 28.4375C8.11364 27.5673 8.47999 26.7327 9.1321 26.1173C9.78422 25.502 10.6687 25.1562 11.5909 25.1562C12.5131 25.1562 13.3976 25.502 14.0497 26.1173C14.7018 26.7327 15.0682 27.5673 15.0682 28.4375C15.0682 29.3077 14.7018 30.1423 14.0497 30.7577C13.3976 31.373 12.5131 31.7188 11.5909 31.7188ZM44.0455 8.75H37.0909V0H4.63636C2.06318 0 0 1.94687 0 4.375V28.4375H4.63636C4.63636 30.178 5.36907 31.8472 6.6733 33.0779C7.97753 34.3086 9.74645 35 11.5909 35C13.4354 35 15.2043 34.3086 16.5085 33.0779C17.8127 31.8472 18.5455 30.178 18.5455 28.4375H32.4545C32.4545 30.178 33.1873 31.8472 34.4915 33.0779C35.7957 34.3086 37.5646 35 39.4091 35C41.2536 35 43.0225 34.3086 44.3267 33.0779C45.6309 31.8472 46.3636 30.178 46.3636 28.4375H51V17.5L44.0455 8.75Z" fill="#437252"/>
-                      </svg>
+                    </svg>
                 </div>
-                <p class="text-lg font-semibold">ID Penjemputan</p>
-                <p class="text-2xl font-bold text-gray-800 mt-1">C032378923</p>
+                <p class="text-lg font-semibold">Kode Penjemputan</p>
+                <p class="text-2xl font-bold text-gray-800 mt-1">{{ $data->first()->kode_penjemputan }}</p>
             </div>
-        
+
             <!-- Card Tanggal Penjemputan -->
             <div class="flex-1 bg-white-100 shadow-md rounded-xl p-6 text-center">
                 <div class="text-green-600 mb-2">
@@ -33,9 +33,9 @@
                     </svg>
                 </div>
                 <p class="text-lg font-semibold">Tanggal Penjemputan</p>
-                <p class="text-2xl font-bold text-gray-800 mt-1">11/29/2024</p>
+                <p class="text-2xl font-bold text-gray-800 mt-1">{{ $data->first()->tanggal_penjemputan }}</p>
             </div>
-        
+
             <!-- Card Status Penjemputan -->
             <div class="flex-1 bg-white-100 shadow-md rounded-xl p-6 text-center">
                 <div class="text-green-600 mb-2">
@@ -44,7 +44,7 @@
                     </svg>
                 </div>
                 <p class="text-lg font-semibold">Status Penjemputan</p>
-                <p class="text-2xl font-bold text-green-600 mt-1">Selesai</p>
+                <p class="text-2xl font-bold text-green-600 mt-1">{{ $data->first()->status }}</p>
             </div>
         </div>
 
@@ -70,16 +70,14 @@
                                 <path
                                     d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
                             </svg>
-                            Sarah Martins - 08323456777
+                            {{ $data->first()->nama }} - {{ $data->first()->nomor_telepon }}
                         </h3>
                         <h3 class="text-lg font-semibold">Alamat Penjemputan</h3>
-                        <p class="text-gray-600">Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan Ledeng, Cidadap
-                            KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142</p>
+                        <p class="text-gray-600">{{ $data->first()->alamat_penjemputan }}</p>
                             <h3 class="text-lg font-semibold mt-4">Daerah Penjemputan</h3>
-                            <p class="text-gray-600">Dayehkolot</p>
+                            <p class="text-gray-600">{{ $data->first()->nama_daerah }}</p>
                             <h3 class="text-lg font-semibold mt-4">Lokasi Dropbox Penyimpanan Sampah</h3>
-                            <p class="text-gray-600">DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
-                                Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142.</p>
+                            <p class="text-gray-600">{{ $data->first()->alamat_dropbox }}</p>
                         </div>
 
                     <!-- sampah -->
@@ -87,26 +85,20 @@
                         <h3 class="text-lg font-semibold">Sampah yang telah dijemput</h3>
                         <div class="grid grid-cols-2 gap-3 mt-4">
                             <!-- card sampah -->
+                            @foreach($data as $detail)
                             <div class="relative  px-4 py-5 bg-gray-100 border rounded-2xl shadow-sm">
-                                <p class="text-base font-medium">Layar dan Monitor</p>
-                                <p class="text-lg font-semibold mt-2">Televisi</p>
+                                <p class="text-base font-medium">{{ $detail->nama_kategori }}</p>
+                                <p class="text-lg font-semibold mt-2">{{ $detail->nama_jenis }}</p>
                                 <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1 Pcs</p>
                                 <div class="absolute bottom-0 right-0 bg-primary-normal text-white-100 font-semibold px-6 py-1 rounded-tl-2xl rounded-br-2xl text-sm">
-                                    1 Kg
+                                    {{ $detail->berat }} Kg
                                 </div>
                             </div>
-                            <div class="relative  px-4 py-5 bg-gray-100 border rounded-2xl shadow-sm">
-                                <p class="text-base font-medium">Layar dan Monitor</p>
-                                <p class="text-lg font-semibold mt-2">Televisi</p>
-                                <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1 Pcs</p>
-                                <div class="absolute bottom-0 right-0 bg-primary-normal text-white-100 font-semibold px-6 py-1 rounded-tl-2xl rounded-br-2xl text-sm">
-                                    1 Kg
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         {{-- catatan --}}
                         <p class="mt-4 font-bold text-red-normal">*Catatan</p>
-                        <p class="text-black">Layar handphone pecah</p>
+                        <p class="text-black">{{ $data->first()->status }}</p>
                     </div>
                 </div>
             </div>

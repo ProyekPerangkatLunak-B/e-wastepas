@@ -1,5 +1,10 @@
 <div class="relative w-[460px] h-auto pb-4 shadow-sm bg-white-100 rounded-2xl group hover:shadow-md border border-gray-200">
     <div class="w-[460px] h-[228px] overflow-hidden bg-white-normal rounded-t-xl">
+        {{-- Poin diujung sebelah kanan --}}
+        <div class="absolute top-0 right-0 z-10 flex items-center justify-center h-12 px-4 mx-auto bg-white-normal rounded-bl-xl rounded-tr-xl">
+            <span class="text-3xl font-bold text-secondary-normal">{{ $poin }}</span>
+            <span class="mt-3 ml-1 font-bold text-md text-black-normal">Poin</span>
+        </div>
         <img src="{{ $image }}" alt="{{ $title }}" class="object-cover w-full h-full">
     </div>
     <div class="flex flex-col items-start justify-between h-[calc(100%-228px)] pt-4">

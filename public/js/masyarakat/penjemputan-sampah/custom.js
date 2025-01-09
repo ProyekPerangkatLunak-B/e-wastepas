@@ -1,4 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // START MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
+    window.openKeteranganModal = function () {
+        console.log("Hi");
+        document.getElementById("keteranganModal").classList.remove("hidden");
+    };
+
+    window.closeKeteranganModal = function () {
+        document.getElementById("keteranganModal").classList.add("hidden");
+    };
+
+    window.openConfirmKeteranganModal = function () {
+        closeKeteranganModal();
+        document.getElementById("alertModal").classList.remove("hidden");
+    };
+
+    window.closeModal = function () {
+        document.getElementById("alertModal").classList.add("hidden");
+    };
+    // END MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
+
     // START modal tambah sampah
 
     // Fungsi untuk membuka atau menutup modal tambah sampah
@@ -53,65 +73,68 @@ document.addEventListener("DOMContentLoaded", function () {
             idBox++;
 
             // Ambil Gambar
-            const jenisData = await fetch(
-                `/api/jenis?search=${jenis.options[jenis.selectedIndex].text}`
-            )
-                .then((response) => response.json())
-                .then((data) => data)
-                .catch((error) => {
-                    console.error("Error fetching jenis data:", error);
-                    return null;
-                });
-            const namaGambar = jenisData[0].gambar;
-            const imagePath = `/img/masyarakat/gambarKategoriSampah/${namaGambar}`;
-            var image = $(location).attr("origin");
-            image += imagePath;
+            try {
+                const jenisData = await fetch(
+                    `/api/jenis?search=${
+                        jenis.options[jenis.selectedIndex].text
+                    }`
+                )
+                    .then((response) => response.json())
+                    .then((data) => data);
+                const namaGambar = jenisData[0].gambar;
+                const imagePath = `/img/masyarakat/gambarKategoriSampah/${namaGambar}`;
+                var image = $(location).attr("origin");
+                image += imagePath;
 
-            const box = `
-            <div class="relative flex items-center justify-between w-[90%] h-[120px] border-0 shadow-sm rounded-2xl overflow-hidden border-secondary-normal" id="boxInput${idBox}">
-                <button type="button" class="absolute top-0 right-0 flex flex-col items-center justify-center w-[76px] h-full rounded-l-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${idBox})">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mb-1 bi bi-trash ms-2" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                    </svg>
-                    <span class="text-sm ms-2">Hapus</span>
-                </button>
+                const box = `
+                <div class="relative flex items-center justify-between w-[90%] h-[120px] border-0 shadow-sm rounded-2xl overflow-hidden border-secondary-normal" id="boxInput${idBox}">
+                    <button type="button" class="absolute top-0 right-0 flex flex-col items-center justify-center w-[76px] h-full rounded-l-lg bg-red-normal text-white-normal hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:ring-offset-0" onclick="hapusDariBox(${idBox})">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="mb-1 bi bi-trash ms-2" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                        </svg>
+                        <span class="text-sm ms-2">Hapus</span>
+                    </button>
 
-                <div class="relative flex items-center justify-between w-[89%] h-full bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal">
-                    <div class="flex items-center justify-center w-[120px] h-full overflow-hidden">
-                        <img src="${image}" alt="Sampah" class="object-cover w-full h-full">
-                    </div>
-                    <input type="text" value="${
-                        kategori.value
-                    }" name="kategori[]" hidden>
-                    <input type="text" value="${
-                        jenis.value
-                    }" name="jenis[]" hidden>
-                    <input type="text" value="${
-                        berat.value
-                    }" name="berat[]" hidden>
-                    <div class="flex flex-col items-center justify-center flex-1 px-2 ms-10 min-w-[120px]">
-                        <p class="overflow-hidden text-sm font-medium text-center text-gray-600 text-wrap whitespace-nowrap text-ellipsis">
-                        Kategori: ${
-                            kategori.options[kategori.selectedIndex].text
-                        }
-                        </p>
-                        <p class="overflow-hidden font-bold text-center text-black text-md text-pretty whitespace-nowrap text-ellipsis">
-                            ${jenis.options[jenis.selectedIndex].text}
-                        </p>
-                    </div>
-                    <div class="flex flex-col items-center justify-center min-w-[80px]">
-                        <p class="font-bold text-green-500 me-4 text-md">
-                        ${berat.value} Kilogram
-                        </p>
+                    <div class="relative flex items-center justify-between w-[89%] h-full bg-gray-100 border shadow-sm rounded-2xl overflow-hidden border-secondary-normal">
+                        <div class="flex items-center justify-center w-[120px] h-full overflow-hidden">
+                            <img src="${image}" alt="Sampah" class="object-cover w-full h-full">
+                        </div>
+                        <input type="text" value="${
+                            kategori.value
+                        }" name="kategori[]" hidden>
+                        <input type="text" value="${
+                            jenis.value
+                        }" name="jenis[]" hidden>
+                        <input type="text" value="${
+                            berat.value
+                        }" name="berat[]" hidden>
+                        <div class="flex flex-col items-center justify-center flex-1 px-2 ms-10 min-w-[120px]">
+                            <p class="overflow-hidden text-sm font-medium text-center text-gray-600 text-wrap whitespace-nowrap text-ellipsis">
+                            Kategori: ${
+                                kategori.options[kategori.selectedIndex].text
+                            }
+                            </p>
+                            <p class="overflow-hidden font-bold text-center text-black text-md text-pretty whitespace-nowrap text-ellipsis">
+                                ${jenis.options[jenis.selectedIndex].text}
+                            </p>
+                        </div>
+                        <div class="flex flex-col items-center justify-center min-w-[80px]">
+                            <p class="font-bold text-green-500 me-4 text-md">
+                            ${berat.value} Kilogram
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            `;
+                `;
 
-            boxSemuaSampah.innerHTML += box;
-            resetInput();
-            toggleModal(false);
+                boxSemuaSampah.innerHTML += box;
+                resetInput();
+                toggleModal(false);
+            } catch (error) {
+                console.error("Error fetching jenis data:", error);
+                alert("Terjadi kesalahan saat mengambil data jenis sampah.");
+            }
         }
     };
 
@@ -137,7 +160,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             totalSampah.innerHTML == 0 ||
             document.getElementById("daerah").value == "" ||
-            document.getElementById("dropbox").value == ""
+            document.getElementById("dropbox").value == "" ||
+            document.getElementById("tanggal_penjemputan").value == "" ||
+            document.getElementById("alamat_penjemputan").value == ""
         ) {
             btnOk.setAttribute("type", "button");
             alertModal.classList.remove("hidden");
@@ -167,14 +192,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Menutup modal konfirmasi
     window.cancelAddRequest = function () {
         confirmModal.classList.add("hidden");
-        btnOk.setAttribute("type", "button");
-        alertModal.classList.remove("hidden");
-        alertMessage.innerHTML = "Permintaan Penjemputan dibatalkan";
-        updateAlertClasses("cancel");
+    };
 
-        // Menambahkan event listener untuk menutup modal saat tombol OK diklik
-        btnOk.removeEventListener("click", closeAlertModal);
-        btnOk.addEventListener("click", closeAlertModal);
+    window.submitKeterangan = function () {
+        const keterangan = document.getElementById("textareaKeterangan").value;
+        if (keterangan.trim() === "") {
+            alert("Keterangan tidak boleh kosong!");
+            return;
+        }
+        // Set the keterangan value to the hidden input in the confirmation form
+        document.getElementById("alasanPembatalan").value = keterangan;
+        closeKeteranganModal();
+        openConfirmationModal();
     };
 
     // Fungsi untuk menutup modal alert
@@ -190,32 +219,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (status == "success") {
             // Status berhasil
+            btnOk.classList.remove("bg-red-normal", "hover:bg-red-400");
             btnOk.classList.add(
                 "bg-secondary-normal",
                 "hover:bg-secondary-300"
             );
-            btnOk.classList.remove("bg-red-normal", "hover:bg-red-400");
             notifikasiAlert.classList.add("text-secondary-normal");
             notifikasiAlert.classList.remove("text-red-normal");
             underlineAlert.classList.add("bg-secondary-normal");
             underlineAlert.classList.remove("bg-red-normal");
         } else if (status == "cancel") {
             // Status gagal
-            btnOk.classList.add("bg-red-normal", "hover:bg-red-400");
             btnOk.classList.remove(
                 "bg-secondary-normal",
                 "hover:bg-secondary-300"
             );
+            btnOk.classList.add("bg-red-normal", "hover:bg-red-400");
             notifikasiAlert.classList.add("text-red-normal");
             notifikasiAlert.classList.remove("text-secondary-normal");
             underlineAlert.classList.add("bg-red-normal");
             underlineAlert.classList.remove("bg-secondary-normal");
         } else if (status == "inserted") {
+            btnOk.classList.remove("bg-red-normal", "hover:bg-red-300");
             btnOk.classList.add(
                 "bg-secondary-normal",
-                "hover:bg-secondary-400"
+                "hover:bg-secondary-300"
             );
-            btnOk.classList.remove("bg-red-normal", "hover:bg-red-300");
             notifikasiAlert.classList.add("text-secondary-normal");
             notifikasiAlert.classList.remove("text-red-normal");
             underlineAlert.classList.add("bg-secondary-normal");
@@ -245,7 +274,23 @@ document.addEventListener("DOMContentLoaded", function () {
     // END modal kirim permintaan dan notifikasi berhasil dan gagal
 
     // START Reset form
+    const resetModal = document.getElementById("resetModal");
+    const closeResetModal = document.getElementById("closeResetModal");
+    const resetFormButton = document.getElementById("resetFormButton");
+
+    window.showResetModal = function () {
+        resetModal.classList.remove("hidden");
+    };
+
+    window.hideResetModal = function () {
+        resetModal.classList.add("hidden");
+    };
+
     window.resetForm = function () {
+        showResetModal();
+    };
+
+    window.confirmResetForm = function () {
         const boxSemuaSampah = $("#boxSemuaSampah")[0].children;
 
         const tanggal = $("#tanggal_penjemputan");
@@ -261,13 +306,45 @@ document.addEventListener("DOMContentLoaded", function () {
         else {
             for (let i = 1; i <= idBox; i++) {
                 const box = boxSemuaSampah[i];
-                box.remove();
+                boxSemuaSampah.remove();
             }
             $("#box-kosong")[0].classList.remove("hidden");
             resetSelect2();
             idBox = 0;
         }
+
+        // Show success alert
+        alertModal.classList.remove("hidden");
+        alertMessage.innerHTML = "Form berhasil direset!";
+        updateAlertClasses("success");
+        btnOk.setAttribute("type", "button");
+        btnOk.removeEventListener("click", closeAlertModal);
+        btnOk.addEventListener("click", closeAlertModal);
+
+        // Hide reset modal
+        hideResetModal();
     };
+
+    window.cancelResetForm = function () {
+        // Show cancel alert
+        alertModal.classList.remove("hidden");
+        alertMessage.innerHTML = "Reset form dibatalkan!";
+        updateAlertClasses("cancel");
+        btnOk.setAttribute("type", "button");
+        btnOk.removeEventListener("click", closeAlertModal);
+        btnOk.addEventListener("click", closeAlertModal);
+
+        // Hide reset modal
+        hideResetModal();
+    };
+
+    closeResetModal.addEventListener("click", window.cancelResetForm);
+    resetFormButton.addEventListener("click", window.confirmResetForm);
+
+    document
+        .getElementById("showResetModalBtn")
+        .addEventListener("click", window.resetForm);
+
     // END Reset form
 
     window.resetSelect2 = function () {
@@ -339,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
             delay: 250,
             data: function (params) {
                 return {
-                    search: params.term, // Kirimkan keyword pencarian
+                    search: params.term,
                 };
             },
             processResults: function (data) {

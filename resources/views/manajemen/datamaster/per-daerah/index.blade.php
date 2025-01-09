@@ -10,17 +10,23 @@
         <div class="px-12 pb-6 mt-4">
             <!-- Baris Pertama: 3 Kolom -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-                    @foreach($dataDaerah as $daerah)
+                @foreach($dataDaerah as $daerah)
                     <x-card-perdaerah
                         image="https://picsum.photos/720/720"
                         title="{{ $daerah->nama_daerah }}"            
                         link="#"
                         berat="{{ number_format($daerah->total_berat_sampah, 0) }}"
                         poin="{{ number_format($daerah->total_poin, 0) }}" />
-                    @endforeach
-        </div>
-        
+                @endforeach
+            </div>
 
+            <!-- Pagination -->
+            <div class="mt-8">
+                {{ $dataDaerah->links('pagination::tailwind') }}
+            </div>
+            
+
+        </div>
     </div>
 </div>
 

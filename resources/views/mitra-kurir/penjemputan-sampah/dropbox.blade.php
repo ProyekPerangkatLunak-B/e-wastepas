@@ -35,7 +35,7 @@
                 <div class="mx-14 mt-4 bg-white-100 shadow-md rounded-2xl">
                     <div class="flex justify-between p-4">
                         <div>
-                            <p class="text-base text-gray-600">ID Penjemputan: {{ $penjemputan->id_penjemputan }}</p>
+                            <p class="text-base text-gray-600">Kode Penjemputan: {{ $penjemputan->id_penjemputan }}</p>
                             <p class="text-lg font-semibold">{{ $penjemputan->kode_penjemputan }}</p>
                         </div>
                         <div class="text-right">

@@ -99,9 +99,19 @@
                                     <div class="relative mt-2">
                                         <input id="email" name="email" type="email" placeholder="Masukkan Email"
                                             class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
-                                            value="{{ $user->email }}" readonly />
+                                            value="{{ $user->email }}" disabled />
                                     </div>
                                 </div>
+                                <div class="mb-4">
+                                    <label for="address" class="block mt-2 text-sm font-medium leading-7 text-gray-500">No
+                                        Ktp</label>
+                                    <div class="relative mt-2">
+                                        <input id="noktp" name="address" type="text" placeholder="Masukkan Alamat"
+                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
+                                            value="{{ $user->nomor_ktp }}" disabledgi />
+                                    </div>
+                                </div>
+
                                 <div class="mb-4">
                                     <label for="phone" class="block mt-2 text-sm font-medium leading-7 text-gray-500">No.
                                         HP</label>
@@ -109,16 +119,6 @@
                                         <input id="phone" name="phone" type="tel" placeholder="Masukkan No.HP"
                                             class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
                                             value="{{ $user->nomor_telepon }}" readonly />
-                                    </div>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label for="address" class="block mt-2 text-sm font-medium leading-7 text-gray-500">No
-                                        Ktp</label>
-                                    <div class="relative mt-2">
-                                        <input id="address" name="address" type="text" placeholder="Masukkan Alamat"
-                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
-                                            value="{{ $user->nomor_ktp }}" readonly />
                                     </div>
                                 </div>
                             </div>

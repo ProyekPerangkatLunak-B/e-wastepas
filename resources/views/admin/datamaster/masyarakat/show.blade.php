@@ -149,8 +149,8 @@
                 </div>
             </div>
 
-            <div class="mt-6">
-                <a href="javascript:history.back()" class="back-button">
+            <div class="mt-6" style="display: flex; justify-content: center; align-items: center;">
+                <a href="javascript:history.back()" class="back-button justify-center">
                     Kembali
                 </a>
             </div>

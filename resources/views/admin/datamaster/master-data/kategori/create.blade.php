@@ -12,7 +12,6 @@
         h2 {
             color: #333;
             margin-bottom: 15px;
-            border-bottom: 3px solid #2ecc71;
             display: inline-block;
             padding-bottom: 5px;
         }
@@ -50,7 +49,7 @@
 
     <div class="container max-w-full px-4 mx-auto bg-gray-50">
         <div class="py-8">
-            <h2 class="text-2xl font-semibold leading-relaxed ml-14">Tambah Kategori Sampah</h2>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14">Tambah Kategori Sampah</h2>
             <h4 class="text-base font-normal ml-14">Silakan isi form berikut untuk menambah kategori baru.</h4>
 
             <div class="px-12 mt-4">
@@ -68,6 +67,12 @@
                             Kategori Sampah</label>
                         <textarea name="deskripsi_kategori" id="deskripsi_kategori" required
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700"></textarea>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="poin" class="block text-sm font-medium text-gray-800 mb-1">Poin</label>
+                        <input type="number" name="poin" id="poin" required
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-700" />
                     </div>
 
                     <div class="mb-6">

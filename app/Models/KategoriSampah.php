@@ -15,6 +15,7 @@ class KategoriSampah extends Model
     protected $fillable = [
         'nama_kategori',
         'deskripsi_kategori',
-        'gambar'
+        'gambar',
+        'poin'
     ];
 }

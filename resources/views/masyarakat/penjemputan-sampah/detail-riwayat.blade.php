@@ -46,12 +46,8 @@
                 </p>
             </div>
             <div class="inline-flex items-center justify-end ml-auto space-x-4">
-                {{-- Button PDF dan XLSX(Excel) --}}
-                <a href="#"
-                    class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-primary-normal hover:bg-primary-300 rounded-2xl shadow-sm">
-                    Export to Excel
-                </a>
-                <a href="#"
+                <a href="{{ route('masyarakat.penjemputan.exportPDFDetailRiwayat', $penjemputan->id_penjemputan) }}"
+                    target="_blank"
                     class="flex items-center justify-center w-[150px] h-[50px] px-4 text-white-normal transition duration-300 bg-red-normal hover:bg-red-400 rounded-2xl shadow-sm">
                     Export to PDF
                 </a>
@@ -61,81 +57,81 @@
         <!-- Container untuk Detail Alamat dan Detail Pelacakan -->
         <div class="w-[1380px] h-[430px] mx-auto pb-10 mt-6 bg-white-normal shadow-sm rounded-xl">
             <div class="flex justify-center mb-12 space-x-28">
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
-                <span class="w-24 h-2 bg-blue-300 rounded"></span>
-                <span class="w-24 h-2 bg-red-200 rounded"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
+                <span class="w-24 h-2 rounded bg-sky-400"></span>
+                <span class="w-24 h-2 rounded bg-red-normal"></span>
             </div>
 
             <!-- Tracking & Details -->
             <div class="px-8 mt-6">
                 <div class="flex justify-between">
-            <!-- Nama, Alamat Penjemputan -->
-            <div class="w-1/2 pr-6 mt-2 ml-4">
+                    <!-- Nama, Alamat Penjemputan -->
+                    <div class="w-1/2 pr-6 mt-2 ml-4">
 
-                <h3 class="mb-2 text-lg font-bold">Nama Kurir</h3>
-                <p class="mb-8 text-gray-600">
-                    {{-- Asep Surasep - 0851632668923 --}}
-                    @if ($penjemputan->id_pengguna_kurir)
-                        {{ $penjemputan->penggunaKurir->nama }} - {{ $penjemputan->penggunaKurir->nomor_telepon }}
-                    @else
-                        -
-                    @endif
-                </p>
+                        <h3 class="mb-2 text-lg font-bold">Nama Kurir</h3>
+                        <p class="mb-8 text-gray-600">
+                            {{-- Asep Surasep - 0851632668923 --}}
+                            @if ($penjemputan->id_pengguna_kurir)
+                                {{ $penjemputan->penggunaKurir->nama }} - {{ $penjemputan->penggunaKurir->nomor_telepon }}
+                            @else
+                                -
+                            @endif
+                        </p>
 
-                <h3 class="mb-2 text-lg font-bold">Diambil dari</h3>
-                <p class="mb-8 text-gray-600">
-                    {{-- DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
+                        <h3 class="mb-2 text-lg font-bold">Diambil dari</h3>
+                        <p class="mb-8 text-gray-600">
+                            {{-- DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
                     Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142 --}}
-                    {{ $penjemputan->alamat_penjemputan }}
-                </p>
+                            {{ $penjemputan->alamat_penjemputan }}
+                        </p>
 
-                <h3 class="mt-4 mb-2 text-lg font-bold">Dikirim ke</h3>
-                <p class="text-gray-600">
-                    {{-- DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
+                        <h3 class="mt-4 mb-2 text-lg font-bold">Dikirim ke</h3>
+                        <p class="text-gray-600">
+                            {{-- DROPBOX CIDADAP, Jalan Kapten Abdul Hamid No.86, RT.3/RW.1, Kelurahan
                     Ledeng, Cidadap KOTA BANDUNG, CIDADAP, JAWA BARAT, ID, 40142. --}}
-                    @if (
-                        $penjemputan->getLatestPelacakan->status !== 'Diproses' &&
-                            $penjemputan->getLatestPelacakan->status !== 'Dibatalkan' &&
-                            $penjemputan->getLatestPelacakan->status !== 'Diterima')
-                        {{ $penjemputan->dropbox->nama_dropbox }} - {{ $penjemputan->dropbox->alamat_dropbox }}
-                    @else
-                        -
-                    @endif
-                </p>
-            </div>
+                            @if (
+                                $penjemputan->getLatestPelacakan->status !== 'Diproses' &&
+                                    $penjemputan->getLatestPelacakan->status !== 'Dibatalkan' &&
+                                    $penjemputan->getLatestPelacakan->status !== 'Diterima')
+                                {{ $penjemputan->dropbox->nama_dropbox }} - {{ $penjemputan->dropbox->alamat_dropbox }}
+                            @else
+                                -
+                            @endif
+                        </p>
+                    </div>
 
-                    <div class="relative w-1/2 mt-2 mr-4">
+                    <div class="relative w-1/2 mt-2 mr-8">
                         <h3 class="mx-auto text-lg font-bold">Detail Pelacakan</h3>
                         <p class="text-base font-normal text-gray-600">Permintaan Penjemputan:
                             {{ Carbon\Carbon::parse($penjemputan->getLatestPelacakan->created_at)->locale(app()->getLocale())->translatedFormat('H:i, j F Y') }}
                         </p>
                         <div class="relative h-64 mt-4 space-y-4 overflow-y-auto">
                             @foreach ($penjemputan->pelacakan as $p)
-                            <!-- Garis Vertikal -->
-                            @php
-                            $status = $penjemputan->getLatestPelacakan->status;
-                            $bottomValue = match($status) {
-                                'Diproses' => 'bottom-44',
-                                'Diterima' => 'bottom-20',
-                                'Dijemput Kurir' => 'bottom-4',
-                                'Menuju Lokasi Penjemputan' => '-bottom-20',
-                                'Sampah Diangkut' => '-bottom-36',
-                                'Menuju Dropbox' => '-bottom-56',
-                                'Menyimpan Sampah di Dropbox' => '-bottom-80',
-                                'Selesai' => '-bottom-80',
-                                'Dibatalkan' => 'bottom-[25rem]',
-                                default => 'bottom-0',
-                            };
-                        @endphp
-                        <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[149px] "></div>
+                                <!-- Garis Vertikal -->
+                                @php
+                                    $status = $penjemputan->getLatestPelacakan->status;
+                                    $bottomValue = match ($status) {
+                                        'Diproses' => 'bottom-44',
+                                        'Diterima' => 'bottom-20',
+                                        'Dijemput Kurir' => '-bottom-8',
+                                        'Menuju Lokasi Penjemputan' => '-bottom-32',
+                                        'Sampah Diangkut' => '-bottom-56',
+                                        'Menuju Dropbox' => '-bottom-80',
+                                        'Menyimpan Sampah di Dropbox' => '-bottom-[26rem]',
+                                        'Selesai' => '-bottom-[27rem]',
+                                        'Dibatalkan' => 'bottom-36',
+                                        default => 'bottom-0',
+                                    };
+                                @endphp
+                                <div class="absolute top-5 w-1 {{ $bottomValue }} bg-gray-200 left-[10.5rem] "></div>
                                 @if ($p->status !== 'Menunggu Konfirmasi')
                                     <div class="relative flex items-start space-x-4">
                                         <!-- Time and Date -->
-                                        <div class="flex flex-col items-end">
+                                        <div class="flex flex-col items-end flex-shrink-0 w-36">
                                             <p class="text-sm font-semibold text-black">
                                                 {{ Carbon\Carbon::parse($p->created_at)->locale(app()->getLocale())->translatedFormat('H:i') }}
                                             </p>
@@ -154,7 +150,7 @@
                                         <!-- Text Content -->
                                         <div class="flex-1">
                                             <p class="text-base font-bold text-black">{{ $p->status }}</p>
-                                            <p class="text-sm text-gray-600 min-h-10">{{ $p->keterangan }}</p>
+                                            <p class="text-sm text-gray-600 min-h-14">{{ $p->keterangan }}</p>
                                         </div>
                                     </div>
                                 @endif

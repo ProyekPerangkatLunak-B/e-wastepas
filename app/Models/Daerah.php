@@ -17,7 +17,6 @@ class Daerah extends Model
     protected $fillable = [
         'nama_daerah',
         'status_daerah',
-        'total_poin',
     ];
 
     public function dropbox()
