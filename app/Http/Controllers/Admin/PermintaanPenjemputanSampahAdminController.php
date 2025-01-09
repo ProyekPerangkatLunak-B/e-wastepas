@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Penjemputan;
+use App\Models\Jenis;
 use App\Models\Pengguna;
 use App\Models\Dropbox;
 use Yajra\DataTables\DataTables;
@@ -13,67 +14,42 @@ use Illuminate\Support\Facades\Mail;
 class PermintaanPenjemputanSampahAdminController extends Controller
 {
     public function index(Request $request)
-{
-    if ($request->ajax()) {
-        $query = Penjemputan::with(['penggunaMasyarakat', 'dropbox'])
-                           ->select('penjemputan.*');
+    {
+        if ($request->ajax()) {
+            // Query untuk mendapatkan data penjemputan dengan relasi yang dibutuhkan
+            $query = Penjemputan::with(['detailPenjemputan.jenis.kategori', 'dropbox']);
 
-        if ($request->has('search') && !empty($request->search['value'])) {
-            $searchValue = $request->search['value'];
-            $query->whereHas('penggunaMasyarakat', function($q) use ($searchValue) {
-                $q->where('nama', 'like', "%{$searchValue}%");
-            });
+            return DataTables::of($query)
+                ->addColumn('action', function ($penjemputan) {
+                    // Menyiapkan data untuk popup dalam bentuk data attributes
+                    $detail = [
+                        'id' => $penjemputan->id_penjemputan,
+                        'jenis' => $penjemputan->detailPenjemputan->map(function($detail) {
+                            return $detail->jenis->nama_jenis . ' (' . $detail->jenis->kategori->nama_kategori . ')';
+                        })->implode(', '),
+                        'berat' => $penjemputan->total_berat,
+                        'alamat' => $penjemputan->alamat_penjemputan,
+                        'dropbox' => $penjemputan->dropbox->nama_dropbox,
+                        'tanggal' => $penjemputan->tanggal_penjemputan
+                    ];
+                    
+                    // Membuat button dengan data attributes
+                    return '<button 
+                        class="detail-btn"
+                        data-id="'.$detail['id'].'"
+                        data-jenis="'.htmlspecialchars($detail['jenis']).'"
+                        data-berat="'.$detail['berat'].'"
+                        data-alamat="'.htmlspecialchars($detail['alamat']).'"
+                        data-dropbox="'.htmlspecialchars($detail['dropbox']).'"
+                        data-tanggal="'.$detail['tanggal'].'"
+                        onclick="showDetail(this)">
+                        Detail
+                    </button>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
-        $recordsTotal = $query->count();
-        $recordsFiltered = $recordsTotal;
-
-        $query->orderBy('id_pengguna_masyarakat', 'asc');
-
-        if ($request->has('order')) {
-            $orderColumn = $request->columns[$request->order[0]['column']]['name'];
-            $orderDirection = $request->order[0]['dir'];
-            
-            // Handle ordering based on related models
-            switch($orderColumn) {
-                case 'nama':
-                    $query->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
-                          ->orderBy('pengguna.nama', $orderDirection);
-                    break;
-                case 'nama_dropbox':
-                    $query->join('dropbox', 'penjemputan.id_dropbox', '=', 'dropbox.id_dropbox')
-                          ->orderBy('dropbox.nama_dropbox', $orderDirection);
-                    break;
-                case 'id_pengguna_masyarakat':
-                        $query->orderBy('id_pengguna_masyarakat', $orderDirection);
-                    break;
-                default:
-                    $query->orderBy($orderColumn, $orderDirection);
-            }
-        }
-
-        $data = $query->skip($request->start)
-                     ->take($request->length)
-                     ->get()
-                     ->map(function($item) {
-                         return [
-                             'nama' => $item->penggunaMasyarakat->nama,
-                             'id_pengguna_masyarakat' => $item->id_pengguna_masyarakat,
-                             'alamat' => $item->alamat_penjemputan,
-                             'dropbox_tujuan' => $item->dropbox->nama_dropbox,
-                             'tanggal_pengajuan' => $item->tanggal_penjemputan
-                         ];
-                     });
-
-        return response()->json([
-            'draw' => intval($request->draw),
-            'recordsTotal' => $recordsTotal,
-            'recordsFiltered' => $recordsFiltered,
-            'data' => $data
-        ]);
+        return view('admin.penjemputan-sampah.permintaan.index');
     }
-
-    return view('admin.penjemputan-sampah.permintaan.index');
-}
-
 }
