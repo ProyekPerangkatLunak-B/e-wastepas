@@ -29,6 +29,9 @@ class DaerahAdminController extends Controller
             ]);
 
             return DataTablesDataTables::of($daerah)
+                ->filterColumn('total_dropbox', function ($query, $keyword) {
+                    $query->whereRaw('(SELECT COUNT(*) FROM dropbox WHERE dropbox.id_daerah = daerah.id_daerah) LIKE ?', ["%{$keyword}%"]);
+                })
                 ->addColumn('action', function ($row) {
                     return '
                     <div class="flex space-x-2">
