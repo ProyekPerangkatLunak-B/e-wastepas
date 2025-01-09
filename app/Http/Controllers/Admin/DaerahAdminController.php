@@ -18,15 +18,21 @@ class DaerahAdminController extends Controller
         return view('admin.datamaster.master-data.daerah.index', compact('daerah'));
     }
 
-    public function getDaerahData()
+    public function getDaerahData(Request $request)
     {
         try {
+            $statusVerifikasi = $request->input('status_verifikasi', '');
+
             $daerah = Daerah::select([
                 'id_daerah',
                 'nama_daerah',
                 'status_daerah',
                 DB::raw('(SELECT COUNT(*) FROM dropbox WHERE dropbox.id_daerah = daerah.id_daerah) as total_dropbox')
             ]);
+
+            if (isset($statusVerifikasi)) {
+                $daerah->where('status_daerah', $statusVerifikasi);
+            }
 
             return DataTablesDataTables::of($daerah)
                 ->filterColumn('total_dropbox', function ($query, $keyword) {
