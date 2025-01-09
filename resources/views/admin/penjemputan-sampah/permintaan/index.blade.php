@@ -2,256 +2,213 @@
 
 @section('content')
     <style>
-
-
         h2 {
             color: black;
-            /* Hijau tua */
             margin-bottom: 15px;
             border-bottom: 3px solid #2ecc71;
-            /* Hijau lebih gelap */
             display: inline-block;
             padding-bottom: 5px;
         }
 
         h4 {
             color: black;
-            /* Hijau tua */
-        }
-
-        a.inline-block {
-            transition: all 0.3s ease;
-        }
-
-        a.inline-block:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 255, 0, 0.3);
-            /* Hijau */
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
+            border-radius: 8px;
             overflow: hidden;
-            border-radius: 12px;
         }
 
         thead {
-            background: linear-gradient(90deg, #27ae60, #2ecc71);
-            /* Gradasi hijau */
-            color: #ffffff;
-            padding: 12px;
-            text-transform: uppercase;
-            font-weight: bold;
-            border: none;
+            background-color: #2ecc71;
+            color: white;
         }
-
-        
-
-
-        td {
-            padding: 10px;
-            border: 1px solid #e0e0e0;
-            background: white;
-            text-align: left;
-            
-            
-        }
-
 
         th {
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px;
+            text-align: left;
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+
+        .detail-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .detail-btn:hover {
+            background-color: #27ae60;
+        }
+
+        /* Pop-up styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .popup table {
+            margin-bottom: 20px;
+        }
+
+        .popup th {
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px;
             text-align: center;
         }
 
-        button {
-            margin: 2px;
+        .close-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
             border-radius: 4px;
-            padding: 4px;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
-            /* Hijau */
-            background-color: #27ae60;
-            color: white
+            cursor: pointer;
+            float: right;
         }
 
-        button:hover {
-            /* Hijau */
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
-            /* Hijau lebih gelap */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
-
-        .flex.space-x-2 button {
-            margin: 0 3px;
-            border-radius: 6px;
-            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-        }
-
-        .flex.space-x-2 button:hover {
-            background-color: #27ae60;
-            /* Hijau lebih gelap */
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
-            /* Hijau lebih gelap */
-        }
-
-        .flex.space-x-2 .active {
-            background-color: #2ecc71;
-            /* Hijau */
-            color: #fff;
-        }
-
-        .popup {
-      display: none; /* Pop-up disembunyikan secara default */
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      z-index: 1000;
-    }
-
-    /* Overlay untuk memberikan efek gelap pada background */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-
-    /* Tombol Close */
-    .popup .close-btn {
-      background-color: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
     </style>
 
     <div class="container max-w-full px-4 mx-auto bg-[#F1F5F9]">
         <div class="py-8">
-            <h2 class="text-2xl font-bold leading-relaxed ml-14 text-black">Permintaan Penjemputan Sampah</h2>
-            <h4 class="text-base font-light ml-14 text-black">Daftar Permintaan Penjemputan Sampah.</h4>
+            <h2 class="text-2xl font-bold leading-relaxed ml-14">Permintaan Penjemputan Sampah</h2>
+            <h4 class="text-base font-light ml-14">Daftar Permintaan Penjemputan Sampah.</h4>
 
-            <div class="pl-12 mt-6 grid grid-cols-2">
-                <div class="overflow-x-auto bg-white rounded-lg shadow-md">
-                    <table id="masyarakatTable" class="w-full border border-gray-300 bg-white rounded-lg">
+            <div class="pl-12 mt-6">
+                <div class="bg-white rounded-lg shadow">
+                    <table id="masyarakatTable">
                         <thead>
                             <tr>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">ID Permintaan Penjemputan</th>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Aksi</th>
+                                <th>ID PERMINTAAN PENJEMPUTAN</th>
+                                <th>AKSI</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Data akan dimuat melalui AJAX -->
-                            <tr>
-                                <th> contoh untuk mengetes button detail</th>
-                                <th><button id="openPopupBtn">Detail</button>
-
-                                    <!-- Overlay -->
-                                    <div id="overlay" class="overlay"></div>
-                                  
-                                    <!-- Konten Pop-Up -->
-                                    <div id="popup" class="popup">
-                                        <div class=" mt-6">
-                                            <div class="overflow-x-auto bg-white rounded-lg shadow-md">
-                                                <table id="masyarakatTable" class="w-full border border-gray-300 bg-white rounded-lg">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                                                style="color: white">ID Permintaan Penjemputan</th>
-                                                            <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                                                style="color: white">Jenis dan Kategori</th>
-                                                            <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                                                style="color: white">Total Berat</th>
-                                                            <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                                                style="color: white">Alamat</th>
-                                                            <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                                                style="color: white">Dropbox</th>
-                                                            <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                                                style="color: white">Tanggal Pengajuan</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Data akan dimuat melalui AJAX -->
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                    </div>
-                                    <button class="close-btn mt-4" id="closePopupBtn">Tutup</button></th>
-                            </tr>
+                            <!-- Data will be loaded dynamically -->
                         </tbody>
                     </table>
                 </div>
-
-                
             </div>
         </div>
     </div>
 
+    <!-- Pop-up Detail -->
+    <div id="overlay" class="overlay"></div>
+    <div id="popup" class="popup">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID PERMINTAAN PENJEMPUTAN</th>
+                    <th>JENIS DAN KATEGORI</th>
+                    <th>TOTAL BERAT</th>
+                    <th>ALAMAT</th>
+                    <th>DROPBOX</th>
+                    <th>TANGGAL PENGAJUAN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="detail-id"></td>
+                    <td id="detail-jenis"></td>
+                    <td id="detail-berat"></td>
+                    <td id="detail-alamat"></td>
+                    <td id="detail-dropbox"></td>
+                    <td id="detail-tanggal"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="close-btn" id="closePopupBtn">Tutup</button>
+    </div>
+
     <script>
-         // Ambil elemen HTML
-    const openPopupBtn = document.getElementById('openPopupBtn');
-    const closePopupBtn = document.getElementById('closePopupBtn');
-    const popup = document.getElementById('popup');
-    const overlay = document.getElementById('overlay');
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = $('#masyarakatTable').DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,
+                paging: false,
+                ajax: '{{ route("admin.penjemputan-sampah.permintaan.index") }}',
+                columns: [
+                    { data: 'id_penjemputan', name: 'id_penjemputan' },
+                    { 
+                        data: 'action', 
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        className: 'text-center'
+                    }
+                ],
+                order: [[0, 'asc']],
+                dom: 't',
+            });
+        });
 
-    // Fungsi untuk menampilkan pop-up
-    openPopupBtn.addEventListener('click', () => {
-      popup.style.display = 'block';
-      overlay.style.display = 'block';
-    });
-
-    // Fungsi untuk menyembunyikan pop-up
-    closePopupBtn.addEventListener('click', () => {
-      popup.style.display = 'none';
-      overlay.style.display = 'none';
-    });
-
-    // Menutup pop-up jika overlay diklik
-    overlay.addEventListener('click', () => {
-      popup.style.display = 'none';
-      overlay.style.display = 'none';
-    });
-        // Define the changePage function globally
-        function changePage(page) {
-            $('#permintaanTable').DataTable().page(page).draw('page');
+        function showDetail(button) {
+            document.getElementById('detail-id').textContent = button.dataset.id;
+            document.getElementById('detail-jenis').textContent = button.dataset.jenis;
+            document.getElementById('detail-berat').textContent = `${button.dataset.berat} kg`;
+            document.getElementById('detail-alamat').textContent = button.dataset.alamat;
+            document.getElementById('detail-dropbox').textContent = button.dataset.dropbox;
+            document.getElementById('detail-tanggal').textContent = new Date(button.dataset.tanggal)
+                .toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+            
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            $(document).ready(function() {
-                $('#masyarakatTable').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax: {
-        url: '{{ route("admin.penjemputan-sampah.permintaan.index") }}',
-        type: 'GET'
-    },
-    columns: [
- 
-    ],
-    order: [[1, 'asc']], // Sort by id_pengguna_masyarakat ascending by default
-    dom: 't'
-});
-});
-});
+        document.getElementById('closePopupBtn').addEventListener('click', () => {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
 
+        document.getElementById('overlay').addEventListener('click', () => {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
 
-        
-
-    
-
-
-        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('popup').style.display = 'none';
+                document.getElementById('overlay').style.display = 'none';
+            }
+        });
     </script>
 @endsection

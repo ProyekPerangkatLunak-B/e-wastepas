@@ -153,6 +153,7 @@ Route::prefix('admin')
             ->as('penjemputan-sampah.')
             ->group(function () {
                 Route::get('permintaan', [PermintaanPenjemputanSampahAdminController::class, 'index'])->name('permintaan.index');
+                Route::get('permintaan/detail/{id}', [PermintaanPenjemputanSampahAdminController::class, 'getDetail'])->name('permintaan.detail');
                 Route::get('penerimaan', [PenerimaanPenjemputanSampahAdminController::class, 'index'])->name('penerimaan.index');
                 Route::get('tracking', [TrackingPenjemputanSampahAdminController::class, 'index'])->name('tracking.index');
                 Route::get('total', [TotalSampahPenjemputanSampahAdminController::class, 'index'])->name('total.index');

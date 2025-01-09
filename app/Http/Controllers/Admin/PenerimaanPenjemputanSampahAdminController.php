@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Penjemputan;
+use App\Models\Pelacakan;
 use App\Models\Pengguna;
 use App\Models\Dropbox;
 use Yajra\DataTables\DataTables;
@@ -15,60 +16,34 @@ class PenerimaanPenjemputanSampahAdminController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Penjemputan::with(['penggunaKurir', 'dropbox'])
-                               ->select('penjemputan.*');
+            // Mengubah query untuk mendapatkan data berdasarkan status "diterima" dari tabel pelacakan
+            $query = Penjemputan::with(['dropbox'])
+                               ->select('penjemputan.*', 'pelacakan.status')
+                               ->join('pelacakan', 'penjemputan.id_penjemputan', '=', 'pelacakan.id_penjemputan')
+                               ->whereIn('pelacakan.status', ['diterima', 'dibatalkan'])
+                               ->groupBy('penjemputan.id_penjemputan', 'pelacakan.status');
 
-            if ($request->has('search') && !empty($request->search['value'])) {
-                $searchValue = $request->search['value'];
-                $query->whereHas('penggunaKurir', function($q) use ($searchValue) {
-                    $q->where('nama', 'like', "%{$searchValue}%");
-                });
-            }
-
-            $recordsTotal = $query->count();
-            $recordsFiltered = $recordsTotal;
-
-            $query->orderBy('id_pengguna_kurir', 'asc');
-
-            if ($request->has('order')) {
-                $orderColumn = $request->columns[$request->order[0]['column']]['name'];
-                $orderDirection = $request->order[0]['dir'];
-                
-                switch($orderColumn) {
-                    case 'nama':
-                        $query->join('pengguna', 'penjemputan.id_pengguna_kurir', '=', 'pengguna.id_pengguna')
-                              ->orderBy('pengguna.nama', $orderDirection);
-                        break;
-                    case 'alamat_dropbox':
-                        $query->join('dropbox', 'penjemputan.id_dropbox', '=', 'dropbox.id_dropbox')
-                              ->orderBy('dropbox.alamat_dropbox', $orderDirection);
-                        break;
-                    default:
-                        $query->orderBy($orderColumn, $orderDirection);
-                }
-            }
-
-            $data = $query->skip($request->start)
-                         ->take($request->length)
-                         ->get()
-                         ->map(function($item) {
-                             return [
-                                 'nama' => $item->penggunaKurir ? $item->penggunaKurir->nama : '-',
-                                 'id_pengguna_kurir' => $item->id_pengguna_kurir,
-                                 'id_penjemputan' => $item->id_penjemputan,
-                                 'alamat_penjemputan' => $item->alamat_penjemputan,
-                                 'alamat_dropbox' => $item->dropbox ? $item->dropbox->alamat_dropbox : '-',
-                                 'kode_penjemputan' => $item->kode_penjemputan,
-                                 'tanggal_penjemputan' => $item->tanggal_penjemputan
-                             ];
-                         });
-
-            return response()->json([
-                'draw' => intval($request->draw),
-                'recordsTotal' => $recordsTotal,
-                'recordsFiltered' => $recordsFiltered,
-                'data' => $data
-            ]);
+            return DataTables::of($query)
+                ->addColumn('id_penjemputan', function ($penjemputan) {
+                    return $penjemputan->id_penjemputan;
+                })
+                ->addColumn('lokasi_penjemputan', function ($penjemputan) {
+                    return $penjemputan->alamat_penjemputan;
+                })
+                ->addColumn('dropbox_tujuan', function ($penjemputan) {
+                    return $penjemputan->dropbox ? $penjemputan->dropbox->nama_dropbox : '-';
+                })
+                ->addColumn('kode_penjemputan', function ($penjemputan) {
+                    return $penjemputan->kode_penjemputan;
+                })
+                ->addColumn('waktu_tanggal', function ($penjemputan) {
+                    return $penjemputan->tanggal_penjemputan;
+                })
+                ->addColumn('status', function ($penjemputan) {
+                    return ucfirst($penjemputan->status);
+                })
+                ->rawColumns(['status'])
+                ->make(true);
         }
 
         return view('admin.penjemputan-sampah.penerimaan.index');

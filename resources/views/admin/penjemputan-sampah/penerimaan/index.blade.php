@@ -2,20 +2,16 @@
 
 @section('content')
     <style>
-
         h2 {
             color: black;
-            /* Hijau tua */
             margin-bottom: 15px;
             border-bottom: 3px solid #2ecc71;
-            /* Hijau lebih gelap */
             display: inline-block;
             padding-bottom: 5px;
         }
 
         h4 {
             color: black;
-            /* Hijau tua */
         }
 
         a.inline-block {
@@ -25,7 +21,6 @@
         a.inline-block:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 255, 0, 0.3);
-            /* Hijau */
         }
 
         table {
@@ -37,7 +32,6 @@
 
         th {
             background: linear-gradient(90deg, #27ae60, #2ecc71);
-            /* Gradasi hijau */
             color: #ffffff;
             padding: 12px;
             text-transform: uppercase;
@@ -49,8 +43,6 @@
             padding: 10px;
             border: 1px solid #e0e0e0;
             background: white;
-            
-            
         }
 
         td,
@@ -61,13 +53,10 @@
         button {
             transition: background-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 10px rgba(0, 255, 0, 0.1);
-            /* Hijau */
         }
 
         button:hover {
-            /* Hijau */
             box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
-            /* Hijau lebih gelap */
         }
 
         .flex.space-x-2 button {
@@ -78,15 +67,12 @@
 
         .flex.space-x-2 button:hover {
             background-color: #27ae60;
-            /* Hijau lebih gelap */
             color: #fff;
             box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
-            /* Hijau lebih gelap */
         }
 
         .flex.space-x-2 .active {
             background-color: #2ecc71;
-            /* Hijau */
             color: #fff;
         }
     </style>
@@ -101,18 +87,12 @@
                     <table id="penerimaanTable" class="w-full border border-gray-300 bg-white rounded-lg">
                         <thead class="bg-gray-100">
                             <tr>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">ID Penjemputan</th>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Lokasi Penjemputan</th>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Dropbox Tujuan</th>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">KOde Penjemputan</th>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Waktu dan Tanggal</th>
-                                <th class="border cursor-pointer px-4 py-2 text-center text-sm font-semibold text-gray-700"
-                                    style="color: white">Status</th>
+                                <th class="border px-4 py-2 text-center text-sm font-semibold" style="color: white">ID Penjemputan</th>
+                                <th class="border px-4 py-2 text-center text-sm font-semibold" style="color: white">Lokasi Penjemputan</th>
+                                <th class="border px-4 py-2 text-center text-sm font-semibold" style="color: white">Dropbox Tujuan</th>
+                                <th class="border px-4 py-2 text-center text-sm font-semibold" style="color: white">Kode Penjemputan</th>
+                                <th class="border px-4 py-2 text-center text-sm font-semibold" style="color: white">Waktu dan Tanggal</th>
+                                <th class="border px-4 py-2 text-center text-sm font-semibold" style="color: white">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,46 +100,32 @@
                         </tbody>
                     </table>
                 </div>
-
-                
             </div>
         </div>
     </div>
 
     <script>
-        // Define the changePage function globally
-        function changePage(page) {
-            $('#penerimaanTable').DataTable().page(page).draw('page');
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            $(document).ready(function() {
-                $('#penerimaanTable').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax: {
-        url: '{{ route("admin.penjemputan-sampah.penerimaan.index") }}',
-        type: 'GET'
-    },
-    columns: [
-        
-    ],
-    order: [[1, 'asc']], // Sort by id_pengguna_kurir ascending by default
-    dom: 't'
-});
-
-                
-
-                
+            $('#penerimaanTable').DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,
+                paging: false,
+                ajax: {
+                    url: '{{ route("admin.penjemputan-sampah.penerimaan.index") }}',
+                    type: 'GET'
+                },
+                columns: [
+                    { data: 'id_penjemputan', name: 'id_penjemputan' },
+                    { data: 'lokasi_penjemputan', name: 'lokasi_penjemputan' },
+                    { data: 'dropbox_tujuan', name: 'dropbox_tujuan' },
+                    { data: 'kode_penjemputan', name: 'kode_penjemputan' },
+                    { data: 'waktu_tanggal', name: 'waktu_tanggal' },
+                    { data: 'status', name: 'status' }
+                ],
+                order: [[0, 'asc']],
+                dom: 't'
             });
         });
-
-
-        
-
-    
-
-
-        
     </script>
 @endsection
