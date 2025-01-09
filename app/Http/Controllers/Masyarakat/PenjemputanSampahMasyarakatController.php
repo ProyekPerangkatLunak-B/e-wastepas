@@ -48,6 +48,8 @@ class PenjemputanSampahMasyarakatController extends Controller
         try {
             $totalSampah = DetailPenjemputan::whereHas('penjemputan.pelacakan', function ($query) {
                 $query->where('status', 'Selesai');
+            })->whereHas('penjemputan.pelacakan', function ($query) {
+                $query->where('id_pengguna_masyarakat', Auth::id());
             })->count();
             $totalPoin = Penjemputan::whereHas('pelacakan', function ($query) {
                 $query->where('status', 'Selesai');
