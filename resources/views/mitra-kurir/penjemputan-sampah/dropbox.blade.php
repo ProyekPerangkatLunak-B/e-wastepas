@@ -35,15 +35,15 @@
             <!-- button jemput sekarang -->
             @if ($penjemputan === null && $pelacakan === null)
                 <a href="#" id="openModalBtn"
-                    class="flex items-center justify-center px-10 py-2 shadow-md opacity-50 pointer-events-none h-max bg-gradient-to-b from-secondary-normal to-primary-normal text-white-100 rounded-2xl">
+                    class="flex hidden items-center justify-center px-10 py-2 shadow-md opacity-50 pointer-events-none h-max bg-gradient-to-b from-secondary-normal to-primary-normal text-white-100 rounded-2xl">
                     Jemput Sekarang
                 </a>
             @else
                 <button data-status="Diterima" data-next-status="Dijemput Kurir" type="button"
                     x-bind:class="{
-                        'flex items-center justify-center px-10 py-2 shadow-md bg-gradient-to-b from-secondary-normal to-primary-normal text-white-100 rounded-2xl': currentStatus ===
+                        'flex hidden items-center justify-center px-10 py-2 shadow-md bg-gradient-to-b from-secondary-normal to-primary-normal text-white-100 rounded-2xl': currentStatus ===
                             $el.getAttribute('data-status'),
-                        'flex items-center justify-center px-10 py-2 shadow-md opacity-50 pointer-events-none cursor-not-allowed bg-gradient-to-b from-secondary-normal to-primary-normal text-white-100 rounded-2xl': currentStatus !==
+                        'flex hidden items-center justify-center px-10 py-2 shadow-md opacity-50 pointer-events-none cursor-not-allowed bg-gradient-to-b from-secondary-normal to-primary-normal text-white-100 rounded-2xl': currentStatus !==
                             $el.getAttribute('data-status')
                     }"
                     x-on:click.prevent="if (currentStatus !== $el.getAttribute('data-next-status')) {
