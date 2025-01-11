@@ -95,7 +95,7 @@
 
                         <!-- Chart: Top Jenis Sampah -->
                         <button class="bg-white p-4 rounded-lg shadow-md text-left w-full hover:bg-[#e2ede0] focus:outline-none focus:ring-2 focus:ring-[#437252]">
-                            <a href="kategori">
+                            {{-- <a href="kategori">
                                 <h2 class="relative text-lg font-bold mb-2 top-0">Top Sampah per Kategori</h2> <!-- Menambahkan top-0 untuk menempatkan di atas -->
                                 <p class="text-sm text-gray-500 mb-4">Berdasarkan Kategori</p>
                         
@@ -141,6 +141,28 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </a> --}}
+
+                            <a href="kategori">
+                                <h2 class="relative text-lg font-bold mb-2 top-0">Top Sampah per Kategori</h2>
+                                <p class="text-sm text-gray-500 mb-4">Berdasarkan Kategori</p>
+
+                                <div class="space-y-6">
+                                    @foreach ($categories as $category)
+                                        <div class="flex items-center space-x-4 ml-10">
+                                            <i class="fa-solid fa-box text-3xl text-gray-700 flex-shrink-0"></i> <!-- Ikon kategori -->
+                                            <div class="w-3/4">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-lg font-medium ml-2">{{ $category['nama_kategori'] }}</span>
+                                                    <span class="text-lg font-medium">{{ $category['persentase'] }}%</span>
+                                                </div>
+                                                <div class="w-full bg-gray-300 h-2 rounded-full mt-1 ml-2">
+                                                    <div class="bg-[#437252] h-2 rounded-full" style="width: {{ $category['persentase'] }}%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </a>
                         </button>
