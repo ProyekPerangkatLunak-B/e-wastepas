@@ -31,7 +31,9 @@
               </tr>
             </thead>
             <tbody>
+              @foreach($riwayat as $key => $kurir)
               <tr class="border-t text-center">
+<<<<<<< Updated upstream
                 <td class="p-4">1</td>
                 <td class="p-4">Asep</td>
                 <td class="p-4">3,000</td>
@@ -64,7 +66,19 @@
                 <td class="p-4">3,000</td>
                 <td class="p-4">38,894</td>
                 <td class="p-4">View</td>
+=======
+                <td class="p-4">{{ $key + 1 }}</td>
+                <td class="p-4">{{ $kurir->kode_penjemputan }}</td>
+                <td class="p-4">{{ \Carbon\Carbon::parse($kurir->tanggal_penjemputan)->format('d-m-Y') }}</td>
+                <td class="p-4">{{ $kurir->alamat_penjemputan }}</td>      
+                <td class="p-4">
+                  <a href="{{$kurir->kode_penjemputan}}" class="text-blue-500 hover:underline">
+                    Lihat Detail
+                  </a>
+                </td>                               
+>>>>>>> Stashed changes
               </tr>
+            @endforeach
             </tbody>
           </table>
 </div>
