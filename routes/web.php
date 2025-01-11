@@ -222,7 +222,6 @@ Route::group([
 
     Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
-
     // Route::get('/datamaster/per-daerah', function () {
     //     return view('manajemen.datamaster.per-daerah.index');
     // })->name('datamaster.per-daerah.index');

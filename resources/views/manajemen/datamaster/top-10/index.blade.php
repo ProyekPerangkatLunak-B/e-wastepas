@@ -21,9 +21,9 @@
     <!-- Card 1 -->
     {{-- Masyarakat --}}
       <div id="masyarakat" class="grid grid-cols-1 md:grid-cols-3 gap-y-2 mb-6 relative ml-40 mt-10 ">
-        @if ($topMasyarakat->isEmpty())
+        {{-- @if ($topMasyarakat->isEmpty())
             <h1 class="text-center text-lg font-bold">Tidak ada Data</h1>
-        @else
+        @else --}}
             <!-- Card Juara 2 -->
             @foreach($topMasyarakat->skip(1)->take(1) as $key => $masyarakat)
             <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-72 relative top-4">
@@ -65,7 +65,7 @@
               </div>
             </div>
             @endforeach
-        @endif
+        {{-- @endif --}}
       </div>
 
       {{-- Kurir --}}
