@@ -30,8 +30,24 @@ class DaerahController extends Controller
             ->orderByDesc('total_berat_sampah') // Berat sampah tertinggi muncul lebih dulu
             ->orderBy('d.id_daerah')   // Urutan default jika semua sama
             ->paginate(8);  // Menambahkan pagination, 8 item per halaman
-    
+        
+            $topDaerah = DB::table('daerah as d')
+            ->leftJoin('penjemputan as p', 'p.id_daerah', '=', 'd.id_daerah')
+            ->leftJoin('pelacakan as pl', 'p.id_penjemputan', '=', 'pl.id_penjemputan')
+            ->select(
+                'd.nama_daerah',
+                DB::raw('COALESCE(SUM(CASE WHEN pl.status = "Selesai" THEN p.total_berat ELSE 0 END), 0) AS total_berat_sampah')
+            )
+            ->groupBy('d.id_daerah', 'd.nama_daerah')
+            ->orderByDesc('total_berat_sampah') // Urutkan berdasarkan total berat sampah
+            ->limit(6) // Ambil 6 daerah teratas
+            ->get();
+
         // Mengembalikan data ke view
-        return view('manajemen.datamaster.per-daerah.index', ['dataDaerah' => $dataDaerah]);
+        return view('manajemen.datamaster.per-daerah.index', [
+            'dataDaerah' => $dataDaerah,
+            'topDaerah' => $topDaerah,
+        ]);
+        
     }
 }    

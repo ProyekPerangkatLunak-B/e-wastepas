@@ -231,73 +231,82 @@
         });
 
         // Chart: Total Sampah Tiap Daerah
-        renderChart("#chart-daerah", {
-        series: [{ data: [38, 40, 23.3, 15.4, 28, 10] }], // Data dalam persen
-        chart: {
-            type: 'radar',
-            width: '100%', // Mengatur lebar chart
-            height: '400px' // Mengatur tinggi chart
-        },
-        labels: ['Cibiru', 'Cileunyi', 'Sarijadi', 'Sukagalih', 'Setiabudi', 'Arab'],
-        stroke: {
-            width: 2,
-            colors: ['#437252']
-        },
-        fill: {
-            opacity: 0.4
-        },
-        markers: {
-            size: 4,
-        },
-        yaxis: {
-            max: 50, // Mengatur nilai maksimum pada sumbu Y ke 100
-            labels: {
-                formatter: function(value) {
-                    return value + "%"; // Menambahkan tanda persen di label
-                }
-            }
-        }
-    });
+        document.addEventListener('DOMContentLoaded', function () {
+            renderChart("#chart-daerah", {
+                series: [{
+                    data: @json($topDaerah->pluck('total_berat_sampah')->map(fn($val) => round($val, 2))),
+                }],
+                chart: {
+                    type: 'radar',
+                    width: '100%',
+                    height: '400px',
+                },
+                labels: @json($topDaerah->pluck('nama_daerah')),
+                stroke: {
+                    width: 2,
+                    colors: ['#437252'],
+                },
+                fill: {
+                    opacity: 0.4,
+                },
+                markers: {
+                    size: 4,
+                },
+                yaxis: {
+                max: 100, // Pastikan ini mencakup data maksimum kamu
+                labels: {
+                    formatter: function(value) {
+                        return value + "%"; // Menambahkan tanda persen di label
+                        },
+                    },
+                },
+            });
+        });
 
     // Chart Dropbox
     const ctx = document.getElementById('doughnutChart').getContext('2d');
 
-    const data = {
-    labels: ['Cicaheum', 'Baleendah', 'Cicadas', 'Marga Sari'],
-    datasets: [{
-        label: 'Jenis Sampah Elektronik',
-        data: [40, 25, 20, 15],
-        backgroundColor: [
-        '#4CAF50', // Hijau
-        '#FFC107', // Kuning
-        '#2196F3', // Biru
-        '#FF5722'  // Oranye
-        ],
-        hoverOffset: 4
-    }]
+    // Data dari controller
+    const labels = @json($topDropbox->pluck('nama_dropbox'));
+    const data = @json($topDropbox->pluck('total_berat_sampah'));
+
+    const doughnutData = {
+        labels: labels,
+        datasets: [{
+            label: 'Total Berat Sampah',
+            data: data,
+            backgroundColor: [
+                '#4CAF50', // Hijau
+                '#FFC107', // Kuning
+                '#2196F3', // Biru
+                '#FF5722'  // Oranye
+            ],
+            hoverOffset: 4
+        }]
     };
 
-    const config = {
-    type: 'doughnut',
-    data: data,
-    options: {
-        responsive: true,
-        plugins: {
-        legend: {
-            position: 'bottom', // Menempatkan legend di bawah grafik
-            labels: {
-            font: {
-                size: 14
+    const doughnutConfig = {
+        type: 'doughnut',
+        data: doughnutData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
             }
-            }
-        },
-        tooltip: {
-            enabled: true
         }
-        }
-    }
     };
 
-    const doughnutChart = new Chart(ctx, config);
+    const doughnutChart = new Chart(ctx, doughnutConfig);
+
       </script>
 @endsection
