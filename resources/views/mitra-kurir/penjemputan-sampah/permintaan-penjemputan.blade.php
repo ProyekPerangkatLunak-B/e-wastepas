@@ -1,22 +1,19 @@
 @extends('layouts.main-mitrakurir')
 
 @section('content')
-    <div class="container max-w-full px-4 mx-auto  bg-gray-100">
+    <div class="container max-w-full px-4 mx-auto bg-gray-100">
         <div class="py-8">
             <h2 class="text-xl font-semibold leading-relaxed ml-14">Permintaan Penjemputan</h2>
 
-            <div class="flex flex-row lg:flex-col items-start justify-between space-y-4 md:space-y-0">
+            <div class="flex flex-row items-start justify-between space-y-4 lg:flex-col md:space-y-0">
 
-
-                <h3><b>Nama kurir:</b> {{ Auth::user()->nama }} - <i class="text-red-400">debugging</i></h3>
-                <h3><b>Peran:</b> {{ Auth::user()->peran->nama_peran }} - <i class="text-red-400">debugging</i></h3>
-                <div class="flex flex-row lg:flex-row my-5 items-center justify-between w-full">
+                <div class="flex flex-row items-center justify-between w-full my-5 lg:flex-row">
 
                     <h4 class="text-base font-normal ml-14">Daftar permintaan penjemputan sampah.</h4>
 
                     {{-- Search and Filter options --}}
                     <div
-                        class="flex flex-col lg:flex-row items-center md:mr-14 space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
+                        class="flex flex-col items-center w-full space-y-4 lg:flex-row md:mr-14 md:space-y-0 md:space-x-4 md:w-auto">
                         {{-- Search Box --}}
                         <form method="get" action="{{ route('mitra-kurir.penjemputan.permintaan') }}"
                             class="relative w-full md:w-[334px]">
@@ -45,15 +42,14 @@
 
                             <select
                                 class="w-full h-[50px] py-3 pl-4 text-sm text-gray-700 bg-white border border-gray-300 appearance-none pr-14 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                                name="kategori" onchange="this.form.submit()">
+                                name="total-berat" onchange="this.form.submit()">
                                 <option value="all">Filter</option>
-                                @foreach ($kategori as $k)
-                                    <option value="{{ $k }}" {{ request('kategori') == $k ? 'selected' : '' }}>
-                                        {{ $k->nama_kategori }}
-                                    </option>
-                                @endforeach
-                                {{-- <option value="diproses" {{ $sort == 'diproses' ? 'selected' : '' }}>Diproses</option>
-                            <option value="diterima" {{ $sort == 'diterima' ? 'selected' : '' }}>Diterima</option> --}}
+                                <option value="berat-ringan"
+                                    {{ request('total-berat') == 'berat-ringan' ? 'selected' : '' }}>
+                                    Berat ke Ringan</option>
+                                <option value="ringan-berat"
+                                    {{ request('total-berat') == 'ringan-berat' ? 'selected' : '' }}>
+                                    Ringan ke Berat</option>
                             </select>
                             <!-- SVG Icon Filter -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -66,7 +62,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row lg:flex-col w-full items-center lg:py-10 justify-center mt-4">
+                <div class="flex flex-row items-center justify-center w-full mt-4 lg:flex-col lg:py-10">
                     <div class="grid grid-cols-1 gap-4 px-12 mt-4 lg:grid-cols-3 lg:gap-4">
                         @if ($penjemputan === null)
                             <div
@@ -104,18 +100,19 @@
                             {{-- asdasdasdasd --}}
                             @foreach ($penjemputan as $pjm)
                                 <div
-                                    class="relative w-full h-auto max-w-md bg-neutral-50 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg flex flex-col justify-between">
+                                    class="relative flex flex-col justify-between w-full h-auto max-w-md border border-gray-200 shadow-md bg-neutral-50 rounded-2xl hover:shadow-lg">
                                     {{-- @foreach ($pjm as $item) --}}
                                     <div
-                                        class="absolute top-0 left-0 bg-secondary-normal text-white-100 font-semibold px-4 py-1 rounded-tl-2xl rounded-br-2xl">
+                                        class="absolute top-0 left-0 px-4 py-1 font-semibold bg-secondary-normal text-white-100 rounded-tl-2xl rounded-br-2xl">
                                         {{ $pjm->total_berat }} Kg
                                     </div>
                                     {{-- @endforeach --}}
 
                                     <!-- Bagian Konten Utama -->
-                                    <div class="flex flex-col items-center pb-5 flex-grow">
+                                    <div class="flex flex-col items-center flex-grow pb-5">
                                         <!-- Gambar -->
-                                        <div class="h-20 rounded-full overflow-hidden bg-white mt-5">
+                                        <div
+                                            class="w-20 h-20 mt-5 overflow-hidden bg-white rounded-full sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-20 lg:h-20">
                                             <img class="object-cover w-full h-full"
                                                 src="{{ $pjm->penggunaMasyarakat->foto_profil }}"
                                                 alt="{{ $pjm->penggunaMasyarakat->nama }}" />
@@ -130,18 +127,18 @@
                                         </div>
 
                                         <!-- Daftar Kategori -->
-                                        <div class="flex-grow">
+                                        <div class="flex-grow mx-8 overflow-y-auto max-h-46">
                                             @foreach ($pjm->kategoriData as $kategori)
                                                 <ul class="my-4 space-y-3">
                                                     <li class="mx-5">
                                                         <a href="{{ route('mitra-kurir.penjemputan.detail-kategori', $kategori['id_kategori']) }}"
-                                                            class="w-auto flex items-center p-3 text-base font-bold text-gray-900 rounded-2xl bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-slate-200 dark:hover:bg-gray-500 dark:text-white">
+                                                            class="flex items-center w-auto p-3 text-base font-bold text-gray-900 rounded-2xl bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-slate-200 dark:hover:bg-gray-500 dark:text-white">
                                                             <div class="flex-shrink-0">
                                                                 <img class="w-8 h-8 rounded-full"
                                                                     src="https://picsum.photos/700/700" alt="">
                                                             </div>
                                                             <span
-                                                                class="flex-1 ms-3 whitespace-normal break-words text-lg font-normal">{{ $kategori['nama_kategori'] }}</span>
+                                                                class="flex-1 text-sm font-normal break-words whitespace-normal ms-3">{{ Str::limit(strip_tags($kategori['nama_kategori']), 50) }}</span>
                                                             <span
                                                                 class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-base font-medium text-lime-900">{{ $kategori['jumlah_jenis'] }}
                                                                 Pcs</span>

@@ -8,15 +8,15 @@
                 <h4 class="text-base font-normal ml-4 md:ml-14 text-center md:text-left">
                     Kategori dan jenis sampah elektronik yang dapat dijemput.
                 </h4>
-            
+
                 {{-- Search and Filter options --}}
-                <div class="flex flex-col lg:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto px-4 md:px-0">
+                <div
+                    class="flex flex-col lg:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto px-4 md:px-0">
                     {{-- Search Box --}}
                     <div class="relative w-full md:w-auto">
                         <input type="text"
                             class="w-full md:w-[334px] h-[50px] py-3 pl-12 pr-4 text-sm text-gray-900 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 placeholder:text-gray-900"
-                            placeholder="Cari...."
-                            value="{{ $search ?? '' }}"
+                            placeholder="Cari...." value="{{ $search ?? '' }}"
                             onkeydown="if(event.key === 'Enter') window.location.href='{{ url()->current() }}?search=' + this.value">
                         <!-- SVG Icon Search -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -26,7 +26,7 @@
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
                     </div>
-            
+
                     {{-- Filter Dropdown --}}
                     <div class="relative w-full md:w-auto">
                         <select
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
             {{-- Card Section --}}
             <div class="flex justify-center mt-4">
@@ -54,8 +54,8 @@
                         <div
                             class="flex justify-center mt-56 items-center col-span-full bg-white-normal w-[400px] h-[300px] rounded-xl shadow-lg">
                             <div class="text-center">
-                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}"
-                                    alt="Tidak Ditemukan" class="w-[100px] h-[100px] mx-auto mb-4">
+                                <img src="{{ asset('img/masyarakat/penjemputan-sampah/batal.png') }}" alt="Tidak Ditemukan"
+                                    class="w-[100px] h-[100px] mx-auto mb-4">
                                 <p class="text-lg font-semibold text-gray-500">
                                     Kategori {{ $search ?? 'Sampah Elektronik' }} tidak ditemukan.
                                 </p>
@@ -64,20 +64,21 @@
                     @else
                         @foreach ($kategori as $kategoriSampah)
                             @php
-                                $imagePath = 'img/masyarakat/gambarKategoriSampah/' . ($kategoriSampah->gambar ?? $kategoriSampah->nama_kategori . '.png');
-                                $image = file_exists(public_path($imagePath)) ? $imagePath : 'img/masyarakat/gambarKategoriSampah/no-image.png';
+                                $imagePath =
+                                    'img/masyarakat/gambarKategoriSampah/' .
+                                    ($kategoriSampah->gambar ?? $kategoriSampah->nama_kategori . '.png');
+                                $image = file_exists(public_path($imagePath))
+                                    ? $imagePath
+                                    : 'img/masyarakat/gambarKategoriSampah/no-image.png';
                             @endphp
-                            <x-card-kategori
-                                title="{{ $kategoriSampah->nama_kategori }}"
-                                description="{{ $kategoriSampah->deskripsi_kategori }}"
-                                image="{{ asset($image) }}"
-                                link="{{ route('mitra-kurir.penjemputan.detail-kategori', $kategoriSampah->id_kategori) }}"
-                            />
+                            <x-card-kategori title="{{ $kategoriSampah->nama_kategori }}"
+                                description="{{ $kategoriSampah->deskripsi_kategori }}" image="{{ asset($image) }}"
+                                link="{{ route('mitra-kurir.penjemputan.detail-kategori', $kategoriSampah->id_kategori) }}" />
                         @endforeach
                     @endif
                 </div>
             </div>
-            
+
         </div>
     </div>
 @endsection
