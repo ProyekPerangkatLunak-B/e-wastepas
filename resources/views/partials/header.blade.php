@@ -15,7 +15,7 @@
 
             <!-- Dropdown menu -->
             <div x-show="dropdownOpen" @click.away="dropdownOpen = false" x-cloak
-                class="absolute right-0 z-10 w-[350px] h-[215px] bg-white-normal shadow-lg mt-72 ring-1 ring-black-normal ring-opacity-5 border border-gray-100 rounded-2xl"
+                class="absolute right-0 z-50 w-[350px] h-[215px] bg-white-normal shadow-lg mt-72 ring-1 ring-black-normal ring-opacity-5 border border-gray-100 rounded-2xl"
                 x-transition:enter="transition ease-out duration-200"
                 x-transition:enter-start="transform opacity-0 scale-95"
                 x-transition:enter-end="transform opacity-100 scale-100"
