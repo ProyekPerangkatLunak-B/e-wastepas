@@ -188,7 +188,7 @@ Route::group([
     // Route::get('/datamaster/detail-riwayat', function () {
     //     return view('manajemen.datamaster.riwayat.detail-riwayat');
     // })->name('datamaster.riwayat.detail-riwayat');
-    
+
 
     Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
@@ -202,7 +202,7 @@ Route::group([
     Route::get('/datamaster/dropbox', [DropboxController::class, 'index'])->name('datamaster.dropbox.index');
 
     Route::get('/datamaster/riwayat', [RiwayatController::class, 'index'])->name('datamaster.riwayat.index');
-    Route::get('/datamaster/{kode_penjemputan}', [RiwayatController::class, 'show'])->name('datamaster.riwayat.detail-riwayat');    
+    Route::get('/datamaster/{kode_penjemputan}', [RiwayatController::class, 'show'])->name('datamaster.riwayat.detail-riwayat');
 
     Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
