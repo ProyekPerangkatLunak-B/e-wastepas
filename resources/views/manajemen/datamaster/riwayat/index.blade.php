@@ -20,67 +20,38 @@
       </header>
       <h4 class="text-base font-normal ml-24 mb-10 -mt-14">Daftar Riwayat Penjemputan Sampah</h4>
     <div class="px-12 pb-6 mt-4 ml-10">
-        <table class="w-full bg-white rounded-2xl shadow-md mt-6">
-            <thead>
-              <tr class="text-center text-sm font-bold">
-                <th class="p-4">No</th>
-                <th class="p-4">Kode</th>
-                <th class="p-4">Tanggal Penjemputan</th>
-                <th class="p-4">Alamat Penjemputan</th>
-                <th class="p-4">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($riwayat as $key => $kurir)
-              <tr class="border-t text-center">
-<<<<<<< Updated upstream
-                <td class="p-4">1</td>
-                <td class="p-4">Asep</td>
-                <td class="p-4">3,000</td>
-                <td class="p-4">38,894</td>
-                 
-                  <td class="p-4">
-                    <button>
-                      <a href="detail-riwayat">View</a> 
-                    </button>
-                  </td>
-                
-              </tr>
-              <tr class="border-t text-center">
-                <td class="p-4">2</td>
-                <td class="p-4">Asep</td>
-                <td class="p-4">3,000</td>
-                <td class="p-4">38,894</td>
-                <td class="p-4">View</td>
-              </tr>
-              <tr class="border-t text-center">
-                <td class="p-4">3</td>
-                <td class="p-4">Asep</td>
-                <td class="p-4">3,000</td>
-                <td class="p-4">38,894</td>
-                <td class="p-4">View</td>
-              </tr>
-              <tr class="border-t text-center">
-                <td class="p-4">4</td>
-                <td class="p-4">Asep</td>
-                <td class="p-4">3,000</td>
-                <td class="p-4">38,894</td>
-                <td class="p-4">View</td>
-=======
-                <td class="p-4">{{ $key + 1 }}</td>
-                <td class="p-4">{{ $kurir->kode_penjemputan }}</td>
-                <td class="p-4">{{ \Carbon\Carbon::parse($kurir->tanggal_penjemputan)->format('d-m-Y') }}</td>
-                <td class="p-4">{{ $kurir->alamat_penjemputan }}</td>      
-                <td class="p-4">
+      @php
+      // Mengelompokkan data berdasarkan kode_penjemputan
+      $riwayatUnique = $riwayat->unique('kode_penjemputan');
+  @endphp
+  
+  <table class="w-full bg-white rounded-2xl shadow-md mt-6">
+      <thead>
+          <tr class="text-center text-sm font-bold">
+              <th class="p-4">No</th>
+              <th class="p-4">Kode</th>
+              <th class="p-4">Tanggal Penjemputan</th>
+              <th class="p-4">Alamat Penjemputan</th>
+              <th class="p-4">Aksi</th>
+          </tr>
+      </thead>
+      <tbody>
+          @foreach($riwayatUnique->values() as $key => $kurir)
+          <tr class="border-t text-center">
+              <td class="p-4">{{ $key + 1 }}</td> <!-- Penomoran tetap berurutan -->
+              <td class="p-4">{{ $kurir->kode_penjemputan }}</td>
+              <td class="p-4">{{ \Carbon\Carbon::parse($kurir->tanggal_penjemputan)->format('d-m-Y') }}</td>
+              <td class="p-4">{{ $kurir->alamat_penjemputan }}</td>
+              <td class="p-4">
                   <a href="{{$kurir->kode_penjemputan}}" class="text-blue-500 hover:underline">
-                    Lihat Detail
+                    <i class="fa-regular fa-eye"></i>
                   </a>
-                </td>                               
->>>>>>> Stashed changes
-              </tr>
-            @endforeach
-            </tbody>
-          </table>
+              </td>
+          </tr>
+          @endforeach
+      </tbody>
+  </table>
+  
 </div>
 
 

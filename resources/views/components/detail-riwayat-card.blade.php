@@ -1,7 +1,7 @@
-<div class="max-w-md border border-green-300 rounded-lg p-4 shadow-md bg-white flex items-center space-x-4">
+<div class="max-w-md border border-green-300 rounded-3xl p-4 shadow-md bg-white flex items-center space-x-4">
   <!-- Image -->
-  <div class="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center">
-    <img src="{{$image}}" alt="">
+  <div class="w-20 h-20 bg-gray-300 flex items-center justify-center">
+    <img src="{{$image}}" alt="" class="rounded-full">
   </div>
 
   <!-- Text Section -->

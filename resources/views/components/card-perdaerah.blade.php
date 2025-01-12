@@ -12,12 +12,12 @@
     </div>
     <!-- Bagian Informasi -->
     <div class="flex flex-col items-center py-5 space-y-4">
-        <div class="flex items-center justify-center gap-2 w-48 p-3 text-base font-bold text-gray-900 rounded-2xl bg-gray-100">
-            <i class="fa-solid fa-recycle text-3xl text-[#437252]"></i>
+        <div class="flex items-center justify-center gap-2 w-48 p-3 text-base font-bold text-gray-900 rounded-2xl bg-gray-100 ">
+            <img src="{{ asset('img/manajemen/datamaster/icon/Asset-1.svg') }}" alt="Total Sampah:">
             <span>{{$berat}} Kg</span>
         </div>
         <div class="flex items-center justify-center gap-2 w-48 p-3 text-base font-bold text-gray-900 rounded-2xl bg-gray-100">
-            <i class="fa-solid fa-trophy text-3xl text-yellow-500"></i>
+            <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="">
             <span>{{$poin}} Poin</span>
         </div>
     </div>
