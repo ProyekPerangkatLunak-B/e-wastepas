@@ -98,8 +98,16 @@
                                         class="block mt-2 text-sm font-medium leading-7 text-gray-500">Email</label>
                                     <div class="relative mt-2">
                                         <input id="email" name="email" type="email" placeholder="Masukkan Email"
-                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
+                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium  text-gray-400 bg-gray-100 text-md focus:outline-none focus:bg-white"
                                             value="{{ $user->email }}" disabled />
+                                        <span class="absolute inset-y-0 right-3 flex items-center text-gray-400">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12 17a1 1 0 100-2 1 1 0 000 2zm0-10a4 4 0 00-4 4v3h8v-3a4 4 0 00-4-4zm-6 4a6 6 0 1112 0v3h1a1 1 0 011 1v5a1 1 0 01-1 1H5a1 1 0 01-1-1v-5a1 1 0 011-1h1v-3z"
+                                                    fill="currentColor" />
+                                            </svg>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="mb-4">
@@ -107,8 +115,16 @@
                                         Ktp</label>
                                     <div class="relative mt-2">
                                         <input id="noktp" name="address" type="text" placeholder="Masukkan Alamat"
-                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
-                                            value="{{ $user->nomor_ktp }}" disabledgi />
+                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium  text-gray-400 bg-gray-100 text-md focus:outline-none focus:bg-white"
+                                            value="{{ $user->nomor_ktp }}" disabled />
+                                        <span class="absolute inset-y-0 right-3 flex items-center text-gray-400">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12 17a1 1 0 100-2 1 1 0 000 2zm0-10a4 4 0 00-4 4v3h8v-3a4 4 0 00-4-4zm-6 4a6 6 0 1112 0v3h1a1 1 0 011 1v5a1 1 0 01-1 1H5a1 1 0 01-1-1v-5a1 1 0 011-1h1v-3z"
+                                                    fill="currentColor" />
+                                            </svg>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -129,7 +145,8 @@
                                     <label for="address"
                                         class="block mt-2 text-sm font-medium leading-7 text-gray-500">Alamat</label>
                                     <div class="relative mt-2">
-                                        <input id="address" name="address" type="text" placeholder="Masukkan Alamat"
+                                        <input id="address" name="address" type="text"
+                                            placeholder="Masukkan Alamat"
                                             class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
                                             value="{{ $user->alamat }}" readonly />
                                     </div>

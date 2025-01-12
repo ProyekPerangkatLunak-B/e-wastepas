@@ -3,16 +3,14 @@
 @section('content')
     <div class="flex items-center justify-center min-h-screen ">
         <div class="container mx-auto px-4 py-8 max-w-2xl">
-            @if ($errors->any())
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <div class="relative px-4 py-3 mt-4 text-red-700 bg-red-100 rounded" role="alert">
-                            <li>{{ $error }}</li>
-                        </div>
-                    @endforeach
-                </ul>
-            @endif
+
             <h1 class="text-2xl font-bold mb-8">Upload Berkas</h1>
+            @if ($errors->any())
+                <div class="relative px-4 py-3 mt-4 text-red-700 bg-red-100 rounded" role="alert">
+                    <p>{{ $errors->first() }}</p>
+                </div>
+            @endif
+
             <form action="{{ route('upload-validate', $user->id_pengguna) }}" method="POST" enctype="multipart/form-data"
                 class="space-y-6">
                 <!-- KTP Upload -->

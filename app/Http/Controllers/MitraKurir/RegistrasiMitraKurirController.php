@@ -123,41 +123,6 @@ public function LogoutAuth(Request $request)
     }
 
     public function simpanData(Request $request)
-    {
-        $messages = [
-            'nama.required' => 'Nama lengkap harus diisi.',
-            'nama.regex' => 'Nama Tidak Boleh Mengandung Simbol Atau Spesial Character',
-            'KTP.required' => 'Nomor KTP harus diisi.',
-            'KTP.min' => 'Nomor KTP harus terdiri dari minimal 16 digit.',
-            'KTP.numeric' => 'Nomor KTP harus berupa angka.',
-            'NomorHP.required' => 'Nomor HP harus diisi.',
-            'NomorHP.min' => 'Nomor HP harus terdiri dari minimal 12 karakter.',
-            'NomorHP.max' => 'Nomor HP tidak boleh lebih dari 14 karakter.',
-            'Email.required' => 'Email harus diisi.',
-            'Email.email' => 'Email yang Anda masukkan tidak valid.',
-            'password.required' => 'Password harus diisi.',
-            'password.min' => 'Password harus terdiri dari minimal 8 karakter.',
-            'ulangiPassword.required' => 'Ulangi password harus diisi.',
-            'ulangiPassword.same' => 'Password konfirmasi tidak sama dengan password yang baru.',
-            'ulangiPassword.min' => 'Password konfirmasi harus terdiri dari minimal 8 karakter.',
-        ];
-            $validateData = $request->validate([
-            'nama' => 'required',
-            'KTP' => ['required', 'min:16','numeric'],
-            'NomorHP' => ['required', 'min:12', 'max:14'],
-            'Email' => ['required', 'email'],
-            'password' => ['required', 'min:8'],
-            'ulangiPassword' => ['required', 'min:8', 'same:password']
-             ],$messages);
-        try {
-         $user = User::create([
-                'nama' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
-                'nomor_ktp' => $validateData['KTP'],
-                'nomor_telepon' => $validateData['NomorHP'],
-                'email' => $validateData['Email'],
-                'kata_sandi' => Hash::make($validateData['password']),
-                'tanggal_dibuat' => now()
-            ]);
 {
     $messages = [
         'nama.required' => 'Nama lengkap harus diisi.',
@@ -210,18 +175,6 @@ public function LogoutAuth(Request $request)
         if ($e->getCode() === '23000') {
             $errorMessages = [];
 
-                if (str_contains($e->getMessage(), 'email_unique')) {
-                    $errorMessages['email'] = 'Email Sudah terdaftar ';
-                }
-
-                if (str_contains($e->getMessage(), 'nomor_ktp_unique')) {
-                    $errorMessages['ktp'] = 'No KTP Sudah terdaftar';
-                }
-                return back()->withErrors($errorMessages);
-            }
-            return back()->withErrors(['error' => 'Ada kesalahan dalam proses registrasi']);
-        }
-    }
             if (str_contains($e->getMessage(), 'email_unique')) {
                 $errorMessages['email'] = 'Email Sudah terdaftar ';
             }
@@ -427,4 +380,6 @@ public function UpdateProfile(Request $request){
         $user->tanggal_update = now();
         $user->save();
         return redirect()->route('mitra-kurir.registrasi.success-message-data');
+}
+
 }
