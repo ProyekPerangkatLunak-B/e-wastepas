@@ -248,6 +248,7 @@ class PenjemputanSampahMitraKurirController extends Controller
     //update status dari menunggu konfirmasi menjadi dijemput driver
     public function updateStatus(Request $request)
     {
+        // dd($request->all());
         try {
             // Validasi data request
             $validated = $request->validate([
@@ -290,7 +291,6 @@ class PenjemputanSampahMitraKurirController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-
 
     /**
      * fn: dropbox
