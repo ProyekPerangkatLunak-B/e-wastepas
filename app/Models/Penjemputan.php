@@ -71,12 +71,12 @@ class Penjemputan extends Model
     {
         // Filter search berdasarkan pencarian nama_jenis
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->whereHas('detailPenjemputan.jenis', function ($query) use ($search) {
-                $query->where('nama_jenis', 'like', '%' . $search . '%');
-            });
-
-            $query->orWhereHas('penggunaMasyarakat', function ($query) use ($search) {
-                $query->where('nama', 'like', '%' . $search . '%');
+            return $query->where(function ($query) use ($search) {
+                $query->whereHas('detailPenjemputan.jenis', function ($query) use ($search) {
+                    $query->where('nama_jenis', 'like', '%' . $search . '%');
+                })->orWhereHas('penggunaMasyarakat', function ($query) use ($search) {
+                    $query->where('nama', 'like', '%' . $search . '%');
+                });
             });
         });
 
