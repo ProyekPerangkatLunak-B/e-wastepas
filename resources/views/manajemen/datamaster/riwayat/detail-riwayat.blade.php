@@ -24,11 +24,11 @@
       <div class="grid grid-cols-2 gap-5 mb-6">
         <div class="flex flex-col justify-center items-center text-center border p-4 rounded-lg h-[230px]">
           <h3 class="text-lg font-semibold text-gray-600">Nama Kurir</h3>
-          <p class="text-xl font-bold mt-2">Audi Hezra</p>
+          <p class="text-xl font-bold mt-2">{{ $kurir->nama }}</p>
         </div>
         <div class="flex flex-col justify-center items-center text-center border p-4 rounded-lg h-[230px]">
           <h3 class="text-lg font-semibold text-gray-600">Tanggal Penjemputan</h3>
-          <p class="text-xl font-bold mt-2">11/29/2024</p>
+          <p class="text-xl font-bold mt-2">{{$riwayatDetail->tanggal_penjemputan}}</p> 
         </div>
       </div>
 
@@ -42,13 +42,13 @@
           <span class="w-24 h-1.5 bg-red-normal"></span>
       </div>
         <div class="p-6">
-          <p class="font-semibold mb-2"><i class="fas fa-user"></i> Sarah Martins - 0032</p>
+          <p class="font-semibold mb-2"><i class="fas fa-user"></i> {{ $masyarakat->nama }}</p>
           <p class="mt-6"><strong>Alamat Penjemputan:</strong> 
-            <p class="mt-4 text-gray-500">Jl. Telekomunikasi 1, Buahbatu, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</p>
-            <p class="mt-6"><strong>Daerah Penjemputan:</strong> 
-              <p class="mt-4 text-gray-500">Sukasari</p>
+            <p class="mt-4 text-gray-500">{{ $riwayatDetail->alamat_penjemputan }}</p>
+            <p class="mt-6"><strong>Daerah Penjemputan:</strong>
+              <p class="mt-4 text-gray-500">{{ $riwayatDetail->daerah->nama_daerah }}</p>
               <p class="mt-6"><strong>Dropbox Tujuan:</strong>
-                <p class="mt-4 text-gray-500"> Geger Kalong Tengah, Gg. Hj. Ridho II No. 17 G, Kec. Sukasari, Kota Bandung, Jawa Barat 40257</p>
+                <p class="mt-4 text-gray-500"> {{ $riwayatDetail->dropbox->alamat_dropbox }}</p>
         </div>
       </div>
       
@@ -58,35 +58,19 @@
     <div class="border p-6 h-full mr-6 rounded-2xl relative">
       <div class="flex items-center justify-between mb-6">
         <h1 class="font-bold text-xl">Sampah yang telah dijemput</h1>
-        <div class="absolute right-0 top-0 bg-green-500 text-white-normal px-4 py-2 rounded-tr-2xl rounded-bl-2xl font-medium">300 Poin</div>
-      </div>
-        
-    
+        <div class="absolute right-0 top-0 bg-green-500 text-white-normal px-4 py-2 rounded-tr-2xl rounded-bl-2xl font-medium">{{$riwayatDetail->total_poin}} Poin</div>
+      </div>    
         <div class="mt-8 grid grid-cols-3 md:grid-cols-1 lg:grid-cols-2 gap-5 ">
             <!-- Kartu Sampah -->
             <x-detail-riwayat-card
-                image="https://picsum.photos/720/720"
-                title="Laptop"
-                jenis="Layar dan Monitor"
-                link="#"
-                berat="37.932"
-                poin="10.019" />
-            <x-detail-riwayat-card
-                image="https://picsum.photos/720/720"
-                title="Laptop"
-                jenis="Layar dan Monitor"
-                link="#"
-                berat="37.932"
-                poin="10.019" />
-            <x-detail-riwayat-card
-                image="https://picsum.photos/720/720"
-                title="Laptop"
-                jenis="Layar dan Monitor"
-                link="#"
-                berat="37.932"
-                poin="10.019" />
+            image="{{ $image }}"
+            nama="{{ $nama }}"
+            kategori="{{ $kategori }}"
+            quantity="{{ $quantity }} Pcs"
+            berat="{{ $berat }} Kg" />
+
         </div>
-        <div class="bg-green-500 text-white-normal px-4 py-2  font-medium absolute rounded-tr-2xl rounded-bl-2xl bottom-0 left-0">30 Kg</div>
+        <div class="bg-green-500 text-white-normal px-4 py-2  font-medium absolute rounded-tr-2xl rounded-bl-2xl bottom-0 left-0">{{$riwayatDetail->total_berat}} kg</div>
     
             <!-- Pagination -->
             <div class="absolute bottom-6 right-6 inline-flex justify-center gap-1">
@@ -122,7 +106,46 @@
 
 </div>
 <div class="flex justify-end items-center mt-12 w-full">
-    <button class="px-4 py-2 bg-green-600 text-white-normal rounded-lg font-bold">Kembali</button>
+    <button class="px-4 py-2 bg-green-600 text-white-normal rounded-lg font-bold">
+      <a href="riwayat">Kembali</a>
+    </button>
   </div>
 
 @endsection
+
+{{-- 
+@extends('layouts.main-manajemen')
+
+@section('content')
+<div class="min-h-screen mx-auto bg-gray-100 w-full">
+    <div class="py-8">
+        <h2 class="text-2xl font-semibold leading-relaxed ml-24">Detail Penjemputan</h2>
+        <div class="px-12 pb-6 mt-4 ml-10">
+            <table class="w-full bg-white rounded-2xl shadow-md mt-6">
+                <tr>
+                    <th class="p-4 text-left">Kode Penjemputan</th>
+                    <td class="p-4">{{ $riwayatDetail->kode_penjemputan }}</td>
+                </tr>
+                <tr>
+                    <th class="p-4 text-left">Nama Pengguna</th>
+                    <td class="p-4">
+                        @if($riwayatDetail->pengguna)
+                            {{ $riwayatDetail->pengguna->nama }}
+                        @else
+                            <span class="text-red-500">Pengguna tidak ditemukan</span>
+                        @endif
+                    </td>
+                </tr>
+                <tr>
+                    <th class="p-4 text-left">Tanggal Penjemputan</th>
+                    <td class="p-4">{{ \Carbon\Carbon::parse($riwayatDetail->tanggal_penjemputan)->format('d-m-Y') }}</td>
+                </tr>
+                <tr>
+                    <th class="p-4 text-left">Alamat Penjemputan</th>
+                    <td class="p-4">{{ $riwayatDetail->alamat_penjemputan }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection --}}
