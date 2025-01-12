@@ -168,12 +168,9 @@
                                     </div>
                                 </div>
                             </div>
+
                         @endforeach
                     </div>
-
-
-
-
 
 
                     <!-- catatan & status -->

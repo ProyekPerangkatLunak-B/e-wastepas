@@ -7,14 +7,15 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\admin\KurirAdminController;
 use App\Http\Controllers\Manajemen\DaerahController;
+use App\Http\Controllers\Manajemen\RiwayatController;
 use App\Http\Controllers\Manajemen\Top10Controller;
+use App\Http\Controllers\Manajemen\KategoriController;
+use App\Http\Controllers\Manajemen\DashboardController;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Manajemen\DashboardKategori;
 use App\Http\Controllers\Manajemen\DropboxController;
 use App\Http\Controllers\Admin\DropboxAdminController;
-use App\Http\Controllers\Manajemen\KategoriController;
-use App\Http\Controllers\Manajemen\DashboardController;
 use App\Http\Controllers\Admin\ManajemenAdminController;
 use App\Http\Controllers\Admin\MasyarakatAdminController;
 use App\Http\Controllers\Admin\JenisSampahAdminController;
@@ -184,41 +185,24 @@ Route::group([
     'as' => 'manajemen.',
 ], function () {
 
-    // Submodul Dashboard
-    // Route::get('/datamaster/dashboard', function () {
-    //     return view('manajemen.datamaster.dashboard.index');
-    // })->name('datamaster.dashboard.index');
+    // Route::get('/datamaster/detail-riwayat', function () {
+    //     return view('manajemen.datamaster.riwayat.detail-riwayat');
+    // })->name('datamaster.riwayat.detail-riwayat');
+    
+
+    Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+
+    Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
+        ->name('datamaster.per-daerah.index');
 
     Route::get('/datamaster/dashboard', [DashboardController::class, 'index'])->name('datamaster.dashboard.index');
 
-    // Route::get('/datamaster/top-10', function () {
-    //     return view('manajemen.datamaster.top-10.index');
-    // })->name('datamaster.top-10.index');
-
     Route::get('/datamaster/top-10', [Top10Controller::class, 'index'])->name('datamaster.top-10.index');
-
-
-    Route::get('/datamaster/riwayat', function () {
-        return view('manajemen.datamaster.riwayat.index');
-    })->name('datamaster.riwayat.index');
-
-    Route::get('/datamaster/detail-riwayat', function () {
-        return view('manajemen.datamaster.riwayat.detail-riwayat');
-    })->name('datamaster.riwayat.detail-riwayat');
-
-    Route::get('/datamaster/riwayat', function () {
-        return view('manajemen.datamaster.riwayat.index');
-    })->name('datamaster.riwayat.index');
-
-    Route::get('/datamaster/detail-riwayat', function () {
-        return view('manajemen.datamaster.riwayat.detail-riwayat');
-    })->name('datamaster.riwayat.detail-riwayat');
 
     Route::get('/datamaster/dropbox', [DropboxController::class, 'index'])->name('datamaster.dropbox.index');
 
-    // Route::get('/datamaster/kategori', function () {
-    //     return view('manajemen.datamaster.kategori.index');
-    // })->name('datamaster.kategori.index');
+    Route::get('/datamaster/riwayat', [RiwayatController::class, 'index'])->name('datamaster.riwayat.index');
+    Route::get('/datamaster/{kode_penjemputan}', [RiwayatController::class, 'show'])->name('datamaster.riwayat.detail-riwayat');    
 
     Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
@@ -227,8 +211,6 @@ Route::group([
     //     return view('manajemen.datamaster.per-daerah.index');
     // })->name('datamaster.per-daerah.index');
 
-    Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
-        ->name('datamaster.per-daerah.index');
 
     Route::get('/datamaster/jenis', function () {
         return view('manajemen.datamaster.jenis.index');
