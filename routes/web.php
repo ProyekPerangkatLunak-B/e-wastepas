@@ -222,6 +222,7 @@ Route::group([
 
     Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
+
     // Route::get('/datamaster/per-daerah', function () {
     //     return view('manajemen.datamaster.per-daerah.index');
     // })->name('datamaster.per-daerah.index');
@@ -440,22 +441,25 @@ Route::group([
     'prefix' => 'mitra-kurir/',
     'as' => 'mitra-kurir.',
 ], function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::controller(PenjemputanSampahMitraKurirController::class)->group(function () {
+            // Submodul Penjemputan Sampah
+            Route::get('penjemputan-sampah/kategori', 'kategori')->name('penjemputan.kategori');
+            Route::get('penjemputan-sampah/kategori/detail/{id}', 'detailKategori')->name('penjemputan.detail-kategori');
+            Route::get('penjemputan-sampah/permintaan-penjemputan', 'permintaan')->name('penjemputan.permintaan');
+            Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', 'detailPermintaan')->name('penjemputan.detail-permintaan');
+            Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', 'updateStatus')->name('penjemputan.update-status');
 
-    // Submodul Penjemputan Sampah
-    Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMitraKurirController::class, 'kategori'])->middleware('auth')->name('penjemputan.kategori');
-    Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->middleware('auth')->name('penjemputan.detail-kategori');
-    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->middleware('auth')->name('penjemputan.permintaan');
-    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->middleware('auth')->name('penjemputan.detail-permintaan');
-    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->middleware('auth')->name('update-status');
+            Route::get('penjemputan-sampah/riwayat-penjemputan', 'riwayat')->name('penjemputan.riwayat-penjemputan');
+            Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}',  'detailRiwayat')->name('penjemputan.detail-riwayat');
 
-    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayat'])->middleware('auth')->name('penjemputan.riwayat-penjemputan');
-    Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->middleware('auth')->name('penjemputan.detail-riwayat');
-
-    Route::get('penjemputan-sampah/dropbox',  [PenjemputanSampahMitraKurirController::class, 'dropbox'])->name('penjemputan.dropbox');
-    Route::post('penjemputan-sampah/dropbox', [PenjemputanSampahMitraKurirController::class, 'updateStatusPelacakan'])->name('penjemputan.updateStatus');
+            Route::get('penjemputan-sampah/dropbox', 'dropbox')->name('penjemputan.dropbox');
+            Route::post('penjemputan-sampah/dropbox', 'updateStatusPelacakan')->name('penjemputan.updateStatus');
+            // End Submodul Penjemputan Sampah
+        });
+    });
 
     // Submodul Registrasi
-
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'RegisterIndex'])->middleware('guest')->name('registrasi.register');
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->middleware('guest')->name('registrasi.login');
 
