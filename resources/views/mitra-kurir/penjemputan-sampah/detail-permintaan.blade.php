@@ -174,15 +174,13 @@
 
 
                     <!-- catatan & status -->
-                    @if ($penjemputan === null)
                         <h3 class="text-lg font-semibold mb-2">Catatan</h3>
                         <div class="bg-gray-100 p-4 rounded-xl text-sm mb-2 border border-gray-300">
-                            <p>{{ $penjemputan->catatan }}</p>
+                            <p>{{ $catatan }}</p>
                         </div>
                         <h4 class="text-base font-semibold mb-7">Status Permintaan Penjemputan:
-                            {{ $penjemputan->pelacakan->status }}
+                            {{ $status }}
                         </h4>
-                    @endif
 
                     <!-- button terima -->
                     <div class="flex justify-center">

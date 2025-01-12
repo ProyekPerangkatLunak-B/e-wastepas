@@ -21,7 +21,7 @@
                     </svg>
                 </div>
                 <p class="text-lg font-semibold">Kode Penjemputan</p>
-                <p class="text-2xl font-bold text-gray-800 mt-1 ">{{ $data->first()->kode_penjemputan }}</p>
+                <p class="text-2xl font-bold text-gray-800 mt-1 ">{{ $penjemputan->kode_penjemputan }}</p>
             </div>
 
             <!-- Card Tanggal Penjemputan -->
@@ -33,7 +33,7 @@
                     </svg>
                 </div>
                 <p class="text-lg font-semibold">Tanggal Penjemputan</p>
-                <p class="text-2xl font-bold text-gray-800 mt-1">{{ $data->first()->tanggal_penjemputan }}</p>
+                <p class="text-2xl font-bold text-gray-800 mt-1">{{ $penjemputan->tanggal_penjemputan }}</p>
             </div>
 
             <!-- Card Status Penjemputan -->
@@ -44,7 +44,7 @@
                     </svg>
                 </div>
                 <p class="text-lg font-semibold">Status Penjemputan</p>
-                <p class="text-2xl font-bold text-green-600 mt-1">{{ $data->first()->status }}</p>
+                <p class="text-2xl font-bold text-green-600 mt-1">{{ $status }}</p>
             </div>
         </div>
 
@@ -70,39 +70,51 @@
                                 <path
                                     d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
                             </svg>
-                            {{ $data->first()->nama }} - {{ $data->first()->nomor_telepon }}
+                            {{ $penjemputan->penggunaMasyarakat->nama }} - {{ $penjemputan->penggunaMasyarakat->nomor_telepon }}
                         </h3>
                         <h3 class="text-lg font-semibold">Alamat Penjemputan</h3>
-                        <p class="text-gray-600">{{ $data->first()->alamat_penjemputan }}</p>
+                        <p class="text-gray-600">{{ $penjemputan->alamat_penjemputan }}</p>
                         <h3 class="text-lg font-semibold mt-4">Daerah Penjemputan</h3>
-                        <p class="text-gray-600">{{ $data->first()->nama_daerah }}</p>
+                        <p class="text-gray-600">{{ $penjemputan->daerah->nama_daerah }}</p>
                         <h3 class="text-lg font-semibold mt-4">Lokasi Dropbox Penyimpanan Sampah</h3>
-                        <p class="text-gray-600">{{ $data->first()->alamat_dropbox }}</p>
+                        <p class="text-gray-600">{{ $penjemputan->dropbox->alamat_dropbox }}</p>
                     </div>
-            
+
                     <!-- sampah -->
                     <div class="w-full md:w-1/2 mt-8 md:mt-0">
                         <h3 class="text-lg font-semibold">Sampah yang telah dijemput</h3>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-4">
                             <!-- card sampah -->
-                            @foreach($data as $detail)
+                            @foreach($penjemputan->detailPenjemputan as $detail)
                             <div class="relative px-4 py-5 bg-gray-100 border rounded-2xl shadow-sm">
-                                <p class="text-base font-medium pr-12 break-words max-w-full">{{ $detail->nama_kategori }}</p>
-                                <p class="text-lg font-semibold mt-2 pr-12 break-words max-w-full">{{ $detail->nama_jenis }}</p>
-                                <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">1 Pcs</p>
+                                <p class="text-base font-medium pr-12 break-words max-w-full">{{ $detail->kategori->first()->nama_kategori }}</p>
+                                <p class="text-lg font-semibold mt-2 pr-12 break-words max-w-full">
+                                    @php
+                                        $jenisList = $detail->jenisList->pluck('nama_jenis')->toArray();
+                                        $lastJenis = array_pop($jenisList);
+                                        $jenisString = implode(', ', $jenisList);
+                                        if (!empty($jenisString)) {
+                                            $jenisString .= ' & ' . $lastJenis;
+                                        } else {
+                                            $jenisString = $lastJenis;
+                                        }
+                                    @endphp
+                                    {{ $jenisString }}.
+                                </p>
+                                <p class="absolute top-6 right-4 text-2xl font-bold text-primary-normal">{{ $detail->jumlah }}</p>
                                 <div class="absolute bottom-0 right-0 bg-primary-normal text-white-100 font-semibold px-6 py-1 rounded-tl-2xl rounded-br-2xl text-sm">
-                                    {{ $detail->berat }} Kg
+                                    {{ $detail->penjemputan->total_berat }} Kg
                                 </div>
                             </div>
                             @endforeach
                         </div>
                         {{-- catatan --}}
                         <p class="mt-4 font-bold text-red-normal">*Catatan</p>
-                        <p class="text-black">{{ $data->first()->status }}</p>
+                        <p class="text-black">{{ $catatan }}</p>
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <!-- Tombol Kembali -->
 <div class="flex justify-end mx-14 mt-6">

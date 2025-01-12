@@ -458,7 +458,7 @@ class PenjemputanSampahMitraKurirController extends Controller
                 return $item;
             });
 
-            // dd($penjemputan);
+
 
             $kategori = Kategori::all();
 
