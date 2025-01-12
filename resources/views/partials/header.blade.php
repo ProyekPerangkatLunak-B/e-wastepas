@@ -9,7 +9,7 @@
                     <span class="text-sm text-gray-500">{{ $userRole }}</span>
                 </div>
                 <!-- Dummy Profile Picture -->
-                <img src="{{ $profileImage }}" alt="Profile Image"
+                <img src="{{ Storage::url($profileImage) }}" alt="Profile Image"
                     class="border border-green-300 rounded-full shadow-sm w-14 h-14">
             </button>
 

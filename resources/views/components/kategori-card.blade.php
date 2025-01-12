@@ -12,17 +12,13 @@
         <!-- Informasi Poin -->
         <div class="flex justify-center gap-4 mt-6">
             <div class="flex items-center gap-4 px-6 py-3 text-base font-bold text-gray-900 bg-gray-200 rounded-2xl">
-                <i class="fa-solid fa-recycle text-2xl text-[#437252]"></i>
+                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-1.svg') }}" alt="">
                 <span>{{ $weight }} Kg</span>
             </div>
             <div class="flex items-center gap-4 px-6 py-3 text-base font-bold text-gray-900 bg-gray-200 rounded-2xl">
-                <i class="fa-solid fa-trophy text-2xl text-[#437252]"></i>
+                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="">
                 <span>{{ $points }} Poin</span>
             </div>
         </div>
-        <!-- Tombol Detail -->
-        <a href="{{ $link }}" class="block bottom-0 w-full mt-6 py-3 text-md font-medium text-white-normal bg-gradient-to-r from-secondary-normal to-primary-normal rounded-xl hover:shadow-md">
-            Detail
-        </a>
     </div>
 </div>
