@@ -63,31 +63,39 @@ class RegistrasiMitraKurirController extends Controller
     }
 
     public function LoginAuth(Request $request)
-{
-    $messages = [
-        'email.required' => 'Email harus diisi.',
-        'email.email' => 'Format email yang Anda masukkan tidak valid.',
-        'kata_sandi.required' => 'Kata sandi harus diisi.',
-    ];
+    {
+        $messages = [
+            'email.required' => 'Email harus diisi.',
+            'email.email' => 'Format email yang Anda masukkan tidak valid.',
+            'kata_sandi.required' => 'Kata sandi harus diisi.',
+        ];
 
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'kata_sandi' => ['required']
-    ],$messages);
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'kata_sandi' => ['required']
+        ],$messages);
 
-    $user = User::where('email', $credentials['email'])->first();
+        $user = User::where('email', $credentials['email'])->first();
 
-    if ($user && Hash::check($credentials['kata_sandi'], $user->kata_sandi)) {
-        Auth::login($user);
-        $request->session()->regenerate();
-        return redirect()->route('mitra-kurir.penjemputan.kategori');
+        if ($user && Hash::check($credentials['kata_sandi'], $user->kata_sandi)) {
+            // Check if user has role 3 (mitra kurir)
+            if ($user->id_peran != 3) {
+                return back()->withErrors([
+                    'email' => 'Akun ini bukan untuk Mitra Kurir'
+                ]);
+            }
+
+            Auth::login($user);
+            $request->session()->regenerate();
+            return redirect()->route('mitra-kurir.penjemputan.kategori');
+        }
+
+        return back()->withErrors([
+            'email' => 'Password atau Email Salah',
+        ]);
     }
 
-    return back()->withErrors([
-        'email' => 'Password atau Email Salah',
-    ]);
 
-}
 
 public function LogoutAuth(Request $request)
 {
@@ -125,8 +133,8 @@ public function LogoutAuth(Request $request)
     public function simpanData(Request $request)
 {
     $messages = [
-        'nama.required' => 'Nama lengkap harus diisi.',
-        'nama.regex' => 'Nama Tidak Boleh Mengandung Simbol Atau Spesial Character',
+        'name.required' => 'Nama lengkap harus diisi.',
+        'name.regex' => 'Nama Tidak Boleh Mengandung Simbol Atau Spesial Character',
         'KTP.required' => 'Nomor KTP harus diisi.',
         'KTP.min' => 'Nomor KTP harus terdiri dari minimal 16 digit.',
         'KTP.numeric' => 'Nomor KTP harus berupa angka.',
@@ -143,7 +151,7 @@ public function LogoutAuth(Request $request)
     ];
 
     $validateData = $request->validate([
-        'nama' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'name' => 'required|regex:/^[a-zA-Z\s]+$/',
         'KTP' => ['required', 'min:16', 'numeric'],
         'NomorHP' => ['required', 'min:12', 'max:14'],
         'Email' => ['required', 'email'],
@@ -153,7 +161,7 @@ public function LogoutAuth(Request $request)
 
     try {
         $user = User::create([
-            'name' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_\@]+$/', 
+            'name' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_\@]+$/',
             'nomor_ktp' => $validateData['KTP'],
             'nomor_telepon' => $validateData['NomorHP'],
             'email' => $validateData['Email'],
@@ -161,6 +169,15 @@ public function LogoutAuth(Request $request)
             'tanggal_dibuat' => now()
         ]);
 
+      $user = User::create([
+    'nama' => $validateData['name'],
+    'id_peran' => 3,
+    'nomor_ktp' => $validateData['KTP'],
+    'nomor_telepon' => $validateData['NomorHP'],
+    'email' => $validateData['Email'],
+    'kata_sandi' => Hash::make($validateData['password']),
+    'tanggal_dibuat' => now()
+]);
         $otp = UserOTP::create([
             'id_pengguna' => $user->id_pengguna,
             'otp_token' => rand(1000, 9999),
@@ -243,6 +260,9 @@ public function LogoutAuth(Request $request)
             'file_dokumen' => $npwp
         ]);
     }
+        $user->status_verifikasi = 'Diproses'; // Ganti dengan kolom dan status yang sesuai
+        $user->tanggal_update = now(); // Tambahkan timestamp jika diperlukan
+        $user->save();
            return redirect()->route('mitra-kurir.registrasi.success-message');
    }
 
