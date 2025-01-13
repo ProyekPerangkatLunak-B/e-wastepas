@@ -67,7 +67,7 @@
                     <div class="grid grid-cols-3 gap-4 mx-auto">
                         @foreach ($jenis as $j)
                             @php
-                                $imagePath = 'img/masyarakat/gambarjenisSampah/' . ($j->gambar ?? $j->nama_jenis . '.png');
+                                    $imagePath = 'img/admin/' . ($j->gambar ?? $j->nama_jenis . '.png');
                                 $image = file_exists(public_path($imagePath)) ? $imagePath : 'img/masyarakat/gambarjenisSampah/no-image.png';
                             @endphp
                             <x-detail-card title="{{ $j->nama_jenis }}" poin="{{ $j->poin }}"

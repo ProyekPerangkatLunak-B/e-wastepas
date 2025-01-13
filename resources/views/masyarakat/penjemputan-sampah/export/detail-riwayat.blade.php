@@ -144,12 +144,14 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            margin: 0 auto;
+            object-fit: cover
         }
 
         th,
         td {
-            text-align: left;
-            padding: 8px;
+            text-align: center; 
+            padding: 4px;
             border: 1px solid #ccc;
         }
 
@@ -158,17 +160,15 @@
         }
 
         .sampah-img {
-            width: 50px;
-            height: 50px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
         }
 
         .sampah-field {
             display: flex;
             align-items: center;
+            justify-content: center;
         }
 
         .note {
@@ -232,8 +232,15 @@
                     @foreach ($penjemputan->detailPenjemputan as $s)
                         <tr>
                             <td class="sampah-field">
-                                <img src="{{ $s->jenis->gambar_url }}" alt="Sampah" class="sampah-img">
-                                {{ $s->jenis->nama_jenis }}
+                                @php
+                                $imagePath =
+                                    'img/admin/' .
+                                    ($s->jenis->gambar ?? $s->jenis->nama_jenis . '.png');
+                                $image = file_exists(public_path($imagePath))
+                                    ? $imagePath
+                                    : 'img/masyarakat/gambarKategoriSampah/no-image.png';
+                            @endphp
+                            <img src="{{ asset($image) }}" alt="Sampah" class="sampah-img">
                             </td>
                             <td>{{ $s->kategori->nama_kategori }}</td>
                             <td>{{ $s->berat }} Kg</td>

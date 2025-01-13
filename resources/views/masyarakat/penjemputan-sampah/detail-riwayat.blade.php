@@ -262,7 +262,7 @@
                                     class="flex items-center justify-center w-[120px] h-full overflow-hidden rounded-lg rounded-l-none rounded-t-none rounded-b-none">
                                     @php
                                         $imagePath =
-                                            'img/masyarakat/gambarJenisSampah/' .
+                                            'img/admin/' .
                                             ($dp->jenis->gambar ?? $dp->jenis->nama_jenis . '.png');
                                         $image = file_exists(public_path($imagePath))
                                             ? $imagePath

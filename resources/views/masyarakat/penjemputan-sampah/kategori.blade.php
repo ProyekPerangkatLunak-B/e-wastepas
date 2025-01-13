@@ -24,7 +24,7 @@
                     @else
                         @foreach ($kategori as $k)
                             @php
-                                $imagePath = 'img/masyarakat/gambarKategoriSampah/' . ($k->gambar ?? $k->nama_kategori . '.png');
+                                $imagePath = 'img/admin/' . ($k->gambar ?? $k->nama_kategori . '.png');
                                 $image = file_exists(public_path($imagePath)) ? $imagePath : 'img/masyarakat/gambarKategoriSampah/no-image.png';
                             @endphp
                             <x-card title="{{ $k->nama_kategori }}" description="{{ $k->deskripsi_kategori }}"
