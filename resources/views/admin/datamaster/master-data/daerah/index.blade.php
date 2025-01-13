@@ -108,8 +108,8 @@
                                 <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Dropbox:</label>
                                 <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
                                     <option value="">Semua</option>
-                                    <option value="Diterima">Aktif</option>
-                                    <option value="Ditolak">Tidak Aktif</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
                                 </select>
                             </div>
                             <!-- Tampilkan Dropdown -->
@@ -159,7 +159,6 @@
                 </div>
 
                 <!-- Custom pagination -->
-                <!-- Custom pagination -->
                 <div id="customPagination" class="flex justify-center items-center space-x-2 mt-4">
                     <!-- Tombol sebelumnya -->
                     <button class="pagination-btn">&lt;</button>
@@ -183,7 +182,12 @@
                 var table = $('#daerahTable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '{{ route('admin.datamaster.daerah.data') }}',
+                    ajax: {
+                        url: '{{ route('admin.datamaster.daerah.data') }}',
+                        data: function(d) {
+                            d.status_verifikasi = $('#statusVerifikasiFilter').val();
+                        }
+                    },
                     columns: [{
                             data: 'nama_daerah',
                             name: 'nama_daerah'
@@ -232,6 +236,10 @@
                 // Custom length menu
                 $('#customLengthMenu').on('change', function() {
                     table.page.len(this.value).draw();
+                });
+
+                $('#statusVerifikasiFilter').on('change', function() {
+                    table.ajax.reload(); // Reload data table when filter status changes
                 });
 
                 // Custom pagination and info display

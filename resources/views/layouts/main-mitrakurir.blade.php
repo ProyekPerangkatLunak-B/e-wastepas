@@ -24,11 +24,7 @@
 <body class="overflow-x-hidden">
 
     {{-- Header --}}
-    @include('partials.header', [
-        'userName' => 'Beyonce Kumalasari',
-        'userRole' => 'Mitra Kurir',
-        'profileImage' => 'https://via.placeholder.com/40',
-    ])
+    @include('partials.header', [])
 
     {{-- Sidebar --}}
     @include('partials.sidebar-mitrakurir')

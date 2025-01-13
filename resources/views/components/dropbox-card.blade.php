@@ -20,11 +20,11 @@
     <!-- Bagian Kanan -->
     <div class="flex flex-col justify-center items-start w-3/4 h-full p-6 space-y-4 bg-gray-50 rounded-r-2xl">
         <div class="flex items-center gap-2 text-lg font-semibold w-48 text-center justify-center p-3 text-gray-900 rounded-2xl bg-gray-100 ml-4">
-            <i class="fa-solid fa-recycle text-2xl text-[#437252]"></i>
+            <img src="{{ asset('img/manajemen/datamaster/icon/Asset-1.svg') }}" alt="">
             <span class="text-black">{{ $berat }} Kg</span>
         </div>
         <div class="flex items-center gap-2 text-lg font-semibold w-48 text-center justify-center p-3 text-gray-900 rounded-2xl bg-gray-100 ml-4 ">
-            <i class="fa-solid fa-trophy text-2xl text-yellow-500"></i>
+            <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="">
             <span class="text-black">{{ $poin }} Poin</span>
         </div>
     </div>

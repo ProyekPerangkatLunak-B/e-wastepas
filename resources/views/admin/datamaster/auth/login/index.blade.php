@@ -66,7 +66,6 @@
                     <div class="w-full flex-20 mt-8">
                         <div class="mx-auto max-w-md">
                             <form action="{{ route('admin.sendAdminLoginLink') }}" method="POST" onsubmit="showSpinner()">
-                            <form action="{{ route('admin.sendAdminLoginLink') }}" method="POST">
                                 @csrf
                                 <div>
                                     <label for="email"

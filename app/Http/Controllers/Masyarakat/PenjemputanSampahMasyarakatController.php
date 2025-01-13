@@ -48,6 +48,8 @@ class PenjemputanSampahMasyarakatController extends Controller
         try {
             $totalSampah = DetailPenjemputan::whereHas('penjemputan.pelacakan', function ($query) {
                 $query->where('status', 'Selesai');
+            })->whereHas('penjemputan.pelacakan', function ($query) {
+                $query->where('id_pengguna_masyarakat', Auth::id());
             })->count();
             $totalPoin = Penjemputan::whereHas('pelacakan', function ($query) {
                 $query->where('status', 'Selesai');
@@ -103,6 +105,7 @@ class PenjemputanSampahMasyarakatController extends Controller
         try {
             $jenis = Jenis::where('id_kategori', $id)
                 ->orderBy('nama_jenis')
+                ->filter(request(['search']))
                 ->paginate(6);
             $kategori = Kategori::find($id);
             return view('masyarakat.penjemputan-sampah.detail-kategori', compact('jenis', 'kategori'));

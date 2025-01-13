@@ -68,7 +68,8 @@
                     </a>
                 </li>
             </ul>
-            <h2 class="mt-4 mb-6 text-sm font-bold text-gray-800">Penjemputan Sampah</h2>
+            <h2 class="mt-6 mb-6 text-sm font-bold text-gray-800 border-b-2 border-green-500"> <i
+                class="fa-solid fa-user-lock mx-2" style="color:  #2ecc71;"></i>Penjemputan Sampah</h2>
             <ul class="space-y-2">
 
                 <li>
