@@ -22,12 +22,12 @@
                 <form class="space-y-0.5" action="{{ url('/mitra-kurir/registrasi/register') }}" method="POST">
                     {{ csrf_field() }}
                     @include('components.mitra-kurir.auth.input', [
-                        'id' => 'name',
-                        'name' => 'nama',
+                        'id' => 'nama',
+                        'name' => 'name',
                         'label' => 'Nama',
                         'type' => 'text',
                         'placeholder' => 'Masukkan Nama',
-                        'value' => old('nama'),
+                        'value' => old('name'),
                     ])
                     @include('components.mitra-kurir.auth.input', [
                         'id' => 'ktp',

@@ -30,16 +30,16 @@ class DashboardController extends Controller
             ->where('detail_penjemputan.id_kategori', $kategori->id_kategori)
             ->where('pelacakan.status', 'Selesai')
             ->sum('penjemputan.total_berat');
-    
+
         return [
             'nama_kategori' => $kategori->nama_kategori,
             'berat' => $totalBeratKategori,
         ];
     });
-    
+
     // Hitung total berat dari semua kategori
     $totalBeratSemuaKategori = $categories->sum('berat');
-    
+
     // Normalisasi persentase agar totalnya 100%
     $categories = $categories->map(function ($category) use ($totalBeratSemuaKategori) {
         $persentase = $totalBeratSemuaKategori > 0 ? ($category['berat'] / $totalBeratSemuaKategori) * 100 : 0;
@@ -48,10 +48,10 @@ class DashboardController extends Controller
             'persentase' => round($persentase, 2), // Dibulatkan 2 desimal
         ];
     });
-    
+
     // Urutkan kategori berdasarkan persentase (descending) dan ambil 3 data teratas
     $categories = $categories->sortByDesc('persentase')->take(3);
-    
+
     // Data lainnya tetap
     $totalPoin = Pelacakan::where('status', 'Selesai')
         ->with('penjemputan')
@@ -59,10 +59,10 @@ class DashboardController extends Controller
         ->sum(function ($pelacakan) {
             return $pelacakan->penjemputan->total_poin ?? 0;
         });
-    
+
     $riwayat = Pelacakan::where('status', 'Selesai')->count();
     $terdaftar = Pengguna::count();
-    
+
     // Mengirim data ke view
     return view('manajemen.datamaster.dashboard.index', [
         'totalSampah' => $totalSampah,
@@ -70,6 +70,6 @@ class DashboardController extends Controller
         'riwayat' => $riwayat,
         'terdaftar' => $terdaftar,
         'categories' => $categories,
-    ]);    
+    ]);
     }
 }
