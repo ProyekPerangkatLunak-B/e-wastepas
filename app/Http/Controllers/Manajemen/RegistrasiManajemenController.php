@@ -48,6 +48,8 @@ class RegistrasiManajemenController extends Controller
             'nomor_telepon' => $request->phone,
             'email' => $request->email,
             'kata_sandi' => Hash::make($request->password),
+            'id_peran' => 4,
+
         ]);
 
         // Buat kode OTP

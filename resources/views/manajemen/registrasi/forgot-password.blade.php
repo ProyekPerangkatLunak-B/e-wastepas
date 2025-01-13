@@ -1,14 +1,34 @@
-@extends('manajemen.registrasi.app') 
+@extends('manajemen.registrasi.app')
 
 @section('title', 'Forgot Password')
 
 @section('content')
-    <div class="min-h-screen flex relative">
+    <div class="min-h-screen bg-white text-gray-900 flex justify-center item-center relative">
+        @if (session('error'))
+            {{-- FE GAK GUNA --}}
+            <div id="alert-box"
+                class="absolute top-0 p-4 px-10 mt-2 text-sm text-red-800 bg-red-100 border border-red-200 rounded-lg animate-fade-in w-fit dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
+                role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
+                <span id="hs-soft-color-danger-label" class="font-bold">Danger</span>
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if (session('success'))
+            {{-- FE GAK GUNA --}}
+            <div id="alert-box"
+                class="p-4 mt-2 text-sm text-teal-800 bg-teal-100 border border-teal-200 rounded-lg animate-fade-in dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500"
+                role="alert" tabindex="-1" aria-labelledby="hs-soft-color-success-label">
+                <span id="hs-soft-color-success-label" class="font-bold">Success</span>
+                {{ session('success') }}
+            </div>
+        @endif
         <!-- Tombol Kembali -->
         <a href="{{ url()->previous() }}"
             class="absolute top-6 left-6 text-gray-600 inline-flex items-center text-sm font-semibold">
             <span class="border border-gray-300 rounded-full p-2 hover:bg-gray-200 inline-flex items-center justify-center">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </span>
