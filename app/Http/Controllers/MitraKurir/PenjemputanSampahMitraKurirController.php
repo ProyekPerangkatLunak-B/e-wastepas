@@ -144,8 +144,6 @@ class PenjemputanSampahMitraKurirController extends Controller
                 })
                 ->paginate(6);
 
-            // dd($penjemputan);
-
             $penjemputan->transform(function ($item) {
                 // Grup kategori dari detailPenjemputan
                 $kategoriData = $item->detailPenjemputan
@@ -239,9 +237,10 @@ class PenjemputanSampahMitraKurirController extends Controller
             $detail->jenisList = Jenis::whereIn('id_jenis', $idJenisGrouped)->get();
         }
 
-        // dd($penjemputan);
+        $status = $penjemputan->pelacakan->first()->status ?? null;
+        $catatan = $penjemputan->catatan ?? null;
 
-        return view('mitra-kurir.penjemputan-sampah.detail-permintaan', compact('penjemputan'));
+        return view('mitra-kurir.penjemputan-sampah.detail-permintaan', compact('penjemputan','status','catatan'));
     }
 
 
@@ -249,6 +248,7 @@ class PenjemputanSampahMitraKurirController extends Controller
     //update status dari menunggu konfirmasi menjadi dijemput driver
     public function updateStatus(Request $request)
     {
+        // dd($request->all());
         try {
             // Validasi data request
             $validated = $request->validate([
@@ -291,7 +291,6 @@ class PenjemputanSampahMitraKurirController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-
 
     /**
      * fn: dropbox
@@ -357,79 +356,185 @@ class PenjemputanSampahMitraKurirController extends Controller
         return redirect()->back()->with('success', 'Status pelacakan berhasil diperbarui.');
     }
 
+//    public function riwayat()
+//    {
+//        try {
+//
+//            if (!Auth::user()) {
+//                $userLogin = User::where('id_peran', 3)->first();
+//            } else {
+//                $userLogin = Auth::user()->id_pengguna;
+//            }
+//
+//            $search = request()->query('search', '');
+//            $sort = request()->query('sort', 'asc');
+//
+//            $data = DB::table('penjemputan')
+//                ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
+//                ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
+//                ->join('detail_penjemputan', 'penjemputan.id_penjemputan', '=', 'detail_penjemputan.id_penjemputan')
+//                ->join('kategori', 'detail_penjemputan.id_kategori', '=', 'kategori.id_kategori')
+//                ->where('pengguna.id_pengguna', $userLogin)
+//                ->where('pelacakan.status', 'Selesai')
+//                ->where('pengguna.nama', 'like', '%' . $search . '%')
+//                ->select(
+//                    'pengguna.nama',
+//                    'pengguna.nomor_telepon',
+//                    'pelacakan.status',
+//                    'pelacakan.id_pelacakan',
+//                    'kategori.nama_kategori',
+//                    'detail_penjemputan.berat',
+//                    'penjemputan.id_penjemputan'
+//                );
+//
+//            switch ($sort) {
+//                case 'berat-asc':
+//                    $data = $data->orderBy('detail_penjemputan.berat', 'desc');
+//                    break;
+//                case 'berat-desc':
+//                    $data = $data->orderBy('detail_penjemputan.berat', 'asc');
+//                    break;
+//                default:
+//                    $data = $data->orderBy('penjemputan.created_at', $sort);
+//                    break;
+//            }
+//
+//            $data = $data->paginate(6);
+//
+//            return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan', compact('data', 'sort', 'search'));
+//        } catch (\Throwable $th) {
+//            throw $th;
+//        }
+//    }
+
     public function riwayat()
     {
-        try {
+    try {
+
             $search = request()->query('search', '');
             $sort = request()->query('sort', 'asc');
 
-            $data = DB::table('penjemputan')
-                ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
-                ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
-                ->join('detail_penjemputan', 'penjemputan.id_penjemputan', '=', 'detail_penjemputan.id_penjemputan')
-                ->join('kategori', 'detail_penjemputan.id_kategori', '=', 'kategori.id_kategori')
-                ->where('pelacakan.status', 'Selesai')
-                ->where('pengguna.nama', 'like', '%' . $search . '%')
-                ->select(
-                    'pengguna.nama',
-                    'pengguna.nomor_telepon',
-                    'pelacakan.status',
-                    'pelacakan.id_pelacakan',
-                    'kategori.nama_kategori',
-                    'detail_penjemputan.berat',
-                    'penjemputan.id_penjemputan'
-                );
-
-            switch ($sort) {
-                case 'berat-asc':
-                    $data = $data->orderBy('detail_penjemputan.berat', 'desc');
-                    break;
-                case 'berat-desc':
-                    $data = $data->orderBy('detail_penjemputan.berat', 'asc');
-                    break;
-                default:
-                    $data = $data->orderBy('penjemputan.created_at', $sort);
-                    break;
+            if (!Auth::user()) {
+                $userLogin = User::where('id_peran', 3)->first();
+            } else {
+                $userLogin = Auth::user()->id_pengguna;
             }
+            $penjemputan = Penjemputan::with([
+                'penggunaMasyarakat',
+                'pelacakan',
+                'detailPenjemputan' => function ($query) {
+                    $query->select('id_penjemputan', 'id_kategori')
+                        ->selectRaw('COUNT(*) as jumlah')
+                        ->groupBy('id_penjemputan', 'id_kategori'); // Kelompokkan berdasarkan kategori
+                },
+            ])
+                ->where('id_pengguna_kurir', $userLogin)
+                ->filter(request(['search', 'total-berat']))
+                ->whereHas('pelacakan', function ($query) {
+                    $query->where('status', 'Selesai');
+                })
+                ->paginate(6);
 
-            $data = $data->paginate(6);
+            $totalSampah = $penjemputan->getCollection()->sum(function ($item) {
+                return $item->detailPenjemputan->count();
+            });
+            $totalBeratSampah = $penjemputan->getCollection()->sum('total_berat');
 
-            return view('mitra-kurir.penjemputan-sampah.riwayat-penjemputan', compact('data', 'sort', 'search'));
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+            // dd($penjemputan);
+            $penjemputan->transform(function ($item) {
+                // Grup kategori dari detailPenjemputan
+                $kategoriData = $item->detailPenjemputan
+                    ->groupBy('id_kategori')
+                    ->map(function ($details, $idKategori) {
+                        return [
+                            'id_kategori' => $details->first()->kategori->id_kategori ?? '#',
+                            'nama_kategori' => $details->first()->kategori->nama_kategori ?? 'Unknown',
+                            'jumlah_jenis' => $details->pluck('kategori.jenis.id_jenis')->unique()->count(),
+                        ];
+                    });
+
+                $item->kategoriData = $kategoriData->values();
+
+                return $item;
+            });
+
+
+
+            $kategori = Kategori::all();
+
+
+
+                return view(
+                    'mitra-kurir.penjemputan-sampah.riwayat-penjemputan',
+                    compact('penjemputan', 'kategori', 'totalSampah', 'totalBeratSampah')
+                );
+        //code...
+            } catch (\Throwable $th) {
+                throw $th;
+            }
     }
+
+//    public function detailRiwayat($id)
+//    {
+//
+//        $data = DB::table('penjemputan')
+//            ->join('detail_penjemputan', 'penjemputan.id_penjemputan', '=', 'detail_penjemputan.id_penjemputan')
+//            ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
+//            ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
+//            ->join('jenis', 'jenis.id_jenis', '=', 'detail_penjemputan.id_jenis')
+//            ->join('kategori', 'jenis.id_kategori', '=', 'kategori.id_kategori')
+//            ->join('dropbox', 'penjemputan.id_dropbox', '=', 'dropbox.id_dropbox')
+//            ->join('daerah', 'penjemputan.id_daerah', '=', 'daerah.id_daerah')
+//            ->where('penjemputan.id_penjemputan', $id)
+//            ->select(
+//                'pengguna.nama',
+//                'pengguna.nomor_telepon',
+//                'pelacakan.status',
+//                'pelacakan.id_pelacakan',
+//                'jenis.nama_jenis',
+//                'detail_penjemputan.berat',
+//                'penjemputan.id_penjemputan',
+//                'penjemputan.kode_penjemputan',
+//                'penjemputan.alamat_penjemputan',
+//                'penjemputan.tanggal_penjemputan',
+//                'penjemputan.catatan',
+//                'dropbox.alamat_dropbox',
+//                'kategori.nama_kategori',
+//                'daerah.nama_daerah'
+//            )
+//            ->get();
+//
+//        return view('mitra-kurir.penjemputan-sampah.detail-riwayat', compact('data'));
+//    }
 
     public function detailRiwayat($id)
     {
+        $penjemputan = Penjemputan::with([
+            'daerah',
+            'dropbox',
+            'penggunaMasyarakat',
+            'pelacakan',
+            'detailPenjemputan.kategori.jenis'
+        ])
+            ->where('id_penjemputan', $id)
+            ->whereHas('pelacakan', function ($query) {
+                $query->where('status', 'Selesai');
+            })
+            ->first();
 
-        $data = DB::table('penjemputan')
-            ->join('detail_penjemputan', 'penjemputan.id_penjemputan', '=', 'detail_penjemputan.id_penjemputan')
-            ->join('pelacakan', 'penjemputan.id_pengguna_masyarakat', '=', 'pelacakan.id_pelacakan')
-            ->join('pengguna', 'penjemputan.id_pengguna_masyarakat', '=', 'pengguna.id_pengguna')
-            ->join('jenis', 'jenis.id_jenis', '=', 'detail_penjemputan.id_jenis')
-            ->join('kategori', 'jenis.id_kategori', '=', 'kategori.id_kategori')
-            ->join('dropbox', 'penjemputan.id_dropbox', '=', 'dropbox.id_dropbox')
-            ->join('daerah', 'penjemputan.id_daerah', '=', 'daerah.id_daerah')
-            ->where('penjemputan.id_penjemputan', $id)
-            ->select(
-                'pengguna.nama',
-                'pengguna.nomor_telepon',
-                'pelacakan.status',
-                'pelacakan.id_pelacakan',
-                'jenis.nama_jenis',
-                'detail_penjemputan.berat',
-                'penjemputan.id_penjemputan',
-                'penjemputan.kode_penjemputan',
-                'penjemputan.alamat_penjemputan',
-                'penjemputan.tanggal_penjemputan',
-                'penjemputan.catatan',
-                'dropbox.alamat_dropbox',
-                'kategori.nama_kategori',
-                'daerah.nama_daerah'
-            )
-            ->get();
 
-        return view('mitra-kurir.penjemputan-sampah.detail-riwayat', compact('data'));
+        if ($penjemputan) {
+            foreach ($penjemputan->detailPenjemputan as $detail) {
+                $idJenisGrouped = explode(',', $detail->id_jenis_grouped);
+                $detail->jenisList = Jenis::whereIn('id_jenis', $idJenisGrouped)->get();
+            }
+        }
+
+        $status = $penjemputan->pelacakan->first()->status ?? null;
+        $catatan = $penjemputan->catatan ?? null;
+
+//        dd($penjemputan);
+
+        return view('mitra-kurir.penjemputan-sampah.detail-riwayat', compact('penjemputan', 'status', 'catatan'));
     }
 }

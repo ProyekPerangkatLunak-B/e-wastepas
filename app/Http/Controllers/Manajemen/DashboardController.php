@@ -63,6 +63,31 @@ class DashboardController extends Controller
     $riwayat = Pelacakan::where('status', 'Selesai')->count();
     $terdaftar = Pengguna::count();
 
+    // Ambil 6 daerah teratas berdasarkan total berat sampah
+    $topDaerah = DB::table('daerah as d')
+        ->leftJoin('penjemputan as p', 'p.id_daerah', '=', 'd.id_daerah')
+        ->leftJoin('pelacakan as pl', 'p.id_penjemputan', '=', 'pl.id_penjemputan')
+        ->select(
+            'd.nama_daerah',
+            DB::raw('COALESCE(SUM(CASE WHEN pl.status = "Selesai" THEN p.total_berat ELSE 0 END), 0) AS total_berat_sampah')
+        )
+        ->groupBy('d.id_daerah', 'd.nama_daerah')
+        ->orderByDesc('total_berat_sampah') // Urutkan berdasarkan total berat sampah
+        ->limit(6) // Ambil 6 daerah teratas
+        ->get();
+
+        $topDropbox = DB::table('dropbox as db')
+        ->leftJoin('penjemputan as p', 'db.id_dropbox', '=', 'p.id_dropbox')
+        ->leftJoin('pelacakan as pl', 'p.id_penjemputan', '=', 'pl.id_penjemputan')
+        ->select(
+            'db.nama_dropbox',
+            DB::raw('COALESCE(SUM(CASE WHEN pl.status = "Selesai" THEN p.total_berat ELSE 0 END), 0) AS total_berat_sampah')
+        )
+        ->groupBy('db.id_dropbox', 'db.nama_dropbox')
+        ->orderByDesc('total_berat_sampah') // Urutkan berdasarkan berat
+        ->limit(4) // Ambil 4 dropbox tertinggi
+        ->get();
+
     // Mengirim data ke view
     return view('manajemen.datamaster.dashboard.index', [
         'totalSampah' => $totalSampah,
@@ -70,6 +95,8 @@ class DashboardController extends Controller
         'riwayat' => $riwayat,
         'terdaftar' => $terdaftar,
         'categories' => $categories,
+        'topDaerah' => $topDaerah,
+        'topDropbox' => $topDropbox,
     ]);
     }
 }
