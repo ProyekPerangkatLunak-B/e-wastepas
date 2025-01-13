@@ -239,6 +239,7 @@ class PenjemputanSampahMasyarakatController extends Controller
             $pelacakan = new Pelacakan();
             $pelacakan->id_penjemputan = $penjemputan->id_penjemputan;
             $pelacakan->status = 'Diproses';
+            $pelacakan->keterangan = 'Permintaan akan segera diproses oleh kurir yang menerima penjemputan';
             $pelacakan->save();
 
             return redirect()->route('masyarakat.penjemputan.detail-melacak', ['id' => $pelacakan->id_penjemputan])->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');
