@@ -26,13 +26,15 @@ class LoginController extends Controller
         // Coba autentikasi dengan data yang diberikan
         if (Auth::attempt($request->only('email', 'password'))) {
             // Jika login berhasil, arahkan ke dashboard atau halaman lain
-            return redirect()->intended('/manajemen/datamaster/dashboard'); // Sesuaikan dengan halaman tujuan
+            return redirect()->intended('/manajemen/datamaster/dashboard')
+                ->with(['success', 'Anda Berhasil Telah Login']); // Sesuaikan dengan halaman tujuan
         }
 
         // Jika gagal, kembali ke halaman login dengan pesan error
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ])->withInput();
+        return back()->with([
+            'error',
+            'Email atau password salah.',
+        ]);
     }
 
     // Fungsi untuk logout

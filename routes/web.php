@@ -204,7 +204,7 @@ Route::group([
     Route::get('/datamaster/riwayat', [RiwayatController::class, 'index'])->name('datamaster.riwayat.index');
     Route::get('/datamaster/{kode_penjemputan}', [RiwayatController::class, 'show'])->name('datamaster.riwayat.detail-riwayat');
 
-    Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('datamaster.kategori.index');
 
 
     // Route::get('/datamaster/per-daerah', function () {
@@ -299,6 +299,9 @@ Route::group([
     Route::get('/konfirmasi-ubah-password', function () {
         return view('manajemen.registrasi.konfirmasi-ubah-password');
     })->name('password.konfirmasi-ubah-password');
+
+    Route::get('manajemen/password/reset', [ForgotPasswordManajemenController::class, 'showLinkRequestForm'])->name('manajemen.password.request');
+
 
 
     // Memverifikasi OTP
