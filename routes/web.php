@@ -482,9 +482,8 @@ Route::post('/mitra-kurir/registrasi/account-profile/profile', [RegistrasiMitraK
 // halaman  security
 Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePasswordIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
 
-// halaman Header
-Route::get('penjemputan.kategori', [RegistrasiMitraKurirController::class, 'UserDashboard'])->middleware('auth');
-
+//resend otp
+Route::post('/resend-otp/{id_pengguna}', [RegistrasiMitraKurirController::class, 'resendOtp'])->name('resend-otp');
 
 // halaman success-message document-upload
 Route::get('/mitra-kurir/registrasi/success-message', function () {
