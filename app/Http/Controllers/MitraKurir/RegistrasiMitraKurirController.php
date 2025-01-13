@@ -159,25 +159,18 @@ public function LogoutAuth(Request $request)
         'ulangiPassword' => ['required', 'min:8', 'same:password']
     ], $messages);
 
-    try {
-        $user = User::create([
-            'name' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s\-_\@]+$/',
-            'nomor_ktp' => $validateData['KTP'],
-            'nomor_telepon' => $validateData['NomorHP'],
-            'email' => $validateData['Email'],
-            'kata_sandi' => Hash::make($validateData['password']),
-            'tanggal_dibuat' => now()
-        ]);
 
-      $user = User::create([
-    'nama' => $validateData['name'],
-    'id_peran' => 3,
-    'nomor_ktp' => $validateData['KTP'],
-    'nomor_telepon' => $validateData['NomorHP'],
-    'email' => $validateData['Email'],
-    'kata_sandi' => Hash::make($validateData['password']),
-    'tanggal_dibuat' => now()
-]);
+      try {
+    $user = User::create([
+        'nama' => $validateData['name'],
+        'id_peran' => 3,
+        'nomor_ktp' => $validateData['KTP'],
+        'nomor_telepon' => $validateData['NomorHP'],
+        'email' => $validateData['Email'],
+        'kata_sandi' => Hash::make($validateData['password']),
+        'tanggal_dibuat' => now()
+    ]);
+
         $otp = UserOTP::create([
             'id_pengguna' => $user->id_pengguna,
             'otp_token' => rand(1000, 9999),
@@ -400,6 +393,39 @@ public function UpdateProfile(Request $request){
         $user->tanggal_update = now();
         $user->save();
         return redirect()->route('mitra-kurir.registrasi.success-message-data');
+}
+public function resendOtp(Request $request, $id_pengguna)
+{
+    $user = User::find($id_pengguna);
+
+    // Periksa apakah OTP terakhir dikirim kurang dari 60 detik yang lalu
+    $lastOtp = UserOTP::where('id_pengguna', $id_pengguna)->latest()->first();
+    if ($lastOtp && $lastOtp->created_at->diffInSeconds(now()) < 60) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'OTP hanya dapat dikirim ulang setelah 60 detik.'
+        ], 429); // 429: Too Many Requests
+    }
+
+    // Hapus OTP lama jika ada
+    if ($lastOtp) {
+        $lastOtp->delete();
+    }
+
+    // Buat OTP baru
+    $otp = UserOTP::create([
+        'id_pengguna' => $id_pengguna,
+        'otp_token' => rand(1000, 9999),
+        'otp_kadaluarsa' => now()->addMinutes(5)
+    ]);
+
+    // Kirim OTP melalui email
+    $user->notify(new OtpMail($otp->otp_token));
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'OTP berhasil dikirim ulang.'
+    ]);
 }
 
 }
