@@ -44,7 +44,7 @@ Route::get('/', function () {
 // Route Modul Admin
 Route::prefix('admin')
     ->as('admin.')
-    // ->middleware(['auth', 'role:Admin'])
+    ->middleware(['auth', 'role:Admin'])
     ->group(function () {
 
         Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
@@ -204,7 +204,7 @@ Route::group([
     Route::get('/datamaster/riwayat', [RiwayatController::class, 'index'])->name('datamaster.riwayat.index');
     Route::get('/datamaster/{kode_penjemputan}', [RiwayatController::class, 'show'])->name('datamaster.riwayat.detail-riwayat');
 
-    Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('datamaster.kategori.index');
 
 
     // Route::get('/datamaster/per-daerah', function () {
@@ -299,6 +299,9 @@ Route::group([
     Route::get('/konfirmasi-ubah-password', function () {
         return view('manajemen.registrasi.konfirmasi-ubah-password');
     })->name('password.konfirmasi-ubah-password');
+
+    Route::get('manajemen/password/reset', [ForgotPasswordManajemenController::class, 'showLinkRequestForm'])->name('manajemen.password.request');
+
 
 
     // Memverifikasi OTP
@@ -479,9 +482,8 @@ Route::post('/mitra-kurir/registrasi/account-profile/profile', [RegistrasiMitraK
 // halaman  security
 Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePasswordIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
 
-// halaman Header
-Route::get('penjemputan.kategori', [RegistrasiMitraKurirController::class, 'UserDashboard'])->middleware('auth');
-
+//resend otp
+Route::post('/resend-otp/{id_pengguna}', [RegistrasiMitraKurirController::class, 'resendOtp'])->name('resend-otp');
 
 // halaman success-message document-upload
 Route::get('/mitra-kurir/registrasi/success-message', function () {
