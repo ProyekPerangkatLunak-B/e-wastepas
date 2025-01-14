@@ -23,6 +23,8 @@ class RoleRedirect
                 return redirect('/admin/datamaster/masyarakat');
             } elseif ($user->id_peran == '2') {
                 return redirect('/kurir/dashboard');
+            } elseif ($user->id_peran == '4') {
+                return redirect()->route('manajemen.datamaster.dashboard.index');
             }
         }
 

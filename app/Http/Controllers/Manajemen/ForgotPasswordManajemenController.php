@@ -29,15 +29,15 @@ class ForgotPasswordManajemenController extends Controller
 
         if ($user) {
             // Generate reset token
-            $token = Str::random(60);
+            $token = Str::random(20);
 
             // Simpan token yang telah dienkripsi
             $user->update([
-                'reset_token' => Hash::make($token)
+                'remember_token' => Hash::make($token)
             ]);
 
             // Generate URL untuk reset password
-            $resetUrl = url('manajemen/reset-password/' . $token);
+            $resetUrl = url('manajemen/ganti-password/?token=' . $token . '&email=' . $user->email);
 
             // Kirim email reset password
             Mail::send([], [], function ($message) use ($user, $resetUrl) {
@@ -62,22 +62,26 @@ class ForgotPasswordManajemenController extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
+            'confirm-password' => 'required|same:password',
+        ], [
+            'confirm-password.same' => 'Konfirmasi password tidak cocok dengan password baru.',
         ]);
+        // dd($request->all());
 
         // Temukan user berdasarkan token dan email
-        $user = User::where('email', $request->email)->where('reset_token', $request->token)->first();
+        $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (!$user && !Hash::check($request->token, $user->remember_token)) {
             return back()->withErrors(['email' => 'Token atau email tidak valid.']);
         }
 
         // Reset password user
-        $user->password = Hash::make($request->password);
-        $user->reset_token = null;  // Hapus token setelah reset
+        $user->kata_sandi = Hash::make($request->password);
+        $user->remember_token = null;  // Hapus token setelah reset
         $user->save();
 
         // Berikan respons sukses
-        return redirect()->route('manajemen.login')->with('status', 'Password berhasil direset.');
+        return redirect()->route('manajemen.registrasi.login')->with('status', 'Password berhasil direset.');
     }
 }
