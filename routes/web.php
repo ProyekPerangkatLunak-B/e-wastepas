@@ -3,7 +3,7 @@
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
-use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Manajemen\LoginController;
 use App\Http\Controllers\Manajemen\Top10Controller;
 use App\Http\Controllers\admin\KurirAdminController;
