@@ -16,7 +16,7 @@ class LoginMasyarakat extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|max:255',
-            'password' => 'required|string|min:8',
+            'password' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -36,13 +36,12 @@ class LoginMasyarakat extends Controller
 
             // Jika login berhasil, redirect ke halaman penjemputan-sampah/kategori
             return redirect()->route('masyarakat.penjemputan.kategori')->with('success', 'Login berhasil.');
+        } else {
+            // **Error Handling yang Lebih Baik**
+            return back()->withErrors([
+                'email_or_password' => 'Email atau Password tidak sesuai.',
+            ]);
         }
-
-        // Jika login gagal
-        return back()->withErrors([
-            'email' => 'Email tidak terdaftar',
-            'password' => 'Password tidak sesuai',
-        ]);
     }
 
     //logout
