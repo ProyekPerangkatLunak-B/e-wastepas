@@ -128,7 +128,7 @@ class PenjemputanSampahMasyarakatController extends Controller
                         ->groupBy('id_penjemputan');
                 })
                 ->where('penjemputan.id_pengguna_masyarakat', Auth::id())
-                ->orderByDesc('penjemputan.created_at')
+                ->orderByDesc('penjemputan.updated_at')
                 ->select('penjemputan.*')
                 ->filter(request(['search', 'status']))
                 ->paginate(6)
