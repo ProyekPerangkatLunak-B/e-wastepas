@@ -71,7 +71,7 @@ class RegistrasiMasyarakatController extends Controller
         // Buat kode OTP
         $otpCode = str_pad(rand(100000, 999999), 6, '0', STR_PAD_LEFT);
 
-        // Buat entri OTP dengan `id_pengguna`
+        // Buat entri OTP dengan `id_penggu      //na`
         Otp::create([
             'id_pengguna' => $pengguna->id_pengguna, // Gunakan ID pengguna
             'otp_token' => $otpCode,

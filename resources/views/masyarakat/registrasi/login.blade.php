@@ -13,7 +13,7 @@
                 <div class="w-full mt-4 flex-20">
                     <div class="flex flex-col items-center justify-around">
                     </div>
-                    
+
                     @if ($errors->has('email_or_password'))
                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 flex items-center" role="alert">
                         <span class="block sm:inline">{{ $errors->first('email_or_password') }}</span>
