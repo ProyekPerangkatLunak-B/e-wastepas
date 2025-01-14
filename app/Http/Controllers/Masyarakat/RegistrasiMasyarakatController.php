@@ -23,35 +23,35 @@ class RegistrasiMasyarakatController extends Controller
     public function register(Request $request)
     {
         $messages = [
-            'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'name.unique' => 'Nama sudah terdaftar',
+
             'email.required' => 'Email wajib diisi.',
-            'email.string' => 'Email harus berupa teks.',
             'email.email' => 'Email harus sesuai format, example@gmail.com',
             'email.max' => 'Email tidak boleh lebih dari 255 karakter.',
             'email.unique' => 'Email ini sudah terdaftar.',
+
             'password.required' => 'Password wajib diisi.',
-            'password.string' => 'Password harus berupa teks.',
             'password.min' => 'Password harus terdiri dari minimal 10 karakter.',
+
             'nomor_ktp.required' => 'Nomor KTP wajib diisi.',
-            'nomor_ktp.string' => 'Nomor KTP harus berupa teks.',
-            'nomor_ktp.min' => 'Nomor KTP harus terdiri dari 16 digit.',
-            'nomor_ktp.max' => 'Nomor KTP harus terdiri dari 16 digit.',
+            'nomor_ktp.numeric' => 'Nomor KTP harus berupa angka.',
+            'nomor_ktp.digits' => 'Nomor KTP harus terdiri dari 16 digit',
             'nomor_ktp.unique' => 'Nomor KTP sudah terdaftar',
+
             'tel.required' => 'Nomor telepon wajib diisi.',
-            'tel.string' => 'Nomor telepon harus berupa teks.',
-            'tel.min' => 'Nomor telepon harus terdiri dari minimal 10 digit.',
-            'tel.max' => 'Nomor telepon tidak boleh lebih dari 13 digit.',
+            'tel.numeric' => 'Nomor telepon harus berupa angka.',
+            'tel.unique' => 'Nomor telepon sudah terdaftar',
         ];
-        
+
         // Validasi input
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:pengguna,email',
-            'password' => 'required|string|min:10',
-            'nomor_ktp' => 'required|string|min:16|max:16|unique:pengguna',
-            'tel' => 'required|string|min:10|max:13',
+            'name' => 'required|string|max:255|unique:pengguna,nama',
+            'email' => 'required|email|max:255|unique:pengguna,email',
+            'password' => 'required|min:10',
+            'nomor_ktp' => 'required|numeric|digits:16|unique:pengguna',
+            'tel' => 'required|numeric',
         ], $messages);
 
         // Simpan pengguna di database

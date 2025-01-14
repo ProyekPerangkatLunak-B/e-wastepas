@@ -41,22 +41,31 @@
 
                     <!-- Input untuk Foto Profil -->
                     <div class="w-full mt-6">
-                        <label for="foto_profil" class="text-gray-500">Foto Profil</label>
+                        <div class = "ml-22 flex">
+                        <label for="foto_profil" class="">
+
+                        </label>
                         <img src="{{ $user->foto_profil ? Storage::url($user->foto_profil) : 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxwZW9wbGV8ZW58MHwwfHx8MTcxMTExMTM4N3ww&ixlib=rb-4.0.3&q=80&w=1080' }}"
-                            alt="Foto Profil" class="w-32 h-32 rounded-full">
+                            alt="Foto Profil" class="w-32 h-32 ml-24 rounded-full">
+                            <div class="ml-8">
+                                <h3 class="font-bold text-xl mt-8">Profile Picture</h3>
+                                <p>PNG, JPG, JPEG Under 15MB</p>
+                              </div>
+                            </div>
                         <input type="file" name="foto_profil" id="foto_profil"
-                            class="p-4 w-full border-2 rounded-lg text-gray-800 border-gray-200">
+                            class="p-4 mt-6 w-full border-2 rounded-lg text-gray-800 border-gray-200">
                     </div>
+
 
                     <!-- Input untuk Nama -->
                     <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-3 justify-center w-full">
-                        <div class="w-full mt-8">
+                        <div class="w-full mt-6">
                             <label for="nama" class="text-gray-500">Nama</label>
                             <input type="text" name="nama" id="nama"
                                 class="p-4 w-full border-2 rounded-lg text-gray-800 border-gray-200"
                                 placeholder="Masukkan Nama" value="{{ old('nama', $user->nama) }}" required>
                         </div>
-                        <div class="w-full mt-8">
+                        <div class="w-full mt-6">
                             <label for="tanggal_lahir" class="text-gray-500">Tanggal Lahir</label>
                             <input type="date" name="tanggal_lahir" id="tanggal_lahir"
                                 class="p-4 w-full border-2 rounded-lg text-gray-800 border-gray-200"
