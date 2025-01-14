@@ -130,7 +130,9 @@ class PenjemputanSampahMitraKurirController extends Controller
             // 'Diproses','Diterima','Dijemput Kurir','Menuju Lokasi Penjemputan','Sampah Diangkut','Menuju Dropbox','Menyimpan Sampah di Dropbox','Selesai','Dibatalkan'
             $penjemputan = Penjemputan::with([
                 'penggunaMasyarakat',
-                'pelacakan',
+                'pelacakan' => function ($query) {
+                    $query->orderBy('created_at', 'desc');
+                },
                 'detailPenjemputan' => function ($query) {
                     $query->select('id_penjemputan', 'id_kategori')
                         ->selectRaw('COUNT(*) as jumlah')
@@ -140,7 +142,10 @@ class PenjemputanSampahMitraKurirController extends Controller
                 ->where('id_pengguna_kurir', $userLogin)
                 ->filter(request(['search', 'total-berat']))
                 ->whereHas('pelacakan', function ($query) {
-                    $query->where('status', ['Diproses', 'Diterima']);
+                    $query->where('status', 'diproses');
+                })
+                ->whereDoesntHave('pelacakan', function ($query) {
+                    $query->where('status', '!=', 'diproses');
                 })
                 ->paginate(6);
 
@@ -216,7 +221,9 @@ class PenjemputanSampahMitraKurirController extends Controller
             'daerah',
             'dropbox',
             'penggunaMasyarakat',
-            'pelacakan',
+            'pelacakan' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            },
             'detailPenjemputan'  => function ($query) {
                 $query->select('id_penjemputan', 'id_kategori')
                     ->selectRaw('COUNT(*) as jumlah')
@@ -230,6 +237,7 @@ class PenjemputanSampahMitraKurirController extends Controller
             ->whereHas('pelacakan', function ($query) {
                 $query->whereNotIn('status', ['Diterima', 'Selesai', 'Dibatalkan']);
             })
+            ->orderBy('created_at', 'desc')
             ->first();
 
         foreach ($penjemputan->detailPenjemputan as $detail) {
@@ -278,12 +286,17 @@ class PenjemputanSampahMitraKurirController extends Controller
             // }
 
             // Temukan pelacakan yang sesuai
-            $pelacakan = Pelacakan::findOrFail($validated['id_pelacakan']);
+            $existingPelacakan = Pelacakan::findOrFail($validated['id_pelacakan']);
 
-            // Update status pelacakan
-            $pelacakan->update([
-                'status' => $validated['status']
-            ]);
+            // Buat pelacakan baru dengan status yang diperbarui
+            $newPelacakan = $existingPelacakan->replicate();
+            $newPelacakan->status = $validated['status'];
+            $newPelacakan->save();
+
+//            // Update status pelacakan
+//            $pelacakan->update([
+//                'status' => $validated['status']
+//            ]);
 
             return redirect()->route('mitra-kurir.penjemputan.dropbox')->with('success', 'Status berhasil diperbarui.');
         } catch (\Exception $e) {
@@ -316,13 +329,22 @@ class PenjemputanSampahMitraKurirController extends Controller
             $penjemputan = Penjemputan::with(['daerah', 'dropbox', 'penggunaMasyarakat', 'penggunaKurir'])
                 ->where('id_pengguna_kurir', $userLogin)
                 ->whereHas('pelacakan', function ($query) {
-                    $query->whereNotIn('status', ['Diproses', 'Diterima', 'Selesai', 'Dibatalkan']);
+                    $query->whereNotIn('status', ['Diproses', 'Diterima', 'Selesai', 'Dibatalkan'])
+                    ->orderBy('created_at', 'desc');
                 })
-                ->orderBy('created_at', 'asc') // ambil penjemputan yang paling lama
+                ->whereDoesntHave('pelacakan', function ($query) {
+                    $query->where('status', 'Selesai');
+                })
+                ->orderBy('created_at', 'desc') // ambil penjemputan yang paling lama
                 ->first();
+
+//            $pelacakan = Pelacakan::where('id_penjemputan', $penjemputan?->id_penjemputan)
+//                ->orderBy('created_at', 'desc')
+//                ->first();
 
             $pelacakan = Pelacakan::where('id_penjemputan', $penjemputan?->id_penjemputan)
                 ->whereNotIn('status', ['Diproses', 'Diterima', 'Selesai', 'Dibatalkan'])
+                ->orderBy('created_at', 'desc')
                 ->first();
 
             // dd($penjemputan);
@@ -339,21 +361,78 @@ class PenjemputanSampahMitraKurirController extends Controller
         }
     }
 
+//    public function dropbox()
+//    {
+//        try {
+//            /**
+//             * @ReadMe!!
+//             * Agar ini terlihat, pastikan login dengan dengan akun yang memiliki peran kurir dan memiliki penjemputan
+//             * dengan pelacakan berstatus selain 'Diproses','Diterima', 'Selesai' atau 'Dibatalkan'.
+//             */
+//            if (!Auth::user()) {
+//                $userLogin = User::where('id_peran', 3)->first();
+//            } else {
+//                $userLogin = Auth::user()->id_pengguna;
+//            }
+//
+//            $penjemputan = Penjemputan::with(['daerah', 'dropbox', 'penggunaMasyarakat', 'penggunaKurir'])
+//                ->where('id_pengguna_kurir', $userLogin)
+//                ->whereHas('pelacakan', function ($query) {
+//                    $query->whereDoesntHave('status', ['Diproses', 'Diterima', 'Selesai', 'Dibatalkan'])
+//                    ->orderBy('created_at', 'desc');
+//                })
+//                ->orderBy('created_at', 'asc') // ambil penjemputan yang paling lama
+//                ->first();
+//
+//            $pelacakan = Pelacakan::where('id_penjemputan', $penjemputan?->id_penjemputan)
+//                ->whereDoesntHave('status', ['Diproses', 'Diterima', 'Selesai', 'Dibatalkan'])
+//                ->orderBy('created_at', 'desc')
+//                ->first();
+//
+//            // dd($penjemputan);
+//            // dd(Auth::user());
+//            // dd($userLogin);
+//
+//            return view(
+//                'mitra-kurir.penjemputan-sampah.dropbox',
+//                compact('penjemputan', 'pelacakan')
+//            );
+//            // return view('mitra-kurir.penjemputan-sampah.dropbox');
+//        } catch (\Throwable $th) {
+//            throw $th;
+//        }
+//    }
+
     public function updateStatusPelacakan(Request $request)
     {
-        // dd($request->all());
+        try {
+            // dd($request->all());
 
-        $validated = $request->validate([
-            'id_pelacakan' => 'required|exists:pelacakan,id_pelacakan',
-            'status' => 'required|string',
-        ]);
+            $validated = $request->validate([
+                'id_pelacakan' => 'required|exists:pelacakan,id_pelacakan',
+                'status' => 'required|string',
+            ]);
 
-        $pelacakan = Pelacakan::find($validated['id_pelacakan']);
+            $existingPelacakan = Pelacakan::findOrFail($validated['id_pelacakan']);
 
-        $pelacakan->status = $validated['status'];
-        $pelacakan->save();
+            $newPelacakan = $existingPelacakan->replicate();
+            $newPelacakan->status = $validated['status'];
+            $newPelacakan->save();
 
-        return redirect()->back()->with('success', 'Status pelacakan berhasil diperbarui.');
+//            $latestPelacakan = Pelacakan::where('id_penjemputan', $existingPelacakan->id_penjemputan)
+//                ->orderBy('created_at', 'desc')
+//                ->first();
+//            $latestPelacakan->save();
+
+//        $pelacakan = Pelacakan::find($validated['id_pelacakan']);
+//
+//        $pelacakan->status = $validated['status'];
+//        $pelacakan->save();
+
+            return redirect()->route('mitra-kurir.penjemputan.dropbox')->with('success', 'Status pelacakan berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
 //    public function riwayat()
@@ -421,7 +500,9 @@ class PenjemputanSampahMitraKurirController extends Controller
             }
             $penjemputan = Penjemputan::with([
                 'penggunaMasyarakat',
-                'pelacakan',
+                'pelacakan' => function ($query) {
+                    $query->orderBy('created_at', 'desc');
+                },
                 'detailPenjemputan' => function ($query) {
                     $query->select('id_penjemputan', 'id_kategori')
                         ->selectRaw('COUNT(*) as jumlah')
@@ -520,6 +601,7 @@ class PenjemputanSampahMitraKurirController extends Controller
             ->whereHas('pelacakan', function ($query) {
                 $query->where('status', 'Selesai');
             })
+            ->orderBy('created_at', 'desc')
             ->first();
 
 
@@ -530,7 +612,7 @@ class PenjemputanSampahMitraKurirController extends Controller
             }
         }
 
-        $status = $penjemputan->pelacakan->first()->status ?? null;
+        $status = $penjemputan->pelacakan->sortByDesc('created_at')->first()->status ?? null;
         $catatan = $penjemputan->catatan ?? null;
 
 //        dd($penjemputan);
