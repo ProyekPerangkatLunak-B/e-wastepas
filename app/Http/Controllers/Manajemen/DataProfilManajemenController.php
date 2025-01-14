@@ -2,87 +2,135 @@
 
 namespace App\Http\Controllers\Manajemen;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Storage;
 
-class ForgotPasswordManajemenController extends Controller
+class DataProfilManajemenController extends Controller
 {
-    public function showResetForm(Request $request, $token = null)
+    public function updateProfile(Request $request)
     {
-        return view('manajemen.registrasi.ganti-password', ['token' => $token, 'email' => $request->email]);
-    }
-
-    // Menampilkan form untuk forgot password
-    public function showLinkRequestForm()
-    {
-        return view('manajemen.registrasi.forgot-password');
-    }
-
-    // Mengirimkan email link reset password
-    public function sendResetLinkEmail(Request $request)
-    {
-        // Validasi input email
-        $request->validate(['email' => 'required|email']);
-
-        // Cari user berdasarkan email
-        $user = User::where('email', $request->email)->first();
-
-        if ($user) {
-            // Generate reset token
-            $token = Str::random(60);
-
-            // Simpan token yang telah dienkripsi
-            $user->update([
-                'reset_token' => Hash::make($token)
-            ]);
-
-            // Generate URL untuk reset password
-            $resetUrl = url('manajemen/ganti-password/' . $token);  // Pastikan ini adalah URL yang benar
-
-            // Kirim email reset password
-            Mail::send([], [], function ($message) use ($user, $resetUrl) {
-                $message->to($user->email)
-                    ->subject('Reset Password')
-                    ->html('Click the following link to reset your password: <a href="' . $resetUrl . '">Reset Password</a>');
-            });
-
-            // Berikan respons sukses
-            return redirect()->route('manajemen.password.ganti-password')
-                ->with('status', 'Link reset password telah dikirim ke email Anda.');
-        }
-
-        // Jika email tidak ditemukan
-        return back()->withErrors(['email' => 'Email tidak ditemukan dalam sistem kami.']);
-    }
-
-
-    // Reset password
-    public function reset(Request $request)
-    {
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
+        // Validasi input
+        $validatedData = $request->validate([
+            'id_pengguna' => 'required',
+            'name' => 'required|string|min:3|max:50',
+            'nomor_telepon' => 'required|regex:/^08[0-9]{9,11}$/',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'required|string|min:5|max:255',
+            'foto_profil' => 'nullable|file|mimes:jpg,jpeg,png|max:15360', // 15 MB
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+            'name.min' => 'Nama minimal 3 karakter.',
+            'name.max' => 'Nama maksimal 50 karakter.',
+            'nomor_telepon.required' => 'Nomor telepon wajib diisi.',
+            'nomor_telepon.regex' => 'Nomor telepon harus dimulai dengan 08 dan memiliki 10-13 digit.',
+            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
+            'tanggal_lahir.date' => 'Tanggal lahir harus berupa format tanggal yang valid.',
+            'alamat.required' => 'Alamat wajib diisi.',
+            'alamat.string' => 'Alamat harus berupa teks.',
+            'alamat.min' => 'Alamat minimal 5 karakter.',
+            'alamat.max' => 'Alamat maksimal 255 karakter.',
+            'foto_profil.file' => 'Foto profil harus berupa file.',
+            'foto_profil.mimes' => 'Foto profil harus berupa file dengan format JPG, JPEG, atau PNG.',
+            'foto_profil.max' => 'Foto profil tidak boleh lebih dari 15 MB.',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        // dd($request->id_pengguna);
+
+        // Cari pengguna berdasarkan ID (misalnya pengguna saat ini)
+        $user = User::find($request->id_pengguna); // atau User::find($id);
 
         if (!$user) {
-            return redirect()->back()->withErrors(['email' => 'Email tidak ditemukan.']);
+            return response()->json([
+                'message' => 'Pengguna tidak ditemukan.',
+            ], 404);
         }
 
-        // Verify the token here (depending on how you stored it)
+        // Proses unggah dan simpan file foto profil jika ada
+        if ($request->hasFile('foto_profil')) {
+            $uploadedFile = $request->file('foto_profil');
 
-        // Update the password
-        $user->password = Hash::make($request->password);
+            // Hash nama file berdasarkan konten
+            $hashName = hash_file('sha256', $uploadedFile->getRealPath()) . '.' . $uploadedFile->getClientOriginalExtension();
+
+            // Simpan file ke direktori yang ditentukan
+            // $uploadedFile->storeAs('img/manajemen/registrasi/profile', $hashName, 'public_uploads');
+            $uploadedFile->storeAs('', $hashName, 'public');
+
+            // Hapus file foto lama jika ada
+            if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
+                Storage::disk('public')->delete($user->foto_profil);
+            }
+
+            // Simpan nama file baru ke database
+            $user->foto_profil = $hashName;
+        }
+
+        // Perbarui data pengguna
+        $user->nama = $validatedData['name'];
+        $user->nomor_telepon = $validatedData['nomor_telepon'];
+        $user->tanggal_lahir = $validatedData['tanggal_lahir'];
+        $user->alamat = $validatedData['alamat'];
+        $user->tanggal_update = now();
         $user->save();
 
-        // Redirect to a success page
-        return redirect()->route('login')->with('status', 'Password berhasil direset.');
+        return redirect()->back()->with(
+            'success',
+            'Data berhasil di perbaharui.',
+        );
+
+        // // Debugging
+        // return response()->json([
+        //     'message' => 'Data berhasil diperbarui.',
+        //     'data' => [
+        //         'id_pengguna' => $user->id_pengguna,
+        //         'nama' => $user->nama,
+        //         'nomor_telepon' => $user->nomor_telepon,
+        //         'tanggal_lahir' => $user->tanggal_lahir,
+        //         'alamat' => $user->alamat,
+        //         'foto_profil' => $user->foto_profil ? asset('storage/' . $user->foto_profil) : null,
+        //     ],
+        // ]);
+    }
+
+    public function ubahPassword(Request $request)
+    {
+        // dd($request->all());
+        // Validasi input
+        $request->validate([
+            'id_pengguna' => 'required|exists:pengguna,id_pengguna',
+            'old-password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|different:old-password',
+            'confirm-password' => 'required|same:password',
+        ], [
+            'old-password.required' => 'Password lama wajib diisi.',
+            'old-password.string' => 'Password lama harus berupa teks.',
+            'old-password.min' => 'Password lama minimal 6 karakter.',
+            'password.required' => 'Password baru wajib diisi.',
+            'password.string' => 'Password baru harus berupa teks.',
+            'password.min' => 'Password baru minimal 6 karakter.',
+            'password.different' => 'Password baru harus berbeda dari password lama.',
+            'confirm-password.required' => 'Konfirmasi password wajib diisi.',
+            'confirm-password.same' => 'Konfirmasi password tidak sesuai dengan password baru.',
+        ]);
+
+        // Ambil pengguna berdasarkan ID
+        $user = User::findOrFail($request->id_pengguna);
+
+        // Periksa apakah password lama cocok
+        if (!Hash::check($request->input('old-password'), $user->kata_sandi)) {
+            return back()->withErrors(['old-password' => 'Password lama tidak sesuai.'])->withInput();
+        }
+
+        // Update password baru
+        $user->update([
+            'kata_sandi' => Hash::make($request->input('password')),
+        ]);
+
+        // Kembalikan response success
+        return redirect()->route('manajemen.password.konfirmasi-ubah-password')->with('success', 'Password berhasil diperbarui.');
     }
 }

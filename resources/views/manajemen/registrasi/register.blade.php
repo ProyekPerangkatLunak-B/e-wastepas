@@ -8,7 +8,8 @@
         <div class="flex items-center justify-center flex-1 p-8 bg-white">
             <div class="w-full max-w-lg">
                 <div class="mb-6 text-center">
-                    <img src="{{ asset('img/manajemen/registrasi/logo.png') }}" alt="Logo E-WastePas" class="w-24 h-24 mx-auto mb-4">
+                    <img src="{{ asset('img/manajemen/registrasi/logo.png') }}" alt="Logo E-WastePas"
+                        class="w-24 h-24 mx-auto mb-4">
                     <h1 class="text-2xl font-bold text-green-700">Selamat Datang di E-WastePas!</h1>
                     <p class="text-gray-600">Isi formulir di bawah ini untuk mendaftar.</p>
                 </div>
@@ -47,10 +48,11 @@
                         <label for="password" class="block text-gray-700">Password</label>
                         <input type="password" name="password" id="password"
                             class="w-full p-2 pr-10 mt-1 border rounded-xl" placeholder="Masukkan Password" required>
-                        <span class="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer" onclick="togglePasswordVisibility()">
+                        <span class="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                            onclick="togglePasswordVisibility()">
                             <i id="eyeIcon" class="fa fa-eye"></i>
                         </span>
-                            <!-- Teks tambahan di bawah kolom password -->
+                        <!-- Teks tambahan di bawah kolom password -->
                         <p class="mt-1 text-sm text-gray-500">Minimal harus terdiri dari 8 karakter.</p>
                     </div>
 
@@ -68,7 +70,8 @@
         </div>
 
         <!-- Bagian Gambar -->
-        <div class="flex-1 bg-center bg-cover" style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}');">
+        <div class="flex-1 bg-center bg-cover"
+            style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}');">
         </div>
     </div>
 
