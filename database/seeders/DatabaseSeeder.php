@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdminSeeder::class,
-            // MasyarakatSeeder::class,
+            MasyarakatSeeder::class,
             KategoriSeeder::class,
             JenisSeeder::class,
             // Data daerah dan dropbox tanpa factory
