@@ -135,7 +135,7 @@ class AdminSeeder extends Seeder
                 'nomor_ktp' => '1234567890123462',
                 'nama' => 'Adiya',
                 'alamat' => 'Jl. Adiya Utama No. 6',
-                'email' => 'adiya.213040088.unpas.ac.id',
+                'email' => 'adiya.213040088@mail.unpas.ac.id',
                 'kata_sandi' => Hash::make('password'),
                 'tanggal_lahir' => '1996-01-01',
                 'foto_profil' => null,

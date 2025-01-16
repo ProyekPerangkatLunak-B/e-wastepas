@@ -120,16 +120,19 @@
 
                 <div id="documentModal"
                     class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div class="bg-white rounded-lg shadow-lg items-center p-6 max-w-lg w-full"
-                        style="background-color: white">
+                    <div class="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full" style="background-color: white">
+                        <!-- Header -->
                         <div class="flex flex-col items-center mb-4">
-                            <h2 class="text-xl font-bold text-gray-500">Detail Dokumen</h2>
+                            <h2 class="text-xl font-bold text-gray-700">Detail Dokumen</h2>
                         </div>
-                        <div class="modal-body">
+                        <!-- Body -->
+                        <div class="modal-body overflow-y-auto max-h-96 p-4 border-t border-b border-gray-300">
                             <!-- Data dokumen akan dimuat di sini -->
                         </div>
+                        <!-- Footer -->
                         <div class="mt-4 text-center">
-                            <button class="px-4 py-2 bg-green-500 rounded text-white-100 hover:bg-green-700"
+                            <button
+                                class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none"
                                 onclick="closeDocumentModal()">Kembali</button>
                         </div>
                     </div>
@@ -518,9 +521,9 @@
                         }
 
                         modalContent += `
-                    <p><strong>File Dokumen:</strong></p>
-                    <img src="${item.file_dokumen}" alt="Dokumen" class="w-96 h-64 ms-10 rounded-lg mt-2 mb-4">
-                `;
+                            <p><strong>File Dokumen:</strong></p>
+                            <img src="/storage/${item.file_dokumen}" alt="Dokumen" class="w-96 h-64 ms-10 rounded-lg mt-2 mb-4">
+                        `;
                     });
 
                     $('#documentModal .modal-body').html(modalContent);
