@@ -157,6 +157,8 @@ class ManajemenAdminController extends Controller
             // Update status_verifikasi menjadi 'Diterima'
             $manajemen = Pengguna::findOrFail($id);
             $manajemen->status_verifikasi = 'Diterima';
+            $manajemen->tanggal_email_diverifikasi = now();
+            $manajemen->updated_at = now();
             $manajemen->save();
 
             // Kirim email notifikasi

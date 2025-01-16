@@ -100,7 +100,10 @@
                     @if ($masyarakat->foto_profil)
                         <img src="{{ asset('storage/' . $masyarakat->foto_profil) }}" alt="Foto Profil">
                     @else
-                        <img src="https://via.placeholder.com/120?text=No+Photo" alt="Foto Profil">
+                        <div
+                            class="w-30 h-30 bg-gray-200 flex items-center justify-center text-gray-500 rounded-full border border-gray-300">
+                            <span class="text-sm">No Photo</span>
+                        </div>
                     @endif
                 </div>
                 <div>
@@ -139,7 +142,9 @@
                 </div>
                 <div class="info-block">
                     <span class="info-label"><i class="fas fa-sync-alt"></i> Tanggal Update:</span>
-                    <p class="info-value">{{ $masyarakat->tanggal_update }}</p>
+                    <p class="info-value">
+                        {{ $masyarakat->tanggal_update ?? $masyarakat->tanggal_email_diverifikasi }}
+                    </p>
                 </div>
                 <div class="info-block">
                     <span class="info-label"><i class="fas fa-check-circle"></i> Tanggal Diverifikasi:</span>
