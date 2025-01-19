@@ -1,0 +1,120 @@
+/* Styling untuk Select2 */
+.select2-container .select2-selection--single {
+    width: 100% !important;
+    height: auto !important;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    background-color: #f3f4f6 !important;
+    border: 1px solid #60b15b;
+    border-radius: 0.75rem !important;
+    box-shadow: none !important;
+    align-items: center;
+    justify-content: end;
+}
+
+/* Styling untuk panah dropdown */
+.select2-container--default
+    .select2-selection--single
+    .select2-selection__arrow {
+    background-color: #fff !important;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+/* Styling untuk dropdown Select2 */
+.select2-container .select2-dropdown {
+    border-radius: 0.75rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+}
+
+/* Styling untuk teks elemen yang belum dipilih */
+.select2-container--default
+    .select2-selection--single
+    .select2-selection__placeholder {
+    color: #6b7280;
+}
+
+/* Styling untuk elemen aktif atau hover */
+.select2-container .select2-results__option--highlighted[aria-selected] {
+    background-color: #cee7cc !important;
+    color: #60b15b !important;
+}
+
+/* Fokus pada Select2 */
+.select2-container--default .select2-selection--single:focus-within {
+    border-color: #60b15b !important;
+    box-shadow: 0 0 0 2px rgba(96, 177, 91, 0.25);
+}
+
+/* Hover pada input select */
+.select2-container .select2-selection--single:hover {
+    border-color: #60b15b !important;
+}
+
+/* Styling untuk dropdown item */
+.select2-container .select2-results__option {
+    padding: 10px;
+    font-size: 0.875rem;
+    color: #000 !important;
+}
+
+/* Hover effect pada item dropdown */
+.select2-container .select2-results__option[aria-selected="true"] {
+    background-color: #cee7cc !important;
+    color: #000 !important;
+}
+
+/* Ketika item dipilih */
+.select2-container .select2-results__option[aria-selected="true"]:hover {
+    background-color: #60b15b !important;
+    color: #fff !important;
+}
+
+/* Menyusun panah di tengah */
+.select2-container .select2-selection__arrow {
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    transform: translate(-50%, 32%);
+}
+
+/* Styling untuk Select2 multiple */
+.select2-container--default .select2-selection--multiple {
+    width: 100% !important;
+    min-height: 3rem !important;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    background-color: #fff !important;
+    border: 1px solid #60b15b;
+    border-radius: 0.75rem !important;
+}
+
+/* Styling untuk elemen yang dipilih dalam multiple select */
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice {
+    background-color: #60b15b !important;
+    color: #fff;
+    border-radius: 1rem;
+    padding: 0.25rem 0.75rem;
+    margin-right: 0.5rem;
+}
+
+/* Styling untuk ketika item dipilih dalam multiple select */
+.select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice__remove {
+    color: #fff;
+    margin-left: 0.25rem;
+    cursor: pointer;
+}
+
+/* Fokus pada Select2 multiple */
+.select2-container--default .select2-selection--multiple:focus-within {
+    border-color: #60b15b !important;
+    box-shadow: 0 0 0 2px rgba(96, 177, 91, 0.25);
+}
