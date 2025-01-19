@@ -115,8 +115,8 @@
                                 <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Dropbox:</label>
                                 <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
                                     <option value="">Semua</option>
-                                    <option value="Diterima">Aktif</option>
-                                    <option value="Ditolak">Tidak Aktif</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
                                 </select>
                             </div>
                             <!-- Tampilkan Dropdown -->
