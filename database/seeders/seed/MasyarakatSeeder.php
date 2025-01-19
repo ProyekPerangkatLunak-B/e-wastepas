@@ -82,35 +82,35 @@ class MasyarakatSeeder extends Seeder
                 $roleId = $masyarakatRole->id_peran;
             }
 
-            $pengguna = Pengguna::create([
-                'id_peran' => $roleId,
-                'nomor_ktp' => $nomorKTP,
-                'nama' => $nama,
-                'alamat' => "Jl. Masyarakat Sejahtera No. $i",
-                'email' => $i . $email,
-                'kata_sandi' => Hash::make('password123'),
-                'tanggal_lahir' => now()->subYears(rand(18, 40))->format('Y-m-d'),
-                'foto_profil' => 'https://picsum.photos/id/' . rand(0, 800) . '/200/300',
-                'nomor_telepon' => $nomorTelepon,
-                'no_rekening' => str_pad($i, 10, '0', STR_PAD_LEFT),
-                'subtotal_poin' => rand(0, 100),
-                'nomor_terverifikasi' => true,
-                'tanggal_email_diverifikasi' => now(),
-                'tanggal_update' => now(),
-                'tanggal_dihapus' => null,
-                'tanggal_diverifikasi' => now(),
-                'status_verifikasi' => $i <= 75 ? 'Diproses' : 'Diterima',
-            ]);
+            // $pengguna = Pengguna::create([
+            //     'id_peran' => $roleId,
+            //     'nomor_ktp' => $nomorKTP,
+            //     'nama' => $nama,
+            //     'alamat' => "Jl. Masyarakat Sejahtera No. $i",
+            //     'email' => $i . $email,
+            //     'kata_sandi' => Hash::make('password123'),
+            //     'tanggal_lahir' => now()->subYears(rand(18, 40))->format('Y-m-d'),
+            //     'foto_profil' => 'https://picsum.photos/id/' . rand(0, 800) . '/200/300',
+            //     'nomor_telepon' => $nomorTelepon,
+            //     'no_rekening' => str_pad($i, 10, '0', STR_PAD_LEFT),
+            //     'subtotal_poin' => rand(0, 100),
+            //     'nomor_terverifikasi' => true,
+            //     'tanggal_email_diverifikasi' => now(),
+            //     'tanggal_update' => now(),
+            //     'tanggal_dihapus' => null,
+            //     'tanggal_diverifikasi' => now(),
+            //     'status_verifikasi' => $i <= 75 ? 'Diproses' : 'Diterima',
+            // ]);
 
-            // Jika pengguna adalah kurir, buat entri dokumen kurir
-            if ($isKurir) {
-                DokumenKurir::create([
-                    'id_pengguna' => $pengguna->id_pengguna,
-                    'tipe_dokumen' => $i % 2 == 0 ? 'KTP' : 'KK', // Selang-seling KTP dan KK
-                    'file_dokumen' => "https://picsum.photos/720/720?random=$i", // URL dari Picsum dengan parameter random
-                    'catatan_admin' => $i % 5 == 0 ? "Dokumen user $i perlu verifikasi manual." : null,
-                ]);
-            }
+            // // Jika pengguna adalah kurir, buat entri dokumen kurir
+            // if ($isKurir) {
+            //     DokumenKurir::create([
+            //         'id_pengguna' => $pengguna->id_pengguna,
+            //         'tipe_dokumen' => $i % 2 == 0 ? 'KTP' : 'KK', // Selang-seling KTP dan KK
+            //         'file_dokumen' => "https://picsum.photos/720/720?random=$i", // URL dari Picsum dengan parameter random
+            //         'catatan_admin' => $i % 5 == 0 ? "Dokumen user $i perlu verifikasi manual." : null,
+            //     ]);
+            // }
         }
     }
 }

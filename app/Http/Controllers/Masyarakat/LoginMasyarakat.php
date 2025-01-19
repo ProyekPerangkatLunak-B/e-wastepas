@@ -52,7 +52,6 @@ class LoginMasyarakat extends Controller
         'email' => 'Email tidak terdaftar',
         'password' => 'Password tidak sesuai',
     ]);
-
     }
 
     //logout

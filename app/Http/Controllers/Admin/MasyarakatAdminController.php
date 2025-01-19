@@ -147,6 +147,8 @@ class MasyarakatAdminController extends Controller
             // Update status_verifikasi menjadi 'Diterima'
             $masyarakat = Pengguna::findOrFail($id);
             $masyarakat->status_verifikasi = 'Diterima';
+            $masyarakat->tanggal_email_diverifikasi = now();
+            $masyarakat->updated_at = now();
             $masyarakat->save();
 
             // Kirim email notifikasi

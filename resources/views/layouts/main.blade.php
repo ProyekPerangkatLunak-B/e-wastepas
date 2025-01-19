@@ -29,9 +29,9 @@
 
     {{-- Header --}}
     @include('partials.header', [
-        'userName' => 'Ammar Bahtiar',
-        'userRole' => 'Masyarakat',
-        'profileImage' => $profileImage ?? asset('img/masyarakat/penjemputan-sampah/no-image.png')
+        'userName' => Auth::user()->nama,
+        'userRole' => Auth::user()->peran->nama_peran,
+        'profileImage' => Auth::user()->foto_profil ? Auth::user()->foto_profil : 'img/masyarakat/penjemputan-sampah/no-image.png',
     ])
 
     {{-- Main Content --}}

@@ -3,15 +3,16 @@
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
-use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Manajemen\LoginController;
-use App\Http\Controllers\admin\KurirAdminController;
-use App\Http\Controllers\Manajemen\DaerahController;
 use App\Http\Controllers\Manajemen\Top10Controller;
+use App\Http\Controllers\Admin\KurirAdminController;
+use App\Http\Controllers\Manajemen\DaerahController;
 use App\Http\Controllers\Masyarakat\LoginMasyarakat;
 use App\Http\Controllers\Admin\DaerahAdminController;
 use App\Http\Controllers\Manajemen\DashboardKategori;
 use App\Http\Controllers\Manajemen\DropboxController;
+use App\Http\Controllers\Manajemen\RiwayatController;
 use App\Http\Controllers\Admin\DropboxAdminController;
 use App\Http\Controllers\Manajemen\KategoriController;
 use App\Http\Controllers\Manajemen\DashboardController;
@@ -22,18 +23,19 @@ use App\Http\Controllers\Manajemen\OtpManajemenController;
 use App\Http\Controllers\Admin\KategoriSampahAdminController;
 use App\Http\Controllers\Masyarakat\ForgotPasswordController;
 use App\Http\Controllers\Masyarakat\ProfileMasyarakatController;
+use App\Http\Controllers\Manajemen\DataProfilManajemenController;
 use App\Http\Controllers\Manajemen\RegistrasiManajemenController;
 use App\Http\Controllers\Masyarakat\RegistrasiMasyarakatController;
 use App\Http\Controllers\MitraKurir\RegistrasiMitraKurirController;
 use App\Http\Controllers\Manajemen\ResetPasswordManajemenController;
 use App\Http\Controllers\Manajemen\ForgotPasswordManajemenController;
+use App\Http\Controllers\Admin\RiwayatPenjemputanSampahAdminController;
+use App\Http\Controllers\Admin\TrackingPenjemputanSampahAdminController;
+use App\Http\Controllers\Admin\PenerimaanPenjemputanSampahAdminController;
+use App\Http\Controllers\Admin\PermintaanPenjemputanSampahAdminController;
 use App\Http\Controllers\Masyarakat\PenjemputanSampahMasyarakatController;
 use App\Http\Controllers\MitraKurir\PenjemputanSampahMitraKurirController;
-use App\Http\Controllers\Admin\PermintaanPenjemputanSampahAdminController;
-use App\Http\Controllers\Admin\PenerimaanPenjemputanSampahAdminController;
-use App\Http\Controllers\Admin\TrackingPenjemputanSampahAdminController;
 use App\Http\Controllers\Admin\TotalSampahPenjemputanSampahAdminController;
-use App\Http\Controllers\Admin\RiwayatPenjemputanSampahAdminController;
 
 // Route untuk halaman utama (welcome)
 Route::get('/', function () {
@@ -43,7 +45,7 @@ Route::get('/', function () {
 // Route Modul Admin
 Route::prefix('admin')
     ->as('admin.')
-    // ->middleware(['auth', 'role:Admin'])
+    ->middleware(['auth', 'role:Admin'])
     ->group(function () {
 
         Route::prefix('masyarakat')->name('masyarakat.')->group(function () {
@@ -184,59 +186,57 @@ Route::group([
     'as' => 'manajemen.',
 ], function () {
 
-    // Submodul Dashboard
-    // Route::get('/datamaster/dashboard', function () {
-    //     return view('manajemen.datamaster.dashboard.index');
-    // })->name('datamaster.dashboard.index');
-
-    Route::get('/datamaster/dashboard', [DashboardController::class, 'index'])->name('datamaster.dashboard.index');
-
-    // Route::get('/datamaster/top-10', function () {
-    //     return view('manajemen.datamaster.top-10.index');
-    // })->name('datamaster.top-10.index');
-
-    Route::get('/datamaster/top-10', [Top10Controller::class, 'index'])->name('datamaster.top-10.index');
+    // Route::get('/datamaster/detail-riwayat', function () {
+    //     return view('manajemen.datamaster.riwayat.detail-riwayat');
+    // })->name('datamaster.riwayat.detail-riwayat');
 
 
-    Route::get('/datamaster/riwayat', function () {
-        return view('manajemen.datamaster.riwayat.index');
-    })->name('datamaster.riwayat.index');
+    Route::middleware(['auth', 'role:Manajemen'])->group(function () {
+        Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
-    Route::get('/datamaster/detail-riwayat', function () {
-        return view('manajemen.datamaster.riwayat.detail-riwayat');
-    })->name('datamaster.riwayat.detail-riwayat');
+        Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
+            ->name('datamaster.per-daerah.index');
 
-    Route::get('/datamaster/riwayat', function () {
-        return view('manajemen.datamaster.riwayat.index');
-    })->name('datamaster.riwayat.index');
+        Route::get('/datamaster/dashboard', [DashboardController::class, 'index'])->name('datamaster.dashboard.index');
 
-    Route::get('/datamaster/detail-riwayat', function () {
-        return view('manajemen.datamaster.riwayat.detail-riwayat');
-    })->name('datamaster.riwayat.detail-riwayat');
+        Route::get('/datamaster/top-10', [Top10Controller::class, 'index'])->name('datamaster.top-10.index');
 
-    Route::get('/datamaster/dropbox', [DropboxController::class, 'index'])->name('datamaster.dropbox.index');
+        Route::get('/datamaster/dropbox', [DropboxController::class, 'index'])->name('datamaster.dropbox.index');
 
-    // Route::get('/datamaster/kategori', function () {
-    //     return view('manajemen.datamaster.kategori.index');
-    // })->name('datamaster.kategori.index');
+        Route::get('/datamaster/riwayat', [RiwayatController::class, 'index'])->name('datamaster.riwayat.index');
+        Route::get('/datamaster/{kode_penjemputan}', [RiwayatController::class, 'show'])->name('datamaster.riwayat.detail-riwayat');
 
-    Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+        Route::get('/datamaster/kategori', [KategoriController::class, 'index'])->name('datamaster.kategori.index');
+        // Route::get('/datamaster/per-daerah', function () {
+        //     return view('manajemen.datamaster.per-daerah.index');
+        // })->name('datamaster.per-daerah.index');
 
+        Route::get('/datamaster/jenis', function () {
+            return view('manajemen.datamaster.jenis.index');
+        })->name('datamaster.jenis.index');
 
-    // Route::get('/datamaster/per-daerah', function () {
-    //     return view('manajemen.datamaster.per-daerah.index');
-    // })->name('datamaster.per-daerah.index');
+        // 
 
-    Route::get('/datamaster/per-daerah', [DaerahController::class, 'index'])
-        ->name('datamaster.per-daerah.index');
+        // Route Data Profil (Registrasi) ieu
+        Route::get('/data-profil', function () {
+            return view('manajemen.registrasi.data-profil');
+        })->name('registrasi.data-profil');
 
-    Route::get('/datamaster/jenis', function () {
-        return view('manajemen.datamaster.jenis.index');
-    })->name('datamaster.jenis.index');
+        Route::post('/data-profil', [DataProfilManajemenController::class, 'updateProfile'])->name('registrasi.data-profil.submit');
+
+        // Route Ubah Password (Registrasi)ieu
+        Route::get('/ubah-password', function () {
+            return view('manajemen.registrasi.ubah-password');
+        })->name('password.ubah-password');
+
+        Route::post('/ubah-password', [DataProfilManajemenController::class, 'ubahPassword'])->name('password.ubah-password.submit');
+    });
 
     // Submodul Registrasi
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('registrasi.login'); // Alias tambahan
     Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     // Route register (Registrasi)
     Route::get('/register', function () {
@@ -249,46 +249,21 @@ Route::group([
     Route::get('/forgot-password', [ForgotPasswordManajemenController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('/forgot-password', [ForgotPasswordManajemenController::class, 'sendResetLinkEmail'])->name('password.email');
 
-    Route::prefix('manajemen')->name('manajemen.')->group(function () {
-
-        // Menampilkan form untuk forgot password (Registrasi)
-        Route::get('forgot-password', [ForgotPasswordManajemenController::class, 'showLinkRequestForm'])
-            ->name('password.request');  // Form untuk meminta reset password
-
-        // Mengirimkan email link reset password (Registrasi)
-        Route::post('forgot-password', [ForgotPasswordManajemenController::class, 'sendResetLinkEmail'])
-            ->name('password.email');  // Kirim email reset password
-
-    });
-
-    // OTP Confirmation Success (Registrasi)
-    Route::get('/otp-confirmation-success', function () {
-        return view('manajemen.registrasi.otp-confirmation-success');
-    })->name('registrasi.otp-confirmation-success');
-
-    // OTP Change Password Success (Registrasi)
-    Route::get('/otp-change-password-success', function () {
-        return view('manajemen.registrasi.otp-change-password-success');
-    })->name('registrasi.otp-change-password-success');
-
     // Route Verfy Otp (Registrasi)
     Route::get('/verify-otp', function () {
         return view('manajemen.registrasi.verify-otp');
     })->name('registrasi.verify-otp');
 
+    Route::post('verify-otp', [RegistrasiManajemenController::class, 'verifyOtp'])->name('manajemen.registrasi.verify-otp.submit');
+
     Route::post('manajemen/verify-otp', [OtpManajemenController::class, 'verifyOtp']);
 
     // Route Data Total Sampah (Registrasi)
-    Route::get('/data-total-sampah', function () {
-        return view('manajemen.registrasi.data-total-sampah');
-    })->name('registrasi.data-total-sampah');
+    // Route::get('/data-total-sampah', function () {
+    //     return view('manajemen.registrasi.data-total-sampah');
+    // })->name('registrasi.data-total-sampah');
 
-    // Route Data Profil (Registrasi)
-    Route::get('/data-profil', function () {
-        return view('manajemen.registrasi.data-profil');
-    })->name('registrasi.data-profil');
-
-    // Route Otp Konfirmasi Sukses (Registrasi)
+    // Route Otp Konfirmasi Sukses (Registrasi) lain
     Route::get('/otp-confirmation-success', function () {
         return view('manajemen.registrasi.otp-confirmation-success');
     })->name('registrasi.otp-confirmation-success');
@@ -308,20 +283,16 @@ Route::group([
         return view('manajemen.registrasi.ganti-password');
     })->name('password.ganti-password');
 
-    // Route Ubah Password (Registrasi)
-    Route::get('/ubah-password', function () {
-        return view('manajemen.registrasi.ubah-password');
-    })->name('password.ubah-password');
+    Route::post('/ganti-password', [ForgotPasswordManajemenController::class, 'reset'])->name('ganti-password.submit');
 
     // Route Konfirmasi Ubah Password (Registrasi)
     Route::get('/konfirmasi-ubah-password', function () {
         return view('manajemen.registrasi.konfirmasi-ubah-password');
     })->name('password.konfirmasi-ubah-password');
 
-
-    // Memverifikasi OTP
-    Route::post('verify-otp', [RegistrasiManajemenController::class, 'verifyOtp'])->name('manajemen.registrasi.verify-otp.submit');
+    Route::get('manajemen/password/reset', [ForgotPasswordManajemenController::class, 'showLinkRequestForm'])->name('manajemen.password.request');
 });
+
 
 // Route Modul Masyarakat
 Route::group([
@@ -441,22 +412,25 @@ Route::group([
     'prefix' => 'mitra-kurir/',
     'as' => 'mitra-kurir.',
 ], function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::controller(PenjemputanSampahMitraKurirController::class)->group(function () {
+            // Submodul Penjemputan Sampah
+            Route::get('penjemputan-sampah/kategori', 'kategori')->name('penjemputan.kategori');
+            Route::get('penjemputan-sampah/kategori/detail/{id}', 'detailKategori')->name('penjemputan.detail-kategori');
+            Route::get('penjemputan-sampah/permintaan-penjemputan', 'permintaan')->name('penjemputan.permintaan');
+            Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', 'detailPermintaan')->name('penjemputan.detail-permintaan');
+            Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', 'updateStatus')->name('penjemputan.update-status');
 
-    // Submodul Penjemputan Sampah
-    Route::get('penjemputan-sampah/kategori', [PenjemputanSampahMitraKurirController::class, 'kategori'])->middleware('auth')->name('penjemputan.kategori');
-    Route::get('penjemputan-sampah/kategori/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailKategori'])->middleware('auth')->name('penjemputan.detail-kategori');
-    Route::get('penjemputan-sampah/permintaan-penjemputan', [PenjemputanSampahMitraKurirController::class, 'permintaan'])->middleware('auth')->name('penjemputan.permintaan');
-    Route::get('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'detailPermintaan'])->middleware('auth')->name('penjemputan.detail-permintaan');
-    Route::put('penjemputan-sampah/permintaan-penjemputan/detail/{id}', [PenjemputanSampahMitraKurirController::class, 'updateStatus'])->middleware('auth')->name('update-status');
+            Route::get('penjemputan-sampah/riwayat-penjemputan', 'riwayat')->name('penjemputan.riwayat-penjemputan');
+            Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}',  'detailRiwayat')->name('penjemputan.detail-riwayat');
 
-    Route::get('penjemputan-sampah/riwayat-penjemputan', [PenjemputanSampahMitraKurirController::class, 'riwayat'])->middleware('auth')->name('penjemputan.riwayat-penjemputan');
-    Route::get('penjemputan-sampah/riwayat-penjemputan/detail-riwayat/{id}', [PenjemputanSampahMitraKurirController::class, 'detailRiwayat'])->middleware('auth')->name('penjemputan.detail-riwayat');
-
-    Route::get('penjemputan-sampah/dropbox',  [PenjemputanSampahMitraKurirController::class, 'dropbox'])->name('penjemputan.dropbox');
-    Route::post('penjemputan-sampah/dropbox', [PenjemputanSampahMitraKurirController::class, 'updateStatusPelacakan'])->name('penjemputan.updateStatus');
+            Route::get('penjemputan-sampah/dropbox', 'dropbox')->name('penjemputan.dropbox');
+            Route::post('penjemputan-sampah/dropbox', 'updateStatusPelacakan')->name('penjemputan.updateStatus');
+            // End Submodul Penjemputan Sampah
+        });
+    });
 
     // Submodul Registrasi
-
     Route::get('registrasi/register', [RegistrasiMitraKurirController::class, 'RegisterIndex'])->middleware('guest')->name('registrasi.register');
     Route::get('registrasi/login', [RegistrasiMitraKurirController::class, 'loginIndex'])->middleware('guest')->name('registrasi.login');
 
@@ -494,6 +468,8 @@ Route::post('/mitra-kurir/registrasi/account-profile/profile', [RegistrasiMitraK
 // halaman  security
 Route::get('/mitra-kurir/registrasi/account-profile/security', [RegistrasiMitraKurirController::class, 'ChangePasswordIndex'])->middleware('auth')->name('mitra-kurir.registrasi.account-profile.security');
 
+//resend otp
+Route::post('/resend-otp/{id_pengguna}', [RegistrasiMitraKurirController::class, 'resendOtp'])->name('resend-otp');
 
 // halaman success-message document-upload
 Route::get('/mitra-kurir/registrasi/success-message', function () {

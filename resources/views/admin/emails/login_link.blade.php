@@ -88,7 +88,7 @@
 
             <p>Halo, <strong>{{ $namaPengguna }}</strong></p>
             <p>Klik tombol di bawah ini untuk login ke akun Anda:</p>
-            <a href="{{ $loginUrl }}" class="btn">Login Sekarang</a>
+            <a href="{{ $loginUrl }}" class="btn" style="color: white">Login Sekarang</a>
 
             <p class="note">
                 Informasi Login:<br>

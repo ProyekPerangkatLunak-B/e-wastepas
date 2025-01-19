@@ -48,6 +48,8 @@ class PenjemputanSampahMasyarakatController extends Controller
         try {
             $totalSampah = DetailPenjemputan::whereHas('penjemputan.pelacakan', function ($query) {
                 $query->where('status', 'Selesai');
+            })->whereHas('penjemputan.pelacakan', function ($query) {
+                $query->where('id_pengguna_masyarakat', Auth::id());
             })->count();
             $totalPoin = Penjemputan::whereHas('pelacakan', function ($query) {
                 $query->where('status', 'Selesai');
@@ -126,7 +128,7 @@ class PenjemputanSampahMasyarakatController extends Controller
                         ->groupBy('id_penjemputan');
                 })
                 ->where('penjemputan.id_pengguna_masyarakat', Auth::id())
-                ->orderByDesc('penjemputan.created_at')
+                ->orderByDesc('penjemputan.updated_at')
                 ->select('penjemputan.*')
                 ->filter(request(['search', 'status']))
                 ->paginate(6)
@@ -237,6 +239,7 @@ class PenjemputanSampahMasyarakatController extends Controller
             $pelacakan = new Pelacakan();
             $pelacakan->id_penjemputan = $penjemputan->id_penjemputan;
             $pelacakan->status = 'Diproses';
+            $pelacakan->keterangan = 'Permintaan akan segera diproses oleh kurir yang menerima penjemputan';
             $pelacakan->save();
 
             return redirect()->route('masyarakat.penjemputan.detail-melacak', ['id' => $pelacakan->id_penjemputan])->with('success', 'Permintaan Penjemputan Berhasil Diajukan!');

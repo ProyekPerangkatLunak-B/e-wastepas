@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     .then((response) => response.json())
                     .then((data) => data);
                 const namaGambar = jenisData[0].gambar;
-                const imagePath = `/img/masyarakat/gambarKategoriSampah/${namaGambar}`;
+                const imagePath = `/img/admin/${namaGambar}`;
                 var image = $(location).attr("origin");
                 image += imagePath;
 

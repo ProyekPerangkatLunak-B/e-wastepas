@@ -106,51 +106,95 @@
                             Kirim Ulang (<span id="timer">60</span>)
                         </button>
                     </div>
-                </div>
+                    <!-- Success Modal -->
+                    <div id="successModal" class="fixed inset-0 flex items-center justify-center z-50"
+                        style="display: none;">
+                        <div class="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
 
-                <!-- Success Modal -->
-                <div id="successModal" class="fixed inset-0 flex items-center justify-center z-50" style="display: none;">
-                    <div class="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
-
-                    <div class="relative rounded-lg p-8 max-w-sm text-center z-10 shadow-lg"
-                        style="background-color: white;">
-                        <p class="text-xl font-semibold">Selamat anda sudah berhasil mengunggah dokumen anda</p>
-                        <div class="mt-4">
-                            <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="mx-auto h-16 w-16">
+                        <div class="relative rounded-lg p-8 max-w-sm text-center z-10 shadow-lg"
+                            style="background-color: white;">
+                            <p class="text-xl font-semibold">Selamat anda sudah berhasil mengunggah dokumen anda</p>
+                            <div class="mt-4">
+                                <img src="/img/mitra-kurir/icon-pop-up.png" alt="Success Icon" class="mx-auto h-16 w-16">
+                            </div>
+                            <p class="mt-4">Butuh Waktu 7x24 Jam Untuk Admin Memvalidasi</p>
+                            <button onclick="closeModal()"
+                                class="mt-6 px-4 py-2 bg-green-700 text-[#FFFFFF] rounded-md">Kembali
+                                ke Menu Utama</button>
                         </div>
-                        <p class="mt-4">Butuh Waktu 7x24 Jam Untuk Admin Memvalidasi</p>
-                        <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-green-700 text-[#FFFFFF] rounded-md">Kembali
-                            ke Menu Utama</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    {{-- Script Timer  --}}
-    <script>
-        function startTimer() {
-            const button = document.getElementById('submitButton');
-            const timerElement = document.getElementById('timer');
-            let timeLeft = 60;
 
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const cooldown = 60; // Waktu hitungan mundur dalam detik
+                let timerInterval;
 
-            button.disabled = true;
-            button.style.opacity = "0.6";
+                const button = document.getElementById("submitButton");
+                const timerElement = document.getElementById("timer");
 
-            // Update the timer every second
-            const timerInterval = setInterval(() => {
-                timeLeft--;
-                timerElement.textContent = timeLeft;
+                // Fungsi untuk memulai hitungan mundur
+                function startTimer() {
+                    let timeLeft = cooldown;
 
-                // Stop the timer when it reaches 0
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    button.disabled = false;
-                    button.style.opacity = "1";
-                    timerElement.textContent = "60";
+                    // Nonaktifkan tombol selama timer berjalan
+                    button.disabled = true;
+                    button.style.opacity = "0.6";
+
+                    // Reset timer jika sudah berjalan sebelumnya
+                    if (timerInterval) {
+                        clearInterval(timerInterval);
+                    }
+
+                    timerElement.textContent = timeLeft;
+
+                    timerInterval = setInterval(() => {
+                        timeLeft -= 1;
+                        timerElement.textContent = timeLeft;
+
+                        if (timeLeft <= 0) {
+                            clearInterval(timerInterval);
+                            button.disabled = false; // Aktifkan tombol kembali
+                            button.style.opacity = "1";
+                            timerElement.textContent = cooldown; // Reset teks timer
+                        }
+                    }, 1000);
                 }
-            }, 1000);
-        }
-    </script>
 
-@endsection
+                // Fungsi untuk mengirim ulang OTP ke server
+                function resendOtp() {
+                    const userId = "{{ $user->id_pengguna }}"; // Pastikan variabel ini tersedia dari backend
+
+                    // Kirim permintaan ke server
+                    fetch(`/resend-otp/${userId}`, {
+                            method: "POST",
+                            headers: {
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                "Content-Type": "application/json",
+                            },
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data.status === "success") {
+                                startTimer(); // Mulai timer setelah OTP berhasil dikirim
+                            }
+
+                        })
+
+                }
+
+                // Tambahkan event listener pada tombol untuk mengaktifkan fungsi resendOtp
+                button.addEventListener("click", (event) => {
+                    event.preventDefault(); // Mencegah pengiriman form default jika ada
+                    resendOtp();
+                });
+
+                // Pastikan timer dimulai saat halaman pertama kali dimuat
+                startTimer();
+            });
+        </script>
+
+
+    @endsection

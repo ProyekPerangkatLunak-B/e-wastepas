@@ -48,9 +48,9 @@ class DatabaseSeeder extends Seeder
             DaerahSeeder::class,
             DropboxSeeder::class,
             //  ~~ * ~~
-            PenjemputanSeeder::class,
-            DetailPenjemputanSeeder::class,
-            PelacakanSeeder::class,
+            // PenjemputanSeeder::class,
+            // DetailPenjemputanSeeder::class,
+            // PelacakanSeeder::class,
         ]);
     }
 }

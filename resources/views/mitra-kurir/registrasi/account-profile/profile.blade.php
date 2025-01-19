@@ -90,7 +90,6 @@
                     <div class="bg-[#F9F9F9] border border-[#E0E0E0] rounded-lg p-6 shadow-sm relative mt-6">
                         <h5 class="text-xl font-semibold text-gray-900 mb-5">Data Diri</h5>
 
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <div class="mb-4">
@@ -98,19 +97,49 @@
                                         class="block mt-2 text-sm font-medium leading-7 text-gray-500">Email</label>
                                     <div class="relative mt-2">
                                         <input id="email" name="email" type="email" placeholder="Masukkan Email"
-                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
+                                            class="w-full mt-2 px-5 py-4 pr-10 rounded-2xl font-medium bg-gray-100 text-gray-400 text-md focus:outline-none focus:bg-white"
                                             value="{{ $user->email }}" disabled />
+                                        <div class="absolute inset-y-0 right-4 flex items-center">
+                                            <svg fill="#BDBDBD" height="20px" width="20px"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330"
+                                                xml:space="preserve">
+                                                <g>
+                                                    <path
+                                                        d="M65,330h200c8.284,0,15-6.716,15-15V145c0-8.284-6.716-15-15-15h-15V85c0-46.869-38.131-85-85-85
+                                                    S80,38.131,80,85v45H65c-8.284,0-15,6.716-15,15v170C50,323.284,56.716,330,65,330z M207.481,219.356l-42.5,42.5
+                                                    c-2.929,2.929-6.768,4.394-10.606,4.394s-7.678-1.465-10.606-4.394l-21.25-21.25c-5.858-5.858-5.858-15.354,0-21.213
+                                                    c5.857-5.858,15.355-5.858,21.213,0l10.644,10.643l31.894-31.893c5.857-5.858,15.355-5.858,21.213,0
+                                                    C213.34,204.002,213.34,213.498,207.481,219.356z M110,85c0-30.327,24.673-55,55-55s55,24.673,55,55v45H110V85z" />
+                                                </g>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="mb-4">
-                                    <label for="address" class="block mt-2 text-sm font-medium leading-7 text-gray-500">No
-                                        Ktp</label>
+                                    <label for="noktp" class="block mt-2 text-sm font-medium leading-7 text-gray-500">No
+                                        KTP</label>
                                     <div class="relative mt-2">
-                                        <input id="noktp" name="address" type="text" placeholder="Masukkan Alamat"
-                                            class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
-                                            value="{{ $user->nomor_ktp }}" disabledgi />
+                                        <input id="noktp" name="noktp" type="text" placeholder="Masukkan Nomor KTP"
+                                            class="w-full mt-2 px-5 py-4 pr-10 rounded-2xl font-medium bg-gray-100 text-gray-400 text-md focus:outline-none focus:bg-white"
+                                            value="{{ $user->nomor_ktp }}" disabled />
+                                        <div class="absolute inset-y-0 right-4 flex items-center">
+                                            <svg fill="#BDBDBD" height="20px" width="20px"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330"
+                                                xml:space="preserve">
+                                                <g>
+                                                    <path
+                                                        d="M65,330h200c8.284,0,15-6.716,15-15V145c0-8.284-6.716-15-15-15h-15V85c0-46.869-38.131-85-85-85
+                                                    S80,38.131,80,85v45H65c-8.284,0-15,6.716-15,15v170C50,323.284,56.716,330,65,330z M207.481,219.356l-42.5,42.5
+                                                    c-2.929,2.929-6.768,4.394-10.606,4.394s-7.678-1.465-10.606-4.394l-21.25-21.25c-5.858-5.858-5.858-15.354,0-21.213
+                                                    c5.857-5.858,15.355-5.858,21.213,0l10.644,10.643l31.894-31.893c5.857-5.858,15.355-5.858,21.213,0
+                                                    C213.34,204.002,213.34,213.498,207.481,219.356z M110,85c0-30.327,24.673-55,55-55s55,24.673,55,55v45H110V85z" />
+                                                </g>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="mb-4">
                                     <label for="phone" class="block mt-2 text-sm font-medium leading-7 text-gray-500">No.
                                         HP</label>
@@ -121,12 +150,15 @@
                                     </div>
                                 </div>
                             </div>
+
+
                             <div>
                                 <div class="mb-4">
                                     <label for="address"
                                         class="block mt-2 text-sm font-medium leading-7 text-gray-500">Alamat</label>
                                     <div class="relative mt-2">
-                                        <input id="address" name="address" type="text" placeholder="Masukkan Alamat"
+                                        <input id="address" name="address" type="text"
+                                            placeholder="Masukkan Alamat"
                                             class="w-full mt-2 px-5 py-4 rounded-2xl font-medium bg-gray-100 text-md focus:outline-none focus:bg-white"
                                             value="{{ $user->alamat }}" readonly />
                                     </div>
@@ -156,26 +188,28 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="mt-8 flex justify-end space-x-4">
-                            <button type="button" id="cancelButton" style="display:none;"
-                                class="w-full sm:w-32  bg-red-normal hover:bg-red-400 text-[#FFFFFF] py-2 px-4 rounded-md
+
+                    <div class="mt-8 flex justify-end space-x-4">
+                        <button type="button" id="cancelButton" style="display:none;"
+                            class="w-full sm:w-32  bg-red-normal hover:bg-red-400 text-[#FFFFFF] py-2 px-4 rounded-md
                                                  transition-all duration-300 ease-in-out
                                                 transform hover:scale-105 text-sm sm:text-base">
-                                Batal
-                            </button>
-                            <button type="submit" id="saveButton" style="display:none;"
-                                class="w-full sm:w-32  bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md
+                            Batal
+                        </button>
+                        <button type="submit" id="saveButton" style="display:none;"
+                            class="w-full sm:w-32  bg-gradient-to-r from-green-500 to-green-700 text-[#FFFFFF] py-2 px-4 rounded-md
                                                 hover:from-green-600 hover:to-green-800 transition-all duration-300 ease-in-out
                                                 transform hover:scale-105 text-sm sm:text-base">
-                                Simpan
-                            </button>
-                        </div>
-                        </form>
+                            Simpan
+                        </button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script>

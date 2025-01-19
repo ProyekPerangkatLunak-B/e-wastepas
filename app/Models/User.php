@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     use HasFactory, Notifiable;
     // /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -15,19 +15,19 @@ class User extends Authenticatable
     protected $table = 'pengguna';
     protected $primaryKey = 'id_pengguna';
 
-// /**azQA  z   ZQ
-    //  * The attributes that are mass assignable.
-    //  *
-    //  * @var array<int, string>
-    //  */
     protected $fillable = [
         'nama',
+        'id_peran',
+        'alamat',
         'email',
         'kata_sandi',
         'nomor_ktp',
         'tanggal_lahir',
         'no_rekening',
-        'nomor_telepon'
+        'nomor_telepon',
+        'status_verifikasi',
+         'tanggal_dibuat',
+
     ];
 
     // /**

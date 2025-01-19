@@ -3,14 +3,34 @@
 @section('title', 'Login')
 
 @section('content')
-    <div class="flex h-screen">
+    <div class="flex h-screen relative w-full">
         <!-- Bagian Gambar di Kiri -->
-        <div class="hidden md:flex w-1/2 bg-cover bg-center" style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}');">
+        <div class="hidden md:flex w-1/2 bg-cover bg-center"
+            style="background-image: url('{{ asset('img/manajemen/registrasi/tree-microchip.png') }}');">
             <!-- Gambar Latar Belakang -->
         </div>
 
         <!-- Bagian Form Login di Kanan -->
         <div class="w-full md:w-1/2 flex flex-col justify-center items-center p-8">
+            <div class="relative w-full h-full">
+                @if (session('error'))
+                    <div id="alert-box"
+                        class="absolute top-0 p-4 px-10 mt-2 text-sm flex flex-row justify-center text-red-800 bg-red-100 border border-red-200 rounded-lg animate-fade-in w-fit dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
+                        role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
+                        <span id="hs-soft-color-danger-label" class="font-bold">Danger</span>
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div id="alert-box"
+                        class="p-4 mt-2 text-sm flex flex-row justify-center text-teal-800 bg-teal-100 border border-teal-200 rounded-lg animate-fade-in dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500"
+                        role="alert" tabindex="-1" aria-labelledby="hs-soft-color-success-label">
+                        <span id="hs-soft-color-success-label" class="font-bold">Success</span>
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
             <!-- Logo dan Judul -->
             <div class="flex flex-col items-center mb-6">
                 <img src="{{ asset('img/manajemen/registrasi/logo.png') }}" alt="Logo E-Wastepas" class="w-28 h-28 mb-4">
@@ -46,7 +66,8 @@
                 <!-- Link Lupa Password -->
                 <div class="flex justify-end mb-4">
                     <a href="/manajemen/forgot-password"
-                        class="text-sm text-gray-500 hover:text-green-500 hover:underline">Lupa Password ?</a>
+                        class="text-sm text-gray-500 hover:text-green-500 hover:underline">Lupa
+                        Password ?</a>
                 </div>
 
                 <!-- Tombol Masuk -->
