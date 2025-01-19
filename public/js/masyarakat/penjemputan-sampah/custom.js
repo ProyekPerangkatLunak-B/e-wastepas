@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // START MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
+    const textareaKeterangan = document.getElementById("textareaKeterangan");
+
     window.openKeteranganModal = function () {
         console.log("Hi");
         document.getElementById("keteranganModal").classList.remove("hidden");
@@ -7,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.closeKeteranganModal = function () {
         document.getElementById("keteranganModal").classList.add("hidden");
+        textareaKeterangan.value = "";
     };
 
     window.openConfirmKeteranganModal = function () {
@@ -18,6 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.closeModal = function () {
         document.getElementById("alertModal").classList.add("hidden");
+    };
+
+    window.closeModalMelacakPenjemputan = function () {
+        document
+            .getElementById("alertModalMelacakPenjemputan")
+            .classList.add("hidden");
+        textareaKeterangan.value = "";
     };
     // END MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
 
@@ -279,6 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const resetModal = document.getElementById("resetModal");
     const closeResetModal = document.getElementById("closeResetModal");
     const resetFormButton = document.getElementById("resetFormButton");
+    const showResetModalBtn = document.getElementById("showResetModalBtn");
 
     window.showResetModal = function () {
         resetModal.classList.remove("hidden");
@@ -308,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
         else {
             for (let i = 1; i <= idBox; i++) {
                 const box = boxSemuaSampah[i];
-                boxSemuaSampah.remove();
+                box.remove();
             }
             $("#box-kosong")[0].classList.remove("hidden");
             resetSelect2();
@@ -340,12 +351,12 @@ document.addEventListener("DOMContentLoaded", function () {
         hideResetModal();
     };
 
-    closeResetModal.addEventListener("click", window.cancelResetForm);
-    resetFormButton.addEventListener("click", window.confirmResetForm);
-
-    document
-        .getElementById("showResetModalBtn")
-        .addEventListener("click", window.resetForm);
+    if (closeResetModal)
+        closeResetModal.addEventListener("click", window.cancelResetForm);
+    if (resetFormButton)
+        resetFormButton.addEventListener("click", window.confirmResetForm);
+    if (showResetModalBtn)
+        showResetModalBtn.addEventListener("click", window.showResetModal);
 
     // END Reset form
 
@@ -368,6 +379,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // START Pesan Error ketika data tidak dimasukkan
     const errorMessage = document.getElementById("error-message");
+    const successMessage = document.getElementById("success-message");
     const dismissButton = document.getElementById("dismiss-button");
 
     // Cek jika tombol dismiss ada
@@ -375,6 +387,9 @@ document.addEventListener("DOMContentLoaded", function () {
         dismissButton.addEventListener("click", function () {
             if (errorMessage) {
                 errorMessage.style.display = "none";
+            }
+            if (successMessage) {
+                successMessage.style.display = "none";
             }
         });
     }

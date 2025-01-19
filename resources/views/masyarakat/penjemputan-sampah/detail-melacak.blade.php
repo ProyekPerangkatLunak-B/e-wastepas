@@ -44,7 +44,8 @@
                             <p class="text-lg font-medium">{{ session('success') }}</p>
                         </div>
                         <!-- Dismiss Button -->
-                        <button id="dismiss-button" class="text-green-600 hover:text-green-800 focus:outline-none">
+                        <button id="dismiss-button" type="button"
+                            class="text-green-600 hover:text-green-800 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M6 18L18 6M6 6l12 12"></path>
@@ -358,8 +359,7 @@
                                     class="flex items-center justify-center w-[120px] h-full overflow-hidden rounded-lg rounded-l-none rounded-t-none rounded-b-none">
                                     @php
                                         $imagePath =
-                                            'img/admin/' .
-                                            ($dp->jenis->gambar ?? $dp->jenis->nama_jenis . '.png');
+                                            'img/admin/' . ($dp->jenis->gambar ?? $dp->jenis->nama_jenis . '.png');
                                         $image = file_exists(public_path($imagePath))
                                             ? $imagePath
                                             : 'img/masyarakat/gambarKategoriSampah/no-image.png';

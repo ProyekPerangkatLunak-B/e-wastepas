@@ -88,7 +88,8 @@
             margin: 20px 0;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 10px;
             border: 1px solid #ddd;
@@ -125,7 +126,8 @@
                 border: 1px solid #000;
             }
 
-            th, td {
+            th,
+            td {
                 font-size: 12px;
                 color: #000;
                 background: transparent;
@@ -152,8 +154,10 @@
     <div class="container">
         <div>
             <h3>Semua Riwayat Penjemputan Sampah</h3>
-            <p><strong>Kode Penjemputan:</strong> {{ $riwayat->first()->kode_penjemputan }}</p>
-            <p>Dibuat pada: {{ Carbon\Carbon::parse($riwayat->first()->created_at)->locale(app()->getLocale())->translatedFormat('H:i, j F Y') }}</p>
+            <p><strong>Nama Pengguna:</strong> {{ Auth::user()->nama }}</p>
+            <p>Dibuat pada:
+                {{ date('H:i, j F Y') }}
+            </p>
         </div>
 
         <table>
@@ -169,20 +173,20 @@
             </thead>
             <tbody>
                 @foreach ($riwayat as $r)
-                <tr>
-                    <td>{{ $r->kode_penjemputan }}</td>
-                    <td>{{ $r->total_berat }} kg</td>
-                    <td>{{ $r->total_poin }}</td>
-                    <td>
-                        <ul class="list-disc">
-                            @foreach ($r->detailPenjemputan as $detail)
-                            <li>{{ $detail->jenis->nama_jenis }}</li>
-                            @endforeach
-                        </ul>
-                    </td>
-                    <td>{{ \Carbon\Carbon::parse($r->tanggal_penjemputan)->translatedFormat('d F Y') }}</td>
-                    <td>{{ $r->alamat_penjemputan }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ $r->kode_penjemputan }}</td>
+                        <td>{{ $r->total_berat }} kg</td>
+                        <td>{{ $r->total_poin }}</td>
+                        <td>
+                            <ul class="list-disc">
+                                @foreach ($r->detailPenjemputan as $detail)
+                                    <li>{{ $detail->jenis->nama_jenis }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>{{ \Carbon\Carbon::parse($r->tanggal_penjemputan)->translatedFormat('d F Y') }}</td>
+                        <td>{{ $r->alamat_penjemputan }}</td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
