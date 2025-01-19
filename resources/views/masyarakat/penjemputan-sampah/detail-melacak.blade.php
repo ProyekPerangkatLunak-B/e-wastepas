@@ -44,7 +44,8 @@
                             <p class="text-lg font-medium">{{ session('success') }}</p>
                         </div>
                         <!-- Dismiss Button -->
-                        <button id="dismiss-button" class="text-green-600 hover:text-green-800 focus:outline-none">
+                        <button id="dismiss-button" type="button"
+                            class="text-green-600 hover:text-green-800 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M6 18L18 6M6 6l12 12"></path>
@@ -358,8 +359,7 @@
                                     class="flex items-center justify-center w-[120px] h-full overflow-hidden rounded-lg rounded-l-none rounded-t-none rounded-b-none">
                                     @php
                                         $imagePath =
-                                            'img/admin/' .
-                                            ($dp->jenis->gambar ?? $dp->jenis->nama_jenis . '.png');
+                                            'img/admin/' . ($dp->jenis->gambar ?? $dp->jenis->nama_jenis . '.png');
                                         $image = file_exists(public_path($imagePath))
                                             ? $imagePath
                                             : 'img/masyarakat/gambarKategoriSampah/no-image.png';
@@ -441,10 +441,11 @@
                 <h2 class="text-lg font-semibold text-red-normal">Keterangan Pembatalan</h2>
                 {{-- Underline  --}}
                 <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
+                <input type="text" value="DICOBA AJA" hidden name="apaaja">
 
                 <textarea id="textareaKeterangan"
                     class="w-full p-6 mt-2 border rounded-lg focus:ring-2 focus:ring-red-normal focus:outline-none" rows="4"
-                    placeholder="Masukkan alasan pembatalan..." name="keterangan"></textarea>
+                    placeholder="Masukkan alasan pembatalan..." name="keterangan">sdl;fkgnkgnspn</textarea>
 
                 <div class="flex justify-end mt-12 space-x-4">
                     <button type="button" onclick="closeKeteranganModal()"
