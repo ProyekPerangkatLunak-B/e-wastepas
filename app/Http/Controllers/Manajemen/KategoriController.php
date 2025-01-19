@@ -34,6 +34,7 @@ class KategoriController extends Controller
                 ->sum('penjemputan.total_poin');
     
             $persentase = $totalBeratSemuaKategori > 0 ? ($totalBerat / $totalBeratSemuaKategori) * 100 : 0;
+            
     
             return [
                 'id_kategori' => $kategori->id_kategori,
@@ -44,11 +45,14 @@ class KategoriController extends Controller
                 'total_poin' => $totalPoin,
                 'persentase' => round($persentase, 2), // Persentase dengan 2 angka desimal
             ];
+
+            
         });
     
         // Urutkan berdasarkan persentase (descending)
         $categories = $categories->sortByDesc('persentase');
     
         return view('manajemen.datamaster.kategori.index', compact('categories'));
-    }    
+    }
+       
 }
