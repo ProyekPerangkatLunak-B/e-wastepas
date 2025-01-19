@@ -441,10 +441,11 @@
                 <h2 class="text-lg font-semibold text-red-normal">Keterangan Pembatalan</h2>
                 {{-- Underline  --}}
                 <div class="w-3/12 h-1 mt-2 mb-8 bg-red-normal"></div>
+                <input type="text" value="DICOBA AJA" hidden name="apaaja">
 
                 <textarea id="textareaKeterangan"
                     class="w-full p-6 mt-2 border rounded-lg focus:ring-2 focus:ring-red-normal focus:outline-none" rows="4"
-                    placeholder="Masukkan alasan pembatalan..." name="keterangan"></textarea>
+                    placeholder="Masukkan alasan pembatalan..." name="keterangan">sdl;fkgnkgnspn</textarea>
 
                 <div class="flex justify-end mt-12 space-x-4">
                     <button type="button" onclick="closeKeteranganModal()"

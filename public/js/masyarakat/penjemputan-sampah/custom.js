@@ -3,13 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const textareaKeterangan = document.getElementById("textareaKeterangan");
 
     window.openKeteranganModal = function () {
-        console.log("Hi");
+        textareaKeterangan.value = "";
         document.getElementById("keteranganModal").classList.remove("hidden");
     };
 
     window.closeKeteranganModal = function () {
         document.getElementById("keteranganModal").classList.add("hidden");
-        textareaKeterangan.value = "";
     };
 
     window.openConfirmKeteranganModal = function () {
@@ -27,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document
             .getElementById("alertModalMelacakPenjemputan")
             .classList.add("hidden");
-        textareaKeterangan.value = "";
     };
     // END MODAL KETERANGAN PEMBATALAN PENJEMPUTAN
 
