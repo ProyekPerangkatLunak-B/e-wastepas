@@ -31,16 +31,41 @@
         {{-- Card Section --}}
         <div class="grid grid-cols-3 gap-6 px-12 pb-6 mt-4 lg:grid-cols-3 lg:gap-6">
             @foreach($categories as $category)
+            @php
+                // Tentukan gambar berdasarkan nama_kategori yang ada di folder gambarKategoriSampah
+                $imagePath = '';
+        
+                // Daftar gambar berdasarkan nama kategori
+                $imageMapping = [
+                    'Lampu' => 'Lampu.png',
+                    'Layar dan Monitor' => 'Layar dan Monitor.png',
+                    'Peralatan Besar' => 'Peralatan Besar.png',
+                    'Peralatan IT dan Telekomunikasi Kecil' => 'Peralatan IT dan Telekomunikasi Kecil.png',
+                    'Peralatan Kecil' => 'Peralatan Kecil.png',
+                    'Peralatan Penukar Suhu' => 'Peralatan Penukar Suhu.png'
+                ];
+        
+                // Cek apakah nama kategori ada dalam mapping gambar
+                if (array_key_exists($category['nama_kategori'], $imageMapping)) {
+                    $imagePath = $imageMapping[$category['nama_kategori']];
+                } else {
+                    $imagePath = 'default.jpg'; // Gambar default jika kategori tidak ditemukan
+                }
+            @endphp
+        
             <x-kategori-card
                 title="{{ $category['nama_kategori'] }}"
                 description="{{ $category['deskripsi_kategori'] }}"
-                image="https://picsum.photos/720/720"
+                image="{{ asset('img/manajemen/datamaster/gambarKategoriSampah/' . $imagePath) }}"
                 link="#"
                 points="{{ number_format($category['total_poin'], 0) }}"
                 weight="{{ number_format($category['total_berat'], 0) }}" />
         @endforeach
+        
         </div>
     </div>
 </div>
 
 @endsection
+
+

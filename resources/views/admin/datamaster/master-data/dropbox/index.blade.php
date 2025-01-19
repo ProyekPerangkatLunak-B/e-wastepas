@@ -111,14 +111,14 @@
                         <!-- Left side filters -->
                         <div class="flex items-center space-x-4">
                             <!-- Status Dropbox Filter -->
-                            <div class="flex items-center">
+                            {{-- <div class="flex items-center">
                                 <label for="statusVerifikasiFilter" class="text-sm text-gray-700">Status Dropbox:</label>
                                 <select id="statusVerifikasiFilter" class="border rounded px-2 py-1 ml-2">
                                     <option value="">Semua</option>
                                     <option value="Diterima">Aktif</option>
                                     <option value="Ditolak">Tidak Aktif</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <!-- Tampilkan Dropdown -->
                             <div class="flex items-center">
                                 <label for="customLengthMenu" class="text-sm text-gray-700">Tampilkan:</label>

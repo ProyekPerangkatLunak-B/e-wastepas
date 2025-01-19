@@ -68,28 +68,39 @@
             </div>
 
             {{-- Pagination --}}
-            <div class="mt-8 flex justify-center space-x-4">
-                {{-- Previous Button --}}
+            <div class="absolute bottom-1 right-6 inline-flex justify-center gap-1">
+                {{-- Tombol untuk move ke paling kiri --}}
                 @if($results->currentPage() > 1)
-                    <a href="{{ $results->previousPageUrl() }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md">Previous</a>
+                    <a href="{{ $results->url(1) }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"><<</a>
                 @else
-                    <span class="px-4 py-2 bg-gray-200 text-gray-400 rounded-md">Previous</span>
+                    <span class="px-4 py-2 bg-gray-200 text-gray-400 rounded-md"><<</span>
                 @endif
-
-                {{-- Page Numbers --}}
-                @for ($i = 1; $i <= $results->lastPage(); $i++)
-                    <a href="{{ $results->url($i) }}" class="px-4 py-2 {{ $i == $results->currentPage() ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-800' }} rounded-md">
-                        {{ $i }}
-                    </a>
-                @endfor
-
-                {{-- Next Button --}}
-                @if($results->hasMorePages())
-                    <a href="{{ $results->nextPageUrl() }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md">Next</a>
+            
+                {{-- Tombol untuk move 1 page ke kiri --}}
+                @if($results->currentPage() > 1)
+                    <a href="{{ $results->previousPageUrl() }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"><</a>
                 @else
-                    <span class="px-4 py-2 bg-gray-200 text-gray-400 rounded-md">Next</span>
+                    <span class="px-4 py-2 bg-gray-200 text-gray-400 rounded-md"><</span>
+                @endif
+            
+                {{-- Nomor Halaman Saat Ini --}}
+                <span class="px-4 py-2 bg-[#E2EDE0] text-white rounded-md">{{ $results->currentPage() }}</span>
+            
+                {{-- Tombol untuk move 1 page ke kanan --}}
+                @if($results->hasMorePages())
+                    <a href="{{ $results->nextPageUrl() }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md">></a>
+                @else
+                    <span class="px-4 py-2 bg-gray-200 text-gray-400 rounded-md">></span>
+                @endif
+            
+                {{-- Tombol untuk move ke paling kanan --}}
+                @if($results->hasMorePages())
+                    <a href="{{ $results->url($results->lastPage()) }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md">>></a>
+                @else
+                    <span class="px-4 py-2 bg-gray-200 text-gray-400 rounded-md">>></span>
                 @endif
             </div>
+            
         </div>
     </div>
 </div>

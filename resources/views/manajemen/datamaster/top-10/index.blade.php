@@ -35,17 +35,17 @@
             <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative">
               <img src="{{$masyarakat->foto_profil}}" alt="Not found" class="rounded-full mb-4 w-16 h-16" />
               <h2 class="text-center text-lg font-bold">{{ $masyarakat->nama }}</h2>
-              <p class="text-center text-gray-500">Masyarakat</p>
+              <p class="text-center text-[#569F52]">Masyarakat</p>
               <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
               <div class="flex flex-col items-center mt-2 text-sm">
                 <p class="flex items-center space-x-2 mr-6">
-                    <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
+                    <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[30px] h-[30px]">
                     {{ $masyarakat->poin }} Poin
                 </p>
                 <p class="flex items-center space-x-2">
-                    <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="mr-2">
-                    {{ $masyarakat->total_penjemputan }} Transaksi
-                </p>
+                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="w-[30px] h-[30px] mt-2">
+                  <span>{{ $masyarakat->total_penjemputan }} Transaksi</span>
+              </p>
                 <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara3.png') }}" alt="" class="w-3/4 h-3/4">
             </div>
             
@@ -57,17 +57,17 @@
             <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative -top-8 ">
               <img src="{{$masyarakat->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
               <h2 class="text-center text-lg font-bold">{{ $masyarakat->nama }}</h2>
-              <p class="text-center text-gray-300">Masyarakat</p>
+              <p class="text-center text-[#569F52]">Masyarakat</p>
               <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
               <div class="flex flex-col items-center mt-4 text-sm">
                 <p class="flex items-center space-x-2 mr-6">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
+                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[30px] h-[30px]">
                   {{ $masyarakat->poin }} Poin
               </p>
               <p class="flex items-center space-x-2">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="mr-2 mt-4">
-                  {{ $masyarakat->total_penjemputan }} Transaksi
-              </p>
+                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="w-[30px] h-[30px] mt-2">
+                <span>{{ $masyarakat->total_penjemputan }} Transaksi</span>
+            </p>            
                   <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara1.png') }}" alt="" class="w-3/4 h-3/4 mt-2">
               </div>
             </div>
@@ -78,17 +78,17 @@
             <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative">
               <img src="{{$masyarakat->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
               <h2 class="text-center text-lg font-bold">{{$masyarakat->nama}}</h2>
-              <p class="text-center text-gray-300">Masyarakat</p>
+              <p class="text-center text-[#569F52]">Masyarakat</p>
               <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
               <div class="flex flex-col items-center mt-4 text-sm">
                 <p class="flex items-center space-x-2 mr-6">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
+                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[30px] h-[30px]">
                   {{ $masyarakat->poin }} Poin
               </p>
               <p class="flex items-center space-x-2">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="mr-2">
-                  {{ $masyarakat->total_penjemputan }} Transaksi
-              </p>
+                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="w-[30px] h-[30px] mt-2">
+                <span>{{ $masyarakat->total_penjemputan }} Transaksi</span>
+            </p>
               <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara2.png') }}" alt="Peringkat 2" class="w-3/4 h-3/4">
               </div>
             </div>
@@ -106,15 +106,16 @@
         <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative top-4">
             <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
             <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
-            <p class="text-center text-gray-500">Kurir</p>
+            <p class="text-center text-[#569F52]">Kurir</p>
             <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
             <div class="flex flex-col items-center mt-2 text-sm">
                 <p class="flex items-center space-x-2 mr-6">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
+                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[30px] h-[30px]">
                    {{ $kurir->poin }} Poin</p>
-                <p class="flex items-center space-x-2">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="mr-2">
-                  {{ $kurir->total_penjemputan }} Transaksi</p>
+                   <p class="flex items-center space-x-2">
+                    <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="w-[30px] h-[30px] mt-2">
+                    <span>{{ $kurir->total_penjemputan }} Transaksi</span>
+                </p>                
                 <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara3.png') }}" alt="" class="w-3/4 h-3/4">
             </div>
         </div>
@@ -125,15 +126,17 @@
         <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative -top-4">
             <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
             <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
-            <p class="text-center text-gray-500">Kurir</p>
+            <p class="text-center text-[#569F52]">Kurir</p>
             <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
             <div class="flex flex-col items-center mt-2 text-sm">
                 <p class="flex items-center space-x-2 mr-6">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
+                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[30px] h-[30px]">
                    {{ $kurir->poin }} Poin</p>
                    <p class="flex items-center space-x-2">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="mr-2">
-                  {{ $kurir->total_penjemputan }} Transaksi</p>
+                    <p class="flex items-center space-x-2">
+                      <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="w-[30px] h-[30px] mt-2">
+                      <span>{{ $kurir->total_penjemputan }} Transaksi</span>
+                  </p>                  
                 <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara1.png') }}" alt="" class="w-3/4 h-3/4">
             </div>
         </div>
@@ -144,15 +147,17 @@
         <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative top-6">
             <img src="{{$kurir->foto_profil}}" alt="Not Found" class="rounded-full mb-4 w-16 h-16" />
             <h2 class="text-center text-lg font-bold">{{ $kurir->nama }}</h2>
-            <p class="text-center text-gray-500">Kurir</p>
+            <p class="text-center text-[#569F52]">Kurir</p>
             <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
             <div class="flex flex-col items-center mt-2 text-sm">
                 <p class="flex items-center space-x-2 mr-6">
                   <img src="{{ asset('img/manajemen/datamaster/icon/Asset-piala.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
                    {{ $kurir->poin }} Poin</p>
                    <p class="flex items-center space-x-2">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="mr-2">
-                  {{ $kurir->total_penjemputan }} Transaksi</p>
+                    <p class="flex items-center space-x-2">
+                      <img src="{{ asset('img/manajemen/datamaster/icon/Asset-transaksi.svg') }}" alt="" class="w-[30px] h-[30px] mt-2">
+                      <span>{{ $kurir->total_penjemputan }} Transaksi</span>
+                  </p>                  
                 <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara2.png') }}" alt="" class="w-3/4 h-3/4">
             </div>
         </div>
@@ -169,15 +174,19 @@
         <!-- Card Peringkat 3 -->
         @foreach($topJenisSampah->skip(2)->take(1) as $key => $jenis)
         <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative top-4">
-            <img src="https://via.placeholder.com/50" alt="Jenis Sampah" class="rounded-full mb-4 w-16 h-16" />
-            <h2 class="text-center text-lg font-bold">{{ $jenis->nama_jenis }}</h2>
-            <p class="text-center text-gray-500">Jenis Sampah</p>
+           @php
+              $imagePath = 'img/manajemen/datamaster/gambarJenisSampah/' . $jenis->nama_jenis . '.png';
+          @endphp
+            <img src="{{ asset($imagePath) }}" alt="img\manajemen\datamaster\gambarJenisSampah\no-image.png" class="rounded-full mb-2 w-16 h-16" />
+            <h2 class="text-left text-lg font-bold">{{ $jenis->nama_jenis }}</h2>
+            <p class="text-center text-[#569F52]">Jenis Sampah</p>
             <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
             <div class="flex flex-col items-center mt-2 text-sm">
-                <p class="flex items-center space-x-2">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-penjemputan.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
-                   {{ $jenis->total_penjemputanJ }} Penjemputan</p>
-                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara3.png') }}" alt="" class="w-full h-full">
+              <p class="flex items-center space-x-2">
+                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-penjemputan.svg') }}" alt="" class="mr-2 w-[38px] h-[38px] mt-2">
+                <span>{{ $jenis->total_penjemputanJ }} Penjemputan</span>
+            </p>            
+                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara3.png') }}" alt="" class="w-full h-1/2 mt-4">
             </div>
         </div>
         @endforeach
@@ -185,15 +194,20 @@
         <!-- Card Peringkat 1 -->
         @foreach($topJenisSampah->take(1) as $key => $jenis)
         <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative -top-4">
-            <img src="https://via.placeholder.com/50" alt="Jenis Sampah" class="rounded-full mb-4 w-16 h-16" />
+          @php
+          $imagePath = 'img/manajemen/datamaster/gambarJenisSampah/' . $jenis->nama_jenis . '.png';
+      @endphp
+        <img src="{{ asset($imagePath) }}" alt="img\manajemen\datamaster\gambarJenisSampah\no-image.png" class="rounded-full mb-2 w-16 h-16" />
             <h2 class="text-center text-lg font-bold">{{ $jenis->nama_jenis }}</h2>
-            <p class="text-center text-gray-500 mb-2">Jenis Sampah</p>
+            <p class="text-center text-[#569F52] mb-2">Jenis Sampah</p>
             <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
             <div class="flex flex-col items-center mt-2 text-sm">
                 <p class="flex items-center space-x-2">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-penjemputan.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
-                   {{ $jenis->total_penjemputanJ }} Penjemputan</p>
-                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara1.png') }}" alt="" class="w-full h-full">
+                  <p class="flex items-center space-x-2">
+                    <img src="{{ asset('img/manajemen/datamaster/icon/Asset-penjemputan.svg') }}" alt="" class="mr-2 w-[38px] h-[38px] mt-2">
+                    <span>{{ $jenis->total_penjemputanJ }} Penjemputan</span>
+                </p>                
+                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara1.png') }}" alt="" class="w-full h-1/2 mt-4">
             </div>
         </div>
         @endforeach
@@ -201,15 +215,25 @@
         <!-- Card Peringkat 2 -->
         @foreach($topJenisSampah->skip(1)->take(1) as $key => $jenis)
         <div class="bg-white p-6 shadow-lg rounded-lg flex flex-col items-center w-64 h-82 relative top-6">
-            <img src="https://via.placeholder.com/50" alt="Jenis Sampah" class="rounded-full mb-4 w-16 h-16" />
+          @php
+          // Menentukan path gambar berdasarkan nama_jenis
+          $imagePath = 'img/manajemen/datamaster/gambarJenisSampah/' . $jenis->nama_jenis . '.png';
+          // Cek apakah file gambar ada
+          $imageExists = file_exists(public_path($imagePath));
+          @endphp
+
+          <!-- Gambar jenis sampah dengan fallback -->
+          <img src="{{ $imageExists ? asset($imagePath) : asset('img/manajemen/datamaster/gambarJenisSampah/no-image.png') }}" alt="Jenis Sampah" class="rounded-full mb-2 w-16 h-16" />
             <h2 class="text-center text-lg font-bold">{{ $jenis->nama_jenis }}</h2>
-            <p class="text-center text-gray-500 mb-2">Jenis Sampah</p>
+            <p class="text-center text-[#569F52] mb-2">Jenis Sampah</p>
             <span class="w-3/4 h-0.5 bg-gray-300 mt-2"></span>
             <div class="flex flex-col items-center mt-2 text-sm">
                 <p class="flex items-center space-x-2 ">
-                  <img src="{{ asset('img/manajemen/datamaster/icon/Asset-penjemputan.svg') }}" alt="" class="mr-2 w-[38px] h-[38px]">
-                   {{ $jenis->total_penjemputanJ }} Penjemputan</p>
-                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara2.png') }}" alt="" class="w-full h-full">
+                  <p class="flex items-center space-x-2">
+                    <img src="{{ asset('img/manajemen/datamaster/icon/Asset-penjemputan.svg') }}" alt="" class="mr-2 w-[38px] h-[38px] mt-2">
+                    <span>{{ $jenis->total_penjemputanJ }} Penjemputan</span>
+                </p>                
+                <img src="{{ asset('img/manajemen/datamaster/icon/Asset-juara2.png') }}" alt="" class="w-full h-1/2 mt-4">
             </div>
         </div>
         @endforeach
@@ -244,11 +268,18 @@
     @foreach($topMasyarakat->skip(3) as $key => $masyarakat)
     <tr class="border-t text-center">
         <td class="p-4">{{ $key + 1 }}</td>
-        <td class="p-4">{{ $masyarakat->nama }}</td>
+        
+        <td class="p-4 flex items-center justify-center space-x-4">
+            <img src="{{ $masyarakat->foto_profil }}" alt="Foto Profil {{ $masyarakat->nama }}" class="rounded-full w-16 h-16" />
+            <span>{{ $masyarakat->nama }}</span>
+        </td>
+        
         <td class="p-4">{{ $masyarakat->total_penjemputan }}</td>
         <td class="p-4">{{ $masyarakat->poin }}</td>
     </tr>
-  @endforeach 
+    @endforeach
+    
+     
   </tbody>
 </table>
 @endif
@@ -266,7 +297,10 @@
     @foreach($topKurir->skip(3) as $key => $kurir)
     <tr class="border-t text-center">
         <td class="p-4">{{ $key + 1 }}</td>
-        <td class="p-4">{{ $kurir->nama }}</td>
+        <td class="p-4 flex items-center justify-center space-x-4">
+          <img src="{{ $kurir->foto_profil }}" alt="Foto Profil {{ $kurir->nama }}" class="rounded-full w-16 h-16" />
+          <span>{{ $kurir->nama }}</span>
+      </td>
         <td class="p-4">{{ $kurir->total_penjemputan }}</td>
         <td class="p-4">{{ $kurir->poin }}</td>
     </tr>
@@ -286,7 +320,16 @@
     @foreach($topJenisSampah->skip(3) as $key => $jenis)
     <tr class="border-t text-center">
         <td class="p-4">{{ $key + 1 }}</td>
-        <td class="p-4">{{ $jenis->nama_jenis }}</td>
+        <td class="p-4 flex items-center justify-center space-x-4">
+          @php
+              // Membuat path gambar berdasarkan nama_jenis
+              $imagePath = 'img/manajemen/datamaster/gambarJenisSampah/' . $jenis->nama_jenis . '.png';
+          @endphp
+      
+          <img src="{{ asset($imagePath) }}" alt="{{ $jenis->nama_jenis }}" class="rounded-full w-16 h-16" />
+          <span>{{ $jenis->nama_jenis }}</span>
+      </td>
+      
         <td class="p-4">{{ $jenis->total_penjemputanJ }}</td>
     </tr>
 @endforeach

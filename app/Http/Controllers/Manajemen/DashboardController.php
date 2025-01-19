@@ -34,6 +34,7 @@ class DashboardController extends Controller
         return [
             'nama_kategori' => $kategori->nama_kategori,
             'berat' => $totalBeratKategori,
+            'gambar' => $kategori->gambar,
         ];
     });
 
