@@ -101,7 +101,7 @@ class Penjemputan extends Model
         // Filter berdasarkan status
         $query->when($filters['status'] ?? false, function ($query, $status) {
             if ($status != 'all') {
-                return $query->whereHas('pelacakan', function ($query) use ($status) {
+                return $query->whereHas('getLatestPelacakan', function ($query) use ($status) {
                     $query->where('status', $status);
                 });
             }

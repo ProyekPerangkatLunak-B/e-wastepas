@@ -28,7 +28,8 @@
                             <p class="text-lg font-medium">Oops! Ada kesalahan pada data yang Anda masukkan.</p>
                         </div>
                         <!-- Dismiss Button -->
-                        <button id="dismiss-button" class="text-red-600 hover:text-red-800 focus:outline-none">
+                        <button id="dismiss-button" type="button"
+                            class="text-red-600 hover:text-red-800 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M6 18L18 6M6 6l12 12"></path>
@@ -240,9 +241,9 @@
                 <h3 class="mb-4 text-lg font-semibold">Reset Form</h3>
                 <p class="mb-6">Apakah Anda yakin ingin mereset form?</p>
                 <div class="flex justify-end space-x-4">
-                    <button type="button" id="closeResetModal""
+                    <button type="button" id="closeResetModal"
                         class="px-4 py-2 w-[200px] h-[40px] bg-gray-300 rounded-xl hover:bg-gray-400">Batal</button>
-                    <button type="button" id="resetFormButton""
+                    <button type="button" id="resetFormButton"
                         class="px-4 py-2 w-[200px] h-[40px] bg-red-normal rounded-xl text-white-normal hover:bg-red-600">Reset</button>
                 </div>
             </div>
