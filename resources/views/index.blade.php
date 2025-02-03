@@ -26,6 +26,13 @@
                             </a>
                         @endforeach
                     </div>
+                    <div class="flex items-center justify-center mt-4">
+                        <a href="https://docs.google.com/document/d/1bt4m7TS73-v-xoGQkiiODiVzJxH5Ig_WLU1RjnGrSUM/edit?tab=t.0"
+                            target="_blank"
+                            class="rounded-md bg-secondary-normal px-6 py-2.5 text-lg font-semibold text-white-normal shadow-sm hover:bg-secondary-400 hover:scale-105 transition transform duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-normal">
+                            Manual Book
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
